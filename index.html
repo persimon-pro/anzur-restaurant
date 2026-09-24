@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ANZUR RESTAURANT — Душанбе | @anzur.rest</title>
+  <meta name="description" content="Ресторан Анзур в Душанбе: ул. Дӯстии халқҳо, 10б (р-н Винзавода). Национальная, европейская и паназиатская кухня. VIP-кабины, караоке, летняя терраса. Резерв: 917 917 917." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://anzur.rest" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="restaurant" />
+  <meta property="og:title" content="ANZUR RESTAURANT — Высокая гастрономия в Душанбе" />
+  <meta property="og:description" content="Три кухни мира под одной крышей. VIP-кабины, профессиональный звук и караоке, летняя терраса. Бронь: 917 917 917." />
+  <meta property="og:image" content="anzur_terrace.jpg" />
+
+  <!-- Favicon: authentic Anzur bulb -->
+  <link rel="icon" href="anzur_bulb_pure.png" type="image/png" />
+
+  <!-- Fonts: Cormorant Garamond (Editorial Luxury) + Space Grotesk (Clean Sans) + Space Mono (Coordinates) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Motion.js (Framer Motion engine for vanilla JS) -->
+  <script src="https://cdn.jsdelivr.net/npm/motion@11/dist/motion.js"></script>
+
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM: GEM × CENTRAL × ALCHEMIST × GERANIUM
+       Pure minimalism. Zero rounded corners. High-fashion restaurant architecture.
+       ========================================================================== */
+    :root {
+      --bg:             #070605;
+      --bg-card:        #0E0C0A;
+      --bg-elevated:    #161310;
+      --border:         #1F1B17;
+      --border-light:   #332D26;
+      --gold:           #C5A059;
+      --gold-light:     #E5C786;
+      --gold-dark:      #856832;
+      --text:           #F6F3EC;
+      --text-muted:     #82786D;
+      --text-dim:       #484138;
+      --wa:             #25D366;
+      --font-serif:     'Cormorant Garamond', Georgia, serif;
+      --font-sans:      'Space Grotesk', -apple-system, sans-serif;
+      --font-mono:      'Space Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border-radius: 0 !important; /* Strict no-rounding rule */
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+    a { text-decoration: none; color: inherit; transition: all 0.2s ease; }
+    ul { list-style: none; }
+    img { display: block; width: 100%; height: auto; object-fit: cover; }
+
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+    @media (max-width: 768px) {
+      .container { padding: 0 1.25rem; }
+    }
+
+    .mono-tag {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* Minimalist Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.9rem 2.2rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid var(--gold);
+      background: var(--gold);
+      color: #070605;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(197, 160, 89, 0.25);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.9rem 2.2rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid var(--border-light);
+      background: transparent;
+      color: var(--text);
+      transition: all 0.2s ease;
+    }
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: var(--bg-card);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       1. ALCHEMIST-STYLE SPLASH PRELOADER (concentric bulb animation)
+       ========================================================================== */
+    #alchemist-intro {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: #050403;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.9s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.8s ease;
+    }
+    #alchemist-intro.dismissed {
+      transform: translateY(-100%);
+      pointer-events: none;
+    }
+
+    .alchemist-emblem-box {
+      position: relative;
+      width: 170px;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2.2rem;
+    }
+
+    .alchemist-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    /* SVG Stroke Drawing Keyframes */
+    .alch-path-outer {
+      stroke-dasharray: 450;
+      stroke-dashoffset: 450;
+      animation: drawOuter 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    }
+    .alch-path-mid {
+      stroke-dasharray: 320;
+      stroke-dashoffset: 320;
+      animation: drawMid 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+    }
+    .alch-path-core {
+      opacity: 0;
+      transform-origin: center;
+      animation: popCore 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+    }
+
+    @keyframes drawOuter {
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes drawMid {
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes popCore {
+      0% { opacity: 0; transform: scale(0.4); }
+      70% { opacity: 1; transform: scale(1.15); filter: drop-shadow(0 0 12px var(--gold)); }
+      100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 6px var(--gold)); }
+    }
+
+    .alchemist-title {
+      font-family: var(--font-serif);
+      font-size: 2.8rem;
+      font-weight: 600;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--text);
+      opacity: 0;
+      animation: fadeInText 1s ease 1s forwards;
+      margin-left: 0.38em; /* Optical centering */
+    }
+    .alchemist-sub {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 0.6rem;
+      opacity: 0;
+      animation: fadeInText 1s ease 1.2s forwards;
+    }
+    @keyframes fadeInText {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .alchemist-enter-btn {
+      margin-top: 2.8rem;
+      padding: 0.75rem 1.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      border: 1px solid var(--border-light);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeInText 0.8s ease 1.4s forwards;
+      transition: all 0.2s ease;
+    }
+    .alchemist-enter-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: var(--bg-card);
+    }
+
+    /* ==========================================================================
+       STICKY MINIMAL NAVBAR (GEM STYLE)
+       ========================================================================== */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(7, 6, 5, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 74px;
+    }
+    .nav-logo-group {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      cursor: pointer;
+    }
+    .nav-logo-icon {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+    .nav-brand-text {
+      font-family: var(--font-serif);
+      font-size: 1.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--text);
+    }
+    .nav-brand-text span {
+      color: var(--gold);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 2.6rem;
+    }
+    .nav-link {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 0.15s ease;
+      position: relative;
+    }
+    .nav-link:hover {
+      color: var(--gold);
+    }
+    .nav-link span {
+      color: var(--gold);
+      margin-right: 0.25rem;
+      font-size: 0.6rem;
+    }
+
+    .nav-cta-btn {
+      padding: 0.65rem 1.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      transition: all 0.2s ease;
+    }
+    .nav-cta-btn:hover {
+      background: var(--gold);
+      color: #070605;
+    }
+
+    .burger-btn {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .burger-btn span {
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+    }
+    @media (max-width: 900px) {
+      .nav-menu { display: none; }
+      .burger-btn { display: flex; }
+    }
+
+    /* Mobile Nav Drawer */
+    .mob-drawer {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 6rem 2rem 3rem;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      border-left: 1px solid var(--border);
+    }
+    .mob-drawer.open { transform: translateX(0); }
+    .mob-links { display: flex; flex-direction: column; gap: 1.6rem; }
+    .mob-link-item {
+      font-family: var(--font-serif);
+      font-size: 2.4rem;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.6rem;
+    }
+
+    /* ==========================================================================
+       2. CENTRAL-STYLE MONUMENTAL HERO
+       Atmospheric, centered, architectural, coordinates, quiet luxury.
+       ========================================================================== */
+    .central-hero {
+      position: relative;
+      min-height: calc(100vh - 74px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .central-hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, rgba(7, 6, 5, 0.4) 0%, rgba(7, 6, 5, 0.85) 60%, rgba(7, 6, 5, 0.98) 100%),
+        url('anzur_terrace.jpg') center/cover no-repeat;
+      transform: scale(1.04);
+      animation: heroZoom 14s infinite alternate ease-in-out;
+      will-change: transform;
+    }
+    @keyframes heroZoom {
+      to { transform: scale(1); }
+    }
+
+    .central-hero-top {
+      position: relative;
+      z-index: 2;
+      padding: 2.2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .central-hero-top span strong { color: var(--gold); }
+
+    .central-hero-center {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 1.5rem;
+      max-width: 980px;
+      margin: auto;
+    }
+    .central-emblem-subtle {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      margin: 0 auto 1.8rem;
+      filter: drop-shadow(0 0 16px rgba(197, 160, 89, 0.4));
+    }
+    .central-hero-h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(3.8rem, 9.5vw, 8.5rem);
+      font-weight: 400;
+      line-height: 0.9;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1.4rem;
+      color: var(--text);
+    }
+    .central-hero-tagline {
+      font-family: var(--font-mono);
+      font-size: clamp(0.72rem, 1.2vw, 0.88rem);
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2.4rem;
+    }
+    .central-hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .central-hero-bottom {
+      position: relative;
+      z-index: 2;
+      padding: 2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      background: rgba(7, 6, 5, 0.5);
+    }
+    .central-coord {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+    }
+    .central-scroll-cue {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .central-scroll-line {
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+      animation: linePulse 2s infinite ease-in-out;
+    }
+    @keyframes linePulse {
+      0%, 100% { transform: scaleX(1); opacity: 1; }
+      50% { transform: scaleX(0.4); opacity: 0.3; }
+    }
+
+    /* ==========================================================================
+       4. RESTAURANT GEM-STYLE RUNNING MARQUEE TICKER
+       ========================================================================== */
+    .gem-ticker-bar {
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-card);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 0.9rem 0;
+      position: relative;
+    }
+    .gem-ticker-track {
+      display: inline-flex;
+      animation: tickerRun 28s linear infinite;
+    }
+    .gem-ticker-track:hover {
+      animation-play-state: paused;
+    }
+    .gem-ticker-item {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 0 2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .gem-ticker-item span.bullet {
+      color: var(--gold);
+      font-size: 0.8rem;
+    }
+    @keyframes tickerRun {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ==========================================================================
+       SECTION HEADERS (RESTAURANT GEM EDITORIAL ARCHITECTURE)
+       ========================================================================== */
+    .gem-section-header {
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 2.5rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      background: var(--bg);
+    }
+    .gem-sec-num {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--gold);
+      letter-spacing: 0.24em;
+      margin-bottom: 0.5rem;
+    }
+    .gem-sec-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 4.5vw, 4.2rem);
+      font-weight: 400;
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+    .gem-sec-title em {
+      font-style: italic;
+      color: var(--gold);
+      font-family: var(--font-serif);
+    }
+
+    /* ==========================================================================
+       3. GERANIUM-STYLE PHOTO REVEALS (SCULPTURAL, GALLERY PRESENTATION)
+       ========================================================================== */
+    .geranium-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+      background: var(--border);
+      gap: 1px;
+    }
+    .geranium-frame {
+      background: var(--bg);
+      padding: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .geranium-img-container {
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      position: relative;
+      background: var(--bg-card);
+      margin-bottom: 1.8rem;
+    }
+    .geranium-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+      filter: brightness(0.9) contrast(1.05);
+    }
+    .geranium-frame:hover .geranium-img-container img {
+      transform: scale(1.04);
+      filter: brightness(1) contrast(1.1);
+    }
+    .geranium-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-top: 1px solid var(--border);
+      padding-top: 1.2rem;
+    }
+    .geranium-dish-name {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .geranium-dish-price {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .geranium-dish-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-top: 0.4rem;
+    }
+
+    @media (max-width: 900px) {
+      .geranium-showcase { grid-template-columns: 1fr; }
+      .geranium-frame { padding: 2rem 1.25rem; }
+    }
+
+    /* ==========================================================================
+       MENU CATALOG (GEM EDITORIAL REFINEMENT)
+       ========================================================================== */
+    .gem-menu-nav {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-card);
+      overflow-x: auto;
+    }
+    .gem-tab-btn {
+      padding: 1.2rem 2.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: transparent;
+      border: none;
+      border-right: 1px solid var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .gem-tab-btn:hover { color: var(--text); }
+    .gem-tab-btn.active {
+      background: var(--gold);
+      color: #070605;
+      font-weight: 700;
+    }
+
+    .gem-menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--border);
+      gap: 1px;
+      border-bottom: 1px solid var(--border);
+    }
+    .gem-dish-card {
+      background: var(--bg);
+      padding: 2.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: background 0.2s ease;
+      min-height: 280px;
+    }
+    .gem-dish-card:hover {
+      background: var(--bg-card);
+    }
+    .gdc-num {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      margin-bottom: 1.4rem;
+    }
+    .gdc-title {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 0.6rem;
+    }
+    .gdc-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.6rem;
+    }
+    .gdc-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: var(--font-mono);
+    }
+    .gdc-price {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .gdc-badge {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    @media (max-width: 1024px) { .gem-menu-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .gem-menu-grid { grid-template-columns: 1fr; } }
+
+    /* ==========================================================================
+       SPACES (VIP · KARAOKE · TERRACE)
+       ========================================================================== */
+    .gem-spaces-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--border);
+      gap: 1px;
+      border-bottom: 1px solid var(--border);
+    }
+    .gem-space-tile {
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+    }
+    .gst-img-box {
+      width: 100%;
+      aspect-ratio: 16/11;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .gst-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+    .gem-space-tile:hover .gst-img-box img {
+      transform: scale(1.05);
+    }
+    .gst-content {
+      padding: 2.2rem;
+    }
+    .gst-capacity {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--gold);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .gst-name {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .gst-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 900px) { .gem-spaces-row { grid-template-columns: 1fr; } }
+
+    /* ==========================================================================
+       INSTAGRAM ARCHIVE (@anzur.rest)
+       ========================================================================== */
+    .insta-archive-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--border);
+      gap: 1px;
+      border-bottom: 1px solid var(--border);
+    }
+    .insta-tile {
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .insta-img-wrap {
+      width: 100%;
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .insta-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .insta-tile:hover .insta-img-wrap img {
+      transform: scale(1.04);
+    }
+    .insta-caption-box {
+      padding: 1.4rem;
+    }
+    .insta-tag {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--gold);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .insta-text {
+      font-size: 0.82rem;
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    @media (max-width: 1024px) { .insta-archive-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .insta-archive-grid { grid-template-columns: 1fr; } }
+
+    /* ==========================================================================
+       CONTACT & LOCATION
+       ========================================================================== */
+    .gem-contact-sec {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      border-bottom: 1px solid var(--border);
+    }
+    .gc-left {
+      padding: 4.5rem 3.5rem;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .gc-phone {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1;
+      margin: 1.8rem 0;
+    }
+    .gc-row {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+    .gc-row:first-child { border-top: 1px solid var(--border); }
+    .gc-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .gc-right {
+      position: relative;
+      min-height: 440px;
+      background: var(--bg-card);
+    }
+    .gc-right iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: grayscale(1) invert(0.92) contrast(1.2) brightness(0.7);
+    }
+
+    @media (max-width: 900px) {
+      .gem-contact-sec { grid-template-columns: 1fr; }
+      .gc-left { border-right: none; border-bottom: 1px solid var(--border); padding: 3rem 1.5rem; }
+      .gc-right { min-height: 350px; }
+      .gc-row { grid-template-columns: 1fr; gap: 0.3rem; }
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    .gem-footer {
+      padding: 3rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      background: var(--bg);
+    }
+    .gf-copy {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Floating WhatsApp Concierge Bar */
+    #wa-dock {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9999;
+      background: var(--bg);
+      border: 1px solid var(--gold);
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      box-shadow: 4px 4px 0 #000;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    #wa-dock:hover {
+      background: var(--bg-card);
+      transform: translateY(-2px);
+      box-shadow: 6px 6px 0 var(--border);
+    }
+    .wa-led {
+      width: 6px;
+      height: 6px;
+      background: var(--wa);
+    }
+    .wa-text {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    @media (max-width: 600px) {
+      #wa-dock {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. ALCHEMIST-STYLE SPLASH PRELOADER
+       Assembles the Anzur concentric bulb logo with glowing SVG drawing strokes.
+       ========================================================================== -->
+  <div id="alchemist-intro" role="dialog" aria-modal="true" aria-label="Вход в ресторан Анзур">
+    <div class="alchemist-emblem-box">
+      <svg class="alchemist-svg" viewBox="0 0 160 170">
+        <defs>
+          <filter id="alch-glow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="3.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <linearGradient id="alch-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#F3DFC1" />
+            <stop offset="50%" stop-color="#C5A059" />
+            <stop offset="100%" stop-color="#8E6C30" />
+          </linearGradient>
+        </defs>
+
+        <g transform="rotate(18, 80, 85)" filter="url(#alch-glow)">
+          <!-- Outer Contour -->
+          <path class="alch-path-outer"
+                d="M 80, 16 C 130, 48, 148, 105, 80, 154 C 12, 105, 30, 48, 80, 16 Z"
+                fill="none" stroke="url(#alch-gold)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+
+          <!-- Middle Contour -->
+          <path class="alch-path-mid"
+                d="M 80, 52 C 112, 74, 122, 112, 80, 136 C 38, 112, 48, 74, 80, 52 Z"
+                fill="none" stroke="url(#alch-gold)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+
+          <!-- Inner Core Bulb -->
+          <path class="alch-path-core"
+                d="M 80, 84 C 95, 96, 99, 116, 80, 124 C 61, 116, 65, 96, 80, 84 Z"
+                fill="url(#alch-gold)" stroke="url(#alch-gold)" stroke-width="2" />
+        </g>
+      </svg>
+    </div>
+
+    <div class="alchemist-title">ANZUR</div>
+    <div class="alchemist-sub">ДУШАНБЕ · ВЫСОКАЯ ГАСТРОНОМИЯ</div>
+
+    <button class="alchemist-enter-btn" onclick="dismissIntro()">
+      [ ВОЙТИ В РЕСТОРАН ]
+    </button>
+  </div>
+
+  <!-- ==========================================================================
+       STICKY NAVBAR (GEM STYLE)
+       ========================================================================== -->
+  <nav class="site-nav">
+    <div class="container nav-inner">
+      <div class="nav-logo-group" onclick="replayIntro()" title="Перезапустить заставку">
+        <img src="anzur_bulb_pure.png" alt="ANZUR" class="nav-logo-icon" />
+        <div class="nav-brand-text">ANZUR<span>.</span></div>
+      </div>
+
+      <div class="nav-menu">
+        <a href="#about" class="nav-link"><span>01</span>Концепция</a>
+        <a href="#menu" class="nav-link"><span>02</span>Меню</a>
+        <a href="#spaces" class="nav-link"><span>03</span>Залы & VIP</a>
+        <a href="#archive" class="nav-link"><span>04</span>Хроника @anzur.rest</a>
+        <a href="#contact" class="nav-link"><span>05</span>Резерв</a>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:1.2rem;">
+        <a href="tel:992917917917" class="nav-cta-btn">917 917 917</a>
+        <div class="burger-btn" onclick="toggleDrawer()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mob-drawer" id="mobDrawer">
+    <div class="mob-links">
+      <a href="#about" class="mob-link-item" onclick="toggleDrawer()">Концепция</a>
+      <a href="#menu" class="mob-link-item" onclick="toggleDrawer()">Меню</a>
+      <a href="#spaces" class="mob-link-item" onclick="toggleDrawer()">Залы & VIP</a>
+      <a href="#archive" class="mob-link-item" onclick="toggleDrawer()">Instagram</a>
+      <a href="#contact" class="mob-link-item" onclick="toggleDrawer()">Контакты</a>
+    </div>
+    <div>
+      <div class="mono-tag" style="margin-bottom:1rem;">ДУШАНБЕ, УЛ. ДӮСТИИ ХАЛҚҲО, 10Б</div>
+      <a href="tel:992917917917" class="btn" style="width:100%;">Позвонить: 917 917 917</a>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       2. CENTRAL-STYLE MONUMENTAL HERO
+       Minimalist, centered architectural composition, quiet confidence.
+       ========================================================================== */ -->
+  <header class="central-hero" id="home">
+    <div class="central-hero-bg"></div>
+
+    <div class="central-hero-top">
+      <div>ЛОКАЦИЯ: <strong>ДУШАНБЕ (Р-Н ВИНЗАВОДА)</strong></div>
+      <div>РЕЖИМ: <strong>10:00 — 00:00 ЕЖЕДНЕВНО</strong></div>
+    </div>
+
+    <div class="central-hero-center">
+      <img src="anzur_bulb_pure.png" alt="ANZUR" class="central-emblem-subtle" />
+      <h1 class="central-hero-h1">ANZUR</h1>
+      <p class="central-hero-tagline">
+        НАЦИОНАЛЬНАЯ · ЕВРОПЕЙСКАЯ · ПАНАЗИАТСКАЯ КУХНЯ
+      </p>
+
+      <div class="central-hero-actions">
+        <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B2%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="btn">
+          Забронировать стол
+        </a>
+        <a href="#menu" class="btn-ghost">
+          Карта блюд
+        </a>
+      </div>
+    </div>
+
+    <div class="central-hero-bottom">
+      <div class="central-coord">
+        38°33'41"N 68°48'20"E · УЛ. ДӮСТИИ ХАЛҚҲО, 10Б
+      </div>
+      <div class="central-scroll-cue">
+        <div class="central-scroll-line"></div>
+        <span>ИССЛЕДОВАТЬ</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       4. RESTAURANT GEM-STYLE TICKER MARQUEE
+       ========================================================================== -->
+  <div class="gem-ticker-bar" aria-hidden="true">
+    <div class="gem-ticker-track">
+      <div class="gem-ticker-item">ANZUR RESTAURANT <span class="bullet">◆</span> ТРИ КУХНИ МИРА <span class="bullet">◆</span> VIP-КАБИНЫ <span class="bullet">◆</span> KARAOKE LOUNGE <span class="bullet">◆</span> ЛЕТНЯЯ ТЕРРАСА <span class="bullet">◆</span> ДУШАНБЕ <span class="bullet">◆</span></div>
+      <div class="gem-ticker-item">ANZUR RESTAURANT <span class="bullet">◆</span> ТРИ КУХНИ МИРА <span class="bullet">◆</span> VIP-КАБИНЫ <span class="bullet">◆</span> KARAOKE LOUNGE <span class="bullet">◆</span> ЛЕТНЯЯ ТЕРРАСА <span class="bullet">◆</span> ДУШАНБЕ <span class="bullet">◆</span></div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       3. GERANIUM-STYLE PHOTO REVEALS (SCULPTURAL PRESENTATION)
+       ========================================================================== -->
+  <section id="about">
+    <div class="gem-section-header">
+      <div>
+        <div class="gem-sec-num">[ 01 / 05 ]</div>
+        <h2 class="gem-sec-title">Эстетика <em>вкуса</em></h2>
+      </div>
+      <div class="mono-tag">ГАСТРОНОМИЧЕСКАЯ КОЛЛЕКЦИЯ</div>
+    </div>
+
+    <div class="geranium-showcase">
+      <!-- Dish Frame 1 -->
+      <article class="geranium-frame">
+        <div class="geranium-img-container">
+          <img src="https://images.unsplash.com/photo-1541544741938-0af808871cc0?w=1000&q=80" alt="Плов Анзур" loading="lazy" />
+        </div>
+        <div>
+          <div class="geranium-meta">
+            <h3 class="geranium-dish-name">Плов «Анзур»</h3>
+            <div class="geranium-dish-price">48 TJS</div>
+          </div>
+          <p class="geranium-dish-desc">
+            Лазерный рис, отборная таджикская баранина, желтая морковь, нут, барбарис и перепелиные яйца. Традиция в идеальном исполнении.
+          </p>
+        </div>
+      </article>
+
+      <!-- Dish Frame 2 -->
+      <article class="geranium-frame">
+        <div class="geranium-img-container">
+          <img src="https://images.unsplash.com/photo-1558030006-450675393462?w=1000&q=80" alt="Стейк Рибай Прайм" loading="lazy" />
+        </div>
+        <div>
+          <div class="geranium-meta">
+            <h3 class="geranium-dish-name">Стейк Рибай Прайм</h3>
+            <div class="geranium-dish-price">115 TJS</div>
+          </div>
+          <p class="geranium-dish-desc">
+            Мраморная говядина зернового откорма степени прожарки Medium, соус демигляс на красном вине и хлопья морской соли.
+          </p>
+        </div>
+      </article>
+
+      <!-- Dish Frame 3 -->
+      <article class="geranium-frame">
+        <div class="geranium-img-container">
+          <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=1000&q=80" alt="Ролл Филадельфия Люкс" loading="lazy" />
+        </div>
+        <div>
+          <div class="geranium-meta">
+            <h3 class="geranium-dish-name">Филадельфия Люкс</h3>
+            <div class="geranium-dish-price">56 TJS</div>
+          </div>
+          <p class="geranium-dish-desc">
+            Охлажденный лосось премиум-качества, сливочный сыр Cremette, спелое авокадо и японский рис высшей пробы.
+          </p>
+        </div>
+      </article>
+
+      <!-- Dish Frame 4 (Real Terrace Photo) -->
+      <article class="geranium-frame">
+        <div class="geranium-img-container">
+          <img src="anzur_terrace.jpg" alt="Терраса ресторана Анзур в Душанбе" loading="lazy" />
+        </div>
+        <div>
+          <div class="geranium-meta">
+            <h3 class="geranium-dish-name">Атмосфера Террасы</h3>
+            <div class="geranium-dish-price">ДУШАНБЕ</div>
+          </div>
+          <p class="geranium-dish-desc">
+            Живой вечерний свет, открытый воздух предгорья, шелест зелени и авторская подача блюд на открытой террасе.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       4. RESTAURANT GEM-STYLE MENU CATALOG
+       ========================================================================== -->
+  <section id="menu">
+    <div class="gem-section-header">
+      <div>
+        <div class="gem-sec-num">[ 02 / 05 ]</div>
+        <h2 class="gem-sec-title">Карта <em>блюд</em></h2>
+      </div>
+      <div class="mono-tag">СЕЗОН 2026 · ВЫБОР ШЕФА</div>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="gem-menu-nav" role="tablist">
+      <button class="gem-tab-btn active" onclick="filterMenu('national', this)">01 / Национальная</button>
+      <button class="gem-tab-btn" onclick="filterMenu('european', this)">02 / Европейская</button>
+      <button class="gem-tab-btn" onclick="filterMenu('asian', this)">03 / Паназиатская</button>
+      <button class="gem-tab-btn" onclick="filterMenu('bar', this)">04 / Чай & Бар</button>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="gem-menu-grid" id="gemGrid">
+      <!-- Populated via JavaScript -->
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SPACES (VIP · KARAOKE · TERRACE)
+       ========================================================================== -->
+  <section id="spaces">
+    <div class="gem-section-header">
+      <div>
+        <div class="gem-sec-num">[ 03 / 05 ]</div>
+        <h2 class="gem-sec-title">Форматы <em>залов</em></h2>
+      </div>
+      <div class="mono-tag">ПРИВАТНОСТЬ И ЗВУК</div>
+    </div>
+
+    <div class="gem-spaces-row">
+      <!-- Tile 1 -->
+      <div class="gem-space-tile">
+        <div class="gst-img-box">
+          <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=900&q=80" alt="VIP-кабины" loading="lazy" />
+        </div>
+        <div class="gst-content">
+          <div class="gst-capacity">6 – 25 ГОСТЕЙ</div>
+          <h3 class="gst-name">VIP-кабины</h3>
+          <p class="gst-desc">
+            Изолированные приватные кабины для деловых переговоров и закрытых ужинов. Персональный официант и собственный климат.
+          </p>
+        </div>
+      </div>
+
+      <!-- Tile 2 -->
+      <div class="gem-space-tile">
+        <div class="gst-img-box">
+          <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=900&q=80" alt="Караоке" loading="lazy" />
+        </div>
+        <div class="gst-content">
+          <div class="gst-capacity">ПРОФЕССИОНАЛЬНАЯ СИСТЕМА</div>
+          <h3 class="gst-name">Karaoke Lounge</h3>
+          <p class="gst-desc">
+            Студийный звук, беспроводные микрофоны и база 80 000+ песен для корпоративных вечеров и праздников.
+          </p>
+        </div>
+      </div>
+
+      <!-- Tile 3 -->
+      <div class="gem-space-tile">
+        <div class="gst-img-box">
+          <img src="anzur_terrace.jpg" alt="Терраса" loading="lazy" />
+        </div>
+        <div class="gst-content">
+          <div class="gst-capacity">ОТКРЫТЫЙ ВОЗДУХ</div>
+          <h3 class="gst-name">Летняя Терраса</h3>
+          <p class="gst-desc">
+            Просторная терраса с живой зеленью и уютной вечерней атмосферой. Лучшее место для ужина в теплое время года.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       INSTAGRAM ARCHIVE (@anzur.rest)
+       ========================================================================== -->
+  <section id="archive">
+    <div class="gem-section-header">
+      <div>
+        <div class="gem-sec-num">[ 04 / 05 ]</div>
+        <h2 class="gem-sec-title">@anzur.<em>rest</em></h2>
+      </div>
+      <a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" class="mono-tag" style="border-bottom:1px solid var(--gold); padding-bottom:2px;">
+        14K ПОДПИСЧИКОВ · 223 ПОСТА ↗
+      </a>
+    </div>
+
+    <div class="insta-archive-grid">
+      <a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" class="insta-tile">
+        <div class="insta-img-wrap">
+          <img src="anzur_terrace.jpg" alt="Терраса Анзур" loading="lazy" />
+        </div>
+        <div class="insta-caption-box">
+          <div class="insta-tag">ТЕРРАСА · ДУШАНБЕ</div>
+          <p class="insta-text">Теплые вечера под живой звук на нашей террасе в районе Винзавода.</p>
+        </div>
+      </a>
+
+      <a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" class="insta-tile">
+        <div class="insta-img-wrap">
+          <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=700&q=80" alt="Шашлык на мангале" loading="lazy" />
+        </div>
+        <div class="insta-caption-box">
+          <div class="insta-tag">МАНГАЛ · УГЛИ</div>
+          <p class="insta-text">Сочная мякоть барашка, свежий лаваш и гранатовый лук на углях.</p>
+        </div>
+      </a>
+
+      <a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" class="insta-tile">
+        <div class="insta-img-wrap">
+          <img src="https://images.unsplash.com/photo-1548943487-a2e4e43b4853?w=700&q=80" alt="Том-Ям" loading="lazy" />
+        </div>
+        <div class="insta-caption-box">
+          <div class="insta-tag">ПАНАЗИЯ</div>
+          <p class="insta-text">Острый и насыщенный суп Том-Ям со свежими морепродуктами.</p>
+        </div>
+      </a>
+
+      <a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" class="insta-tile">
+        <div class="insta-img-wrap">
+          <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=700&q=80" alt="Чайная церемония" loading="lazy" />
+        </div>
+        <div class="insta-caption-box">
+          <div class="insta-tag">ПАМИРСКИЙ ЧАЙ</div>
+          <p class="insta-text">Горный сбор с чабрецом, дикой мятой и шафраном для уютного вечера.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CONTACT & RESERVATION (DIRECT CONCIERGE)
+       ========================================================================== -->
+  <section class="gem-contact-sec" id="contact">
+    <div class="gc-left">
+      <div>
+        <div class="gem-sec-num">[ 05 / 05 ]</div>
+        <h2 class="gem-sec-title">Резерв <em>стола</em></h2>
+
+        <a href="tel:992917917917" class="gc-phone">
+          917 917 917
+        </a>
+
+        <div>
+          <div class="gc-row">
+            <span class="gc-label">АДРЕС</span>
+            <span>г. Душанбе, ул. Дӯстии халқҳо, 10б (р-н Винзавода)</span>
+          </div>
+          <div class="gc-row">
+            <span class="gc-label">РЕЖИМ</span>
+            <span>Ежедневно 10:00 — 00:00</span>
+          </div>
+          <div class="gc-row">
+            <span class="gc-label">РЕЙТИНГ</span>
+            <span>4.6 ★ (Яндекс Карты)</span>
+          </div>
+          <div class="gc-row">
+            <span class="gc-label">INSTAGRAM</span>
+            <span><a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" style="color:var(--gold);">@anzur.rest</a></span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:2.5rem; display:flex; gap:1.2rem; flex-wrap:wrap;">
+        <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B2%20%D0%A0%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD%D0%B5%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="btn" style="background:var(--wa); border-color:var(--wa); color:#fff;">
+          WhatsApp бронь
+        </a>
+        <a href="tel:992917917917" class="btn-ghost">
+          Позвонить
+        </a>
+      </div>
+    </div>
+
+    <div class="gc-right">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12467.31940989399!2d68.7985!3d38.5615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38d0fb8b01dfdc6d%3A0x5c3ee1765e19df7!2sDushanbe%2C%20Tajikistan!5e0!3m2!1sen!2s!4v1700000000000"
+        allowfullscreen=""
+        loading="lazy"
+        title="Локация ресторана Анзур в Душанбе">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="gem-footer">
+    <div style="display:flex; align-items:center; gap:1.2rem;">
+      <img src="anzur_bulb_pure.png" alt="ANZUR" style="height:26px; width:auto;" />
+      <span class="gf-copy">© 2026 ANZUR RESTAURANT · ДУШАНБЕ</span>
+    </div>
+    <div class="gf-copy">
+      УЛ. ДӮСТИИ ХАЛҚҲО, 10Б · 917 917 917 · @ANZUR.REST
+    </div>
+  </footer>
+
+  <!-- FLOATING CONCIERGE DOCK -->
+  <a id="wa-dock" href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D1%82%D1%8C%20%D0%BF%D0%BE%20%D0%BF%D0%BE%D0%B2%D0%BE%D0%B4%D1%83%20%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%D0%B8%D0%BA%D0%B0." target="_blank" rel="noopener" aria-label="Бронь столика в WhatsApp">
+    <div class="wa-led"></div>
+    <span class="wa-text">БРОНЬ В WHATSAPP</span>
+  </a>
+
+  <!-- ==========================================================================
+       JAVASCRIPT LOGIC
+       ========================================================================== -->
+  <script>
+    // 1. Alchemist Splash Preloader Controller
+    function dismissIntro() {
+      const intro = document.getElementById('alchemist-intro');
+      intro.classList.add('dismissed');
+      sessionStorage.setItem('anzur_intro_shown', 'true');
+    }
+
+    function replayIntro() {
+      const intro = document.getElementById('alchemist-intro');
+      intro.classList.remove('dismissed');
+      // Re-trigger animation
+      const clone = intro.cloneNode(true);
+      intro.parentNode.replaceChild(clone, intro);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Auto-dismiss after 2.6 seconds if not dismissed manually
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const intro = document.getElementById('alchemist-intro');
+        if (intro && !intro.classList.contains('dismissed')) {
+          dismissIntro();
+        }
+      }, 2800);
+    });
+
+    // Mobile Drawer Toggle
+    function toggleDrawer() {
+      document.getElementById('mobDrawer').classList.toggle('open');
+    }
+
+    // Menu Database
+    const MENU_ITEMS = {
+      national: [
+        { name: 'Плов «Анзур» Праздничный', desc: 'Лазерный рис, сочная баранина, барбарис, нут и перепелиные яйца.', price: '48 TJS' },
+        { name: 'Шашлык из баранины на углях', desc: 'Маринованная мякоть барашка, лаваш, маринованный лук и гранат.', price: '58 TJS' },
+        { name: 'Казан-Кебаб с картофелем', desc: 'Томленая говядина в медном казане с золотистым картофелем.', price: '55 TJS' },
+        { name: 'Лагман уйгурский ручной тяжки', desc: 'Домашняя лапша, обжаренная говядина, джусай, сладкий перец.', price: '42 TJS' },
+        { name: 'Самса тандырная с бараниной', desc: 'Хрустящее слоёное тесто из тандыра с черным тмином (2 шт).', price: '22 TJS' },
+        { name: 'Манты с тыквой и мясом', desc: 'Тонкое тесто на пару, сладкая тыква, рубленая говядина, чакка.', price: '36 TJS' }
+      ],
+      european: [
+        { name: 'Стейк Рибай Прайм', desc: 'Мраморная говядина Medium, соус демигляс, розмарин.', price: '115 TJS' },
+        { name: 'Филе лосося на гриле', desc: 'Норвежский лосось, спаржа, цитрусовый соус бер-блан.', price: '88 TJS' },
+        { name: 'Паста Карбонара', desc: 'Панчетта, пармезан, пастеризованный желток, перец.', price: '46 TJS' },
+        { name: 'Салат с тигровыми креветками', desc: 'Обжаренные креветки, авокадо, микс листьев, лаймовый дрессинг.', price: '54 TJS' },
+        { name: 'Крем-суп из белых грибов', desc: 'С фермерскими сливками, трюфельным маслом и чиабаттой.', price: '38 TJS' },
+        { name: 'Тирамису Классик', desc: 'Савоярди, эспрессо, крем маскарпоне и какао.', price: '32 TJS' }
+      ],
+      asian: [
+        { name: 'Ролл Филадельфия Люкс', desc: 'Охлажденный лосось, сливочный сыр Cremette, авокадо.', price: '56 TJS' },
+        { name: 'Суп Том-Ям с креветками', desc: 'Пряный кокосовый бульон, лемонграсс, морепродукты, рис жасмин.', price: '52 TJS' },
+        { name: 'Пад-Тай с морепродуктами', desc: 'Рисовая лапша, тамариндовый соус, яйцо, ростки сои, арахис.', price: '49 TJS' },
+        { name: 'Сет «Императорский Анзур» (32 шт)', desc: 'Филадельфия, Дракон, Калифорния, Запеченный спайси ролл.', price: '165 TJS' },
+        { name: 'Дим-самы с креветками на пару', desc: 'Прозрачное паровое тесто, начинка из тигровой креветки.', price: '44 TJS' },
+        { name: 'Салат Чука с ореховым соусом', desc: 'Водоросли вакаме, семена кунжута, традиционный ореховый соус.', price: '28 TJS' }
+      ],
+      bar: [
+        { name: 'Чай «Анзур» на горных травах', desc: 'Высокогорный зеленый чай, чабрец, горная мята, шафран.', price: '20 TJS' },
+        { name: 'Лимонад «Гранатовый Памир»', desc: 'Свежий гранатовый сок, базиликовый кордиал, содовая.', price: '24 TJS' },
+        { name: 'Свежевыжатые соки', desc: 'Апельсин, яблоко, морковь — 100% натуральный отжим.', price: '22 TJS' },
+        { name: 'Смузи Манго-Маракуйя', desc: 'Спелое манго, маракуйя, кокосовое молоко, чиа.', price: '28 TJS' },
+        { name: 'Кофе Specialty (Капучино)', desc: '100% Арабика свежей обжарки, фермерское молоко.', price: '18 TJS' },
+        { name: 'Мохито безалкогольный', desc: 'Свежая мята, лайм, тростниковый сахар, газированная вода.', price: '22 TJS' }
+      ]
+    };
+
+    function filterMenu(category, btn) {
+      document.querySelectorAll('.gem-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const grid = document.getElementById('gemGrid');
+      grid.innerHTML = '';
+      const items = MENU_ITEMS[category] || [];
+
+      items.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'gem-dish-card';
+        card.innerHTML = `
+          <div>
+            <div class="gdc-num">[ 0${index + 1} ]</div>
+            <h4 class="gdc-title">${item.name}</h4>
+            <p class="gdc-desc">${item.desc}</p>
+          </div>
+          <div class="gdc-footer">
+            <span class="gdc-price">${item.price}</span>
+            <span class="gdc-badge">ANZUR</span>
+          </div>
+        `;
+        grid.appendChild(card);
+
+        // Motion.js micro-stagger
+        if (window.Motion && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+          Motion.animate(card, { opacity: [0, 1], y: [16, 0] }, { duration: 0.35, delay: index * 0.04 });
+        }
+      });
+    }
+
+    // Initial render
+    filterMenu('national', document.querySelector('.gem-tab-btn'));
+  </script>
+</body>
+</html>

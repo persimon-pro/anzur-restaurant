@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" width="200" height="240">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DFBF7A" />
+      <stop offset="50%" stop-color="#C5A059" />
+      <stop offset="100%" stop-color="#8C6E33" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Outer Layer -->
+  <path class="anim-path path-outer" d="M 100 20 C 160 70, 185 135, 100 215 C 15 135, 40 70, 100 20 Z"
+        fill="none" stroke="url(#goldGrad)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Middle Layer -->
+  <path class="anim-path path-mid" d="M 100 65 C 138 100, 152 145, 100 190 C 48 145, 62 100, 100 65 Z"
+        fill="none" stroke="url(#goldGrad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Inner Core -->
+  <path class="anim-path path-inner" d="M 100 108 C 120 128, 126 150, 100 168 C 74 150, 80 128, 100 108 Z"
+        fill="url(#goldGrad)" stroke="none" />
+</svg>
