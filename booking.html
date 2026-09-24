@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Бронирование стола — ANZUR RESTAURANT | Душанбе</title>
+  <meta name="description" content="Онлайн-бронирование столика в ресторане Анзур (Душанбе). Главный зал, VIP-кабины, караоке, летняя терраса. Резерв: 917 917 917." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://anzur.rest/booking.html" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="anzur_bulb_pure.png" type="image/png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:             #060504;
+      --bg-card:        #0C0A09;
+      --bg-elevated:    #15120F;
+      --border:         #1A1714;
+      --border-light:   #2C2620;
+      --gold:           #C5A059;
+      --gold-light:     #E5C786;
+      --text:           #F5F2EB;
+      --text-muted:     #787065;
+      --wa:             #25D366;
+      --font-serif:     'Cormorant Garamond', Georgia, serif;
+      --font-sans:      'Space Grotesk', -apple-system, sans-serif;
+      --font-mono:      'Space Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border-radius: 0 !important;
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; transition: all 0.2s ease; }
+
+    /* Top Nav */
+    .top-nav {
+      border-bottom: 1px solid var(--border);
+      background: rgba(6, 5, 4, 0.96);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .top-nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 3rem;
+      height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .back-link {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .back-link:hover { color: var(--gold); }
+
+    .brand-center {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+    .brand-emblem {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+    }
+    .brand-title span { color: var(--gold); }
+
+    .phone-direct {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
+    }
+    .phone-direct:hover { color: var(--gold-light); }
+
+    @media (max-width: 768px) {
+      .top-nav-inner { padding: 0 1.5rem; }
+      .phone-direct { display: none; }
+    }
+
+    /* Main Container */
+    .main-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 5rem 2rem 7rem;
+    }
+
+    .booking-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .mono-tag {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+    .booking-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 6vw, 4.4rem);
+      font-weight: 300;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 1.2rem;
+    }
+    .booking-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .booking-subtitle {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* Form Card */
+    .booking-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 3.5rem;
+    }
+    @media (max-width: 768px) {
+      .booking-card { padding: 2rem 1.5rem; }
+      .main-wrap { padding: 3rem 1.25rem 5rem; }
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      margin-bottom: 1.8rem;
+    }
+    @media (max-width: 640px) {
+      .form-grid { grid-template-columns: 1fr; gap: 1.4rem; }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .form-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .form-control {
+      background: var(--bg);
+      border: 1px solid var(--border-light);
+      color: var(--text);
+      padding: 1rem 1.2rem;
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+      width: 100%;
+    }
+    .form-control:focus {
+      border-color: var(--gold);
+    }
+
+    /* Quick Time Buttons */
+    .time-chips {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.4rem;
+    }
+    .time-chip {
+      background: var(--bg);
+      border: 1px solid var(--border-light);
+      padding: 0.65rem 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+    }
+    .time-chip:hover {
+      border-color: var(--gold);
+      color: var(--text);
+    }
+    .time-chip.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #060504;
+      font-weight: 700;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 1.2rem;
+      margin-top: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: var(--gold);
+      border: 1px solid var(--gold);
+      color: #060504;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      transition: all 0.2s ease;
+    }
+    .submit-btn:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(197, 160, 89, 0.25);
+    }
+
+    /* Direct Contact Footnote */
+    .direct-box {
+      margin-top: 3rem;
+      text-align: center;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .direct-num {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: var(--gold);
+      line-height: 1;
+      margin: 0.5rem 0;
+    }
+    .direct-sub {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Nav -->
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a href="index.html" class="back-link">
+        ← НА ГЛАВНУЮ
+      </a>
+
+      <a href="index.html" class="brand-center">
+        <img src="anzur_bulb_pure.png" alt="ANZUR" class="brand-emblem" />
+        <div class="brand-title">ANZUR<span>.</span></div>
+      </a>
+
+      <a href="tel:992917917917" class="phone-direct">
+        917 917 917
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Booking Interface -->
+  <main class="main-wrap">
+    <div class="booking-header">
+      <div class="mono-tag">ОНЛАЙН-РЕЗЕРВАЦИЯ</div>
+      <h1 class="booking-title">Забронировать <em>стол</em></h1>
+      <p class="booking-subtitle">
+        Заполните параметры вашего визита. Заявка моментально сформируется и откроется в WhatsApp администратора для подтверждения.
+      </p>
+    </div>
+
+    <div class="booking-card">
+      <form id="reservationForm" onsubmit="sendBookingToWhatsApp(event)">
+        <!-- Row 1: Date & Time -->
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">ДАТА ВИЗИТА</label>
+            <input type="date" class="form-control" id="resDate" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">ВРЕМЯ</label>
+            <input type="time" class="form-control" id="resTime" value="19:00" required />
+          </div>
+        </div>
+
+        <!-- Row 2: Guests & Hall -->
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">КОЛИЧЕСТВО ПЕРСОН</label>
+            <select class="form-control" id="resGuests">
+              <option value="1–2 персоны">1 – 2 персоны</option>
+              <option value="3–4 персоны" selected>3 – 4 персоны</option>
+              <option value="5–8 персон">5 – 8 персон</option>
+              <option value="VIP-кабина (от 8 персон)">VIP-кабина (от 8 персон)</option>
+              <option value="Банкет (более 15 гостей)">Банкет (более 15 гостей)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">ЖЕЛАЕМАЯ ЗОНА</label>
+            <select class="form-control" id="resZone">
+              <option value="Главный зал" selected>Главный зал (живая музыка)</option>
+              <option value="Приватная VIP-кабина">Приватная VIP-кабина</option>
+              <option value="Karaoke Lounge">Karaoke Lounge</option>
+              <option value="Панорамная терраса">Панорамная летняя терраса</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Row 3: Name & Phone -->
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">ВАШЕ ИМЯ</label>
+            <input type="text" class="form-control" id="resName" placeholder="Как к вам обращаться?" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">ТЕЛЕФОН / WHATSAPP</label>
+            <input type="tel" class="form-control" id="resPhone" placeholder="+992 ..." required />
+          </div>
+        </div>
+
+        <!-- Row 4: Notes -->
+        <div class="form-group" style="margin-bottom:1.8rem;">
+          <label class="form-label">ОСОБЫЕ ПОЖЕЛАНИЯ / ПОВОД</label>
+          <input type="text" class="form-control" id="resNotes" placeholder="День рождения, деловой ужин, романтический вечер..." />
+        </div>
+
+        <!-- Action Button -->
+        <button type="submit" class="submit-btn">
+          <span>ОТПРАВИТЬ БРОНЬ В WHATSAPP</span>
+          <span>→</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Direct Hotline -->
+    <div class="direct-box">
+      <div class="direct-sub">ПРЯМАЯ ЛИНИЯ АДМИНИСТРАТОРА</div>
+      <a href="tel:992917917917" class="direct-num">917 917 917</a>
+      <div class="direct-sub">ДУШАНБЕ · ЕЖЕДНЕВНО С 10:00 ДО 00:00</div>
+    </div>
+  </main>
+
+  <script>
+    // Set default date to today or tomorrow
+    const today = new Date();
+    const dateInput = document.getElementById('resDate');
+    dateInput.min = today.toISOString().split('T')[0];
+    dateInput.value = today.toISOString().split('T')[0];
+
+    function sendBookingToWhatsApp(e) {
+      e.preventDefault();
+      const date = document.getElementById('resDate').value;
+      const time = document.getElementById('resTime').value;
+      const guests = document.getElementById('resGuests').value;
+      const zone = document.getElementById('resZone').value;
+      const name = document.getElementById('resName').value;
+      const phone = document.getElementById('resPhone').value;
+      const notes = document.getElementById('resNotes').value;
+
+      let msg = `Здравствуйте! Бронирование столика в ресторане Анзур:
+` +
+        `• Имя: ${name}
+` +
+        `• Телефон: ${phone}
+` +
+        `• Дата: ${date}
+` +
+        `• Время: ${time}
+` +
+        `• Персон: ${guests}
+` +
+        `• Зона: ${zone}`;
+
+      if (notes && notes.trim()) {
+        msg += `
+• Пожелания: ${notes.trim()}`;
+      }
+
+      const waUrl = `https://wa.me/992917917917?text=${encodeURIComponent(msg)}`;
+      window.open(waUrl, '_blank');
+    }
+  </script>
+</body>
+</html>

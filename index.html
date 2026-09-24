@@ -3,45 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ANZUR RESTAURANT — Душанбе | @anzur.rest</title>
+  <title>ANZUR — Ресторан высокой гастрономии | Душанбе</title>
   <meta name="description" content="Ресторан Анзур в Душанбе: ул. Дӯстии халқҳо, 10б (р-н Винзавода). Национальная, европейская и паназиатская кухня. VIP-кабины, караоке, летняя терраса. Резерв: 917 917 917." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://anzur.rest" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="restaurant" />
-  <meta property="og:title" content="ANZUR RESTAURANT — Высокая гастрономия в Душанбе" />
-  <meta property="og:description" content="Три кухни мира под одной крышей. VIP-кабины, профессиональный звук и караоке, летняя терраса. Бронь: 917 917 917." />
-  <meta property="og:image" content="anzur_terrace.jpg" />
+  <meta property="og:title" content="ANZUR — Ресторан высокой гастрономии в Душанбе" />
+  <meta property="og:description" content="Национальная · Европейская · Паназиатская кухня. Резерв: 917 917 917." />
+  <meta property="og:image" content="gen_hero_terrace.jpg" />
 
-  <!-- Favicon: authentic Anzur bulb -->
+  <!-- Favicon -->
   <link rel="icon" href="anzur_bulb_pure.png" type="image/png" />
 
   <!-- Fonts: Cormorant Garamond (Editorial Luxury) + Space Grotesk (Clean Sans) + Space Mono (Coordinates) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
-  <!-- Motion.js (Framer Motion engine for vanilla JS) -->
+  <!-- Motion.js -->
   <script src="https://cdn.jsdelivr.net/npm/motion@11/dist/motion.js"></script>
 
   <style>
     /* ==========================================================================
-       DESIGN SYSTEM: GEM × CENTRAL × ALCHEMIST × GERANIUM
-       Pure minimalism. Zero rounded corners. High-fashion restaurant architecture.
+       ULTRA-MINIMAL LUXURY (ALCHEMIST × CENTRAL × GERANIUM × GEM)
+       Clean negative space. Zero visual noise. Only essential elements.
        ========================================================================== */
     :root {
-      --bg:             #070605;
-      --bg-card:        #0E0C0A;
-      --bg-elevated:    #161310;
-      --border:         #1F1B17;
-      --border-light:   #332D26;
+      --bg:             #060504;
+      --bg-card:        #0C0A09;
+      --border:         #1A1714;
+      --border-subtle:  #28231E;
       --gold:           #C5A059;
       --gold-light:     #E5C786;
-      --gold-dark:      #856832;
-      --text:           #F6F3EC;
-      --text-muted:     #82786D;
-      --text-dim:       #484138;
+      --text:           #F5F2EB;
+      --text-muted:     #787065;
       --wa:             #25D366;
       --font-serif:     'Cormorant Garamond', Georgia, serif;
       --font-sans:      'Space Grotesk', -apple-system, sans-serif;
@@ -52,7 +49,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      border-radius: 0 !important; /* Strict no-rounding rule */
+      border-radius: 0 !important;
     }
 
     html {
@@ -66,79 +63,77 @@
       font-family: var(--font-sans);
       background: var(--bg);
       color: var(--text);
-      line-height: 1.5;
+      line-height: 1.6;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar { width: 2px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--gold); }
 
-    a { text-decoration: none; color: inherit; transition: all 0.2s ease; }
-    ul { list-style: none; }
+    a { text-decoration: none; color: inherit; transition: opacity 0.2s ease, color 0.2s ease; }
     img { display: block; width: 100%; height: auto; object-fit: cover; }
 
     .container {
-      max-width: 1440px;
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 0 2.5rem;
+      padding: 0 3rem;
     }
     @media (max-width: 768px) {
-      .container { padding: 0 1.25rem; }
+      .container { padding: 0 1.5rem; }
     }
 
-    .mono-tag {
+    .mono-label {
       font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.24em;
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--gold);
     }
 
-    /* Minimalist Buttons */
-    .btn {
+    /* Minimalist Action Buttons */
+    .btn-gold {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 0.6rem;
-      padding: 0.9rem 2.2rem;
+      padding: 0.95rem 2.4rem;
       font-family: var(--font-mono);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       cursor: pointer;
       border: 1px solid var(--gold);
       background: var(--gold);
-      color: #070605;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      color: #060504;
+      transition: all 0.25s ease;
     }
-    .btn:hover {
+    .btn-gold:hover {
       background: var(--gold-light);
       border-color: var(--gold-light);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(197, 160, 89, 0.25);
+      box-shadow: 0 10px 28px rgba(197, 160, 89, 0.2);
     }
 
-    .btn-ghost {
+    .btn-outline {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 0.6rem;
-      padding: 0.9rem 2.2rem;
+      padding: 0.95rem 2.4rem;
       font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       cursor: pointer;
-      border: 1px solid var(--border-light);
+      border: 1px solid var(--border-subtle);
       background: transparent;
       color: var(--text);
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
     }
-    .btn-ghost:hover {
+    .btn-outline:hover {
       border-color: var(--gold);
       color: var(--gold);
       background: var(--bg-card);
@@ -146,126 +141,105 @@
     }
 
     /* ==========================================================================
-       1. ALCHEMIST-STYLE SPLASH PRELOADER (concentric bulb animation)
+       1. ALCHEMIST INTRO SPLASH (Animated Concentric Bulb)
        ========================================================================== */
-    #alchemist-intro {
+    #splash {
       position: fixed;
       inset: 0;
       z-index: 10000;
-      background: #050403;
+      background: #040302;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: transform 0.9s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.8s ease;
+      cursor: pointer;
+      transition: opacity 0.8s ease, transform 0.9s cubic-bezier(0.85, 0, 0.15, 1);
     }
-    #alchemist-intro.dismissed {
+    #splash.done {
+      opacity: 0;
       transform: translateY(-100%);
       pointer-events: none;
     }
 
-    .alchemist-emblem-box {
-      position: relative;
-      width: 170px;
-      height: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 2.2rem;
+    .splash-box {
+      width: 140px;
+      height: 150px;
+      margin-bottom: 2rem;
     }
-
-    .alchemist-svg {
+    .splash-svg {
       width: 100%;
       height: 100%;
       overflow: visible;
     }
 
-    /* SVG Stroke Drawing Keyframes */
-    .alch-path-outer {
+    .sp-outer {
       stroke-dasharray: 450;
       stroke-dashoffset: 450;
-      animation: drawOuter 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+      animation: drawLine 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
     }
-    .alch-path-mid {
+    .sp-mid {
       stroke-dasharray: 320;
       stroke-dashoffset: 320;
-      animation: drawMid 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+      animation: drawLine 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
     }
-    .alch-path-core {
+    .sp-core {
       opacity: 0;
       transform-origin: center;
-      animation: popCore 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+      animation: corePop 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
     }
 
-    @keyframes drawOuter {
-      to { stroke-dashoffset: 0; }
-    }
-    @keyframes drawMid {
-      to { stroke-dashoffset: 0; }
-    }
-    @keyframes popCore {
-      0% { opacity: 0; transform: scale(0.4); }
-      70% { opacity: 1; transform: scale(1.15); filter: drop-shadow(0 0 12px var(--gold)); }
+    @keyframes drawLine { to { stroke-dashoffset: 0; } }
+    @keyframes corePop {
+      0% { opacity: 0; transform: scale(0.3); }
+      70% { opacity: 1; transform: scale(1.15); filter: drop-shadow(0 0 14px var(--gold)); }
       100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 6px var(--gold)); }
     }
 
-    .alchemist-title {
+    .splash-wordmark {
       font-family: var(--font-serif);
-      font-size: 2.8rem;
-      font-weight: 600;
-      letter-spacing: 0.38em;
+      font-size: 2.6rem;
+      font-weight: 400;
+      letter-spacing: 0.4em;
       text-transform: uppercase;
       color: var(--text);
       opacity: 0;
-      animation: fadeInText 1s ease 1s forwards;
-      margin-left: 0.38em; /* Optical centering */
+      animation: fadeIn 0.9s ease 1s forwards;
+      margin-left: 0.4em;
     }
-    .alchemist-sub {
+    .splash-city {
       font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
+      font-size: 0.62rem;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
       color: var(--gold);
       margin-top: 0.6rem;
       opacity: 0;
-      animation: fadeInText 1s ease 1.2s forwards;
+      animation: fadeIn 0.9s ease 1.2s forwards;
     }
-    @keyframes fadeInText {
-      from { opacity: 0; transform: translateY(10px); }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .alchemist-enter-btn {
-      margin-top: 2.8rem;
-      padding: 0.75rem 1.8rem;
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      border: 1px solid var(--border-light);
-      background: transparent;
-      color: var(--text-muted);
-      cursor: pointer;
-      opacity: 0;
-      animation: fadeInText 0.8s ease 1.4s forwards;
-      transition: all 0.2s ease;
-    }
-    .alchemist-enter-btn:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-      background: var(--bg-card);
-    }
-
     /* ==========================================================================
-       STICKY MINIMAL NAVBAR (GEM STYLE)
+       TOP MINIMAL NAV (GEM STYLE)
        ========================================================================== */
-    .site-nav {
-      position: sticky;
+    .nav {
+      position: fixed;
       top: 0;
+      left: 0;
+      right: 0;
       z-index: 1000;
-      background: rgba(7, 6, 5, 0.94);
-      backdrop-filter: blur(14px);
+      background: rgba(6, 5, 4, 0.94);
+      backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
+      transform: translateY(-100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
+      pointer-events: none;
+    }
+    .nav.is-visible {
+      transform: translateY(0);
+      pointer-events: all;
     }
     .nav-inner {
       display: flex;
@@ -273,113 +247,61 @@
       justify-content: space-between;
       height: 74px;
     }
-    .nav-logo-group {
+    .nav-brand {
       display: flex;
       align-items: center;
-      gap: 1.1rem;
+      gap: 1rem;
       cursor: pointer;
     }
-    .nav-logo-icon {
-      width: 28px;
-      height: 28px;
+    .nav-emblem {
+      width: 26px;
+      height: 26px;
       object-fit: contain;
     }
-    .nav-brand-text {
+    .nav-title {
       font-family: var(--font-serif);
-      font-size: 1.7rem;
+      font-size: 1.6rem;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       color: var(--text);
     }
-    .nav-brand-text span {
-      color: var(--gold);
-    }
+    .nav-title span { color: var(--gold); }
 
-    .nav-menu {
+    .nav-center-menu {
       display: flex;
       align-items: center;
-      gap: 2.6rem;
+      gap: 3rem;
     }
-    .nav-link {
+    .nav-item {
       font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.18em;
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--text-muted);
-      transition: color 0.15s ease;
-      position: relative;
     }
-    .nav-link:hover {
-      color: var(--gold);
-    }
-    .nav-link span {
-      color: var(--gold);
-      margin-right: 0.25rem;
-      font-size: 0.6rem;
-    }
+    .nav-item:hover { color: var(--gold); }
 
-    .nav-cta-btn {
-      padding: 0.65rem 1.4rem;
+    .nav-reserve-link {
       font-family: var(--font-mono);
       font-size: 0.68rem;
       font-weight: 700;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      background: transparent;
       color: var(--gold);
-      border: 1px solid var(--gold);
-      transition: all 0.2s ease;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
     }
-    .nav-cta-btn:hover {
-      background: var(--gold);
-      color: #070605;
-    }
+    .nav-reserve-link:hover { color: var(--gold-light); border-color: var(--gold-light); }
 
-    .burger-btn {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-    }
-    .burger-btn span {
-      width: 24px;
-      height: 2px;
-      background: var(--gold);
-    }
-    @media (max-width: 900px) {
-      .nav-menu { display: none; }
-      .burger-btn { display: flex; }
-    }
-
-    /* Mobile Nav Drawer */
-    .mob-drawer {
-      position: fixed;
-      inset: 0;
-      background: var(--bg);
-      z-index: 999;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 6rem 2rem 3rem;
-      transform: translateX(100%);
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      border-left: 1px solid var(--border);
-    }
-    .mob-drawer.open { transform: translateX(0); }
-    .mob-links { display: flex; flex-direction: column; gap: 1.6rem; }
-    .mob-link-item {
-      font-family: var(--font-serif);
-      font-size: 2.4rem;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.6rem;
+    @media (max-width: 860px) {
+      .nav-center-menu { display: none; }
     }
 
     /* ==========================================================================
-       2. CENTRAL-STYLE MONUMENTAL HERO
-       Atmospheric, centered, architectural, coordinates, quiet luxury.
+       2. CENTRAL MONUMENTAL HERO
+       Calm, centered, architectural, poetic restraint.
        ========================================================================== */
-    .central-hero {
+    .hero {
       position: relative;
       min-height: calc(100vh - 74px);
       display: flex;
@@ -388,497 +310,747 @@
       border-bottom: 1px solid var(--border);
       overflow: hidden;
     }
-    .central-hero-bg {
+    .hero-backdrop {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse at center, rgba(7, 6, 5, 0.4) 0%, rgba(7, 6, 5, 0.85) 60%, rgba(7, 6, 5, 0.98) 100%),
-        url('anzur_terrace.jpg') center/cover no-repeat;
-      transform: scale(1.04);
-      animation: heroZoom 14s infinite alternate ease-in-out;
+        radial-gradient(ellipse at center, rgba(6, 5, 4, 0.45) 0%, rgba(6, 5, 4, 0.88) 70%, rgba(6, 5, 4, 0.98) 100%),
+        url('gen_hero_terrace.jpg') center/cover no-repeat;
+      transform: scale(1.03);
+      animation: slowZoom 16s infinite alternate ease-in-out;
       will-change: transform;
     }
-    @keyframes heroZoom {
-      to { transform: scale(1); }
-    }
+    @keyframes slowZoom { to { transform: scale(1); } }
 
-    .central-hero-top {
+    .hero-meta-top {
       position: relative;
       z-index: 2;
-      padding: 2.2rem 2.5rem;
+      padding: 2.2rem 3rem;
       display: flex;
       justify-content: space-between;
-      align-items: center;
       font-family: var(--font-mono);
       font-size: 0.65rem;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--text-muted);
     }
-    .central-hero-top span strong { color: var(--gold); }
+    .hero-meta-top strong { color: var(--gold); font-weight: 400; }
 
-    .central-hero-center {
+    .hero-content {
       position: relative;
       z-index: 2;
       text-align: center;
       padding: 0 1.5rem;
-      max-width: 980px;
+      max-width: 900px;
       margin: auto;
     }
-    .central-emblem-subtle {
-      width: 58px;
-      height: 58px;
+    .hero-emblem {
+      width: 52px;
+      height: 52px;
       object-fit: contain;
-      margin: 0 auto 1.8rem;
-      filter: drop-shadow(0 0 16px rgba(197, 160, 89, 0.4));
+      margin: 0 auto 1.6rem;
+      filter: drop-shadow(0 0 16px rgba(197, 160, 89, 0.35));
     }
-    .central-hero-h1 {
+    .hero-h1 {
       font-family: var(--font-serif);
-      font-size: clamp(3.8rem, 9.5vw, 8.5rem);
-      font-weight: 400;
+      font-size: clamp(4rem, 11vw, 9.5rem);
+      font-weight: 300;
       line-height: 0.9;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      margin-bottom: 1.4rem;
-      color: var(--text);
+      margin-bottom: 1.6rem;
+      margin-left: 0.16em;
     }
-    .central-hero-tagline {
+    .hero-subtitle {
       font-family: var(--font-mono);
-      font-size: clamp(0.72rem, 1.2vw, 0.88rem);
-      letter-spacing: 0.28em;
+      font-size: clamp(0.68rem, 1.1vw, 0.82rem);
+      letter-spacing: 0.32em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 2.4rem;
+      margin-bottom: 2.8rem;
     }
-    .central-hero-actions {
+    .hero-actions {
       display: flex;
       justify-content: center;
       gap: 1.2rem;
       flex-wrap: wrap;
     }
 
-    .central-hero-bottom {
+    .hero-meta-bottom {
       position: relative;
       z-index: 2;
-      padding: 2rem 2.5rem;
+      padding: 2rem 3rem;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(6, 5, 4, 0.4);
       backdrop-filter: blur(8px);
-      background: rgba(7, 6, 5, 0.5);
-    }
-    .central-coord {
       font-family: var(--font-mono);
       font-size: 0.65rem;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.2em;
       color: var(--text-muted);
     }
-    .central-scroll-cue {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
+    .scroll-indicator {
       color: var(--gold);
       display: flex;
       align-items: center;
       gap: 0.8rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
     }
-    .central-scroll-line {
+    .scroll-bar {
       width: 32px;
       height: 1px;
       background: var(--gold);
-      animation: linePulse 2s infinite ease-in-out;
     }
-    @keyframes linePulse {
-      0%, 100% { transform: scaleX(1); opacity: 1; }
-      50% { transform: scaleX(0.4); opacity: 0.3; }
+
+    @media (max-width: 768px) {
+      .hero-meta-top, .hero-meta-bottom { padding: 1.5rem; }
+      .hero-meta-bottom { flex-direction: column; gap: 0.8rem; align-items: center; text-align: center; }
     }
 
     /* ==========================================================================
-       4. RESTAURANT GEM-STYLE RUNNING MARQUEE TICKER
+       SECTION HEADERS (RESTAURANT GEM ARCHITECTURE)
        ========================================================================== */
-    .gem-ticker-bar {
+    .sec-header {
+      padding: 5rem 0 2.5rem;
       border-bottom: 1px solid var(--border);
-      background: var(--bg-card);
-      overflow: hidden;
-      white-space: nowrap;
-      padding: 0.9rem 0;
-      position: relative;
-    }
-    .gem-ticker-track {
-      display: inline-flex;
-      animation: tickerRun 28s linear infinite;
-    }
-    .gem-ticker-track:hover {
-      animation-play-state: paused;
-    }
-    .gem-ticker-item {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      padding: 0 2rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-    .gem-ticker-item span.bullet {
-      color: var(--gold);
-      font-size: 0.8rem;
-    }
-    @keyframes tickerRun {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    /* ==========================================================================
-       SECTION HEADERS (RESTAURANT GEM EDITORIAL ARCHITECTURE)
-       ========================================================================== */
-    .gem-section-header {
-      border-bottom: 1px solid var(--border);
-      padding: 3rem 2.5rem 2.5rem;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      background: var(--bg);
     }
-    .gem-sec-num {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--gold);
-      letter-spacing: 0.24em;
-      margin-bottom: 0.5rem;
-    }
-    .gem-sec-title {
+    .sec-title {
       font-family: var(--font-serif);
-      font-size: clamp(2.4rem, 4.5vw, 4.2rem);
-      font-weight: 400;
-      line-height: 0.95;
+      font-size: clamp(2.6rem, 5vw, 4.4rem);
+      font-weight: 300;
+      line-height: 1;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--text);
+      letter-spacing: 0.06em;
     }
-    .gem-sec-title em {
+    .sec-title em {
       font-style: italic;
       color: var(--gold);
-      font-family: var(--font-serif);
     }
 
     /* ==========================================================================
-       3. GERANIUM-STYLE PHOTO REVEALS (SCULPTURAL, GALLERY PRESENTATION)
+       3. KINETIC MENU SHOWCASE & EDITORIAL SLIDER (GEM × GERANIUM × MOTION)
        ========================================================================== */
-    .geranium-showcase {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      border-bottom: 1px solid var(--border);
-      background: var(--border);
-      gap: 1px;
-    }
-    .geranium-frame {
-      background: var(--bg);
-      padding: 3.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .menu-section {
       position: relative;
+      border-bottom: 1px solid var(--border);
     }
-    .geranium-img-container {
-      width: 100%;
-      aspect-ratio: 4/3;
-      overflow: hidden;
+
+    /* Filter tabs bar */
+    .menu-filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 1.4rem;
+      padding-bottom: 2rem;
+    }
+    .menu-filter-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.15rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .menu-filter-btn:hover {
+      border-color: var(--border-subtle);
+      color: var(--text);
+    }
+    .menu-filter-btn.is-active {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(197, 160, 89, 0.08);
+    }
+
+    /* Main Showcase Stage (Split Layout) */
+    .stage-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    /* Left: Visual Frame */
+    .stage-visual {
       position: relative;
       background: var(--bg-card);
-      margin-bottom: 1.8rem;
+      overflow: hidden;
+      aspect-ratio: 16/11;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .geranium-img-container img {
+    .stage-visual-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
-      filter: brightness(0.9) contrast(1.05);
+      will-change: transform, opacity;
+      filter: brightness(0.92) contrast(1.08);
+      transform-origin: center center;
     }
-    .geranium-frame:hover .geranium-img-container img {
-      transform: scale(1.04);
-      filter: brightness(1) contrast(1.1);
+    .stage-visual-vignette {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(6,5,4,0.3) 0%, transparent 45%, rgba(6,5,4,0.75) 100%);
     }
-    .geranium-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      border-top: 1px solid var(--border);
-      padding-top: 1.2rem;
-    }
-    .geranium-dish-name {
-      font-family: var(--font-serif);
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-    .geranium-dish-price {
+
+    /* Floating badges inside image frame */
+    .stage-badge-top-left {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      z-index: 2;
+      background: rgba(6, 5, 4, 0.88);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.4rem 0.9rem;
       font-family: var(--font-mono);
-      font-size: 1rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
       color: var(--gold);
-      font-weight: 700;
     }
-    .geranium-dish-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-top: 0.4rem;
-    }
-
-    @media (max-width: 900px) {
-      .geranium-showcase { grid-template-columns: 1fr; }
-      .geranium-frame { padding: 2rem 1.25rem; }
-    }
-
-    /* ==========================================================================
-       MENU CATALOG (GEM EDITORIAL REFINEMENT)
-       ========================================================================== */
-    .gem-menu-nav {
-      display: flex;
-      border-bottom: 1px solid var(--border);
-      background: var(--bg-card);
-      overflow-x: auto;
-    }
-    .gem-tab-btn {
-      padding: 1.2rem 2.4rem;
+    .stage-badge-top-right {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 2;
+      background: rgba(6, 5, 4, 0.88);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.4rem 0.9rem;
       font-family: var(--font-mono);
       font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      background: transparent;
-      border: none;
-      border-right: 1px solid var(--border);
-      color: var(--text-muted);
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.15s ease;
+      letter-spacing: 0.18em;
+      color: var(--text);
     }
-    .gem-tab-btn:hover { color: var(--text); }
-    .gem-tab-btn.active {
-      background: var(--gold);
-      color: #070605;
-      font-weight: 700;
+    .stage-badge-top-right .dim {
+      color: var(--text-muted);
+      margin: 0 0.3rem;
+    }
+    .stage-badge-bottom-left {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      z-index: 2;
+      background: rgba(6, 5, 4, 0.88);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.4rem 0.9rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
     }
 
-    .gem-menu-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      background: var(--border);
-      gap: 1px;
-      border-bottom: 1px solid var(--border);
-    }
-    .gem-dish-card {
+    /* Right: Editorial Typographic Panel */
+    .stage-details {
       background: var(--bg);
-      padding: 2.2rem;
+      border-left: 1px solid var(--border);
+      padding: 3.5rem 3.5rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: background 0.2s ease;
-      min-height: 280px;
+      position: relative;
     }
-    .gem-dish-card:hover {
-      background: var(--bg-card);
-    }
-    .gdc-num {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--gold);
-      letter-spacing: 0.2em;
-      margin-bottom: 1.4rem;
-    }
-    .gdc-title {
-      font-family: var(--font-serif);
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--text);
-      line-height: 1.2;
-      margin-bottom: 0.6rem;
-    }
-    .gdc-desc {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 1.6rem;
-    }
-    .gdc-footer {
-      border-top: 1px solid var(--border);
-      padding-top: 1rem;
+    .stage-header-line {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      font-family: var(--font-mono);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.2rem;
+      margin-bottom: 1.8rem;
     }
-    .gdc-price {
-      font-size: 1.15rem;
-      font-weight: 700;
+    .stage-cat-name {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
       color: var(--gold);
     }
-    .gdc-badge {
-      font-size: 0.6rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-dim);
+    .stage-price-tag {
+      font-family: var(--font-mono);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+    }
+    .stage-price-tag span {
+      font-size: 0.8rem;
+      color: var(--gold);
+      font-weight: 400;
+      letter-spacing: 0.1em;
     }
 
-    @media (max-width: 1024px) { .gem-menu-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 640px) { .gem-menu-grid { grid-template-columns: 1fr; } }
+    .stage-main-text {
+      flex: 1;
+    }
+    .stage-dish-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 3.2vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+    .stage-dish-sub {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--gold-light);
+      line-height: 1.4;
+      margin-bottom: 1.4rem;
+    }
+    .stage-dish-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    /* Gastronomy Spec Grid */
+    .stage-specs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.2rem 0;
+      margin-bottom: 2.4rem;
+      gap: 1.2rem;
+    }
+    .spec-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .spec-key {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .spec-val {
+      font-size: 0.78rem;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* Actions & Controls Bar */
+    .stage-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .stage-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .stage-nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .stage-arrow-btn {
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: all 0.25s ease;
+    }
+    .stage-arrow-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: var(--bg-card);
+    }
+    .stage-pause-btn {
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      transition: all 0.25s ease;
+    }
+    .stage-pause-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ==========================================================================
+       FILMSTRIP / THUMBNAIL TRACK
+       ========================================================================== */
+    .filmstrip-wrap {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      border-top: 1px solid var(--border);
+      background: var(--border);
+      gap: 1px;
+    }
+    .filmstrip-item {
+      background: var(--bg);
+      padding: 1.2rem;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .filmstrip-item:hover,
+    .filmstrip-item.is-active {
+      background: var(--bg-card);
+    }
+    .filmstrip-thumb {
+      width: 100%;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      margin-bottom: 0.8rem;
+      background: #040302;
+    }
+    .filmstrip-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease, filter 0.4s ease;
+      filter: brightness(0.85);
+    }
+    .filmstrip-item:hover .filmstrip-thumb img,
+    .filmstrip-item.is-active .filmstrip-thumb img {
+      transform: scale(1.06);
+      filter: brightness(1);
+    }
+    .filmstrip-meta-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.3rem;
+    }
+    .filmstrip-num {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+    }
+    .filmstrip-price {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .filmstrip-title {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.25;
+      margin-bottom: 0.2rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .filmstrip-cat {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Active progress bar inside filmstrip */
+    .filmstrip-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: transparent;
+      overflow: hidden;
+    }
+    .filmstrip-item.is-active .filmstrip-progress {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .filmstrip-fill {
+      width: 0%;
+      height: 100%;
+      background: var(--gold);
+      transform-origin: left center;
+    }
+
+    /* ==========================================================================
+       FULL RESTAURANT MENU MODAL (GEM / ALCHEMIST ARCHITECTURE)
+       ========================================================================== */
+    .menu-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 12000;
+      background: rgba(4, 3, 2, 0.96);
+      backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .menu-modal-overlay.is-open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .menu-modal-header {
+      padding: 1.8rem 3rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(6, 5, 4, 0.98);
+    }
+    .menu-modal-title {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .menu-modal-close {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.4rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .menu-modal-close:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .menu-modal-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 3.5rem 3rem;
+    }
+    .menu-columns {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2.5rem;
+    }
+    .menu-cat-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+    }
+    .menu-cat-head {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.8rem;
+    }
+    .menu-cat-head h3 {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .menu-cat-head span {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .menu-list-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+      padding-bottom: 1rem;
+    }
+    .menu-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    .menu-item-name {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+    .menu-item-price {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+    .menu-item-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .menu-modal-footer {
+      padding: 1.5rem 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(6, 5, 4, 0.98);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+    }
+
+    @media (max-width: 1200px) {
+      .menu-columns { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+      .filmstrip-wrap { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .stage-grid { grid-template-columns: 1fr; }
+      .stage-details { border-left: none; border-top: 1px solid var(--border); padding: 2.5rem 1.5rem; }
+      .stage-specs { grid-template-columns: 1fr; gap: 0.8rem; }
+      .filmstrip-wrap { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }
+      .filmstrip-item { min-width: 220px; flex-shrink: 0; scroll-snap-align: start; }
+      .menu-columns { grid-template-columns: 1fr; }
+      .menu-modal-header, .menu-modal-body, .menu-modal-footer { padding: 1.5rem; }
+    }
 
     /* ==========================================================================
        SPACES (VIP · KARAOKE · TERRACE)
        ========================================================================== */
-    .gem-spaces-row {
+    .spaces-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--border);
       background: var(--border);
       gap: 1px;
-      border-bottom: 1px solid var(--border);
     }
-    .gem-space-tile {
+    .space-box {
       background: var(--bg);
       display: flex;
       flex-direction: column;
     }
-    .gst-img-box {
+    .space-media {
       width: 100%;
-      aspect-ratio: 16/11;
+      aspect-ratio: 4/3;
       overflow: hidden;
       border-bottom: 1px solid var(--border);
     }
-    .gst-img-box img {
+    .space-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.8s ease;
     }
-    .gem-space-tile:hover .gst-img-box img {
-      transform: scale(1.05);
+    .space-box:hover .space-media img { transform: scale(1.05); }
+    .space-text {
+      padding: 2.5rem;
     }
-    .gst-content {
-      padding: 2.2rem;
-    }
-    .gst-capacity {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--gold);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      margin-bottom: 0.6rem;
-    }
-    .gst-name {
+    .space-title {
       font-family: var(--font-serif);
       font-size: 1.6rem;
-      font-weight: 600;
+      font-weight: 400;
       text-transform: uppercase;
-      margin-bottom: 0.8rem;
+      margin: 0.4rem 0 0.8rem;
     }
-    .gst-desc {
+    .space-desc {
       font-size: 0.85rem;
       color: var(--text-muted);
       line-height: 1.6;
     }
 
-    @media (max-width: 900px) { .gem-spaces-row { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) {
+      .spaces-grid { grid-template-columns: 1fr; }
+      .space-text { padding: 2rem 1.5rem; }
+    }
 
     /* ==========================================================================
-       INSTAGRAM ARCHIVE (@anzur.rest)
+       MINIMAL CONTACT & RESERVATION
        ========================================================================== */
-    .insta-archive-grid {
+    .reservation-sec {
+      border-bottom: 1px solid var(--border);
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      background: var(--border);
-      gap: 1px;
-      border-bottom: 1px solid var(--border);
+      grid-template-columns: 1.2fr 1fr;
     }
-    .insta-tile {
-      background: var(--bg);
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-    .insta-img-wrap {
-      width: 100%;
-      aspect-ratio: 1/1;
-      overflow: hidden;
-      border-bottom: 1px solid var(--border);
-    }
-    .insta-img-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease;
-    }
-    .insta-tile:hover .insta-img-wrap img {
-      transform: scale(1.04);
-    }
-    .insta-caption-box {
-      padding: 1.4rem;
-    }
-    .insta-tag {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      color: var(--gold);
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin-bottom: 0.4rem;
-    }
-    .insta-text {
-      font-size: 0.82rem;
-      color: var(--text);
-      line-height: 1.45;
-    }
-
-    @media (max-width: 1024px) { .insta-archive-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 600px) { .insta-archive-grid { grid-template-columns: 1fr; } }
-
-    /* ==========================================================================
-       CONTACT & LOCATION
-       ========================================================================== */
-    .gem-contact-sec {
-      display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      border-bottom: 1px solid var(--border);
-    }
-    .gc-left {
-      padding: 4.5rem 3.5rem;
+    .res-left {
+      padding: 6rem 4rem;
       border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
     }
-    .gc-phone {
+    .res-phone {
       font-family: var(--font-serif);
-      font-size: clamp(2.4rem, 4.5vw, 4rem);
-      font-weight: 600;
+      font-size: clamp(3rem, 6vw, 5.2rem);
+      font-weight: 300;
       color: var(--gold);
       line-height: 1;
-      margin: 1.8rem 0;
+      margin: 1.5rem 0 2.5rem;
+      letter-spacing: 0.04em;
     }
-    .gc-row {
+    .res-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-bottom: 3rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.8rem;
+    }
+    .res-row {
       display: grid;
-      grid-template-columns: 130px 1fr;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.88rem;
+      grid-template-columns: 120px 1fr;
+      font-size: 0.9rem;
     }
-    .gc-row:first-child { border-top: 1px solid var(--border); }
-    .gc-label {
+    .res-label {
       font-family: var(--font-mono);
       font-size: 0.65rem;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--gold);
     }
 
-    .gc-right {
+    .res-right {
       position: relative;
-      min-height: 440px;
+      min-height: 480px;
       background: var(--bg-card);
     }
-    .gc-right iframe {
+    .res-right iframe {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -888,17 +1060,17 @@
     }
 
     @media (max-width: 900px) {
-      .gem-contact-sec { grid-template-columns: 1fr; }
-      .gc-left { border-right: none; border-bottom: 1px solid var(--border); padding: 3rem 1.5rem; }
-      .gc-right { min-height: 350px; }
-      .gc-row { grid-template-columns: 1fr; gap: 0.3rem; }
+      .reservation-sec { grid-template-columns: 1fr; }
+      .res-left { border-right: none; border-bottom: 1px solid var(--border); padding: 3.5rem 1.5rem; }
+      .res-right { min-height: 350px; }
+      .res-row { grid-template-columns: 1fr; gap: 0.2rem; }
     }
 
     /* ==========================================================================
-       FOOTER
+       QUIET FOOTER
        ========================================================================== */
-    .gem-footer {
-      padding: 3rem 2.5rem;
+    .footer {
+      padding: 3.5rem 3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -906,15 +1078,15 @@
       gap: 1.5rem;
       background: var(--bg);
     }
-    .gf-copy {
+    .footer-copy {
       font-family: var(--font-mono);
       font-size: 0.65rem;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--text-muted);
     }
 
-    /* Floating WhatsApp Concierge Bar */
+    /* Floating WhatsApp Dock */
     #wa-dock {
       position: fixed;
       bottom: 2rem;
@@ -922,12 +1094,12 @@
       z-index: 9999;
       background: var(--bg);
       border: 1px solid var(--gold);
-      padding: 0.85rem 1.5rem;
+      padding: 0.85rem 1.6rem;
       display: flex;
       align-items: center;
       gap: 0.8rem;
-      box-shadow: 4px 4px 0 #000;
       cursor: pointer;
+      box-shadow: 4px 4px 0 #000;
       transition: all 0.2s ease;
     }
     #wa-dock:hover {
@@ -940,11 +1112,11 @@
       height: 6px;
       background: var(--wa);
     }
-    .wa-text {
+    .wa-label {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 700;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--text);
     }
@@ -961,541 +1133,986 @@
 <body>
 
   <!-- ==========================================================================
-       1. ALCHEMIST-STYLE SPLASH PRELOADER
-       Assembles the Anzur concentric bulb logo with glowing SVG drawing strokes.
+       1. ALCHEMIST INTRO SPLASH PRELOADER
        ========================================================================== -->
-  <div id="alchemist-intro" role="dialog" aria-modal="true" aria-label="Вход в ресторан Анзур">
-    <div class="alchemist-emblem-box">
-      <svg class="alchemist-svg" viewBox="0 0 160 170">
+  <div id="splash" onclick="dismissSplash()" role="dialog" aria-modal="true" aria-label="Вход в ресторан Анзур">
+    <div class="splash-box">
+      <svg class="splash-svg" viewBox="0 0 160 170">
         <defs>
-          <filter id="alch-glow" x="-30%" y="-30%" width="160%" height="160%">
+          <filter id="glow-gold" x="-30%" y="-30%" width="160%" height="160%">
             <feGaussianBlur stdDeviation="3.5" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
-          <linearGradient id="alch-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id="gold-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#F3DFC1" />
             <stop offset="50%" stop-color="#C5A059" />
             <stop offset="100%" stop-color="#8E6C30" />
           </linearGradient>
         </defs>
 
-        <g transform="rotate(18, 80, 85)" filter="url(#alch-glow)">
+        <g transform="rotate(18, 80, 85)" filter="url(#glow-gold)">
           <!-- Outer Contour -->
-          <path class="alch-path-outer"
+          <path class="sp-outer"
                 d="M 80, 16 C 130, 48, 148, 105, 80, 154 C 12, 105, 30, 48, 80, 16 Z"
-                fill="none" stroke="url(#alch-gold)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+                fill="none" stroke="url(#gold-stroke)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
 
           <!-- Middle Contour -->
-          <path class="alch-path-mid"
+          <path class="sp-mid"
                 d="M 80, 52 C 112, 74, 122, 112, 80, 136 C 38, 112, 48, 74, 80, 52 Z"
-                fill="none" stroke="url(#alch-gold)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+                fill="none" stroke="url(#gold-stroke)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
 
           <!-- Inner Core Bulb -->
-          <path class="alch-path-core"
+          <path class="sp-core"
                 d="M 80, 84 C 95, 96, 99, 116, 80, 124 C 61, 116, 65, 96, 80, 84 Z"
-                fill="url(#alch-gold)" stroke="url(#alch-gold)" stroke-width="2" />
+                fill="url(#gold-stroke)" stroke="url(#gold-stroke)" stroke-width="2" />
         </g>
       </svg>
     </div>
 
-    <div class="alchemist-title">ANZUR</div>
-    <div class="alchemist-sub">ДУШАНБЕ · ВЫСОКАЯ ГАСТРОНОМИЯ</div>
-
-    <button class="alchemist-enter-btn" onclick="dismissIntro()">
-      [ ВОЙТИ В РЕСТОРАН ]
-    </button>
+    <div class="splash-wordmark">ANZUR</div>
+    <div class="splash-city">ДУШАНБЕ</div>
   </div>
 
   <!-- ==========================================================================
-       STICKY NAVBAR (GEM STYLE)
+       MINIMAL STICKY NAVBAR
        ========================================================================== -->
-  <nav class="site-nav">
+  <nav class="nav">
     <div class="container nav-inner">
-      <div class="nav-logo-group" onclick="replayIntro()" title="Перезапустить заставку">
-        <img src="anzur_bulb_pure.png" alt="ANZUR" class="nav-logo-icon" />
-        <div class="nav-brand-text">ANZUR<span>.</span></div>
+      <div class="nav-brand" onclick="replaySplash()" title="Перезапустить заставку">
+        <img src="anzur_bulb_pure.png" alt="ANZUR" class="nav-emblem" />
+        <div class="nav-title">ANZUR<span>.</span></div>
       </div>
 
-      <div class="nav-menu">
-        <a href="#about" class="nav-link"><span>01</span>Концепция</a>
-        <a href="#menu" class="nav-link"><span>02</span>Меню</a>
-        <a href="#spaces" class="nav-link"><span>03</span>Залы & VIP</a>
-        <a href="#archive" class="nav-link"><span>04</span>Хроника @anzur.rest</a>
-        <a href="#contact" class="nav-link"><span>05</span>Резерв</a>
+      <div class="nav-center-menu">
+        <a href="#cuisine" class="nav-item">Гастрономия</a>
+        <a href="#spaces" class="nav-item">Залы & VIP</a>
+        <a href="#reservation" class="nav-item">Контакты</a>
       </div>
 
-      <div style="display:flex; align-items:center; gap:1.2rem;">
-        <a href="tel:992917917917" class="nav-cta-btn">917 917 917</a>
-        <div class="burger-btn" onclick="toggleDrawer()">
-          <span></span><span></span><span></span>
-        </div>
-      </div>
+      <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B2%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="nav-reserve-link">
+        Напишите нам
+      </a>
     </div>
   </nav>
 
-  <!-- Mobile Drawer -->
-  <div class="mob-drawer" id="mobDrawer">
-    <div class="mob-links">
-      <a href="#about" class="mob-link-item" onclick="toggleDrawer()">Концепция</a>
-      <a href="#menu" class="mob-link-item" onclick="toggleDrawer()">Меню</a>
-      <a href="#spaces" class="mob-link-item" onclick="toggleDrawer()">Залы & VIP</a>
-      <a href="#archive" class="mob-link-item" onclick="toggleDrawer()">Instagram</a>
-      <a href="#contact" class="mob-link-item" onclick="toggleDrawer()">Контакты</a>
-    </div>
-    <div>
-      <div class="mono-tag" style="margin-bottom:1rem;">ДУШАНБЕ, УЛ. ДӮСТИИ ХАЛҚҲО, 10Б</div>
-      <a href="tel:992917917917" class="btn" style="width:100%;">Позвонить: 917 917 917</a>
-    </div>
-  </div>
-
   <!-- ==========================================================================
-       2. CENTRAL-STYLE MONUMENTAL HERO
-       Minimalist, centered architectural composition, quiet confidence.
-       ========================================================================== */ -->
-  <header class="central-hero" id="home">
-    <div class="central-hero-bg"></div>
+       2. CENTRAL MONUMENTAL HERO
+       ========================================================================== -->
+  <header class="hero">
+    <div class="hero-backdrop"></div>
 
-    <div class="central-hero-top">
-      <div>ЛОКАЦИЯ: <strong>ДУШАНБЕ (Р-Н ВИНЗАВОДА)</strong></div>
-      <div>РЕЖИМ: <strong>10:00 — 00:00 ЕЖЕДНЕВНО</strong></div>
-    </div>
+    
 
-    <div class="central-hero-center">
-      <img src="anzur_bulb_pure.png" alt="ANZUR" class="central-emblem-subtle" />
-      <h1 class="central-hero-h1">ANZUR</h1>
-      <p class="central-hero-tagline">
+    <div class="hero-content">
+      <img src="anzur_bulb_pure.png" alt="ANZUR" class="hero-emblem" />
+      <h1 class="hero-h1">ANZUR</h1>
+      <p class="hero-subtitle">
         НАЦИОНАЛЬНАЯ · ЕВРОПЕЙСКАЯ · ПАНАЗИАТСКАЯ КУХНЯ
       </p>
 
-      <div class="central-hero-actions">
-        <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B2%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="btn">
+      <div class="hero-actions">
+        <a href="booking.html" class="btn-gold">
           Забронировать стол
         </a>
-        <a href="#menu" class="btn-ghost">
-          Карта блюд
+        <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D1%82%D1%8C%20%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BE%20%D1%80%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD%D0%B5%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="btn-outline">
+          Напишите нам
         </a>
       </div>
     </div>
 
-    <div class="central-hero-bottom">
-      <div class="central-coord">
-        38°33'41"N 68°48'20"E · УЛ. ДӮСТИИ ХАЛҚҲО, 10Б
-      </div>
-      <div class="central-scroll-cue">
-        <div class="central-scroll-line"></div>
+    <div class="hero-meta-bottom">
+      
+      <div class="scroll-indicator">
+        <div class="scroll-bar"></div>
         <span>ИССЛЕДОВАТЬ</span>
       </div>
     </div>
   </header>
 
   <!-- ==========================================================================
-       4. RESTAURANT GEM-STYLE TICKER MARQUEE
+       3. KINETIC MENU SHOWCASE & EDITORIAL SLIDER (GEM × GERANIUM × MOTION)
        ========================================================================== -->
-  <div class="gem-ticker-bar" aria-hidden="true">
-    <div class="gem-ticker-track">
-      <div class="gem-ticker-item">ANZUR RESTAURANT <span class="bullet">◆</span> ТРИ КУХНИ МИРА <span class="bullet">◆</span> VIP-КАБИНЫ <span class="bullet">◆</span> KARAOKE LOUNGE <span class="bullet">◆</span> ЛЕТНЯЯ ТЕРРАСА <span class="bullet">◆</span> ДУШАНБЕ <span class="bullet">◆</span></div>
-      <div class="gem-ticker-item">ANZUR RESTAURANT <span class="bullet">◆</span> ТРИ КУХНИ МИРА <span class="bullet">◆</span> VIP-КАБИНЫ <span class="bullet">◆</span> KARAOKE LOUNGE <span class="bullet">◆</span> ЛЕТНЯЯ ТЕРРАСА <span class="bullet">◆</span> ДУШАНБЕ <span class="bullet">◆</span></div>
-    </div>
-  </div>
-
-  <!-- ==========================================================================
-       3. GERANIUM-STYLE PHOTO REVEALS (SCULPTURAL PRESENTATION)
-       ========================================================================== -->
-  <section id="about">
-    <div class="gem-section-header">
-      <div>
-        <div class="gem-sec-num">[ 01 / 05 ]</div>
-        <h2 class="gem-sec-title">Эстетика <em>вкуса</em></h2>
+  <section id="cuisine" class="menu-section">
+    <div class="container">
+      <div class="sec-header" style="border-bottom:none; padding-bottom:0;">
+        <div>
+          <span class="mono-label">[ ВЫБОР ШЕФ-ПОВАРА · СЕЗОН 2026 ]</span>
+          <h2 class="sec-title" style="margin-top:0.4rem;">Карта <em>вкуса</em></h2>
+        </div>
+        <button type="button" class="btn-outline" onclick="openMenuModal()" style="padding:0.7rem 1.6rem; font-size:0.65rem;">
+          ПОЛНОЕ МЕНЮ РЕСТОРАНА
+        </button>
       </div>
-      <div class="mono-tag">ГАСТРОНОМИЧЕСКАЯ КОЛЛЕКЦИЯ</div>
-    </div>
 
-    <div class="geranium-showcase">
-      <!-- Dish Frame 1 -->
-      <article class="geranium-frame">
-        <div class="geranium-img-container">
-          <img src="https://images.unsplash.com/photo-1541544741938-0af808871cc0?w=1000&q=80" alt="Плов Анзур" loading="lazy" />
-        </div>
-        <div>
-          <div class="geranium-meta">
-            <h3 class="geranium-dish-name">Плов «Анзур»</h3>
-            <div class="geranium-dish-price">48 TJS</div>
-          </div>
-          <p class="geranium-dish-desc">
-            Лазерный рис, отборная таджикская баранина, желтая морковь, нут, барбарис и перепелиные яйца. Традиция в идеальном исполнении.
-          </p>
-        </div>
-      </article>
-
-      <!-- Dish Frame 2 -->
-      <article class="geranium-frame">
-        <div class="geranium-img-container">
-          <img src="https://images.unsplash.com/photo-1558030006-450675393462?w=1000&q=80" alt="Стейк Рибай Прайм" loading="lazy" />
-        </div>
-        <div>
-          <div class="geranium-meta">
-            <h3 class="geranium-dish-name">Стейк Рибай Прайм</h3>
-            <div class="geranium-dish-price">115 TJS</div>
-          </div>
-          <p class="geranium-dish-desc">
-            Мраморная говядина зернового откорма степени прожарки Medium, соус демигляс на красном вине и хлопья морской соли.
-          </p>
-        </div>
-      </article>
-
-      <!-- Dish Frame 3 -->
-      <article class="geranium-frame">
-        <div class="geranium-img-container">
-          <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=1000&q=80" alt="Ролл Филадельфия Люкс" loading="lazy" />
-        </div>
-        <div>
-          <div class="geranium-meta">
-            <h3 class="geranium-dish-name">Филадельфия Люкс</h3>
-            <div class="geranium-dish-price">56 TJS</div>
-          </div>
-          <p class="geranium-dish-desc">
-            Охлажденный лосось премиум-качества, сливочный сыр Cremette, спелое авокадо и японский рис высшей пробы.
-          </p>
-        </div>
-      </article>
-
-      <!-- Dish Frame 4 (Real Terrace Photo) -->
-      <article class="geranium-frame">
-        <div class="geranium-img-container">
-          <img src="anzur_terrace.jpg" alt="Терраса ресторана Анзур в Душанбе" loading="lazy" />
-        </div>
-        <div>
-          <div class="geranium-meta">
-            <h3 class="geranium-dish-name">Атмосфера Террасы</h3>
-            <div class="geranium-dish-price">ДУШАНБЕ</div>
-          </div>
-          <p class="geranium-dish-desc">
-            Живой вечерний свет, открытый воздух предгорья, шелест зелени и авторская подача блюд на открытой террасе.
-          </p>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       4. RESTAURANT GEM-STYLE MENU CATALOG
-       ========================================================================== -->
-  <section id="menu">
-    <div class="gem-section-header">
-      <div>
-        <div class="gem-sec-num">[ 02 / 05 ]</div>
-        <h2 class="gem-sec-title">Карта <em>блюд</em></h2>
+      <!-- Category Filter Pills -->
+      <div class="menu-filter-bar">
+        <button type="button" class="menu-filter-btn is-active" data-cat="all" onclick="filterMenu('all', this)">Все категории (6)</button>
+        <button type="button" class="menu-filter-btn" data-cat="national" onclick="filterMenu('national', this)">Национальная</button>
+        <button type="button" class="menu-filter-btn" data-cat="european" onclick="filterMenu('european', this)">Европейская</button>
+        <button type="button" class="menu-filter-btn" data-cat="panasian" onclick="filterMenu('panasian', this)">Паназиатская</button>
+        <button type="button" class="menu-filter-btn" data-cat="bar" onclick="filterMenu('bar', this)">Чайный дом & Бар</button>
       </div>
-      <div class="mono-tag">СЕЗОН 2026 · ВЫБОР ШЕФА</div>
     </div>
 
-    <!-- Category Tabs -->
-    <div class="gem-menu-nav" role="tablist">
-      <button class="gem-tab-btn active" onclick="filterMenu('national', this)">01 / Национальная</button>
-      <button class="gem-tab-btn" onclick="filterMenu('european', this)">02 / Европейская</button>
-      <button class="gem-tab-btn" onclick="filterMenu('asian', this)">03 / Паназиатская</button>
-      <button class="gem-tab-btn" onclick="filterMenu('bar', this)">04 / Чай & Бар</button>
+    <!-- MAIN EDITORIAL STAGE -->
+    <div class="stage-grid" id="menu-stage-container">
+      <!-- Left Visual Stage -->
+      <div class="stage-visual">
+        <img id="stage-img" class="stage-visual-img" src="gen_plov.jpg" alt="Праздничный Плов Анзур" />
+        <div class="stage-visual-vignette"></div>
+
+        <!-- Badges -->
+        <div class="stage-badge-top-left" id="stage-badge-tag">
+          НАЦИОНАЛЬНАЯ КУХНЯ
+        </div>
+        <div class="stage-badge-top-right">
+          <span id="stage-counter-cur">01</span><span class="dim">/</span><span id="stage-counter-total">06</span>
+        </div>
+        <div class="stage-badge-bottom-left" id="stage-badge-serving">
+          «ШЕФ-ПОДАЧА» · 650 Г
+        </div>
+      </div>
+
+      <!-- Right Editorial Typographic Panel -->
+      <div class="stage-details">
+        <div>
+          <div class="stage-header-line stage-anim">
+            <span class="stage-cat-name" id="stage-cat-name">ТРАДИЦИОННАЯ КУХНЯ</span>
+            <div class="stage-price-tag">
+              <span id="stage-price">48</span> <span>TJS</span>
+            </div>
+          </div>
+
+          <div class="stage-main-text">
+            <h3 class="stage-dish-title stage-anim" id="stage-title">Плов «Анзур»</h3>
+            <p class="stage-dish-sub stage-anim" id="stage-subtitle">Традиционный казанный плов на хлопковом масле и самаркандском зире</p>
+            <p class="stage-dish-desc stage-anim" id="stage-desc">
+              Отборный длиннозерный лазерный рис, томлёная таджикская баранина, сладкая янтарная морковь, нут, горный барбарис, казы и перепелиные яйца.
+            </p>
+          </div>
+
+          <!-- Gastronomy Spec Grid -->
+          <div class="stage-specs stage-anim">
+            <div class="spec-cell">
+              <span class="spec-key">ОСНОВА</span>
+              <span class="spec-val" id="stage-spec-base">Баранина, лазерный рис</span>
+            </div>
+            <div class="spec-cell">
+              <span class="spec-key">ПРИГОТОВЛЕНИЕ</span>
+              <span class="spec-val" id="stage-spec-prep">Казан, живой огонь</span>
+            </div>
+            <div class="spec-cell">
+              <span class="spec-key">РЕКОМЕНДАЦИЯ</span>
+              <span class="spec-val" id="stage-spec-pair">Ачичук & Памирский сбор</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Actions & Controls -->
+        <div class="stage-footer stage-anim">
+          <div class="stage-actions">
+            <a id="stage-wa-link" href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%20%D0%B1%D0%BB%D1%8E%D0%B4%D0%BE%20%D0%9F%D0%BB%D0%BE%D0%B2%20%C2%AB%D0%90%D0%BD%D0%B7%D1%83%D1%80%C2%BB" target="_blank" rel="noopener" class="btn-gold" style="padding:0.8rem 1.8rem;">
+              Заказать в WhatsApp
+            </a>
+            <button type="button" class="btn-outline" onclick="openMenuModal()" style="padding:0.8rem 1.6rem;">
+              Смотреть меню
+            </button>
+          </div>
+
+          <div class="stage-nav-controls">
+            <button type="button" class="stage-arrow-btn" onclick="prevSlide()" aria-label="Предыдущее блюдо">←</button>
+            <button type="button" class="stage-pause-btn" id="stage-pause-btn" onclick="toggleAutoplay()" aria-label="Пауза автовоспроизведения">❚❚</button>
+            <button type="button" class="stage-arrow-btn" onclick="nextSlide()" aria-label="Следующее блюдо">→</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Cards Grid -->
-    <div class="gem-menu-grid" id="gemGrid">
-      <!-- Populated via JavaScript -->
+    <!-- FILMSTRIP TRACK -->
+    <div class="filmstrip-wrap" id="filmstrip-track">
+      <!-- Item 0: Plov -->
+      <div class="filmstrip-item is-active" data-idx="0" onclick="goToSlide(0)">
+        <div class="filmstrip-thumb">
+          <img src="gen_plov.jpg" alt="Плов Анзур" loading="lazy" />
+        </div>
+        <div class="filmstrip-meta-top">
+          <span class="filmstrip-num">01</span>
+          <span class="filmstrip-price">48 TJS</span>
+        </div>
+        <div class="filmstrip-title">Плов «Анзур»</div>
+        <div class="filmstrip-cat">Национальная</div>
+        <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
+      </div>
+
+      <!-- Item 1: Shashlik -->
+      <div class="filmstrip-item" data-idx="1" onclick="goToSlide(1)">
+        <div class="filmstrip-thumb">
+          <img src="gen_shashlik.jpg" alt="Шашлык из ягненка" loading="lazy" />
+        </div>
+        <div class="filmstrip-meta-top">
+          <span class="filmstrip-num">02</span>
+          <span class="filmstrip-price">62 TJS</span>
+        </div>
+        <div class="filmstrip-title">Шашлык на углях</div>
+        <div class="filmstrip-cat">Мангал</div>
+        <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
+      </div>
+
+      <!-- Item 2: Ribeye -->
+      <div class="filmstrip-item" data-idx="2" onclick="goToSlide(2)">
+        <div class="filmstrip-thumb">
+          <img src="gen_steak.jpg" alt="Стейк Рибай" loading="lazy" />
+        </div>
+        <div class="filmstrip-meta-top">
+          <span class="filmstrip-num">03</span>
+          <span class="filmstrip-price">115 TJS</span>
+        </div>
+        <div class="filmstrip-title">Стейк Рибай Прайм</div>
+        <div class="filmstrip-cat">Европейская</div>
+        <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
+      </div>
+
+      <!-- Item 3: Sushi -->
+      <div class="filmstrip-item" data-idx="3" onclick="goToSlide(3)">
+        <div class="filmstrip-thumb">
+          <img src="gen_sushi.jpg" alt="Омакасе Нигири" loading="lazy" />
+        </div>
+        <div class="filmstrip-meta-top">
+          <span class="filmstrip-num">04</span>
+          <span class="filmstrip-price">98 TJS</span>
+        </div>
+        <div class="filmstrip-title">Сет Омакасе</div>
+        <div class="filmstrip-cat">Паназиатская</div>
+        <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
+      </div>
+
+      <!-- Item 4: Tom Yum -->
+      <div class="filmstrip-item" data-idx="4" onclick="goToSlide(4)">
+        <div class="filmstrip-thumb">
+          <img src="gen_tomyum.jpg" alt="Том Ям с морепродуктами" loading="lazy" />
+        </div>
+        <div class="filmstrip-meta-top">
+          <span class="filmstrip-num">05</span>
+          <span class="filmstrip-price">68 TJS</span>
+        </div>
+        <div class="filmstrip-title">Том Ям Королевский</div>
+        <div class="filmstrip-cat">Паназиатская</div>
+        <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
+      </div>
+
+      <!-- Item 5: Tea -->
+      <div class="filmstrip-item" data-idx="5" onclick="goToSlide(5)">
+        <div class="filmstrip-thumb">
+          <img src="gen_tea.jpg" alt="Памирский сбор" loading="lazy" />
+        </div>
+        <div class="filmstrip-meta-top">
+          <span class="filmstrip-num">06</span>
+          <span class="filmstrip-price">25 TJS</span>
+        </div>
+        <div class="filmstrip-title">Памирский сбор</div>
+        <div class="filmstrip-cat">Чай & Бар</div>
+        <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
+      </div>
     </div>
   </section>
 
   <!-- ==========================================================================
        SPACES (VIP · KARAOKE · TERRACE)
        ========================================================================== -->
-  <section id="spaces">
-    <div class="gem-section-header">
-      <div>
-        <div class="gem-sec-num">[ 03 / 05 ]</div>
-        <h2 class="gem-sec-title">Форматы <em>залов</em></h2>
-      </div>
-      <div class="mono-tag">ПРИВАТНОСТЬ И ЗВУК</div>
-    </div>
-
-    <div class="gem-spaces-row">
-      <!-- Tile 1 -->
-      <div class="gem-space-tile">
-        <div class="gst-img-box">
-          <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=900&q=80" alt="VIP-кабины" loading="lazy" />
-        </div>
-        <div class="gst-content">
-          <div class="gst-capacity">6 – 25 ГОСТЕЙ</div>
-          <h3 class="gst-name">VIP-кабины</h3>
-          <p class="gst-desc">
-            Изолированные приватные кабины для деловых переговоров и закрытых ужинов. Персональный официант и собственный климат.
-          </p>
-        </div>
-      </div>
-
-      <!-- Tile 2 -->
-      <div class="gem-space-tile">
-        <div class="gst-img-box">
-          <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=900&q=80" alt="Караоке" loading="lazy" />
-        </div>
-        <div class="gst-content">
-          <div class="gst-capacity">ПРОФЕССИОНАЛЬНАЯ СИСТЕМА</div>
-          <h3 class="gst-name">Karaoke Lounge</h3>
-          <p class="gst-desc">
-            Студийный звук, беспроводные микрофоны и база 80 000+ песен для корпоративных вечеров и праздников.
-          </p>
-        </div>
-      </div>
-
-      <!-- Tile 3 -->
-      <div class="gem-space-tile">
-        <div class="gst-img-box">
-          <img src="anzur_terrace.jpg" alt="Терраса" loading="lazy" />
-        </div>
-        <div class="gst-content">
-          <div class="gst-capacity">ОТКРЫТЫЙ ВОЗДУХ</div>
-          <h3 class="gst-name">Летняя Терраса</h3>
-          <p class="gst-desc">
-            Просторная терраса с живой зеленью и уютной вечерней атмосферой. Лучшее место для ужина в теплое время года.
-          </p>
-        </div>
-      </div>
+  <section id="spaces" class="container">
+    <div class="sec-header">
+      <h2 class="sec-title">Залы & <em>Форматы</em></h2>
+      <span class="mono-label">[ ПРИВАТНОСТЬ И ЗВУК ]</span>
     </div>
   </section>
 
-  <!-- ==========================================================================
-       INSTAGRAM ARCHIVE (@anzur.rest)
-       ========================================================================== -->
-  <section id="archive">
-    <div class="gem-section-header">
-      <div>
-        <div class="gem-sec-num">[ 04 / 05 ]</div>
-        <h2 class="gem-sec-title">@anzur.<em>rest</em></h2>
+  <div class="spaces-grid">
+    <!-- VIP Room -->
+    <div class="space-box">
+      <div class="space-media">
+        <img src="gen_vip.jpg" alt="VIP-кабины" loading="lazy" />
       </div>
-      <a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" class="mono-tag" style="border-bottom:1px solid var(--gold); padding-bottom:2px;">
-        14K ПОДПИСЧИКОВ · 223 ПОСТА ↗
-      </a>
+      <div class="space-text">
+        <span class="mono-label">6 – 25 ПЕРСОН</span>
+        <h3 class="space-title">VIP-кабины</h3>
+        <p class="space-desc">
+          Изолированные апартаменты для конфиденциальных деловых встреч и закрытых ужинов.
+        </p>
+      </div>
     </div>
 
-    <div class="insta-archive-grid">
-      <a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" class="insta-tile">
-        <div class="insta-img-wrap">
-          <img src="anzur_terrace.jpg" alt="Терраса Анзур" loading="lazy" />
-        </div>
-        <div class="insta-caption-box">
-          <div class="insta-tag">ТЕРРАСА · ДУШАНБЕ</div>
-          <p class="insta-text">Теплые вечера под живой звук на нашей террасе в районе Винзавода.</p>
-        </div>
-      </a>
-
-      <a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" class="insta-tile">
-        <div class="insta-img-wrap">
-          <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=700&q=80" alt="Шашлык на мангале" loading="lazy" />
-        </div>
-        <div class="insta-caption-box">
-          <div class="insta-tag">МАНГАЛ · УГЛИ</div>
-          <p class="insta-text">Сочная мякоть барашка, свежий лаваш и гранатовый лук на углях.</p>
-        </div>
-      </a>
-
-      <a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" class="insta-tile">
-        <div class="insta-img-wrap">
-          <img src="https://images.unsplash.com/photo-1548943487-a2e4e43b4853?w=700&q=80" alt="Том-Ям" loading="lazy" />
-        </div>
-        <div class="insta-caption-box">
-          <div class="insta-tag">ПАНАЗИЯ</div>
-          <p class="insta-text">Острый и насыщенный суп Том-Ям со свежими морепродуктами.</p>
-        </div>
-      </a>
-
-      <a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" class="insta-tile">
-        <div class="insta-img-wrap">
-          <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=700&q=80" alt="Чайная церемония" loading="lazy" />
-        </div>
-        <div class="insta-caption-box">
-          <div class="insta-tag">ПАМИРСКИЙ ЧАЙ</div>
-          <p class="insta-text">Горный сбор с чабрецом, дикой мятой и шафраном для уютного вечера.</p>
-        </div>
-      </a>
+    <!-- Karaoke Lounge -->
+    <div class="space-box">
+      <div class="space-media">
+        <img src="gen_karaoke.jpg" alt="Караоке лаунж" loading="lazy" />
+      </div>
+      <div class="space-text">
+        <span class="mono-label">80 000+ ТРЕКОВ</span>
+        <h3 class="space-title">Karaoke Lounge</h3>
+        <p class="space-desc">
+          Профессиональная акустическая инженерия, клубный сценический свет и премиальные микрофоны.
+        </p>
+      </div>
     </div>
-  </section>
+
+    <!-- Terrace -->
+    <div class="space-box">
+      <div class="space-media">
+        <img src="gen_hero_terrace.jpg" alt="Летняя терраса" loading="lazy" />
+      </div>
+      <div class="space-text">
+        <span class="mono-label">ОТКРЫТЫЙ ВОЗДУХ</span>
+        <h3 class="space-title">Панорамная Терраса</h3>
+        <p class="space-desc">
+          Живая зелень, вечерняя подсветка и мягкий горный воздух для неспешных ужинов.
+        </p>
+      </div>
+    </div>
+  </div>
 
   <!-- ==========================================================================
-       CONTACT & RESERVATION (DIRECT CONCIERGE)
+       RESERVATION & CONTACT
        ========================================================================== -->
-  <section class="gem-contact-sec" id="contact">
-    <div class="gc-left">
-      <div>
-        <div class="gem-sec-num">[ 05 / 05 ]</div>
-        <h2 class="gem-sec-title">Резерв <em>стола</em></h2>
+  <section id="reservation" class="reservation-sec">
+    <div class="res-left">
+      <span class="mono-label">БРОНИРОВАНИЕ СТОЛИКА</span>
+      <h2 class="sec-title" style="margin-top:0.4rem;">Контакты</h2>
 
-        <a href="tel:992917917917" class="gc-phone">
-          917 917 917
-        </a>
+      <a href="tel:992917917917" class="res-phone">
+        917 917 917
+      </a>
 
-        <div>
-          <div class="gc-row">
-            <span class="gc-label">АДРЕС</span>
-            <span>г. Душанбе, ул. Дӯстии халқҳо, 10б (р-н Винзавода)</span>
-          </div>
-          <div class="gc-row">
-            <span class="gc-label">РЕЖИМ</span>
-            <span>Ежедневно 10:00 — 00:00</span>
-          </div>
-          <div class="gc-row">
-            <span class="gc-label">РЕЙТИНГ</span>
-            <span>4.6 ★ (Яндекс Карты)</span>
-          </div>
-          <div class="gc-row">
-            <span class="gc-label">INSTAGRAM</span>
-            <span><a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" style="color:var(--gold);">@anzur.rest</a></span>
-          </div>
+      <div class="res-details">
+        <div class="res-row">
+          <span class="res-label">АДРЕС</span>
+          <span>г. Душанбе, ул. Дӯстии халқҳо, 10б (р-н Винзавода)</span>
+        </div>
+        <div class="res-row">
+          <span class="res-label">РЕЖИМ</span>
+          <span>Ежедневно: 10:00 — 00:00</span>
+        </div>
+        <div class="res-row">
+          <span class="res-label">INSTAGRAM</span>
+          <span><a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" style="color:var(--gold);">@anzur.rest</a></span>
         </div>
       </div>
 
-      <div style="margin-top:2.5rem; display:flex; gap:1.2rem; flex-wrap:wrap;">
-        <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B2%20%D0%A0%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD%D0%B5%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="btn" style="background:var(--wa); border-color:var(--wa); color:#fff;">
-          WhatsApp бронь
-        </a>
-        <a href="tel:992917917917" class="btn-ghost">
-          Позвонить
+      <div>
+        <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B2%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="btn-gold">
+          Написать в WhatsApp
         </a>
       </div>
     </div>
 
-    <div class="gc-right">
+    <div class="res-right">
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12467.31940989399!2d68.7985!3d38.5615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38d0fb8b01dfdc6d%3A0x5c3ee1765e19df7!2sDushanbe%2C%20Tajikistan!5e0!3m2!1sen!2s!4v1700000000000"
         allowfullscreen=""
         loading="lazy"
-        title="Локация ресторана Анзур в Душанбе">
+        title="Локация ресторана Анзур">
       </iframe>
     </div>
   </section>
 
   <!-- ==========================================================================
-       FOOTER
+       FULL RESTAURANT MENU MODAL (GEM / ALCHEMIST ARCHITECTURE)
        ========================================================================== -->
-  <footer class="gem-footer">
-    <div style="display:flex; align-items:center; gap:1.2rem;">
-      <img src="anzur_bulb_pure.png" alt="ANZUR" style="height:26px; width:auto;" />
-      <span class="gf-copy">© 2026 ANZUR RESTAURANT · ДУШАНБЕ</span>
+  <div id="menu-modal" class="menu-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-menu-heading">
+    <div class="menu-modal-header">
+      <div>
+        <span class="mono-label">[ АНЗУР · ГАСТРОНОМИЧЕСКАЯ КАРТА ]</span>
+        <h2 id="modal-menu-heading" class="menu-modal-title">Сезонное меню ресторана</h2>
+      </div>
+      <button type="button" class="menu-modal-close" onclick="closeMenuModal()">✕ ЗАКРЫТЬ [ESC]</button>
     </div>
-    <div class="gf-copy">
-      УЛ. ДӮСТИИ ХАЛҚҲО, 10Б · 917 917 917 · @ANZUR.REST
+
+    <div class="menu-modal-body">
+      <div class="menu-columns">
+        <!-- Col 1: Национальная -->
+        <div class="menu-cat-col">
+          <div class="menu-cat-head">
+            <span>ТАДЖИКИСТАН & ВОСТОК</span>
+            <h3>Национальная кухня</h3>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Плов «Анзур» Праздничный</span>
+              <span class="menu-item-price">48 TJS</span>
+            </div>
+            <p class="menu-item-desc">Лазерный рис, томлёная баранина, желтая морковь, нут, барбарис, перепелиные яйца, казы.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Шашлык из ягнёнка</span>
+              <span class="menu-item-price">62 TJS</span>
+            </div>
+            <p class="menu-item-desc">Мякоть горного ягнёнка с курдюком, маринованная в соке дикого лука анзур на углях лозы.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Казан-кебаб из телятины</span>
+              <span class="menu-item-price">65 TJS</span>
+            </div>
+            <p class="menu-item-desc">Нежная телятина с хрустящим золотистым молодым картофелем и томлёным зирваком.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Шурпа шелковая</span>
+              <span class="menu-item-price">42 TJS</span>
+            </div>
+            <p class="menu-item-desc">Прозрачный наваристый бульон из баранины на косточке с горохом нут и горными кореньями.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Самса тандырная слоёная</span>
+              <span class="menu-item-price">18 TJS</span>
+            </div>
+            <p class="menu-item-desc">Хрустящее слоеное тесто, рубленая баранина, репчатый лук, черный тмин и семена кунжута.</p>
+          </div>
+        </div>
+
+        <!-- Col 2: Европейская & Стейки -->
+        <div class="menu-cat-col">
+          <div class="menu-cat-head">
+            <span>BLACK ANGUS & КЛАССИКА</span>
+            <h3>Европейская кухня</h3>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Стейк Рибай Прайм</span>
+              <span class="menu-item-price">115 TJS</span>
+            </div>
+            <p class="menu-item-desc">Мраморная говядина Black Angus 28-дневного вызревания, соус демигляс на красном вине.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Филе-Миньон с трюфелем</span>
+              <span class="menu-item-price">130 TJS</span>
+            </div>
+            <p class="menu-item-desc">Нежнейшая центральная вырезка, трюфельное пюре, спаржа на гриле, соус из сморчков.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Тартар из мраморной говядины</span>
+              <span class="menu-item-price">54 TJS</span>
+            </div>
+            <p class="menu-item-desc">Вырезка говядины ручной рубки, каперсы, лук шалот, дижонская горчица, перепелиный желток.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Филе Сибаса на углях</span>
+              <span class="menu-item-price">88 TJS</span>
+            </div>
+            <p class="menu-item-desc">Средиземноморский сибас, пюре из печеного пастернака, соус бер-блан с лимоном.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Салат с хрустящей уткой</span>
+              <span class="menu-item-price">49 TJS</span>
+            </div>
+            <p class="menu-item-desc">Томленая утиная грудка, листья рукколы, сладкий инжир, карамелизированный пекан и соус порто.</p>
+          </div>
+        </div>
+
+        <!-- Col 3: Паназия -->
+        <div class="menu-cat-col">
+          <div class="menu-cat-head">
+            <span>RAW BAR & WOK</span>
+            <h3>Паназиатская линия</h3>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Сет Омакасе Нигири & Сашими</span>
+              <span class="menu-item-price">98 TJS</span>
+            </div>
+            <p class="menu-item-desc">Охлажденный лосось, тунец блюфин, тигровые креветки, японский рис высшей пробы, сусальное золото.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Том Ям с морепродуктами</span>
+              <span class="menu-item-price">68 TJS</span>
+            </div>
+            <p class="menu-item-desc">Тигровые креветки, кальмар, грибы шиитаке, лемонграсс, кокосовые сливки, паровой жасминовый рис.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Ролл «Анзур Дракон»</span>
+              <span class="menu-item-price">64 TJS</span>
+            </div>
+            <p class="menu-item-desc">Копченый угорь, авокадо хасс, крем-чиз, соус унаги и хрустящая рисовая темпура.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Удон Wok с морепродуктами</span>
+              <span class="menu-item-price">58 TJS</span>
+            </div>
+            <p class="menu-item-desc">Пшеничная лапша удон, кальмары, креветки, сладкий перец, ростки сои в соусе черного перца.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Тартар из тунца Блюфин</span>
+              <span class="menu-item-price">66 TJS</span>
+            </div>
+            <p class="menu-item-desc">Кубики свежего тунца блюфин, авокадо, трюфельный понзу, хрустящие рисовые чипсы.</p>
+          </div>
+        </div>
+
+        <!-- Col 4: Горный бар & Десерты -->
+        <div class="menu-cat-col">
+          <div class="menu-cat-head">
+            <span>ТРАВЫ, ЧАЙ & ДЕСЕРТЫ</span>
+            <h3>Бар & Кондитерская</h3>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Памирский сбор (Чайная церемония)</span>
+              <span class="menu-item-price">25 TJS</span>
+            </div>
+            <p class="menu-item-desc">Высокогорные травы Памира: чабрец, горная мята, шафран, курага, грецкие орехи, набат.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Зеленый чай с диким жасмином</span>
+              <span class="menu-item-price">20 TJS</span>
+            </div>
+            <p class="menu-item-desc">Премиальный листовой чай с нежными цветами жасмина первого весеннего сбора.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Фирменный лимонад «Анзур Гранат»</span>
+              <span class="menu-item-price">22 TJS</span>
+            </div>
+            <p class="menu-item-desc">Свежевыжатый сок кулябского граната, розмарин, цитрус и газированная родниковая вода.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Фисташковая пахлава ручной лепки</span>
+              <span class="menu-item-price">28 TJS</span>
+            </div>
+            <p class="menu-item-desc">40 слоев тончайшего теста фило, иранская фисташка, горный цветочный мед и сливочный пломбир.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Шоколадный фондан с ягодами</span>
+              <span class="menu-item-price">32 TJS</span>
+            </div>
+            <p class="menu-item-desc">Теплый бельгийский шоколад 70% какао с жидким центром и сорбетом из лесных ягод.</p>
+          </div>
+        </div>
+      </div>
     </div>
-  </footer>
 
-  <!-- FLOATING CONCIERGE DOCK -->
-  <a id="wa-dock" href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D1%82%D1%8C%20%D0%BF%D0%BE%20%D0%BF%D0%BE%D0%B2%D0%BE%D0%B4%D1%83%20%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%D0%B8%D0%BA%D0%B0." target="_blank" rel="noopener" aria-label="Бронь столика в WhatsApp">
-    <div class="wa-led"></div>
-    <span class="wa-text">БРОНЬ В WHATSAPP</span>
-  </a>
+    <div class="menu-modal-footer">
+      <div>
+        УТОЧНИТЬ АЛЛЕРГЕНЫ И СЕЗОННЫЕ СПЕЦИАЛИТЕТЫ: <strong style="color:var(--gold);">917 917 917</strong>
+      </div>
+      <div>
+        <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D1%82%D1%8C%20%D0%BC%D0%B5%D0%BD%D1%8E%20%D0%B8%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B2%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="btn-gold" style="padding:0.6rem 1.6rem; font-size:0.65rem;">
+          Связаться в WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
 
-  <!-- ==========================================================================
-       JAVASCRIPT LOGIC
-       ========================================================================== -->
+  <!-- SCRIPT -->
   <script>
-    // 1. Alchemist Splash Preloader Controller
-    function dismissIntro() {
-      const intro = document.getElementById('alchemist-intro');
-      intro.classList.add('dismissed');
-      sessionStorage.setItem('anzur_intro_shown', 'true');
+    function dismissSplash() {
+      const splash = document.getElementById('splash');
+      if (splash) splash.classList.add('done');
     }
 
-    function replayIntro() {
-      const intro = document.getElementById('alchemist-intro');
-      intro.classList.remove('dismissed');
-      // Re-trigger animation
-      const clone = intro.cloneNode(true);
-      intro.parentNode.replaceChild(clone, intro);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Nav reveal on scroll
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('.nav');
+      if (nav) {
+        if (window.scrollY > 80) {
+          nav.classList.add('is-visible');
+        } else {
+          nav.classList.remove('is-visible');
+        }
+      }
+    }, { passive: true });
+
+    function replaySplash() {
+      const sp = document.getElementById('splash');
+      if (sp) {
+        sp.classList.remove('done');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
 
-    // Auto-dismiss after 2.6 seconds if not dismissed manually
+    // Auto-dismiss after 2.3 seconds
     window.addEventListener('load', () => {
       setTimeout(() => {
-        const intro = document.getElementById('alchemist-intro');
-        if (intro && !intro.classList.contains('dismissed')) {
-          dismissIntro();
-        }
-      }, 2800);
+        dismissSplash();
+      }, 2300);
     });
 
-    // Mobile Drawer Toggle
-    function toggleDrawer() {
-      document.getElementById('mobDrawer').classList.toggle('open');
-    }
+    /* ==========================================================================
+       KINETIC MENU SHOWCASE & EDITORIAL SLIDER LOGIC
+       ========================================================================== */
+    const DISHES = [
+      {
+        id: 0,
+        category: 'national',
+        catName: 'НАЦИОНАЛЬНАЯ КУХНЯ',
+        tag: 'НАЦИОНАЛЬНАЯ КУХНЯ',
+        serving: '«ШЕФ-ПОДАЧА» · 650 Г',
+        title: 'Плов «Анзур»',
+        subtitle: 'Традиционный казанный плов на хлопковом масле и самаркандском зире',
+        desc: 'Отборный длиннозерный лазерный рис, томлёная таджикская баранина, сладкая янтарная морковь, нут, горный барбарис, казы и перепелиные яйца.',
+        price: '48',
+        img: 'gen_plov.jpg',
+        specBase: 'Баранина, лазерный рис',
+        specPrep: 'Казан, живой огонь',
+        specPair: 'Ачичук & Памирский сбор',
+        waText: 'Здравствуйте! Хочу заказать блюдо Плов «Анзур»'
+      },
+      {
+        id: 1,
+        category: 'national',
+        catName: 'МАНГАЛ & УГЛИ',
+        tag: 'НАЦИОНАЛЬНАЯ / МАНГАЛ',
+        serving: 'С МАНГАЛА · 380 Г',
+        title: 'Шашлык на углях',
+        subtitle: 'Маринованная вырезка молочного ягнёнка с горными травами',
+        desc: 'Нежнейшие кусочки горного ягнёнка с курдюком, маринованные в соке дикого лука анзур и кориандра, обжаренные на углях из лозы.',
+        price: '62',
+        img: 'gen_shashlik.jpg',
+        specBase: 'Горный ягнёнок, курдюк',
+        specPrep: 'Угли из виноградной лозы',
+        specPair: 'Маринованный лук & Наршараб',
+        waText: 'Здравствуйте! Хочу заказать блюдо Шашлык на углях'
+      },
+      {
+        id: 2,
+        category: 'european',
+        catName: 'ЕВРОПЕЙСКАЯ КЛАССИКА',
+        tag: 'ВЫДЕРЖКА DRY AGED',
+        serving: 'ВЫРЕЗКА ПРАЙМ · 400 Г',
+        title: 'Стейк Рибай Прайм',
+        subtitle: 'Мраморная говядина 28-дневного сухого вызревания',
+        desc: 'Зерновой откорм премиального качества, прожарка Medium. Подаётся с копчёным сливочным маслом, розмарином и винным соусом демигляс.',
+        price: '115',
+        img: 'gen_steak.jpg',
+        specBase: 'Мраморная говядина Black Angus',
+        specPrep: 'Сухое вызревание 28 дней',
+        specPair: 'Соус Демигляс & Печеный чеснок',
+        waText: 'Здравствуйте! Хочу заказать блюдо Стейк Рибай Прайм'
+      },
+      {
+        id: 3,
+        category: 'panasian',
+        catName: 'ПАНАЗИАТСКАЯ ЛИНИЯ',
+        tag: 'ОМАКАСЕ RAW BAR',
+        serving: 'ОМАКАСЕ СЕТ · 12 ШТ',
+        title: 'Сет Омакасе',
+        subtitle: 'Аутентичный выбор шефа из дикого лосося и тунца блюфин',
+        desc: 'Свежайший охлажденный дикий лосось, тунец блюфин и тигровые креветки на японском рисе косихикари, микрозелень шисо и сусальное золото.',
+        price: '98',
+        img: 'gen_sushi.jpg',
+        specBase: 'Тунец блюфин, лосось, гребешок',
+        specPrep: 'Японский рис Koshihikari',
+        specPair: 'Настоящий тёртый васаби',
+        waText: 'Здравствуйте! Хочу заказать блюдо Сет Омакасе'
+      },
+      {
+        id: 4,
+        category: 'panasian',
+        catName: 'ПАНАЗИАТСКАЯ КУХНЯ',
+        tag: 'ШЕФ-РЕЦЕПТ',
+        serving: 'ГОРЯЧАЯ ПОДАЧА · 480 МЛ',
+        title: 'Том Ям Королевский',
+        subtitle: 'Пряный тайский суп на кокосовом молоке с дарами моря',
+        desc: 'Наваристый бульон на лемонграссе и галангале с тигровыми креветками, кальмаром, шиитаке и томатами черри. Подаётся с паровым жасминовым рисом.',
+        price: '68',
+        img: 'gen_tomyum.jpg',
+        specBase: 'Тигровые креветки, кальмар, шиитаке',
+        specPrep: 'Кокосовые сливки, паста том ям',
+        specPair: 'Паровой жасминовый рис',
+        waText: 'Здравствуйте! Хочу заказать блюдо Том Ям Королевский'
+      },
+      {
+        id: 5,
+        category: 'bar',
+        catName: 'ГОРНЫЙ БАР & НАПИТКИ',
+        tag: 'ТРАДИЦИИ ПАМИРА',
+        serving: 'ЦЕРЕМОНИЯ · 900 МЛ',
+        title: 'Памирский сбор',
+        subtitle: 'Коллекционный высокогорный чай в расписном чайнике',
+        desc: 'Традиционный сбор дикорастущих трав с предгорий Памира: чабрец, горная мята, дикий шафран и цветы липы. Подаётся с набатом и сухофруктами.',
+        price: '25',
+        img: 'gen_tea.jpg',
+        specBase: 'Чабрец, мята, шафран, липа',
+        specPrep: 'Традиционный заварной чайник',
+        specPair: 'Горный мед, набат, орехи',
+        waText: 'Здравствуйте! Хочу заказать Памирский сбор (Чайная церемония)'
+      }
+    ];
 
-    // Menu Database
-    const MENU_ITEMS = {
-      national: [
-        { name: 'Плов «Анзур» Праздничный', desc: 'Лазерный рис, сочная баранина, барбарис, нут и перепелиные яйца.', price: '48 TJS' },
-        { name: 'Шашлык из баранины на углях', desc: 'Маринованная мякоть барашка, лаваш, маринованный лук и гранат.', price: '58 TJS' },
-        { name: 'Казан-Кебаб с картофелем', desc: 'Томленая говядина в медном казане с золотистым картофелем.', price: '55 TJS' },
-        { name: 'Лагман уйгурский ручной тяжки', desc: 'Домашняя лапша, обжаренная говядина, джусай, сладкий перец.', price: '42 TJS' },
-        { name: 'Самса тандырная с бараниной', desc: 'Хрустящее слоёное тесто из тандыра с черным тмином (2 шт).', price: '22 TJS' },
-        { name: 'Манты с тыквой и мясом', desc: 'Тонкое тесто на пару, сладкая тыква, рубленая говядина, чакка.', price: '36 TJS' }
-      ],
-      european: [
-        { name: 'Стейк Рибай Прайм', desc: 'Мраморная говядина Medium, соус демигляс, розмарин.', price: '115 TJS' },
-        { name: 'Филе лосося на гриле', desc: 'Норвежский лосось, спаржа, цитрусовый соус бер-блан.', price: '88 TJS' },
-        { name: 'Паста Карбонара', desc: 'Панчетта, пармезан, пастеризованный желток, перец.', price: '46 TJS' },
-        { name: 'Салат с тигровыми креветками', desc: 'Обжаренные креветки, авокадо, микс листьев, лаймовый дрессинг.', price: '54 TJS' },
-        { name: 'Крем-суп из белых грибов', desc: 'С фермерскими сливками, трюфельным маслом и чиабаттой.', price: '38 TJS' },
-        { name: 'Тирамису Классик', desc: 'Савоярди, эспрессо, крем маскарпоне и какао.', price: '32 TJS' }
-      ],
-      asian: [
-        { name: 'Ролл Филадельфия Люкс', desc: 'Охлажденный лосось, сливочный сыр Cremette, авокадо.', price: '56 TJS' },
-        { name: 'Суп Том-Ям с креветками', desc: 'Пряный кокосовый бульон, лемонграсс, морепродукты, рис жасмин.', price: '52 TJS' },
-        { name: 'Пад-Тай с морепродуктами', desc: 'Рисовая лапша, тамариндовый соус, яйцо, ростки сои, арахис.', price: '49 TJS' },
-        { name: 'Сет «Императорский Анзур» (32 шт)', desc: 'Филадельфия, Дракон, Калифорния, Запеченный спайси ролл.', price: '165 TJS' },
-        { name: 'Дим-самы с креветками на пару', desc: 'Прозрачное паровое тесто, начинка из тигровой креветки.', price: '44 TJS' },
-        { name: 'Салат Чука с ореховым соусом', desc: 'Водоросли вакаме, семена кунжута, традиционный ореховый соус.', price: '28 TJS' }
-      ],
-      bar: [
-        { name: 'Чай «Анзур» на горных травах', desc: 'Высокогорный зеленый чай, чабрец, горная мята, шафран.', price: '20 TJS' },
-        { name: 'Лимонад «Гранатовый Памир»', desc: 'Свежий гранатовый сок, базиликовый кордиал, содовая.', price: '24 TJS' },
-        { name: 'Свежевыжатые соки', desc: 'Апельсин, яблоко, морковь — 100% натуральный отжим.', price: '22 TJS' },
-        { name: 'Смузи Манго-Маракуйя', desc: 'Спелое манго, маракуйя, кокосовое молоко, чиа.', price: '28 TJS' },
-        { name: 'Кофе Specialty (Капучино)', desc: '100% Арабика свежей обжарки, фермерское молоко.', price: '18 TJS' },
-        { name: 'Мохито безалкогольный', desc: 'Свежая мята, лайм, тростниковый сахар, газированная вода.', price: '22 TJS' }
-      ]
-    };
+    let currentSlideIdx = 0;
+    let autoplayInterval = null;
+    let isAutoplayActive = true;
+    let isUserHovered = false;
+    let activeFillAnimation = null;
+    const SLIDE_DURATION = 5000;
 
-    function filterMenu(category, btn) {
-      document.querySelectorAll('.gem-tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+    function renderSlide(idx) {
+      currentSlideIdx = (idx + DISHES.length) % DISHES.length;
+      const dish = DISHES[currentSlideIdx];
 
-      const grid = document.getElementById('gemGrid');
-      grid.innerHTML = '';
-      const items = MENU_ITEMS[category] || [];
+      // Update text elements
+      const imgEl = document.getElementById('stage-img');
+      const badgeTag = document.getElementById('stage-badge-tag');
+      const counterCur = document.getElementById('stage-counter-cur');
+      const badgeServing = document.getElementById('stage-badge-serving');
+      const catName = document.getElementById('stage-cat-name');
+      const priceEl = document.getElementById('stage-price');
+      const titleEl = document.getElementById('stage-title');
+      const subEl = document.getElementById('stage-subtitle');
+      const descEl = document.getElementById('stage-desc');
+      const specBase = document.getElementById('stage-spec-base');
+      const specPrep = document.getElementById('stage-spec-prep');
+      const specPair = document.getElementById('stage-spec-pair');
+      const waLink = document.getElementById('stage-wa-link');
 
-      items.forEach((item, index) => {
-        const card = document.createElement('div');
-        card.className = 'gem-dish-card';
-        card.innerHTML = `
-          <div>
-            <div class="gdc-num">[ 0${index + 1} ]</div>
-            <h4 class="gdc-title">${item.name}</h4>
-            <p class="gdc-desc">${item.desc}</p>
-          </div>
-          <div class="gdc-footer">
-            <span class="gdc-price">${item.price}</span>
-            <span class="gdc-badge">ANZUR</span>
-          </div>
-        `;
-        grid.appendChild(card);
+      if (imgEl) {
+        imgEl.src = dish.img;
+        imgEl.alt = dish.title;
+      }
+      if (badgeTag) badgeTag.textContent = dish.tag;
+      if (counterCur) counterCur.textContent = String(dish.id + 1).padStart(2, '0');
+      if (badgeServing) badgeServing.textContent = dish.serving;
+      if (catName) catName.textContent = dish.catName;
+      if (priceEl) priceEl.textContent = dish.price;
+      if (titleEl) titleEl.textContent = dish.title;
+      if (subEl) subEl.textContent = dish.subtitle;
+      if (descEl) descEl.textContent = dish.desc;
+      if (specBase) specBase.textContent = dish.specBase;
+      if (specPrep) specPrep.textContent = dish.specPrep;
+      if (specPair) specPair.textContent = dish.specPair;
 
-        // Motion.js micro-stagger
-        if (window.Motion && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-          Motion.animate(card, { opacity: [0, 1], y: [16, 0] }, { duration: 0.35, delay: index * 0.04 });
+      if (waLink) {
+        const textEnc = encodeURIComponent(dish.waText);
+        waLink.href = `https://wa.me/992917917917?text=${textEnc}`;
+      }
+
+      // Update filmstrip active state
+      const items = document.querySelectorAll('.filmstrip-item');
+      items.forEach((item, i) => {
+        if (i === currentSlideIdx) {
+          item.classList.add('is-active');
+        } else {
+          item.classList.remove('is-active');
         }
       });
+
+      // Animate with Motion.js
+      if (window.Motion && typeof Motion.animate === 'function') {
+        try {
+          Motion.animate('#stage-img', {
+            opacity: [0.35, 1],
+            scale: [1.06, 1]
+          }, {
+            duration: 0.65,
+            easing: [0.16, 1, 0.3, 1]
+          });
+
+          Motion.animate('.stage-anim', {
+            opacity: [0, 1],
+            y: [14, 0]
+          }, {
+            delay: Motion.stagger(0.04),
+            duration: 0.45,
+            easing: [0.16, 1, 0.3, 1]
+          });
+        } catch (e) {
+          console.warn('Motion animation error:', e);
+        }
+      }
+
+      // Progress bar handling
+      startProgressBar();
     }
 
-    // Initial render
-    filterMenu('national', document.querySelector('.gem-tab-btn'));
+    function startProgressBar() {
+      // Clear previous fill animations
+      document.querySelectorAll('.filmstrip-fill').forEach(el => {
+        el.style.width = '0%';
+        if (el.animRef && typeof el.animRef.stop === 'function') {
+          el.animRef.stop();
+        }
+      });
+
+      if (!isAutoplayActive || isUserHovered) return;
+
+      const activeItem = document.querySelector(`.filmstrip-item[data-idx="${currentSlideIdx}"]`);
+      if (activeItem) {
+        const fillEl = activeItem.querySelector('.filmstrip-fill');
+        if (fillEl) {
+          if (window.Motion && typeof Motion.animate === 'function') {
+            try {
+              fillEl.animRef = Motion.animate(fillEl, {
+                width: ['0%', '100%']
+              }, {
+                duration: SLIDE_DURATION / 1000,
+                easing: 'linear'
+              });
+            } catch (err) {
+              fillEl.style.transition = `width ${SLIDE_DURATION}ms linear`;
+              fillEl.style.width = '100%';
+            }
+          } else {
+            fillEl.style.transition = `width ${SLIDE_DURATION}ms linear`;
+            fillEl.style.width = '100%';
+          }
+        }
+      }
+    }
+
+    function resetAutoplay() {
+      if (autoplayInterval) clearInterval(autoplayInterval);
+      if (isAutoplayActive && !isUserHovered) {
+        autoplayInterval = setInterval(() => {
+          nextSlide();
+        }, SLIDE_DURATION);
+      }
+      startProgressBar();
+    }
+
+    function nextSlide() {
+      renderSlide(currentSlideIdx + 1);
+      resetAutoplay();
+    }
+
+    function prevSlide() {
+      renderSlide(currentSlideIdx - 1);
+      resetAutoplay();
+    }
+
+    function goToSlide(idx) {
+      renderSlide(idx);
+      resetAutoplay();
+    }
+
+    function toggleAutoplay() {
+      const btn = document.getElementById('stage-pause-btn');
+      isAutoplayActive = !isAutoplayActive;
+      if (isAutoplayActive) {
+        if (btn) btn.textContent = '❚❚';
+        resetAutoplay();
+      } else {
+        if (btn) btn.textContent = '▶';
+        if (autoplayInterval) clearInterval(autoplayInterval);
+        document.querySelectorAll('.filmstrip-fill').forEach(el => {
+          if (el.animRef && typeof el.animRef.stop === 'function') el.animRef.stop();
+        });
+      }
+    }
+
+    function filterMenu(category, btn) {
+      document.querySelectorAll('.menu-filter-btn').forEach(b => b.classList.remove('is-active'));
+      if (btn) btn.classList.add('is-active');
+
+      if (category === 'all') {
+        goToSlide(0);
+      } else {
+        const foundIdx = DISHES.findIndex(d => d.category === category);
+        if (foundIdx !== -1) {
+          goToSlide(foundIdx);
+        }
+      }
+    }
+
+    // Modal logic
+    function openMenuModal() {
+      const modal = document.getElementById('menu-modal');
+      if (modal) {
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeMenuModal() {
+      const modal = document.getElementById('menu-modal');
+      if (modal) {
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Global Key listeners (ESC closes modal, Arrows cycle slides)
+    window.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('menu-modal');
+      if (modal && modal.classList.contains('is-open')) {
+        if (e.key === 'Escape') closeMenuModal();
+        return;
+      }
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    // Hover & Viewport listeners
+    const stageCont = document.getElementById('menu-stage-container');
+    const stripTrack = document.getElementById('filmstrip-track');
+
+    [stageCont, stripTrack].forEach(el => {
+      if (el) {
+        el.addEventListener('mouseenter', () => {
+          isUserHovered = true;
+          if (autoplayInterval) clearInterval(autoplayInterval);
+          document.querySelectorAll('.filmstrip-fill').forEach(f => {
+            if (f.animRef && typeof f.animRef.stop === 'function') f.animRef.stop();
+          });
+        });
+        el.addEventListener('mouseleave', () => {
+          isUserHovered = false;
+          resetAutoplay();
+        });
+      }
+    });
+
+    // IntersectionObserver to pause autoplay when offscreen
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) {
+            if (autoplayInterval) clearInterval(autoplayInterval);
+          } else {
+            if (isAutoplayActive && !isUserHovered) resetAutoplay();
+          }
+        });
+      }, { threshold: 0.25 });
+
+      const cuisineSec = document.getElementById('cuisine');
+      if (cuisineSec) observer.observe(cuisineSec);
+    }
+
+    // Touch swipe support for mobile
+    let touchStartX = 0;
+    if (stageCont) {
+      stageCont.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].clientX;
+      }, { passive: true });
+
+      stageCont.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].clientX;
+        const diffX = touchEndX - touchStartX;
+        if (Math.abs(diffX) > 45) {
+          if (diffX < 0) nextSlide();
+          else prevSlide();
+        }
+      }, { passive: true });
+    }
+
+    // Initialize first slide on DOM ready
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSlide(0);
+      resetAutoplay();
+    });
   </script>
 </body>
 </html>
