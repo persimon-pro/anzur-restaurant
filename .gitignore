@@ -1,0 +1,5 @@
+*.png
+!anzur_bulb_pure.png
+!anzur_emblem_clean.png
+backups/
+.DS_Store

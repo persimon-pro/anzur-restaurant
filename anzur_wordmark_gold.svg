@@ -1,29 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 140" width="100%" height="auto">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 130" width="100%" height="auto">
   <defs>
-    <linearGradient id="logoGold" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="wmGold" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#F2E2BE" />
       <stop offset="30%" stop-color="#D8B772" />
       <stop offset="70%" stop-color="#C5A059" />
       <stop offset="100%" stop-color="#9E7B35" />
     </linearGradient>
-    <filter id="logoGlow" x="-15%" y="-15%" width="130%" height="130%">
+    <filter id="wmGlow" x="-15%" y="-15%" width="130%" height="130%">
       <feDropShadow dx="0" dy="2" stdDeviation="5" flood-color="#C5A059" flood-opacity="0.35" />
     </filter>
   </defs>
-  <g transform="translate(5, 5) scale(0.55)" filter="url(#logoGlow)">
-    <path d="M 100 18 C 165 72, 188 138, 100 220 C 12 138, 35 72, 100 18 Z"
-          fill="none" stroke="url(#logoGold)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M 100 62 C 142 98, 154 144, 100 192 C 46 144, 58 98, 100 62 Z"
-          fill="none" stroke="url(#logoGold)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M 100 106 C 122 126, 128 148, 100 168 C 72 148, 78 126, 100 106 Z"
-          fill="url(#logoGold)" />
-  </g>
-  <g transform="translate(125, 4)" fill="url(#logoGold)" filter="url(#logoGlow)">
+  <g fill="url(#wmGold)" filter="url(#wmGlow)">
+    <!-- Letter A -->
     <path d="M 42 76 L 18 76 C 14.5 76 12.5 73.8 13.4 70.8 L 33.2 12.2 C 34.4 8.5 38.2 6 42.4 6 L 47.6 6 C 51.8 6 55.6 8.5 56.8 12.2 L 76.6 70.8 C 77.5 73.8 75.5 76 72 76 L 48 76 Z M 36 51 L 54 51 L 45 23 Z" />
+    <!-- Letter N -->
     <path d="M 96 76 L 86 76 C 82.5 76 80 73.5 80 70 L 80 12 C 80 8.5 82.5 6 86 6 L 96 6 C 99 6 101.5 8.2 101.8 11.2 L 102 43.5 L 138 8.8 C 140.5 6.4 144 6 147 6 L 156 6 C 159.5 6 162 8.5 162 12 L 162 70 C 162 73.5 159.5 76 156 76 L 146 76 C 142.5 76 140 73.5 140 70 L 140 37.5 L 103.5 72.8 C 101.5 74.8 98.8 76 96 76 Z" />
+    <!-- Letter Z -->
     <path d="M 182 76 C 178.5 76 176 73.5 176 70 C 176 68.2 176.8 66.6 178.2 65.4 L 226 19 L 184 19 C 180.5 19 178 16.5 178 13 C 178 9.5 180.5 7 184 7 L 246 7 C 249.5 7 252 9.5 252 13 C 252 14.8 251.2 16.4 249.8 17.6 L 202 64 L 246 64 C 249.5 64 252 66.5 252 70 C 252 73.5 249.5 76 246 76 Z" />
+    <!-- Letter U -->
     <path d="M 272 12 L 272 47 C 272 65.5 285.5 77.5 306 77.5 C 326.5 77.5 340 65.5 340 47 L 340 12 C 340 8.5 342.5 6 346 6 L 356 6 C 359.5 6 362 8.5 362 12 L 362 47 C 362 76.5 339 94 306 94 C 273 94 250 76.5 250 47 L 250 12 C 250 8.5 252.5 6 256 6 L 266 6 C 269.5 6 272 8.5 272 12 Z" />
+    <!-- Letter R with signature curled leg -->
     <path d="M 382 76 L 372 76 C 368.5 76 366 73.5 366 70 L 366 12 C 366 8.5 368.5 6 372 6 L 418 6 C 440.5 6 454.5 18 454.5 35.5 C 454.5 48.5 446 58 432.5 62 C 435.8 64.6 440 68.2 444.8 72 C 450.5 76.2 457.2 77.5 463 75.2 C 466.8 73.6 469.5 70 469.5 66 C 469.5 63.2 471.8 61 474.5 61 L 480.5 61 C 483.5 61 485.5 63.2 485.5 66 C 485.5 75.5 478.2 83.5 467.5 84.5 C 457 85.5 446.5 82 436.5 74.2 L 423 63.2 L 388 63.2 L 388 70 C 388 73.5 385.5 76 382 76 Z M 388 47.5 L 416 47.5 C 428.5 47.5 434.5 42 434.5 34.5 C 434.5 27 428.5 21.5 416 21.5 L 388 21.5 Z" />
-    <text x="249" y="122" font-family="'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="600" letter-spacing="13" fill="url(#logoGold)" text-anchor="middle">RESTAURANT</text>
   </g>
+  <text x="249" y="122" font-family="'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="600" letter-spacing="13" fill="url(#wmGold)" text-anchor="middle">RESTAURANT</text>
 </svg>

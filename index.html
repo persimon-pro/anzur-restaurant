@@ -342,18 +342,23 @@
       margin: auto;
     }
     .hero-emblem {
-      width: 64px;
+      width: 72px;
       height: auto;
       object-fit: contain;
       margin: 0 auto 1.4rem;
+      display: block;
       filter: drop-shadow(0 0 20px rgba(197, 160, 89, 0.45));
     }
     .hero-brand-wrap {
       margin-bottom: 1.6rem;
+      max-width: 480px;
+      width: 86%;
+      margin-left: auto;
+      margin-right: auto;
     }
+    .hero-wordmark-svg,
     .hero-wordmark-img {
-      max-width: 440px;
-      width: 82%;
+      width: 100%;
       height: auto;
       display: block;
       margin: 0 auto;
@@ -1076,6 +1081,218 @@
     }
 
     /* ==========================================================================
+       EVENTS & SHOWS (ШОУ И КОНЦЕРТЫ · АФИША И ЖИВАЯ МУЗЫКА)
+       ========================================================================== */
+    .events-section {
+      position: relative;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .event-card {
+      border-right: 1px solid var(--border);
+      background: var(--bg-card);
+      display: flex;
+      flex-direction: column;
+      transition: background 0.3s ease;
+      position: relative;
+    }
+    .event-card:last-child {
+      border-right: none;
+    }
+    .event-card:hover {
+      background: #110e0c;
+    }
+    .event-media {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .event-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.85) contrast(1.05);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+    }
+    .event-card:hover .event-media img {
+      transform: scale(1.04);
+      filter: brightness(0.95) contrast(1.1);
+    }
+    .event-tag-badge {
+      position: absolute;
+      top: 1.2rem;
+      left: 1.2rem;
+      background: rgba(6, 5, 4, 0.88);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--gold);
+      padding: 0.35rem 0.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      z-index: 2;
+    }
+    .event-body {
+      padding: 2.2rem 2.4rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+    .event-meta-time {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .event-meta-time::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+    }
+    .event-title {
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 1rem;
+      letter-spacing: 0.02em;
+    }
+    .event-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 1.8rem;
+      font-weight: 300;
+    }
+    .event-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .event-specs {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .event-link {
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: gap 0.2s ease, color 0.2s ease;
+    }
+    .event-link:hover {
+      color: var(--gold-light);
+      gap: 0.65rem;
+    }
+
+    /* Events Program Schedule Strip */
+    .events-schedule-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+      background: #090807;
+    }
+    .sched-item {
+      padding: 1.6rem 2rem;
+      border-right: 1px solid var(--border);
+    }
+    .sched-item:last-child {
+      border-right: none;
+    }
+    .sched-day {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.24em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .sched-name {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+    .sched-detail {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    /* Events Bottom CTA */
+    .events-cta-bar {
+      padding: 3rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .events-cta-text {
+      max-width: 580px;
+    }
+    .events-cta-title {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+      margin-bottom: 0.4rem;
+    }
+    .events-cta-sub {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .events-cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1024px) {
+      .events-grid { grid-template-columns: 1fr; }
+      .event-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .events-schedule-strip { grid-template-columns: 1fr 1fr; }
+      .sched-item:nth-child(2) { border-right: none; }
+      .sched-item:nth-child(1), .sched-item:nth-child(2) { border-bottom: 1px solid var(--border); }
+    }
+    @media (max-width: 640px) {
+      .events-schedule-strip { grid-template-columns: 1fr; }
+      .sched-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .events-cta-bar { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ==========================================================================
        RESTORED MULTI-COLUMN ARCHITECTURAL FOOTER
        ========================================================================== */
     .site-footer {
@@ -1147,7 +1364,7 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.85rem;
     }
     .footer-links li a,
     .footer-links li span {
@@ -1155,9 +1372,25 @@
       color: var(--text-muted);
       transition: color 0.2s ease;
       line-height: 1.4;
+      display: inline-flex;
+      align-items: center;
     }
     .footer-links li a:hover {
       color: var(--gold);
+    }
+    .footer-gold-icon {
+      width: 14px;
+      height: 14px;
+      stroke: var(--gold);
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-right: 0.65rem;
+      display: inline-block;
+      transition: transform 0.25s ease, stroke 0.25s ease;
+    }
+    .footer-links li a:hover .footer-gold-icon {
+      transform: scale(1.18);
+      stroke: var(--gold-light);
     }
 
     .footer-bottom-bar {
@@ -1296,6 +1529,7 @@
       <div class="nav-center-menu">
         <a href="#cuisine" class="nav-item">Гастрономия</a>
         <a href="#spaces" class="nav-item">Залы & VIP</a>
+        <a href="#events" class="nav-item">Шоу & Концерты</a>
         <a href="#reservation" class="nav-item">Контакты</a>
       </div>
 
@@ -1312,9 +1546,56 @@
     <div class="hero-backdrop"></div>
 
     <div class="hero-content">
-      <img src="anzur_emblem_vector.svg" alt="ANZUR" class="hero-emblem" />
+      <div class="hero-emblem-wrap">
+        <svg class="hero-emblem" viewBox="0 0 190 230" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Эмблема Ресторана Анзур">
+          <defs>
+            <linearGradient id="heroEmbGold" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#F2E2BE" />
+              <stop offset="30%" stop-color="#D8B772" />
+              <stop offset="70%" stop-color="#C5A059" />
+              <stop offset="100%" stop-color="#9E7B35" />
+            </linearGradient>
+            <filter id="heroEmbGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="2" stdDeviation="5" flood-color="#C5A059" flood-opacity="0.45" />
+            </filter>
+          </defs>
+          <g transform="translate(-5, 0)" filter="url(#heroEmbGlow)">
+            <path d="M 100 18 C 165 72, 188 138, 100 220 C 12 138, 35 72, 100 18 Z"
+                  fill="none" stroke="url(#heroEmbGold)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M 100 62 C 142 98, 154 144, 100 192 C 46 144, 58 98, 100 62 Z"
+                  fill="none" stroke="url(#heroEmbGold)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M 100 106 C 122 126, 128 148, 100 168 C 72 148, 78 126, 100 106 Z"
+                  fill="url(#heroEmbGold)" />
+          </g>
+        </svg>
+      </div>
       <div class="hero-brand-wrap">
-        <img src="anzur_wordmark_gold.svg" alt="ANZUR RESTAURANT" class="hero-wordmark-img" />
+        <svg class="hero-wordmark-svg" viewBox="0 0 500 130" width="100%" height="auto" role="img" aria-label="ANZUR RESTAURANT">
+          <defs>
+            <linearGradient id="heroWmGold" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#F2E2BE" />
+              <stop offset="30%" stop-color="#D8B772" />
+              <stop offset="70%" stop-color="#C5A059" />
+              <stop offset="100%" stop-color="#9E7B35" />
+            </linearGradient>
+            <filter id="heroWmGlow" x="-15%" y="-15%" width="130%" height="130%">
+              <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#C5A059" flood-opacity="0.38" />
+            </filter>
+          </defs>
+          <g fill="url(#heroWmGold)" filter="url(#heroWmGlow)">
+            <!-- Letter A -->
+            <path d="M 42 76 L 18 76 C 14.5 76 12.5 73.8 13.4 70.8 L 33.2 12.2 C 34.4 8.5 38.2 6 42.4 6 L 47.6 6 C 51.8 6 55.6 8.5 56.8 12.2 L 76.6 70.8 C 77.5 73.8 75.5 76 72 76 L 48 76 Z M 36 51 L 54 51 L 45 23 Z" />
+            <!-- Letter N -->
+            <path d="M 96 76 L 86 76 C 82.5 76 80 73.5 80 70 L 80 12 C 80 8.5 82.5 6 86 6 L 96 6 C 99 6 101.5 8.2 101.8 11.2 L 102 43.5 L 138 8.8 C 140.5 6.4 144 6 147 6 L 156 6 C 159.5 6 162 8.5 162 12 L 162 70 C 162 73.5 159.5 76 156 76 L 146 76 C 142.5 76 140 73.5 140 70 L 140 37.5 L 103.5 72.8 C 101.5 74.8 98.8 76 96 76 Z" />
+            <!-- Letter Z -->
+            <path d="M 182 76 C 178.5 76 176 73.5 176 70 C 176 68.2 176.8 66.6 178.2 65.4 L 226 19 L 184 19 C 180.5 19 178 16.5 178 13 C 178 9.5 180.5 7 184 7 L 246 7 C 249.5 7 252 9.5 252 13 C 252 14.8 251.2 16.4 249.8 17.6 L 202 64 L 246 64 C 249.5 64 252 66.5 252 70 C 252 73.5 249.5 76 246 76 Z" />
+            <!-- Letter U -->
+            <path d="M 272 12 L 272 47 C 272 65.5 285.5 77.5 306 77.5 C 326.5 77.5 340 65.5 340 47 L 340 12 C 340 8.5 342.5 6 346 6 L 356 6 C 359.5 6 362 8.5 362 12 L 362 47 C 362 76.5 339 94 306 94 C 273 94 250 76.5 250 47 L 250 12 C 250 8.5 252.5 6 256 6 L 266 6 C 269.5 6 272 8.5 272 12 Z" />
+            <!-- Letter R with Instagram signature curled leg -->
+            <path d="M 382 76 L 372 76 C 368.5 76 366 73.5 366 70 L 366 12 C 366 8.5 368.5 6 372 6 L 418 6 C 440.5 6 454.5 18 454.5 35.5 C 454.5 48.5 446 58 432.5 62 C 435.8 64.6 440 68.2 444.8 72 C 450.5 76.2 457.2 77.5 463 75.2 C 466.8 73.6 469.5 70 469.5 66 C 469.5 63.2 471.8 61 474.5 61 L 480.5 61 C 483.5 61 485.5 63.2 485.5 66 C 485.5 75.5 478.2 83.5 467.5 84.5 C 457 85.5 446.5 82 436.5 74.2 L 423 63.2 L 388 63.2 L 388 70 C 388 73.5 385.5 76 382 76 Z M 388 47.5 L 416 47.5 C 428.5 47.5 434.5 42 434.5 34.5 C 434.5 27 428.5 21.5 416 21.5 L 388 21.5 Z" />
+          </g>
+          <text x="249" y="122" font-family="'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="600" letter-spacing="13" fill="url(#heroWmGold)" text-anchor="middle">RESTAURANT</text>
+        </svg>
         <h1 class="visually-hidden">ANZUR RESTAURANT — Ресторан высокой гастрономии в Душанбе</h1>
       </div>
       <p class="hero-subtitle">
@@ -1582,7 +1863,128 @@
   </div>
 
   <!-- ==========================================================================
-       RESERVATION & CONTACT
+       4. EVENTS & SHOWS (ШОУ И КОНЦЕРТЫ · АФИША И ЖИВАЯ МУЗЫКА)
+       ========================================================================== -->
+  <section id="events" class="events-section">
+    <div class="container">
+      <div class="sec-header">
+        <div>
+          <span class="mono-label">[ АФИША · ЖИВОЙ ЗВУК · ВЕЧЕРНЯЯ ПРОГРАММА ]</span>
+          <h2 class="sec-title" style="margin-top:0.4rem;">Шоу & <em>Концерты</em></h2>
+        </div>
+        <a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" class="btn-outline" style="padding:0.7rem 1.6rem; font-size:0.65rem;">
+          INSTAGRAM @ANZUR.REST
+        </a>
+      </div>
+    </div>
+
+    <!-- Editorial 3-Cards Grid -->
+    <div class="events-grid">
+      <!-- Card 1: Live Music & Vocal -->
+      <article class="event-card">
+        <div class="event-media">
+          <span class="event-tag-badge">ПТ — ВС · 19:30</span>
+          <img src="gen_live_concert.jpg" alt="Живая музыка в ресторане Анзур" loading="lazy" />
+        </div>
+        <div class="event-body">
+          <div>
+            <div class="event-meta-time">ГЛАВНЫЙ ЗАЛ & ТЕРРАСА</div>
+            <h3 class="event-title">Живая музыка & Вокал</h3>
+            <p class="event-desc">
+              Виртуозные соло на саксофоне и скрипке, восточные струнные инструменты (рубаб, тар) и чарующий живой вокал. Атмосферные джазовые импровизации, мировые хиты и восточная классика под аккомпанемент вашего ужина.
+            </p>
+          </div>
+          <div class="event-footer">
+            <span class="event-specs">САКСОФОН · СКРИПКА · ВОКАЛ</span>
+            <a href="booking.html" class="event-link">Резерв стола →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: Karaoke & DJ -->
+      <article class="event-card">
+        <div class="event-media">
+          <span class="event-tag-badge">ЕЖЕДНЕВНО · С 20:00</span>
+          <img src="gen_karaoke.jpg" alt="Караоке и DJ-вечеринки в ресторане Анзур" loading="lazy" />
+        </div>
+        <div class="event-body">
+          <div>
+            <div class="event-meta-time">KARAOKE LOUNGE & ТЕРРАСА</div>
+            <h3 class="event-title">Karaoke Night & DJ-сеты</h3>
+            <p class="event-desc">
+              Премиальная система караоке AST с каталогом более 80 000 композиций, студийный сценический звук и индивидуальные сценарии клубного света. По выходным — глубокий organic lounge и диджей-сеты на открытой террасе.
+            </p>
+          </div>
+          <div class="event-footer">
+            <span class="event-specs">80 000+ ТРЕКОВ · КЛУБНЫЙ ЗВУК</span>
+            <a href="booking.html" class="event-link">Заказать VIP-кабину →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: Chef's Fire Show -->
+      <article class="event-card">
+        <div class="event-media">
+          <span class="event-tag-badge">УИКЕНД · 20:30</span>
+          <img src="gen_chef_fire_show.jpg" alt="Гастрономическое шоу шеф-повара" loading="lazy" />
+        </div>
+        <div class="event-body">
+          <div>
+            <div class="event-meta-time">ОТКРЫТАЯ КУХНЯ & СТОЛЫ ГОСТЕЙ</div>
+            <h3 class="event-title">Огненное Шоу Шеф-повара</h3>
+            <p class="event-desc">
+              Гастрономический перформанс на открытом огне: праздничная выемка плова «Анзур» из 50-литрового казана, зрелищное фламбирование сочных стейков Рибай прямо у вашего стола и подача шашлыков на тлеющих углях.
+            </p>
+          </div>
+          <div class="event-footer">
+            <span class="event-specs">ОТКРЫТЫЙ ОГОНЬ · КАЗАН · ФЛАМБЕ</span>
+            <a href="booking.html" class="event-link">Участвовать →</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Weekly Schedule Strip -->
+    <div class="events-schedule-strip">
+      <div class="sched-item">
+        <div class="sched-day">ПЯТНИЦА — ВОСКРЕСЕНЬЕ</div>
+        <div class="sched-name">Живой вокал & Саксофон</div>
+        <div class="sched-detail">19:30 — 23:00 · Главный зал и терраса</div>
+      </div>
+      <div class="sched-item">
+        <div class="sched-day">КАЖДЫЙ УИКЕНД</div>
+        <div class="sched-name">Шоу Шефа & Ханский плов</div>
+        <div class="sched-detail">20:30 · Открытый казан и подача у стола</div>
+      </div>
+      <div class="sched-item">
+        <div class="sched-day">ЕЖЕДНЕВНО</div>
+        <div class="sched-name">VIP Karaoke Lounge</div>
+        <div class="sched-detail">20:00 — 00:00 · Каталог 80 000+ песен</div>
+      </div>
+      <div class="sched-item">
+        <div class="sched-day">СУББОТА & ВОСКРЕСЕНЬЕ</div>
+        <div class="sched-name">Семейные уикенды</div>
+        <div class="sched-detail">12:00 — 17:00 · Детская зона и аниматоры</div>
+      </div>
+    </div>
+
+    <!-- CTA Bar -->
+    <div class="container events-cta-bar">
+      <div class="events-cta-text">
+        <h4 class="events-cta-title">Планируете особенный вечер?</h4>
+        <p class="events-cta-sub">Забронируйте стол у сцены или отдельную VIP-кабину для вашей компании</p>
+      </div>
+      <div class="events-cta-buttons">
+        <a href="booking.html" class="btn-gold">Забронировать стол на вечер</a>
+        <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%B0%D1%84%D0%B8%D1%88%D1%83%20%D1%88%D0%BE%D1%83%20%D0%B8%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D1%80%D1%82%D0%BE%D0%B2%20%D0%B2%20%D1%80%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD%D0%B5%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="btn-outline">
+          Уточнить афишу в WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       5. RESERVATION & CONTACT
        ========================================================================== -->
   <section id="reservation" class="reservation-sec">
     <div class="res-left">
@@ -1657,6 +2059,7 @@
         <ul class="footer-links">
           <li><a href="#cuisine">Карта вкуса</a></li>
           <li><a href="#spaces">Залы & Пространства</a></li>
+          <li><a href="#events">Шоу & Концерты</a></li>
           <li><a href="#reservation">Контакты & Резерв</a></li>
           <li><a href="booking.html">Онлайн-бронирование</a></li>
           <li><a href="javascript:void(0)" onclick="openMenuModal()">Полное меню ресторана</a></li>
@@ -1679,11 +2082,36 @@
       <div class="footer-col">
         <h4 class="footer-col-title">Контакты</h4>
         <ul class="footer-links">
-          <li><a href="tel:992917917917" style="color:var(--gold); font-weight:700;">📞 917 917 917</a></li>
-          <li><a href="https://wa.me/992917917917" target="_blank" rel="noopener">💬 WhatsApp Консьерж</a></li>
-          <li><a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener">📸 @anzur.rest</a></li>
-          <li><span>📍 г. Душанбе, ул. Дӯстии халқҳо, 10б</span></li>
-          <li><span style="color:var(--text-muted);">🕐 Ежедневно 10:00 — 00:00</span></li>
+          <li>
+            <a href="tel:992917917917" style="color:var(--gold); font-weight:700;">
+              <svg class="footer-gold-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>917 917 917</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/992917917917" target="_blank" rel="noopener">
+              <svg class="footer-gold-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              <span>WhatsApp Консьерж</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener">
+              <svg class="footer-gold-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              <span>@anzur.rest</span>
+            </a>
+          </li>
+          <li>
+            <span>
+              <svg class="footer-gold-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>г. Душанбе, ул. Дӯстии халқҳо, 10б</span>
+            </span>
+          </li>
+          <li>
+            <span style="color:var(--text-muted);">
+              <svg class="footer-gold-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Ежедневно 10:00 — 00:00</span>
+            </span>
+          </li>
         </ul>
       </div>
     </div>
