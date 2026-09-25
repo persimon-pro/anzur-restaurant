@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Бронирование стола — ANZUR RESTAURANT | Душанбе</title>
-  <meta name="description" content="Онлайн-бронирование столика в ресторане Анзур (Душанбе). Главный зал, VIP-кабины, караоке, летняя терраса. Резерв: 917 917 917." />
+  <title>Интерактивная схема столов — Ресторан «Анзур» (Душанбе)</title>
+  <meta name="description" content="Официальная интерактивная схема 1-го и 2-го яруса ресторана Анзур (Душанбе). Онлайн-бронирование столов у сцены, на балконе, летней террасе и в VIP-кабинах с караоке." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://anzur.rest/booking.html" />
 
@@ -21,13 +21,16 @@
       --bg:             #060504;
       --bg-card:        #0C0A09;
       --bg-elevated:    #15120F;
-      --border:         #1A1714;
-      --border-light:   #2C2620;
+      --border:         #1E1A16;
+      --border-light:   #2E2720;
       --gold:           #C5A059;
       --gold-light:     #E5C786;
+      --gold-dark:      #8E7238;
       --text:           #F5F2EB;
-      --text-muted:     #787065;
-      --wa:             #25D366;
+      --text-muted:     #8C8478;
+      --status-free:    #10B981;
+      --status-busy:    #EF4444;
+      --status-sel:     #C5A059;
       --font-serif:     'Cormorant Garamond', Georgia, serif;
       --font-sans:      'Space Grotesk', -apple-system, sans-serif;
       --font-mono:      'Space Mono', monospace;
@@ -37,7 +40,6 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      border-radius: 0 !important;
     }
 
     html, body {
@@ -61,9 +63,9 @@
       z-index: 100;
     }
     .top-nav-inner {
-      max-width: 1400px;
+      max-width: 1440px;
       margin: 0 auto;
-      padding: 0 3rem;
+      padding: 0 2rem;
       height: 74px;
       display: flex;
       align-items: center;
@@ -71,110 +73,157 @@
     }
     .back-link {
       font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--text-muted);
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.5rem;
     }
     .back-link:hover { color: var(--gold); }
 
     .brand-center {
       display: flex;
       align-items: center;
-      gap: 0.9rem;
+      gap: 0.8rem;
     }
-    .brand-emblem {
-      width: 24px;
-      height: 24px;
-      object-fit: contain;
+    .brand-center img {
+      height: 34px;
+      width: auto;
     }
-    .brand-title {
-      font-family: var(--font-serif);
-      font-size: 1.5rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-    }
-    .brand-title span { color: var(--gold); }
 
-    .phone-direct {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.16em;
-      color: var(--gold);
-      border-bottom: 1px solid var(--gold);
-      padding-bottom: 2px;
-    }
-    .phone-direct:hover { color: var(--gold-light); }
-    /* Language Switcher */
-    .lang-switcher {
-      display: inline-flex;
+    .nav-actions {
+      display: flex;
       align-items: center;
-      gap: 0.2rem;
-      border: 1px solid rgba(197, 160, 89, 0.28);
-      padding: 0.24rem 0.55rem;
-      background: rgba(12, 10, 9, 0.88);
-      backdrop-filter: blur(8px);
+      gap: 1.2rem;
     }
-    .lang-btn {
-      background: transparent;
-      border: none;
+
+    /* Blueprint view button */
+    .btn-blueprint {
       font-family: var(--font-mono);
-      font-size: 0.64rem;
-      letter-spacing: 0.1em;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.45rem 0.85rem;
+      border: 1px solid var(--border-light);
+      background: rgba(255,255,255,0.03);
       color: var(--text-muted);
       cursor: pointer;
-      padding: 0.15rem 0.25rem;
-      transition: all 0.2s ease;
-      line-height: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s;
     }
-    .lang-btn:hover { color: var(--gold-light); }
-    .lang-btn.is-active {
+    .btn-blueprint:hover {
+      border-color: var(--gold);
       color: var(--gold);
+    }
+
+    /* Manager Button */
+    .btn-manager {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.5rem 0.9rem;
+      border: 1px solid var(--border-light);
+      background: transparent;
+      color: var(--gold);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+    .btn-manager:hover {
+      background: rgba(197, 160, 89, 0.12);
+      border-color: var(--gold);
+    }
+    .btn-manager.active {
+      background: var(--gold);
+      color: #060504;
       font-weight: 700;
-      text-shadow: 0 0 10px rgba(197, 160, 89, 0.6);
-    }
-    .lang-divider {
-      color: rgba(255, 255, 255, 0.15);
-      font-size: 0.55rem;
-      user-select: none;
     }
 
+    /* Lang Switcher */
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+    }
+    .lang-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.2rem 0.4rem;
+      font-weight: 600;
+      transition: color 0.15s;
+    }
+    .lang-btn.is-active, .lang-btn:hover { color: var(--gold); }
+    .lang-divider { color: var(--border-light); }
 
-    @media (max-width: 768px) {
-      .top-nav-inner { padding: 0 1.5rem; }
-      .phone-direct { display: none; }
+    /* Admin Banner */
+    .admin-banner {
+      background: linear-gradient(90deg, #1C1608 0%, #2A210C 100%);
+      border-bottom: 1px solid var(--gold);
+      color: var(--gold-light);
+      padding: 0.65rem 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 74px;
+      z-index: 99;
+    }
+    .admin-banner.visible { display: flex; }
+    .admin-banner button {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 0.25rem 0.6rem;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+    }
+    .admin-banner button:hover {
+      background: var(--gold);
+      color: #060504;
     }
 
     /* Main Container */
     .main-wrap {
-      max-width: 820px;
+      max-width: 1440px;
       margin: 0 auto;
-      padding: 5rem 2rem 7rem;
+      padding: 2.5rem 1.5rem 6rem;
     }
 
     .booking-header {
       text-align: center;
-      margin-bottom: 4rem;
+      margin-bottom: 2.2rem;
     }
     .mono-tag {
       font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.28em;
+      font-size: 0.68rem;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.5rem;
     }
     .booking-title {
       font-family: var(--font-serif);
-      font-size: clamp(2.8rem, 6vw, 4.4rem);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
       font-weight: 300;
-      line-height: 1;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      margin-bottom: 1.2rem;
+      margin-bottom: 0.6rem;
+      line-height: 1.1;
     }
     .booking-title em {
       font-style: italic;
@@ -183,443 +232,1881 @@
     .booking-subtitle {
       font-size: 0.92rem;
       color: var(--text-muted);
-      line-height: 1.7;
-      max-width: 520px;
+      max-width: 680px;
       margin: 0 auto;
+      line-height: 1.6;
     }
 
-    /* Form Card */
-    .booking-card {
+    /* Controls Bar */
+    .controls-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      padding: 3.5rem;
-    }
-    @media (max-width: 768px) {
-      .booking-card { padding: 2rem 1.5rem; }
-      .main-wrap { padding: 3rem 1.25rem 5rem; }
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.8rem;
+      padding: 1.2rem 1.8rem;
       margin-bottom: 1.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.2rem;
     }
-    @media (max-width: 640px) {
-      .form-grid { grid-template-columns: 1fr; gap: 1.4rem; }
+    .filters-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.2rem;
     }
-
-    .form-group {
+    .control-item {
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.3rem;
     }
-    .form-label {
+    .control-label {
       font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.22em;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--gold);
     }
-    .form-control {
+    .control-input {
       background: var(--bg);
       border: 1px solid var(--border-light);
       color: var(--text);
-      padding: 1rem 1.2rem;
+      padding: 0.55rem 0.8rem;
       font-family: var(--font-sans);
       font-size: 0.88rem;
       outline: none;
-      transition: border-color 0.2s ease;
-      width: 100%;
+      transition: border-color 0.2s;
     }
-    .form-control:focus {
-      border-color: var(--gold);
-    }
+    .control-input:focus { border-color: var(--gold); }
 
-    /* Quick Time Buttons */
-    .time-chips {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.4rem;
+    /* Map Legend */
+    .map-legend {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
     }
-    .time-chip {
-      background: var(--bg);
-      border: 1px solid var(--border-light);
-      padding: 0.65rem 0.5rem;
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      display: inline-block;
+    }
+    .dot-free { background: var(--status-free); box-shadow: 0 0 8px rgba(16,185,129,0.4); }
+    .dot-busy { background: var(--status-busy); box-shadow: 0 0 8px rgba(239,68,68,0.4); }
+    .dot-selected { background: var(--gold); box-shadow: 0 0 8px rgba(197,160,89,0.6); }
+
+    /* Zone Tabs */
+    .zone-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+      overflow-x: auto;
+    }
+    .zone-tab {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.75rem 1.4rem;
       font-family: var(--font-mono);
       font-size: 0.72rem;
-      color: var(--text-muted);
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.15s ease;
-    }
-    .time-chip:hover {
-      border-color: var(--gold);
-      color: var(--text);
-    }
-    .time-chip.active {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: #060504;
-      font-weight: 700;
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 1.2rem;
-      margin-top: 1rem;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      background: var(--gold);
-      border: 1px solid var(--gold);
-      color: #060504;
       cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 0.8rem;
+      gap: 0.6rem;
+      white-space: nowrap;
       transition: all 0.2s ease;
     }
-    .submit-btn:hover {
-      background: var(--gold-light);
-      border-color: var(--gold-light);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(197, 160, 89, 0.25);
+    .zone-tab:hover {
+      border-color: var(--gold);
+      color: var(--text);
+    }
+    .zone-tab.active {
+      background: var(--bg-card);
+      border-color: var(--gold);
+      color: var(--gold);
+      font-weight: 700;
     }
 
-    /* Direct Contact Footnote */
-    .direct-box {
-      margin-top: 3rem;
-      text-align: center;
-      padding: 2rem;
+    /* Layout Content Grid */
+    .booking-grid {
+      display: grid;
+      grid-template-columns: 1fr 390px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 1080px) {
+      .booking-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Floor Plan Architectural Canvas */
+    .floor-canvas-card {
+      background: #080706;
       border: 1px solid var(--border);
-      background: var(--bg);
+      padding: 1.8rem;
+      position: relative;
+      overflow-x: auto;
+      min-height: 580px;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(197, 160, 89, 0.03) 0%, transparent 40%),
+        linear-gradient(to right, rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 100% 100%, 30px 30px, 30px 30px;
     }
-    .direct-num {
-      font-family: var(--font-serif);
-      font-size: 2.2rem;
-      font-weight: 400;
-      color: var(--gold);
-      line-height: 1;
-      margin: 0.5rem 0;
+
+    .plan-top-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px dashed var(--border-light);
+      padding-bottom: 0.8rem;
     }
-    .direct-sub {
+    .plan-title-badge {
       font-family: var(--font-mono);
-      font-size: 0.65rem;
+      font-size: 0.72rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* Architectural Hall Map Frame */
+    .hall-map-frame {
+      border: 2px solid var(--border-light);
+      position: relative;
+      background: rgba(12, 10, 9, 0.9);
+      min-width: 720px;
+      padding: 1.5rem;
+    }
+
+    /* Table Node Element */
+    .table-cell {
+      border: 1px solid var(--border-light);
+      background: #0F0D0B;
+      padding: 0.6rem 0.4rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .table-cell:hover {
+      transform: scale(1.04);
+      z-index: 10;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.8);
+    }
+
+    .table-cell.is-free {
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+    .table-cell.is-free:hover {
+      border-color: var(--status-free);
+      background: rgba(16, 185, 129, 0.08);
+    }
+    .table-cell.is-free .t-status { color: var(--status-free); }
+
+    .table-cell.is-busy {
+      border-color: rgba(239, 68, 68, 0.35);
+      background: rgba(239, 68, 68, 0.05);
+      cursor: not-allowed;
+    }
+    .table-cell.is-busy .t-status { color: var(--status-busy); }
+
+    .table-cell.is-selected {
+      border-color: var(--gold) !important;
+      background: rgba(197, 160, 89, 0.18) !important;
+      box-shadow: 0 0 20px rgba(197, 160, 89, 0.5) !important;
+    }
+    .table-cell.is-selected .t-num { color: var(--gold-light); }
+
+    .t-num {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .t-cap {
+      font-size: 0.65rem;
       color: var(--text-muted);
     }
+    .t-status {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-top: 0.2rem;
+    }
+
+    /* Stage block on the right */
+    .stage-column {
+      width: 130px;
+      background: linear-gradient(270deg, #1F190D 0%, #120F0A 100%);
+      border: 1px solid var(--gold);
+      border-left: 2px dashed var(--gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(197, 160, 89, 0.15);
+    }
+    .stage-column-title {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      color: var(--gold);
+      letter-spacing: 0.18em;
+      line-height: 1.2;
+    }
+    .stage-column-sub {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+      letter-spacing: 0.16em;
+    }
+
+    /* Dance Floor between tables and stage */
+    .dance-floor-column {
+      width: 170px;
+      min-width: 150px;
+      background: 
+        radial-gradient(ellipse at center, rgba(197, 160, 89, 0.14) 0%, rgba(20, 16, 10, 0.95) 75%),
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 2px, transparent 2px, transparent 14px);
+      border: 1px dashed rgba(197, 160, 89, 0.55);
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.2rem 0.6rem;
+      text-align: center;
+      position: relative;
+      box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.8), 0 0 15px rgba(197, 160, 89, 0.08);
+      user-select: none;
+    }
+    .dance-floor-badge {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+      text-transform: uppercase;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-bottom: 0.35rem;
+    }
+    .dance-floor-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      letter-spacing: 0.16em;
+      color: #FFFFFF;
+      text-shadow: 0 0 12px rgba(197, 160, 89, 0.5);
+      font-weight: 400;
+      line-height: 1.2;
+    }
+    .dance-floor-sub {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 0.45rem;
+      line-height: 1.45;
+    }
+    .dance-floor-sparkle {
+      font-size: 0.75rem;
+      color: var(--gold-light);
+      margin-top: 0.6rem;
+      letter-spacing: 0.3em;
+      opacity: 0.8;
+      animation: sparkle-anim 2.5s infinite ease-in-out;
+    }
+    @keyframes sparkle-anim {
+      0%, 100% { opacity: 0.4; transform: scale(0.95); }
+      50% { opacity: 1; transform: scale(1.08); }
+    }
+
+    /* Menu Quick Banner */
+    .menu-quick-banner {
+      background: linear-gradient(90deg, #18140B 0%, #261E0E 100%);
+      border: 1px solid var(--gold);
+      border-radius: 4px;
+      padding: 0.9rem 1.4rem;
+      margin-bottom: 1.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .menu-quick-banner:hover {
+      border-color: var(--gold-light);
+      box-shadow: 0 4px 20px rgba(197, 160, 89, 0.25);
+      transform: translateY(-1px);
+    }
+    .mqb-left {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .mqb-badge {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      background: var(--gold);
+      color: #060504;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+    }
+    .mqb-text {
+      font-size: 0.85rem;
+      color: var(--text);
+    }
+    .mqb-btn {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: var(--gold-light);
+      font-weight: 700;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+
+    /* Menu Modal Fullscreen & Carousel */
+    .modal-box.menu-wide {
+      max-width: 1060px;
+      width: 95vw;
+      padding: 1.5rem;
+      max-height: 94vh;
+      display: flex;
+      flex-direction: column;
+      background: #0A0806;
+      border: 1px solid var(--gold);
+    }
+    .menu-modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.8rem;
+      margin-bottom: 0.8rem;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .menu-modal-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin: 0;
+    }
+    .menu-modal-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .menu-dl-btn {
+      background: rgba(197, 160, 89, 0.12);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      padding: 0.35rem 0.8rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+    .menu-dl-btn:hover {
+      background: var(--gold);
+      color: #060504;
+    }
+
+    /* Category pills horizontal row */
+    .menu-cats-nav {
+      display: flex;
+      gap: 0.4rem;
+      overflow-x: auto;
+      padding-bottom: 0.6rem;
+      margin-bottom: 0.8rem;
+      border-bottom: 1px dashed var(--border-light);
+      scrollbar-width: thin;
+    }
+    .menu-cat-pill {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      background: var(--bg);
+      border: 1px solid var(--border-light);
+      color: var(--text-muted);
+      padding: 0.3rem 0.65rem;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.15s;
+    }
+    .menu-cat-pill:hover, .menu-cat-pill.active {
+      border-color: var(--gold);
+      color: var(--gold-light);
+      background: rgba(197, 160, 89, 0.12);
+    }
+
+    /* Carousel Main Stage */
+    .menu-carousel-stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: #000;
+      border: 1px solid var(--border-light);
+      min-height: 440px;
+      max-height: 58vh;
+      overflow: hidden;
+    }
+    .menu-page-img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      display: block;
+      transition: opacity 0.2s ease;
+    }
+    .menu-nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(10, 8, 6, 0.85);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.2s;
+      z-index: 5;
+    }
+    .menu-nav-arrow:hover {
+      background: var(--gold);
+      color: #060504;
+      transform: translateY(-50%) scale(1.1);
+    }
+    .menu-nav-arrow.prev { left: 1rem; }
+    .menu-nav-arrow.next { right: 1rem; }
+
+    /* Page Info & Thumbnails */
+    .menu-footer-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 0.2rem 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+    .menu-page-counter {
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+    }
+    .menu-thumbs-strip {
+      display: flex;
+      gap: 0.4rem;
+      overflow-x: auto;
+      padding: 0.4rem 0 0.2rem;
+      max-height: 80px;
+      scrollbar-width: thin;
+    }
+    .menu-thumb-item {
+      flex: 0 0 50px;
+      height: 65px;
+      border: 1px solid var(--border-light);
+      cursor: pointer;
+      position: relative;
+      opacity: 0.6;
+      transition: all 0.2s;
+      background: #000;
+    }
+    .menu-thumb-item:hover, .menu-thumb-item.active {
+      opacity: 1;
+      border-color: var(--gold);
+      box-shadow: 0 0 10px rgba(197, 160, 89, 0.5);
+      transform: scale(1.06);
+    }
+    .menu-thumb-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .menu-thumb-num {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      font-size: 0.55rem;
+      font-family: var(--font-mono);
+      padding: 0.1rem 0.25rem;
+      border-radius: 2px;
+    }
+
+    /* Void / Atrium on Tier 2 */
+    .atrium-void {
+      background: rgba(0,0,0,0.5);
+      border: 1px dashed var(--gold-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    /* Blueprint Image Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--gold);
+      max-width: 520px;
+      width: 100%;
+      padding: 2.2rem;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+    }
+    .modal-box.wide {
+      max-width: 960px;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+    .modal-close:hover { color: var(--gold); }
+
+    /* Right Form Sidebar */
+    .sidebar-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 2.2rem 2rem;
+      position: sticky;
+      top: 100px;
+    }
+    .sidebar-title {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      margin-bottom: 0.3rem;
+      font-weight: 400;
+    }
+    .sidebar-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .chosen-table-badge {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-light);
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .chosen-info h4 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: var(--gold);
+    }
+    .chosen-info p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .form-group { margin-bottom: 1.1rem; }
+    .form-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+    .form-input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border-light);
+      color: var(--text);
+      padding: 0.75rem 0.9rem;
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { border-color: var(--gold); }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--gold);
+      border: 1px solid var(--gold);
+      color: #060504;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 1rem;
+      cursor: pointer;
+      margin-top: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+    .btn-submit:hover:not(:disabled) {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(197, 160, 89, 0.3);
+    }
+    .btn-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .mgr-action-btn {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 0.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-free-table { background: #EF4444; color: #fff; }
+    .btn-book-table { background: var(--gold); color: #060504; }
+
+    .toast-msg {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--gold);
+      padding: 1rem 1.4rem;
+      font-size: 0.85rem;
+      color: var(--gold-light);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      z-index: 1100;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    .toast-msg.show { transform: translateY(0); opacity: 1; }
   </style>
 </head>
 <body>
 
-  <!-- Top Nav -->
+  <!-- Top Navigation -->
   <nav class="top-nav">
     <div class="top-nav-inner">
-      <a href="index.html" class="back-link" data-i18n="bk_back">
+      <a href="index.html" class="back-link">
         ← НА ГЛАВНУЮ
       </a>
 
       <a href="index.html" class="brand-center" title="ANZUR RESTAURANT">
-        <img src="anzur_logo_gold.svg" alt="ANZUR RESTAURANT" style="height:34px; width:auto; display:block;" />
+        <img src="anzur_logo_gold.svg" alt="ANZUR RESTAURANT" />
       </a>
 
-      <div style="display:flex; align-items:center; gap:1.2rem;">
-        <div class="lang-switcher" role="navigation" aria-label="Language selection">
-          <button type="button" class="lang-btn is-active" data-lang="ru" onclick="switchLanguage('ru')">RU</button>
+      <div class="nav-actions">
+        <!-- Button to view official 22-page menu -->
+        <button type="button" class="btn-blueprint" onclick="openMenuModal()" style="border-color:var(--gold); color:var(--gold-light);">
+          <span>📖</span>
+          <span>Меню (22 стр.)</span>
+        </button>
+
+        <!-- Button to view original blueprints -->
+        <button type="button" class="btn-blueprint" onclick="openBlueprintModal()">
+          <span>📐</span>
+          <span>План БТИ</span>
+        </button>
+
+        <!-- Language Switcher -->
+        <div class="lang-switcher">
+          <button type="button" class="lang-btn is-active" data-lang="ru" onclick="setLanguage('ru')">RU</button>
           <span class="lang-divider">/</span>
-          <button type="button" class="lang-btn" data-lang="tj" onclick="switchLanguage('tj')">TJ</button>
+          <button type="button" class="lang-btn" data-lang="tj" onclick="setLanguage('tj')">TJ</button>
           <span class="lang-divider">/</span>
-          <button type="button" class="lang-btn" data-lang="en" onclick="switchLanguage('en')">EN</button>
-          <span class="lang-divider">/</span>
-          <button type="button" class="lang-btn" data-lang="zh" onclick="switchLanguage('zh')">中文</button>
+          <button type="button" class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
         </div>
 
-        <a href="tel:992917917917" class="phone-direct">
-          917 917 917
-        </a>
+        <!-- Manager Login Button -->
+        <button type="button" class="btn-manager" id="managerBtn" onclick="openManagerModal()">
+          <span>🔐</span>
+          <span id="mgrBtnText">Вход для менеджера</span>
+        </button>
       </div>
     </div>
   </nav>
 
+  <!-- Admin Mode Notification Banner -->
+  <div class="admin-banner" id="adminBanner">
+    <div>
+      👑 <b>РЕЖИМ АДМИНИСТРАТОРА:</b> Вы можете кликнуть на любой стол на схеме, чтобы поставить бронь вручную или снять её.
+    </div>
+    <button type="button" onclick="logoutManager()">Выйти из панели</button>
+  </div>
+
   <!-- Main Booking Interface -->
   <main class="main-wrap">
     <div class="booking-header">
-      <div class="mono-tag" data-i18n="bk_tag">ОНЛАЙН-РЕЗЕРВАЦИЯ</div>
-      <h1 class="booking-title" data-i18n-html="bk_title">Забронировать <em>стол</em></h1>
-      <p class="booking-subtitle" data-i18n="bk_subtitle">
-        Заполните параметры вашего визита. Заявка моментально сформируется и откроется в WhatsApp администратора для подтверждения.
+      <div class="mono-tag" id="i18n-tag">ОФИЦИАЛЬНАЯ СХЕМА ЗАЛОВ</div>
+      <h1 class="booking-title" id="i18n-title">Интерактивный <em>план столов</em></h1>
+      <p class="booking-subtitle" id="i18n-sub">
+        Точная архитектурная схема 1-го и 2-го яруса ресторана «Анзур». Выберите стол у танцпола, у сцены или на балконе.
       </p>
     </div>
 
-    <div class="booking-card">
-      <form id="reservationForm" onsubmit="sendBookingToWhatsApp(event)">
-        <!-- Row 1: Date & Time -->
-        <div class="form-grid">
-          <div class="form-group">
-            <label class="form-label" data-i18n="bk_date_lbl">ДАТА ВИЗИТА</label>
-            <input type="date" class="form-control" id="resDate" required />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" data-i18n="bk_time_lbl">ВРЕМЯ</label>
-            <input type="time" class="form-control" id="resTime" value="19:00" required />
-          </div>
-        </div>
-
-        <!-- Row 2: Guests & Hall -->
-        <div class="form-grid">
-          <div class="form-group">
-            <label class="form-label" data-i18n="bk_guests_lbl">КОЛИЧЕСТВО ПЕРСОН</label>
-            <select class="form-control" id="resGuests">
-              <option value="1–2 персоны" data-i18n="guests_1_2">1 – 2 персоны</option>
-              <option value="3–4 персоны" selected data-i18n="guests_3_4">3 – 4 персоны</option>
-              <option value="5–8 персон" data-i18n="guests_5_8">5 – 8 персон</option>
-              <option value="VIP-кабина (от 8 персон)" data-i18n="guests_vip">VIP-кабина (от 8 персон)</option>
-              <option value="Банкет (более 15 гостей)" data-i18n="guests_banquet">Банкет (более 15 гостей)</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" data-i18n="bk_zone_lbl">ЖЕЛАЕМАЯ ЗОНА</label>
-            <select class="form-control" id="resZone">
-              <option value="Главный ресторанный зал" selected data-i18n="zone_main">Главный зал (живая музыка)</option>
-              <option value="VIP-кабины с караоке" data-i18n="zone_vip">VIP-кабины с караоке</option>
-              <option value="Летняя терраса" data-i18n="zone_terrace">Летняя терраса</option>
-              <option value="Тихая веранда" data-i18n="zone_veranda">Тихая веранда (без громкой музыки)</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Row 3: Name & Phone -->
-        <div class="form-grid">
-          <div class="form-group">
-            <label class="form-label" data-i18n="bk_name_lbl">ВАШЕ ИМЯ</label>
-            <input type="text" class="form-control" id="resName" placeholder="Как к вам обращаться?" required />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" data-i18n="bk_phone_lbl">ТЕЛЕФОН / WHATSAPP</label>
-            <input type="tel" class="form-control" id="resPhone" placeholder="+992 ..." required />
-          </div>
-        </div>
-
-        <!-- Row 4: Notes -->
-        <div class="form-group" style="margin-bottom:1.8rem;">
-          <label class="form-label" data-i18n="bk_notes_lbl">ОСОБЫЕ ПОЖЕЛАНИЯ / ПОВОД</label>
-          <input type="text" class="form-control" id="resNotes" placeholder="День рождения, деловой ужин, романтический вечер..." />
-        </div>
-
-        <!-- Action Button -->
-        <button type="submit" class="submit-btn">
-          <span data-i18n="bk_submit">ОТПРАВИТЬ БРОНЬ В WHATSAPP</span>
-          <span>→</span>
-        </button>
-      </form>
+    <!-- Quick Menu Banner -->
+    <div class="menu-quick-banner" onclick="openMenuModal()">
+      <div class="mqb-left">
+        <span class="mqb-badge">МЕНЮ 2026</span>
+        <span class="mqb-text"><b>Официальное меню «Анзур» (22 страницы):</b> Национальная, европейская, хоспер, шашлыки, плов, суши, десерты</span>
+      </div>
+      <div class="mqb-right">
+        <span class="mqb-btn">Смотреть меню (22 стр.) ↗</span>
+      </div>
     </div>
 
-    <!-- Direct Hotline -->
-    <div class="direct-box">
-      <div class="direct-sub" data-i18n="bk_hotline">ПРЯМАЯ ЛИНИЯ АДМИНИСТРАТОРА</div>
-      <a href="tel:992917917917" class="direct-num">917 917 917</a>
-      <div class="direct-sub" data-i18n="bk_hours">ДУШАНБЕ · ЕЖЕДНЕВНО С 10:00 ДО 00:00</div>
+    <!-- Controls Bar -->
+    <div class="controls-card">
+      <div class="filters-group">
+        <div class="control-item">
+          <label class="control-label" id="i18n-date-lbl">ДАТА ВИЗИТА</label>
+          <input type="date" class="control-input" id="filterDate" onchange="onDateChanged()" />
+        </div>
+
+        <div class="control-item">
+          <label class="control-label" id="i18n-time-lbl">ВРЕМЯ ПРИБЫТИЯ</label>
+          <select class="control-input" id="filterTime">
+            <option value="18:00">18:00</option>
+            <option value="18:30">18:30</option>
+            <option value="19:00" selected>19:00 (Начало вечера)</option>
+            <option value="19:30">19:30 (Живая музыка)</option>
+            <option value="20:00">20:00</option>
+            <option value="20:30">20:30</option>
+            <option value="21:00">21:00</option>
+            <option value="21:30">21:30</option>
+            <option value="22:00">22:00</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Map Status Legend -->
+      <div class="map-legend">
+        <div class="legend-item">
+          <span class="legend-dot dot-free"></span>
+          <span id="i18n-free">Свободен</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot dot-busy"></span>
+          <span id="i18n-busy">Занят</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot dot-selected"></span>
+          <span id="i18n-sel">Ваш выбор</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone Tabs: Tier 1, Tier 2, Terrace, VIP -->
+    <div class="zone-tabs">
+      <button type="button" class="zone-tab active" data-zone="tier1" onclick="switchZone('tier1')">
+        🏛️ <span id="i18n-zone-tier1">1-й ярус (Партер & Сцена) · Столы 1–20</span>
+      </button>
+      <button type="button" class="zone-tab" data-zone="tier2" onclick="switchZone('tier2')">
+        🎭 <span id="i18n-zone-tier2">2-й ярус (Балкон & Банкетный зал) · Столы 21–36</span>
+      </button>
+      <button type="button" class="zone-tab" data-zone="terrace" onclick="switchZone('terrace')">
+        🌿 <span id="i18n-zone-terrace">Летняя панорамная терраса</span>
+      </button>
+      <button type="button" class="zone-tab" data-zone="vip" onclick="switchZone('vip')">
+        👑 <span id="i18n-zone-vip">VIP-кабины с караоке</span>
+      </button>
+    </div>
+
+    <!-- Layout Grid: Floor Plan + Sidebar Form -->
+    <div class="booking-grid">
+      
+      <!-- Architectural Floor Plan Canvas -->
+      <div class="floor-canvas-card">
+        
+        <!-- ============================================== -->
+        <!-- 1-Й ЯРУС (ПАРТЕР & СЦЕНА)                      -->
+        <!-- ============================================== -->
+        <div id="zone-tier1-content">
+          <div class="plan-top-info">
+            <span class="plan-title-badge">ПЛАН 1-ГО ЯРУСА (ОСНОВНОЙ КОНЦЕРТНЫЙ ЗАЛ)</span>
+            <button type="button" class="btn-blueprint" onclick="showBlueprintPhoto(1)">🔍 Оригинальный чертеж 1-го яруса</button>
+          </div>
+
+          <div class="hall-map-frame" style="display:flex; gap:1.2rem; min-height:480px;">
+            <!-- Left & Center Tables Section (Shifted to Left) -->
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:space-between;">
+              
+              <!-- Top Row (North wall): Table 2, Table 3, Tables 4, 5, 6, Angle 7 -->
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.2rem;">
+                <div style="display:flex; gap:0.8rem;">
+                  <div id="t-cell-2" style="width:75px; height:75px;"></div>
+                  <div id="t-cell-3" style="width:70px; height:70px;"></div>
+                </div>
+                <div style="display:flex; gap:0.6rem; margin-right:2rem;">
+                  <div id="t-cell-4" style="width:58px; height:62px;"></div>
+                  <div id="t-cell-5" style="width:58px; height:62px;"></div>
+                  <div id="t-cell-6" style="width:65px; height:62px;"></div>
+                  <div id="t-cell-7" style="width:60px; height:62px; transform:rotate(-15deg);"></div>
+                </div>
+              </div>
+
+              <!-- Center Zone: Central Booths (11-16) and Front Tables (17-20) Shifted Left -->
+              <div style="display:flex; justify-content:flex-start; align-items:center; gap:2rem; margin:1rem 0; margin-left:1.5rem;">
+                
+                <!-- Central Booths: 2 rows of 3 -->
+                <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border); padding:0.6rem; border-radius:4px;">
+                  <div style="font-family:var(--font-mono); font-size:0.55rem; color:var(--text-muted); text-align:center; margin-bottom:0.4rem; letter-spacing:0.14em;">ДИВАННЫЕ КУПЕ (ЦЕНТР)</div>
+                  <div style="display:grid; grid-template-columns:repeat(3, 64px); gap:0.5rem; margin-bottom:0.5rem;">
+                    <div id="t-cell-12" style="height:55px;"></div>
+                    <div id="t-cell-13" style="height:55px;"></div>
+                    <div id="t-cell-15" style="height:55px;"></div>
+                  </div>
+                  <div style="display:grid; grid-template-columns:repeat(3, 64px); gap:0.5rem;">
+                    <div id="t-cell-11" style="height:55px;"></div>
+                    <div id="t-cell-14" style="height:55px;"></div>
+                    <div id="t-cell-16" style="height:55px;"></div>
+                  </div>
+                </div>
+
+                <!-- Stage Front Tables: 17, 18 (row 2), 19, 20 (row 1 right at dance floor) -->
+                <div style="background:rgba(197, 160, 89, 0.05); border:1px solid rgba(197, 160, 89, 0.4); padding:0.6rem; border-radius:4px;">
+                  <div style="font-family:var(--font-mono); font-size:0.55rem; color:var(--gold); text-align:center; margin-bottom:0.4rem; letter-spacing:0.14em;">ПРЕМИУМ У ТАНЦПОЛА</div>
+                  <div style="display:grid; grid-template-columns:repeat(2, 64px); gap:0.5rem; margin-bottom:0.5rem;">
+                    <div id="t-cell-17" style="height:55px;"></div>
+                    <div id="t-cell-19" style="height:55px;"></div>
+                  </div>
+                  <div style="display:grid; grid-template-columns:repeat(2, 64px); gap:0.5rem;">
+                    <div id="t-cell-18" style="height:55px;"></div>
+                    <div id="t-cell-20" style="height:55px;"></div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Bottom Row (South wall): Table 1, Entrance/Stairs, Tables 10, 9, Angle 8 -->
+              <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:1.2rem;">
+                <div style="display:flex; gap:1rem; align-items:center;">
+                  <div id="t-cell-1" style="width:75px; height:75px;"></div>
+                  <div style="font-family:var(--font-mono); font-size:0.6rem; color:var(--text-muted); border-left:1px dashed var(--border-light); padding-left:0.6rem;">
+                    ВХОД /<br>ГАРДЕРОБ
+                  </div>
+                </div>
+                <div style="display:flex; gap:0.6rem; margin-right:2rem;">
+                  <div id="t-cell-10" style="width:58px; height:62px;"></div>
+                  <div id="t-cell-9" style="width:65px; height:62px;"></div>
+                  <div id="t-cell-8" style="width:60px; height:62px; transform:rotate(15deg);"></div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Dance Floor in Front of the Stage -->
+            <div class="dance-floor-column">
+              <div class="dance-floor-badge">
+                <span>🪩</span> ТАНЦПОЛ
+              </div>
+              <div class="dance-floor-title">DANCE FLOOR</div>
+              <div class="dance-floor-sub">ТАНЦЕВАЛЬНАЯ ЗОНА<br>ПЕРЕД СЦЕНОЙ</div>
+              <div class="dance-floor-sparkle">✦ ✧ ✦</div>
+            </div>
+
+            <!-- Stage Column on Right -->
+            <div class="stage-column">
+              <div class="stage-column-title">🎭 СЦЕНА</div>
+              <div class="stage-column-sub">ЖИВОЙ ЗВУК<br>АРТИСТЫ<br>19:30 — 23:30</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 2-Й ЯРУС (БАЛКОН & БАНКЕТНЫЙ ЗАЛ)              -->
+        <!-- ============================================== -->
+        <div id="zone-tier2-content" style="display:none;">
+          <div class="plan-top-info">
+            <span class="plan-title-badge">ПЛАН 2-ГО ЯРУСА (БАЛКОН, ВТОРОЙ СВЕТ & БАНКЕТНАЯ ЗОНА)</span>
+            <button type="button" class="btn-blueprint" onclick="showBlueprintPhoto(2)">🔍 Оригинальный чертеж 2-го яруса</button>
+          </div>
+
+          <div class="hall-map-frame" style="display:flex; gap:1.2rem; min-height:480px;">
+            
+            <!-- Left Section: Banquet Grand Table 29, Tables 30, 28, 25, 27, 26 -->
+            <div style="width:230px; border-right:1px dashed var(--border-light); padding-right:1rem; display:flex; flex-direction:column; justify-content:space-between;">
+              <div style="font-family:var(--font-mono); font-size:0.58rem; color:var(--gold); text-align:center; letter-spacing:0.16em;">БАНКЕТНЫЙ СЕКТОР</div>
+
+              <!-- Top Left: Large Banquet Table 29 & Table 30 -->
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem;">
+                <div id="t-cell-29" style="width:120px; height:85px;"></div>
+                <div id="t-cell-30" style="width:65px; height:65px;"></div>
+              </div>
+
+              <!-- Middle: Table 28 -->
+              <div style="display:flex; justify-content:flex-end;">
+                <div id="t-cell-28" style="width:65px; height:65px;"></div>
+              </div>
+
+              <!-- Bottom Left: Table 25, 27, 26 -->
+              <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:0.6rem;">
+                <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                  <div id="t-cell-27" style="width:75px; height:50px;"></div>
+                  <div id="t-cell-26" style="width:75px; height:45px;"></div>
+                </div>
+                <div id="t-cell-25" style="width:65px; height:65px;"></div>
+              </div>
+            </div>
+
+            <!-- Center & Right Balcony Section -->
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:space-between;">
+              
+              <!-- North Balcony: 31, 32 (wall) + 33, 34, 35 (rail) + 36 (angle) -->
+              <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div style="display:flex; gap:0.5rem;">
+                  <div id="t-cell-31" style="width:58px; height:55px;"></div>
+                  <div id="t-cell-32" style="width:58px; height:55px;"></div>
+                </div>
+                <div style="display:flex; gap:0.5rem; align-items:flex-start;">
+                  <div id="t-cell-33" style="width:58px; height:55px;"></div>
+                  <div id="t-cell-34" style="width:58px; height:55px;"></div>
+                  <div id="t-cell-35" style="width:58px; height:55px;"></div>
+                  <div id="t-cell-36" style="width:60px; height:55px; transform:rotate(-15deg);"></div>
+                </div>
+              </div>
+
+              <!-- Central Void (Atrium overlooking 1st tier and stage) -->
+              <div class="atrium-void">
+                <div>ВТОРОЙ СВЕТ · АТРИУМ НАД ЗАЛОМ</div>
+                <div style="font-size:0.55rem; color:var(--text-muted); margin-top:0.3rem;">ПАНОРАМНЫЙ ОБЗОР СЦЕНЫ И ПАРТЕРА</div>
+              </div>
+
+              <!-- South Balcony: 24, 23, 22 (rail) + 21 (angle) -->
+              <div style="display:flex; justify-content:flex-end; align-items:flex-end; gap:0.5rem;">
+                <div id="t-cell-24" style="width:58px; height:55px;"></div>
+                <div id="t-cell-23" style="width:58px; height:55px;"></div>
+                <div id="t-cell-22" style="width:58px; height:55px;"></div>
+                <div id="t-cell-21" style="width:60px; height:55px; transform:rotate(15deg);"></div>
+              </div>
+
+            </div>
+
+            <!-- View to Stage on Right -->
+            <div class="stage-column" style="background:rgba(0,0,0,0.6); border-color:var(--border);">
+              <div class="stage-column-title" style="font-size:1.1rem; color:var(--text-muted);">ВИД НА СЦЕНУ</div>
+              <div class="stage-column-sub">ВЕРХНИЙ УРОВЕНЬ</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- ЛЕТНЯЯ ТЕРРАСА                                 -->
+        <!-- ============================================== -->
+        <div id="zone-terrace-content" style="display:none;">
+          <div class="plan-top-info">
+            <span class="plan-title-badge">ПАНОРАМНАЯ ЛЕТНЯЯ ТЕРРАСА</span>
+          </div>
+
+          <div style="font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.18em; color:#34D399; margin-bottom:0.6rem; text-transform:uppercase;">
+            СТОЛЫ У ПАНОРАМНЫХ ПЕРИЛ:
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:1rem; margin-bottom:1.5rem;" id="terrace-rail-grid"></div>
+
+          <div style="font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.18em; color:var(--text-muted); margin-bottom:0.6rem; text-transform:uppercase;">
+            У ФОНТАНА И В САДУ:
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:1rem;" id="terrace-garden-grid"></div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- VIP-КАБИНЫ С КАРАОКЕ                           -->
+        <!-- ============================================== -->
+        <div id="zone-vip-content" style="display:none;">
+          <div class="plan-top-info">
+            <span class="plan-title-badge">ПРИВАТНЫЕ VIP-КАБИНЫ С КАРАОКЕ EVOLUTION</span>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:1.4rem;" id="vip-grid"></div>
+        </div>
+
+      </div>
+
+      <!-- Right Form Sidebar -->
+      <aside class="sidebar-card">
+        <h3 class="sidebar-title" id="i18n-form-title">Параметры брони</h3>
+        <p class="sidebar-sub" id="i18n-form-sub">Выберите стол на схеме зала, введите контактные данные и нажмите кнопку подтверждения.</p>
+
+        <!-- Selected Table Card -->
+        <div class="chosen-table-badge" id="chosenCard">
+          <div class="chosen-info">
+            <h4 id="chosenTableName">Стол не выбран</h4>
+            <p id="chosenTableSub">Нажмите на любой свободный стол на схеме</p>
+          </div>
+          <span style="font-size:1.8rem;">🍽️</span>
+        </div>
+
+        <!-- Guest Form -->
+        <form id="bookingForm" onsubmit="submitGuestBooking(event)">
+          <div class="form-group">
+            <label class="form-label">ВАШЕ ИМЯ *</label>
+            <input type="text" class="form-input" id="guestName" placeholder="Например: Рустам" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">НОМЕР ТЕЛЕФОНА (WHATSAPP) *</label>
+            <input type="tel" class="form-input" id="guestPhone" placeholder="992 917 917 917" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">КОЛИЧЕСТВО ПЕРСОН</label>
+            <select class="form-input" id="guestCount">
+              <option value="1–2 персоны">1 – 2 персоны</option>
+              <option value="3–4 персоны" selected>3 – 4 персоны</option>
+              <option value="5–6 персон">5 – 6 персон</option>
+              <option value="7–10 персон">7 – 10 персон</option>
+              <option value="Банкет (от 12 персон)">Банкет (от 12 персон)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">ПОЖЕЛАНИЯ / ПОВОД</label>
+            <input type="text" class="form-input" id="guestComment" placeholder="День рождения, ближе к сцене и т.д." />
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn" disabled>
+            <span>ПОДТВЕРДИТЬ БРОНИРОВАНИЕ</span>
+            <span>→</span>
+          </button>
+        </form>
+
+        <div style="margin-top:1.8rem; border-top:1px solid var(--border); padding-top:1.2rem; text-align:center;">
+          <div style="font-family:var(--font-mono); font-size:0.62rem; color:var(--text-muted); letter-spacing:0.18em; text-transform:uppercase;">
+            ИЛИ ЗАБРОНИРУЙТЕ ПО ТЕЛЕФОНУ:
+          </div>
+          <a href="tel:992917917917" style="font-family:var(--font-serif); font-size:1.6rem; color:var(--gold); display:block; margin-top:0.3rem;">
+            917 917 917
+          </a>
+        </div>
+      </aside>
+
     </div>
   </main>
 
-  <footer style="border-top:1px solid var(--border); padding:2.2rem 3rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.2rem; font-family:var(--font-mono); font-size:0.65rem; color:var(--text-muted); letter-spacing:0.14em; background:var(--bg);">
-    <div>
-      © 2026 Ресторан «Анзур». Все права защищены. · Разработка сайта — <strong style="color:var(--gold);">Loft Creative House</strong>
+  <!-- Modal: Full 22-Page Official Restaurant Menu -->
+  <div class="modal-overlay" id="menuViewerModal">
+    <div class="modal-box menu-wide">
+      <button type="button" class="modal-close" onclick="closeModal('menuViewerModal')">✕</button>
+      
+      <div class="menu-modal-head">
+        <div>
+          <span style="font-family:var(--font-mono); font-size:0.62rem; color:var(--gold); letter-spacing:0.2em; text-transform:uppercase;">[ АНЗУР · ОФИЦИАЛЬНОЕ МЕНЮ 2026 ]</span>
+          <h3 class="menu-modal-title">Гастрономическое меню ресторана</h3>
+        </div>
+        <div class="menu-modal-actions">
+          <a href="anzur_menu.pdf" download="anzur_restaurant_menu.pdf" class="menu-dl-btn" title="Скачать оригинальный PDF файл (20.8 МБ)">
+            <span>📥</span> <span>Скачать PDF (21 МБ)</span>
+          </a>
+          <a href="anzur_menu.pdf" target="_blank" class="menu-dl-btn" title="Открыть PDF в новой вкладке">
+            <span>↗</span> <span>В новой вкладке</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="menu-cats-nav" id="menuCatsNav">
+        <button type="button" class="menu-cat-pill active" onclick="jumpToMenuPage(1)">1. Обложка</button>
+        <button type="button" class="menu-cat-pill" onclick="jumpToMenuPage(2)">2-3. Закуски</button>
+        <button type="button" class="menu-cat-pill" onclick="jumpToMenuPage(4)">4-5. Салаты</button>
+        <button type="button" class="menu-cat-pill" onclick="jumpToMenuPage(6)">6-7. Горячие закуски</button>
+        <button type="button" class="menu-cat-pill" onclick="jumpToMenuPage(8)">8-9. Супы</button>
+        <button type="button" class="menu-cat-pill" onclick="jumpToMenuPage(10)">10. Пицца</button>
+        <button type="button" class="menu-cat-pill" onclick="jumpToMenuPage(11)">11. Блюда в печи</button>
+        <button type="button" class="menu-cat-pill" onclick="jumpToMenuPage(12)">12. Гарниры</button>
+        <button type="button" class="menu-cat-pill" onclick="jumpToMenuPage(13)">13. Хоспер & Стейки</button>
+        <button type="button" class="menu-cat-pill" onclick="jumpToMenuPage(14)">14. Рыба</button>
+        <button type="button" class="menu-cat-pill" onclick="jumpToMenuPage(15)">15. Суши & Роллы</button>
+        <button type="button" class="menu-cat-pill" onclick="jumpToMenuPage(16)">16-17. Шашлыки & Гриль</button>
+        <button type="button" class="menu-cat-pill" onclick="jumpToMenuPage(18)">18. Плов «Анзур»</button>
+        <button type="button" class="menu-cat-pill" onclick="jumpToMenuPage(19)">19. Нац. блюда</button>
+        <button type="button" class="menu-cat-pill" onclick="jumpToMenuPage(20)">20. Фрукты</button>
+        <button type="button" class="menu-cat-pill" onclick="jumpToMenuPage(21)">21. Десерты</button>
+        <button type="button" class="menu-cat-pill" onclick="jumpToMenuPage(22)">22. О ресторане</button>
+      </div>
+
+      <!-- Carousel Viewer -->
+      <div class="menu-carousel-stage">
+        <button type="button" class="menu-nav-arrow prev" onclick="prevMenuPage()" title="Предыдущая страница (Стрелка влево)">‹</button>
+        <img id="menuCurrentImg" src="menu_pages_web/menu_page_01.jpg" alt="Страница меню ресторана Анзур" class="menu-page-img" />
+        <button type="button" class="menu-nav-arrow next" onclick="nextMenuPage()" title="Следующая страница (Стрелка вправо)">›</button>
+      </div>
+
+      <!-- Footer Info -->
+      <div class="menu-footer-bar">
+        <div id="menuPageTitle">Обложка ресторана «Анзур»</div>
+        <div class="menu-page-counter" id="menuPageCounter">Страница 1 из 22</div>
+      </div>
+
+      <!-- Thumbnail Strip -->
+      <div class="menu-thumbs-strip" id="menuThumbsStrip"></div>
+
     </div>
-    <div>
-      г. Душанбе, ул. Дӯстии халқҳо, 10б · +992 917 917 917
+  </div>
+
+  <!-- Modal: Original Blueprint Photos -->
+  <div class="modal-overlay" id="blueprintModal">
+    <div class="modal-box wide">
+      <button type="button" class="modal-close" onclick="closeModal('blueprintModal')">✕</button>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:1px solid var(--border); padding-bottom:0.8rem;">
+        <h3 style="font-family:var(--font-serif); font-size:1.8rem; color:var(--gold);" id="bpModalTitle">План залов ресторана «Анзур»</h3>
+        <div style="display:flex; gap:0.5rem;">
+          <button type="button" class="btn-blueprint" onclick="showBlueprintPhoto(1)">1-й ярус</button>
+          <button type="button" class="btn-blueprint" onclick="showBlueprintPhoto(2)">2-й ярус</button>
+        </div>
+      </div>
+      <div style="max-height:75vh; overflow:auto; text-align:center; background:#000;">
+        <img id="bpImg" src="floor_plan_tier_1.jpg" alt="План яруса" style="max-width:100%; height:auto; display:inline-block; border:1px solid var(--border);" />
+      </div>
+      <div style="font-family:var(--font-mono); font-size:0.65rem; color:var(--text-muted); margin-top:0.8rem; text-align:center;">
+        Официальный архитектурный план рассадки столов ресторана «Анзур»
+      </div>
     </div>
-  </footer>
+  </div>
+
+  <!-- Manager Login Modal -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal-box">
+      <button type="button" class="modal-close" onclick="closeModal('loginModal')">✕</button>
+      <h3 style="font-family:var(--font-serif); font-size:1.8rem; color:var(--gold); margin-bottom:0.4rem;">Вход для менеджера</h3>
+      <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1.5rem;">Введите логин и пароль для управления бронями столов.</p>
+
+      <form onsubmit="handleManagerLogin(event)">
+        <div class="form-group">
+          <label class="form-label">ЛОГИН</label>
+          <input type="text" class="form-input" id="mgrLogin" value="manager" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">ПАРОЛЬ</label>
+          <input type="password" class="form-input" id="mgrPass" placeholder="••••••••" required />
+        </div>
+        <button type="submit" class="btn-submit" style="margin-top:1.2rem;">
+          ВОЙТИ В ПАНЕЛЬ УПРАВЛЕНИЯ
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Manager Table Control Modal -->
+  <div class="modal-overlay" id="tableControlModal">
+    <div class="modal-box">
+      <button type="button" class="modal-close" onclick="closeModal('tableControlModal')">✕</button>
+      <h3 style="font-family:var(--font-serif); font-size:1.8rem; color:var(--gold); margin-bottom:0.2rem;" id="mgrModalTableTitle">Стол</h3>
+      <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1.2rem;" id="mgrModalTableSub">Статус стола</p>
+      <div id="mgrTableDetails" style="background:var(--bg); border:1px solid var(--border); padding:1rem; margin-bottom:1rem; font-size:0.85rem;"></div>
+      <div id="mgrTableActions"></div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-box" style="text-align:center;">
+      <button type="button" class="modal-close" onclick="closeModal('successModal')">✕</button>
+      <div style="font-size:3rem; margin-bottom:0.5rem;">🎉</div>
+      <h3 style="font-family:var(--font-serif); font-size:2rem; color:var(--gold); margin-bottom:0.4rem;">Стол успешно забронирован!</h3>
+      <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:1.5rem;" id="successModalText"></p>
+      <a id="successWaBtn" href="#" target="_blank" class="btn-submit" style="background:#25D366; border-color:#25D366; color:#fff; text-decoration:none;">
+        ОТКРЫТЬ ПОДТВЕРЖДЕНИЕ В WHATSAPP →
+      </a>
+    </div>
+  </div>
+
+  <!-- Toast Message -->
+  <div class="toast-msg" id="toast">
+    <span id="toastText">Готово</span>
+  </div>
 
   <script>
-
-    const BK_I18N = {
-      ru: {
-        bk_back: "← НА ГЛАВНУЮ",
-        bk_tag: "ОНЛАЙН-РЕЗЕРВАЦИЯ",
-        bk_title: "Забронировать <em>стол</em>",
-        bk_subtitle: "Заполните параметры вашего визита. Заявка моментально сформируется и откроется в WhatsApp администратора для подтверждения.",
-        bk_date_lbl: "ДАТА ВИЗИТА",
-        bk_time_lbl: "ВРЕМЯ",
-        bk_guests_lbl: "КОЛИЧЕСТВО ПЕРСОН",
-        bk_zone_lbl: "ЖЕЛАЕМАЯ ЗОНА",
-        bk_name_lbl: "ВАШЕ ИМЯ",
-        bk_phone_lbl: "ТЕЛЕФОН / WHATSAPP",
-        bk_notes_lbl: "ОСОБЫЕ ПОЖЕЛАНИЯ / ПОВОД",
-        bk_submit: "ОТПРАВИТЬ БРОНЬ В WHATSAPP",
-        bk_hotline: "ПРЯМАЯ ЛИНИЯ АДМИНИСТРАТОРА",
-        bk_hours: "ДУШАНБЕ · ЕЖЕДНЕВНО С 10:00 ДО 00:00",
-        zone_main: "Главный зал (живая музыка)",
-        zone_vip: "VIP-кабины с караоке",
-        zone_terrace: "Летняя терраса",
-        zone_veranda: "Тихая веранда (без громкой музыки)",
-        guests_1_2: "1 – 2 персоны",
-        guests_3_4: "3 – 4 персоны",
-        guests_5_8: "5 – 8 персон",
-        guests_vip: "VIP-кабина (от 8 персон)",
-        guests_banquet: "Банкет (более 15 гостей)",
-        name_ph: "Как к вам обращаться?",
-        notes_ph: "День рождения, деловой ужин, романтический вечер..."
-      },
-      tj: {
-        bk_back: "← БА АСОСӢ",
-        bk_tag: "ФАРМОИШИ ОНЛАЙН",
-        bk_title: "Фармоиши <em>миз</em>",
-        bk_subtitle: "Мушаххасоти ташрифи худро ворид кунед. Дархост фавран таҳия ва дар WhatsApp-и маъмур барои тасдиқ кушода мешавад.",
-        bk_date_lbl: "САНАИ ТАШРИФ",
-        bk_time_lbl: "ВАҚТ",
-        bk_guests_lbl: "ШУМОРАИ МЕҲМОНОН",
-        bk_zone_lbl: "ФАЗОИ ДИЛХОҲ",
-        bk_name_lbl: "НОМИ ШУМО",
-        bk_phone_lbl: "ТЕЛЕФОН / WHATSAPP",
-        bk_notes_lbl: "ХОҲИШҲОИ ХОС / МУНОСИБАТ",
-        bk_submit: "ФАРМОИШРО ДАР WHATSAPP ФИРИСТОДАН",
-        bk_hotline: "ХАТТИ БЕВОСИТАИ МАЪМУР",
-        bk_hours: "ДУШАНБЕ · ҲАР РӮЗ АЗ 10:00 ТО 00:00",
-        zone_main: "Толори асосӣ (мусиқии зинда)",
-        zone_vip: "Ҳуҷраҳои VIP бо караоке",
-        zone_terrace: "Террасаи тобистона",
-        zone_veranda: "Верандаи ором (бе садои баланд)",
-        guests_1_2: "1 – 2 нафар",
-        guests_3_4: "3 – 4 нафар",
-        guests_5_8: "5 – 8 нафар",
-        guests_vip: "Ҳуҷраи VIP (аз 8 нафар)",
-        guests_banquet: "Зиёфат (зиёда аз 15 меҳмон)",
-        name_ph: "Шуморо чӣ тавр ном барем?",
-        notes_ph: "Зодрӯз, мулоқоти корӣ, шоми ошиқона..."
-      },
-      en: {
-        bk_back: "← BACK TO HOME",
-        bk_tag: "ONLINE RESERVATION",
-        bk_title: "Reserve a <em>Table</em>",
-        bk_subtitle: "Fill in your visit details. Your booking request will be instantly formatted and opened in WhatsApp for prompt confirmation.",
-        bk_date_lbl: "VISIT DATE",
-        bk_time_lbl: "TIME",
-        bk_guests_lbl: "NUMBER OF GUESTS",
-        bk_zone_lbl: "PREFERRED ZONE",
-        bk_name_lbl: "YOUR NAME",
-        bk_phone_lbl: "PHONE / WHATSAPP",
-        bk_notes_lbl: "SPECIAL REQUESTS / OCCASION",
-        bk_submit: "SEND RESERVATION TO WHATSAPP",
-        bk_hotline: "DIRECT MANAGER HOTLINE",
-        bk_hours: "DUSHANBE · DAILY 10:00 — 00:00",
-        zone_main: "Main Dining Hall (live music)",
-        zone_vip: "VIP Suites with Karaoke",
-        zone_terrace: "Summer Terrace",
-        zone_veranda: "Quiet Veranda (no loud music)",
-        guests_1_2: "1 – 2 Guests",
-        guests_3_4: "3 – 4 Guests",
-        guests_5_8: "5 – 8 Guests",
-        guests_vip: "VIP Suite (8+ guests)",
-        guests_banquet: "Banquet (15+ guests)",
-        name_ph: "How should we address you?",
-        notes_ph: "Birthday, business dinner, romantic evening..."
-      },
-      zh: {
-        bk_back: "← 返回主页",
-        bk_tag: "在线餐位预订",
-        bk_title: "预订<em>餐桌</em>",
-        bk_subtitle: "填写您的到访信息。预订请求将即时生成并通过WhatsApp直接发送给餐厅主管进行快速确认。",
-        bk_date_lbl: "就餐日期",
-        bk_time_lbl: "到店时间",
-        bk_guests_lbl: "就餐人数",
-        bk_zone_lbl: "期望区域",
-        bk_name_lbl: "您的姓名",
-        bk_phone_lbl: "联系电话 / WHATSAPP",
-        bk_notes_lbl: "特殊要求 / 用餐目的",
-        bk_submit: "通过WHATSAPP发送预订",
-        bk_hotline: "餐厅主管直通专线",
-        bk_hours: "杜尚别 · 每日 10:00 至 00:00",
-        zone_main: "主宴会大厅（现场音乐）",
-        zone_vip: "VIP私享包厢（配备KTV）",
-        zone_terrace: "户外夏日露台",
-        zone_veranda: "静谧回廊雅座（无嘈杂音乐）",
-        guests_1_2: "1 – 2 位贵宾",
-        guests_3_4: "3 – 4 位贵宾",
-        guests_5_8: "5 – 8 位贵宾",
-        guests_vip: "VIP专属包厢（8位起）",
-        guests_banquet: "宴会与大型团体（15位以上）",
-        name_ph: "请问该如何称呼您？",
-        notes_ph: "生日庆生、商务宴请、浪漫纪念日..."
-      }
-    };
-
+    const API_BASE = "https://anzur-artist-bot-240157015248.europe-west1.run.app";
+    
     let currentLang = 'ru';
+    let isManager = localStorage.getItem('anzur_manager_token') === 'mgr_secret_session_2026';
+    let selectedTableId = null;
+    let currentZone = 'tier1';
+    let tablesData = [];
 
-    function switchLanguage(lang) {
-      if (!BK_I18N[lang]) return;
-      currentLang = lang;
-      try { localStorage.setItem('anzur_lang', lang); } catch (e) {}
-      document.documentElement.lang = lang;
+    // Table specifications from blueprint
+    const BLUEPRINT_TABLES = [
+      // 1-й ярус (1 - 20)
+      {id:"1", zone:"tier1", name:"Лаунж-диван 1", capacity:"6–8 чел", desc:"Уютная диванная лаунж-зона"},
+      {id:"2", zone:"tier1", name:"Лаунж-диван 2", capacity:"6–8 чел", desc:"Уютная диванная лаунж-зона"},
+      {id:"3", zone:"tier1", name:"Диванный стол 3", capacity:"4–6 чел", desc:"Комфортный диван у лестницы"},
+      {id:"4", zone:"tier1", name:"Стол 4", capacity:"2–4 чел", desc:"Стол у северной стены"},
+      {id:"5", zone:"tier1", name:"Стол 5", capacity:"2–4 чел", desc:"Стол у северной стены"},
+      {id:"6", zone:"tier1", name:"Стол 6", capacity:"4–6 чел", desc:"Стол с диваном у стены"},
+      {id:"7", zone:"tier1", name:"Стол 7", capacity:"2–4 чел", desc:"Угловой стол перед сценой"},
+      {id:"8", zone:"tier1", name:"Стол 8", capacity:"2–4 чел", desc:"Угловой стол перед сценой"},
+      {id:"9", zone:"tier1", name:"Стол 9", capacity:"4–6 чел", desc:"Стол с диваном у южной стены"},
+      {id:"10", zone:"tier1", name:"Стол 10", capacity:"2–4 чел", desc:"Стол у южной стены"},
+      {id:"11", zone:"tier1", name:"Купе 11", capacity:"4–6 чел", desc:"Центральное мягкое купе"},
+      {id:"12", zone:"tier1", name:"Купе 12", capacity:"4–6 чел", desc:"Центральное мягкое купе"},
+      {id:"13", zone:"tier1", name:"Купе 13", capacity:"4–6 чел", desc:"Центральное мягкое купе"},
+      {id:"14", zone:"tier1", name:"Купе 14", capacity:"4–6 чел", desc:"Центральное мягкое купе"},
+      {id:"15", zone:"tier1", name:"Купе 15", capacity:"4–6 чел", desc:"Центральное мягкое купе"},
+      {id:"16", zone:"tier1", name:"Купе 16", capacity:"4–6 чел", desc:"Центральное мягкое купе"},
+      {id:"17", zone:"tier1", name:"Стол 17", capacity:"4 чел", desc:"Премиум перед сценой (2-й ряд)"},
+      {id:"18", zone:"tier1", name:"Стол 18", capacity:"4 чел", desc:"Премиум перед сценой (2-й ряд)"},
+      {id:"19", zone:"tier1", name:"Стол 19", capacity:"4 чел", desc:"Первый ряд прямо перед сценой"},
+      {id:"20", zone:"tier1", name:"Стол 20", capacity:"4 чел", desc:"Первый ряд прямо перед сценой"},
 
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        if (btn.getAttribute('data-lang') === lang) btn.classList.add('is-active');
-        else btn.classList.remove('is-active');
-      });
+      // 2-й ярус (21 - 36)
+      {id:"21", zone:"tier2", name:"Стол 21", capacity:"2–4 чел", desc:"Южный балкон, прямой вид на сцену"},
+      {id:"22", zone:"tier2", name:"Стол 22", capacity:"4 чел", desc:"Южный балкон у перил над залом"},
+      {id:"23", zone:"tier2", name:"Стол 23", capacity:"4 чел", desc:"Южный балкон у перил над залом"},
+      {id:"24", zone:"tier2", name:"Стол 24", capacity:"4 чел", desc:"Южный балкон у перил над залом"},
+      {id:"25", zone:"tier2", name:"Стол 25", capacity:"4 чел", desc:"Банкетный сектор"},
+      {id:"26", zone:"tier2", name:"Стол 26", capacity:"4 чел", desc:"Банкетный сектор"},
+      {id:"27", zone:"tier2", name:"Стол 27", capacity:"6 чел", desc:"Банкетный сектор"},
+      {id:"28", zone:"tier2", name:"Стол 28", capacity:"4 чел", desc:"Банкетный сектор"},
+      {id:"29", zone:"tier2", name:"Банкетный стол 29", capacity:"10–12 чел", desc:"Большой представительский стол для торжеств"},
+      {id:"30", zone:"tier2", name:"Стол 30", capacity:"4 чел", desc:"Банкетный сектор"},
+      {id:"31", zone:"tier2", name:"Стол 31", capacity:"4 чел", desc:"Северный балкон у стены"},
+      {id:"32", zone:"tier2", name:"Стол 32", capacity:"4 чел", desc:"Северный балкон у стены"},
+      {id:"33", zone:"tier2", name:"Стол 33", capacity:"4 чел", desc:"Северный балкон у перил над залом"},
+      {id:"34", zone:"tier2", name:"Стол 34", capacity:"4 чел", desc:"Северный балкон у перил над залом"},
+      {id:"35", zone:"tier2", name:"Стол 35", capacity:"4 чел", desc:"Северный балкон у перил над залом"},
+      {id:"36", zone:"tier2", name:"Стол 36", capacity:"2–4 чел", desc:"Северный балкон, прямой вид на сцену"},
 
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (BK_I18N[lang] && BK_I18N[lang][key]) el.textContent = BK_I18N[lang][key];
-      });
+      // Терраса (R1 - R8)
+      {id:"R1", zone:"terrace", name:"Терраса R1", capacity:"4 чел", desc:"Панорамный вид на ночной город"},
+      {id:"R2", zone:"terrace", name:"Терраса R2", capacity:"4 чел", desc:"Панорамный вид на ночной город"},
+      {id:"R3", zone:"terrace", name:"Терраса R3", capacity:"4 чел", desc:"Панорамный вид на ночной город"},
+      {id:"R4", zone:"terrace", name:"Терраса R4", capacity:"4 чел", desc:"Панорамный вид на ночной город"},
+      {id:"R5", zone:"terrace", name:"Терраса R5", capacity:"4–6 чел", desc:"У фонтана и зеленого сада"},
+      {id:"R6", zone:"terrace", name:"Терраса R6", capacity:"4–6 чел", desc:"У фонтана и зеленого сада"},
+      {id:"R7", zone:"terrace", name:"Терраса R7", capacity:"2–4 чел", desc:"Уютный тихий угол"},
+      {id:"R8", zone:"terrace", name:"Терраса R8", capacity:"2–4 чел", desc:"Уютный тихий угол"},
 
-      document.querySelectorAll('[data-i18n-html]').forEach(el => {
-        const key = el.getAttribute('data-i18n-html');
-        if (BK_I18N[lang] && BK_I18N[lang][key]) el.innerHTML = BK_I18N[lang][key];
-      });
+      // VIP-кабины
+      {id:"VIP1", zone:"vip", name:"VIP 1 «Худжанд»", capacity:"8–10 чел", desc:"Караоке Evolution, приватный лаунж"},
+      {id:"VIP2", zone:"vip", name:"VIP 2 «Памир»", capacity:"10–14 чел", desc:"Клубный свет, караоке, гардероб"},
+      {id:"VIP3", zone:"vip", name:"VIP 3 «Самарканд»", capacity:"12–16 чел", desc:"Премиум-звук, банкетный стол"},
+      {id:"VIP4", zone:"vip", name:"VIP 4 «Анзур Гранд»", capacity:"до 25 чел", desc:"Президентский люкс для особых торжеств"}
+    ];
 
-      const nameInp = document.getElementById('resName');
-      const notesInp = document.getElementById('resNotes');
-      if (nameInp && BK_I18N[lang].name_ph) nameInp.placeholder = BK_I18N[lang].name_ph;
-      if (notesInp && BK_I18N[lang].notes_ph) notesInp.placeholder = BK_I18N[lang].notes_ph;
+    window.addEventListener('DOMContentLoaded', () => {
+      const today = new Date().toISOString().split('T')[0];
+      const dateInput = document.getElementById('filterDate');
+      dateInput.value = today;
+      dateInput.min = today;
+
+      updateManagerUI();
+      loadTablesForDate(today);
+    });
+
+    async function loadTablesForDate(dateStr) {
+      try {
+        const resp = await fetch(`${API_BASE}/api/tables?date=${dateStr}`, { cache: "no-store" });
+        if (resp.ok) {
+          const json = await resp.json();
+          if (json.tables && json.tables.length > 0) {
+            tablesData = json.tables;
+            renderAllMapCells();
+            return;
+          }
+        }
+      } catch (err) {}
+
+      // Fallback
+      const localKey = `anzur_tables_${dateStr}`;
+      const saved = localStorage.getItem(localKey);
+      if (saved) {
+        try { tablesData = JSON.parse(saved); } catch(e) { tablesData = JSON.parse(JSON.stringify(BLUEPRINT_TABLES)); }
+      } else {
+        tablesData = JSON.parse(JSON.stringify(BLUEPRINT_TABLES));
+      }
+      renderAllMapCells();
     }
 
-    // Set default date to today or tomorrow
-    const today = new Date();
-    const dateInput = document.getElementById('resDate');
-    dateInput.min = today.toISOString().split('T')[0];
-    dateInput.value = today.toISOString().split('T')[0];
-    const savedLang = localStorage.getItem('anzur_lang') || 'ru';
-    switchLanguage(savedLang);
+    function saveLocalTables(dateStr) {
+      const localKey = `anzur_tables_${dateStr}`;
+      localStorage.setItem(localKey, JSON.stringify(tablesData));
+    }
 
-    function sendBookingToWhatsApp(e) {
-      e.preventDefault();
-      const date = document.getElementById('resDate').value;
-      const time = document.getElementById('resTime').value;
-      const guests = document.getElementById('resGuests').value;
-      const zone = document.getElementById('resZone').value;
-      const name = document.getElementById('resName').value;
-      const phone = document.getElementById('resPhone').value;
-      const notes = document.getElementById('resNotes').value;
-
-      const greetings = {
-        ru: `Здравствуйте! Бронирование столика в ресторане Анзур:\n• Имя: ${name}\n• Телефон: ${phone}\n• Дата: ${date}\n• Время: ${time}\n• Персон: ${guests}\n• Зона: ${zone}`,
-        tj: `Салом! Фармоиши миз дар ресторани Анзур:\n• Ном: ${name}\n• Телефон: ${phone}\n• Сана: ${date}\n• Вақт: ${time}\n• Меҳмонон: ${guests}\n• Фазо: ${zone}`,
-        en: `Hello! Table reservation at Anzur Restaurant:\n• Name: ${name}\n• Phone: ${phone}\n• Date: ${date}\n• Time: ${time}\n• Guests: ${guests}\n• Zone: ${zone}`,
-        zh: `您好！安祖尔餐厅餐位预订请求：\n• 贵宾姓名: ${name}\n• 联系电话: ${phone}\n• 就餐日期: ${date}\n• 就餐时间: ${time}\n• 就餐人数: ${guests}\n• 期望区域: ${zone}`
-      };
-
-      const wishLabels = {
-        ru: "\n• Пожелания: ",
-        tj: "\n• Хоҳишҳо: ",
-        en: "\n• Special requests: ",
-        zh: "\n• 特殊要求: "
-      };
-
-      let msg = greetings[currentLang] || greetings.ru;
-      if (notes && notes.trim()) {
-        msg += (wishLabels[currentLang] || wishLabels.ru) + notes.trim();
+    function renderAllMapCells() {
+      // Render 1st tier (1 - 20)
+      for (let i = 1; i <= 20; i++) {
+        const cell = document.getElementById(`t-cell-${i}`);
+        if (!cell) continue;
+        const table = tablesData.find(t => String(t.id) === String(i)) || {id: String(i), capacity:"4 чел", is_booked:false};
+        populateCell(cell, table);
       }
 
-      const waUrl = `https://wa.me/992917917917?text=${encodeURIComponent(msg)}`;
-      window.open(waUrl, '_blank');
+      // Render 2nd tier (21 - 36)
+      for (let i = 21; i <= 36; i++) {
+        const cell = document.getElementById(`t-cell-${i}`);
+        if (!cell) continue;
+        const table = tablesData.find(t => String(t.id) === String(i)) || {id: String(i), capacity:"4 чел", is_booked:false};
+        populateCell(cell, table);
+      }
+
+      // Render Terrace
+      renderTerraceGrid();
+
+      // Render VIP
+      renderVipGrid();
+    }
+
+    function populateCell(cell, table) {
+      const isFree = !table.is_booked;
+      const isSelected = selectedTableId === String(table.id);
+
+      cell.className = `table-cell ${isFree ? 'is-free' : 'is-busy'} ${isSelected ? 'is-selected' : ''}`;
+      cell.onclick = () => onTableClicked(table);
+
+      const statusText = isFree ? "Свободен" : (isManager && table.booking_info ? (table.booking_info.guest_name || "Занят") : "Занят");
+
+      cell.innerHTML = `
+        <div class="t-num">${table.id}</div>
+        <div class="t-cap">${table.capacity || '4 чел'}</div>
+        <div class="t-status">${statusText}</div>
+      `;
+    }
+
+    function renderTerraceGrid() {
+      const railGrid = document.getElementById('terrace-rail-grid');
+      const gardenGrid = document.getElementById('terrace-garden-grid');
+      if (!railGrid || !gardenGrid) return;
+
+      railGrid.innerHTML = "";
+      gardenGrid.innerHTML = "";
+
+      for (let i = 1; i <= 4; i++) {
+        const id = `R${i}`;
+        const t = tablesData.find(x => x.id === id) || {id, capacity:"4 чел", is_booked:false};
+        const div = document.createElement('div');
+        div.style.minHeight = "70px";
+        populateCell(div, t);
+        railGrid.appendChild(div);
+      }
+
+      for (let i = 5; i <= 8; i++) {
+        const id = `R${i}`;
+        const t = tablesData.find(x => x.id === id) || {id, capacity:"4–6 чел", is_booked:false};
+        const div = document.createElement('div');
+        div.style.minHeight = "70px";
+        populateCell(div, t);
+        gardenGrid.appendChild(div);
+      }
+    }
+
+    function renderVipGrid() {
+      const grid = document.getElementById('vip-grid');
+      if (!grid) return;
+      grid.innerHTML = "";
+
+      const vips = tablesData.filter(t => String(t.id).startsWith("VIP"));
+      (vips.length ? vips : [
+        {id:"VIP1", name:"VIP 1 «Худжанд»", capacity:"8–10 чел", is_booked:false},
+        {id:"VIP2", name:"VIP 2 «Памир»", capacity:"10–14 чел", is_booked:false},
+        {id:"VIP3", name:"VIP 3 «Самарканд»", capacity:"12–16 чел", is_booked:false},
+        {id:"VIP4", name:"VIP 4 «Анзур Гранд»", capacity:"до 25 чел", is_booked:false}
+      ]).forEach(v => {
+        const div = document.createElement('div');
+        div.style.minHeight = "110px";
+        div.style.padding = "1.2rem";
+        div.style.textAlign = "left";
+        div.style.alignItems = "flex-start";
+
+        const isFree = !v.is_booked;
+        const isSelected = selectedTableId === String(v.id);
+        div.className = `table-cell ${isFree ? 'is-free' : 'is-busy'} ${isSelected ? 'is-selected' : ''}`;
+        div.onclick = () => onTableClicked(v);
+
+        div.innerHTML = `
+          <div style="font-family:var(--font-mono); font-size:0.58rem; color:var(--gold); letter-spacing:0.16em;">VIP SUITE · КАРАОКЕ</div>
+          <div class="t-num" style="font-size:1.15rem; font-family:var(--font-serif); margin-top:0.2rem;">${v.name || v.id}</div>
+          <div class="t-cap" style="margin-top:0.2rem;">Вместимость: <b>${v.capacity}</b></div>
+          <div class="t-status" style="margin-top:0.5rem;">● ${isFree ? 'Свободен' : 'Занят'}</div>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    function switchZone(zone) {
+      currentZone = zone;
+      document.querySelectorAll('.zone-tab').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-zone') === zone);
+      });
+
+      document.getElementById('zone-tier1-content').style.display = zone === 'tier1' ? 'block' : 'none';
+      document.getElementById('zone-tier2-content').style.display = zone === 'tier2' ? 'block' : 'none';
+      document.getElementById('zone-terrace-content').style.display = zone === 'terrace' ? 'block' : 'none';
+      document.getElementById('zone-vip-content').style.display = zone === 'vip' ? 'block' : 'none';
+    }
+
+    function onTableClicked(table) {
+      if (isManager) {
+        openManagerTableControl(table);
+        return;
+      }
+
+      if (table.is_booked) {
+        showToast("⚠️ Стол уже забронирован на эту дату. Пожалуйста, выберите другой свободный стол.");
+        return;
+      }
+
+      selectedTableId = String(table.id);
+      renderAllMapCells();
+
+      const bp = BLUEPRINT_TABLES.find(x => String(x.id) === selectedTableId) || table;
+      document.getElementById('chosenTableName').textContent = `Стол №${bp.id} (${bp.name || 'Зал'})`;
+      document.getElementById('chosenTableSub').textContent = `${bp.capacity || 'Вместимость'} · ${bp.desc || 'Без депозита'}`;
+      document.getElementById('submitBtn').disabled = false;
+
+      if (window.innerWidth <= 1080) {
+        document.querySelector('.sidebar-card').scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function onDateChanged() {
+      const dateStr = document.getElementById('filterDate').value;
+      selectedTableId = null;
+      document.getElementById('chosenTableName').textContent = "Стол не выбран";
+      document.getElementById('chosenTableSub').textContent = "Нажмите на любой свободный стол на схеме";
+      document.getElementById('submitBtn').disabled = true;
+      loadTablesForDate(dateStr);
+    }
+
+    async function submitGuestBooking(event) {
+      event.preventDefault();
+      if (!selectedTableId) return;
+
+      const dateStr = document.getElementById('filterDate').value;
+      const timeStr = document.getElementById('filterTime').value;
+      const name = document.getElementById('guestName').value.trim();
+      const phone = document.getElementById('guestPhone').value.trim();
+      const count = document.getElementById('guestCount').value;
+      const comment = document.getElementById('guestComment').value.trim();
+
+      const bp = BLUEPRINT_TABLES.find(x => String(x.id) === selectedTableId) || {name: `Стол ${selectedTableId}`};
+
+      // API Call
+      try {
+        await fetch(`${API_BASE}/api/bookings`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            table_id: selectedTableId,
+            date: dateStr,
+            time: timeStr,
+            guest_name: name,
+            guest_phone: phone,
+            guests_count: count,
+            comment: comment
+          })
+        });
+      } catch(e) {}
+
+      // Update Local State
+      let t = tablesData.find(x => String(x.id) === selectedTableId);
+      if (!t) {
+        t = { id: selectedTableId, capacity: count };
+        tablesData.push(t);
+      }
+      t.is_booked = true;
+      t.booking_info = { guest_name: name, guest_phone: phone, time: timeStr, guests_count: count, comment: comment };
+      saveLocalTables(dateStr);
+
+      // WhatsApp URL
+      const waText = encodeURIComponent(
+        `Здравствуйте! Я хочу забронировать стол в ресторане «Анзур»:\n\n` +
+        `🏛️ Стол: №${selectedTableId} (${bp.name || 'Зал'})\n` +
+        `📅 Дата: ${dateStr}\n` +
+        `⏰ Время: ${timeStr}\n` +
+        `👤 Имя: ${name}\n` +
+        `📱 Телефон: ${phone}\n` +
+        `👥 Гостей: ${count}\n` +
+        `💬 Пожелания: ${comment || '—'}`
+      );
+
+      document.getElementById('successModalText').innerHTML = 
+        `Стол: <b>№${selectedTableId} (${bp.name || 'Зал'})</b><br>` +
+        `Дата и время: <b>${dateStr} в ${timeStr}</b><br>` +
+        `Гость: <b>${name}</b> (+${phone})<br><br>` +
+        `Заявка зафиксирована в системе ресторана!`;
+
+      document.getElementById('successWaBtn').href = `https://wa.me/992917917917?text=${waText}`;
+      openModal('successModal');
+
+      selectedTableId = null;
+      renderAllMapCells();
+      document.getElementById('bookingForm').reset();
+      document.getElementById('chosenTableName').textContent = "Стол не выбран";
+      document.getElementById('chosenTableSub').textContent = "Нажмите на любой свободный стол на схеме";
+      document.getElementById('submitBtn').disabled = true;
+    }
+
+    // Modal Blueprint Controls
+    function openBlueprintModal() {
+      showBlueprintPhoto(currentZone === 'tier2' ? 2 : 1);
+      openModal('blueprintModal');
+    }
+
+    function showBlueprintPhoto(tierNum) {
+      const img = document.getElementById('bpImg');
+      const title = document.getElementById('bpModalTitle');
+      if (tierNum === 2) {
+        img.src = 'floor_plan_tier_2.jpg';
+        title.textContent = 'Оригинальный план БТИ: 2-й ярус (Балкон и Банкетная зона)';
+      } else {
+        img.src = 'floor_plan_tier_1.jpg';
+        title.textContent = 'Оригинальный план БТИ: 1-й ярус (Партер и Сцена)';
+      }
+      openModal('blueprintModal');
+    }
+
+    // Manager Portal
+    function updateManagerUI() {
+      const banner = document.getElementById('adminBanner');
+      const btn = document.getElementById('managerBtn');
+      const btnText = document.getElementById('mgrBtnText');
+
+      if (isManager) {
+        banner.classList.add('visible');
+        btn.classList.add('active');
+        btnText.textContent = "Администратор ✓";
+      } else {
+        banner.classList.remove('visible');
+        btn.classList.remove('active');
+        btnText.textContent = "Вход для менеджера";
+      }
+    }
+
+    function openManagerModal() {
+      if (isManager) {
+        showToast("👑 Вы уже авторизованы как менеджер");
+        return;
+      }
+      openModal('loginModal');
+    }
+
+    async function handleManagerLogin(event) {
+      event.preventDefault();
+      const login = document.getElementById('mgrLogin').value.trim();
+      const pass = document.getElementById('mgrPass').value.trim();
+
+      if (login === 'manager' && pass === 'anzur2026') {
+        isManager = true;
+        localStorage.setItem('anzur_manager_token', 'mgr_secret_session_2026');
+        closeModal('loginModal');
+        updateManagerUI();
+        renderAllMapCells();
+        showToast("✅ Вы вошли в панель управления!");
+      } else {
+        alert("Неверный логин или пароль!");
+      }
+    }
+
+    function logoutManager() {
+      isManager = false;
+      localStorage.removeItem('anzur_manager_token');
+      updateManagerUI();
+      renderAllMapCells();
+      showToast("Вы вышли из режима менеджера");
+    }
+
+    function openManagerTableControl(table) {
+      const dateStr = document.getElementById('filterDate').value;
+      const bp = BLUEPRINT_TABLES.find(x => String(x.id) === String(table.id)) || table;
+
+      document.getElementById('mgrModalTableTitle').textContent = `Стол №${table.id} (${bp.name || 'Зал'})`;
+
+      const detailsDiv = document.getElementById('mgrTableDetails');
+      const actionsDiv = document.getElementById('mgrTableActions');
+
+      if (table.is_booked) {
+        const b = table.booking_info || {};
+        document.getElementById('mgrModalTableSub').textContent = "🔴 СТОЛ СЕЙЧАС ЗАБРОНИРОВАН";
+        detailsDiv.innerHTML = `
+          <div><b>Гость:</b> ${b.guest_name || 'Не указано'}</div>
+          <div><b>Телефон:</b> +${b.guest_phone || '—'}</div>
+          <div><b>Время визита:</b> ${b.time || '19:00'}</div>
+          <div><b>Количество персон:</b> ${b.guests_count || table.capacity}</div>
+          <div><b>Пометки:</b> ${b.comment || '—'}</div>
+        `;
+
+        actionsDiv.innerHTML = `
+          <button type="button" class="mgr-action-btn btn-free-table" onclick="managerFreeTable('${table.id}', '${dateStr}')">
+            🗑️ СНЯТЬ БРОНЬ / ОСВОБОДИТЬ СТОЛ
+          </button>
+        `;
+      } else {
+        document.getElementById('mgrModalTableSub').textContent = "🟢 СТОЛ СВОБОДЕН";
+        detailsDiv.innerHTML = `
+          <div>Вместимость: <b>${table.capacity || bp.capacity}</b></div>
+          <div>Зона: <b>${table.zone || bp.zone}</b></div>
+          <div>Описание: ${bp.desc || 'Стандарт'}</div>
+        `;
+
+        actionsDiv.innerHTML = `
+          <div style="font-family:var(--font-mono); font-size:0.68rem; color:var(--gold); margin-bottom:0.6rem;">ПОСТАВИТЬ БРОНЬ ВРУЧНУЮ:</div>
+          <input type="text" id="mgrManualName" class="form-input" placeholder="Имя гостя" style="margin-bottom:0.5rem;" />
+          <input type="tel" id="mgrManualPhone" class="form-input" placeholder="Телефон (+992...)" style="margin-bottom:0.5rem;" />
+          <button type="button" class="mgr-action-btn btn-book-table" onclick="managerBookTable('${table.id}', '${dateStr}')">
+            🔒 ЗАБРОНИРОВАТЬ СТОЛ
+          </button>
+        `;
+      }
+
+      openModal('tableControlModal');
+    }
+
+    async function managerFreeTable(tableId, dateStr) {
+      try {
+        await fetch(`${API_BASE}/api/admin/tables/toggle`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            token: "mgr_secret_session_2026",
+            table_id: tableId,
+            date: dateStr,
+            action: "free"
+          })
+        });
+      } catch(e) {}
+
+      let t = tablesData.find(x => String(x.id) === String(tableId));
+      if (t) {
+        t.is_booked = false;
+        t.booking_info = null;
+        saveLocalTables(dateStr);
+      }
+
+      closeModal('tableControlModal');
+      renderAllMapCells();
+      showToast(`Стол №${tableId} освобожден!`);
+    }
+
+    async function managerBookTable(tableId, dateStr) {
+      const name = (document.getElementById('mgrManualName').value || 'Бронь администратора').trim();
+      const phone = (document.getElementById('mgrManualPhone').value || '917917917').trim();
+      const timeStr = document.getElementById('filterTime').value;
+
+      try {
+        await fetch(`${API_BASE}/api/admin/tables/toggle`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            token: "mgr_secret_session_2026",
+            table_id: tableId,
+            date: dateStr,
+            time: timeStr,
+            guest_name: name,
+            guest_phone: phone,
+            action: "book"
+          })
+        });
+      } catch(e) {}
+
+      let t = tablesData.find(x => String(x.id) === String(tableId));
+      if (!t) {
+        t = { id: String(tableId) };
+        tablesData.push(t);
+      }
+      t.is_booked = true;
+      t.booking_info = { guest_name: name, guest_phone: phone, time: timeStr };
+      saveLocalTables(dateStr);
+
+      closeModal('tableControlModal');
+      renderAllMapCells();
+      showToast(`Стол №${tableId} забронирован на ${name}!`);
+    }
+
+    // -----------------------------------------------------------
+    // Official 22-Page Menu Viewer Logic
+    // -----------------------------------------------------------
+    let currentMenuPage = 1;
+    const TOTAL_MENU_PAGES = 22;
+
+    const MENU_PAGE_TITLES = {
+      1: "Обложка · Ресторан «Анзур» (EST. 2023)",
+      2: "Холодные закуски · Сет брускетт, мясное плато, рулетики",
+      3: "Холодные закуски & Салаты · Карпаччо, капрезе, сырная тарелка",
+      4: "Салаты · Стейк-салат с медальонами, Цезарь классический",
+      5: "Салаты & Морепродукты · Салат с осьминогом, руккола с креветками",
+      6: "Горячие закуски · Крылышки BBQ, сырные палочки, кесадилья",
+      7: "Креветки & Морепродукты · Темпура, васаби соус, чесночные",
+      8: "Супы · Шурпа шелковая, суп с фрикадельками, лагман",
+      9: "Супы Азии & Европы · Том Ям с морепродуктами, куриный суп",
+      10: "Пицца из дровяной печи · Маргарита, 4 сыра, Пепперони, Дьявола",
+      11: "Блюда в печи · Хачапури по-мегрельски, по-аджарски",
+      12: "Гарниры · Картофель фри, пюре, овощи на гриле, грибы",
+      13: "Хоспер-печь · Стейк Рибай, медальоны из мраморной телятины",
+      14: "Рыбные блюда · Дорадо на гриле, сибас, стейк из лосося",
+      15: "Суши & Роллы · Филадельфия, Калифорния, запечённые маки",
+      16: "Шашлыки & Люля · Люля-кебаб, корейка ягнёнка на углях",
+      17: "Мангал & Сеты · Фирменный шашлычный сет «Анзур»",
+      18: "Плов «Анзур» · Праздничный плов с казы и горячая кульча",
+      19: "Национальная кухня · Казан-кебаб, шурпа, самса тандырная",
+      20: "Фруктовые вазы · Сезонное фруктовое плато",
+      21: "Десерты · Чизкейк Сан-Себастьян, Тирамису, медовик",
+      22: "Ресторан «Анзур» · Концепция, шеф-повар & Контакты"
+    };
+
+    function openMenuModal(page = 1) {
+      initMenuThumbs();
+      jumpToMenuPage(page);
+      openModal('menuViewerModal');
+    }
+
+    function initMenuThumbs() {
+      const container = document.getElementById('menuThumbsStrip');
+      if (!container || container.children.length > 0) return;
+
+      for (let i = 1; i <= TOTAL_MENU_PAGES; i++) {
+        const pad = String(i).padStart(2, '0');
+        const item = document.createElement('div');
+        item.className = `menu-thumb-item ${i === currentMenuPage ? 'active' : ''}`;
+        item.id = `menu-thumb-${i}`;
+        item.onclick = () => jumpToMenuPage(i);
+        item.innerHTML = `
+          <img src="menu_pages_web/menu_page_${pad}.jpg" alt="Стр. ${i}" loading="lazy" />
+          <div class="menu-thumb-num">${i}</div>
+        `;
+        container.appendChild(item);
+      }
+    }
+
+    function jumpToMenuPage(page) {
+      if (page < 1) page = 1;
+      if (page > TOTAL_MENU_PAGES) page = TOTAL_MENU_PAGES;
+      currentMenuPage = page;
+
+      const pad = String(page).padStart(2, '0');
+      const img = document.getElementById('menuCurrentImg');
+      if (img) {
+        img.src = `menu_pages_web/menu_page_${pad}.jpg`;
+      }
+
+      const counter = document.getElementById('menuPageCounter');
+      if (counter) {
+        counter.textContent = `Страница ${page} из ${TOTAL_MENU_PAGES}`;
+      }
+
+      const title = document.getElementById('menuPageTitle');
+      if (title) {
+        title.textContent = MENU_PAGE_TITLES[page] || `Страница ${page}`;
+      }
+
+      // Update active category pill
+      document.querySelectorAll('.menu-cat-pill').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      const pills = document.querySelectorAll('.menu-cat-pill');
+      pills.forEach(p => {
+        const attr = p.getAttribute('onclick');
+        if (attr && attr.includes(`jumpToMenuPage(${page})`)) {
+          p.classList.add('active');
+        }
+      });
+
+      // Update thumbnail active state and scroll into view
+      document.querySelectorAll('.menu-thumb-item').forEach((t, idx) => {
+        const isActive = (idx + 1) === page;
+        t.classList.toggle('active', isActive);
+        if (isActive) {
+          t.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      });
+    }
+
+    function prevMenuPage() {
+      jumpToMenuPage(currentMenuPage > 1 ? currentMenuPage - 1 : TOTAL_MENU_PAGES);
+    }
+
+    function nextMenuPage() {
+      jumpToMenuPage(currentMenuPage < TOTAL_MENU_PAGES ? currentMenuPage + 1 : 1);
+    }
+
+    // Keyboard navigation (arrows and Escape)
+    document.addEventListener('keydown', (e) => {
+      const menuModal = document.getElementById('menuViewerModal');
+      if (menuModal && menuModal.classList.contains('open')) {
+        if (e.key === 'ArrowLeft') prevMenuPage();
+        if (e.key === 'ArrowRight') nextMenuPage();
+        if (e.key === 'Escape') closeModal('menuViewerModal');
+      }
+    });
+
+    function openModal(id) { document.getElementById(id).classList.add('open'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+    function showToast(text) {
+      const t = document.getElementById('toast');
+      document.getElementById('toastText').textContent = text;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3500);
     }
   </script>
 </body>

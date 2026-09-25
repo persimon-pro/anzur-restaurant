@@ -1762,11 +1762,11 @@
       <!-- Item 0: Plov -->
       <div class="filmstrip-item is-active" data-idx="0" onclick="goToSlide(0)">
         <div class="filmstrip-thumb">
-          <img src="gen_plov.jpg" alt="Плов Анзур" loading="lazy" />
+          <img src="dish_real_plov.jpg" alt="Плов Анзур" loading="lazy" />
         </div>
         <div class="filmstrip-meta-top">
           <span class="filmstrip-num">01</span>
-          <span class="filmstrip-price">48 TJS</span>
+          <span class="filmstrip-price">55 TJS</span>
         </div>
         <div class="filmstrip-title">Плов «Анзур»</div>
         <div class="filmstrip-cat">Национальная</div>
@@ -1776,14 +1776,14 @@
       <!-- Item 1: Shashlik -->
       <div class="filmstrip-item" data-idx="1" onclick="goToSlide(1)">
         <div class="filmstrip-thumb">
-          <img src="gen_shashlik.jpg" alt="Шашлык из ягненка" loading="lazy" />
+          <img src="dish_real_kazan_kabob.jpg" alt="Казан Кабоб" loading="lazy" />
         </div>
         <div class="filmstrip-meta-top">
           <span class="filmstrip-num">02</span>
-          <span class="filmstrip-price">62 TJS</span>
+          <span class="filmstrip-price">95 TJS</span>
         </div>
-        <div class="filmstrip-title">Шашлык на углях</div>
-        <div class="filmstrip-cat">Мангал</div>
+        <div class="filmstrip-title">Казан Кабоб</div>
+        <div class="filmstrip-cat">Национальная</div>
         <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
       </div>
 
@@ -1832,14 +1832,14 @@
       <!-- Item 5: Tea -->
       <div class="filmstrip-item" data-idx="5" onclick="goToSlide(5)">
         <div class="filmstrip-thumb">
-          <img src="gen_tea.jpg" alt="Памирский сбор" loading="lazy" />
+          <img src="dish_real_dubai_cheesecake.jpg" alt="Дубайский чизкейк" loading="lazy" />
         </div>
         <div class="filmstrip-meta-top">
           <span class="filmstrip-num">06</span>
-          <span class="filmstrip-price">25 TJS</span>
+          <span class="filmstrip-price">99 TJS</span>
         </div>
-        <div class="filmstrip-title">Памирский сбор</div>
-        <div class="filmstrip-cat">Чай & Бар</div>
+        <div class="filmstrip-title">Дубайский чизкейк</div>
+        <div class="filmstrip-cat">Десерты</div>
         <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
       </div>
     </div>
@@ -1865,7 +1865,7 @@
         <span class="mono-label" data-i18n="space1_badge">6 – 25 ПЕРСОН · КАРАОКЕ</span>
         <h3 class="space-title" data-i18n="space1_title">VIP-кабины</h3>
         <p class="space-desc" data-i18n="space1_desc">
-          Приватные залы с профессиональной караоке-системой, клубным светом и премиальным звуком для закрытых вечеров.
+          Приватные залы с профессиональной караоке-системой (аренда караоке от 500 TJS), клубным светом и премиальным звуком для закрытых вечеров.
         </p>
       </div>
     </div>
@@ -2171,10 +2171,29 @@
         <span class="mono-label">[ АНЗУР · ГАСТРОНОМИЧЕСКАЯ КАРТА ]</span>
         <h2 id="modal-menu-heading" class="menu-modal-title" data-i18n="modal_title">Сезонное меню ресторана</h2>
       </div>
-      <button type="button" class="menu-modal-close" onclick="closeMenuModal()" data-i18n="modal_close">✕ ЗАКРЫТЬ [ESC]</button>
+      <div style="display:flex; align-items:center; gap:0.8rem; flex-wrap:wrap;">
+        <a href="anzur_menu.pdf" download="anzur_restaurant_menu.pdf" class="btn-outline" style="padding:0.45rem 1rem; font-size:0.62rem; color:var(--gold); border-color:var(--gold);">
+          📥 СКАЧАТЬ ПЕЧАТНОЕ МЕНЮ (PDF 21 МБ)
+        </a>
+        <a href="booking.html" class="btn-gold" style="padding:0.45rem 1rem; font-size:0.62rem;">
+          🏛️ СХЕМА ЗАЛОВ & БРОНЬ
+        </a>
+        <button type="button" class="menu-modal-close" onclick="closeMenuModal()" data-i18n="modal_close">✕ ЗАКРЫТЬ [ESC]</button>
+      </div>
     </div>
 
     <div class="menu-modal-body">
+      <!-- 22-Page Official Menu Callout -->
+      <div style="background:linear-gradient(90deg, #18140B 0%, #291F0E 100%); border:1px solid var(--gold); padding:0.9rem 1.4rem; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; border-radius:4px;">
+        <div>
+          <span style="font-family:var(--font-mono); font-size:0.62rem; background:var(--gold); color:#060504; font-weight:700; padding:0.2rem 0.5rem; border-radius:2px; margin-right:0.6rem;">НОВОЕ</span>
+          <span style="font-size:0.88rem; color:#fff;"><b>Официальное иллюстрированное меню ресторана (22 страницы)</b> доступно для полистного просмотра</span>
+        </div>
+        <div style="display:flex; gap:0.6rem;">
+          <a href="anzur_menu.pdf" target="_blank" class="btn-outline" style="padding:0.4rem 0.8rem; font-size:0.62rem;">Открыть PDF ↗</a>
+          <a href="booking.html" class="btn-gold" style="padding:0.4rem 0.8rem; font-size:0.62rem;">Выбрать стол & Меню →</a>
+        </div>
+      </div>
       <div class="menu-columns">
         <!-- Col 1: Национальная -->
         <div class="menu-cat-col">
@@ -2184,38 +2203,52 @@
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
-              <span class="menu-item-name">Плов «Анзур» Праздничный</span>
-              <span class="menu-item-price">48 TJS</span>
+              <span class="menu-item-name">Плов «Анзур» (говядина) <small style="color:var(--text-muted); font-size:0.75em;">±250г</small></span>
+              <span class="menu-item-price">55 TJS</span>
             </div>
-            <p class="menu-item-desc">Лазерный рис, томлёная баранина, желтая морковь, нут, барбарис, перепелиные яйца, казы.</p>
+            <p class="menu-item-desc">Плов из говядины, подаётся с сезонным салатом Ачик-Чучук, казы и специями.</p>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
-              <span class="menu-item-name">Шашлык из ягнёнка</span>
-              <span class="menu-item-price">62 TJS</span>
+              <span class="menu-item-name">Плов Чайханский <small style="color:var(--gold); font-size:0.75em;">[НА ЗАКАЗ 1 КГ]</small></span>
+              <span class="menu-item-price">475 TJS</span>
             </div>
-            <p class="menu-item-desc">Мякоть горного ягнёнка с курдюком, маринованная в соке дикого лука анзур на углях лозы.</p>
+            <p class="menu-item-desc">Настоящий праздничный казанный плов. Готовится по предварительному заказу за 3 часа.</p>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
-              <span class="menu-item-name">Казан-кебаб из телятины</span>
-              <span class="menu-item-price">65 TJS</span>
+              <span class="menu-item-name">Казан Кабоб <small style="color:var(--text-muted); font-size:0.75em;">±390г</small></span>
+              <span class="menu-item-price">95 / 100 TJS</span>
             </div>
-            <p class="menu-item-desc">Нежная телятина с хрустящим золотистым молодым картофелем и томлёным зирваком.</p>
+            <p class="menu-item-desc">Жареное каре ягнёнка (100 TJS) или говядина (95 TJS). Подаётся с обжаренным до корочки картофелем и луком.</p>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
-              <span class="menu-item-name">Шурпа шелковая</span>
-              <span class="menu-item-price">42 TJS</span>
+              <span class="menu-item-name">Кайла <small style="color:var(--text-muted); font-size:0.75em;">±250г</small></span>
+              <span class="menu-item-price">90 / 95 TJS</span>
             </div>
-            <p class="menu-item-desc">Прозрачный наваристый бульон из баранины на косточке с горохом нут и горными кореньями.</p>
+            <p class="menu-item-desc">Томлёное нежнейшее мясо: говядина (90 TJS) или баранина (95 TJS) с восточными специями и зеленью.</p>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
-              <span class="menu-item-name">Самса тандырная слоёная</span>
+              <span class="menu-item-name">Бараньи семечки <small style="color:var(--text-muted); font-size:0.75em;">±380г</small></span>
+              <span class="menu-item-price">79 TJS</span>
+            </div>
+            <p class="menu-item-desc">Мелкорубленная баранья корейка с хрустящей корочкой, подаётся с красным луком.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Салат Ачик-Чучук <small style="color:var(--text-muted); font-size:0.75em;">±150г</small></span>
               <span class="menu-item-price">18 TJS</span>
             </div>
-            <p class="menu-item-desc">Хрустящее слоеное тесто, рубленая баранина, репчатый лук, черный тмин и семена кунжута.</p>
+            <p class="menu-item-desc">Спелые сладкие помидоры, красный лук, свежий базилик с оливковым маслом.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Кульча тандырная</span>
+              <span class="menu-item-price">6 TJS</span>
+            </div>
+            <p class="menu-item-desc">Традиционная горячая таджикская лепешка из тандыра с хрустящим узором.</p>
           </div>
         </div>
 
@@ -2305,46 +2338,81 @@
           </div>
         </div>
 
-        <!-- Col 4: Горный бар & Десерты -->
+        <!-- Col 4: Десерты & Фрукты -->
         <div class="menu-cat-col">
           <div class="menu-cat-head">
-            <span data-i18n="modal_cat_tea">ТРАВЫ, ЧАЙ & ДЕСЕРТЫ</span>
-            <h3 data-i18n="modal_cat_tea_title">Бар & Кондитерская</h3>
+            <span data-i18n="modal_cat_tea">ФИРМЕННЫЕ ДЕСЕРТЫ</span>
+            <h3 data-i18n="modal_cat_tea_title">Кондитерская & Фрукты</h3>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Дубайский чизкейк <small style="color:var(--gold); font-size:0.75em;">±185г</small></span>
+              <span class="menu-item-price">99 TJS</span>
+            </div>
+            <p class="menu-item-desc">Фирменный хит с хрустящим тестом катаифи, премиальной фисташковой пастой и шоколадом.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Сан-Себастьян <small style="color:var(--text-muted); font-size:0.75em;">±180г</small></span>
+              <span class="menu-item-price">52 TJS</span>
+            </div>
+            <p class="menu-item-desc">Опаленный баскский чизкейк с нежнейшей кремовой текстурой и теплым молочным шоколадом.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Меренговый рулет <small style="color:var(--text-muted); font-size:0.75em;">±250г</small></span>
+              <span class="menu-item-price">58 TJS</span>
+            </div>
+            <p class="menu-item-desc">Воздушная хрустящая меренга, сливочно-сырный крем маскарпоне и свежие ягоды малины.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Медовик домашний <small style="color:var(--text-muted); font-size:0.75em;">±180г</small></span>
+              <span class="menu-item-price">52 TJS</span>
+            </div>
+            <p class="menu-item-desc">Тончайшие медовые коржи с горным медом и натуральным сметанным кремом.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Чизкейк Нью-Йорк <small style="color:var(--text-muted); font-size:0.75em;">±135г</small></span>
+              <span class="menu-item-price">60 TJS</span>
+            </div>
+            <p class="menu-item-desc">Классический запеченный чизкейк с нежным сырным слоем и карамельным глянцем.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Наполеон слоёный <small style="color:var(--text-muted); font-size:0.75em;">±170г</small></span>
+              <span class="menu-item-price">56 TJS</span>
+            </div>
+            <p class="menu-item-desc">Хрустящие слои теста с бархатным ванильным заварным кремом патисьер.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Фруктовая ваза <small style="color:var(--gold); font-size:0.75em;">[ГРАНД-ПОДАЧА]</small></span>
+              <span class="menu-item-price">350 TJS</span>
+            </div>
+            <p class="menu-item-desc">Ананас, виноград, цитрусовые, гранат, бананы, яблоки, сезонные ягоды на хрустальном ярусе.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Фруктовое плато</span>
+              <span class="menu-item-price">165 TJS</span>
+            </div>
+            <p class="menu-item-desc">Спелый рубиновый гранат, цитрусовые, банан, яблоки и свежие фрукты.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Мороженое в ассортименте <small style="color:var(--text-muted); font-size:0.75em;">±60г</small></span>
+              <span class="menu-item-price">11 TJS</span>
+            </div>
+            <p class="menu-item-desc">Сливочный пломбир, шоколадное, ванильное с ягодным соусом.</p>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
               <span class="menu-item-name">Памирский сбор (Чайная церемония)</span>
               <span class="menu-item-price">25 TJS</span>
             </div>
-            <p class="menu-item-desc">Высокогорные травы Памира: чабрец, горная мята, шафран, курага, грецкие орехи, набат.</p>
-          </div>
-          <div class="menu-list-item">
-            <div class="menu-item-row">
-              <span class="menu-item-name">Зеленый чай с диким жасмином</span>
-              <span class="menu-item-price">20 TJS</span>
-            </div>
-            <p class="menu-item-desc">Премиальный листовой чай с нежными цветами жасмина первого весеннего сбора.</p>
-          </div>
-          <div class="menu-list-item">
-            <div class="menu-item-row">
-              <span class="menu-item-name">Фирменный лимонад «Анзур Гранат»</span>
-              <span class="menu-item-price">22 TJS</span>
-            </div>
-            <p class="menu-item-desc">Свежевыжатый сок кулябского граната, розмарин, цитрус и газированная родниковая вода.</p>
-          </div>
-          <div class="menu-list-item">
-            <div class="menu-item-row">
-              <span class="menu-item-name">Фисташковая пахлава ручной лепки</span>
-              <span class="menu-item-price">28 TJS</span>
-            </div>
-            <p class="menu-item-desc">40 слоев тончайшего теста фило, иранская фисташка, горный цветочный мед и сливочный пломбир.</p>
-          </div>
-          <div class="menu-list-item">
-            <div class="menu-item-row">
-              <span class="menu-item-name">Шоколадный фондан с ягодами</span>
-              <span class="menu-item-price">32 TJS</span>
-            </div>
-            <p class="menu-item-desc">Теплый бельгийский шоколад 70% какао с жидким центром и сорбетом из лесных ягод.</p>
+            <p class="menu-item-desc">Высокогорные травы Памира: чабрец, мята, шафран, липа. Подаётся с набатом и сухофруктами.</p>
           </div>
         </div>
       </div>
@@ -2352,7 +2420,7 @@
 
     <div class="menu-modal-footer">
       <div>
-        УТОЧНИТЬ АЛЛЕРГЕНЫ И СЕЗОННЫЕ СПЕЦИАЛИТЕТЫ: <strong style="color:var(--gold);">917 917 917</strong>
+        ОБСЛУЖИВАНИЕ 12% · АРЕНДА КАРАОКЕ ОТ 500 TJS · РЕЗЕРВ: <strong style="color:var(--gold);">917 917 917</strong>
       </div>
       <div>
         <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D1%82%D1%8C%20%D0%BC%D0%B5%D0%BD%D1%8E%20%D0%B8%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B2%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="btn-gold" style="padding:0.6rem 1.6rem; font-size:0.65rem;">
@@ -2435,7 +2503,7 @@
     spaces_mono: "[ ПРИВАТНОСТЬ И ЗВУК ]",
     space1_badge: "6 – 25 ПЕРСОН · КАРАОКЕ",
     space1_title: "VIP-кабины",
-    space1_desc: "Приватные залы с профессиональной караоке-системой, клубным светом и премиальным звуком для закрытых вечеров.",
+    space1_desc: "Приватные залы с профессиональной караоке-системой (аренда караоке от 500 TJS), клубным светом и премиальным звуком для закрытых вечеров.",
     space2_badge: "ОТКРЫТЫЙ ВОЗДУХ",
     space2_title: "Летняя Терраса",
     space2_desc: "Уютная зона под открытым небом с живой зеленью и вечерней подсветкой для неспешных ужинов.",
@@ -2810,28 +2878,28 @@ for (let l of ['ru', 'tj', 'en', 'zh']) {
       {
         id: 0,
         category: 'national',
-        price: '48',
-        img: 'gen_plov.jpg',
-        catShort: { ru: 'Национальная', tj: 'Миллӣ', en: 'National', zh: '传统中亚菜' },
-        catName: { ru: 'НАЦИОНАЛЬНАЯ КУХНЯ', tj: 'ТАОМҲОИ МИЛЛӢ', en: 'NATIONAL CUISINE', zh: '传统中亚菜' },
-        tag: { ru: 'НАЦИОНАЛЬНАЯ КУХНЯ', tj: 'ТАОМҲОИ МИЛЛӢ', en: 'NATIONAL CUISINE', zh: '传统中亚菜' },
-        serving: { ru: '«ШЕФ-ПОДАЧА» · 650 Г', tj: '«ПЕШКАШИ САР-ОШПАЗ» · 650 Г', en: "CHEF'S SERVING · 650 G", zh: '主厨精呈 · 650克' },
-        title: { ru: 'Плов «Анзур»', tj: 'Оши «Анзур»', en: 'Anzur Signature Plov', zh: '安祖尔手抓饭' },
+        price: '55',
+        img: 'dish_real_plov.jpg',
+        catShort: { ru: 'Плов Анзур', tj: 'Оши Анзур', en: 'Anzur Plov', zh: '安祖尔抓饭' },
+        catName: { ru: 'ФИРМЕННЫЙ ПЛОВ', tj: 'ОШИ СУННАТӢ', en: 'SIGNATURE PLOV', zh: '招牌手抓饭' },
+        tag: { ru: 'ФИРМЕННОЕ БЛЮДО', tj: 'ТАОМИ МАХСУС', en: 'SIGNATURE DISH', zh: '主厨招牌' },
+        serving: { ru: '± 250 Г · 55 TJS / 1 КГ 475 TJS', tj: '± 250 Г · 55 TJS / 1 КГ 475 TJS', en: '± 250 G · 55 TJS / 1 KG 475 TJS', zh: '± 250克 · 55 TJS / 1公斤 475 TJS' },
+        title: { ru: 'Плов «Анзур»', tj: 'Оши «Анзур»', en: 'Anzur Plov', zh: '安祖尔手抓饭' },
         subtitle: {
-          ru: 'Традиционный казанный плов на хлопковом масле и самаркандском зире',
-          tj: 'Оши суннатии дегӣ бо равғани пахта ва зираи самарқандӣ',
-          en: 'Traditional cauldron pilaf cooked over cotton oil with Samarkand cumin',
-          zh: '传统大铁锅棉籽油焖煮，佐以撒马尔罕野生孜然'
+          ru: 'Плов из говядины, подаётся с сезонным салатом',
+          tj: 'Оши суннатӣ аз гӯшти гов, бо хӯриши мавсимӣ',
+          en: 'Traditional beef plov served with fresh seasonal salad',
+          zh: '特选牛肉手抓饭，佐以时令鲜蔬沙拉'
         },
         desc: {
-          ru: 'Отборный длиннозерный лазерный рис, томлёная таджикская баранина, сладкая янтарная морковь, нут, горный барбарис, казы и перепелиные яйца.',
-          tj: 'Биринҷи лазерӣ, гӯшти гӯсфанди кӯҳӣ, сабзии зард, нахӯд, зирк, тухми бедона ва қозӣ.',
-          en: 'Select long-grain laser rice, slow-simmered mountain lamb, amber carrots, chickpeas, barberries, kazy, and quail eggs.',
-          zh: '精选长粒丝苗米、慢火慢炖高山羔羊肉、甜美黄胡萝卜、鹰嘴豆、野山楂、马肉香肠与鹌鹑蛋。'
+          ru: 'Отборная томлёная говядина, лазерный рис, сладкая морковь, нут, барбарис, казы, чеснок и перепелиное яйцо. Доступен порционно (250 г) или чайханский казан на заказ 1 кг (за 3 часа).',
+          tj: 'Гӯшти нарми гов, биринҷи лазерӣ, сабзии ширин, нахӯд, зирк, қозӣ, сир ва тухми бедона. Ба таври порсионӣ (250г) ва 1кг фармоишӣ (барои 3 соат пеш).',
+          en: 'Tender beef, laser rice, sweet carrots, chickpeas, barberries, kazy, garlic, and quail egg. Available as single serving (250g) or Chaihana cauldron 1kg by pre-order (3h ahead).',
+          zh: '精选焖牛肉、特优长粒米、黄胡萝卜、鹰嘴豆、马肉香肠与鹌鹑蛋。支持单人份（250克）或提前3小时预订1公斤茶舍大锅聚会份。'
         },
-        specBase: { ru: 'Баранина, лазерный рис', tj: 'Гӯшти гӯсфанд, биринҷи лазерӣ', en: 'Mountain lamb, laser rice', zh: '羔羊肉，特选长粒米' },
-        specPrep: { ru: 'Казан, живой огонь', tj: 'Дег, оташи зинда', en: 'Cast-iron cauldron, live fire', zh: '传统大铁锅，明火慢煨' },
-        specPair: { ru: 'Ачичук & Памирский сбор', tj: 'Ачичук & Чойи кӯҳӣ', en: 'Achichuk & Pamir herbal tea', zh: '阿奇丘克沙拉 & 帕米尔高山茶' },
+        specBase: { ru: 'Говядина, лазерный рис, казы', tj: 'Гӯшти гов, биринҷи лазерӣ, қозӣ', en: 'Beef, laser rice, kazy', zh: '特选牛肉，丝苗米，马肉肠' },
+        specPrep: { ru: 'Чугунный казан, живой огонь', tj: 'Деги чӯянӣ, оташи зинда', en: 'Cast-iron cauldron, live flame', zh: '传统铁锅，明火慢煨' },
+        specPair: { ru: 'Салат Ачик-чучук & Кульча', tj: 'Хӯриши Ачик-чучук & Кулча', en: 'Achik-Chuchuk Salad & Kulcha', zh: '阿奇丘克沙拉 & 烤馕' },
         waText: {
           ru: 'Здравствуйте! Хочу заказать блюдо Плов «Анзур»',
           tj: 'Салом! Мехоҳам Оши «Анзур»-ро фармоиш диҳам',
@@ -2842,33 +2910,33 @@ for (let l of ['ru', 'tj', 'en', 'zh']) {
       {
         id: 1,
         category: 'national',
-        price: '62',
-        img: 'gen_shashlik.jpg',
-        catShort: { ru: 'Мангал', tj: 'Манқал', en: 'Charcoal Grill', zh: '炭烤烧烤' },
-        catName: { ru: 'МАНГАЛ & УГЛИ', tj: 'МАНҚАЛ ВА КАБОБ', en: 'CHARCOAL MANGAL', zh: '炭烤烧烤' },
-        tag: { ru: 'НАЦИОНАЛЬНАЯ / МАНГАЛ', tj: 'МИЛЛӢ / МАНҚАЛ', en: 'NATIONAL / GRILL', zh: '传统烤炙' },
-        serving: { ru: 'С МАНГАЛА · 380 Г', tj: 'АЗ СИХХОНА · 380 Г', en: 'CHARCOAL GRILL · 380 G', zh: '明火炭烤 · 380克' },
-        title: { ru: 'Шашлык на углях', tj: 'Кабоби рӯи ангишт', en: 'Vine-Charcoal Lamb Kebab', zh: '葡萄木炭烤羊肉串' },
+        price: '95',
+        img: 'dish_real_kazan_kabob.jpg',
+        catShort: { ru: 'Казан Кабоб', tj: 'Қазон Кабоб', en: 'Kazan Kabob', zh: '铁锅烤肉' },
+        catName: { ru: 'НАЦИОНАЛЬНЫЕ БЛЮДА', tj: 'ТАОМҲОИ МИЛЛӢ', en: 'NATIONAL DISHES', zh: '传统中亚菜' },
+        tag: { ru: 'ХИТ РЕСТОРАНА', tj: 'МАҲБУБТАРИН', en: 'TOP HIT', zh: '人气名菜' },
+        serving: { ru: '± 390 Г · ГОВЯДИНА 95 / БАРАНИНА 100 TJS', tj: '± 390 Г · 95 / 100 TJS', en: '± 390 G · BEEF 95 / LAMB 100 TJS', zh: '± 390克 · 牛肉95 / 羊肉100 TJS' },
+        title: { ru: 'Казан Кабоб', tj: 'Қазон Кабоб', en: 'Kazan Kabob', zh: '大锅煨烤肉 (Kazan Kabob)' },
         subtitle: {
-          ru: 'Маринованная вырезка молочного ягнёнка с горными травами',
-          tj: 'Гӯшти нарми барраи кӯҳӣ бо гиёҳҳои кӯҳистон',
-          en: 'Marinated tender mountain lamb tenderloin infused with alpine herbs',
-          zh: '高山乳羔羊里脊肉，浸润野生草本清香'
+          ru: 'Жареное каре ягнёнка или говядина с обжаренным до корочки картофелем',
+          tj: 'Гӯшти бирёншудаи барра ё гов бо картошкаи тиллоӣ',
+          en: 'Seared lamb chops or tender beef with crispy golden potatoes',
+          zh: '酥香羔羊排或精选牛肉，佐以黄金香脆土豆块'
         },
         desc: {
-          ru: 'Нежнейшие кусочки горного ягнёнка с курдюком, маринованные в соке дикого лука анзур и кориандра, обжаренные на углях из лозы.',
-          tj: 'Қитъаҳои ширини барра бо равғани думба, дар шарбати пиёзи анзур ва кашниз таркардашуда.',
-          en: 'Succulent morsels of mountain lamb and tail fat, cured in wild anzur onion and coriander essence, grilled over grapevine embers.',
-          zh: '鲜嫩多汁的高山羔羊肉搭配丰美羊尾油，经野生安祖尔洋葱汁与芫荽调味，葡萄藤炭火现烤。'
+          ru: 'Настоящее восточное застольное блюдо: сочное мясо с хрустящей корочкой, томлёный золотистый молодой картофель, сладкий лук и свежая зелень.',
+          tj: 'Таоми суннатии шоҳона: гӯшти хуштаъми бирён бо картошкаи тиллоӣ, пиёз ва кабудии тару тоза.',
+          en: 'Authentic festive delicacy: juicy meat seared to a crisp exterior, tender golden potatoes, sliced onions, and fragrant herbs.',
+          zh: '地道中亚盛宴名肴：外焦里嫩的鲜美肉排，配以小火慢煨至金黄酥软的土豆与新鲜洋葱丝。'
         },
-        specBase: { ru: 'Горный ягнёнок, курдюк', tj: 'Барраи кӯҳӣ, думба', en: 'Mountain lamb, tail fat', zh: '高山羔羊肉，羊尾油' },
-        specPrep: { ru: 'Угли из виноградной лозы', tj: 'Ангишти токи ангур', en: 'Grapevine charcoal', zh: '天然葡萄藤木炭' },
-        specPair: { ru: 'Маринованный лук & Наршараб', tj: 'Пиёзи сиркоӣ & Наршароб', en: 'Pickled onion & Narsharab', zh: '腌渍洋葱 & 石榴浓汁' },
+        specBase: { ru: 'Каре ягнёнка / говядина, картофель', tj: 'Қабурғаи барра / гов, картошка', en: 'Lamb chops / beef, potatoes', zh: '精选肉排，黄金土豆' },
+        specPrep: { ru: 'Обжарка в казане до корочки', tj: 'Дар дег то сурх шудан бирён кардан', en: 'Seared in cauldron until crispy', zh: '大铁锅高温封边炙烤' },
+        specPair: { ru: 'Красный лук, помидоры & Кульча', tj: 'Пиёзи сурх, помидор & Кулча', en: 'Red onion, tomatoes & Kulcha', zh: '红洋葱，鲜番茄 & 传统烤饼' },
         waText: {
-          ru: 'Здравствуйте! Хочу заказать блюдо Шашлык на углях',
-          tj: 'Салом! Мехоҳам Кабоби рӯи ангиштро фармоиш диҳам',
-          en: 'Hello! I would like to order Vine-Charcoal Lamb Kebab',
-          zh: '您好！我想订购葡萄木炭烤羊肉串'
+          ru: 'Здравствуйте! Хочу заказать блюдо Казан Кабоб',
+          tj: 'Салом! Мехоҳам Қазон Кабобро фармоиш диҳам',
+          en: 'Hello! I would like to order Kazan Kabob',
+          zh: '您好！我想订购大锅煨烤肉 (Kazan Kabob)'
         }
       },
       {
@@ -2970,33 +3038,33 @@ for (let l of ['ru', 'tj', 'en', 'zh']) {
       {
         id: 5,
         category: 'bar',
-        price: '25',
-        img: 'gen_tea.jpg',
-        catShort: { ru: 'Чай & Бар', tj: 'Чой & Бар', en: 'Tea & Bar', zh: '茶饮与酒单' },
-        catName: { ru: 'ГОРНЫЙ БАР & НАПИТКИ', tj: 'БАРИ КӮҲӢ ВА НӮШОКИҲО', en: 'MOUNTAIN BAR & BEVERAGES', zh: '高山茶舍与精选饮品' },
-        tag: { ru: 'ТРАДИЦИИ ПАМИРА', tj: 'АНЪАНАҲОИ ПОМИР', en: 'PAMIR HERITAGE', zh: '帕米尔非遗传统' },
-        serving: { ru: 'ЦЕРЕМОНИЯ · 900 МЛ', tj: 'МАРОСИМӢ · 900 МЛ', en: 'TEA CEREMONY · 900 ML', zh: '茶道仪式 · 900毫升' },
-        title: { ru: 'Памирский сбор', tj: 'Чойи кӯҳии Помир', en: 'Pamir Mountain Herbal Blend', zh: '帕米尔高山野生典藏草本茶' },
+        price: '99',
+        img: 'dish_real_dubai_cheesecake.jpg',
+        catShort: { ru: 'Десерты', tj: 'Шириниҳо', en: 'Desserts', zh: '精品甜点' },
+        catName: { ru: 'ФИРМЕННЫЙ ДЕСЕРТ', tj: 'ДЕСЕРТИ МАХСУС', en: 'SIGNATURE DESSERT', zh: '招牌甜点' },
+        tag: { ru: 'ТРЕНД СЕЗОНА', tj: 'ТРЕНДИ ФАСЛ', en: 'SEASON TREND', zh: '当季爆款' },
+        serving: { ru: '± 185 Г · 99 TJS', tj: '± 185 Г · 99 TJS', en: '± 185 G · 99 TJS', zh: '± 185克 · 99 TJS' },
+        title: { ru: 'Дубайский чизкейк', tj: 'Чизкейки Дубай', en: 'Dubai Pistachio Cheesecake', zh: '迪拜开心果芝士蛋糕' },
         subtitle: {
-          ru: 'Коллекционный высокогорный чай в расписном чайнике',
-          tj: 'Чойи гиёҳии нодир дар чойники нақшини миллӣ',
-          en: 'Reserve high-altitude wild herb tea served in an artisan ceramic teapot',
-          zh: '盛装于手绘传统茶壶的高海拔典藏养生茶品'
+          ru: 'Фирменный хит с хрустящим тестом катаифи и фисташковой пастой',
+          tj: 'Хити махсус бо хамири катаифи ва пастаи пистагии аълосифат',
+          en: 'Artisan sensation with crispy kataifi crunch and premium pistachio cream',
+          zh: '风靡全球的招牌甜点，搭配酥脆卡达耶夫丝与浓醇开心果酱'
         },
         desc: {
-          ru: 'Традиционный сбор дикорастущих трав с предгорий Памира: чабрец, горная мята, дикий шафран и цветы липы. Подаётся с набатом и сухофруктами.',
-          tj: 'Маҷмӯи суннатии гиёҳҳои кӯҳии Помир: каклик, пудинаи кӯҳӣ, заъфарони худрӯй ва гули бедана. Бо набот ва меваи хушк пешкаш мешавад.',
-          en: 'Authentic wild herbs harvested from Pamir foothills: wild thyme, mountain mint, saffron threads, and linden blossom. Served with local crystal nabat candy and dried fruits.',
-          zh: '采自帕米尔高原纯净山麓的野生草药：百里香、薄荷叶、野红花与椴树花。随配传统冰糖结晶、坚果与天然干果。'
+          ru: 'Хрустящее обжаренное тесто катаифи, насыщенная крем-паста из 100% отборных фисташек, нежнейшая сливочная основа чизкейка и тончайший бельгийский шоколад.',
+          tj: 'Хамири тиллоии катаифи, қаймоқи лазизи пистагӣ, асоси қаймоқии чизкейк ва шоколади шоҳонаи белгиягӣ.',
+          en: 'Toasted golden kataifi pastry ribbons layered with pure roasted pistachio paste, velvety cream cheese center, and rich Belgian chocolate glaze.',
+          zh: '烘烤金黄酥脆的卡达耶夫丝，层层融入100%纯坚果开心果膏与丝滑芝士馅心，淋覆香浓比利时巧克力。'
         },
-        specBase: { ru: 'Чабрец, мята, шафран, липа', tj: 'Каклик, пудина, заъфарон', en: 'Wild thyme, mint, saffron, linden', zh: '野生百里香，山地薄荷，红花' },
-        specPrep: { ru: 'Традиционный заварной чайник', tj: 'Чойники нақшини суннатӣ', en: 'Handcrafted clay teapot', zh: '传统手作陶壶冲泡' },
-        specPair: { ru: 'Горный мед, набат, орехи', tj: 'Асали кӯҳӣ, набот, мағзҳо', en: 'Mountain honey, nabat crystals, nuts', zh: '高山生蜜，天然冰糖，坚果' },
+        specBase: { ru: 'Фисташковая паста, тесто катаифи', tj: 'Пастаи писта, хамири катаифи', en: 'Pistachio cream, kataifi pastry', zh: '纯开心果酱，卡达耶夫丝' },
+        specPrep: { ru: 'Холодное вызревание, темперированный шоколад', tj: 'Омодасозии дастӣ бо шоколади белгиягӣ', en: 'Cold set, tempered chocolate finish', zh: '低温凝固，精准调温巧克力' },
+        specPair: { ru: 'Памирский чай & Двойной эспрессо', tj: 'Чойи кӯҳӣ & Эспрессо', en: 'Pamir Herbal Tea & Double Espresso', zh: '帕米尔高山茶 & 双份意式浓缩' },
         waText: {
-          ru: 'Здравствуйте! Хочу заказать Памирский сбор (Чайная церемония)',
-          tj: 'Салом! Мехоҳам Чойи кӯҳии Помирро фармоиш диҳам',
-          en: 'Hello! I would like to order Pamir Mountain Herbal Blend',
-          zh: '您好！我想订购帕米尔高山野生草本茶'
+          ru: 'Здравствуйте! Хочу заказать Дубайский чизкейк',
+          tj: 'Салом! Мехоҳам Чизкейки Дубайро фармоиш диҳам',
+          en: 'Hello! I would like to order Dubai Pistachio Cheesecake',
+          zh: '您好！我想订购迪拜开心果芝士蛋糕'
         }
       }
     ];
