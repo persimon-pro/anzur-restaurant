@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ANZUR — Ресторан высокой гастрономии | Душанбе</title>
-  <meta name="description" content="Ресторан Анзур в Душанбе: ул. Дӯстии халқҳо, 10б (р-н Винзавода). Национальная, европейская и паназиатская кухня. VIP-кабины, караоке, летняя терраса. Резерв: 917 917 917." />
+  <meta name="description" content="Ресторан Анзур в Душанбе: ул. Дӯстии халқҳо, 10б (р-н Винзавода). Национальная, европейская и паназиатская кухня. VIP-кабины с караоке, летняя терраса, тихая веранда. Резерв: 917 917 917." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://anzur.rest" />
 
@@ -153,18 +153,24 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: opacity 0.8s ease, transform 0.9s cubic-bezier(0.85, 0, 0.15, 1);
+      transition: opacity 3.6s cubic-bezier(0.4, 0, 0.2, 1),
+                  filter 4.0s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 4.0s cubic-bezier(0.4, 0, 0.2, 1);
     }
     #splash.done {
       opacity: 0;
-      transform: translateY(-100%);
+      filter: blur(55px) brightness(1.6);
+      transform: scale(1.22);
       pointer-events: none;
     }
 
+    /* 4x Larger Onion Emblem Box */
     .splash-box {
-      width: 140px;
-      height: 150px;
-      margin-bottom: 2rem;
+      width: min(440px, 78vmin);
+      height: min(440px, 78vmin);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .splash-svg {
       width: 100%;
@@ -172,53 +178,57 @@
       overflow: visible;
     }
 
-    .sp-outer {
+    /* Ring 1: Внешний контур — собирается первым (0.2s - 1.4s) */
+    .sp-ring-1 {
+      stroke-dasharray: 820;
+      stroke-dashoffset: 820;
+      animation: drawRing1 1.2s cubic-bezier(0.25, 1, 0.4, 1) 0.2s forwards;
+    }
+
+    /* Ring 2: Среднее кольцо — собирается вторым (1.3s - 2.3s) */
+    .sp-ring-2 {
       stroke-dasharray: 450;
       stroke-dashoffset: 450;
-      animation: drawLine 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
-    }
-    .sp-mid {
-      stroke-dasharray: 320;
-      stroke-dashoffset: 320;
-      animation: drawLine 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
-    }
-    .sp-core {
-      opacity: 0;
-      transform-origin: center;
-      animation: corePop 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+      animation: drawRing2 1.0s cubic-bezier(0.25, 1, 0.4, 1) 1.3s forwards;
     }
 
-    @keyframes drawLine { to { stroke-dashoffset: 0; } }
-    @keyframes corePop {
-      0% { opacity: 0; transform: scale(0.3); }
-      70% { opacity: 1; transform: scale(1.15); filter: drop-shadow(0 0 14px var(--gold)); }
-      100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 6px var(--gold)); }
+    /* Ring 3: Центральное зерно/капля — собирается третьим (2.2s - 2.8s) */
+    .sp-ring-3 {
+      opacity: 0;
+      transform-origin: 200px 210px;
+      animation: popRing3 0.7s cubic-bezier(0.16, 1, 0.3, 1) 2.2s forwards;
     }
 
-    .splash-wordmark {
-      font-family: var(--font-sans);
-      font-size: 2.4rem;
-      font-weight: 700;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: var(--text);
-      opacity: 0;
-      animation: fadeIn 0.9s ease 1s forwards;
-      margin-left: 0.32em;
+    @keyframes drawRing1 {
+      to { stroke-dashoffset: 0; }
     }
-    .splash-city {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-top: 0.6rem;
-      opacity: 0;
-      animation: fadeIn 0.9s ease 1.2s forwards;
+    @keyframes drawRing2 {
+      to { stroke-dashoffset: 0; }
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes popRing3 {
+      0% {
+        opacity: 0;
+        transform: scale(0.3);
+        filter: drop-shadow(0 0 25px var(--gold));
+      }
+      70% {
+        opacity: 1;
+        transform: scale(1.18);
+        filter: drop-shadow(0 0 35px var(--gold));
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: drop-shadow(0 0 12px var(--gold));
+      }
+    }
+
+    .sp-onion-group {
+      animation: emblemPulse 2.8s ease-in-out 2.8s infinite alternate;
+    }
+    @keyframes emblemPulse {
+      0% { filter: drop-shadow(0 0 20px rgba(197, 160, 89, 0.3)); }
+      100% { filter: drop-shadow(0 0 45px rgba(197, 160, 89, 0.65)); }
     }
 
     /* ==========================================================================
@@ -290,8 +300,53 @@
     }
     .nav-reserve-link:hover { color: var(--gold-light); border-color: var(--gold-light); }
 
+    /* Language Switcher (RU / TJ / EN / ZH) */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+    }
+    .lang-switcher {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      border: 1px solid rgba(197, 160, 89, 0.28);
+      padding: 0.24rem 0.55rem;
+      background: rgba(12, 10, 9, 0.88);
+      backdrop-filter: blur(8px);
+    }
+    .lang-btn {
+      background: transparent;
+      border: none;
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.15rem 0.25rem;
+      transition: all 0.2s ease;
+      line-height: 1;
+    }
+    .lang-btn:hover {
+      color: var(--gold-light);
+    }
+    .lang-btn.is-active {
+      color: var(--gold);
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(197, 160, 89, 0.6);
+    }
+    .lang-divider {
+      color: rgba(255, 255, 255, 0.15);
+      font-size: 0.55rem;
+      user-select: none;
+    }
+
     @media (max-width: 860px) {
       .nav-center-menu { display: none; }
+    }
+    @media (max-width: 520px) {
+      .nav-reserve-link { display: none; }
+      .lang-switcher { padding: 0.2rem 0.4rem; gap: 0.12rem; }
     }
 
     /* ==========================================================================
@@ -341,28 +396,17 @@
       max-width: 900px;
       margin: auto;
     }
-    .hero-emblem {
-      width: 72px;
-      height: auto;
-      object-fit: contain;
-      margin: 0 auto 1.4rem;
-      display: block;
-      filter: drop-shadow(0 0 20px rgba(197, 160, 89, 0.45));
+    .hero-logo-wrap {
+      margin: 0 auto 1.6rem;
+      max-width: 280px;
+      width: 55%;
     }
-    .hero-brand-wrap {
-      margin-bottom: 1.6rem;
-      max-width: 480px;
-      width: 86%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .hero-wordmark-svg,
-    .hero-wordmark-img {
+    .hero-logo-img {
       width: 100%;
       height: auto;
       display: block;
       margin: 0 auto;
-      filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 18px rgba(197, 160, 89, 0.35));
+      filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 40px rgba(197, 160, 89, 0.3));
     }
     .visually-hidden {
       position: absolute;
@@ -393,30 +437,30 @@
     .hero-meta-bottom {
       position: relative;
       z-index: 2;
-      padding: 2rem 3rem;
+      padding: 2rem 0;
       display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      background: rgba(6, 5, 4, 0.4);
-      backdrop-filter: blur(8px);
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      color: var(--text-muted);
+      justify-content: center;
     }
     .scroll-indicator {
-      color: var(--gold);
+      cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0.8rem;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
+      justify-content: center;
     }
-    .scroll-bar {
+    .scroll-arrow {
       width: 32px;
-      height: 1px;
-      background: var(--gold);
+      height: 32px;
+      color: var(--gold);
+      animation: bounceArrow 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      filter: drop-shadow(0 0 6px rgba(197, 160, 89, 0.4));
+      transition: opacity 0.3s;
+    }
+    .scroll-indicator:hover .scroll-arrow {
+      opacity: 0.6;
+    }
+    @keyframes bounceArrow {
+      0%, 100% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(10px); opacity: 0.5; }
     }
 
     @media (max-width: 768px) {
@@ -517,6 +561,36 @@
       inset: 0;
       pointer-events: none;
       background: linear-gradient(180deg, rgba(6,5,4,0.3) 0%, transparent 45%, rgba(6,5,4,0.75) 100%);
+    }
+
+    /* Overlay arrows on image */
+    .stage-img-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 4;
+      width: 48px;
+      height: 48px;
+      background: rgba(6, 5, 4, 0.55);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .stage-img-arrow svg {
+      width: 20px;
+      height: 20px;
+    }
+    .stage-img-arrow--prev { left: 1rem; }
+    .stage-img-arrow--next { right: 1rem; }
+    .stage-img-arrow:hover {
+      background: rgba(197, 160, 89, 0.2);
+      border-color: var(--gold);
+      color: var(--gold);
     }
 
     /* Floating badges inside image frame */
@@ -1216,7 +1290,7 @@
     /* Events Program Schedule Strip */
     .events-schedule-strip {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       border-bottom: 1px solid var(--border);
       background: #090807;
     }
@@ -1478,43 +1552,41 @@
        ========================================================================== -->
   <div id="splash" onclick="dismissSplash()" role="dialog" aria-modal="true" aria-label="Вход в ресторан Анзур">
     <div class="splash-box">
-      <svg class="splash-svg" viewBox="0 0 160 170">
+      <svg class="splash-svg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Эмблема Ресторана Анзур">
         <defs>
-          <filter id="glow-gold" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="3.5" result="blur" />
+          <filter id="splashGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="8" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
-          <linearGradient id="gold-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#F3DFC1" />
-            <stop offset="50%" stop-color="#C5A059" />
-            <stop offset="100%" stop-color="#8E6C30" />
+          <linearGradient id="splashGold" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FCEFD8" />
+            <stop offset="35%" stop-color="#DEBE7A" />
+            <stop offset="70%" stop-color="#C5A059" />
+            <stop offset="100%" stop-color="#916D2A" />
           </linearGradient>
         </defs>
 
-        <g transform="rotate(18, 80, 85)" filter="url(#glow-gold)">
-          <!-- Outer Contour -->
-          <path class="sp-outer"
-                d="M 80, 16 C 130, 48, 148, 105, 80, 154 C 12, 105, 30, 48, 80, 16 Z"
-                fill="none" stroke="url(#gold-stroke)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+        <g filter="url(#splashGlow)" class="sp-onion-group">
+          <!-- Ring 1: Внешний контур луковицы (собирается первым) -->
+          <path class="sp-ring sp-ring-1"
+                d="M 205.5 73.2 L 220.3 77.8 L 252.0 100.1 L 273.4 117.1 L 297.2 140.5 L 311.1 158.5 L 320.1 175.6 L 327.0 198.9 L 328.2 216.9 L 324.6 239.3 L 316.6 260.7 L 301.5 283.6 L 287.0 298.4 L 264.6 314.2 L 245.9 322.6 L 221.6 329.3 L 194.2 331.4 L 167.1 327.4 L 145.3 320.0 L 121.0 306.7 L 101.6 290.1 L 88.2 274.0 L 77.5 253.3 L 71.7 233.2 L 70.0 208.0 L 72.2 190.0 L 78.1 173.1 L 89.4 154.2 L 101.8 139.9 L 119.3 123.5 L 147.4 103.0 L 190.4 77.3 Z"
+                stroke="url(#splashGold)" stroke-width="31" stroke-linecap="round" stroke-linejoin="round" fill="none" />
 
-          <!-- Middle Contour -->
-          <path class="sp-mid"
-                d="M 80, 52 C 112, 74, 122, 112, 80, 136 C 38, 112, 48, 74, 80, 52 Z"
-                fill="none" stroke="url(#gold-stroke)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+          <!-- Ring 2: Среднее кольцо луковицы (собирается вторым) -->
+          <path class="sp-ring sp-ring-2"
+                d="M 216.5 136.2 L 221.8 138.2 L 228.0 143.6 L 243.3 164.3 L 256.2 186.6 L 263.2 208.4 L 263.9 219.0 L 262.6 229.9 L 259.1 240.7 L 252.0 252.9 L 245.0 260.9 L 234.5 269.2 L 223.7 275.1 L 210.4 279.1 L 200.6 280.3 L 186.7 279.2 L 172.0 274.9 L 161.0 269.0 L 149.4 259.3 L 141.6 249.9 L 136.3 240.6 L 131.6 227.0 L 129.9 210.5 L 131.1 199.4 L 138.4 181.8 L 146.9 171.2 L 168.5 155.9 L 187.1 146.2 L 208.4 137.0 Z"
+                stroke="url(#splashGold)" stroke-width="31" stroke-linecap="round" stroke-linejoin="round" fill="none" />
 
-          <!-- Inner Core Bulb -->
-          <path class="sp-core"
-                d="M 80, 84 C 95, 96, 99, 116, 80, 124 C 61, 116, 65, 96, 80, 84 Z"
-                fill="url(#gold-stroke)" stroke="url(#gold-stroke)" stroke-width="2" />
+          <!-- Ring 3: Центральное зерно/капля (собирается третьим) -->
+          <path class="sp-ring sp-ring-3"
+                d="M 201.80 186.82 L 194.61 192.81 L 181.43 201.20 L 176.63 208.39 L 176.63 217.98 L 182.62 227.56 L 194.61 233.55 L 204.19 233.55 L 205.39 232.36 L 207.79 232.36 L 212.58 229.96 L 218.57 221.57 L 218.57 209.59 L 216.18 205.99 L 216.18 203.60 L 213.78 201.20 L 210.19 194.01 Z"
+                fill="url(#splashGold)" stroke="url(#splashGold)" stroke-width="6" stroke-linejoin="round" />
         </g>
       </svg>
     </div>
-
-    <div class="splash-wordmark">ANZUR</div>
-    <div class="splash-city">RESTAURANT · ДУШАНБЕ</div>
   </div>
 
   <!-- ==========================================================================
@@ -1527,15 +1599,27 @@
       </div>
 
       <div class="nav-center-menu">
-        <a href="#cuisine" class="nav-item">Гастрономия</a>
-        <a href="#spaces" class="nav-item">Залы & VIP</a>
-        <a href="#events" class="nav-item">Шоу & Концерты</a>
-        <a href="#reservation" class="nav-item">Контакты</a>
+        <a href="#cuisine" class="nav-item" data-i18n="nav_gastronomy">Гастрономия</a>
+        <a href="#spaces" class="nav-item" data-i18n="nav_spaces">Залы & VIP</a>
+        <a href="#events" class="nav-item" data-i18n="nav_events">Шоу & Концерты</a>
+        <a href="#reservation" class="nav-item" data-i18n="nav_contacts">Контакты</a>
       </div>
 
-      <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B2%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="nav-reserve-link">
-        Напишите нам
-      </a>
+      <div class="nav-right">
+        <div class="lang-switcher" role="navigation" aria-label="Language selection">
+          <button type="button" class="lang-btn is-active" data-lang="ru" onclick="switchLanguage('ru')">RU</button>
+          <span class="lang-divider">/</span>
+          <button type="button" class="lang-btn" data-lang="tj" onclick="switchLanguage('tj')">TJ</button>
+          <span class="lang-divider">/</span>
+          <button type="button" class="lang-btn" data-lang="en" onclick="switchLanguage('en')">EN</button>
+          <span class="lang-divider">/</span>
+          <button type="button" class="lang-btn" data-lang="zh" onclick="switchLanguage('zh')">中文</button>
+        </div>
+
+        <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B2%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="nav-reserve-link" data-i18n="nav_write_us">
+          Напишите нам
+        </a>
+      </div>
     </div>
   </nav>
 
@@ -1546,77 +1630,27 @@
     <div class="hero-backdrop"></div>
 
     <div class="hero-content">
-      <div class="hero-emblem-wrap">
-        <svg class="hero-emblem" viewBox="0 0 190 230" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Эмблема Ресторана Анзур">
-          <defs>
-            <linearGradient id="heroEmbGold" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#F2E2BE" />
-              <stop offset="30%" stop-color="#D8B772" />
-              <stop offset="70%" stop-color="#C5A059" />
-              <stop offset="100%" stop-color="#9E7B35" />
-            </linearGradient>
-            <filter id="heroEmbGlow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="2" stdDeviation="5" flood-color="#C5A059" flood-opacity="0.45" />
-            </filter>
-          </defs>
-          <g transform="translate(-5, 0)" filter="url(#heroEmbGlow)">
-            <path d="M 100 18 C 165 72, 188 138, 100 220 C 12 138, 35 72, 100 18 Z"
-                  fill="none" stroke="url(#heroEmbGold)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M 100 62 C 142 98, 154 144, 100 192 C 46 144, 58 98, 100 62 Z"
-                  fill="none" stroke="url(#heroEmbGold)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M 100 106 C 122 126, 128 148, 100 168 C 72 148, 78 126, 100 106 Z"
-                  fill="url(#heroEmbGold)" />
-          </g>
-        </svg>
+      <div class="hero-logo-wrap">
+        <img src="anzur_logo_gold.png" alt="ANZUR RESTAURANT" class="hero-logo-img" />
       </div>
-      <div class="hero-brand-wrap">
-        <svg class="hero-wordmark-svg" viewBox="0 0 500 130" width="100%" height="auto" role="img" aria-label="ANZUR RESTAURANT">
-          <defs>
-            <linearGradient id="heroWmGold" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#F2E2BE" />
-              <stop offset="30%" stop-color="#D8B772" />
-              <stop offset="70%" stop-color="#C5A059" />
-              <stop offset="100%" stop-color="#9E7B35" />
-            </linearGradient>
-            <filter id="heroWmGlow" x="-15%" y="-15%" width="130%" height="130%">
-              <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#C5A059" flood-opacity="0.38" />
-            </filter>
-          </defs>
-          <g fill="url(#heroWmGold)" filter="url(#heroWmGlow)">
-            <!-- Letter A -->
-            <path d="M 42 76 L 18 76 C 14.5 76 12.5 73.8 13.4 70.8 L 33.2 12.2 C 34.4 8.5 38.2 6 42.4 6 L 47.6 6 C 51.8 6 55.6 8.5 56.8 12.2 L 76.6 70.8 C 77.5 73.8 75.5 76 72 76 L 48 76 Z M 36 51 L 54 51 L 45 23 Z" />
-            <!-- Letter N -->
-            <path d="M 96 76 L 86 76 C 82.5 76 80 73.5 80 70 L 80 12 C 80 8.5 82.5 6 86 6 L 96 6 C 99 6 101.5 8.2 101.8 11.2 L 102 43.5 L 138 8.8 C 140.5 6.4 144 6 147 6 L 156 6 C 159.5 6 162 8.5 162 12 L 162 70 C 162 73.5 159.5 76 156 76 L 146 76 C 142.5 76 140 73.5 140 70 L 140 37.5 L 103.5 72.8 C 101.5 74.8 98.8 76 96 76 Z" />
-            <!-- Letter Z -->
-            <path d="M 182 76 C 178.5 76 176 73.5 176 70 C 176 68.2 176.8 66.6 178.2 65.4 L 226 19 L 184 19 C 180.5 19 178 16.5 178 13 C 178 9.5 180.5 7 184 7 L 246 7 C 249.5 7 252 9.5 252 13 C 252 14.8 251.2 16.4 249.8 17.6 L 202 64 L 246 64 C 249.5 64 252 66.5 252 70 C 252 73.5 249.5 76 246 76 Z" />
-            <!-- Letter U -->
-            <path d="M 272 12 L 272 47 C 272 65.5 285.5 77.5 306 77.5 C 326.5 77.5 340 65.5 340 47 L 340 12 C 340 8.5 342.5 6 346 6 L 356 6 C 359.5 6 362 8.5 362 12 L 362 47 C 362 76.5 339 94 306 94 C 273 94 250 76.5 250 47 L 250 12 C 250 8.5 252.5 6 256 6 L 266 6 C 269.5 6 272 8.5 272 12 Z" />
-            <!-- Letter R with Instagram signature curled leg -->
-            <path d="M 382 76 L 372 76 C 368.5 76 366 73.5 366 70 L 366 12 C 366 8.5 368.5 6 372 6 L 418 6 C 440.5 6 454.5 18 454.5 35.5 C 454.5 48.5 446 58 432.5 62 C 435.8 64.6 440 68.2 444.8 72 C 450.5 76.2 457.2 77.5 463 75.2 C 466.8 73.6 469.5 70 469.5 66 C 469.5 63.2 471.8 61 474.5 61 L 480.5 61 C 483.5 61 485.5 63.2 485.5 66 C 485.5 75.5 478.2 83.5 467.5 84.5 C 457 85.5 446.5 82 436.5 74.2 L 423 63.2 L 388 63.2 L 388 70 C 388 73.5 385.5 76 382 76 Z M 388 47.5 L 416 47.5 C 428.5 47.5 434.5 42 434.5 34.5 C 434.5 27 428.5 21.5 416 21.5 L 388 21.5 Z" />
-          </g>
-          <text x="249" y="122" font-family="'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="600" letter-spacing="13" fill="url(#heroWmGold)" text-anchor="middle">RESTAURANT</text>
-        </svg>
-        <h1 class="visually-hidden">ANZUR RESTAURANT — Ресторан высокой гастрономии в Душанбе</h1>
-      </div>
-      <p class="hero-subtitle">
+      <h1 class="visually-hidden">ANZUR RESTAURANT — Ресторан высокой гастрономии в Душанбе</h1>
+      <p class="hero-subtitle" data-i18n="hero_subtitle">
         НАЦИОНАЛЬНАЯ · ЕВРОПЕЙСКАЯ · ПАНАЗИАТСКАЯ КУХНЯ
       </p>
 
       <div class="hero-actions">
-        <a href="booking.html" class="btn-gold">
+        <a href="booking.html" class="btn-gold" data-i18n="hero_book_btn">
           Забронировать стол
-        </a>
-        <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D1%82%D1%8C%20%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BE%20%D1%80%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD%D0%B5%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="btn-outline">
-          Напишите нам
         </a>
       </div>
     </div>
 
     <div class="hero-meta-bottom">
       
-      <div class="scroll-indicator">
-        <div class="scroll-bar"></div>
-        <span>ИССЛЕДОВАТЬ</span>
+      <div class="scroll-indicator" onclick="document.getElementById('cuisine').scrollIntoView({behavior:'smooth'})">
+        <svg class="scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 10l5 5 5-5"/>
+        </svg>
       </div>
     </div>
   </header>
@@ -1628,21 +1662,20 @@
     <div class="container">
       <div class="sec-header" style="border-bottom:none; padding-bottom:0;">
         <div>
-          <span class="mono-label">[ ВЫБОР ШЕФ-ПОВАРА · СЕЗОН 2026 ]</span>
-          <h2 class="sec-title" style="margin-top:0.4rem;">Карта <em>вкуса</em></h2>
+          <span class="mono-label" data-i18n="menu_mono_tag">[ ВЫБОР ШЕФ-ПОВАРА · СЕЗОН 2026 ]</span>
+          <h2 class="sec-title" style="margin-top:0.4rem;" data-i18n-html="menu_sec_title">Карта <em>вкуса</em></h2>
         </div>
-        <button type="button" class="btn-outline" onclick="openMenuModal()" style="padding:0.7rem 1.6rem; font-size:0.65rem;">
+        <button type="button" class="btn-outline" onclick="openMenuModal()" style="padding:0.7rem 1.6rem; font-size:0.65rem;" data-i18n="menu_full_btn">
           ПОЛНОЕ МЕНЮ РЕСТОРАНА
         </button>
       </div>
 
       <!-- Category Filter Pills -->
       <div class="menu-filter-bar">
-        <button type="button" class="menu-filter-btn is-active" data-cat="all" onclick="filterMenu('all', this)">Все категории (6)</button>
-        <button type="button" class="menu-filter-btn" data-cat="national" onclick="filterMenu('national', this)">Национальная</button>
-        <button type="button" class="menu-filter-btn" data-cat="european" onclick="filterMenu('european', this)">Европейская</button>
-        <button type="button" class="menu-filter-btn" data-cat="panasian" onclick="filterMenu('panasian', this)">Паназиатская</button>
-        <button type="button" class="menu-filter-btn" data-cat="bar" onclick="filterMenu('bar', this)">Чайный дом & Бар</button>
+        <button type="button" class="menu-filter-btn is-active" data-cat="national" onclick="filterMenu('national', this)" data-i18n="cat_national">Национальная</button>
+        <button type="button" class="menu-filter-btn" data-cat="european" onclick="filterMenu('european', this)" data-i18n="cat_european">Европейская</button>
+        <button type="button" class="menu-filter-btn" data-cat="panasian" onclick="filterMenu('panasian', this)" data-i18n="cat_panasian">Паназиатская</button>
+        <button type="button" class="menu-filter-btn" data-cat="bar" onclick="filterMenu('bar', this)" data-i18n="cat_bar">Чайный дом & Бар</button>
       </div>
     </div>
 
@@ -1663,6 +1696,14 @@
         <div class="stage-badge-bottom-left" id="stage-badge-serving">
           «ШЕФ-ПОДАЧА» · 650 Г
         </div>
+
+        <!-- Overlay navigation arrows -->
+        <button type="button" class="stage-img-arrow stage-img-arrow--prev" onclick="prevSlide()" aria-label="Предыдущее блюдо">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <button type="button" class="stage-img-arrow stage-img-arrow--next" onclick="nextSlide()" aria-label="Следующее блюдо">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
       </div>
 
       <!-- Right Editorial Typographic Panel -->
@@ -1686,15 +1727,15 @@
           <!-- Gastronomy Spec Grid -->
           <div class="stage-specs stage-anim">
             <div class="spec-cell">
-              <span class="spec-key">ОСНОВА</span>
+              <span class="spec-key" data-i18n="spec_base">ОСНОВА</span>
               <span class="spec-val" id="stage-spec-base">Баранина, лазерный рис</span>
             </div>
             <div class="spec-cell">
-              <span class="spec-key">ПРИГОТОВЛЕНИЕ</span>
+              <span class="spec-key" data-i18n="spec_prep">ПРИГОТОВЛЕНИЕ</span>
               <span class="spec-val" id="stage-spec-prep">Казан, живой огонь</span>
             </div>
             <div class="spec-cell">
-              <span class="spec-key">РЕКОМЕНДАЦИЯ</span>
+              <span class="spec-key" data-i18n="spec_pair">РЕКОМЕНДАЦИЯ</span>
               <span class="spec-val" id="stage-spec-pair">Ачичук & Памирский сбор</span>
             </div>
           </div>
@@ -1703,19 +1744,15 @@
         <!-- Footer Actions & Controls -->
         <div class="stage-footer stage-anim">
           <div class="stage-actions">
-            <a id="stage-wa-link" href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%20%D0%B1%D0%BB%D1%8E%D0%B4%D0%BE%20%D0%9F%D0%BB%D0%BE%D0%B2%20%C2%AB%D0%90%D0%BD%D0%B7%D1%83%D1%80%C2%BB" target="_blank" rel="noopener" class="btn-gold" style="padding:0.8rem 1.8rem;">
+            <a id="stage-wa-link" href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%20%D0%B1%D0%BB%D1%8E%D0%B4%D0%BE%20%D0%9F%D0%BB%D0%BE%D0%B2%20%C2%AB%D0%90%D0%BD%D0%B7%D1%83%D1%80%C2%BB" target="_blank" rel="noopener" class="btn-gold" style="padding:0.8rem 1.8rem;" data-i18n="stage_order_wa">
               Заказать в WhatsApp
             </a>
-            <button type="button" class="btn-outline" onclick="openMenuModal()" style="padding:0.8rem 1.6rem;">
+            <button type="button" class="btn-outline" onclick="openMenuModal()" style="padding:0.8rem 1.6rem;" data-i18n="stage_view_menu">
               Смотреть меню
             </button>
           </div>
 
-          <div class="stage-nav-controls">
-            <button type="button" class="stage-arrow-btn" onclick="prevSlide()" aria-label="Предыдущее блюдо">←</button>
-            <button type="button" class="stage-pause-btn" id="stage-pause-btn" onclick="toggleAutoplay()" aria-label="Пауза автовоспроизведения">❚❚</button>
-            <button type="button" class="stage-arrow-btn" onclick="nextSlide()" aria-label="Следующее блюдо">→</button>
-          </div>
+
         </div>
       </div>
     </div>
@@ -1813,50 +1850,50 @@
        ========================================================================== -->
   <section id="spaces" class="container">
     <div class="sec-header">
-      <h2 class="sec-title">Залы & <em>Форматы</em></h2>
-      <span class="mono-label">[ ПРИВАТНОСТЬ И ЗВУК ]</span>
+      <h2 class="sec-title" data-i18n-html="spaces_title">Залы & <em>Форматы</em></h2>
+      <span class="mono-label" data-i18n="spaces_mono">[ ПРИВАТНОСТЬ И ЗВУК ]</span>
     </div>
   </section>
 
   <div class="spaces-grid">
-    <!-- VIP Room -->
+    <!-- VIP & Karaoke (merged) -->
     <div class="space-box">
       <div class="space-media">
-        <img src="gen_vip.jpg" alt="VIP-кабины" loading="lazy" />
+        <img src="gen_vip.jpg" alt="VIP-кабины с караоке" loading="lazy" />
       </div>
       <div class="space-text">
-        <span class="mono-label">6 – 25 ПЕРСОН</span>
-        <h3 class="space-title">VIP-кабины</h3>
-        <p class="space-desc">
-          Изолированные апартаменты для конфиденциальных деловых встреч и закрытых ужинов.
+        <span class="mono-label" data-i18n="space1_badge">6 – 25 ПЕРСОН · КАРАОКЕ</span>
+        <h3 class="space-title" data-i18n="space1_title">VIP-кабины</h3>
+        <p class="space-desc" data-i18n="space1_desc">
+          Приватные залы с профессиональной караоке-системой, клубным светом и премиальным звуком для закрытых вечеров.
         </p>
       </div>
     </div>
 
-    <!-- Karaoke Lounge -->
-    <div class="space-box">
-      <div class="space-media">
-        <img src="gen_karaoke.jpg" alt="Караоке лаунж" loading="lazy" />
-      </div>
-      <div class="space-text">
-        <span class="mono-label">80 000+ ТРЕКОВ</span>
-        <h3 class="space-title">Karaoke Lounge</h3>
-        <p class="space-desc">
-          Профессиональная акустическая инженерия, клубный сценический свет и премиальные микрофоны.
-        </p>
-      </div>
-    </div>
-
-    <!-- Terrace -->
+    <!-- Летняя терраса -->
     <div class="space-box">
       <div class="space-media">
         <img src="gen_hero_terrace.jpg" alt="Летняя терраса" loading="lazy" />
       </div>
       <div class="space-text">
-        <span class="mono-label">ОТКРЫТЫЙ ВОЗДУХ</span>
-        <h3 class="space-title">Панорамная Терраса</h3>
-        <p class="space-desc">
-          Живая зелень, вечерняя подсветка и мягкий горный воздух для неспешных ужинов.
+        <span class="mono-label" data-i18n="space2_badge">ОТКРЫТЫЙ ВОЗДУХ</span>
+        <h3 class="space-title" data-i18n="space2_title">Летняя Терраса</h3>
+        <p class="space-desc" data-i18n="space2_desc">
+          Уютная зона под открытым небом с живой зеленью и вечерней подсветкой для неспешных ужинов.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тихая веранда -->
+    <div class="space-box">
+      <div class="space-media">
+        <img src="gen_veranda.jpg" alt="Тихая веранда" loading="lazy" />
+      </div>
+      <div class="space-text">
+        <span class="mono-label" data-i18n="space3_badge">БЕЗ ГРОМКОЙ МУЗЫКИ</span>
+        <h3 class="space-title" data-i18n="space3_title">Тихая Веранда</h3>
+        <p class="space-desc" data-i18n="space3_desc">
+          Спокойная зона вдали от сцены — для деловых встреч, семейных обедов и тех, кто ценит тишину.
         </p>
       </div>
     </div>
@@ -1869,8 +1906,8 @@
     <div class="container">
       <div class="sec-header">
         <div>
-          <span class="mono-label">[ АФИША · ЖИВОЙ ЗВУК · ВЕЧЕРНЯЯ ПРОГРАММА ]</span>
-          <h2 class="sec-title" style="margin-top:0.4rem;">Шоу & <em>Концерты</em></h2>
+          <span class="mono-label" data-i18n="events_mono">[ АФИША · ЖИВОЙ ЗВУК · ВЕЧЕРНЯЯ ПРОГРАММА ]</span>
+          <h2 class="sec-title" style="margin-top:0.4rem;" data-i18n-html="events_title">Шоу & <em>Концерты</em></h2>
         </div>
         <a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" class="btn-outline" style="padding:0.7rem 1.6rem; font-size:0.65rem;">
           INSTAGRAM @ANZUR.REST
@@ -1880,65 +1917,65 @@
 
     <!-- Editorial 3-Cards Grid -->
     <div class="events-grid">
-      <!-- Card 1: Live Music & Vocal -->
+      <!-- Card 1: Живая музыка -->
       <article class="event-card">
         <div class="event-media">
-          <span class="event-tag-badge">ПТ — ВС · 19:30</span>
+          <span class="event-tag-badge" data-i18n="ev1_badge">ПТ — ВС · 19:30</span>
           <img src="gen_live_concert.jpg" alt="Живая музыка в ресторане Анзур" loading="lazy" />
         </div>
         <div class="event-body">
           <div>
-            <div class="event-meta-time">ГЛАВНЫЙ ЗАЛ & ТЕРРАСА</div>
-            <h3 class="event-title">Живая музыка & Вокал</h3>
-            <p class="event-desc">
-              Виртуозные соло на саксофоне и скрипке, восточные струнные инструменты (рубаб, тар) и чарующий живой вокал. Атмосферные джазовые импровизации, мировые хиты и восточная классика под аккомпанемент вашего ужина.
+            <div class="event-meta-time" data-i18n="ev1_meta">ГЛАВНЫЙ ЗАЛ & ТЕРРАСА</div>
+            <h3 class="event-title" data-i18n="ev1_title">Живая Музыка</h3>
+            <p class="event-desc" data-i18n="ev1_desc">
+              Саксофон, скрипка, живой вокал и восточные инструменты — рубаб, тар. Джазовые импровизации, мировые хиты и восточная классика каждый вечер.
             </p>
           </div>
           <div class="event-footer">
-            <span class="event-specs">САКСОФОН · СКРИПКА · ВОКАЛ</span>
-            <a href="booking.html" class="event-link">Резерв стола →</a>
+            <span class="event-specs" data-i18n="ev1_specs">САКСОФОН · СКРИПКА · ВОКАЛ</span>
+            <a href="booking.html" class="event-link" data-i18n="ev1_link">Резерв стола →</a>
           </div>
         </div>
       </article>
 
-      <!-- Card 2: Karaoke & DJ -->
+      <!-- Card 2: Шоу-балет -->
       <article class="event-card">
         <div class="event-media">
-          <span class="event-tag-badge">ЕЖЕДНЕВНО · С 20:00</span>
-          <img src="gen_karaoke.jpg" alt="Караоке и DJ-вечеринки в ресторане Анзур" loading="lazy" />
+          <span class="event-tag-badge" data-i18n="ev2_badge">ПТ & СБ · 21:00</span>
+          <img src="gen_show_ballet.jpg" alt="Шоу-балет в ресторане Анзур" loading="lazy" />
         </div>
         <div class="event-body">
           <div>
-            <div class="event-meta-time">KARAOKE LOUNGE & ТЕРРАСА</div>
-            <h3 class="event-title">Karaoke Night & DJ-сеты</h3>
-            <p class="event-desc">
-              Премиальная система караоке AST с каталогом более 80 000 композиций, студийный сценический звук и индивидуальные сценарии клубного света. По выходным — глубокий organic lounge и диджей-сеты на открытой террасе.
+            <div class="event-meta-time" data-i18n="ev2_meta">ГЛАВНАЯ СЦЕНА</div>
+            <h3 class="event-title" data-i18n="ev2_title">Шоу-балет</h3>
+            <p class="event-desc" data-i18n="ev2_desc">
+              Зрелищные танцевальные постановки с профессиональными артистами, костюмированные шоу-программы, сценический свет и спецэффекты.
             </p>
           </div>
           <div class="event-footer">
-            <span class="event-specs">80 000+ ТРЕКОВ · КЛУБНЫЙ ЗВУК</span>
-            <a href="booking.html" class="event-link">Заказать VIP-кабину →</a>
+            <span class="event-specs" data-i18n="ev2_specs">ТАНЦЫ · КОСТЮМЫ · СПЕЦЭФФЕКТЫ</span>
+            <a href="booking.html" class="event-link" data-i18n="ev2_link">Забронировать →</a>
           </div>
         </div>
       </article>
 
-      <!-- Card 3: Chef's Fire Show -->
+      <!-- Card 3: Концерты звёзд -->
       <article class="event-card">
         <div class="event-media">
-          <span class="event-tag-badge">УИКЕНД · 20:30</span>
-          <img src="gen_chef_fire_show.jpg" alt="Гастрономическое шоу шеф-повара" loading="lazy" />
+          <span class="event-tag-badge" data-i18n="ev3_badge">СПЕЦИАЛЬНЫЕ ВЕЧЕРА</span>
+          <img src="gen_star_concert.jpg" alt="Концерты звёзд в ресторане Анзур" loading="lazy" />
         </div>
         <div class="event-body">
           <div>
-            <div class="event-meta-time">ОТКРЫТАЯ КУХНЯ & СТОЛЫ ГОСТЕЙ</div>
-            <h3 class="event-title">Огненное Шоу Шеф-повара</h3>
-            <p class="event-desc">
-              Гастрономический перформанс на открытом огне: праздничная выемка плова «Анзур» из 50-литрового казана, зрелищное фламбирование сочных стейков Рибай прямо у вашего стола и подача шашлыков на тлеющих углях.
+            <div class="event-meta-time" data-i18n="ev3_meta">КОНЦЕРТНЫЙ ЗАЛ</div>
+            <h3 class="event-title" data-i18n="ev3_title">Концерты Звёзд</h3>
+            <p class="event-desc" data-i18n="ev3_desc">
+              Выступления популярных артистов эстрады — специальные концертные вечера с полной программой, живым звуком и VIP-местами у сцены.
             </p>
           </div>
           <div class="event-footer">
-            <span class="event-specs">ОТКРЫТЫЙ ОГОНЬ · КАЗАН · ФЛАМБЕ</span>
-            <a href="booking.html" class="event-link">Участвовать →</a>
+            <span class="event-specs" data-i18n="ev3_specs">ЗВЁЗДЫ · ЖИВОЙ ЗВУК · VIP</span>
+            <a href="booking.html" class="event-link" data-i18n="ev3_link">Узнать афишу →</a>
           </div>
         </div>
       </article>
@@ -1947,36 +1984,31 @@
     <!-- Weekly Schedule Strip -->
     <div class="events-schedule-strip">
       <div class="sched-item">
-        <div class="sched-day">ПЯТНИЦА — ВОСКРЕСЕНЬЕ</div>
-        <div class="sched-name">Живой вокал & Саксофон</div>
-        <div class="sched-detail">19:30 — 23:00 · Главный зал и терраса</div>
+        <div class="sched-day" data-i18n="sched1_day">ПЯТНИЦА — ВОСКРЕСЕНЬЕ</div>
+        <div class="sched-name" data-i18n="sched1_name">Живая музыка</div>
+        <div class="sched-detail" data-i18n="sched1_detail">19:30 — 23:00 · Главный зал и терраса</div>
       </div>
       <div class="sched-item">
-        <div class="sched-day">КАЖДЫЙ УИКЕНД</div>
-        <div class="sched-name">Шоу Шефа & Ханский плов</div>
-        <div class="sched-detail">20:30 · Открытый казан и подача у стола</div>
+        <div class="sched-day" data-i18n="sched2_day">ПЯТНИЦА & СУББОТА</div>
+        <div class="sched-name" data-i18n="sched2_name">Шоу-балет</div>
+        <div class="sched-detail" data-i18n="sched2_detail">21:00 · Главная сцена</div>
       </div>
       <div class="sched-item">
-        <div class="sched-day">ЕЖЕДНЕВНО</div>
-        <div class="sched-name">VIP Karaoke Lounge</div>
-        <div class="sched-detail">20:00 — 00:00 · Каталог 80 000+ песен</div>
-      </div>
-      <div class="sched-item">
-        <div class="sched-day">СУББОТА & ВОСКРЕСЕНЬЕ</div>
-        <div class="sched-name">Семейные уикенды</div>
-        <div class="sched-detail">12:00 — 17:00 · Детская зона и аниматоры</div>
+        <div class="sched-day" data-i18n="sched3_day">СПЕЦИАЛЬНЫЕ ДАТЫ</div>
+        <div class="sched-name" data-i18n="sched3_name">Концерты звёзд</div>
+        <div class="sched-detail" data-i18n="sched3_detail">По расписанию · Следите в Instagram</div>
       </div>
     </div>
 
     <!-- CTA Bar -->
     <div class="container events-cta-bar">
       <div class="events-cta-text">
-        <h4 class="events-cta-title">Планируете особенный вечер?</h4>
-        <p class="events-cta-sub">Забронируйте стол у сцены или отдельную VIP-кабину для вашей компании</p>
+        <h4 class="events-cta-title" data-i18n="cta_title">Планируете особенный вечер?</h4>
+        <p class="events-cta-sub" data-i18n="cta_sub">Забронируйте стол у сцены или отдельную VIP-кабину для вашей компании</p>
       </div>
       <div class="events-cta-buttons">
-        <a href="booking.html" class="btn-gold">Забронировать стол на вечер</a>
-        <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%B0%D1%84%D0%B8%D1%88%D1%83%20%D1%88%D0%BE%D1%83%20%D0%B8%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D1%80%D1%82%D0%BE%D0%B2%20%D0%B2%20%D1%80%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD%D0%B5%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="btn-outline">
+        <a href="booking.html" class="btn-gold" data-i18n="cta_btn_book">Забронировать стол на вечер</a>
+        <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%B0%D1%84%D0%B8%D1%88%D1%83%20%D1%88%D0%BE%D1%83%20%D0%B8%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D1%80%D1%82%D0%BE%D0%B2%20%D0%B2%20%D1%80%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD%D0%B5%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="btn-outline" data-i18n="cta_btn_wa">
           Уточнить афишу в WhatsApp
         </a>
       </div>
@@ -1988,8 +2020,8 @@
        ========================================================================== -->
   <section id="reservation" class="reservation-sec">
     <div class="res-left">
-      <span class="mono-label">БРОНИРОВАНИЕ СТОЛИКА</span>
-      <h2 class="sec-title" style="margin-top:0.4rem;">Контакты</h2>
+      <span class="mono-label" data-i18n="res_mono">[ ВИНЗАВОД · ДУШАНБЕ ]</span>
+      <h2 class="sec-title" style="margin-top:0.4rem;" data-i18n-html="res_title">Резерв & <em>Локация</em></h2>
 
       <a href="tel:992917917917" class="res-phone">
         917 917 917
@@ -1997,12 +2029,12 @@
 
       <div class="res-details">
         <div class="res-row">
-          <span class="res-label">АДРЕС</span>
-          <span>г. Душанбе, ул. Дӯстии халқҳо, 10б (р-н Винзавода)</span>
+          <span class="res-label" data-i18n="res_label_addr">АДРЕС</span>
+          <span data-i18n="res_val_addr">г. Душанбе, ул. Дӯстии халқҳо, 10б (р-н Винзавода)</span>
         </div>
         <div class="res-row">
-          <span class="res-label">РЕЖИМ</span>
-          <span>Ежедневно: 10:00 — 00:00</span>
+          <span class="res-label" data-i18n="res_label_hours">РЕЖИМ</span>
+          <span data-i18n="res_val_hours">Ежедневно: 10:00 — 00:00</span>
         </div>
         <div class="res-row">
           <span class="res-label">INSTAGRAM</span>
@@ -2011,7 +2043,7 @@
       </div>
 
       <div>
-        <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B2%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="btn-gold">
+        <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B2%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="btn-gold" data-i18n="res_wa_btn">
           Написать в WhatsApp
         </a>
       </div>
@@ -2037,8 +2069,8 @@
         <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;" class="footer-brand-logo" title="ANZUR RESTAURANT">
           <img src="anzur_logo_gold.svg" alt="ANZUR RESTAURANT" />
         </a>
-        <p class="footer-brand-desc">
-          Ресторан высокой гастрономии в Душанбе. Национальная, европейская и паназиатская кухня, приватные VIP-кабины, Karaoke Lounge и панорамная летняя терраса.
+        <p class="footer-brand-desc" data-i18n="footer_desc">
+          Ресторан высокой гастрономии в Душанбе. Национальная, европейская и паназиатская кухня, приватные VIP-кабины с караоке, летняя терраса и тихая веранда.
         </p>
         <div class="footer-social-row">
           <a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" class="footer-soc-link" aria-label="Instagram">
@@ -2055,7 +2087,7 @@
 
       <!-- Col 2: Навигация -->
       <div class="footer-col">
-        <h4 class="footer-col-title">Навигация</h4>
+        <h4 class="footer-col-title" data-i18n="footer_col_nav">Навигация</h4>
         <ul class="footer-links">
           <li><a href="#cuisine">Карта вкуса</a></li>
           <li><a href="#spaces">Залы & Пространства</a></li>
@@ -2068,19 +2100,19 @@
 
       <!-- Col 3: Залы & Отдых -->
       <div class="footer-col">
-        <h4 class="footer-col-title">Залы & Форматы</h4>
+        <h4 class="footer-col-title" data-i18n="footer_col_spaces">Залы & Форматы</h4>
         <ul class="footer-links">
           <li><a href="#spaces">Главный ресторанный зал</a></li>
-          <li><a href="#spaces">VIP-кабины (6 – 25 персон)</a></li>
-          <li><a href="#spaces">Karaoke Lounge (80 000+ треков)</a></li>
-          <li><a href="#spaces">Панорамная летняя терраса</a></li>
+          <li><a href="#spaces">VIP-кабины с караоке</a></li>
+          <li><a href="#spaces">Летняя терраса</a></li>
+          <li><a href="#spaces">Тихая веранда</a></li>
           <li><a href="booking.html">Банкеты и корпоративы</a></li>
         </ul>
       </div>
 
       <!-- Col 4: Контакты & Локация -->
       <div class="footer-col">
-        <h4 class="footer-col-title">Контакты</h4>
+        <h4 class="footer-col-title" data-i18n="footer_col_contacts">Контакты</h4>
         <ul class="footer-links">
           <li>
             <a href="tel:992917917917" style="color:var(--gold); font-weight:700;">
@@ -2119,9 +2151,9 @@
     <!-- Footer Bottom Bar -->
     <div class="footer-bottom-bar container">
       <div class="footer-bottom-left">
-        <span>© 2026 Ресторан «Анзур». Все права защищены.</span>
+        <span data-i18n="footer_rights">© 2026 Ресторан «Анзур». Все права защищены.</span>
         <span class="footer-dev-credit">
-          Разработка сайта — <strong style="color:var(--gold);">Loft Creative House</strong>
+          <span data-i18n="footer_dev">Разработка сайта — </span><strong style="color:var(--gold);">Loft Creative House</strong>
         </span>
       </div>
       <div class="footer-bottom-right">
@@ -2137,9 +2169,9 @@
     <div class="menu-modal-header">
       <div>
         <span class="mono-label">[ АНЗУР · ГАСТРОНОМИЧЕСКАЯ КАРТА ]</span>
-        <h2 id="modal-menu-heading" class="menu-modal-title">Сезонное меню ресторана</h2>
+        <h2 id="modal-menu-heading" class="menu-modal-title" data-i18n="modal_title">Сезонное меню ресторана</h2>
       </div>
-      <button type="button" class="menu-modal-close" onclick="closeMenuModal()">✕ ЗАКРЫТЬ [ESC]</button>
+      <button type="button" class="menu-modal-close" onclick="closeMenuModal()" data-i18n="modal_close">✕ ЗАКРЫТЬ [ESC]</button>
     </div>
 
     <div class="menu-modal-body">
@@ -2147,8 +2179,8 @@
         <!-- Col 1: Национальная -->
         <div class="menu-cat-col">
           <div class="menu-cat-head">
-            <span>ТАДЖИКИСТАН & ВОСТОК</span>
-            <h3>Национальная кухня</h3>
+            <span data-i18n="modal_cat_east">ТАДЖИКИСТАН & ВОСТОК</span>
+            <h3 data-i18n="modal_cat_nat">Национальная кухня</h3>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
@@ -2190,8 +2222,8 @@
         <!-- Col 2: Европейская & Стейки -->
         <div class="menu-cat-col">
           <div class="menu-cat-head">
-            <span>BLACK ANGUS & КЛАССИКА</span>
-            <h3>Европейская кухня</h3>
+            <span data-i18n="modal_cat_euro">BLACK ANGUS & КЛАССИКА</span>
+            <h3 data-i18n="modal_cat_euro_title">Европейская кухня</h3>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
@@ -2233,8 +2265,8 @@
         <!-- Col 3: Паназия -->
         <div class="menu-cat-col">
           <div class="menu-cat-head">
-            <span>RAW BAR & WOK</span>
-            <h3>Паназиатская линия</h3>
+            <span data-i18n="modal_cat_asia">RAW BAR & WOK</span>
+            <h3 data-i18n="modal_cat_asia_title">Паназиатская линия</h3>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
@@ -2276,8 +2308,8 @@
         <!-- Col 4: Горный бар & Десерты -->
         <div class="menu-cat-col">
           <div class="menu-cat-head">
-            <span>ТРАВЫ, ЧАЙ & ДЕСЕРТЫ</span>
-            <h3>Бар & Кондитерская</h3>
+            <span data-i18n="modal_cat_tea">ТРАВЫ, ЧАЙ & ДЕСЕРТЫ</span>
+            <h3 data-i18n="modal_cat_tea_title">Бар & Кондитерская</h3>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
@@ -2333,7 +2365,7 @@
   <!-- DOCKED WHATSAPP BUTTON -->
   <a id="wa-dock" href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B2%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" aria-label="Бронь столика в WhatsApp">
     <div class="wa-led"></div>
-    <span class="wa-label">НАПИШИТЕ НАМ</span>
+    <span class="wa-label" data-i18n="wa_dock">НАПИШИТЕ НАМ</span>
   </a>
 
   <!-- SCRIPT -->
@@ -2359,129 +2391,679 @@
       const sp = document.getElementById('splash');
       if (sp) {
         sp.classList.remove('done');
+        sp.querySelectorAll('.sp-ring').forEach(el => {
+          el.style.animation = 'none';
+          el.offsetHeight; // force reflow
+          el.style.animation = '';
+        });
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     }
 
-    // Auto-dismiss after 2.3 seconds
+    // Auto-dismiss after rings finish assembling (~3.4s)
     window.addEventListener('load', () => {
       setTimeout(() => {
         dismissSplash();
-      }, 2300);
+      }, 3400);
     });
 
     /* ==========================================================================
        KINETIC MENU SHOWCASE & EDITORIAL SLIDER LOGIC
        ========================================================================== */
+    const I18N = {
+  ru: {
+    nav_gastronomy: "Гастрономия",
+    nav_spaces: "Залы & VIP",
+    nav_events: "Шоу & Концерты",
+    nav_contacts: "Контакты",
+    nav_write_us: "Напишите нам",
+    hero_subtitle: "НАЦИОНАЛЬНАЯ · ЕВРОПЕЙСКАЯ · ПАНАЗИАТСКАЯ КУХНЯ",
+    hero_book_btn: "Забронировать стол",
+    menu_mono_tag: "[ ВЫБОР ШЕФ-ПОВАРА · СЕЗОН 2026 ]",
+    menu_sec_title: "Карта <em>вкуса</em>",
+    menu_full_btn: "ПОЛНОЕ МЕНЮ РЕСТОРАНА",
+    cat_national: "Национальная",
+    cat_european: "Европейская",
+    cat_panasian: "Паназиатская",
+    cat_bar: "Чайный дом & Бар",
+    spec_base: "ОСНОВА",
+    spec_prep: "ПРИГОТОВЛЕНИЕ",
+    spec_pair: "РЕКОМЕНДАЦИЯ",
+    stage_order_wa: "Заказать в WhatsApp",
+    stage_view_menu: "Смотреть меню",
+    spaces_title: "Залы & <em>Форматы</em>",
+    spaces_mono: "[ ПРИВАТНОСТЬ И ЗВУК ]",
+    space1_badge: "6 – 25 ПЕРСОН · КАРАОКЕ",
+    space1_title: "VIP-кабины",
+    space1_desc: "Приватные залы с профессиональной караоке-системой, клубным светом и премиальным звуком для закрытых вечеров.",
+    space2_badge: "ОТКРЫТЫЙ ВОЗДУХ",
+    space2_title: "Летняя Терраса",
+    space2_desc: "Уютная зона под открытым небом с живой зеленью и вечерней подсветкой для неспешных ужинов.",
+    space3_badge: "БЕЗ ГРОМКОЙ МУЗЫКИ",
+    space3_title: "Тихая Веранда",
+    space3_desc: "Спокойная зона вдали от сцены — для деловых встреч, семейных обедов и тех, кто ценит тишину.",
+    events_title: "Шоу & <em>Концерты</em>",
+    events_mono: "[ АФИША · ЖИВОЙ ЗВУК · ВЕЧЕРНЯЯ ПРОГРАММА ]",
+    ev1_badge: "ПТ — ВС · 19:30",
+    ev1_meta: "ГЛАВНЫЙ ЗАЛ & ТЕРРАСА",
+    ev1_title: "Живая Музыка",
+    ev1_desc: "Саксофон, скрипка, живой вокал и восточные инструменты — рубаб, тар. Джазовые импровизации, мировые хиты и восточная классика каждый вечер.",
+    ev1_specs: "САКСОФОН · СКРИПКА · ВОКАЛ",
+    ev1_link: "Резерв стола →",
+    ev2_badge: "ПТ & СБ · 21:00",
+    ev2_meta: "ГЛАВНАЯ СЦЕНА",
+    ev2_title: "Шоу-балет",
+    ev2_desc: "Зрелищные танцевальные постановки с профессиональными артистами, костюмированные шоу-программы, сценический свет и спецэффекты.",
+    ev2_specs: "ТАНЦЫ · КОСТЮМЫ · СПЕЦЭФФЕКТЫ",
+    ev2_link: "Забронировать →",
+    ev3_badge: "СПЕЦИАЛЬНЫЕ ВЕЧЕРА",
+    ev3_meta: "КОНЦЕРТНЫЙ ЗАЛ",
+    ev3_title: "Концерты Звёзд",
+    ev3_desc: "Выступления популярных артистов эстрады — специальные концертные вечера с полной программой, живым звуком и VIP-местами у сцены.",
+    ev3_specs: "ЗВЁЗДЫ · ЖИВОЙ ЗВУК · VIP",
+    ev3_link: "Узнать афишу →",
+    sched1_day: "ПЯТНИЦА — ВОСКРЕСЕНЬЕ",
+    sched1_name: "Живая музыка",
+    sched1_detail: "19:30 — 23:00 · Главный зал и терраса",
+    sched2_day: "ПЯТНИЦА & СУББОТА",
+    sched2_name: "Шоу-балет",
+    sched2_detail: "21:00 · Главная сцена",
+    sched3_day: "СПЕЦИАЛЬНЫЕ ДАТЫ",
+    sched3_name: "Концерты звёзд",
+    sched3_detail: "По расписанию · Следите в Instagram",
+    cta_title: "Планируете особенный вечер?",
+    cta_sub: "Забронируйте стол у сцены или отдельную VIP-кабину для вашей компании",
+    cta_btn_book: "Забронировать стол на вечер",
+    cta_btn_wa: "Уточнить афишу в WhatsApp",
+    res_title: "Резерв & <em>Локация</em>",
+    res_mono: "[ ВИНЗАВОД · ДУШАНБЕ ]",
+    res_label_addr: "АДРЕС",
+    res_val_addr: "г. Душанбе, ул. Дӯстии халқҳо, 10б (р-н Винзавода)",
+    res_label_hours: "РЕЖИМ РАБОТЫ",
+    res_val_hours: "Ежедневно: 10:00 — 00:00",
+    res_direct_title: "ПРЯМОЙ РЕЗЕРВ СТОЛА",
+    res_direct_sub: "Позвоните нам или напишите в WhatsApp — администратор мгновенно подтвердит стол или VIP-кабину.",
+    res_call_btn: "Позвонить +992 91 791 79 17",
+    res_wa_btn: "Написать в WhatsApp",
+    res_online_link: "Перейти к онлайн-форме бронирования →",
+    footer_desc: "Ресторан высокой гастрономии в Душанбе. Национальная, европейская и паназиатская кухня, приватные VIP-кабины с караоке, летняя терраса и тихая веранда.",
+    footer_col_nav: "Навигация",
+    footer_col_spaces: "Залы & Форматы",
+    footer_col_contacts: "Контакты",
+    footer_banquets: "Банкеты и корпоративы",
+    footer_main_hall: "Главный ресторанный зал",
+    footer_rights: "© 2026 Ресторан «Анзур». Все права защищены.",
+    footer_dev: "Разработка сайта — ",
+    wa_dock: "НАПИШИТЕ НАМ",
+    modal_title: "Сезонное меню ресторана",
+    modal_close: "✕ ЗАКРЫТЬ [ESC]",
+    modal_cat_east: "ТАДЖИКИСТАН & ВОСТОК",
+    modal_cat_nat: "Национальная кухня",
+    modal_cat_grill: "ОТКРЫТЫЙ ОГОНЬ",
+    modal_cat_mangal: "Мангал & Гриль",
+    modal_cat_euro: "ЕВРОПА & СТЕЙКХАУС",
+    modal_cat_euro_title: "Европейская классика",
+    modal_cat_asia: "ПАНАЗИАТСКАЯ ЛИНИЯ",
+    modal_cat_asia_title: "Raw Bar & Wok",
+    modal_cat_tea: "ЧАЙНАЯ КОЛЛЕКЦИЯ",
+    modal_cat_tea_title: "Чайный дом & Напитки"
+  },
+  tj: {
+    nav_gastronomy: "Таомҳо",
+    nav_spaces: "Толорҳо & VIP",
+    nav_events: "Шоу & Консертҳо",
+    nav_contacts: "Тамос",
+    nav_write_us: "Ба мо нависед",
+    hero_subtitle: "ТАОМҲОИ МИЛЛӢ · АВРУПОӢ · ПАН-ОСИЁӢ",
+    hero_book_btn: "Фармоиши миз",
+    menu_mono_tag: "[ ИНТИХОБИ САР-ОШПАЗ · ФАСЛИ 2026 ]",
+    menu_sec_title: "Харитаи <em>лаззатҳо</em>",
+    menu_full_btn: "МЕНЮИ ПУРРАИ РЕСТОРАН",
+    cat_national: "Миллӣ",
+    cat_european: "Аврупоӣ",
+    cat_panasian: "Пан-осиёӣ",
+    cat_bar: "Чойхона & Бар",
+    spec_base: "АСОС",
+    spec_prep: "ПУХТУПАЗ",
+    spec_pair: "ТАВСИЯ",
+    stage_order_wa: "Фармоиш дар WhatsApp",
+    stage_view_menu: "Дидани меню",
+    spaces_title: "Толорҳо & <em>Фазоҳо</em>",
+    spaces_mono: "[ МАХФИЯТ ВА САДО ]",
+    space1_badge: "6 – 25 НАФАР · КАРАОКЕ",
+    space1_title: "Ҳуҷраҳои VIP",
+    space1_desc: "Ҳуҷраҳои алоҳида бо системаи караокеи касбӣ, равшании клубӣ ва садои олӣ барои шомҳои хотирмон.",
+    space2_badge: "ҲАВОИ КУШОД",
+    space2_title: "Террасаи Тобистона",
+    space2_desc: "Фазои дилнишин дар зери осмони кушод бо сабзазор ва чароғони шомона барои шомҳои гуворо.",
+    space3_badge: "БЕ САДОИ БАЛАНД",
+    space3_title: "Верандаи Ором",
+    space3_desc: "Минтақаи ором дур аз саҳна — барои мулоқотҳои корӣ, хӯроки оилавӣ ва касоне, ки хомӯширо қадр мекунанд.",
+    events_title: "Шоу & <em>Консертҳо</em>",
+    events_mono: "[ АФИША · САДОИ ЗИНДА · БАРНОМАИ ШОМОНА ]",
+    ev1_badge: "ҶУМ — ЯКШ · 19:30",
+    ev1_meta: "ТОЛОРИ АСОСӢ & ТЕРРАСА",
+    ev1_title: "Мусиқии Зинда",
+    ev1_desc: "Саксофон, ғижак, овози зинда ва созҳои шарқӣ — рубоб, тор. Импровизатсияҳои ҷаз, хитҳои ҷаҳонӣ ва классикаи шарқӣ ҳар шом.",
+    ev1_specs: "САКСОФОН · ҒИЖАК · ОВОЗ",
+    ev1_link: "Фармоиши миз →",
+    ev2_badge: "ҶУМ & ШАН · 21:00",
+    ev2_meta: "САҲНАИ АСОСӢ",
+    ev2_title: "Шоу-балет",
+    ev2_desc: "Намоишҳои ҷолиби рақсӣ бо ҳунармандони касбӣ, барномаҳои пурҷилои либосӣ, равшании саҳна ва эффектҳои махсус.",
+    ev2_specs: "РАҚС · ЛИБОСҲО · ЭФФЕКТҲО",
+    ev2_link: "Брон кардан →",
+    ev3_badge: "ШОМҲОИ МАХСУС",
+    ev3_meta: "ТОЛОРИ КОНСЕРТӢ",
+    ev3_title: "Консерти Ситораҳо",
+    ev3_desc: "Баромадҳои сарояндагони машҳури эстрада — шомҳои консертии хоса бо барномаи мукаммал, садои зинда ва ҷойҳои VIP дар назди саҳна.",
+    ev3_specs: "СИТОРАҲО · САДОИ ЗИНДА · VIP",
+    ev3_link: "Афишаро фаҳмидан →",
+    sched1_day: "ҶУМЪА — ЯКШАНБЕ",
+    sched1_name: "Мусиқии зинда",
+    sched1_detail: "19:30 — 23:00 · Толори асосӣ ва терраса",
+    sched2_day: "ҶУМЪА & ШАНБЕ",
+    sched2_name: "Шоу-балет",
+    sched2_detail: "21:00 · Саҳнаи асосӣ",
+    sched3_day: "САНАҲОИ МАХСУС",
+    sched3_name: "Консерти ситораҳо",
+    sched3_detail: "Мувофиқи ҷадвал · Дар Instagram пайгирӣ кунед",
+    cta_title: "Шоми махсусро ба нақша доред?",
+    cta_sub: "Мизро дар назди саҳна ё ҳуҷраи алоҳидаи VIP барои ширкати худ брон кунед",
+    cta_btn_book: "Брон кардани миз барои шом",
+    cta_btn_wa: "Афишаро дар WhatsApp муайян кардан",
+    res_title: "Резерв & <em>Макон</em>",
+    res_mono: "[ ВИНЗАВОД · ДУШАНБЕ ]",
+    res_label_addr: "СУРОҒА",
+    res_val_addr: "ш. Душанбе, кӯч. Дӯстии халқҳо, 10б (н. Винзавод)",
+    res_label_hours: "СОАТИ КОРӢ",
+    res_val_hours: "Ҳар рӯз: 10:00 — 00:00",
+    res_direct_title: "ФАРМОИШИ БЕВОСИТАИ МИЗ",
+    res_direct_sub: "Ба мо занг занед ё дар WhatsApp нависед — маъмур миз ё ҳуҷраи VIP-ро зуд тасдиқ мекунад.",
+    res_call_btn: "Занг задан +992 91 791 79 17",
+    res_wa_btn: "Навиштан дар WhatsApp",
+    res_online_link: "Гузариш ба шакли онлайни фармоиш →",
+    footer_desc: "Ресторани таомҳои олии гастрономӣ дар Душанбе. Ошхонаи миллӣ, аврупоӣ ва пан-осиёӣ, ҳуҷраҳои хусусии VIP бо караоке, террасаи тобистона ва верандаи ором.",
+    footer_col_nav: "Навигатсия",
+    footer_col_spaces: "Толорҳо & Фазоҳо",
+    footer_col_contacts: "Тамос",
+    footer_banquets: "Зиёфатҳо ва чорабиниҳо",
+    footer_main_hall: "Толори асосии ресторан",
+    footer_rights: "© 2026 Ресторани «Анзур». Ҳамаи ҳуқуқҳо маҳфузанд.",
+    footer_dev: "Таҳияи сомона — ",
+    wa_dock: "БА МО НАВИСЕД",
+    modal_title: "Менюи мавсимии ресторан",
+    modal_close: "✕ ПӮШИДАН [ESC]",
+    modal_cat_east: "ТОҶИКИСТОН & ШАРҚ",
+    modal_cat_nat: "Таомҳои миллӣ",
+    modal_cat_grill: "ОТАШИ КУШОД",
+    modal_cat_mangal: "Манқал & Грилл",
+    modal_cat_euro: "АВРУПО & СТЕЙКХАУС",
+    modal_cat_euro_title: "Классикаи аврупоӣ",
+    modal_cat_asia: "ХАТТИ ПАН-ОСИЁӢ",
+    modal_cat_asia_title: "Raw Bar & Wok",
+    modal_cat_tea: "МАҶМӮАИ ЧОЙҲО",
+    modal_cat_tea_title: "Чойхона & Нӯшокиҳо"
+  },
+  en: {
+    nav_gastronomy: "Gastronomy",
+    nav_spaces: "Spaces & VIP",
+    nav_events: "Shows & Concerts",
+    nav_contacts: "Contacts",
+    nav_write_us: "Message Us",
+    hero_subtitle: "NATIONAL · EUROPEAN · PAN-ASIAN CUISINE",
+    hero_book_btn: "Reserve a Table",
+    menu_mono_tag: "[ CHEF'S SELECTION · SEASON 2026 ]",
+    menu_sec_title: "Taste <em>Map</em>",
+    menu_full_btn: "FULL RESTAURANT MENU",
+    cat_national: "National",
+    cat_european: "European",
+    cat_panasian: "Pan-Asian",
+    cat_bar: "Tea House & Bar",
+    spec_base: "BASE",
+    spec_prep: "PREPARATION",
+    spec_pair: "RECOMMENDATION",
+    stage_order_wa: "Order via WhatsApp",
+    stage_view_menu: "View Menu",
+    spaces_title: "Spaces & <em>Ambience</em>",
+    spaces_mono: "[ PRIVACY & ACOUSTICS ]",
+    space1_badge: "6 – 25 GUESTS · KARAOKE",
+    space1_title: "VIP Lounges",
+    space1_desc: "Private suites equipped with professional karaoke, club lighting, and studio-grade acoustics for exclusive gatherings.",
+    space2_badge: "OPEN AIR",
+    space2_title: "Summer Terrace",
+    space2_desc: "A cozy open-air terrace with lush natural greenery and ambient evening illumination for unhurried dining.",
+    space3_badge: "NO LOUD MUSIC",
+    space3_title: "Quiet Veranda",
+    space3_desc: "A tranquil sanctuary distanced from the stage — crafted for business talks, family lunches, and lovers of serene calm.",
+    events_title: "Shows & <em>Concerts</em>",
+    events_mono: "[ PLAYBILL · LIVE SOUND · EVENING PROGRAM ]",
+    ev1_badge: "FRI — SUN · 19:30",
+    ev1_meta: "MAIN HALL & TERRACE",
+    ev1_title: "Live Music",
+    ev1_desc: "Saxophone, violin, live vocalists, and traditional instruments like rubab and tar. Jazz improvisations, world classics, and oriental masterpieces.",
+    ev1_specs: "SAX · VIOLIN · VOCALS",
+    ev1_link: "Reserve Table →",
+    ev2_badge: "FRI & SAT · 21:00",
+    ev2_meta: "MAIN STAGE",
+    ev2_title: "Show Ballet",
+    ev2_desc: "Dazzling dance performances with professional artists, theatrical costume shows, dynamic stage lighting, and special effects.",
+    ev2_specs: "DANCE · COSTUMES · FX",
+    ev2_link: "Book Now →",
+    ev3_badge: "SPECIAL NIGHTS",
+    ev3_meta: "CONCERT HALL",
+    ev3_title: "Star Concerts",
+    ev3_desc: "Headliner performances by acclaimed stars — special concert nights with full programs, live sound, and premier VIP stage-side seating.",
+    ev3_specs: "STARS · LIVE SOUND · VIP",
+    ev3_link: "View Playbill →",
+    sched1_day: "FRIDAY — SUNDAY",
+    sched1_name: "Live Music",
+    sched1_detail: "19:30 — 23:00 · Main Hall & Terrace",
+    sched2_day: "FRIDAY & SATURDAY",
+    sched2_name: "Show Ballet",
+    sched2_detail: "21:00 · Main Stage",
+    sched3_day: "SPECIAL DATES",
+    sched3_name: "Star Concerts",
+    sched3_detail: "By schedule · Follow on Instagram",
+    cta_title: "Planning a special evening?",
+    cta_sub: "Reserve a stage-side table or a private VIP suite for your party",
+    cta_btn_book: "Reserve Evening Table",
+    cta_btn_wa: "Inquire Playbill via WhatsApp",
+    res_title: "Reserve & <em>Location</em>",
+    res_mono: "[ WINERY DISTRICT · DUSHANBE ]",
+    res_label_addr: "ADDRESS",
+    res_val_addr: "10b Dustii Khalqho St., Dushanbe (Winery district)",
+    res_label_hours: "OPENING HOURS",
+    res_val_hours: "Daily: 10:00 — 00:00",
+    res_direct_title: "DIRECT TABLE RESERVATION",
+    res_direct_sub: "Call us or message on WhatsApp — our manager will promptly confirm your table or VIP lounge.",
+    res_call_btn: "Call +992 91 791 79 17",
+    res_wa_btn: "Message on WhatsApp",
+    res_online_link: "Go to Online Booking Form →",
+    footer_desc: "Fine dining restaurant in Dushanbe. National, European, and Pan-Asian cuisine, private VIP karaoke lounges, summer terrace, and quiet veranda.",
+    footer_col_nav: "Navigation",
+    footer_col_spaces: "Spaces & Formats",
+    footer_col_contacts: "Contacts",
+    footer_banquets: "Banquets & Corporate Events",
+    footer_main_hall: "Main Dining Hall",
+    footer_rights: "© 2026 Anzur Restaurant. All rights reserved.",
+    footer_dev: "Website by — ",
+    wa_dock: "MESSAGE US",
+    modal_title: "Seasonal Restaurant Menu",
+    modal_close: "✕ CLOSE [ESC]",
+    modal_cat_east: "TAJIKISTAN & ORIENT",
+    modal_cat_nat: "National Cuisine",
+    modal_cat_grill: "LIVE FIRE",
+    modal_cat_mangal: "Mangal & Charcoal Grill",
+    modal_cat_euro: "EUROPE & STEAKHOUSE",
+    modal_cat_euro_title: "European Classics",
+    modal_cat_asia: "PAN-ASIAN LINE",
+    modal_cat_asia_title: "Raw Bar & Wok",
+    modal_cat_tea: "TEA COLLECTION",
+    modal_cat_tea_title: "Tea House & Beverages"
+  },
+  zh: {
+    nav_gastronomy: "精致美馔",
+    nav_spaces: "空间与包厢",
+    nav_events: "演艺盛事",
+    nav_contacts: "联系我们",
+    nav_write_us: "在线咨询",
+    hero_subtitle: "传统中亚风味 · 欧式佳肴 · 泛亚美馔",
+    hero_book_btn: "预订餐桌",
+    menu_mono_tag: "[ 主厨精选 · 2026年度 ]",
+    menu_sec_title: "赏味<em>地图</em>",
+    menu_full_btn: "查看完整菜单",
+    cat_national: "传统中亚菜",
+    cat_european: "欧洲风味",
+    cat_panasian: "泛亚料理",
+    cat_bar: "茶舍与酒吧",
+    spec_base: "主料",
+    spec_prep: "烹饪工艺",
+    spec_pair: "推荐搭配",
+    stage_order_wa: "WhatsApp/微信预订",
+    stage_view_menu: "浏览菜单",
+    spaces_title: "空间与<em>格局</em>",
+    spaces_mono: "[ 私密与原声 ]",
+    space1_badge: "6 – 25位宾客 · 专属KTV",
+    space1_title: "VIP贵宾包厢",
+    space1_desc: "配备专业级KTV系统、俱乐部氛围灯光与殿堂级音响的独立私密套间，专为私人宴请打造。",
+    space2_badge: "露天雅座",
+    space2_title: "夏日露台",
+    space2_desc: "绿植环绕、灯光柔和的露天用餐区，感受清爽夜风与从容晚宴。",
+    space3_badge: "静谧无喧",
+    space3_title: "静谧回廊",
+    space3_desc: "远离舞台喧闹的幽雅区域，专为商务洽谈、温馨家宴与崇尚安静舒适的宾客而设。",
+    events_title: "演艺与<em>音乐盛宴</em>",
+    events_mono: "[ 精彩节目 · 现场原声 · 晚间特辑 ]",
+    ev1_badge: "周五至周日 · 19:30",
+    ev1_meta: "主宴会厅与露台",
+    ev1_title: "现场音乐",
+    ev1_desc: "萨克斯管、小提琴、现场主唱与鲁巴布等东方传统乐器交织，每晚呈献爵士即兴、世界金曲与东方经典旋律。",
+    ev1_specs: "萨克斯 · 小提琴 · 声乐",
+    ev1_link: "预约餐桌 →",
+    ev2_badge: "周五与周六 · 21:00",
+    ev2_meta: "中心主舞台",
+    ev2_title: "芭蕾大秀",
+    ev2_desc: "专业舞者呈献震撼人心的华丽舞蹈、定制服装舞台秀、动感灯光与光影特效。",
+    ev2_specs: "舞蹈 · 华服 · 光影特效",
+    ev2_link: "立即预订 →",
+    ev3_badge: "特别专场",
+    ev3_meta: "音乐大厅",
+    ev3_title: "明星演唱会",
+    ev3_desc: "特邀知名流行巨星登台献唱——完整专场音乐会、纯正现场原声及舞台前方VIP席位。",
+    ev3_specs: "明星阵容 · 现场原声 · VIP礼遇",
+    ev3_link: "查看演出表 →",
+    sched1_day: "周五至周日",
+    sched1_name: "现场音乐演艺",
+    sched1_detail: "19:30 — 23:00 · 主厅及露台",
+    sched2_day: "周五及周六",
+    sched2_name: "华丽芭蕾表演",
+    sched2_detail: "21:00 · 中心主舞台",
+    sched3_day: "特约日期",
+    sched3_name: "巨星专场音乐会",
+    sched3_detail: "按期举办 · 敬请关注Instagram",
+    cta_title: "正在规划一段特别的夜晚？",
+    cta_sub: "提前锁定靠近舞台的绝佳席位，或为您的团队预订独立VIP私享包厢",
+    cta_btn_book: "预订晚间餐位",
+    cta_btn_wa: "通过WhatsApp咨询演出表",
+    res_title: "预订与<em>位置</em>",
+    res_mono: "[ 葡萄酒厂区 · 杜尚别 ]",
+    res_label_addr: "地址",
+    res_val_addr: "杜尚别市人民友谊大街10b号（葡萄酒厂区）",
+    res_label_hours: "营业时间",
+    res_val_hours: "每日: 10:00 — 00:00",
+    res_direct_title: "快速订座专线",
+    res_direct_sub: "致电我们或通过WhatsApp发送信息——餐厅主管将即时为您确认餐台或VIP包厢。",
+    res_call_btn: "电话直拨 +992 91 791 79 17",
+    res_wa_btn: "WhatsApp联系",
+    res_online_link: "前往在线预订页面 →",
+    footer_desc: "杜尚别高端特色餐厅。呈献传统中亚风味、欧陆名馔与泛亚料理，尊享KTV私密包厢、户外夏日露台与幽雅回廊。",
+    footer_col_nav: "页面导航",
+    footer_col_spaces: "空间与格局",
+    footer_col_contacts: "联系与信息",
+    footer_banquets: "宴会与企业活动",
+    footer_main_hall: "主餐饮大厅",
+    footer_rights: "© 2026 安祖尔餐厅 (ANZUR). 版权所有.",
+    footer_dev: "网站开发 — ",
+    wa_dock: "在线咨询",
+    modal_title: "餐厅时令赏味菜单",
+    modal_close: "✕ 关闭 [ESC]",
+    modal_cat_east: "塔吉克斯坦与东方",
+    modal_cat_nat: "传统中亚菜",
+    modal_cat_grill: "明火炙烤",
+    modal_cat_mangal: "炭烤烧烤",
+    modal_cat_euro: "欧陆与牛排",
+    modal_cat_euro_title: "欧洲经典名馔",
+    modal_cat_asia: "泛亚料理特辑",
+    modal_cat_asia_title: "生鲜吧与铁板镬气",
+    modal_cat_tea: "典藏茶饮",
+    modal_cat_tea_title: "高山茶舍与精选饮品"
+  }
+};
+console.log("I18N keys count per language:");
+for (let l of ['ru', 'tj', 'en', 'zh']) {
+  console.log(l, Object.keys(I18N[l]).length);
+}
+
+
     const DISHES = [
       {
         id: 0,
         category: 'national',
-        catName: 'НАЦИОНАЛЬНАЯ КУХНЯ',
-        tag: 'НАЦИОНАЛЬНАЯ КУХНЯ',
-        serving: '«ШЕФ-ПОДАЧА» · 650 Г',
-        title: 'Плов «Анзур»',
-        subtitle: 'Традиционный казанный плов на хлопковом масле и самаркандском зире',
-        desc: 'Отборный длиннозерный лазерный рис, томлёная таджикская баранина, сладкая янтарная морковь, нут, горный барбарис, казы и перепелиные яйца.',
         price: '48',
         img: 'gen_plov.jpg',
-        specBase: 'Баранина, лазерный рис',
-        specPrep: 'Казан, живой огонь',
-        specPair: 'Ачичук & Памирский сбор',
-        waText: 'Здравствуйте! Хочу заказать блюдо Плов «Анзур»'
+        catShort: { ru: 'Национальная', tj: 'Миллӣ', en: 'National', zh: '传统中亚菜' },
+        catName: { ru: 'НАЦИОНАЛЬНАЯ КУХНЯ', tj: 'ТАОМҲОИ МИЛЛӢ', en: 'NATIONAL CUISINE', zh: '传统中亚菜' },
+        tag: { ru: 'НАЦИОНАЛЬНАЯ КУХНЯ', tj: 'ТАОМҲОИ МИЛЛӢ', en: 'NATIONAL CUISINE', zh: '传统中亚菜' },
+        serving: { ru: '«ШЕФ-ПОДАЧА» · 650 Г', tj: '«ПЕШКАШИ САР-ОШПАЗ» · 650 Г', en: "CHEF'S SERVING · 650 G", zh: '主厨精呈 · 650克' },
+        title: { ru: 'Плов «Анзур»', tj: 'Оши «Анзур»', en: 'Anzur Signature Plov', zh: '安祖尔手抓饭' },
+        subtitle: {
+          ru: 'Традиционный казанный плов на хлопковом масле и самаркандском зире',
+          tj: 'Оши суннатии дегӣ бо равғани пахта ва зираи самарқандӣ',
+          en: 'Traditional cauldron pilaf cooked over cotton oil with Samarkand cumin',
+          zh: '传统大铁锅棉籽油焖煮，佐以撒马尔罕野生孜然'
+        },
+        desc: {
+          ru: 'Отборный длиннозерный лазерный рис, томлёная таджикская баранина, сладкая янтарная морковь, нут, горный барбарис, казы и перепелиные яйца.',
+          tj: 'Биринҷи лазерӣ, гӯшти гӯсфанди кӯҳӣ, сабзии зард, нахӯд, зирк, тухми бедона ва қозӣ.',
+          en: 'Select long-grain laser rice, slow-simmered mountain lamb, amber carrots, chickpeas, barberries, kazy, and quail eggs.',
+          zh: '精选长粒丝苗米、慢火慢炖高山羔羊肉、甜美黄胡萝卜、鹰嘴豆、野山楂、马肉香肠与鹌鹑蛋。'
+        },
+        specBase: { ru: 'Баранина, лазерный рис', tj: 'Гӯшти гӯсфанд, биринҷи лазерӣ', en: 'Mountain lamb, laser rice', zh: '羔羊肉，特选长粒米' },
+        specPrep: { ru: 'Казан, живой огонь', tj: 'Дег, оташи зинда', en: 'Cast-iron cauldron, live fire', zh: '传统大铁锅，明火慢煨' },
+        specPair: { ru: 'Ачичук & Памирский сбор', tj: 'Ачичук & Чойи кӯҳӣ', en: 'Achichuk & Pamir herbal tea', zh: '阿奇丘克沙拉 & 帕米尔高山茶' },
+        waText: {
+          ru: 'Здравствуйте! Хочу заказать блюдо Плов «Анзур»',
+          tj: 'Салом! Мехоҳам Оши «Анзур»-ро фармоиш диҳам',
+          en: 'Hello! I would like to order Anzur Signature Plov',
+          zh: '您好！我想订购安祖尔手抓饭'
+        }
       },
       {
         id: 1,
         category: 'national',
-        catName: 'МАНГАЛ & УГЛИ',
-        tag: 'НАЦИОНАЛЬНАЯ / МАНГАЛ',
-        serving: 'С МАНГАЛА · 380 Г',
-        title: 'Шашлык на углях',
-        subtitle: 'Маринованная вырезка молочного ягнёнка с горными травами',
-        desc: 'Нежнейшие кусочки горного ягнёнка с курдюком, маринованные в соке дикого лука анзур и кориандра, обжаренные на углях из лозы.',
         price: '62',
         img: 'gen_shashlik.jpg',
-        specBase: 'Горный ягнёнок, курдюк',
-        specPrep: 'Угли из виноградной лозы',
-        specPair: 'Маринованный лук & Наршараб',
-        waText: 'Здравствуйте! Хочу заказать блюдо Шашлык на углях'
+        catShort: { ru: 'Мангал', tj: 'Манқал', en: 'Charcoal Grill', zh: '炭烤烧烤' },
+        catName: { ru: 'МАНГАЛ & УГЛИ', tj: 'МАНҚАЛ ВА КАБОБ', en: 'CHARCOAL MANGAL', zh: '炭烤烧烤' },
+        tag: { ru: 'НАЦИОНАЛЬНАЯ / МАНГАЛ', tj: 'МИЛЛӢ / МАНҚАЛ', en: 'NATIONAL / GRILL', zh: '传统烤炙' },
+        serving: { ru: 'С МАНГАЛА · 380 Г', tj: 'АЗ СИХХОНА · 380 Г', en: 'CHARCOAL GRILL · 380 G', zh: '明火炭烤 · 380克' },
+        title: { ru: 'Шашлык на углях', tj: 'Кабоби рӯи ангишт', en: 'Vine-Charcoal Lamb Kebab', zh: '葡萄木炭烤羊肉串' },
+        subtitle: {
+          ru: 'Маринованная вырезка молочного ягнёнка с горными травами',
+          tj: 'Гӯшти нарми барраи кӯҳӣ бо гиёҳҳои кӯҳистон',
+          en: 'Marinated tender mountain lamb tenderloin infused with alpine herbs',
+          zh: '高山乳羔羊里脊肉，浸润野生草本清香'
+        },
+        desc: {
+          ru: 'Нежнейшие кусочки горного ягнёнка с курдюком, маринованные в соке дикого лука анзур и кориандра, обжаренные на углях из лозы.',
+          tj: 'Қитъаҳои ширини барра бо равғани думба, дар шарбати пиёзи анзур ва кашниз таркардашуда.',
+          en: 'Succulent morsels of mountain lamb and tail fat, cured in wild anzur onion and coriander essence, grilled over grapevine embers.',
+          zh: '鲜嫩多汁的高山羔羊肉搭配丰美羊尾油，经野生安祖尔洋葱汁与芫荽调味，葡萄藤炭火现烤。'
+        },
+        specBase: { ru: 'Горный ягнёнок, курдюк', tj: 'Барраи кӯҳӣ, думба', en: 'Mountain lamb, tail fat', zh: '高山羔羊肉，羊尾油' },
+        specPrep: { ru: 'Угли из виноградной лозы', tj: 'Ангишти токи ангур', en: 'Grapevine charcoal', zh: '天然葡萄藤木炭' },
+        specPair: { ru: 'Маринованный лук & Наршараб', tj: 'Пиёзи сиркоӣ & Наршароб', en: 'Pickled onion & Narsharab', zh: '腌渍洋葱 & 石榴浓汁' },
+        waText: {
+          ru: 'Здравствуйте! Хочу заказать блюдо Шашлык на углях',
+          tj: 'Салом! Мехоҳам Кабоби рӯи ангиштро фармоиш диҳам',
+          en: 'Hello! I would like to order Vine-Charcoal Lamb Kebab',
+          zh: '您好！我想订购葡萄木炭烤羊肉串'
+        }
       },
       {
         id: 2,
         category: 'european',
-        catName: 'ЕВРОПЕЙСКАЯ КЛАССИКА',
-        tag: 'ВЫДЕРЖКА DRY AGED',
-        serving: 'ВЫРЕЗКА ПРАЙМ · 400 Г',
-        title: 'Стейк Рибай Прайм',
-        subtitle: 'Мраморная говядина 28-дневного сухого вызревания',
-        desc: 'Зерновой откорм премиального качества, прожарка Medium. Подаётся с копчёным сливочным маслом, розмарином и винным соусом демигляс.',
         price: '115',
         img: 'gen_steak.jpg',
-        specBase: 'Мраморная говядина Black Angus',
-        specPrep: 'Сухое вызревание 28 дней',
-        specPair: 'Соус Демигляс & Печеный чеснок',
-        waText: 'Здравствуйте! Хочу заказать блюдо Стейк Рибай Прайм'
+        catShort: { ru: 'Европейская', tj: 'Аврупоӣ', en: 'European', zh: '欧洲风味' },
+        catName: { ru: 'ЕВРОПЕЙСКАЯ КЛАССИКА', tj: 'КЛАССИКАИ АВРУПОӢ', en: 'EUROPEAN CLASSICS', zh: '欧洲经典名馔' },
+        tag: { ru: 'ВЫДЕРЖКА DRY AGED', tj: 'НИГОҲДОРИИ DRY AGED', en: 'DRY AGED RESERVE', zh: '干式熟成甄选' },
+        serving: { ru: 'ВЫРЕЗКА ПРАЙМ · 400 Г', tj: 'БУРИШИ ПРАЙМ · 400 Г', en: 'PRIME CUT · 400 G', zh: '特优原切 · 400克' },
+        title: { ru: 'Стейк Рибай Прайм', tj: 'Стейки Рибай Прайм', en: 'Prime Ribeye Steak', zh: '特级顶级肉眼牛排' },
+        subtitle: {
+          ru: 'Мраморная говядина 28-дневного сухого вызревания',
+          tj: 'Гӯшти мармарии 28 рӯз дар шароити хушк нигоҳдошташуда',
+          en: '28-day dry-aged artisanal marbled beef',
+          zh: '28天干式熟成高级雪花牛肉'
+        },
+        desc: {
+          ru: 'Зерновой откорм премиального качества, прожарка Medium. Подаётся с копчёным сливочным маслом, розмарином и винным соусом демигляс.',
+          tj: 'Сифати олӣ, пухтани дараҷаи Medium. Бо равғани дуддодаи маска ва соуси шаробии демигляс пешкаш мегардад.',
+          en: 'Premium grain-fed beef seared to Medium perfection. Served with smoked rosemary herb butter and rich red wine demi-glace.',
+          zh: '特选谷饲顶级雪花牛肉，五分熟精准炙烤。佐以迷迭香烟熏黄油及醇厚红酒法式浓汁。'
+        },
+        specBase: { ru: 'Мраморная говядина Black Angus', tj: 'Гӯшти гови Black Angus', en: 'Black Angus marbled beef', zh: '黑安格斯雪花牛肉' },
+        specPrep: { ru: 'Сухое вызревание 28 дней', tj: 'Нигоҳдории хушки 28 рӯза', en: 'Dry-aged 28 days', zh: '28天干式熟成' },
+        specPair: { ru: 'Соус Демигляс & Печеный чеснок', tj: 'Соуси Демигляс & Сири бирён', en: 'Demi-glace & roasted garlic', zh: '法式浓缩肉汁 & 烤蒜' },
+        waText: {
+          ru: 'Здравствуйте! Хочу заказать блюдо Стейк Рибай Прайм',
+          tj: 'Салом! Мехоҳам Стейки Рибайро фармоиш диҳам',
+          en: 'Hello! I would like to order Prime Ribeye Steak',
+          zh: '您好！我想订购特级肉眼牛排'
+        }
       },
       {
         id: 3,
         category: 'panasian',
-        catName: 'ПАНАЗИАТСКАЯ ЛИНИЯ',
-        tag: 'ОМАКАСЕ RAW BAR',
-        serving: 'ОМАКАСЕ СЕТ · 12 ШТ',
-        title: 'Сет Омакасе',
-        subtitle: 'Аутентичный выбор шефа из дикого лосося и тунца блюфин',
-        desc: 'Свежайший охлажденный дикий лосось, тунец блюфин и тигровые креветки на японском рисе косихикари, микрозелень шисо и сусальное золото.',
         price: '98',
         img: 'gen_sushi.jpg',
-        specBase: 'Тунец блюфин, лосось, гребешок',
-        specPrep: 'Японский рис Koshihikari',
-        specPair: 'Настоящий тёртый васаби',
-        waText: 'Здравствуйте! Хочу заказать блюдо Сет Омакасе'
+        catShort: { ru: 'Паназиатская', tj: 'Пан-осиёӣ', en: 'Pan-Asian', zh: '泛亚料理' },
+        catName: { ru: 'ПАНАЗИАТСКАЯ ЛИНИЯ', tj: 'ХАТТИ ПАН-ОСИЁӢ', en: 'PAN-ASIAN LINE', zh: '泛亚料理特辑' },
+        tag: { ru: 'ОМАКАСЕ RAW BAR', tj: 'ОМАКАСЕ RAW BAR', en: 'OMAKASE RAW BAR', zh: '生鲜吧主厨手作' },
+        serving: { ru: 'ОМАКАСЕ СЕТ · 12 ШТ', tj: 'МАҶМӮИ ОМАКАСЕ · 12 ДОНА', en: 'OMAKASE SET · 12 PCS', zh: '主厨精选套组 · 12贯' },
+        title: { ru: 'Сет Омакасе', tj: 'Маҷмӯи Омакасе', en: 'Omakase Sushi Set', zh: '主厨定制主理寿司拼盘' },
+        subtitle: {
+          ru: 'Аутентичный выбор шефа из дикого лосося и тунца блюфин',
+          tj: 'Интихоби хоси сар-ошпаз аз моҳии лосос ва тунеси кабудқанот',
+          en: "Chef's authentic master curation of wild salmon and bluefin tuna",
+          zh: '野生鲑鱼与蓝鳍金枪鱼的匠心甄选'
+        },
+        desc: {
+          ru: 'Свежайший охлажденный дикий лосось, тунец блюфин и тигровые креветки на японском рисе косихикари, микрозелень шисо и сусальное золото.',
+          tj: 'Моҳии тару тозаи сардшуда, тунес ва майгуҳои шоҳона дар болои биринҷи ҷопонии косиҳикарӣ бо гиёҳи шисо ва тиллои хӯрокӣ.',
+          en: 'Chilled wild salmon, bluefin tuna, and tiger prawns over seasoned Koshihikari rice, garnished with shiso microgreens and edible gold leaf.',
+          zh: '冷链冰鲜野生三文鱼、蓝鳍金枪鱼与黑虎虾，搭配越光越式寿司醋饭、紫苏幼苗及食用金箔点缀。'
+        },
+        specBase: { ru: 'Тунец блюфин, лосось, гребешок', tj: 'Тунес, лосос, садафак', en: 'Bluefin tuna, salmon, scallop', zh: '蓝鳍金枪鱼，三文鱼，带子' },
+        specPrep: { ru: 'Японский рис Koshihikari', tj: 'Биринҷи ҷопонии Koshihikari', en: 'Japanese Koshihikari rice', zh: '日本越光寿司米' },
+        specPair: { ru: 'Настоящий тёртый васаби', tj: 'Васабии аслии кӯфта', en: 'Freshly grated real wasabi', zh: '现磨野生山葵' },
+        waText: {
+          ru: 'Здравствуйте! Хочу заказать блюдо Сет Омакасе',
+          tj: 'Салом! Мехоҳам Маҷмӯи Омакасеро фармоиш диҳам',
+          en: 'Hello! I would like to order Omakase Sushi Set',
+          zh: '您好！我想订购主厨定制寿司拼盘'
+        }
       },
       {
         id: 4,
         category: 'panasian',
-        catName: 'ПАНАЗИАТСКАЯ КУХНЯ',
-        tag: 'ШЕФ-РЕЦЕПТ',
-        serving: 'ГОРЯЧАЯ ПОДАЧА · 480 МЛ',
-        title: 'Том Ям Королевский',
-        subtitle: 'Пряный тайский суп на кокосовом молоке с дарами моря',
-        desc: 'Наваристый бульон на лемонграссе и галангале с тигровыми креветками, кальмаром, шиитаке и томатами черри. Подаётся с паровым жасминовым рисом.',
         price: '68',
         img: 'gen_tomyum.jpg',
-        specBase: 'Тигровые креветки, кальмар, шиитаке',
-        specPrep: 'Кокосовые сливки, паста том ям',
-        specPair: 'Паровой жасминовый рис',
-        waText: 'Здравствуйте! Хочу заказать блюдо Том Ям Королевский'
+        catShort: { ru: 'Паназиатская', tj: 'Пан-осиёӣ', en: 'Pan-Asian', zh: '泛亚料理' },
+        catName: { ru: 'ПАНАЗИАТСКАЯ КУХНЯ', tj: 'ОШХОНАИ ПАН-ОСИЁӢ', en: 'PAN-ASIAN CUISINE', zh: '泛亚精致料理' },
+        tag: { ru: 'ШЕФ-РЕЦЕПТ', tj: 'ДАСТУРИ САР-ОШПАЗ', en: "CHEF'S RECIPE", zh: '主厨独家秘方' },
+        serving: { ru: 'ГОРЯЧАЯ ПОДАЧА · 480 МЛ', tj: 'ХӮРОКИ ГАРМ · 480 МЛ', en: 'HOT SERVING · 480 ML', zh: '热腾呈献 · 480毫升' },
+        title: { ru: 'Том Ям Королевский', tj: 'Том Ями Шоҳона', en: 'Royal Tom Yum', zh: '皇家冬阴功海鲜汤' },
+        subtitle: {
+          ru: 'Пряный тайский суп на кокосовом молоке с дарами моря',
+          tj: 'Шӯрбои тунди таиландӣ бо шири кокос ва неъматҳои баҳрӣ',
+          en: 'Aromatic Thai broth infused with rich coconut milk and seafood',
+          zh: '浓郁椰奶与精粹海味交织的泰式经典酸辣浓汤'
+        },
+        desc: {
+          ru: 'Наваристый бульон на лемонграссе и галангале с тигровыми креветками, кальмаром, шиитаке и томатами черри. Подаётся с паровым жасминовым рисом.',
+          tj: 'Оби гӯшти серғизо бо лемонграсс ва галангал, майгуҳои шоҳона, калмар, занбӯруғи шиитаке ва помидорҳои черрӣ.',
+          en: 'Rich infusion of lemongrass, kaffir lime, and galangal with tiger prawns, tender squid, shiitake mushrooms, and cherry tomatoes. Served with steamed jasmine rice.',
+          zh: '鲜香柠檬草与南姜慢炖浓郁高汤，搭配黑虎大虾、鲜鱿、香菇与樱桃番茄，佐以泰国香米饭。'
+        },
+        specBase: { ru: 'Тигровые креветки, кальмар, шиитаке', tj: 'Майгуҳои шоҳона, калмар, занбӯруғ', en: 'Tiger prawns, squid, shiitake', zh: '黑虎虾，鱿鱼，香菇' },
+        specPrep: { ru: 'Кокосовые сливки, паста том ям', tj: 'Шири кокос, хамираи том ям', en: 'Coconut cream, tom yum paste', zh: '特浓椰浆，冬阴功原酱' },
+        specPair: { ru: 'Паровой жасминовый рис', tj: 'Биринҷи буғпарвардаи ёсмин', en: 'Steamed jasmine rice', zh: '泰国茉莉香米饭' },
+        waText: {
+          ru: 'Здравствуйте! Хочу заказать блюдо Том Ям Королевский',
+          tj: 'Салом! Мехоҳам Том Ями Шоҳонаро фармоиш диҳам',
+          en: 'Hello! I would like to order Royal Tom Yum',
+          zh: '您好！我想订购皇家冬阴功海鲜汤'
+        }
       },
       {
         id: 5,
         category: 'bar',
-        catName: 'ГОРНЫЙ БАР & НАПИТКИ',
-        tag: 'ТРАДИЦИИ ПАМИРА',
-        serving: 'ЦЕРЕМОНИЯ · 900 МЛ',
-        title: 'Памирский сбор',
-        subtitle: 'Коллекционный высокогорный чай в расписном чайнике',
-        desc: 'Традиционный сбор дикорастущих трав с предгорий Памира: чабрец, горная мята, дикий шафран и цветы липы. Подаётся с набатом и сухофруктами.',
         price: '25',
         img: 'gen_tea.jpg',
-        specBase: 'Чабрец, мята, шафран, липа',
-        specPrep: 'Традиционный заварной чайник',
-        specPair: 'Горный мед, набат, орехи',
-        waText: 'Здравствуйте! Хочу заказать Памирский сбор (Чайная церемония)'
+        catShort: { ru: 'Чай & Бар', tj: 'Чой & Бар', en: 'Tea & Bar', zh: '茶饮与酒单' },
+        catName: { ru: 'ГОРНЫЙ БАР & НАПИТКИ', tj: 'БАРИ КӮҲӢ ВА НӮШОКИҲО', en: 'MOUNTAIN BAR & BEVERAGES', zh: '高山茶舍与精选饮品' },
+        tag: { ru: 'ТРАДИЦИИ ПАМИРА', tj: 'АНЪАНАҲОИ ПОМИР', en: 'PAMIR HERITAGE', zh: '帕米尔非遗传统' },
+        serving: { ru: 'ЦЕРЕМОНИЯ · 900 МЛ', tj: 'МАРОСИМӢ · 900 МЛ', en: 'TEA CEREMONY · 900 ML', zh: '茶道仪式 · 900毫升' },
+        title: { ru: 'Памирский сбор', tj: 'Чойи кӯҳии Помир', en: 'Pamir Mountain Herbal Blend', zh: '帕米尔高山野生典藏草本茶' },
+        subtitle: {
+          ru: 'Коллекционный высокогорный чай в расписном чайнике',
+          tj: 'Чойи гиёҳии нодир дар чойники нақшини миллӣ',
+          en: 'Reserve high-altitude wild herb tea served in an artisan ceramic teapot',
+          zh: '盛装于手绘传统茶壶的高海拔典藏养生茶品'
+        },
+        desc: {
+          ru: 'Традиционный сбор дикорастущих трав с предгорий Памира: чабрец, горная мята, дикий шафран и цветы липы. Подаётся с набатом и сухофруктами.',
+          tj: 'Маҷмӯи суннатии гиёҳҳои кӯҳии Помир: каклик, пудинаи кӯҳӣ, заъфарони худрӯй ва гули бедана. Бо набот ва меваи хушк пешкаш мешавад.',
+          en: 'Authentic wild herbs harvested from Pamir foothills: wild thyme, mountain mint, saffron threads, and linden blossom. Served with local crystal nabat candy and dried fruits.',
+          zh: '采自帕米尔高原纯净山麓的野生草药：百里香、薄荷叶、野红花与椴树花。随配传统冰糖结晶、坚果与天然干果。'
+        },
+        specBase: { ru: 'Чабрец, мята, шафран, липа', tj: 'Каклик, пудина, заъфарон', en: 'Wild thyme, mint, saffron, linden', zh: '野生百里香，山地薄荷，红花' },
+        specPrep: { ru: 'Традиционный заварной чайник', tj: 'Чойники нақшини суннатӣ', en: 'Handcrafted clay teapot', zh: '传统手作陶壶冲泡' },
+        specPair: { ru: 'Горный мед, набат, орехи', tj: 'Асали кӯҳӣ, набот, мағзҳо', en: 'Mountain honey, nabat crystals, nuts', zh: '高山生蜜，天然冰糖，坚果' },
+        waText: {
+          ru: 'Здравствуйте! Хочу заказать Памирский сбор (Чайная церемония)',
+          tj: 'Салом! Мехоҳам Чойи кӯҳии Помирро фармоиш диҳам',
+          en: 'Hello! I would like to order Pamir Mountain Herbal Blend',
+          zh: '您好！我想订购帕米尔高山野生草本茶'
+        }
       }
     ];
 
-    let currentSlideIdx = 0;
+    let currentLang = 'ru';
+
+let currentSlideIdx = 0;
     let autoplayInterval = null;
     let isAutoplayActive = true;
     let isUserHovered = false;
     let activeFillAnimation = null;
     const SLIDE_DURATION = 5000;
 
+    
+    function switchLanguage(lang) {
+      if (!I18N[lang]) return;
+      currentLang = lang;
+      try {
+        localStorage.setItem('anzur_lang', lang);
+      } catch (e) {}
+
+      document.documentElement.lang = lang;
+
+      // Update active state on language buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.getAttribute('data-lang') === lang) {
+          btn.classList.add('is-active');
+        } else {
+          btn.classList.remove('is-active');
+        }
+      });
+
+      // Update static text elements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (I18N[lang] && I18N[lang][key]) {
+          el.textContent = I18N[lang][key];
+        }
+      });
+
+      // Update elements with HTML formatting (e.g. <em>)
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        if (I18N[lang] && I18N[lang][key]) {
+          el.innerHTML = I18N[lang][key];
+        }
+      });
+
+      // Update kinetic slider filmstrip labels
+      document.querySelectorAll('.filmstrip-item').forEach(item => {
+        const idx = parseInt(item.getAttribute('data-idx'));
+        if (!isNaN(idx) && DISHES[idx]) {
+          const tEl = item.querySelector('.filmstrip-title');
+          const cEl = item.querySelector('.filmstrip-cat');
+          if (tEl && DISHES[idx].title[lang]) tEl.textContent = DISHES[idx].title[lang];
+          if (cEl && DISHES[idx].catShort[lang]) cEl.textContent = DISHES[idx].catShort[lang];
+        }
+      });
+
+      // Re-render current slide with new language
+      renderSlide(currentSlideIdx);
+    }
+
     function renderSlide(idx) {
       currentSlideIdx = (idx + DISHES.length) % DISHES.length;
       const dish = DISHES[currentSlideIdx];
+      const lang = currentLang || 'ru';
 
       // Update text elements
       const imgEl = document.getElementById('stage-img');
@@ -2500,22 +3082,22 @@
 
       if (imgEl) {
         imgEl.src = dish.img;
-        imgEl.alt = dish.title;
+        imgEl.alt = dish.title[lang] || dish.title.ru;
       }
-      if (badgeTag) badgeTag.textContent = dish.tag;
+      if (badgeTag) badgeTag.textContent = dish.tag[lang] || dish.tag.ru;
       if (counterCur) counterCur.textContent = String(dish.id + 1).padStart(2, '0');
-      if (badgeServing) badgeServing.textContent = dish.serving;
-      if (catName) catName.textContent = dish.catName;
+      if (badgeServing) badgeServing.textContent = dish.serving[lang] || dish.serving.ru;
+      if (catName) catName.textContent = dish.catName[lang] || dish.catName.ru;
       if (priceEl) priceEl.textContent = dish.price;
-      if (titleEl) titleEl.textContent = dish.title;
-      if (subEl) subEl.textContent = dish.subtitle;
-      if (descEl) descEl.textContent = dish.desc;
-      if (specBase) specBase.textContent = dish.specBase;
-      if (specPrep) specPrep.textContent = dish.specPrep;
-      if (specPair) specPair.textContent = dish.specPair;
+      if (titleEl) titleEl.textContent = dish.title[lang] || dish.title.ru;
+      if (subEl) subEl.textContent = dish.subtitle[lang] || dish.subtitle.ru;
+      if (descEl) descEl.textContent = dish.desc[lang] || dish.desc.ru;
+      if (specBase) specBase.textContent = dish.specBase[lang] || dish.specBase.ru;
+      if (specPrep) specPrep.textContent = dish.specPrep[lang] || dish.specPrep.ru;
+      if (specPair) specPair.textContent = dish.specPair[lang] || dish.specPair.ru;
 
       if (waLink) {
-        const textEnc = encodeURIComponent(dish.waText);
+        const textEnc = encodeURIComponent(dish.waText[lang] || dish.waText.ru);
         waLink.href = `https://wa.me/992917917917?text=${textEnc}`;
       }
 
@@ -2729,6 +3311,8 @@
 
     // Initialize first slide on DOM ready
     document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('anzur_lang') || 'ru';
+      switchLanguage(savedLang);
       renderSlide(0);
       resetAutoplay();
     });

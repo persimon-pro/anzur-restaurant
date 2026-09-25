@@ -108,6 +108,40 @@
       padding-bottom: 2px;
     }
     .phone-direct:hover { color: var(--gold-light); }
+    /* Language Switcher */
+    .lang-switcher {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      border: 1px solid rgba(197, 160, 89, 0.28);
+      padding: 0.24rem 0.55rem;
+      background: rgba(12, 10, 9, 0.88);
+      backdrop-filter: blur(8px);
+    }
+    .lang-btn {
+      background: transparent;
+      border: none;
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.15rem 0.25rem;
+      transition: all 0.2s ease;
+      line-height: 1;
+    }
+    .lang-btn:hover { color: var(--gold-light); }
+    .lang-btn.is-active {
+      color: var(--gold);
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(197, 160, 89, 0.6);
+    }
+    .lang-divider {
+      color: rgba(255, 255, 255, 0.15);
+      font-size: 0.55rem;
+      user-select: none;
+    }
+
 
     @media (max-width: 768px) {
       .top-nav-inner { padding: 0 1.5rem; }
@@ -286,7 +320,7 @@
   <!-- Top Nav -->
   <nav class="top-nav">
     <div class="top-nav-inner">
-      <a href="index.html" class="back-link">
+      <a href="index.html" class="back-link" data-i18n="bk_back">
         ← НА ГЛАВНУЮ
       </a>
 
@@ -294,18 +328,30 @@
         <img src="anzur_logo_gold.svg" alt="ANZUR RESTAURANT" style="height:34px; width:auto; display:block;" />
       </a>
 
-      <a href="tel:992917917917" class="phone-direct">
-        917 917 917
-      </a>
+      <div style="display:flex; align-items:center; gap:1.2rem;">
+        <div class="lang-switcher" role="navigation" aria-label="Language selection">
+          <button type="button" class="lang-btn is-active" data-lang="ru" onclick="switchLanguage('ru')">RU</button>
+          <span class="lang-divider">/</span>
+          <button type="button" class="lang-btn" data-lang="tj" onclick="switchLanguage('tj')">TJ</button>
+          <span class="lang-divider">/</span>
+          <button type="button" class="lang-btn" data-lang="en" onclick="switchLanguage('en')">EN</button>
+          <span class="lang-divider">/</span>
+          <button type="button" class="lang-btn" data-lang="zh" onclick="switchLanguage('zh')">中文</button>
+        </div>
+
+        <a href="tel:992917917917" class="phone-direct">
+          917 917 917
+        </a>
+      </div>
     </div>
   </nav>
 
   <!-- Main Booking Interface -->
   <main class="main-wrap">
     <div class="booking-header">
-      <div class="mono-tag">ОНЛАЙН-РЕЗЕРВАЦИЯ</div>
-      <h1 class="booking-title">Забронировать <em>стол</em></h1>
-      <p class="booking-subtitle">
+      <div class="mono-tag" data-i18n="bk_tag">ОНЛАЙН-РЕЗЕРВАЦИЯ</div>
+      <h1 class="booking-title" data-i18n-html="bk_title">Забронировать <em>стол</em></h1>
+      <p class="booking-subtitle" data-i18n="bk_subtitle">
         Заполните параметры вашего визита. Заявка моментально сформируется и откроется в WhatsApp администратора для подтверждения.
       </p>
     </div>
@@ -315,12 +361,12 @@
         <!-- Row 1: Date & Time -->
         <div class="form-grid">
           <div class="form-group">
-            <label class="form-label">ДАТА ВИЗИТА</label>
+            <label class="form-label" data-i18n="bk_date_lbl">ДАТА ВИЗИТА</label>
             <input type="date" class="form-control" id="resDate" required />
           </div>
 
           <div class="form-group">
-            <label class="form-label">ВРЕМЯ</label>
+            <label class="form-label" data-i18n="bk_time_lbl">ВРЕМЯ</label>
             <input type="time" class="form-control" id="resTime" value="19:00" required />
           </div>
         </div>
@@ -328,23 +374,23 @@
         <!-- Row 2: Guests & Hall -->
         <div class="form-grid">
           <div class="form-group">
-            <label class="form-label">КОЛИЧЕСТВО ПЕРСОН</label>
+            <label class="form-label" data-i18n="bk_guests_lbl">КОЛИЧЕСТВО ПЕРСОН</label>
             <select class="form-control" id="resGuests">
-              <option value="1–2 персоны">1 – 2 персоны</option>
-              <option value="3–4 персоны" selected>3 – 4 персоны</option>
-              <option value="5–8 персон">5 – 8 персон</option>
-              <option value="VIP-кабина (от 8 персон)">VIP-кабина (от 8 персон)</option>
-              <option value="Банкет (более 15 гостей)">Банкет (более 15 гостей)</option>
+              <option value="1–2 персоны" data-i18n="guests_1_2">1 – 2 персоны</option>
+              <option value="3–4 персоны" selected data-i18n="guests_3_4">3 – 4 персоны</option>
+              <option value="5–8 персон" data-i18n="guests_5_8">5 – 8 персон</option>
+              <option value="VIP-кабина (от 8 персон)" data-i18n="guests_vip">VIP-кабина (от 8 персон)</option>
+              <option value="Банкет (более 15 гостей)" data-i18n="guests_banquet">Банкет (более 15 гостей)</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label class="form-label">ЖЕЛАЕМАЯ ЗОНА</label>
+            <label class="form-label" data-i18n="bk_zone_lbl">ЖЕЛАЕМАЯ ЗОНА</label>
             <select class="form-control" id="resZone">
-              <option value="Главный зал" selected>Главный зал (живая музыка)</option>
-              <option value="Приватная VIP-кабина">Приватная VIP-кабина</option>
-              <option value="Karaoke Lounge">Karaoke Lounge</option>
-              <option value="Панорамная терраса">Панорамная летняя терраса</option>
+              <option value="Главный ресторанный зал" selected data-i18n="zone_main">Главный зал (живая музыка)</option>
+              <option value="VIP-кабины с караоке" data-i18n="zone_vip">VIP-кабины с караоке</option>
+              <option value="Летняя терраса" data-i18n="zone_terrace">Летняя терраса</option>
+              <option value="Тихая веранда" data-i18n="zone_veranda">Тихая веранда (без громкой музыки)</option>
             </select>
           </div>
         </div>
@@ -352,25 +398,25 @@
         <!-- Row 3: Name & Phone -->
         <div class="form-grid">
           <div class="form-group">
-            <label class="form-label">ВАШЕ ИМЯ</label>
+            <label class="form-label" data-i18n="bk_name_lbl">ВАШЕ ИМЯ</label>
             <input type="text" class="form-control" id="resName" placeholder="Как к вам обращаться?" required />
           </div>
 
           <div class="form-group">
-            <label class="form-label">ТЕЛЕФОН / WHATSAPP</label>
+            <label class="form-label" data-i18n="bk_phone_lbl">ТЕЛЕФОН / WHATSAPP</label>
             <input type="tel" class="form-control" id="resPhone" placeholder="+992 ..." required />
           </div>
         </div>
 
         <!-- Row 4: Notes -->
         <div class="form-group" style="margin-bottom:1.8rem;">
-          <label class="form-label">ОСОБЫЕ ПОЖЕЛАНИЯ / ПОВОД</label>
+          <label class="form-label" data-i18n="bk_notes_lbl">ОСОБЫЕ ПОЖЕЛАНИЯ / ПОВОД</label>
           <input type="text" class="form-control" id="resNotes" placeholder="День рождения, деловой ужин, романтический вечер..." />
         </div>
 
         <!-- Action Button -->
         <button type="submit" class="submit-btn">
-          <span>ОТПРАВИТЬ БРОНЬ В WHATSAPP</span>
+          <span data-i18n="bk_submit">ОТПРАВИТЬ БРОНЬ В WHATSAPP</span>
           <span>→</span>
         </button>
       </form>
@@ -378,9 +424,9 @@
 
     <!-- Direct Hotline -->
     <div class="direct-box">
-      <div class="direct-sub">ПРЯМАЯ ЛИНИЯ АДМИНИСТРАТОРА</div>
+      <div class="direct-sub" data-i18n="bk_hotline">ПРЯМАЯ ЛИНИЯ АДМИНИСТРАТОРА</div>
       <a href="tel:992917917917" class="direct-num">917 917 917</a>
-      <div class="direct-sub">ДУШАНБЕ · ЕЖЕДНЕВНО С 10:00 ДО 00:00</div>
+      <div class="direct-sub" data-i18n="bk_hours">ДУШАНБЕ · ЕЖЕДНЕВНО С 10:00 ДО 00:00</div>
     </div>
   </main>
 
@@ -394,11 +440,154 @@
   </footer>
 
   <script>
+
+    const BK_I18N = {
+      ru: {
+        bk_back: "← НА ГЛАВНУЮ",
+        bk_tag: "ОНЛАЙН-РЕЗЕРВАЦИЯ",
+        bk_title: "Забронировать <em>стол</em>",
+        bk_subtitle: "Заполните параметры вашего визита. Заявка моментально сформируется и откроется в WhatsApp администратора для подтверждения.",
+        bk_date_lbl: "ДАТА ВИЗИТА",
+        bk_time_lbl: "ВРЕМЯ",
+        bk_guests_lbl: "КОЛИЧЕСТВО ПЕРСОН",
+        bk_zone_lbl: "ЖЕЛАЕМАЯ ЗОНА",
+        bk_name_lbl: "ВАШЕ ИМЯ",
+        bk_phone_lbl: "ТЕЛЕФОН / WHATSAPP",
+        bk_notes_lbl: "ОСОБЫЕ ПОЖЕЛАНИЯ / ПОВОД",
+        bk_submit: "ОТПРАВИТЬ БРОНЬ В WHATSAPP",
+        bk_hotline: "ПРЯМАЯ ЛИНИЯ АДМИНИСТРАТОРА",
+        bk_hours: "ДУШАНБЕ · ЕЖЕДНЕВНО С 10:00 ДО 00:00",
+        zone_main: "Главный зал (живая музыка)",
+        zone_vip: "VIP-кабины с караоке",
+        zone_terrace: "Летняя терраса",
+        zone_veranda: "Тихая веранда (без громкой музыки)",
+        guests_1_2: "1 – 2 персоны",
+        guests_3_4: "3 – 4 персоны",
+        guests_5_8: "5 – 8 персон",
+        guests_vip: "VIP-кабина (от 8 персон)",
+        guests_banquet: "Банкет (более 15 гостей)",
+        name_ph: "Как к вам обращаться?",
+        notes_ph: "День рождения, деловой ужин, романтический вечер..."
+      },
+      tj: {
+        bk_back: "← БА АСОСӢ",
+        bk_tag: "ФАРМОИШИ ОНЛАЙН",
+        bk_title: "Фармоиши <em>миз</em>",
+        bk_subtitle: "Мушаххасоти ташрифи худро ворид кунед. Дархост фавран таҳия ва дар WhatsApp-и маъмур барои тасдиқ кушода мешавад.",
+        bk_date_lbl: "САНАИ ТАШРИФ",
+        bk_time_lbl: "ВАҚТ",
+        bk_guests_lbl: "ШУМОРАИ МЕҲМОНОН",
+        bk_zone_lbl: "ФАЗОИ ДИЛХОҲ",
+        bk_name_lbl: "НОМИ ШУМО",
+        bk_phone_lbl: "ТЕЛЕФОН / WHATSAPP",
+        bk_notes_lbl: "ХОҲИШҲОИ ХОС / МУНОСИБАТ",
+        bk_submit: "ФАРМОИШРО ДАР WHATSAPP ФИРИСТОДАН",
+        bk_hotline: "ХАТТИ БЕВОСИТАИ МАЪМУР",
+        bk_hours: "ДУШАНБЕ · ҲАР РӮЗ АЗ 10:00 ТО 00:00",
+        zone_main: "Толори асосӣ (мусиқии зинда)",
+        zone_vip: "Ҳуҷраҳои VIP бо караоке",
+        zone_terrace: "Террасаи тобистона",
+        zone_veranda: "Верандаи ором (бе садои баланд)",
+        guests_1_2: "1 – 2 нафар",
+        guests_3_4: "3 – 4 нафар",
+        guests_5_8: "5 – 8 нафар",
+        guests_vip: "Ҳуҷраи VIP (аз 8 нафар)",
+        guests_banquet: "Зиёфат (зиёда аз 15 меҳмон)",
+        name_ph: "Шуморо чӣ тавр ном барем?",
+        notes_ph: "Зодрӯз, мулоқоти корӣ, шоми ошиқона..."
+      },
+      en: {
+        bk_back: "← BACK TO HOME",
+        bk_tag: "ONLINE RESERVATION",
+        bk_title: "Reserve a <em>Table</em>",
+        bk_subtitle: "Fill in your visit details. Your booking request will be instantly formatted and opened in WhatsApp for prompt confirmation.",
+        bk_date_lbl: "VISIT DATE",
+        bk_time_lbl: "TIME",
+        bk_guests_lbl: "NUMBER OF GUESTS",
+        bk_zone_lbl: "PREFERRED ZONE",
+        bk_name_lbl: "YOUR NAME",
+        bk_phone_lbl: "PHONE / WHATSAPP",
+        bk_notes_lbl: "SPECIAL REQUESTS / OCCASION",
+        bk_submit: "SEND RESERVATION TO WHATSAPP",
+        bk_hotline: "DIRECT MANAGER HOTLINE",
+        bk_hours: "DUSHANBE · DAILY 10:00 — 00:00",
+        zone_main: "Main Dining Hall (live music)",
+        zone_vip: "VIP Suites with Karaoke",
+        zone_terrace: "Summer Terrace",
+        zone_veranda: "Quiet Veranda (no loud music)",
+        guests_1_2: "1 – 2 Guests",
+        guests_3_4: "3 – 4 Guests",
+        guests_5_8: "5 – 8 Guests",
+        guests_vip: "VIP Suite (8+ guests)",
+        guests_banquet: "Banquet (15+ guests)",
+        name_ph: "How should we address you?",
+        notes_ph: "Birthday, business dinner, romantic evening..."
+      },
+      zh: {
+        bk_back: "← 返回主页",
+        bk_tag: "在线餐位预订",
+        bk_title: "预订<em>餐桌</em>",
+        bk_subtitle: "填写您的到访信息。预订请求将即时生成并通过WhatsApp直接发送给餐厅主管进行快速确认。",
+        bk_date_lbl: "就餐日期",
+        bk_time_lbl: "到店时间",
+        bk_guests_lbl: "就餐人数",
+        bk_zone_lbl: "期望区域",
+        bk_name_lbl: "您的姓名",
+        bk_phone_lbl: "联系电话 / WHATSAPP",
+        bk_notes_lbl: "特殊要求 / 用餐目的",
+        bk_submit: "通过WHATSAPP发送预订",
+        bk_hotline: "餐厅主管直通专线",
+        bk_hours: "杜尚别 · 每日 10:00 至 00:00",
+        zone_main: "主宴会大厅（现场音乐）",
+        zone_vip: "VIP私享包厢（配备KTV）",
+        zone_terrace: "户外夏日露台",
+        zone_veranda: "静谧回廊雅座（无嘈杂音乐）",
+        guests_1_2: "1 – 2 位贵宾",
+        guests_3_4: "3 – 4 位贵宾",
+        guests_5_8: "5 – 8 位贵宾",
+        guests_vip: "VIP专属包厢（8位起）",
+        guests_banquet: "宴会与大型团体（15位以上）",
+        name_ph: "请问该如何称呼您？",
+        notes_ph: "生日庆生、商务宴请、浪漫纪念日..."
+      }
+    };
+
+    let currentLang = 'ru';
+
+    function switchLanguage(lang) {
+      if (!BK_I18N[lang]) return;
+      currentLang = lang;
+      try { localStorage.setItem('anzur_lang', lang); } catch (e) {}
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.getAttribute('data-lang') === lang) btn.classList.add('is-active');
+        else btn.classList.remove('is-active');
+      });
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (BK_I18N[lang] && BK_I18N[lang][key]) el.textContent = BK_I18N[lang][key];
+      });
+
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        if (BK_I18N[lang] && BK_I18N[lang][key]) el.innerHTML = BK_I18N[lang][key];
+      });
+
+      const nameInp = document.getElementById('resName');
+      const notesInp = document.getElementById('resNotes');
+      if (nameInp && BK_I18N[lang].name_ph) nameInp.placeholder = BK_I18N[lang].name_ph;
+      if (notesInp && BK_I18N[lang].notes_ph) notesInp.placeholder = BK_I18N[lang].notes_ph;
+    }
+
     // Set default date to today or tomorrow
     const today = new Date();
     const dateInput = document.getElementById('resDate');
     dateInput.min = today.toISOString().split('T')[0];
     dateInput.value = today.toISOString().split('T')[0];
+    const savedLang = localStorage.getItem('anzur_lang') || 'ru';
+    switchLanguage(savedLang);
 
     function sendBookingToWhatsApp(e) {
       e.preventDefault();
@@ -410,23 +599,23 @@
       const phone = document.getElementById('resPhone').value;
       const notes = document.getElementById('resNotes').value;
 
-      let msg = `Здравствуйте! Бронирование столика в ресторане Анзур:
-` +
-        `• Имя: ${name}
-` +
-        `• Телефон: ${phone}
-` +
-        `• Дата: ${date}
-` +
-        `• Время: ${time}
-` +
-        `• Персон: ${guests}
-` +
-        `• Зона: ${zone}`;
+      const greetings = {
+        ru: `Здравствуйте! Бронирование столика в ресторане Анзур:\n• Имя: ${name}\n• Телефон: ${phone}\n• Дата: ${date}\n• Время: ${time}\n• Персон: ${guests}\n• Зона: ${zone}`,
+        tj: `Салом! Фармоиши миз дар ресторани Анзур:\n• Ном: ${name}\n• Телефон: ${phone}\n• Сана: ${date}\n• Вақт: ${time}\n• Меҳмонон: ${guests}\n• Фазо: ${zone}`,
+        en: `Hello! Table reservation at Anzur Restaurant:\n• Name: ${name}\n• Phone: ${phone}\n• Date: ${date}\n• Time: ${time}\n• Guests: ${guests}\n• Zone: ${zone}`,
+        zh: `您好！安祖尔餐厅餐位预订请求：\n• 贵宾姓名: ${name}\n• 联系电话: ${phone}\n• 就餐日期: ${date}\n• 就餐时间: ${time}\n• 就餐人数: ${guests}\n• 期望区域: ${zone}`
+      };
 
+      const wishLabels = {
+        ru: "\n• Пожелания: ",
+        tj: "\n• Хоҳишҳо: ",
+        en: "\n• Special requests: ",
+        zh: "\n• 特殊要求: "
+      };
+
+      let msg = greetings[currentLang] || greetings.ru;
       if (notes && notes.trim()) {
-        msg += `
-• Пожелания: ${notes.trim()}`;
+        msg += (wishLabels[currentLang] || wishLabels.ru) + notes.trim();
       }
 
       const waUrl = `https://wa.me/992917917917?text=${encodeURIComponent(msg)}`;
