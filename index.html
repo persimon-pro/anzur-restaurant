@@ -801,7 +801,7 @@
        ========================================================================== */
     .filmstrip-wrap {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(7, 1fr);
       border-top: 1px solid var(--border);
       background: var(--border);
       gap: 1px;
@@ -952,11 +952,11 @@
       padding: 3.5rem 3rem;
     }
     .menu-columns {
-      max-width: 1400px;
+      max-width: 1600px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 2rem;
     }
     .menu-cat-col {
       display: flex;
@@ -1673,9 +1673,11 @@
       <!-- Category Filter Pills -->
       <div class="menu-filter-bar">
         <button type="button" class="menu-filter-btn is-active" data-cat="national" onclick="filterMenu('national', this)" data-i18n="cat_national">Национальная</button>
-        <button type="button" class="menu-filter-btn" data-cat="european" onclick="filterMenu('european', this)" data-i18n="cat_european">Европейская</button>
-        <button type="button" class="menu-filter-btn" data-cat="panasian" onclick="filterMenu('panasian', this)" data-i18n="cat_panasian">Паназиатская</button>
-        <button type="button" class="menu-filter-btn" data-cat="bar" onclick="filterMenu('bar', this)" data-i18n="cat_bar">Чайный дом & Бар</button>
+        <button type="button" class="menu-filter-btn" data-cat="european" onclick="filterMenu('european', this)" data-i18n="cat_european">Печь Josper</button>
+        <button type="button" class="menu-filter-btn" data-cat="panasian" onclick="filterMenu('panasian', this)" data-i18n="cat_panasian">Суши & Роллы</button>
+        <button type="button" class="menu-filter-btn" data-cat="mangal" onclick="filterMenu('mangal', this)" data-i18n="cat_mangal">Мангал & Шашлыки</button>
+        <button type="button" class="menu-filter-btn" data-cat="fish" onclick="filterMenu('fish', this)" data-i18n="cat_fish">Рыба Josper</button>
+        <button type="button" class="menu-filter-btn" data-cat="bar" onclick="filterMenu('bar', this)" data-i18n="cat_bar">Десерты & Фрукты</button>
       </div>
     </div>
 
@@ -1691,7 +1693,7 @@
           НАЦИОНАЛЬНАЯ КУХНЯ
         </div>
         <div class="stage-badge-top-right">
-          <span id="stage-counter-cur">01</span><span class="dim">/</span><span id="stage-counter-total">06</span>
+          <span id="stage-counter-cur">01</span><span class="dim">/</span><span id="stage-counter-total">07</span>
         </div>
         <div class="stage-badge-bottom-left" id="stage-badge-serving">
           «ШЕФ-ПОДАЧА» · 650 Г
@@ -1773,7 +1775,7 @@
         <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
       </div>
 
-      <!-- Item 1: Shashlik -->
+      <!-- Item 1: Kazan Kabob -->
       <div class="filmstrip-item" data-idx="1" onclick="goToSlide(1)">
         <div class="filmstrip-thumb">
           <img src="dish_real_kazan_kabob.jpg" alt="Казан Кабоб" loading="lazy" />
@@ -1787,55 +1789,69 @@
         <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
       </div>
 
-      <!-- Item 2: Ribeye -->
+      <!-- Item 2: Josper Steaks -->
       <div class="filmstrip-item" data-idx="2" onclick="goToSlide(2)">
         <div class="filmstrip-thumb">
-          <img src="gen_steak.jpg" alt="Стейк Рибай" loading="lazy" />
+          <img src="dish_real_josper.jpg" alt="Стейки в Josper" loading="lazy" />
         </div>
         <div class="filmstrip-meta-top">
           <span class="filmstrip-num">03</span>
-          <span class="filmstrip-price">115 TJS</span>
+          <span class="filmstrip-price">178 TJS</span>
         </div>
-        <div class="filmstrip-title">Стейк Рибай Прайм</div>
-        <div class="filmstrip-cat">Европейская</div>
+        <div class="filmstrip-title">Рибай в Josper</div>
+        <div class="filmstrip-cat">Печь Josper</div>
         <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
       </div>
 
-      <!-- Item 3: Sushi -->
+      <!-- Item 3: Sushi Set Anzur -->
       <div class="filmstrip-item" data-idx="3" onclick="goToSlide(3)">
         <div class="filmstrip-thumb">
-          <img src="gen_sushi.jpg" alt="Омакасе Нигири" loading="lazy" />
+          <img src="dish_real_sushiset.jpg" alt="Суши сет Анзур" loading="lazy" />
         </div>
         <div class="filmstrip-meta-top">
           <span class="filmstrip-num">04</span>
-          <span class="filmstrip-price">98 TJS</span>
+          <span class="filmstrip-price">789 TJS</span>
         </div>
-        <div class="filmstrip-title">Сет Омакасе</div>
+        <div class="filmstrip-title">Суши сет «Анзур»</div>
         <div class="filmstrip-cat">Паназиатская</div>
         <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
       </div>
 
-      <!-- Item 4: Tom Yum -->
+      <!-- Item 4: Kebabs Assorti -->
       <div class="filmstrip-item" data-idx="4" onclick="goToSlide(4)">
         <div class="filmstrip-thumb">
-          <img src="gen_tomyum.jpg" alt="Том Ям с морепродуктами" loading="lazy" />
+          <img src="dish_real_kebabs.jpg" alt="Ассорти шашлыков" loading="lazy" />
         </div>
         <div class="filmstrip-meta-top">
           <span class="filmstrip-num">05</span>
-          <span class="filmstrip-price">68 TJS</span>
+          <span class="filmstrip-price">449 TJS</span>
         </div>
-        <div class="filmstrip-title">Том Ям Королевский</div>
-        <div class="filmstrip-cat">Паназиатская</div>
+        <div class="filmstrip-title">Ассорти шашлыков</div>
+        <div class="filmstrip-cat">Мангал</div>
         <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
       </div>
 
-      <!-- Item 5: Tea -->
+      <!-- Item 5: Josper Salmon -->
       <div class="filmstrip-item" data-idx="5" onclick="goToSlide(5)">
+        <div class="filmstrip-thumb">
+          <img src="dish_real_salmon.jpg" alt="Стейк Лосось Josper" loading="lazy" />
+        </div>
+        <div class="filmstrip-meta-top">
+          <span class="filmstrip-num">06</span>
+          <span class="filmstrip-price">230 TJS</span>
+        </div>
+        <div class="filmstrip-title">Стейк Лосось Josper</div>
+        <div class="filmstrip-cat">Рыба Josper</div>
+        <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
+      </div>
+
+      <!-- Item 6: Dubai Cheesecake -->
+      <div class="filmstrip-item" data-idx="6" onclick="goToSlide(6)">
         <div class="filmstrip-thumb">
           <img src="dish_real_dubai_cheesecake.jpg" alt="Дубайский чизкейк" loading="lazy" />
         </div>
         <div class="filmstrip-meta-top">
-          <span class="filmstrip-num">06</span>
+          <span class="filmstrip-num">07</span>
           <span class="filmstrip-price">99 TJS</span>
         </div>
         <div class="filmstrip-title">Дубайский чизкейк</div>
@@ -2195,7 +2211,7 @@
         </div>
       </div>
       <div class="menu-columns">
-        <!-- Col 1: Национальная -->
+        <!-- Col 1: Национальная кухня -->
         <div class="menu-cat-col">
           <div class="menu-cat-head">
             <span data-i18n="modal_cat_east">ТАДЖИКИСТАН & ВОСТОК</span>
@@ -2252,97 +2268,266 @@
           </div>
         </div>
 
-        <!-- Col 2: Европейская & Стейки -->
+        <!-- Col 2: Хосперы & Стейки -->
         <div class="menu-cat-col">
           <div class="menu-cat-head">
-            <span data-i18n="modal_cat_euro">BLACK ANGUS & КЛАССИКА</span>
-            <h3 data-i18n="modal_cat_euro_title">Европейская кухня</h3>
+            <span data-i18n="modal_cat_euro">ПЕЧЬ JOSPER & СТЕЙКХАУС</span>
+            <h3 data-i18n="modal_cat_euro_title">Стейки в Josper</h3>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
-              <span class="menu-item-name">Стейк Рибай Прайм</span>
-              <span class="menu-item-price">115 TJS</span>
+              <span class="menu-item-name">Рибай Prime Josper <small style="color:var(--gold); font-size:0.75em;">±275/325г</small></span>
+              <span class="menu-item-price">380 / 450 TJS</span>
             </div>
-            <p class="menu-item-desc">Мраморная говядина Black Angus 28-дневного вызревания, соус демигляс на красном вине.</p>
+            <p class="menu-item-desc">Обжаренный импортный Рибай Prime в печи Josper, подаётся с соусом Демигласс.</p>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
-              <span class="menu-item-name">Филе-Миньон с трюфелем</span>
-              <span class="menu-item-price">130 TJS</span>
+              <span class="menu-item-name">Рибай Josper <small style="color:var(--text-muted); font-size:0.75em;">±400г</small></span>
+              <span class="menu-item-price">178 TJS</span>
             </div>
-            <p class="menu-item-desc">Нежнейшая центральная вырезка, трюфельное пюре, спаржа на гриле, соус из сморчков.</p>
+            <p class="menu-item-desc">Обжаренный Рибай в печи Josper с дымным ароматом, подаётся с соусом Демигласс.</p>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
-              <span class="menu-item-name">Тартар из мраморной говядины</span>
-              <span class="menu-item-price">54 TJS</span>
+              <span class="menu-item-name">Стейк Томагавк <small style="color:var(--gold); font-size:0.75em;">±1 КГ</small></span>
+              <span class="menu-item-price">350 TJS</span>
             </div>
-            <p class="menu-item-desc">Вырезка говядины ручной рубки, каперсы, лук шалот, дижонская горчица, перепелиный желток.</p>
+            <p class="menu-item-desc">Килограммовый говяжий томагавк в маринаде со специями, запекается в Josper с соусом Демигласс.</p>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
-              <span class="menu-item-name">Филе Сибаса на углях</span>
-              <span class="menu-item-price">88 TJS</span>
+              <span class="menu-item-name">Т-Бон Josper <small style="color:var(--text-muted); font-size:0.75em;">±400г</small></span>
+              <span class="menu-item-price">175 TJS</span>
             </div>
-            <p class="menu-item-desc">Средиземноморский сибас, пюре из печеного пастернака, соус бер-блан с лимоном.</p>
+            <p class="menu-item-desc">Обжаренный стейк Т-бон на кости в печи Josper, подаётся с соусом Демигласс.</p>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
-              <span class="menu-item-name">Салат с хрустящей уткой</span>
-              <span class="menu-item-price">49 TJS</span>
+              <span class="menu-item-name">Стейк Bijo <small style="color:var(--text-muted); font-size:0.75em;">±300г</small></span>
+              <span class="menu-item-price">250 TJS</span>
             </div>
-            <p class="menu-item-desc">Томленая утиная грудка, листья рукколы, сладкий инжир, карамелизированный пекан и соус порто.</p>
+            <p class="menu-item-desc">Маринованные говяжьи рёбра Josper с жареным картофелем.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Медальоны с грибами <small style="color:var(--text-muted); font-size:0.75em;">±240г</small></span>
+              <span class="menu-item-price">168 TJS</span>
+            </div>
+            <p class="menu-item-desc">Обжаренные медальоны в печи Josper под сливочно-грибным соусом.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Баранья корейка Josper <small style="color:var(--text-muted); font-size:0.75em;">±380г</small></span>
+              <span class="menu-item-price">155 TJS</span>
+            </div>
+            <p class="menu-item-desc">Обжаренная баранья корейка в печи Josper с винно-луковым соусом.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Телятина с грибами <small style="color:var(--text-muted); font-size:0.75em;">±250г</small></span>
+              <span class="menu-item-price">135 TJS</span>
+            </div>
+            <p class="menu-item-desc">Вырезка бон-филе в томлёном сливочном соусе с грибами и соусом Демигласс.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Куриное филе в Josper <small style="color:var(--text-muted); font-size:0.75em;">±210г</small></span>
+              <span class="menu-item-price">78 TJS</span>
+            </div>
+            <p class="menu-item-desc">Куриная грудка в печи Josper, травы, сливочно-сырный соус, микс салат.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Евро Ассорти <small style="color:var(--gold); font-size:0.75em;">[± 6 ПЕРСОН]</small></span>
+              <span class="menu-item-price">1099 TJS</span>
+            </div>
+            <p class="menu-item-desc">Гранд-плато: Т-бон, Рибай, медальоны, куриный стейк, корейка Josper, Томагавк, микс салат.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Соусы к мясу на выбор <small style="color:var(--text-muted); font-size:0.75em;">±50г</small></span>
+              <span class="menu-item-price">10 TJS</span>
+            </div>
+            <p class="menu-item-desc">Демиглас, Сырный, BBQ, Шрирача, Чесночный, Кетчуп.</p>
           </div>
         </div>
 
-        <!-- Col 3: Паназия -->
+        <!-- Col 3: Рыба, Суши & Сашими -->
         <div class="menu-cat-col">
           <div class="menu-cat-head">
-            <span data-i18n="modal_cat_asia">RAW BAR & WOK</span>
-            <h3 data-i18n="modal_cat_asia_title">Паназиатская линия</h3>
+            <span data-i18n="modal_cat_asia">РЫБА & СУШИ-БАР</span>
+            <h3 data-i18n="modal_cat_asia_title">Рыба & Суши</h3>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
-              <span class="menu-item-name">Сет Омакасе Нигири & Сашими</span>
-              <span class="menu-item-price">98 TJS</span>
+              <span class="menu-item-name">Суши сет «Анзур» <small style="color:var(--gold); font-size:0.75em;">[ГРАНД-ЛАДЬЯ]</small></span>
+              <span class="menu-item-price">789 TJS</span>
             </div>
-            <p class="menu-item-desc">Охлажденный лосось, тунец блюфин, тигровые креветки, японский рис высшей пробы, сусальное золото.</p>
+            <p class="menu-item-desc">Флагманский сет на большой деревянной ладье: роллы Филадельфия, Калифорния, запечённые суши, сашими из лосося и угря.</p>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
-              <span class="menu-item-name">Том Ям с морепродуктами</span>
-              <span class="menu-item-price">68 TJS</span>
+              <span class="menu-item-name">Стейк Лосось Josper <small style="color:var(--text-muted); font-size:0.75em;">±210г</small></span>
+              <span class="menu-item-price">230 TJS</span>
             </div>
-            <p class="menu-item-desc">Тигровые креветки, кальмар, грибы шиитаке, лемонграсс, кокосовые сливки, паровой жасминовый рис.</p>
+            <p class="menu-item-desc">Филе атлантического лосося запекается в печи Josper, сливочно-икорный соус, лимон.</p>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
-              <span class="menu-item-name">Ролл «Анзур Дракон»</span>
-              <span class="menu-item-price">64 TJS</span>
+              <span class="menu-item-name">Сибас с лимонным соусом <small style="color:var(--text-muted); font-size:0.75em;">±200г</small></span>
+              <span class="menu-item-price">385 TJS</span>
             </div>
-            <p class="menu-item-desc">Копченый угорь, авокадо хасс, крем-чиз, соус унаги и хрустящая рисовая темпура.</p>
+            <p class="menu-item-desc">Нежное филе Сибаса на углях с фирменным лимонно-сливочным соусом.</p>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
-              <span class="menu-item-name">Удон Wok с морепродуктами</span>
-              <span class="menu-item-price">58 TJS</span>
+              <span class="menu-item-name">Дорадо с лимонным соусом <small style="color:var(--text-muted); font-size:0.75em;">±200г</small></span>
+              <span class="menu-item-price">375 TJS</span>
             </div>
-            <p class="menu-item-desc">Пшеничная лапша удон, кальмары, креветки, сладкий перец, ростки сои в соусе черного перца.</p>
+            <p class="menu-item-desc">Золотистое филе Дорадо, обжаренное на гриле, подаётся с соусом из цитрусовых.</p>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
-              <span class="menu-item-name">Тартар из тунца Блюфин</span>
-              <span class="menu-item-price">66 TJS</span>
+              <span class="menu-item-name">Роллы Классические (6 шт)</span>
+              <span class="menu-item-price">59 – 95 TJS</span>
             </div>
-            <p class="menu-item-desc">Кубики свежего тунца блюфин, авокадо, трюфельный понзу, хрустящие рисовые чипсы.</p>
+            <p class="menu-item-desc">Филадельфия (69c), Калифорния (79c), Канада с угрём (95c), Чиз-ролл (59c).</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Запечённые & Горячие роллы (6 шт)</span>
+              <span class="menu-item-price">69 – 120 TJS</span>
+            </div>
+            <p class="menu-item-desc">С креветкой (69/79c), с лососем (75c), с копчёным угрём (120c).</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Маки роллы (6 шт)</span>
+              <span class="menu-item-price">35 – 50 TJS</span>
+            </div>
+            <p class="menu-item-desc">С огурцом (35c), авокадо (40c), лососем (45c), угрём (50c), креветкой (50c).</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Сашими премиум</span>
+              <span class="menu-item-price">65 – 329 TJS</span>
+            </div>
+            <p class="menu-item-desc">Лосось (65c), Угорь (120c), Камчатский краб (175c), Дорадо (329c).</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Спайси суши & Нигири</span>
+              <span class="menu-item-price">29 – 50 TJS</span>
+            </div>
+            <p class="menu-item-desc">Спайси лосось (29c), эби (35c), угорь (42c) / Суши нигири 2 шт: эби (30c), лосось (49c), угорь (50c).</p>
           </div>
         </div>
 
-        <!-- Col 4: Десерты & Фрукты -->
+        <!-- Col 4: Мангал & Шашлыки -->
         <div class="menu-cat-col">
           <div class="menu-cat-head">
-            <span data-i18n="modal_cat_tea">ФИРМЕННЫЕ ДЕСЕРТЫ</span>
-            <h3 data-i18n="modal_cat_tea_title">Кондитерская & Фрукты</h3>
+            <span data-i18n="modal_cat_mangal">ОТКРЫТЫЙ ОГОНЬ</span>
+            <h3 data-i18n="modal_cat_mangal_title">Мангал & Шашлыки</h3>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Ассорти из шашлыков <small style="color:var(--gold); font-size:0.75em;">[НА 5 ПЕРСОН]</small></span>
+              <span class="menu-item-price">449 TJS</span>
+            </div>
+            <p class="menu-item-desc">Гранд-доска: куриный, баранье, говяжье на углях, свежий лук, тонкий лаваш, томатный соус.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Ассорти на мангале <small style="color:var(--gold); font-size:0.75em;">[НА 4 ПЕРСОНЫ]</small></span>
+              <span class="menu-item-price">435 TJS</span>
+            </div>
+            <p class="menu-item-desc">Речная форель, перепёлки, самса на мангале, целое цыплёнок табака и печёные овощи.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Форель на мангале <small style="color:var(--text-muted); font-size:0.75em;">±1 КГ</small></span>
+              <span class="menu-item-price">185 TJS</span>
+            </div>
+            <p class="menu-item-desc">Цельная маринованная речная форель на углях с маслинами, травами и лимоном.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Цыплёнок табака на мангале <small style="color:var(--text-muted); font-size:0.75em;">±900г</small></span>
+              <span class="menu-item-price">90 TJS</span>
+            </div>
+            <p class="menu-item-desc">Хрустящий сочный цыплёнок табака на углях с пикантным томатным соусом.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Перепёлки на мангале <small style="color:var(--text-muted); font-size:0.75em;">(2 шт)</small></span>
+              <span class="menu-item-price">85 TJS</span>
+            </div>
+            <p class="menu-item-desc">Маринованные сочные перепёлки на живом огне с пикантным соусом.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Самса на мангале <small style="color:var(--text-muted); font-size:0.75em;">±70г</small></span>
+              <span class="menu-item-price">35 TJS</span>
+            </div>
+            <p class="menu-item-desc">Говяжий фарш, сулугуни, лаваш на углях с хрустящей корочкой и соусом.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Шашлык «Наполеон» <small style="color:var(--text-muted); font-size:0.75em;">±200г</small></span>
+              <span class="menu-item-price">48 TJS</span>
+            </div>
+            <p class="menu-item-desc">Чередование говяжьей мякоти и бараньего курдюка на шампуре с пикантным соусом.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Шашлык Рулет / В лаваше <small style="color:var(--text-muted); font-size:0.75em;">±200г</small></span>
+              <span class="menu-item-price">46 TJS</span>
+            </div>
+            <p class="menu-item-desc">Телячье бон-филе заворачивается с бараньим курдюком, обжаривается на углях.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Шашлык из баранины <small style="color:var(--text-muted); font-size:0.75em;">±150г</small></span>
+              <span class="menu-item-price">55 TJS</span>
+            </div>
+            <p class="menu-item-desc">Баранья лента с восточными специями на мангале.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Люля из баранины с овощами <small style="color:var(--text-muted); font-size:0.75em;">±200г</small></span>
+              <span class="menu-item-price">50 TJS</span>
+            </div>
+            <p class="menu-item-desc">Рубленая баранина, специи, сладкий перец на шампуре (или классический Люля — 38 TJS).</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Люля с чарбу <small style="color:var(--text-muted); font-size:0.75em;">±150г</small></span>
+              <span class="menu-item-price">46 TJS</span>
+            </div>
+            <p class="menu-item-desc">Нежный говяжий фарш в жировой сетке чарбу, запечённый до аппетитной корочки.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Кусковой говядины <small style="color:var(--text-muted); font-size:0.75em;">±200г</small></span>
+              <span class="menu-item-price">48 TJS</span>
+            </div>
+            <p class="menu-item-desc">Сочная говяжья вырезка с курдюком и восточными травами.</p>
+          </div>
+          <div class="menu-list-item">
+            <div class="menu-item-row">
+              <span class="menu-item-name">Шашлык куриный / Крылышки</span>
+              <span class="menu-item-price">29 TJS</span>
+            </div>
+            <p class="menu-item-desc">Сочное куриное бедро (200г, 29c) или хрустящие куриные крылышки (150г, 29c).</p>
+          </div>
+        </div>
+
+        <!-- Col 5: Десерты & Фрукты -->
+        <div class="menu-cat-col">
+          <div class="menu-cat-head">
+            <span data-i18n="modal_cat_tea">ФИРМЕННАЯ КОНДИТЕРСКАЯ</span>
+            <h3 data-i18n="modal_cat_tea_title">Десерты & Фрукты</h3>
           </div>
           <div class="menu-list-item">
             <div class="menu-item-row">
@@ -2406,13 +2591,6 @@
               <span class="menu-item-price">11 TJS</span>
             </div>
             <p class="menu-item-desc">Сливочный пломбир, шоколадное, ванильное с ягодным соусом.</p>
-          </div>
-          <div class="menu-list-item">
-            <div class="menu-item-row">
-              <span class="menu-item-name">Памирский сбор (Чайная церемония)</span>
-              <span class="menu-item-price">25 TJS</span>
-            </div>
-            <p class="menu-item-desc">Высокогорные травы Памира: чабрец, мята, шафран, липа. Подаётся с набатом и сухофруктами.</p>
           </div>
         </div>
       </div>
@@ -2491,9 +2669,11 @@
     menu_sec_title: "Карта <em>вкуса</em>",
     menu_full_btn: "ПОЛНОЕ МЕНЮ РЕСТОРАНА",
     cat_national: "Национальная",
-    cat_european: "Европейская",
-    cat_panasian: "Паназиатская",
-    cat_bar: "Чайный дом & Бар",
+    cat_european: "Печь Josper",
+    cat_panasian: "Суши & Роллы",
+    cat_bar: "Десерты & Фрукты",
+    cat_mangal: "Мангал & Шашлыки",
+    cat_fish: "Рыба Josper",
     spec_base: "ОСНОВА",
     spec_prep: "ПРИГОТОВЛЕНИЕ",
     spec_pair: "РЕКОМЕНДАЦИЯ",
@@ -2588,9 +2768,11 @@
     menu_sec_title: "Харитаи <em>лаззатҳо</em>",
     menu_full_btn: "МЕНЮИ ПУРРАИ РЕСТОРАН",
     cat_national: "Миллӣ",
-    cat_european: "Аврупоӣ",
-    cat_panasian: "Пан-осиёӣ",
-    cat_bar: "Чойхона & Бар",
+    cat_european: "Танӯри Josper",
+    cat_panasian: "Суши & Роллҳо",
+    cat_bar: "Шириниҳо & Меваҳо",
+    cat_mangal: "Манқал & Шашлик",
+    cat_fish: "Моҳии Josper",
     spec_base: "АСОС",
     spec_prep: "ПУХТУПАЗ",
     spec_pair: "ТАВСИЯ",
@@ -2685,9 +2867,11 @@
     menu_sec_title: "Taste <em>Map</em>",
     menu_full_btn: "FULL RESTAURANT MENU",
     cat_national: "National",
-    cat_european: "European",
-    cat_panasian: "Pan-Asian",
-    cat_bar: "Tea House & Bar",
+    cat_european: "Josper Grill",
+    cat_panasian: "Sushi & Rolls",
+    cat_bar: "Desserts & Fruits",
+    cat_mangal: "Mangal & Kebabs",
+    cat_fish: "Josper Fish",
     spec_base: "BASE",
     spec_prep: "PREPARATION",
     spec_pair: "RECOMMENDATION",
@@ -2782,9 +2966,11 @@
     menu_sec_title: "赏味<em>地图</em>",
     menu_full_btn: "查看完整菜单",
     cat_national: "传统中亚菜",
-    cat_european: "欧洲风味",
-    cat_panasian: "泛亚料理",
-    cat_bar: "茶舍与酒吧",
+    cat_european: "Josper炭烤",
+    cat_panasian: "寿司刺身",
+    cat_bar: "主厨甜点与鲜果",
+    cat_mangal: "炭烤与肉串",
+    cat_fish: "Josper鲜鱼",
     spec_base: "主料",
     spec_prep: "烹饪工艺",
     spec_pair: "推荐搭配",
@@ -2942,129 +3128,161 @@ for (let l of ['ru', 'tj', 'en', 'zh']) {
       {
         id: 2,
         category: 'european',
-        price: '115',
-        img: 'gen_steak.jpg',
-        catShort: { ru: 'Европейская', tj: 'Аврупоӣ', en: 'European', zh: '欧洲风味' },
-        catName: { ru: 'ЕВРОПЕЙСКАЯ КЛАССИКА', tj: 'КЛАССИКАИ АВРУПОӢ', en: 'EUROPEAN CLASSICS', zh: '欧洲经典名馔' },
-        tag: { ru: 'ВЫДЕРЖКА DRY AGED', tj: 'НИГОҲДОРИИ DRY AGED', en: 'DRY AGED RESERVE', zh: '干式熟成甄选' },
-        serving: { ru: 'ВЫРЕЗКА ПРАЙМ · 400 Г', tj: 'БУРИШИ ПРАЙМ · 400 Г', en: 'PRIME CUT · 400 G', zh: '特优原切 · 400克' },
-        title: { ru: 'Стейк Рибай Прайм', tj: 'Стейки Рибай Прайм', en: 'Prime Ribeye Steak', zh: '特级顶级肉眼牛排' },
+        price: '178',
+        img: 'dish_real_josper.jpg',
+        catShort: { ru: 'Печь Josper', tj: 'Танӯри Josper', en: 'Josper Grill', zh: 'Josper炭烤' },
+        catName: { ru: 'СТЕЙКХАУС JOSPER', tj: 'СТЕЙКҲО ДАР JOSPER', en: 'JOSPER STEAKHOUSE', zh: 'Josper炭火烤炉牛排' },
+        tag: { ru: 'ЧИСТЫЙ ДРЕВЕСНЫЙ УГОЛЬ', tj: 'АНГИШТИ ТОЗАИ ЧӮБ', en: 'CHARCOAL EMBERS', zh: '天然木炭高温炙烤' },
+        serving: { ru: '± 400 Г 178 TJS · PRIME 380-450 TJS · ТОМАГАВК 1 КГ 350 TJS', tj: '± 400 Г 178 TJS · PRIME 380-450 TJS', en: '± 400 G 178 TJS · PRIME 380-450 TJS · TOMAHAWK 1 KG 350 TJS', zh: '± 400克 178 TJS · 特级Prime 380-450 TJS · 战斧1公斤 350 TJS' },
+        title: { ru: 'Рибай в печи Josper', tj: 'Стейки Рибай дар Josper', en: 'Josper Ribeye Steak', zh: 'Josper炭火肉眼牛排' },
         subtitle: {
-          ru: 'Мраморная говядина 28-дневного сухого вызревания',
-          tj: 'Гӯшти мармарии 28 рӯз дар шароити хушк нигоҳдошташуда',
-          en: '28-day dry-aged artisanal marbled beef',
-          zh: '28天干式熟成高级雪花牛肉'
+          ru: 'Премиальный стейк с дымным ароматом живых углей и соусом Демиглас',
+          tj: 'Стейки олӣ бо бӯи хуши ангишт ва соуси Демиглас',
+          en: 'Premium steak kissed by live charcoal embers with rich Demi-glace sauce',
+          zh: '饱含木炭烟熏香气的特级牛排，佐以法式浓汁'
         },
         desc: {
-          ru: 'Зерновой откорм премиального качества, прожарка Medium. Подаётся с копчёным сливочным маслом, розмарином и винным соусом демигляс.',
-          tj: 'Сифати олӣ, пухтани дараҷаи Medium. Бо равғани дуддодаи маска ва соуси шаробии демигляс пешкаш мегардад.',
-          en: 'Premium grain-fed beef seared to Medium perfection. Served with smoked rosemary herb butter and rich red wine demi-glace.',
-          zh: '特选谷饲顶级雪花牛肉，五分熟精准炙烤。佐以迷迭香烟熏黄油及醇厚红酒法式浓汁。'
+          ru: 'Фирменные стейки ресторана «Анзур», запекаемые в испанской печи Josper при температуре свыше 350°C. Сохраняют сочность, приобретают неповторимую корочку и подаются с соусом Демиглас, печёным картофелем и томатами черри.',
+          tj: 'Стейкҳои махсуси ресторани «Анзур» дар танӯри испании Josper дар ҳарорати беш аз 350°C омода мешаванд. Бо соуси Демиглас ва картошкаи танӯрӣ пешкаш мегарданд.',
+          en: 'Signature steaks at Anzur prepared in an authentic Spanish Josper charcoal oven at 350°C. Delivers an unmatched crust, sealed juices, served with demi-glace, baked potato, and cherry tomatoes.',
+          zh: '安祖尔特色牛排，在超过350°C的西班牙原装Josper炭火烤炉中瞬间锁汁，肉质醇厚嫩滑，佐以法式德米格拉斯酱汁与炭烤小土豆。'
         },
-        specBase: { ru: 'Мраморная говядина Black Angus', tj: 'Гӯшти гови Black Angus', en: 'Black Angus marbled beef', zh: '黑安格斯雪花牛肉' },
-        specPrep: { ru: 'Сухое вызревание 28 дней', tj: 'Нигоҳдории хушки 28 рӯза', en: 'Dry-aged 28 days', zh: '28天干式熟成' },
-        specPair: { ru: 'Соус Демигляс & Печеный чеснок', tj: 'Соуси Демигляс & Сири бирён', en: 'Demi-glace & roasted garlic', zh: '法式浓缩肉汁 & 烤蒜' },
+        specBase: { ru: 'Рибай, Томагавк, Медальоны, Т-Бон', tj: 'Рибай, Томагавк, Медалон, Т-Бон', en: 'Ribeye, Tomahawk, Medallions, T-Bone', zh: '肉眼、战斧、菲力圆切、T骨' },
+        specPrep: { ru: 'Испанская печь Josper, 350°C', tj: 'Танӯри испании Josper, 350°C', en: 'Spanish Josper charcoal oven, 350°C', zh: '西班牙Josper炭烤烤炉，350°C' },
+        specPair: { ru: 'Соус Демиглас & Запечённый картофель', tj: 'Соуси Демиглас & Картошкаи танӯрӣ', en: 'Demi-glace sauce & baked potato', zh: '德米格拉斯浓酱 & 炭烤土豆' },
         waText: {
-          ru: 'Здравствуйте! Хочу заказать блюдо Стейк Рибай Прайм',
-          tj: 'Салом! Мехоҳам Стейки Рибайро фармоиш диҳам',
-          en: 'Hello! I would like to order Prime Ribeye Steak',
-          zh: '您好！我想订购特级肉眼牛排'
+          ru: 'Здравствуйте! Хочу заказать стейк в печи Josper',
+          tj: 'Салом! Мехоҳам Стейки Josper-ро фармоиш диҳам',
+          en: 'Hello! I would like to order a Josper Steak',
+          zh: '您好！我想订购Josper炭烤牛排'
         }
       },
       {
         id: 3,
         category: 'panasian',
-        price: '98',
-        img: 'gen_sushi.jpg',
-        catShort: { ru: 'Паназиатская', tj: 'Пан-осиёӣ', en: 'Pan-Asian', zh: '泛亚料理' },
-        catName: { ru: 'ПАНАЗИАТСКАЯ ЛИНИЯ', tj: 'ХАТТИ ПАН-ОСИЁӢ', en: 'PAN-ASIAN LINE', zh: '泛亚料理特辑' },
-        tag: { ru: 'ОМАКАСЕ RAW BAR', tj: 'ОМАКАСЕ RAW BAR', en: 'OMAKASE RAW BAR', zh: '生鲜吧主厨手作' },
-        serving: { ru: 'ОМАКАСЕ СЕТ · 12 ШТ', tj: 'МАҶМӮИ ОМАКАСЕ · 12 ДОНА', en: 'OMAKASE SET · 12 PCS', zh: '主厨精选套组 · 12贯' },
-        title: { ru: 'Сет Омакасе', tj: 'Маҷмӯи Омакасе', en: 'Omakase Sushi Set', zh: '主厨定制主理寿司拼盘' },
+        price: '789',
+        img: 'dish_real_sushiset.jpg',
+        catShort: { ru: 'Суши & Роллы', tj: 'Суши & Роллҳо', en: 'Sushi & Rolls', zh: '寿司刺身' },
+        catName: { ru: 'ПАНАЗИАТСКАЯ ЛИНИЯ', tj: 'ХАТТИ ПАН-ОСИЁӢ', en: 'PAN-ASIAN LINE', zh: '泛亚经典与刺身吧' },
+        tag: { ru: 'ФЛАГМАН СУШИ-БАРА', tj: 'МАҶМӮИ ШОҲОНА', en: 'GRAND SUSHI BOAT', zh: '招牌木舟大拼盘' },
+        serving: { ru: 'ГРАНД-ЛАДЬЯ · ДЛЯ БОЛЬШОЙ КОМПАНИИ · 789 TJS', tj: 'КИШТИИ ШОҲОНА · БАРОИ ШИРКАТИ КАЛОН · 789 TJS', en: 'GRAND BOAT · FOR GROUPS · 789 TJS', zh: '豪华日式大船 · 多人盛宴 · 789 TJS' },
+        title: { ru: 'Суши сет «Анзур»', tj: 'Маҷмӯи сушии «Анзур»', en: 'Sushi Set «Anzur»', zh: '安祖尔豪华木舟寿司拼盘' },
         subtitle: {
-          ru: 'Аутентичный выбор шефа из дикого лосося и тунца блюфин',
-          tj: 'Интихоби хоси сар-ошпаз аз моҳии лосос ва тунеси кабудқанот',
-          en: "Chef's authentic master curation of wild salmon and bluefin tuna",
-          zh: '野生鲑鱼与蓝鳍金枪鱼的匠心甄选'
+          ru: 'Гранд-ладья с роллами Филадельфия, Калифорния, запечёнными суши и сашими',
+          tj: 'Киштии чӯбин бо роллҳои Филаделфия, Калифорния, суши ва сашимиҳои тару тоза',
+          en: 'Grand presentation boat with Philadelphia, California, baked rolls, and fresh sashimi',
+          zh: '精美手作日式龙舟盛宴：汇聚特级三文鱼、加州卷、费城卷、焗烤寿司与极鲜刺身'
         },
         desc: {
-          ru: 'Свежайший охлажденный дикий лосось, тунец блюфин и тигровые креветки на японском рисе косихикари, микрозелень шисо и сусальное золото.',
-          tj: 'Моҳии тару тозаи сардшуда, тунес ва майгуҳои шоҳона дар болои биринҷи ҷопонии косиҳикарӣ бо гиёҳи шисо ва тиллои хӯрокӣ.',
-          en: 'Chilled wild salmon, bluefin tuna, and tiger prawns over seasoned Koshihikari rice, garnished with shiso microgreens and edible gold leaf.',
-          zh: '冷链冰鲜野生三文鱼、蓝鳍金枪鱼与黑虎虾，搭配越光越式寿司醋饭、紫苏幼苗及食用金箔点缀。'
+          ru: 'Впечатляющая подача на японской деревянной ладье: роллы Филадельфия, Калифорния, фирменные запечённые и горячие роллы, спайси суши и сашими из отборного охлажденного лосося, угря и тигровых креветок.',
+          tj: 'Пешкаши беназир дар киштии чӯбини ҷопонӣ: роллҳои Филаделфия, Калифорния, роллҳои гарм ва пухташуда, спайсӣ суши ва сашимӣ аз лосос ва моҳии мормоҳӣ.',
+          en: 'Show-stopping presentation on a handcrafted Japanese wooden boat: Philadelphia rolls, California rolls, hot tempura rolls, spicy gunkan, and sashimi cuts of chilled salmon and unagi eel.',
+          zh: '极具仪式感的传统日式木船摆盘：精选厚切挪威三文鱼、鳗鱼刺身、极品费城卷、加州卷与特调焗烤芝士热卷，盛宴聚餐首选。'
         },
-        specBase: { ru: 'Тунец блюфин, лосось, гребешок', tj: 'Тунес, лосос, садафак', en: 'Bluefin tuna, salmon, scallop', zh: '蓝鳍金枪鱼，三文鱼，带子' },
-        specPrep: { ru: 'Японский рис Koshihikari', tj: 'Биринҷи ҷопонии Koshihikari', en: 'Japanese Koshihikari rice', zh: '日本越光寿司米' },
-        specPair: { ru: 'Настоящий тёртый васаби', tj: 'Васабии аслии кӯфта', en: 'Freshly grated real wasabi', zh: '现磨野生山葵' },
+        specBase: { ru: 'Дикий лосось, угорь, креветка эби', tj: 'Лосос, мормоҳӣ, майгуи эбӣ', en: 'Wild salmon, unagi eel, ebi shrimp', zh: '特级三文鱼，烤鳗鱼，海虾' },
+        specPrep: { ru: 'Японский рис, авторская ладья', tj: 'Биринҷи ҷопонӣ, киштии махсус', en: 'Japanese sushi rice, handcrafted boat', zh: '日本寿司醋饭，精雕实木船' },
+        specPair: { ru: 'Тёртый васаби, имбирь, соус унаги', tj: 'Васаби, занҷабил, соуси унагӣ', en: 'Fresh wasabi, pickled ginger, unagi sauce', zh: '现磨山葵，寿司生姜，鳗鱼甜汁' },
         waText: {
-          ru: 'Здравствуйте! Хочу заказать блюдо Сет Омакасе',
-          tj: 'Салом! Мехоҳам Маҷмӯи Омакасеро фармоиш диҳам',
-          en: 'Hello! I would like to order Omakase Sushi Set',
-          zh: '您好！我想订购主厨定制寿司拼盘'
+          ru: 'Здравствуйте! Хочу заказать Суши сет «Анзур»',
+          tj: 'Салом! Мехоҳам Маҷмӯи сушии «Анзур»-ро фармоиш диҳам',
+          en: 'Hello! I would like to order Sushi Set Anzur',
+          zh: '您好！我想订购安祖尔豪华木舟寿司拼盘'
         }
       },
       {
         id: 4,
-        category: 'panasian',
-        price: '68',
-        img: 'gen_tomyum.jpg',
-        catShort: { ru: 'Паназиатская', tj: 'Пан-осиёӣ', en: 'Pan-Asian', zh: '泛亚料理' },
-        catName: { ru: 'ПАНАЗИАТСКАЯ КУХНЯ', tj: 'ОШХОНАИ ПАН-ОСИЁӢ', en: 'PAN-ASIAN CUISINE', zh: '泛亚精致料理' },
-        tag: { ru: 'ШЕФ-РЕЦЕПТ', tj: 'ДАСТУРИ САР-ОШПАЗ', en: "CHEF'S RECIPE", zh: '主厨独家秘方' },
-        serving: { ru: 'ГОРЯЧАЯ ПОДАЧА · 480 МЛ', tj: 'ХӮРОКИ ГАРМ · 480 МЛ', en: 'HOT SERVING · 480 ML', zh: '热腾呈献 · 480毫升' },
-        title: { ru: 'Том Ям Королевский', tj: 'Том Ями Шоҳона', en: 'Royal Tom Yum', zh: '皇家冬阴功海鲜汤' },
+        category: 'mangal',
+        price: '449',
+        img: 'dish_real_kebabs.jpg',
+        catShort: { ru: 'Шашлыки', tj: 'Шашликҳо', en: 'Kebabs', zh: '炭烤肉串' },
+        catName: { ru: 'МАНГАЛ & УГЛИ', tj: 'МАНҚАЛ ВА ОТАШ', en: 'MANGAL & CHARCOAL', zh: '明火炭烤系列' },
+        tag: { ru: 'НА 5 ПЕРСОН', tj: 'БАРОИ 5 НАФАР', en: 'SERVES 5 GUESTS', zh: '5人豪华盛宴' },
+        serving: { ru: 'ГРАНД-ДОСКА НА 5 ПЕРСОН · 449 TJS', tj: 'ТАХТАИ ШОҲОНА БАРОИ 5 НАФАР · 449 TJS', en: 'GRAND BOARD FOR 5 · 449 TJS', zh: '5人份炭烤全家福大木盘 · 449 TJS' },
+        title: { ru: 'Ассорти из шашлыков', tj: 'Маҷмӯи шашликҳо', en: 'Assorted Kebabs Platter', zh: '安祖尔炭烤烤肉大拼盘' },
         subtitle: {
-          ru: 'Пряный тайский суп на кокосовом молоке с дарами моря',
-          tj: 'Шӯрбои тунди таиландӣ бо шири кокос ва неъматҳои баҳрӣ',
-          en: 'Aromatic Thai broth infused with rich coconut milk and seafood',
-          zh: '浓郁椰奶与精粹海味交织的泰式经典酸辣浓汤'
+          ru: 'Богатая доска: шашлык «Наполеон», рулет, люля, баранина, куриный шашлык и овощи',
+          tj: 'Тахтаи бой: шашлики «Наполеон», рулет, лӯла, барра ва мурғ бо сабзавот',
+          en: 'Grand platter: Napoleon kebab, rolled tenderloin, lulya, lamb chops, chicken, and flatbread',
+          zh: '豪迈木盘盛装：拿破仑肉串、卷肉串、羊肉卢拉、鲜香羊排、嫩烤鸡肉与烤馕洋葱'
         },
         desc: {
-          ru: 'Наваристый бульон на лемонграссе и галангале с тигровыми креветками, кальмаром, шиитаке и томатами черри. Подаётся с паровым жасминовым рисом.',
-          tj: 'Оби гӯшти серғизо бо лемонграсс ва галангал, майгуҳои шоҳона, калмар, занбӯруғи шиитаке ва помидорҳои черрӣ.',
-          en: 'Rich infusion of lemongrass, kaffir lime, and galangal with tiger prawns, tender squid, shiitake mushrooms, and cherry tomatoes. Served with steamed jasmine rice.',
-          zh: '鲜香柠檬草与南姜慢炖浓郁高汤，搭配黑虎大虾、鲜鱿、香菇与樱桃番茄，佐以泰国香米饭。'
+          ru: 'Королевское плато на длинной деревянной доске: шашлык «Наполеон» с курдюком, рулет из говяжьего бон-филе, люля из баранины, кусковой шашлык, куриный шашлык, маринованный лук, зелень, тонкий лаваш и пикантный томатный соус.',
+          tj: 'Таоми шоҳона дар болои тахтаи махсус: шашлики Наполеон, рулет аз гӯшти гов, лӯлаи барра, шашлики мурғӣ, пиёзи мариновашуда ва нони тунук бо соус.',
+          en: 'Served on a handcrafted wooden board: succulent Napoleon kebab layered with kurdyuk fat, rolled veal tenderloin, lamb lyulya, tender chicken, pickled red onions, fresh herbs, lavash, and spicy tomato sauce.',
+          zh: '以长木托盘呈献的豪气大餐：拿破仑层层烤肉、牛里脊卷、羔羊卢拉碎肉烤串、原切牛肉串、嫩香鸡肉串，佐以特制腌洋葱丝、香薄饼及秘制番茄蘸酱。'
         },
-        specBase: { ru: 'Тигровые креветки, кальмар, шиитаке', tj: 'Майгуҳои шоҳона, калмар, занбӯруғ', en: 'Tiger prawns, squid, shiitake', zh: '黑虎虾，鱿鱼，香菇' },
-        specPrep: { ru: 'Кокосовые сливки, паста том ям', tj: 'Шири кокос, хамираи том ям', en: 'Coconut cream, tom yum paste', zh: '特浓椰浆，冬阴功原酱' },
-        specPair: { ru: 'Паровой жасминовый рис', tj: 'Биринҷи буғпарвардаи ёсмин', en: 'Steamed jasmine rice', zh: '泰国茉莉香米饭' },
+        specBase: { ru: 'Говядина, баранина, цыплёнок, курдюк', tj: 'Гӯшти гов, барра, чӯҷа, дунба', en: 'Beef tenderloin, lamb, chicken, fat tail', zh: '精选牛肉、羔羊肉、童子鸡、羊尾脂' },
+        specPrep: { ru: 'Мангал, берёзовые и фруктовые угли', tj: 'Манқал, ангишти дарахтони мева', en: 'Mangal grill, fruitwood charcoal', zh: '传统炭烤架，果木高温烘烤' },
+        specPair: { ru: 'Тонкий лаваш, красный лук, томатный соус', tj: 'Лавоши тунук, пиёзи сурх, соус', en: 'Thin lavash, sliced red onion, spicy sauce', zh: '薄烤饼，红洋葱丝，秘制番茄酱' },
         waText: {
-          ru: 'Здравствуйте! Хочу заказать блюдо Том Ям Королевский',
-          tj: 'Салом! Мехоҳам Том Ями Шоҳонаро фармоиш диҳам',
-          en: 'Hello! I would like to order Royal Tom Yum',
-          zh: '您好！我想订购皇家冬阴功海鲜汤'
+          ru: 'Здравствуйте! Хочу заказать Ассорти из шашлыков',
+          tj: 'Салом! Мехоҳам Маҷмӯи шашликҳоро фармоиш диҳам',
+          en: 'Hello! I would like to order the Assorted Kebabs Platter',
+          zh: '您好！我想订购炭烤烤肉大拼盘'
         }
       },
       {
         id: 5,
+        category: 'fish',
+        price: '230',
+        img: 'dish_real_salmon.jpg',
+        catShort: { ru: 'Рыба Josper', tj: 'Моҳии Josper', en: 'Josper Fish', zh: '炭烤鱼鲜' },
+        catName: { ru: 'РЫБНЫЕ БЛЮДА JOSPER', tj: 'ТАОМҲОИ МОҲӢ', en: 'JOSPER FISH SPECIALTIES', zh: 'Josper炭烤特色鱼排' },
+        tag: { ru: 'ДЕЛИКАТЕС', tj: 'ТАОМИ НОЗУК', en: 'SEAFOOD DELICACY', zh: '主厨海味珍馐' },
+        serving: { ru: '± 210 Г · СО СЛИВОЧНО-ИКОРНЫМ СОУСОМ · 230 TJS', tj: '± 210 Г · БО СОУСИ ИКРАГИИ СЛИВКАӢ · 230 TJS', en: '± 210 G · WITH CAVIAR CREAM SAUCE · 230 TJS', zh: '± 210克 · 鱼子酱奶油特汁 · 230 TJS' },
+        title: { ru: 'Стейк Лосось Josper', tj: 'Стейки Лосос дар Josper', en: 'Josper Salmon Steak', zh: 'Josper炭烤三文鱼排配鱼子酱浓汁' },
+        subtitle: {
+          ru: 'Филе лосося запекается в печи Josper, подаётся со сливочно-икорным соусом',
+          tj: 'Гӯшти моҳии лосос дар танӯри Josper пухта шуда, бо соуси икра пешкаш мегардад',
+          en: 'Atlantic salmon fillet baked in Josper oven, served with velvety caviar cream sauce',
+          zh: '大西洋三文鱼原切菲力经Josper炭火精烤，佐以温热细腻的鱼子酱白汁'
+        },
+        desc: {
+          ru: 'Нежнейшее филе атлантического лосося с аппетитным рисунком от решётки гриля Josper. Подаётся с деликатным сливочно-икорным соусом, свежим микс-салатом и дольками лимона.',
+          tj: 'Гӯшти бениҳоят мулоими лососи атлантикӣ, ки дар оташи танӯри Josper маззаи махсус гирифтааст. Бо соуси серғизои икрадор ва лимӯ пешниҳод мешавад.',
+          en: 'Succulent Atlantic salmon steak kissed by charcoal grill bars. Served atop fresh garden greens with a lavish caviar-infused cream sauce and citrus garnish.',
+          zh: '精选大西洋优质三文鱼排，在Josper炭火中烤出完美菱形烤痕与酥脆外皮，肉质细腻多汁，佐以鲜美鱼子酱奶油汁与柠檬沙拉。'
+        },
+        specBase: { ru: 'Филе лосося, красная икра, сливки', tj: 'Лосос, икраи сурх, қаймоқ', en: 'Salmon fillet, red caviar, heavy cream', zh: '新鲜三文鱼排，红鱼子酱，特浓奶油' },
+        specPrep: { ru: 'Запекание в печи Josper на углях', tj: 'Пухтан дар танӯри Josper', en: 'Baked in Josper charcoal oven', zh: '西班牙Josper炭火炉精准锁水烘烤' },
+        specPair: { ru: 'Сливочно-икорный соус & Лимон', tj: 'Соуси қаймоқии икрадор & Лимӯ', en: 'Caviar cream sauce & lemon', zh: '特调鱼子酱白汁 & 鲜柠檬' },
+        waText: {
+          ru: 'Здравствуйте! Хочу заказать Стейк Лосось Josper',
+          tj: 'Салом! Мехоҳам Стейки Лососро фармоиш диҳам',
+          en: 'Hello! I would like to order the Josper Salmon Steak',
+          zh: '您好！我想订购Josper炭烤三文鱼排'
+        }
+      },
+      {
+        id: 6,
         category: 'bar',
         price: '99',
         img: 'dish_real_dubai_cheesecake.jpg',
-        catShort: { ru: 'Десерты', tj: 'Шириниҳо', en: 'Desserts', zh: '精品甜点' },
-        catName: { ru: 'ФИРМЕННЫЙ ДЕСЕРТ', tj: 'ДЕСЕРТИ МАХСУС', en: 'SIGNATURE DESSERT', zh: '招牌甜点' },
-        tag: { ru: 'ТРЕНД СЕЗОНА', tj: 'ТРЕНДИ ФАСЛ', en: 'SEASON TREND', zh: '当季爆款' },
+        catShort: { ru: 'Десерты', tj: 'Шириниҳо', en: 'Desserts', zh: '甜品' },
+        catName: { ru: 'АВТОРСКИЕ ДЕСЕРТЫ', tj: 'ШИРИНИҲОИ ХОС', en: 'ARTISANAL DESSERTS', zh: '安祖尔主厨甜品' },
+        tag: { ru: 'ТРЕНДОВЫЙ ХИТ', tj: 'ХИТИ ИМРӮЗА', en: 'VIRAL HIT', zh: '风靡全球招牌' },
         serving: { ru: '± 185 Г · 99 TJS', tj: '± 185 Г · 99 TJS', en: '± 185 G · 99 TJS', zh: '± 185克 · 99 TJS' },
-        title: { ru: 'Дубайский чизкейк', tj: 'Чизкейки Дубай', en: 'Dubai Pistachio Cheesecake', zh: '迪拜开心果芝士蛋糕' },
+        title: { ru: 'Дубайский чизкейк', tj: 'Чизкейки Дубайӣ', en: 'Dubai Cheesecake', zh: '迪拜风情开心果芝士蛋糕' },
         subtitle: {
-          ru: 'Фирменный хит с хрустящим тестом катаифи и фисташковой пастой',
-          tj: 'Хити махсус бо хамири катаифи ва пастаи пистагии аълосифат',
-          en: 'Artisan sensation with crispy kataifi crunch and premium pistachio cream',
-          zh: '风靡全球的招牌甜点，搭配酥脆卡达耶夫丝与浓醇开心果酱'
+          ru: 'Хрустящее тесто катаифи, фисташковая паста и нежный крем',
+          tj: 'Хамири қаҳваранги катаифӣ, хамираи писта ва креми мулоим',
+          en: 'Crispy kataifi pastry, premium pistachio praline, and silky cheese cream',
+          zh: '香脆卡达耶夫细丝脆皮，浓郁开心果酱与轻盈丝滑乳酪'
         },
         desc: {
-          ru: 'Хрустящее обжаренное тесто катаифи, насыщенная крем-паста из 100% отборных фисташек, нежнейшая сливочная основа чизкейка и тончайший бельгийский шоколад.',
-          tj: 'Хамири тиллоии катаифи, қаймоқи лазизи пистагӣ, асоси қаймоқии чизкейк ва шоколади шоҳонаи белгиягӣ.',
-          en: 'Toasted golden kataifi pastry ribbons layered with pure roasted pistachio paste, velvety cream cheese center, and rich Belgian chocolate glaze.',
-          zh: '烘烤金黄酥脆的卡达耶夫丝，层层融入100%纯坚果开心果膏与丝滑芝士馅心，淋覆香浓比利时巧克力。'
+          ru: 'Главный десертный хит: обжаренное до хруста восточное тесто катаифи с натуральной фисташковой пастой, покрытое слоем нежнейшего сливочного крем-чиза и премиальным бельгийским шоколадом.',
+          tj: 'Хити асосии шириниҳо: хамири тиллоии катаифӣ бо хамираи табиии писта, қабати қаймоқии панирӣ ва шоколади беҳтарини белгиягӣ.',
+          en: 'The global viral phenomenon: golden crispy kataifi threads folded into 100% pistachio paste, crowned with rich cream cheese and finished with Belgian milk chocolate.',
+          zh: '风靡全球的明星甜品：黄油酥炸的中东卡达耶夫脆丝，融入浓郁纯正开心果流心，外覆轻盈醇滑的奶酪慕斯与比利时巧克力脆壳。'
         },
-        specBase: { ru: 'Фисташковая паста, тесто катаифи', tj: 'Пастаи писта, хамири катаифи', en: 'Pistachio cream, kataifi pastry', zh: '纯开心果酱，卡达耶夫丝' },
-        specPrep: { ru: 'Холодное вызревание, темперированный шоколад', tj: 'Омодасозии дастӣ бо шоколади белгиягӣ', en: 'Cold set, tempered chocolate finish', zh: '低温凝固，精准调温巧克力' },
-        specPair: { ru: 'Памирский чай & Двойной эспрессо', tj: 'Чойи кӯҳӣ & Эспрессо', en: 'Pamir Herbal Tea & Double Espresso', zh: '帕米尔高山茶 & 双份意式浓缩' },
+        specBase: { ru: 'Тесто катаифи, фисташка, крем-чиз', tj: 'Катаифӣ, писта, панири қаймоқӣ', en: 'Kataifi pastry, pistachio cream, cheese', zh: '卡达耶夫脆丝，开心果酱，奶油芝士' },
+        specPrep: { ru: 'Авторская формовка шеф-кондитера', tj: 'Ороиши махсуси ошпази ширинӣ', en: 'Handcrafted by pastry chef', zh: '主厨手工精致层叠制成' },
+        specPair: { ru: 'Горный чай с чабрецом и мятой', tj: 'Чойи кӯҳӣ бо камол ва пудина', en: 'Mountain thyme & mint tea', zh: '高山百里香鲜薄荷热茶' },
         waText: {
           ru: 'Здравствуйте! Хочу заказать Дубайский чизкейк',
-          tj: 'Салом! Мехоҳам Чизкейки Дубайро фармоиш диҳам',
-          en: 'Hello! I would like to order Dubai Pistachio Cheesecake',
-          zh: '您好！我想订购迪拜开心果芝士蛋糕'
+          tj: 'Салом! Мехоҳам Чизкейки Дубайиро фармоиш диҳам',
+          en: 'Hello! I would like to order the Dubai Cheesecake',
+          zh: '您好！我想订购迪拜风情开心果芝士蛋糕'
         }
       }
     ];
