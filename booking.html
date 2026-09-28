@@ -963,23 +963,7 @@
         ← НА ГЛАВНУЮ
       </a>
 
-      <a href="index.html" class="brand-center" title="ANZUR RESTAURANT">
-        <img src="anzur_logo_gold.svg" alt="ANZUR RESTAURANT" />
-      </a>
-
       <div class="nav-actions">
-        <!-- Button to view official 22-page menu -->
-        <button type="button" class="btn-blueprint" onclick="openMenuModal()" style="border-color:var(--gold); color:var(--gold-light);">
-          <span>📖</span>
-          <span>Меню (22 стр.)</span>
-        </button>
-
-        <!-- Button to view original blueprints -->
-        <button type="button" class="btn-blueprint" onclick="openBlueprintModal()">
-          <span>📐</span>
-          <span>План БТИ</span>
-        </button>
-
         <!-- Language Switcher -->
         <div class="lang-switcher">
           <button type="button" class="lang-btn is-active" data-lang="ru" onclick="setLanguage('ru')">RU</button>
@@ -1011,20 +995,6 @@
     <div class="booking-header">
       <div class="mono-tag" id="i18n-tag">ОФИЦИАЛЬНАЯ СХЕМА ЗАЛОВ</div>
       <h1 class="booking-title" id="i18n-title">Интерактивный <em>план столов</em></h1>
-      <p class="booking-subtitle" id="i18n-sub">
-        Точная архитектурная схема 1-го и 2-го яруса ресторана «Анзур». Выберите стол у танцпола, у сцены или на балконе.
-      </p>
-    </div>
-
-    <!-- Quick Menu Banner -->
-    <div class="menu-quick-banner" onclick="openMenuModal()">
-      <div class="mqb-left">
-        <span class="mqb-badge">МЕНЮ 2026</span>
-        <span class="mqb-text"><b>Официальное меню «Анзур» (22 страницы):</b> Национальная, европейская, хоспер, шашлыки, плов, суши, десерты</span>
-      </div>
-      <div class="mqb-right">
-        <span class="mqb-btn">Смотреть меню (22 стр.) ↗</span>
-      </div>
     </div>
 
     <!-- Controls Bar -->
@@ -1096,7 +1066,6 @@
         <div id="zone-tier1-content">
           <div class="plan-top-info">
             <span class="plan-title-badge">ПЛАН 1-ГО ЯРУСА (ОСНОВНОЙ КОНЦЕРТНЫЙ ЗАЛ)</span>
-            <button type="button" class="btn-blueprint" onclick="showBlueprintPhoto(1)">🔍 Оригинальный чертеж 1-го яруса</button>
           </div>
 
           <div class="hall-map-frame" style="display:flex; gap:1.2rem; min-height:480px;">
@@ -1191,7 +1160,6 @@
         <div id="zone-tier2-content" style="display:none;">
           <div class="plan-top-info">
             <span class="plan-title-badge">ПЛАН 2-ГО ЯРУСА (БАЛКОН, ВТОРОЙ СВЕТ & БАНКЕТНАЯ ЗОНА)</span>
-            <button type="button" class="btn-blueprint" onclick="showBlueprintPhoto(2)">🔍 Оригинальный чертеж 2-го яруса</button>
           </div>
 
           <div class="hall-map-frame" style="display:flex; gap:1.2rem; min-height:480px;">
@@ -1415,25 +1383,6 @@
     </div>
   </div>
 
-  <!-- Modal: Original Blueprint Photos -->
-  <div class="modal-overlay" id="blueprintModal">
-    <div class="modal-box wide">
-      <button type="button" class="modal-close" onclick="closeModal('blueprintModal')">✕</button>
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:1px solid var(--border); padding-bottom:0.8rem;">
-        <h3 style="font-family:var(--font-serif); font-size:1.8rem; color:var(--gold);" id="bpModalTitle">План залов ресторана «Анзур»</h3>
-        <div style="display:flex; gap:0.5rem;">
-          <button type="button" class="btn-blueprint" onclick="showBlueprintPhoto(1)">1-й ярус</button>
-          <button type="button" class="btn-blueprint" onclick="showBlueprintPhoto(2)">2-й ярус</button>
-        </div>
-      </div>
-      <div style="max-height:75vh; overflow:auto; text-align:center; background:#000;">
-        <img id="bpImg" src="floor_plan_tier_1.jpg" alt="План яруса" style="max-width:100%; height:auto; display:inline-block; border:1px solid var(--border);" />
-      </div>
-      <div style="font-family:var(--font-mono); font-size:0.65rem; color:var(--text-muted); margin-top:0.8rem; text-align:center;">
-        Официальный архитектурный план рассадки столов ресторана «Анзур»
-      </div>
-    </div>
-  </div>
 
   <!-- Manager Login Modal -->
   <div class="modal-overlay" id="loginModal">
@@ -1808,24 +1757,6 @@
       document.getElementById('submitBtn').disabled = true;
     }
 
-    // Modal Blueprint Controls
-    function openBlueprintModal() {
-      showBlueprintPhoto(currentZone === 'tier2' ? 2 : 1);
-      openModal('blueprintModal');
-    }
-
-    function showBlueprintPhoto(tierNum) {
-      const img = document.getElementById('bpImg');
-      const title = document.getElementById('bpModalTitle');
-      if (tierNum === 2) {
-        img.src = 'floor_plan_tier_2.jpg';
-        title.textContent = 'Оригинальный план БТИ: 2-й ярус (Балкон и Банкетная зона)';
-      } else {
-        img.src = 'floor_plan_tier_1.jpg';
-        title.textContent = 'Оригинальный план БТИ: 1-й ярус (Партер и Сцена)';
-      }
-      openModal('blueprintModal');
-    }
 
     // Manager Portal
     function updateManagerUI() {
