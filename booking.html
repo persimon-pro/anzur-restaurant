@@ -453,6 +453,97 @@
       margin-top: 0.2rem;
     }
 
+    /* Architectural Elements from Blueprints */
+    .arch-pillar {
+      width: 16px;
+      height: 16px;
+      background: #2a2216;
+      border: 1px solid var(--gold);
+      border-radius: 2px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 8px rgba(0,0,0,0.8);
+      flex-shrink: 0;
+      position: relative;
+    }
+    .arch-pillar::after {
+      content: '';
+      width: 4px;
+      height: 4px;
+      background: var(--gold);
+      border-radius: 1px;
+    }
+    .arch-stairs {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 6px 8px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      border-radius: 4px;
+      text-align: center;
+      box-sizing: border-box;
+      user-select: none;
+    }
+    .arch-stairs-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      width: 100%;
+      margin: 4px 0;
+    }
+    .arch-stairs-line {
+      height: 2px;
+      background: rgba(197, 160, 89, 0.4);
+      width: 100%;
+      border-radius: 1px;
+    }
+    .arch-stairs-label {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      color: var(--gold-light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .aisle-label {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-align: center;
+      user-select: none;
+    }
+
+    /* Table shape customizations matching blueprints */
+    #t-cell-1, #t-cell-2 {
+      border-radius: 12px;
+      background: radial-gradient(circle at center, rgba(197, 160, 89, 0.12) 0%, rgba(20, 16, 11, 0.95) 100%);
+      box-shadow: inset 0 0 0 1px rgba(197, 160, 89, 0.35);
+    }
+    #t-cell-29 {
+      border-radius: 14px;
+      background: radial-gradient(circle at center, rgba(197, 160, 89, 0.16) 0%, rgba(26, 20, 14, 0.95) 100%);
+      box-shadow: inset 0 0 0 1px rgba(197, 160, 89, 0.45);
+    }
+    #t-cell-7, #t-cell-36 {
+      transform: rotate(-20deg);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+    #t-cell-7:hover, #t-cell-36:hover {
+      transform: rotate(-20deg) scale(1.06);
+    }
+    #t-cell-8, #t-cell-21 {
+      transform: rotate(20deg);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+    #t-cell-8:hover, #t-cell-21:hover {
+      transform: rotate(20deg) scale(1.06);
+    }
+
     /* Stage block on the right */
     .stage-column {
       width: 130px;
@@ -1068,69 +1159,109 @@
             <span class="plan-title-badge">ПЛАН 1-ГО ЯРУСА (ОСНОВНОЙ КОНЦЕРТНЫЙ ЗАЛ)</span>
           </div>
 
-          <div class="hall-map-frame" style="display:flex; gap:1.2rem; min-height:480px;">
-            <!-- Left & Center Tables Section (Shifted to Left) -->
+          <div class="hall-map-frame" style="display:flex; gap:1.2rem; min-height:510px; min-width:960px;">
+            <!-- Left & Center Tables Section -->
             <div style="flex:1; display:flex; flex-direction:column; justify-content:space-between;">
               
-              <!-- Top Row (North wall): Table 2, Table 3, Tables 4, 5, 6, Angle 7 -->
-              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.2rem;">
-                <div style="display:flex; gap:0.8rem;">
-                  <div id="t-cell-2" style="width:75px; height:75px;"></div>
-                  <div id="t-cell-3" style="width:70px; height:70px;"></div>
+              <!-- Top Row (North wall): Table 2, Stairs up, Table 3, Pillar, Table 4, Pillar, Table 5, Pillar, Table 6, Angle 7 -->
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem;">
+                <div style="display:flex; gap:0.9rem; align-items:center;">
+                  <div id="t-cell-2" style="width:86px; height:78px;"></div>
+                  <div class="arch-stairs" style="width:72px; height:74px;">
+                    <div class="arch-stairs-label">▲ НА 2-Й ЯРУС</div>
+                    <div class="arch-stairs-lines">
+                      <div class="arch-stairs-line"></div>
+                      <div class="arch-stairs-line"></div>
+                      <div class="arch-stairs-line"></div>
+                      <div class="arch-stairs-line"></div>
+                    </div>
+                    <div style="font-family:var(--font-mono); font-size:0.48rem; color:var(--text-muted);">ЛЕСТНИЦА</div>
+                  </div>
+                  <div id="t-cell-3" style="width:78px; height:70px;"></div>
                 </div>
-                <div style="display:flex; gap:0.6rem; margin-right:2rem;">
-                  <div id="t-cell-4" style="width:58px; height:62px;"></div>
-                  <div id="t-cell-5" style="width:58px; height:62px;"></div>
-                  <div id="t-cell-6" style="width:65px; height:62px;"></div>
-                  <div id="t-cell-7" style="width:60px; height:62px; transform:rotate(-15deg);"></div>
+
+                <div style="display:flex; gap:0.55rem; align-items:center;">
+                  <div class="arch-pillar" title="Несущая колонна"></div>
+                  <div id="t-cell-4" style="width:60px; height:62px;"></div>
+                  <div class="arch-pillar" title="Несущая колонна"></div>
+                  <div id="t-cell-5" style="width:60px; height:62px;"></div>
+                  <div class="arch-pillar" title="Несущая колонна"></div>
+                  <div id="t-cell-6" style="width:72px; height:62px;"></div>
+                  <div id="t-cell-7" style="width:64px; height:62px; margin-left:0.4rem;"></div>
                 </div>
               </div>
 
-              <!-- Center Zone: Central Booths (11-16) and Front Tables (17-20) Shifted Left -->
-              <div style="display:flex; justify-content:flex-start; align-items:center; gap:2rem; margin:1rem 0; margin-left:1.5rem;">
+              <!-- Aisle to Dance Floor & Stage -->
+              <div style="display:flex; align-items:center; justify-content:center; margin:0.4rem 0;">
+                <div class="aisle-label">· · · ПРОХОД К ТАНЦПОЛУ И СЦЕНЕ · · ·</div>
+              </div>
+
+              <!-- Center Zone: Central Booths (11-16 back-to-back) and Front Tables (17-20) -->
+              <div style="display:flex; justify-content:space-around; align-items:center; gap:1.8rem; margin:0.6rem 0;">
                 
-                <!-- Central Booths: 2 rows of 3 -->
-                <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border); padding:0.6rem; border-radius:4px;">
-                  <div style="font-family:var(--font-mono); font-size:0.55rem; color:var(--text-muted); text-align:center; margin-bottom:0.4rem; letter-spacing:0.14em;">ДИВАННЫЕ КУПЕ (ЦЕНТР)</div>
-                  <div style="display:grid; grid-template-columns:repeat(3, 64px); gap:0.5rem; margin-bottom:0.5rem;">
-                    <div id="t-cell-12" style="height:55px;"></div>
-                    <div id="t-cell-13" style="height:55px;"></div>
-                    <div id="t-cell-15" style="height:55px;"></div>
+                <!-- Central Booths: 2 rows of 3 back-to-back with divider -->
+                <div style="background:rgba(20, 16, 12, 0.7); border:1px solid rgba(197, 160, 89, 0.3); padding:0.7rem 0.9rem; border-radius:6px; box-shadow:0 4px 16px rgba(0,0,0,0.5);">
+                  <div style="font-family:var(--font-mono); font-size:0.56rem; color:var(--gold); text-align:center; margin-bottom:0.5rem; letter-spacing:0.16em; font-weight:700;">ДИВАННЫЕ КУПЕ ПАРТЕРА (СПИНА К СПИНЕ)</div>
+                  <div style="display:grid; grid-template-columns:repeat(3, 72px); gap:0.6rem;">
+                    <div id="t-cell-12" style="height:56px;"></div>
+                    <div id="t-cell-13" style="height:56px;"></div>
+                    <div id="t-cell-15" style="height:56px;"></div>
                   </div>
-                  <div style="display:grid; grid-template-columns:repeat(3, 64px); gap:0.5rem;">
-                    <div id="t-cell-11" style="height:55px;"></div>
-                    <div id="t-cell-14" style="height:55px;"></div>
-                    <div id="t-cell-16" style="height:55px;"></div>
+                  <div style="height:3px; background:rgba(197, 160, 89, 0.35); margin:0.45rem 0; border-radius:1px; display:flex; align-items:center; justify-content:center;">
+                    <span style="background:var(--bg); padding:0 6px; font-family:var(--font-mono); font-size:0.45rem; color:var(--text-muted); letter-spacing:0.1em;">ПЕРЕГОРОДКА</span>
+                  </div>
+                  <div style="display:grid; grid-template-columns:repeat(3, 72px); gap:0.6rem;">
+                    <div id="t-cell-11" style="height:56px;"></div>
+                    <div id="t-cell-14" style="height:56px;"></div>
+                    <div id="t-cell-16" style="height:56px;"></div>
                   </div>
                 </div>
 
                 <!-- Stage Front Tables: 17, 18 (row 2), 19, 20 (row 1 right at dance floor) -->
-                <div style="background:rgba(197, 160, 89, 0.05); border:1px solid rgba(197, 160, 89, 0.4); padding:0.6rem; border-radius:4px;">
-                  <div style="font-family:var(--font-mono); font-size:0.55rem; color:var(--gold); text-align:center; margin-bottom:0.4rem; letter-spacing:0.14em;">ПРЕМИУМ У ТАНЦПОЛА</div>
-                  <div style="display:grid; grid-template-columns:repeat(2, 64px); gap:0.5rem; margin-bottom:0.5rem;">
-                    <div id="t-cell-17" style="height:55px;"></div>
-                    <div id="t-cell-19" style="height:55px;"></div>
+                <div style="background:rgba(197, 160, 89, 0.06); border:1px solid rgba(197, 160, 89, 0.45); padding:0.7rem 0.9rem; border-radius:6px; box-shadow:0 4px 16px rgba(0,0,0,0.5);">
+                  <div style="font-family:var(--font-mono); font-size:0.56rem; color:var(--gold-light); text-align:center; margin-bottom:0.5rem; letter-spacing:0.16em; font-weight:700;">ПРЕМИУМ У ТАНЦПОЛА</div>
+                  <div style="display:grid; grid-template-columns:repeat(2, 70px); gap:0.6rem; margin-bottom:0.5rem;">
+                    <div id="t-cell-17" style="height:56px;"></div>
+                    <div id="t-cell-19" style="height:56px;"></div>
                   </div>
-                  <div style="display:grid; grid-template-columns:repeat(2, 64px); gap:0.5rem;">
-                    <div id="t-cell-18" style="height:55px;"></div>
-                    <div id="t-cell-20" style="height:55px;"></div>
+                  <div style="display:grid; grid-template-columns:repeat(2, 70px); gap:0.6rem;">
+                    <div id="t-cell-18" style="height:56px;"></div>
+                    <div id="t-cell-20" style="height:56px;"></div>
                   </div>
                 </div>
 
               </div>
 
-              <!-- Bottom Row (South wall): Table 1, Entrance/Stairs, Tables 10, 9, Angle 8 -->
-              <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:1.2rem;">
-                <div style="display:flex; gap:1rem; align-items:center;">
-                  <div id="t-cell-1" style="width:75px; height:75px;"></div>
-                  <div style="font-family:var(--font-mono); font-size:0.6rem; color:var(--text-muted); border-left:1px dashed var(--border-light); padding-left:0.6rem;">
-                    ВХОД /<br>ГАРДЕРОБ
+              <!-- Aisle to Dance Floor & Stage -->
+              <div style="display:flex; align-items:center; justify-content:center; margin:0.4rem 0;">
+                <div class="aisle-label">· · · ПРОХОД К ТАНЦПОЛУ И СЦЕНЕ · · ·</div>
+              </div>
+
+              <!-- Bottom Row (South wall): Table 1, Entrance/Foyer, South Stairs up, Pillar, Table 10, Pillar, Table 9, Angle 8 -->
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.8rem;">
+                <div style="display:flex; gap:0.9rem; align-items:center;">
+                  <div id="t-cell-1" style="width:86px; height:78px;"></div>
+                  <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; padding:6px 10px; border:1px dashed rgba(255,255,255,0.15); border-radius:4px; font-family:var(--font-mono); font-size:0.52rem; color:var(--text-muted); text-align:center; height:74px; box-sizing:border-box;">
+                    <span style="font-size:1.1rem; margin-bottom:2px;">🚪</span>ВХОД /<br>ГАРДЕРОБ
+                  </div>
+                  <div class="arch-stairs" style="width:72px; height:74px;">
+                    <div class="arch-stairs-label">▲ НА 2-Й ЯРУС</div>
+                    <div class="arch-stairs-lines">
+                      <div class="arch-stairs-line"></div>
+                      <div class="arch-stairs-line"></div>
+                      <div class="arch-stairs-line"></div>
+                      <div class="arch-stairs-line"></div>
+                    </div>
+                    <div style="font-family:var(--font-mono); font-size:0.48rem; color:var(--text-muted);">ЛЕСТНИЦА</div>
                   </div>
                 </div>
-                <div style="display:flex; gap:0.6rem; margin-right:2rem;">
-                  <div id="t-cell-10" style="width:58px; height:62px;"></div>
-                  <div id="t-cell-9" style="width:65px; height:62px;"></div>
-                  <div id="t-cell-8" style="width:60px; height:62px; transform:rotate(15deg);"></div>
+
+                <div style="display:flex; gap:0.55rem; align-items:center;">
+                  <div class="arch-pillar" title="Несущая колонна"></div>
+                  <div id="t-cell-10" style="width:60px; height:62px;"></div>
+                  <div class="arch-pillar" title="Несущая колонна"></div>
+                  <div id="t-cell-9" style="width:72px; height:62px;"></div>
+                  <div id="t-cell-8" style="width:64px; height:62px; margin-left:0.4rem;"></div>
                 </div>
               </div>
 
@@ -1162,70 +1293,104 @@
             <span class="plan-title-badge">ПЛАН 2-ГО ЯРУСА (БАЛКОН, ВТОРОЙ СВЕТ & БАНКЕТНАЯ ЗОНА)</span>
           </div>
 
-          <div class="hall-map-frame" style="display:flex; gap:1.2rem; min-height:480px;">
+          <div class="hall-map-frame" style="display:flex; gap:1.2rem; min-height:510px; min-width:960px;">
             
             <!-- Left Section: Banquet Grand Table 29, Tables 30, 28, 25, 27, 26 -->
-            <div style="width:230px; border-right:1px dashed var(--border-light); padding-right:1rem; display:flex; flex-direction:column; justify-content:space-between;">
-              <div style="font-family:var(--font-mono); font-size:0.58rem; color:var(--gold); text-align:center; letter-spacing:0.16em;">БАНКЕТНЫЙ СЕКТОР</div>
+            <div style="width:250px; border-right:1px dashed rgba(197, 160, 89, 0.35); padding-right:1.2rem; display:flex; flex-direction:column; justify-content:space-between;">
+              <div style="font-family:var(--font-mono); font-size:0.6rem; color:var(--gold); text-align:center; letter-spacing:0.18em; font-weight:700;">👑 БАНКЕТНЫЙ СЕКТОР</div>
 
               <!-- Top Left: Large Banquet Table 29 & Table 30 -->
               <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem;">
-                <div id="t-cell-29" style="width:120px; height:85px;"></div>
-                <div id="t-cell-30" style="width:65px; height:65px;"></div>
+                <div id="t-cell-29" style="width:142px; height:80px;"></div>
+                <div id="t-cell-30" style="width:68px; height:68px;"></div>
               </div>
 
-              <!-- Middle: Table 28 -->
-              <div style="display:flex; justify-content:flex-end;">
-                <div id="t-cell-28" style="width:65px; height:65px;"></div>
+              <!-- Middle: Table 27 & Table 28 -->
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem; margin:0.8rem 0;">
+                <div id="t-cell-27" style="width:84px; height:62px;"></div>
+                <div id="t-cell-28" style="width:68px; height:62px;"></div>
               </div>
 
-              <!-- Bottom Left: Table 25, 27, 26 -->
-              <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:0.6rem;">
-                <div style="display:flex; flex-direction:column; gap:0.5rem;">
-                  <div id="t-cell-27" style="width:75px; height:50px;"></div>
-                  <div id="t-cell-26" style="width:75px; height:45px;"></div>
-                </div>
-                <div id="t-cell-25" style="width:65px; height:65px;"></div>
+              <!-- Bottom Left: Table 26 & Table 25 -->
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem;">
+                <div id="t-cell-26" style="width:84px; height:62px;"></div>
+                <div id="t-cell-25" style="width:68px; height:62px;"></div>
+              </div>
+
+              <div style="font-family:var(--font-mono); font-size:0.5rem; color:var(--text-muted); text-align:center; margin-top:0.4rem; letter-spacing:0.1em;">
+                ТОРЖЕСТВА & ПРИВАТНЫЕ БАНКЕТЫ
               </div>
             </div>
 
             <!-- Center & Right Balcony Section -->
             <div style="flex:1; display:flex; flex-direction:column; justify-content:space-between;">
               
-              <!-- North Balcony: 31, 32 (wall) + 33, 34, 35 (rail) + 36 (angle) -->
-              <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                <div style="display:flex; gap:0.5rem;">
-                  <div id="t-cell-31" style="width:58px; height:55px;"></div>
-                  <div id="t-cell-32" style="width:58px; height:55px;"></div>
+              <!-- North Balcony: North stairs down + 31, 32 (wall) + Pillar + 33, 34 + Pillar + 35 + 36 (angle) -->
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div style="display:flex; gap:0.6rem; align-items:center;">
+                  <div class="arch-stairs" style="width:72px; height:64px;">
+                    <div class="arch-stairs-label">▼ 1-Й ЯРУС</div>
+                    <div class="arch-stairs-lines">
+                      <div class="arch-stairs-line"></div>
+                      <div class="arch-stairs-line"></div>
+                      <div class="arch-stairs-line"></div>
+                    </div>
+                    <div style="font-family:var(--font-mono); font-size:0.46rem; color:var(--text-muted);">СПУСК</div>
+                  </div>
+                  <div id="t-cell-31" style="width:62px; height:60px;"></div>
+                  <div id="t-cell-32" style="width:62px; height:60px;"></div>
                 </div>
-                <div style="display:flex; gap:0.5rem; align-items:flex-start;">
-                  <div id="t-cell-33" style="width:58px; height:55px;"></div>
-                  <div id="t-cell-34" style="width:58px; height:55px;"></div>
-                  <div id="t-cell-35" style="width:58px; height:55px;"></div>
-                  <div id="t-cell-36" style="width:60px; height:55px; transform:rotate(-15deg);"></div>
+
+                <div style="display:flex; gap:0.55rem; align-items:center;">
+                  <div class="arch-pillar" title="Несущая колонна"></div>
+                  <div id="t-cell-33" style="width:62px; height:60px;"></div>
+                  <div id="t-cell-34" style="width:62px; height:60px;"></div>
+                  <div class="arch-pillar" title="Несущая колонна"></div>
+                  <div id="t-cell-35" style="width:62px; height:60px;"></div>
+                  <div id="t-cell-36" style="width:64px; height:60px; margin-left:0.4rem;"></div>
                 </div>
               </div>
 
               <!-- Central Void (Atrium overlooking 1st tier and stage) -->
-              <div class="atrium-void">
-                <div>ВТОРОЙ СВЕТ · АТРИУМ НАД ЗАЛОМ</div>
-                <div style="font-size:0.55rem; color:var(--text-muted); margin-top:0.3rem;">ПАНОРАМНЫЙ ОБЗОР СЦЕНЫ И ПАРТЕРА</div>
+              <div class="atrium-void" style="border: 2px dashed rgba(197, 160, 89, 0.45); background: radial-gradient(ellipse at center, rgba(197, 160, 89, 0.05) 0%, rgba(10, 8, 6, 0.85) 100%); padding: 1.2rem; margin: 0.8rem 0; border-radius: 8px;">
+                <div style="font-family:var(--font-serif); font-size:1.15rem; color:var(--gold-light); letter-spacing:0.18em;">ВТОРОЙ СВЕТ · АТРИУМ НАД ЗАЛОМ</div>
+                <div style="font-family:var(--font-mono); font-size:0.58rem; color:var(--text-muted); margin-top:0.4rem; letter-spacing:0.14em;">ПАНОРАМНЫЙ ОБЗОР ТАНЦПОЛА, ПАРТЕРА И СЦЕНЫ С ВЫСОТЫ 2-ГО ЭТАЖА</div>
+                <div style="display:flex; justify-content:center; gap:2.5rem; margin-top:0.7rem; font-family:var(--font-mono); font-size:0.52rem; color:rgba(197, 160, 89, 0.65); letter-spacing:0.12em;">
+                  <span>═ ПЕРИЛА СЕВЕРНОГО БАЛКОНА ═</span>
+                  <span>═ ПЕРИЛА ЮЖНОГО БАЛКОНА ═</span>
+                </div>
               </div>
 
-              <!-- South Balcony: 24, 23, 22 (rail) + 21 (angle) -->
-              <div style="display:flex; justify-content:flex-end; align-items:flex-end; gap:0.5rem;">
-                <div id="t-cell-24" style="width:58px; height:55px;"></div>
-                <div id="t-cell-23" style="width:58px; height:55px;"></div>
-                <div id="t-cell-22" style="width:58px; height:55px;"></div>
-                <div id="t-cell-21" style="width:60px; height:55px; transform:rotate(15deg);"></div>
+              <!-- South Balcony: South stairs up + 24 + Pillar + 23 + Pillar + 22 + 21 (angle) -->
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div style="display:flex; gap:0.6rem; align-items:center;">
+                  <div class="arch-stairs" style="width:72px; height:64px;">
+                    <div class="arch-stairs-label">▲ С 1-ГО ЯРУСА</div>
+                    <div class="arch-stairs-lines">
+                      <div class="arch-stairs-line"></div>
+                      <div class="arch-stairs-line"></div>
+                      <div class="arch-stairs-line"></div>
+                    </div>
+                    <div style="font-family:var(--font-mono); font-size:0.46rem; color:var(--text-muted);">ВЫХОД</div>
+                  </div>
+                </div>
+
+                <div style="display:flex; gap:0.55rem; align-items:center;">
+                  <div id="t-cell-24" style="width:62px; height:60px;"></div>
+                  <div class="arch-pillar" title="Несущая колонна"></div>
+                  <div id="t-cell-23" style="width:62px; height:60px;"></div>
+                  <div class="arch-pillar" title="Несущая колонна"></div>
+                  <div id="t-cell-22" style="width:62px; height:60px;"></div>
+                  <div id="t-cell-21" style="width:64px; height:60px; margin-left:0.4rem;"></div>
+                </div>
               </div>
 
             </div>
 
             <!-- View to Stage on Right -->
-            <div class="stage-column" style="background:rgba(0,0,0,0.6); border-color:var(--border);">
-              <div class="stage-column-title" style="font-size:1.1rem; color:var(--text-muted);">ВИД НА СЦЕНУ</div>
-              <div class="stage-column-sub">ВЕРХНИЙ УРОВЕНЬ</div>
+            <div class="stage-column" style="background:rgba(18, 14, 9, 0.85); border-color:rgba(197, 160, 89, 0.45);">
+              <div class="stage-column-title" style="font-size:1.15rem; color:var(--gold);">🎭 ВИД НА СЦЕНУ</div>
+              <div class="stage-column-sub">ВЕРХНИЙ РАКУРС<br>ОБЗОР ШОУ<br>С БАЛКОНА</div>
             </div>
 
           </div>
