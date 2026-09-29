@@ -1509,48 +1509,6 @@
       .footer-dev-credit { margin-left: 0; padding-left: 0; border-left: none; display: block; margin-top: 0.4rem; }
     }
 
-    /* Floating WhatsApp Dock */
-    #wa-dock {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      z-index: 9999;
-      background: var(--bg);
-      border: 1px solid var(--gold);
-      padding: 0.85rem 1.6rem;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      cursor: pointer;
-      box-shadow: 4px 4px 0 #000;
-      transition: all 0.2s ease;
-    }
-    #wa-dock:hover {
-      background: var(--bg-card);
-      transform: translateY(-2px);
-      box-shadow: 6px 6px 0 var(--border);
-    }
-    .wa-led {
-      width: 6px;
-      height: 6px;
-      background: var(--wa);
-    }
-    .wa-label {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text);
-    }
-    @media (max-width: 600px) {
-      #wa-dock {
-        bottom: 1rem;
-        right: 1rem;
-        left: 1rem;
-        justify-content: center;
-      }
-    }
   
 </style>
 </head>
@@ -2531,11 +2489,7 @@
     </div>
   </div>
 
-  <!-- DOCKED WHATSAPP BUTTON -->
-  <a id="wa-dock" href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B2%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" aria-label="Бронь столика в WhatsApp">
-    <div class="wa-led"></div>
-    <span class="wa-label" data-i18n="wa_dock">НАПИШИТЕ НАМ</span>
-  </a>
+
 
   <!-- SCRIPT -->
   <script>
