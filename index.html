@@ -677,11 +677,16 @@
       align-items: baseline;
       gap: 0.4rem;
     }
-    .stage-price-tag span {
-      font-size: 0.8rem;
+    .stage-price-tag #stage-price {
+      font-size: 1.8rem;
+      color: var(--text);
+      font-weight: 700;
+    }
+    .stage-price-tag span:last-child {
+      font-size: 0.85rem;
       color: var(--gold);
-      font-weight: 400;
-      letter-spacing: 0.1em;
+      font-weight: 500;
+      letter-spacing: 0.12em;
     }
 
     .stage-main-text {
@@ -1681,17 +1686,6 @@
         <img id="stage-img" class="stage-visual-img" src="dish_real_plov.jpg" alt="Праздничный Плов Анзур" />
         <div class="stage-visual-vignette"></div>
 
-        <!-- Badges -->
-        <div class="stage-badge-top-left" id="stage-badge-tag">
-          НАЦИОНАЛЬНАЯ КУХНЯ
-        </div>
-        <div class="stage-badge-top-right">
-          <span id="stage-counter-cur">01</span><span class="dim">/</span><span id="stage-counter-total">07</span>
-        </div>
-        <div class="stage-badge-bottom-left" id="stage-badge-serving">
-          «ШЕФ-ПОДАЧА» · 650 Г
-        </div>
-
         <!-- Overlay navigation arrows -->
         <button type="button" class="stage-img-arrow stage-img-arrow--prev" onclick="prevSlide()" aria-label="Предыдущее блюдо">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
@@ -1703,10 +1697,9 @@
 
       <!-- Right Editorial Typographic Panel -->
       <div class="stage-details">
-        <div class="stage-header-line stage-anim">
-          <span class="stage-cat-name" id="stage-cat-name">ТРАДИЦИОННАЯ КУХНЯ</span>
+        <div class="stage-header-line stage-anim" style="justify-content:flex-end;">
           <div class="stage-price-tag">
-            <span id="stage-price">48</span> <span>TJS</span>
+            <span id="stage-price">55</span> <span class="stage-price-curr">TJS</span>
           </div>
         </div>
 
@@ -1732,7 +1725,6 @@
           <span class="filmstrip-price">55 TJS</span>
         </div>
         <div class="filmstrip-title">Плов «Анзур»</div>
-        <div class="filmstrip-cat">Национальная</div>
         <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
       </div>
 
@@ -1746,7 +1738,6 @@
           <span class="filmstrip-price">95 TJS</span>
         </div>
         <div class="filmstrip-title">Казан Кабоб</div>
-        <div class="filmstrip-cat">Национальная</div>
         <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
       </div>
 
@@ -1760,7 +1751,6 @@
           <span class="filmstrip-price">178 TJS</span>
         </div>
         <div class="filmstrip-title">Рибай в Josper</div>
-        <div class="filmstrip-cat">Печь Josper</div>
         <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
       </div>
 
@@ -1774,7 +1764,6 @@
           <span class="filmstrip-price">789 TJS</span>
         </div>
         <div class="filmstrip-title">Суши сет «Анзур»</div>
-        <div class="filmstrip-cat">Паназиатская</div>
         <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
       </div>
 
@@ -1788,7 +1777,6 @@
           <span class="filmstrip-price">449 TJS</span>
         </div>
         <div class="filmstrip-title">Ассорти шашлыков</div>
-        <div class="filmstrip-cat">Мангал</div>
         <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
       </div>
 
@@ -1802,7 +1790,6 @@
           <span class="filmstrip-price">230 TJS</span>
         </div>
         <div class="filmstrip-title">Стейк Лосось Josper</div>
-        <div class="filmstrip-cat">Рыба Josper</div>
         <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
       </div>
 
@@ -1816,7 +1803,6 @@
           <span class="filmstrip-price">99 TJS</span>
         </div>
         <div class="filmstrip-title">Дубайский чизкейк</div>
-        <div class="filmstrip-cat">Десерты</div>
         <div class="filmstrip-progress"><div class="filmstrip-fill"></div></div>
       </div>
     </div>
