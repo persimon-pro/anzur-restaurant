@@ -1758,14 +1758,19 @@
        SPACES (VIP · KARAOKE · TERRACE)
        ========================================================================== -->
   <section id="spaces" class="container">
-    <div class="sec-header">
-      <h2 class="sec-title" data-i18n-html="spaces_title">Залы & <em>Форматы</em></h2>
+    <div class="sec-header" style="border-bottom:none; padding-bottom:2.5rem;">
+      <div>
+        <h2 class="sec-title" data-i18n-html="spaces_title">Залы & <em>Форматы</em></h2>
+      </div>
+      <button type="button" class="btn-outline" onclick="openSpacesModal()" style="padding:0.7rem 1.6rem; font-size:0.65rem;" data-i18n="spaces_photos_btn">
+        ФОТОГРАФИИ ЛОКАЦИЙ
+      </button>
     </div>
   </section>
 
   <div class="spaces-grid">
     <!-- VIP & Karaoke (merged) -->
-    <div class="space-box">
+    <div class="space-box" onclick="openSpacesModal(0)" style="cursor:pointer;" title="Смотреть фотографии локаций">
       <div class="space-media">
         <img src="gen_vip.jpg" alt="VIP-кабины с караоке" loading="lazy" />
       </div>
@@ -1779,9 +1784,9 @@
     </div>
 
     <!-- Летняя терраса (Реальное фото) -->
-    <div class="space-box">
+    <div class="space-box" onclick="openSpacesModal(0)" style="cursor:pointer;" title="Смотреть фотографии локаций">
       <div class="space-media">
-        <img src="real_anzur_terrace.jpg" alt="Летняя терраса ресторана Анзур" loading="lazy" />
+        <img src="location_photos/location_01.jpg" alt="Летняя терраса ресторана Анзур" loading="lazy" />
       </div>
       <div class="space-text">
         <span class="mono-label" data-i18n="space2_badge">ОТКРЫТЫЙ ВОЗДУХ</span>
@@ -1793,9 +1798,9 @@
     </div>
 
     <!-- Тихая веранда (Реальное фото) -->
-    <div class="space-box">
+    <div class="space-box" onclick="openSpacesModal(1)" style="cursor:pointer;" title="Смотреть фотографии локаций">
       <div class="space-media">
-        <img src="real_anzur_entrance.jpg" alt="Тихая веранда ресторана Анзур" loading="lazy" />
+        <img src="location_photos/location_02.jpg" alt="Тихая веранда ресторана Анзур" loading="lazy" />
       </div>
       <div class="space-text">
         <span class="mono-label" data-i18n="space3_badge">БЕЗ ГРОМКОЙ МУЗЫКИ</span>
@@ -1970,6 +1975,7 @@
           <li><a href="#spaces">VIP-кабины с караоке</a></li>
           <li><a href="#spaces">Летняя терраса</a></li>
           <li><a href="#spaces">Тихая веранда</a></li>
+          <li><a href="javascript:void(0)" onclick="openSpacesModal()">Фотографии локаций</a></li>
           <li><a href="booking.html">Банкеты и корпоративы</a></li>
         </ul>
       </div>
@@ -2038,6 +2044,18 @@
     </div>
   </div>
 
+  <!-- ==========================================================================
+       CLEAN LOCATIONS VIEWER (PHOTOS + ARROWS ONLY)
+       ========================================================================== -->
+  <div id="spaces-modal" class="menu-modal-overlay" role="dialog" aria-modal="true" aria-label="Фотографии локаций ресторана Анзур" onclick="handleSpacesOverlayClick(event)">
+    <button type="button" class="menu-modal-close-btn" onclick="closeSpacesModal()" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
+    <div class="menu-lightbox-stage" id="modalSpacesStage" onclick="event.stopPropagation()">
+      <button type="button" class="menu-stage-arrow prev" onclick="prevSpacesPage()" title="Предыдущее фото" aria-label="Предыдущее фото">‹</button>
+      <img id="modalSpacesCurrentImg" src="location_photos/location_01.jpg" alt="Локация ресторана Анзур" class="menu-page-display" />
+      <button type="button" class="menu-stage-arrow next" onclick="nextSpacesPage()" title="Следующее фото" aria-label="Следующее фото">›</button>
+    </div>
+  </div>
+
 
 
   <!-- SCRIPT -->
@@ -2095,6 +2113,7 @@
     stage_order_wa: "Заказать в WhatsApp",
     stage_view_menu: "Смотреть меню",
     spaces_title: "Залы & <em>Форматы</em>",
+    spaces_photos_btn: "ФОТОГРАФИИ ЛОКАЦИЙ",
     spaces_mono: "[ ПРИВАТНОСТЬ И ЗВУК ]",
     space1_badge: "6 – 25 ПЕРСОН · КАРАОКЕ",
     space1_title: "VIP-кабины",
@@ -2202,6 +2221,7 @@
     stage_order_wa: "Фармоиш дар WhatsApp",
     stage_view_menu: "Дидани меню",
     spaces_title: "Толорҳо & <em>Фазоҳо</em>",
+    spaces_photos_btn: "АКСҲОИ ТОЛОРҲО",
     spaces_mono: "[ МАХФИЯТ ВА САДО ]",
     space1_badge: "6 – 25 НАФАР · КАРАОКЕ",
     space1_title: "Ҳуҷраҳои VIP",
@@ -2301,6 +2321,7 @@
     stage_order_wa: "Order via WhatsApp",
     stage_view_menu: "View Menu",
     spaces_title: "Spaces & <em>Ambience</em>",
+    spaces_photos_btn: "LOCATION PHOTOS",
     spaces_mono: "[ PRIVACY & ACOUSTICS ]",
     space1_badge: "6 – 25 GUESTS · KARAOKE",
     space1_title: "VIP Lounges",
@@ -2400,6 +2421,7 @@
     stage_order_wa: "WhatsApp/微信预订",
     stage_view_menu: "浏览菜单",
     spaces_title: "空间与<em>格局</em>",
+    spaces_photos_btn: "空间实景相册",
     spaces_mono: "[ 私密与原声 ]",
     space1_badge: "6 – 25位宾客 · 专属KTV",
     space1_title: "VIP贵宾包厢",
@@ -3006,10 +3028,86 @@ let currentSlideIdx = 0;
       });
     })();
 
+    // Spaces / Locations Lightbox Modal (Pure photos + arrows only)
+    const LOCATION_PHOTOS = [
+      'location_photos/location_01.jpg',
+      'location_photos/location_02.jpg',
+      'location_photos/location_03.jpg',
+      'location_photos/location_04.jpg',
+      'location_photos/location_05.jpg'
+    ];
+    let currentSpacesIndex = 0;
+
+    function openSpacesModal(index) {
+      if (typeof index === 'number' && index >= 0 && index < LOCATION_PHOTOS.length) {
+        currentSpacesIndex = index;
+      }
+      setSpacesPhoto(currentSpacesIndex);
+      const modal = document.getElementById('spaces-modal');
+      if (modal) {
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeSpacesModal() {
+      const modal = document.getElementById('spaces-modal');
+      if (modal) {
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function handleSpacesOverlayClick(e) {
+      if (e.target && e.target.id === 'spaces-modal') {
+        closeSpacesModal();
+      }
+    }
+
+    function setSpacesPhoto(idx) {
+      if (idx < 0) idx = LOCATION_PHOTOS.length - 1;
+      if (idx >= LOCATION_PHOTOS.length) idx = 0;
+      currentSpacesIndex = idx;
+      const img = document.getElementById('modalSpacesCurrentImg');
+      if (img) {
+        img.src = LOCATION_PHOTOS[currentSpacesIndex];
+      }
+    }
+
+    function prevSpacesPage() {
+      setSpacesPhoto(currentSpacesIndex - 1);
+    }
+
+    function nextSpacesPage() {
+      setSpacesPhoto(currentSpacesIndex + 1);
+    }
+
+    // Touch swipe support on spaces stage
+    (function initSpacesTouchSwipe() {
+      window.addEventListener('DOMContentLoaded', () => {
+        const stage = document.getElementById('modalSpacesStage');
+        if (!stage) return;
+        let startX = 0;
+        stage.addEventListener('touchstart', (e) => {
+          if (e.touches && e.touches.length > 0) startX = e.touches[0].clientX;
+        }, { passive: true });
+        stage.addEventListener('touchend', (e) => {
+          if (e.changedTouches && e.changedTouches.length > 0) {
+            const diffX = e.changedTouches[0].clientX - startX;
+            if (Math.abs(diffX) > 40) {
+              if (diffX > 0) prevSpacesPage();
+              else nextSpacesPage();
+            }
+          }
+        }, { passive: true });
+      });
+    })();
+
     // Global Key listeners (ESC closes modal, Arrows cycle pages / slides)
     window.addEventListener('keydown', (e) => {
-      const modal = document.getElementById('menu-modal');
-      if (modal && modal.classList.contains('is-open')) {
+      // Menu modal
+      const menuModal = document.getElementById('menu-modal');
+      if (menuModal && menuModal.classList.contains('is-open')) {
         if (e.key === 'Escape') {
           closeMenuModal();
           return;
@@ -3023,6 +3121,24 @@ let currentSlideIdx = 0;
           return;
         }
       }
+
+      // Spaces / Locations modal
+      const spacesModal = document.getElementById('spaces-modal');
+      if (spacesModal && spacesModal.classList.contains('is-open')) {
+        if (e.key === 'Escape') {
+          closeSpacesModal();
+          return;
+        }
+        if (e.key === 'ArrowRight') {
+          nextSpacesPage();
+          return;
+        }
+        if (e.key === 'ArrowLeft') {
+          prevSpacesPage();
+          return;
+        }
+      }
+
       if (e.key === 'ArrowRight') nextSlide();
       if (e.key === 'ArrowLeft') prevSlide();
     });
