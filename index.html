@@ -902,380 +902,126 @@
     }
 
     /* ==========================================================================
-       FULL RESTAURANT MENU MODAL (COMPACT POPUP / PDF & PAGES)
+       CLEAN MENU VIEWER (PAGES + ARROWS ONLY)
        ========================================================================== */
     .menu-modal-overlay {
       position: fixed;
       inset: 0;
       z-index: 12000;
-      background: rgba(4, 3, 2, 0.88);
+      background: rgba(4, 3, 2, 0.94);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1.25rem;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
+      padding: 1rem;
     }
     .menu-modal-overlay.is-open {
       opacity: 1;
       pointer-events: auto;
     }
-    .menu-modal-window {
-      width: 100%;
-      max-width: 960px;
-      height: 88vh;
-      max-height: 840px;
-      background: #0c0a08;
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      border-radius: 12px;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95), 0 0 40px rgba(212, 175, 55, 0.08);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      transform: scale(0.96) translateY(12px);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .menu-modal-overlay.is-open .menu-modal-window {
-      transform: scale(1) translateY(0);
-    }
-    .menu-modal-head {
-      padding: 0.9rem 1.4rem;
-      border-bottom: 1px solid var(--border);
-      background: #0e0c09;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .menu-modal-brand {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-    }
-    .menu-modal-tag {
-      font-family: var(--font-mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.18em;
-      color: var(--gold);
-      text-transform: uppercase;
-    }
-    .menu-modal-title {
-      font-family: var(--font-serif);
-      font-size: 1.25rem;
-      font-weight: 400;
-      letter-spacing: 0.05em;
-      color: var(--text);
-      margin: 0;
-    }
-    .menu-modal-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-    }
-    .menu-modal-action-btn {
-      font-family: var(--font-mono);
-      font-size: 0.64rem;
-      letter-spacing: 0.1em;
-      color: var(--gold);
-      background: rgba(212, 175, 55, 0.08);
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      padding: 0.42rem 0.85rem;
-      border-radius: 4px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-weight: 600;
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-    .menu-modal-action-btn:hover {
-      background: var(--gold);
-      color: #060504;
-      border-color: var(--gold);
-    }
     .menu-modal-close-btn {
-      background: transparent;
-      border: 1px solid var(--border-subtle);
-      color: var(--text);
-      width: 32px;
-      height: 32px;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all 0.2s ease;
-      padding: 0;
-      line-height: 1;
-    }
-    .menu-modal-close-btn:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-      background: rgba(212, 175, 55, 0.12);
-    }
-
-    /* Sub-nav switcher: PDF vs By Pages */
-    .menu-modal-subnav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #080705;
-      padding: 0.4rem 1.2rem;
-      border-bottom: 1px solid var(--border);
-      gap: 0.8rem;
-      overflow-x: auto;
-    }
-    .menu-modal-tabs {
-      display: flex;
-      gap: 0.4rem;
-    }
-    .menu-tab-btn {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      background: transparent;
-      border: 1px solid transparent;
-      color: var(--text-muted);
-      padding: 0.3rem 0.75rem;
-      border-radius: 3px;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-    .menu-tab-btn:hover {
-      color: var(--text);
-    }
-    .menu-tab-btn.active {
-      background: rgba(212, 175, 55, 0.14);
-      border-color: var(--gold);
-      color: var(--gold-light);
-      font-weight: 700;
-    }
-    .menu-modal-hint {
-      font-family: var(--font-mono);
-      font-size: 0.58rem;
-      color: var(--text-muted);
-      letter-spacing: 0.08em;
-      white-space: nowrap;
-    }
-
-    /* Panes */
-    .menu-pane {
-      flex: 1;
-      display: none;
-      flex-direction: column;
-      overflow: hidden;
-      position: relative;
-    }
-    .menu-pane.active {
-      display: flex;
-    }
-
-    /* PDF View */
-    .menu-pdf-wrap {
-      flex: 1;
-      width: 100%;
-      height: 100%;
-      background: #14120e;
-      position: relative;
-    }
-    .menu-pdf-frame {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-
-    /* Pages View */
-    .menu-cats-strip {
-      display: flex;
-      gap: 0.35rem;
-      overflow-x: auto;
-      padding: 0.5rem 1.2rem;
-      background: #090806;
-      border-bottom: 1px solid var(--border-subtle);
-      scrollbar-width: thin;
-    }
-    .menu-cat-chip {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.06em;
-      white-space: nowrap;
-      background: #100e0a;
-      border: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-      padding: 0.25rem 0.6rem;
-      cursor: pointer;
-      border-radius: 3px;
-      transition: all 0.15s ease;
-    }
-    .menu-cat-chip:hover, .menu-cat-chip.active {
-      border-color: var(--gold);
-      color: var(--gold-light);
-      background: rgba(212, 175, 55, 0.12);
-    }
-    .menu-page-stage {
-      flex: 1;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #030302;
-      overflow: hidden;
-      min-height: 320px;
-    }
-    .menu-page-display {
-      max-height: 100%;
-      max-width: 100%;
-      object-fit: contain;
-      display: block;
-      transition: opacity 0.18s ease;
-    }
-    .menu-stage-arrow {
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(12, 10, 8, 0.88);
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 12010;
+      background: rgba(18, 14, 10, 0.85);
       border: 1px solid var(--gold);
       color: var(--gold);
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       line-height: 1;
       transition: all 0.2s ease;
-      z-index: 5;
+      backdrop-filter: blur(8px);
+    }
+    .menu-modal-close-btn:hover {
+      background: var(--gold);
+      color: #060504;
+      transform: scale(1.08);
+    }
+    .menu-lightbox-stage {
+      position: relative;
+      max-width: 90vw;
+      max-height: 94vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+    .menu-page-display {
+      max-width: min(88vw, 840px);
+      max-height: 92vh;
+      object-fit: contain;
+      display: block;
+      border-radius: 6px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.12);
+      transition: opacity 0.15s ease;
+    }
+    .menu-stage-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(14, 11, 8, 0.88);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 2rem;
+      line-height: 1;
+      transition: all 0.2s ease;
+      z-index: 10;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      user-select: none;
     }
     .menu-stage-arrow:hover {
       background: var(--gold);
       color: #060504;
-      transform: translateY(-50%) scale(1.08);
+      transform: translateY(-50%) scale(1.1);
     }
-    .menu-stage-arrow.prev { left: 0.8rem; }
-    .menu-stage-arrow.next { right: 0.8rem; }
-
-    .menu-page-info {
-      padding: 0.45rem 1.2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #090806;
-      border-top: 1px solid var(--border-subtle);
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--text-muted);
+    .menu-stage-arrow.prev {
+      left: -28px;
     }
-    .menu-page-title-label {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 70%;
+    .menu-stage-arrow.next {
+      right: -28px;
     }
-    .menu-thumbs-carousel {
-      display: flex;
-      gap: 0.4rem;
-      overflow-x: auto;
-      padding: 0.45rem 1.2rem;
-      background: #060504;
-      border-top: 1px solid var(--border-subtle);
-      scrollbar-width: thin;
-      max-height: 75px;
-    }
-    .menu-thumb-card {
-      position: relative;
-      flex-shrink: 0;
-      width: 44px;
-      height: 60px;
-      border: 1px solid var(--border-subtle);
-      border-radius: 3px;
-      overflow: hidden;
-      cursor: pointer;
-      opacity: 0.55;
-      transition: all 0.15s ease;
-    }
-    .menu-thumb-card:hover, .menu-thumb-card.active {
-      opacity: 1;
-      border-color: var(--gold);
-      box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
-      transform: translateY(-2px);
-    }
-    .menu-thumb-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .menu-thumb-card .badge {
-      position: absolute;
-      bottom: 2px;
-      right: 2px;
-      background: rgba(0,0,0,0.85);
-      color: var(--gold);
-      font-family: var(--font-mono);
-      font-size: 0.5rem;
-      font-weight: 700;
-      padding: 1px 3px;
-      border-radius: 2px;
-    }
-
-    /* Modal Footer */
-    .menu-modal-foot {
-      padding: 0.75rem 1.4rem;
-      border-top: 1px solid var(--border);
-      background: #0a0806;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      color: var(--text-muted);
-    }
-
-    @media (max-width: 768px) {
-      .menu-modal-overlay {
-        padding: 0.5rem;
-      }
-      .menu-modal-window {
-        height: 94vh;
-        max-height: 94vh;
-        border-radius: 8px;
-      }
-      .menu-modal-head {
-        padding: 0.75rem 1rem;
-      }
-      .menu-modal-title {
-        font-size: 1.05rem;
-      }
-      .menu-modal-subnav {
-        padding: 0.35rem 0.8rem;
-      }
-      .menu-modal-foot {
-        padding: 0.6rem 1rem;
-      }
+    @media (max-width: 900px) {
+      .menu-stage-arrow.prev { left: 8px; }
+      .menu-stage-arrow.next { right: 8px; }
       .menu-stage-arrow {
-        width: 34px;
-        height: 34px;
-        font-size: 1rem;
+        width: 44px;
+        height: 44px;
+        font-size: 1.5rem;
+        background: rgba(8, 6, 4, 0.92);
+      }
+      .menu-modal-close-btn {
+        top: 1rem;
+        right: 1rem;
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
+      }
+      .menu-page-display {
+        max-width: 96vw;
+        max-height: 90vh;
       }
     }
 
-    @media (max-width: 1200px) {
+        @media (max-width: 1200px) {
       .filmstrip-wrap { grid-template-columns: repeat(3, 1fr); }
     }
     @media (max-width: 900px) {
@@ -2281,101 +2027,14 @@
   </footer>
 
   <!-- ==========================================================================
-       FULL RESTAURANT MENU MODAL (POPUP WINDOW / PDF & HIGH-RES PAGES)
+       CLEAN MENU VIEWER (PAGES + ARROWS ONLY)
        ========================================================================== -->
-  <div id="menu-modal" class="menu-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-menu-heading" onclick="handleMenuOverlayClick(event)">
-    <div class="menu-modal-window" onclick="event.stopPropagation()">
-      <!-- Modal Header -->
-      <div class="menu-modal-head">
-        <div class="menu-modal-brand">
-          <span class="menu-modal-tag">[ АНЗУР · ГАСТРОНОМИЧЕСКАЯ КАРТА ]</span>
-          <h2 id="modal-menu-heading" class="menu-modal-title" data-i18n="modal_title">Полное меню ресторана</h2>
-        </div>
-        <div class="menu-modal-actions">
-          <a href="anzur_menu.pdf" download="anzur_restaurant_menu.pdf" class="menu-modal-action-btn" title="Скачать оригинальный файл меню (PDF 20 МБ)">
-            <span>📥</span> <span>Скачать PDF</span>
-          </a>
-          <a href="anzur_menu.pdf" target="_blank" rel="noopener" class="menu-modal-action-btn" title="Открыть в новой вкладке">
-            <span>↗</span> <span>В новой вкладке</span>
-          </a>
-          <button type="button" class="menu-modal-close-btn" onclick="closeMenuModal()" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
-        </div>
-      </div>
-
-      <!-- View Switcher Subnav -->
-      <div class="menu-modal-subnav">
-        <div class="menu-modal-tabs">
-          <button type="button" class="menu-tab-btn active" id="menuTabPdfBtn" onclick="switchMenuPane('pdf')">
-            <span>📄</span> <span>PDF документ</span>
-          </button>
-          <button type="button" class="menu-tab-btn" id="menuTabPagesBtn" onclick="switchMenuPane('pages')">
-            <span>📖</span> <span>По страницам (1–22)</span>
-          </button>
-        </div>
-        <div class="menu-modal-hint">
-          22 страницы · Все блюда, фото и цены
-        </div>
-      </div>
-
-      <!-- Pane 1: Full Embedded PDF -->
-      <div id="modalPdfPane" class="menu-pane active">
-        <div class="menu-pdf-wrap">
-          <iframe id="menuPdfIframe" src="" data-src="anzur_menu.pdf#toolbar=1&navpanes=0&view=FitH" class="menu-pdf-frame" title="Официальное PDF меню ресторана «Анзур»"></iframe>
-        </div>
-      </div>
-
-      <!-- Pane 2: Interactive 22 Pages Flip Viewer -->
-      <div id="modalPagesPane" class="menu-pane">
-        <!-- Categories Quick Chips -->
-        <div class="menu-cats-strip" id="modalMenuCatsNav">
-          <button type="button" class="menu-cat-chip active" onclick="jumpToModalMenuPage(1)">1. Обложка</button>
-          <button type="button" class="menu-cat-chip" onclick="jumpToModalMenuPage(2)">2-3. Закуски</button>
-          <button type="button" class="menu-cat-chip" onclick="jumpToModalMenuPage(4)">4-5. Салаты</button>
-          <button type="button" class="menu-cat-chip" onclick="jumpToModalMenuPage(6)">6-7. Горячие закуски</button>
-          <button type="button" class="menu-cat-chip" onclick="jumpToModalMenuPage(8)">8-9. Супы</button>
-          <button type="button" class="menu-cat-chip" onclick="jumpToModalMenuPage(10)">10. Пицца</button>
-          <button type="button" class="menu-cat-chip" onclick="jumpToModalMenuPage(11)">11. Печь & Выпечка</button>
-          <button type="button" class="menu-cat-chip" onclick="jumpToModalMenuPage(12)">12. Гарниры</button>
-          <button type="button" class="menu-cat-chip" onclick="jumpToModalMenuPage(13)">13. Хоспер & Стейки</button>
-          <button type="button" class="menu-cat-chip" onclick="jumpToModalMenuPage(14)">14. Рыба</button>
-          <button type="button" class="menu-cat-chip" onclick="jumpToModalMenuPage(15)">15. Суши & Роллы</button>
-          <button type="button" class="menu-cat-chip" onclick="jumpToModalMenuPage(16)">16-17. Шашлыки & Мангал</button>
-          <button type="button" class="menu-cat-chip" onclick="jumpToModalMenuPage(18)">18. Плов «Анзур»</button>
-          <button type="button" class="menu-cat-chip" onclick="jumpToModalMenuPage(19)">19. Нац. блюда</button>
-          <button type="button" class="menu-cat-chip" onclick="jumpToModalMenuPage(20)">20. Фрукты</button>
-          <button type="button" class="menu-cat-chip" onclick="jumpToModalMenuPage(21)">21. Десерты</button>
-          <button type="button" class="menu-cat-chip" onclick="jumpToModalMenuPage(22)">22. О ресторане</button>
-        </div>
-
-        <!-- Stage with arrows -->
-        <div class="menu-page-stage" id="modalMenuStage">
-          <button type="button" class="menu-stage-arrow prev" onclick="prevModalMenuPage()" title="Предыдущая страница (Влево)">‹</button>
-          <img id="modalMenuCurrentImg" src="menu_pages_web/menu_page_01.jpg" alt="Меню ресторана Анзур" class="menu-page-display" />
-          <button type="button" class="menu-stage-arrow next" onclick="nextModalMenuPage()" title="Следующая страница (Вправо)">›</button>
-        </div>
-
-        <!-- Current Page Title Bar -->
-        <div class="menu-page-info">
-          <span class="menu-page-title-label" id="modalMenuPageTitle">Обложка · Ресторан «Анзур» (EST. 2023)</span>
-          <span id="modalMenuPageCounter" style="color:var(--gold); font-weight:700;">Стр. 1 из 22</span>
-        </div>
-
-        <!-- Thumbnails Strip -->
-        <div class="menu-thumbs-carousel" id="modalMenuThumbsStrip"></div>
-      </div>
-
-      <!-- Modal Bottom Bar -->
-      <div class="menu-modal-foot">
-        <div>
-          <span>Цены в сомони (TJS) · Обслуживание 12% · Резерв: </span>
-          <a href="tel:992917917917" style="color:var(--gold); text-decoration:none; font-weight:700;">+992 917 917 917</a>
-        </div>
-        <div style="display:flex; gap:0.6rem; align-items:center;">
-          <a href="booking.html" class="btn-gold" style="padding:0.35rem 0.8rem; font-size:0.62rem; text-decoration:none;">
-            Выбрать стол & Забронировать →
-          </a>
-        </div>
-      </div>
+  <div id="menu-modal" class="menu-modal-overlay" role="dialog" aria-modal="true" aria-label="Меню ресторана Анзур" onclick="handleMenuOverlayClick(event)">
+    <button type="button" class="menu-modal-close-btn" onclick="closeMenuModal()" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
+    <div class="menu-lightbox-stage" id="modalMenuStage" onclick="event.stopPropagation()">
+      <button type="button" class="menu-stage-arrow prev" onclick="prevModalMenuPage()" title="Предыдущая страница" aria-label="Предыдущая страница">‹</button>
+      <img id="modalMenuCurrentImg" src="menu_pages_web/menu_page_01.jpg" alt="Меню ресторана Анзур" class="menu-page-display" />
+      <button type="button" class="menu-stage-arrow next" onclick="nextModalMenuPage()" title="Следующая страница" aria-label="Следующая страница">›</button>
     </div>
   </div>
 
@@ -3278,49 +2937,18 @@ let currentSlideIdx = 0;
       }
     }
 
-    // Modal logic
+    // Modal logic (Clean Menu Viewer with arrows only)
     const TOTAL_MODAL_MENU_PAGES = 22;
     let currentModalMenuPage = 1;
-    let modalThumbsInitialized = false;
 
-    const MODAL_MENU_TITLES = {
-      1: "Обложка · Ресторан «Анзур» (EST. 2023)",
-      2: "Холодные закуски · Мясное плато (245c), Сырная тарелка (225c), Сельдь (70c)",
-      3: "Закуски & Соленья · Горный лук Анзур (75c), Свежие овощи с зеленью (105c)",
-      4: "Салаты фирменные · Стейк-салат (125c), Баклажаны со страчателлой (118c), Греческий (78c)",
-      5: "Салаты & Морепродукты · Салат с лососем (155c), С креветками (125c), Цезарь (68/145c)",
-      6: "Горячие закуски & WOK · Жареный лагман (68c), Уйгурский лагман (45c), Манты (16c), Самса (19c)",
-      7: "Закуски из морепродуктов · Креветки миндальные (190c), Креветки темпура (175c), Рулет с лососем (140c)",
-      8: "Национальные супы · Шурпа баранина/говядина (65/60c), Дум шурпа (65c), Чучвара (45c)",
-      9: "Супы Азии & Пасты · Том Ям (157c), Милано с песто (75c), Болоньезе (79c)",
-      10: "Пицца из печи · Пицца Ассорти (99c), Четыре сыра (95c), Пепперони (85c), Маргарита (79c)",
-      11: "Блюда в печи & Выпечка · Хачапури по-аджарски (75c), Фокачча (25c), Хлебная корзина (20c)",
-      12: "Гарниры · Овощи гриль (55c), Грибы (35c), Кукуруза (30c), Пюре (25c), Картофель розмарин (18c)",
-      13: "Хоспер & Стейки · Рибай Prime (380/450c), Томагавк (350c), Т-Бон (175c), Стейк Bijo (250c)",
-      14: "Рыба на гриле · Стейк Лосось Josper (230c), Сибас (385c), Дорадо (375c)",
-      15: "Суши и Роллы · Гранд сет Анзур (789c), Филадельфия (69c), Калифорния (79c), Канада (95c)",
-      16: "Шашлыки · Шашлык «Наполеон» (48c), Рулет (46c), Баранина (55c), Люля (38c), Сет шашлыков (449c)",
-      17: "Блюда на мангале · Ассорти гриль на 4 чел (435c), Форель (185c), Цыплёнок табака (90c)",
-      18: "Плов «Анзур» · Плов из говядины (55c порция / Чайханский казан 1кг 475c), Ачик-чучук (18c)",
-      19: "Национальные блюда · Казан Кабоб (95/100c), Кайла (90/95c), Бараньи семечки (79c)",
-      20: "Фрукты & Мороженое · Фруктовая ваза Гранд (350c), Плато (165c), Мороженое (11c)",
-      21: "Десерты · Дубайский чизкейк (99c), Сан-Себастьян (52c), Меренговый рулет (58c), Медовик (52c)",
-      22: "Ресторан «Анзур» · Концепция, шеф-повар & Контакты: +992 91 791 79 17"
-    };
-
-    function openMenuModal() {
+    function openMenuModal(page) {
+      if (typeof page === 'number' && page >= 1 && page <= TOTAL_MODAL_MENU_PAGES) {
+        setModalMenuPage(page);
+      }
       const modal = document.getElementById('menu-modal');
       if (modal) {
         modal.classList.add('is-open');
         document.body.style.overflow = 'hidden';
-
-        // Lazy-load PDF iframe
-        const iframe = document.getElementById('menuPdfIframe');
-        if (iframe && !iframe.getAttribute('src')) {
-          iframe.src = iframe.getAttribute('data-src') || 'anzur_menu.pdf#toolbar=1&navpanes=0&view=FitH';
-        }
-
-        initModalMenuThumbs();
       }
     }
 
@@ -3338,115 +2966,47 @@ let currentSlideIdx = 0;
       }
     }
 
-    function switchMenuPane(pane) {
-      const isPdf = (pane === 'pdf');
-      const pdfPane = document.getElementById('modalPdfPane');
-      const pagesPane = document.getElementById('modalPagesPane');
-      const pdfBtn = document.getElementById('menuTabPdfBtn');
-      const pagesBtn = document.getElementById('menuTabPagesBtn');
-
-      if (pdfPane) pdfPane.classList.toggle('active', isPdf);
-      if (pagesPane) pagesPane.classList.toggle('active', !isPdf);
-      if (pdfBtn) pdfBtn.classList.toggle('active', isPdf);
-      if (pagesBtn) pagesBtn.classList.toggle('active', !isPdf);
-
-      if (isPdf) {
-        const iframe = document.getElementById('menuPdfIframe');
-        if (iframe && !iframe.getAttribute('src')) {
-          iframe.src = iframe.getAttribute('data-src') || 'anzur_menu.pdf#toolbar=1&navpanes=0&view=FitH';
-        }
-      }
-    }
-
-    function initModalMenuThumbs() {
-      if (modalThumbsInitialized) return;
-      const strip = document.getElementById('modalMenuThumbsStrip');
-      if (!strip) return;
-      modalThumbsInitialized = true;
-
-      for (let i = 1; i <= TOTAL_MODAL_MENU_PAGES; i++) {
-        const pad = String(i).padStart(2, '0');
-        const card = document.createElement('div');
-        card.className = `menu-thumb-card ${i === currentModalMenuPage ? 'active' : ''}`;
-        card.id = `modal-menu-thumb-${i}`;
-        card.onclick = () => jumpToModalMenuPage(i);
-        card.innerHTML = `
-          <img src="menu_pages_web/menu_page_${pad}.jpg" alt="Стр. ${i}" loading="lazy" />
-          <span class="badge">${i}</span>
-        `;
-        strip.appendChild(card);
-      }
-
-      // Add touch swipe on modal stage
-      const stage = document.getElementById('modalMenuStage');
-      if (stage) {
-        let touchStartX = 0;
-        let touchEndX = 0;
-        stage.addEventListener('touchstart', (e) => {
-          touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-        stage.addEventListener('touchend', (e) => {
-          touchEndX = e.changedTouches[0].screenX;
-          const diff = touchEndX - touchStartX;
-          if (Math.abs(diff) > 40) {
-            if (diff > 0) prevModalMenuPage();
-            else nextModalMenuPage();
-          }
-        }, { passive: true });
-      }
-    }
-
-    function jumpToModalMenuPage(page) {
+    function setModalMenuPage(page) {
       if (page < 1) page = 1;
       if (page > TOTAL_MODAL_MENU_PAGES) page = TOTAL_MODAL_MENU_PAGES;
       currentModalMenuPage = page;
-
       const pad = String(page).padStart(2, '0');
       const img = document.getElementById('modalMenuCurrentImg');
       if (img) {
-        img.src = `menu_pages_web/menu_page_${pad}.jpg`;
+        img.src = 'menu_pages_web/menu_page_' + pad + '.jpg';
       }
-
-      const titleEl = document.getElementById('modalMenuPageTitle');
-      if (titleEl && MODAL_MENU_TITLES[page]) {
-        titleEl.textContent = MODAL_MENU_TITLES[page];
-      }
-
-      const counterEl = document.getElementById('modalMenuPageCounter');
-      if (counterEl) {
-        counterEl.textContent = `Стр. ${page} из ${TOTAL_MODAL_MENU_PAGES}`;
-      }
-
-      // Update chips active state
-      const chips = document.querySelectorAll('.menu-cat-chip');
-      chips.forEach(c => {
-        const attr = c.getAttribute('onclick');
-        if (attr && attr.includes(`jumpToModalMenuPage(${page})`)) {
-          c.classList.add('active');
-        } else {
-          c.classList.remove('active');
-        }
-      });
-
-      // Update thumbnails active state & scroll into view
-      document.querySelectorAll('.menu-thumb-card').forEach((t, idx) => {
-        const isActive = (idx + 1) === page;
-        t.classList.toggle('active', isActive);
-        if (isActive) {
-          t.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-        }
-      });
     }
 
     function prevModalMenuPage() {
-      jumpToModalMenuPage(currentModalMenuPage > 1 ? currentModalMenuPage - 1 : TOTAL_MODAL_MENU_PAGES);
+      setModalMenuPage(currentModalMenuPage > 1 ? currentModalMenuPage - 1 : TOTAL_MODAL_MENU_PAGES);
     }
 
     function nextModalMenuPage() {
-      jumpToModalMenuPage(currentModalMenuPage < TOTAL_MODAL_MENU_PAGES ? currentModalMenuPage + 1 : 1);
+      setModalMenuPage(currentModalMenuPage < TOTAL_MODAL_MENU_PAGES ? currentModalMenuPage + 1 : 1);
     }
 
-    // Global Key listeners (ESC closes modal, Arrows cycle slides / pages)
+    // Touch swipe support on menu stage
+    (function initMenuTouchSwipe() {
+      window.addEventListener('DOMContentLoaded', () => {
+        const stage = document.getElementById('modalMenuStage');
+        if (!stage) return;
+        let startX = 0;
+        stage.addEventListener('touchstart', (e) => {
+          if (e.touches && e.touches.length > 0) startX = e.touches[0].clientX;
+        }, { passive: true });
+        stage.addEventListener('touchend', (e) => {
+          if (e.changedTouches && e.changedTouches.length > 0) {
+            const diffX = e.changedTouches[0].clientX - startX;
+            if (Math.abs(diffX) > 40) {
+              if (diffX > 0) prevModalMenuPage();
+              else nextModalMenuPage();
+            }
+          }
+        }, { passive: true });
+      });
+    })();
+
+    // Global Key listeners (ESC closes modal, Arrows cycle pages / slides)
     window.addEventListener('keydown', (e) => {
       const modal = document.getElementById('menu-modal');
       if (modal && modal.classList.contains('is-open')) {
@@ -3454,12 +3014,14 @@ let currentSlideIdx = 0;
           closeMenuModal();
           return;
         }
-        const pagesPane = document.getElementById('modalPagesPane');
-        if (pagesPane && pagesPane.classList.contains('active')) {
-          if (e.key === 'ArrowRight') nextModalMenuPage();
-          if (e.key === 'ArrowLeft') prevModalMenuPage();
+        if (e.key === 'ArrowRight') {
+          nextModalMenuPage();
+          return;
         }
-        return;
+        if (e.key === 'ArrowLeft') {
+          prevModalMenuPage();
+          return;
+        }
       }
       if (e.key === 'ArrowRight') nextSlide();
       if (e.key === 'ArrowLeft') prevSlide();
