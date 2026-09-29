@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>安祖尔特色奢享餐厅 · 完整菜单与价格表</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #d4af37;
+      --gold-light: #f3e5ab;
+      --bg-dark: #0a0907;
+      --card-bg: #12100d;
+      --text-white: #f5f2eb;
+      --text-muted: #9e978c;
+      --border-color: rgba(212, 175, 55, 0.2);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-white);
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.5;
+      padding: 0;
+      min-height: 100vh;
+    }
+    .top-actions {
+      background: #14120e;
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.85rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--text-white);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1.1rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(212, 175, 55, 0.08);
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: #000;
+      font-weight: 600;
+      border: 1px solid var(--gold);
+    }
+    .btn-gold:hover {
+      background: var(--gold-light);
+      color: #000;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+    .header-block {
+      text-align: center;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 3rem;
+    }
+    .brand-crest {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2.4rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    .menu-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.85rem;
+      color: var(--text-white);
+      margin-bottom: 0.5rem;
+    }
+    .menu-subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .header-meta {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.82rem;
+      color: var(--gold-light);
+      letter-spacing: 0.05em;
+    }
+    .menu-category-block {
+      margin-bottom: 3.5rem;
+      page-break-inside: avoid;
+    }
+    .cat-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.65rem;
+      color: var(--gold);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.04em;
+    }
+    .dish-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 768px) {
+      .dish-list {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.75rem 2.5rem;
+      }
+    }
+    .dish-row {
+      page-break-inside: avoid;
+    }
+    .dish-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.35rem;
+    }
+    .dish-name-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      flex-shrink: 1;
+    }
+    .dish-name {
+      font-weight: 600;
+      font-size: 0.98rem;
+      color: var(--text-white);
+    }
+    .dish-weight {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .dish-dots {
+      flex-grow: 1;
+      border-bottom: 1px dotted rgba(212, 175, 55, 0.25);
+      margin: 0 0.25rem;
+      position: relative;
+      top: -3px;
+    }
+    .dish-price {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+    .dish-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .menu-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media print {
+      .top-actions { display: none !important; }
+      body { background: #fff !important; color: #111 !important; font-size: 10pt; }
+      .container { max-width: 100% !important; padding: 0 !important; }
+      .header-block { border-bottom: 1px solid #ccc; margin-bottom: 1.5rem; padding-bottom: 1rem; }
+      .brand-crest { color: #000 !important; font-size: 20pt; }
+      .menu-title { color: #222 !important; font-size: 14pt; }
+      .cat-title { color: #7a5c10 !important; border-bottom: 1px solid #ccc; font-size: 13pt; margin-top: 1.5rem; }
+      .dish-name { color: #000 !important; font-weight: 600; }
+      .dish-price { color: #7a5c10 !important; font-weight: 700; }
+      .dish-desc { color: #555 !important; font-size: 8.5pt; }
+      .dish-dots { border-bottom: 1px dotted #bbb; }
+      .menu-footer { color: #666 !important; border-top: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-actions">
+    <a href="index.html" class="btn">← 返回餐厅官网</a>
+    <button onclick="window.print()" class="btn btn-gold">🖨️ 打印 / 另存为 PDF</button>
+  </div>
+  <div class="container">
+    <header class="header-block">
+      <div class="brand-crest">ANZUR</div>
+      <h1 class="menu-title">安祖尔特色奢享餐厅 · 完整菜单与价格表</h1>
+      <p class="menu-subtitle">中亚国宴级传统手抓饭 · 传统果木炭烤串 · 泛亚风味 · 乔斯珀果木牛排</p>
+      <div class="header-meta">
+        <span>📍 杜尚别市，人民友谊街10b（葡萄酒厂区）</span>
+        <span>📞 +992 917 917 917</span>
+      </div>
+    </header>
+
+    <main>
+      
+        <div class="menu-category-block">
+          <h2 class="cat-title">经典冷盘与前菜</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">家常风味烤茄子</span>
+                  <span class="dish-weight">180g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">55 TJS</span>
+              </div>
+              <div class="dish-desc">香煎鲜嫩茄子片，佐以主厨特调新鲜番茄莎莎酱并缀以帕玛森干酪碎</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">布拉塔鲜水牛奶酪佐罗勒青酱</span>
+                  <span class="dish-weight">225g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">178 TJS</span>
+              </div>
+              <div class="dish-desc">流心鲜嫩布拉塔干酪，搭配慢烤茄子鱼子酱与手工鲜打罗勒松子青酱</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">卡普里意式风味烤面包小吃</span>
+                  <span class="dish-weight">200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">115 TJS</span>
+              </div>
+              <div class="dish-desc">酥脆意式烤面包薄片，覆盖新鲜莫扎里拉水牛奶酪、蜜汁番茄与特级初榨橄榄油</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">烟熏大西洋三文鱼烤面包小吃</span>
+                  <span class="dish-weight">200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">155 TJS</span>
+              </div>
+              <div class="dish-desc">精选大西洋低温微腌三文鱼片，搭配脆烤法棍与丝滑醇香奶油干酪</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">经典意式卡普里水牛奶酪番茄沙拉</span>
+                  <span class="dish-weight">250g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">195 TJS</span>
+              </div>
+              <div class="dish-desc">新鲜莫扎里拉奶酪切片搭配熟成蜜茄，淋上罗勒坚果青酱与香脆松子</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">特色中亚冷切肉盘与开胃佐菜</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">安祖尔特制中亚冷切肉食拼盘</span>
+                  <span class="dish-weight">350g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">245 TJS</span>
+              </div>
+              <div class="dish-desc">传统手工马肉香肠卡兹(Kazy)、秘制香料风干牛肉片、慢煮鲜牛舌与主厨烤牛肉</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">精选欧洲风味干酪拼盘佐帕米尔高山原蜜</span>
+                  <span class="dish-weight">300g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">225 TJS</span>
+              </div>
+              <div class="dish-desc">熟成帕玛森、法国卡门贝尔、蓝纹干酪与苏鲁古尼干酪，伴以香脆核桃仁与高山纯天然百花蜜</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">帕米尔特产安祖尔高山珍珠野葱与传统腌菜</span>
+                  <span class="dish-weight">280g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">75 TJS</span>
+              </div>
+              <div class="dish-desc">帕米尔高原珍稀特产：古法慢腌安祖尔珍珠野葱，佐以中亚自制香脆时令腌渍蔬果</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">塔吉克高山农场鲜蔬大拼盘</span>
+                  <span class="dish-weight">400g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">105 TJS</span>
+              </div>
+              <div class="dish-desc">吉萨尔高甜沙瓤番茄、爽脆水黄瓜、彩椒、水萝卜，配以帕米尔紫罗勒与鲜香菜</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">主厨特调招牌沙拉</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">乔斯珀炭烤嫩牛肉金牌沙拉</span>
+                  <span class="dish-weight">260g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">125 TJS</span>
+              </div>
+              <div class="dish-desc">炭烤特级鲜嫩小牛柳、爽脆有机混合生菜、樱桃番茄、香脆松子佐野生松果特调果木香汁</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">金黄香脆茄盒佐意式斯特拉切拉拉丝奶酪</span>
+                  <span class="dish-weight">240g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">118 TJS</span>
+              </div>
+              <div class="dish-desc">外酥里嫩的金黄脆皮茄块，搭配轻盈鲜浓斯特拉切拉奶酪、多汁番茄与秘制甜辣风味汁</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">经典希腊田园沙拉配特级费塔羊奶酪</span>
+                  <span class="dish-weight">280g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">78 TJS</span>
+              </div>
+              <div class="dish-desc">新鲜脆甜黄瓜、彩椒与罗马番茄，搭配卡拉马塔黑橄榄、浓醇费塔奶酪与初榨橄榄油牛至汁</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">高加索风味核桃红芸豆温润特色沙拉</span>
+                  <span class="dish-weight">220g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">75 TJS</span>
+              </div>
+              <div class="dish-desc">软糯红芸豆、精选山核桃碎、阿塞拜疆纯正石榴浓汁、鲜香菜与高加索传统香草</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">深海海鲜与地中海轻食沙拉</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">炙烧大西洋三文鱼牛油果沙拉</span>
+                  <span class="dish-weight">240g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">155 TJS</span>
+              </div>
+              <div class="dish-desc">微火轻炙三文鱼切片、成熟牛油果、有机幼苗生菜，佐日本柚子香橙果醋汁与泡菜芝麻</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">地中海烤虎虾配幼嫩八爪鱼温热沙拉</span>
+                  <span class="dish-weight">250g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">125 TJS</span>
+              </div>
+              <div class="dish-desc">西班牙炭烤炉快炙大虎虾与八爪鱼、嫩烤小土豆、野生芝麻菜，配第戎芥末柠檬酸豆汁</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">经典意式烤嫩鸡胸凯撒沙拉</span>
+                  <span class="dish-weight">260g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">68 TJS</span>
+              </div>
+              <div class="dish-desc">清脆罗马生菜心、果木烤嫩鸡胸肉、24个月熟成帕玛森干酪、现烤佛卡夏面包粒与传统鳀鱼凯撒酱</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">尊享金牌炭烤大王虾凯撒沙拉</span>
+                  <span class="dish-weight">280g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">145 TJS</span>
+              </div>
+              <div class="dish-desc">果木炭烤香脆特大王虾、帕玛森干酪薄片、清爽罗马生菜与特调醇滑凯撒汁</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">中亚传统热点心与铁板镬气料理</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">镬气铁板香炒拉条子 (Kavurga)</span>
+                  <span class="dish-weight">380g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">68 TJS</span>
+              </div>
+              <div class="dish-desc">手工劲道拉面，大火宽油快炒嫩牛肉丝、甜彩椒、鲜韭苔与浓郁蒜蓉辣汁</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">正宗维吾尔风味浓汁手工拉面</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">45 TJS</span>
+              </div>
+              <div class="dish-desc">长寿拉面浸润在浓郁牛肉煨汁中，搭配嫩肉丁、四季豆、番茄块与丝路秘制天然香辛料</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">经典多汁薄皮手工牛肉包子 (单只)</span>
+                  <span class="dish-weight">80g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">16 TJS</span>
+              </div>
+              <div class="dish-desc">半透明薄韧面皮，包裹手工切碎多汁牛肉与甜洋葱粒、孜然原粒，蒸汽蒸透配醇香酸奶油</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">安祖尔泥炉千层脆皮烤包子 (Samsa)</span>
+                  <span class="dish-weight">120g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">19 TJS</span>
+              </div>
+              <div class="dish-desc">泥炉炭火高温炙烤，金黄起酥千层面皮，咬开爆出鲜美牛肉汁与浓郁孜然香气</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">金黄香酥深海海鲜小食</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">杏仁薄脆特级黄金凤尾大虾</span>
+                  <span class="dish-weight">220g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">190 TJS</span>
+              </div>
+              <div class="dish-desc">大只黑虎虾身裹满酥脆烘烤杏仁薄片，配主厨招牌秘制微辣甜芥末奶香酱</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">日式黄金天妇罗脆炸大虾</span>
+                  <span class="dish-weight">200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">175 TJS</span>
+              </div>
+              <div class="dish-desc">轻盈酥脆日式天妇罗面衣，包裹弹牙鲜虾，搭配浓甜鳗鱼汁与烘烤芝麻</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">热烤金黄酥皮三文鱼芝士卷</span>
+                  <span class="dish-weight">230g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">140 TJS</span>
+              </div>
+              <div class="dish-desc">整块大西洋三文鱼嫩肉排、菠菜嫩叶与醇滑干酪包裹于香脆金黄酥皮之中</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">豪华聚会佐酒热前菜大拼盘</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">68 TJS</span>
+              </div>
+              <div class="dish-desc">经典黑麦蒜香脆面包干、拉丝莫扎里拉奶酪棒、黄金鱿鱼圈与脆炸洋葱圈</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">塔吉克传统滋补养生瓦煲靓汤</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">高山草原羊排清炖浓汤 (Shurpa)</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">65 TJS</span>
+              </div>
+              <div class="dish-desc">整根带髓嫩羊排慢火长炖数小时，汤清如镜无膻味，搭配整颗土豆、黄胡萝卜与高山野草香料</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">特选精品黄牛肉原汁浓汤</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">60 TJS</span>
+              </div>
+              <div class="dish-desc">精选雪花牛胸肉慢炖出的金黄浓汤，肉质酥烂入味，搭配整颗高山甜土豆</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">富含胶原蛋白古法慢煨牛尾汤 (Dum Shurpa)</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">65 TJS</span>
+              </div>
+              <div class="dish-desc">中亚百年传承滋补名汤，精选牛尾文火慢炖6小时，汤汁醇厚胶质丰盈，暖胃强身</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">传统手工小金丝饺清汤 (Chuchvara)</span>
+                  <span class="dish-weight">400g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">45 TJS</span>
+              </div>
+              <div class="dish-desc">一口一个的纯手工迷你牛肉小水饺，汤清味鲜，缀以翠绿香葱香菜与丝滑天然酸奶油</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">泛亚风味海鲜浓汤与意式手工意面</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">泰式冬阴功超级海鲜椰香浓汤</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">157 TJS</span>
+              </div>
+              <div class="dish-desc">浓郁天然椰浆，慢熬香茅、青柠叶与南姜，满满大虎虾与鲜鱿鱼片，配香气扑鼻的泰国茉莉香米</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">米兰式丝滑翡翠菠菜浓汤佐青酱</span>
+                  <span class="dish-weight">350g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">75 TJS</span>
+              </div>
+              <div class="dish-desc">新鲜嫩菠菜细磨成如丝般细腻的翡翠奶油汤，点缀香脆松子仁与帕玛森干酪拉花</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">纯手工宽意面配经典博洛尼亚牛肉酱</span>
+                  <span class="dish-weight">320g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">79 TJS</span>
+              </div>
+              <div class="dish-desc">厨师每日鲜压鸡蛋宽面，慢煨6小时圣马扎诺番茄多汁牛肉肉酱，撒满熟成干酪碎</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">奶油牛肝菌烤鸡肉特浓意大利面</span>
+                  <span class="dish-weight">340g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">70 TJS</span>
+              </div>
+              <div class="dish-desc">经典意式缎带宽面，裹附香浓法式鲜奶油、金黄嫩煎鸡胸肉、野生香气牛肝菌与新鲜百里香</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">传统原木柴火果木烤炉意式披萨</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">安祖尔豪华招牌综合大肉披萨</span>
+                  <span class="dish-weight">550g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">99 TJS</span>
+              </div>
+              <div class="dish-desc">48小时低温慢发酵意式面团，手工拉饼烤出虎皮豹纹边缘，铺满鲜莫扎里拉、烤牛肉、中亚马肉香肠卡兹</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">经典意式浓郁四种芝士披萨</span>
+                  <span class="dish-weight">480g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">95 TJS</span>
+              </div>
+              <div class="dish-desc">纯白奶油底酱，完美配比融化莫扎里拉、蓝纹古冈佐拉干酪、成熟帕玛森与瑞士埃门塔尔干酪</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">经典辣味美式萨拉米香肠意式披萨</span>
+                  <span class="dish-weight">480g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">85 TJS</span>
+              </div>
+              <div class="dish-desc">圣马扎诺番茄原汁红酱、融化瀑布莫扎里拉芝士、香辣意式纯牛肉萨拉米香肠与鲜罗勒叶</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">那不勒斯传奇纯正玛格丽特披萨</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">79 TJS</span>
+              </div>
+              <div class="dish-desc">意大利国菜象征：鲜打甜番茄糊、新鲜水牛奶酪、特级初榨橄榄油与刚采摘的翠绿甜罗勒</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">传统陶土泥炉鲜烤面点与格鲁吉亚奶酪饼</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">阿扎尔流心蛋黄双重芝士小船烤饼</span>
+                  <span class="dish-weight">380g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">75 TJS</span>
+              </div>
+              <div class="dish-desc">烤至金黄酥脆的小船形状发酵面饼，填满滚烫融化的苏鲁古尼双重芝士，正中窝一颗新鲜农场生蛋黄与特级黄油</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">明格列尔双层厚烤拉丝芝士大圆饼</span>
+                  <span class="dish-weight">420g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">70 TJS</span>
+              </div>
+              <div class="dish-desc">双层厚芝士暴击：内层包入丰腴温热苏鲁古尼咸香干酪，外表再厚厚撒满一层烤至金黄焦香的脆皮奶酪</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">迷迭香初榨橄榄油意式佛卡夏大饼</span>
+                  <span class="dish-weight">220g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">25 TJS</span>
+              </div>
+              <div class="dish-desc">气孔丰盈蓬松的经典意式手工大面包，表面刷满高品质橄榄油，撒上海盐结晶与新鲜迷迭香</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">安祖尔主厨烘焙手工面包篮</span>
+                  <span class="dish-weight">300g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">20 TJS</span>
+              </div>
+              <div class="dish-desc">三种热腾腾刚出炉的面包精选：泥炉烤圆馕、意式佛卡夏与蒜香香草黄油黑麦脆面包</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">果木炭烤香蔬与手工特色主厨配菜</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">乔斯珀果木炭烤时令鲜蔬拼盘</span>
+                  <span class="dish-weight">250g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">55 TJS</span>
+              </div>
+              <div class="dish-desc">木炭高温速烤西葫芦、嫩茄、彩椒、熟番茄与口蘑，锁住水分微焦香甜，淋特制蒜香香草橄榄油</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">炭烤多汁蘑菇盏塞流心芝士</span>
+                  <span class="dish-weight">200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">35 TJS</span>
+              </div>
+              <div class="dish-desc">新鲜大口蘑原顶，填入香滑苏鲁古尼干酪碳火烘烤，一口爆汁浓香四溢</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">炭烤香甜黄玉米段佐烟熏红椒黄油</span>
+                  <span class="dish-weight">200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">30 TJS</span>
+              </div>
+              <div class="dish-desc">金黄香甜多汁水果甜玉米，炭烤微焦刷满特制浓香烟熏红椒黄油酱</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">迷迭香脆烤小土豆 / 特浓奶香土豆泥 / 香脆薯条</span>
+                  <span class="dish-weight">200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">18 / 25 / 17 TJS</span>
+              </div>
+              <div class="dish-desc">整颗红皮小土豆撒海盐迷迭香慢烤至外脆里软，或搭配法式醇滑纯牛奶油土豆泥</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">乔斯珀果木炭烤顶级牛排系列</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">特级安格斯肉眼牛排 Prime</span>
+                  <span class="dish-weight">350g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">380 TJS</span>
+              </div>
+              <div class="dish-desc">200天谷饲特级雪花黑牛，经西班牙乔斯珀果木炭火烤炉炙烤，外焦里嫩肉香四溢</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">战斧带骨厚切牛排 (1公斤)</span>
+                  <span class="dish-weight">1000g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">350 TJS</span>
+              </div>
+              <div class="dish-desc">霸气整根长肋战斧牛排，果木炭烤香气扑鼻，配迷迭香与阿根廷香草青酱</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">主厨特调招牌必卓菲力牛排</span>
+                  <span class="dish-weight">280g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">250 TJS</span>
+              </div>
+              <div class="dish-desc">严选牛腰柳中段极嫩菲力，干邑黑胡椒秘制腌汁与黑松露油浸润提味</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">经典T骨双拼牛排 Josper</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">175 TJS</span>
+              </div>
+              <div class="dish-desc">一排双味：一边是肉汁浓郁的纽约西冷，一边是入口即化的细腻菲力</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">炭火原条整鱼与精选海鲜</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">乔斯珀果木炭烤大西洋三文鱼排佐红鱼子酱</span>
+                  <span class="dish-weight">260g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">230 TJS</span>
+              </div>
+              <div class="dish-desc">特级挪威大西洋三文鱼厚切排，西班牙炭火慢烤外焦里嫩，搭配鲜美三文鱼红鱼子酱奶香白汁与嫩芦笋</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">地中海深海海鲈鱼 (整条果木炭烤)</span>
+                  <span class="dish-weight">400g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">385 TJS</span>
+              </div>
+              <div class="dish-desc">整条地中海鲜活海鲈鱼，开花刀填入迷迭香与柠檬片炭烤，外皮金黄酥脆肉质雪白细腻</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">地中海金头鲷鱼 (整条原汁炭烤)</span>
+                  <span class="dish-weight">400g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">375 TJS</span>
+              </div>
+              <div class="dish-desc">地中海优质金头鲷鱼，炭火高温锁住丰腴鲜汁，搭配百里香大蒜香草黄油与甘甜阿塞拜疆石榴汁</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">日式高端手作寿司与招牌拼盘</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">安祖尔皇家御享特大豪华寿司拼盘 (32只)</span>
+                  <span class="dish-weight">950g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">789 TJS</span>
+              </div>
+              <div class="dish-desc">豪华32件全能霸气拼盘：特级厚切三文鱼费城卷、帝王蟹肉加州卷、顶级烤鳗鱼加拿大卷、黑松露焗烤卷与辣三文鱼刺身</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">加拿大特级蒲烧烤鳗鱼牛油果手卷</span>
+                  <span class="dish-weight">250g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">95 TJS</span>
+              </div>
+              <div class="dish-desc">炭烤蒲烧活鳗切片覆盖卷顶，卷入特浓奶油干酪、熟牛油果与爽脆青瓜，淋甘甜浓郁鳗鱼汁与金芝麻</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">豪华全包特厚大西洋三文鱼费城卷</span>
+                  <span class="dish-weight">240g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">69 TJS</span>
+              </div>
+              <div class="dish-desc">整整一整圈大西洋新鲜厚切三文鱼包裹，内馅是满满双份醇滑干酪、牛油果条与爽脆黄瓜</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">传统加州雪蟹柳飞鱼子反卷</span>
+                  <span class="dish-weight">230g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">79 TJS</span>
+              </div>
+              <div class="dish-desc">香甜雪蟹肉拌日式蛋黄酱、牛油果与爽脆黄瓜，外层滚满晶莹剔透橙色鲜香爆汁飞鱼子</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">中亚传统果木明火炭烤肉串系列</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">安祖尔豪华大肉串家庭欢聚大拼盘 (5人份)</span>
+                  <span class="dish-weight">1200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">449 TJS</span>
+              </div>
+              <div class="dish-desc">汇聚安祖尔5大招牌烤肉：拿破仑千层肉串、牛柳肉卷、香烤羊排肉、传统牛肉柳叶串、网油羊肉串配现烤热馕与蘸酱</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">主厨特调招牌“拿破仑”千层肥瘦鲜牛肉串</span>
+                  <span class="dish-weight">180g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">48 TJS</span>
+              </div>
+              <div class="dish-desc">安祖尔传世名肉：顶级纯瘦牛柳肉片与中亚特级香料羊尾油层层交织相间串制，炭火烤出油香四溢、肉嫩汁滑</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">秘制香草肥牛金牌肉卷串</span>
+                  <span class="dish-weight">180g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">46 TJS</span>
+              </div>
+              <div class="dish-desc">细嫩牛排肉打薄，卷入新鲜高原香草碎与极薄羊脂，外焦香内多汁，口感层次丰富</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">多汁鲜嫩高山嫩羊肉串 / 特级手剁牛肉柳叶串</span>
+                  <span class="dish-weight">180g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">55 / 38 TJS</span>
+              </div>
+              <div class="dish-desc">精选高山放牧小羔羊鲜后腿肉，纯洋葱原汁与手碾芫荽籽冷腌，天然果木炭炙烤至焦香爆汁</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">炭火飞禽与高山冷水野生红点活鳟鱼</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">四人分享式炭烤全席大丰收拼盘</span>
+                  <span class="dish-weight">1100g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">435 TJS</span>
+              </div>
+              <div class="dish-desc">整只压铁板炭火小雏鸡、香烤整只肥鹌鹑、牛羊肉烤串组合、炭火甜椒番茄与自制香草酱汁</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">帕米尔雪山泉水活捕彩虹鳟鱼 (1公斤整条炭烤)</span>
+                  <span class="dish-weight">1000g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">185 TJS</span>
+              </div>
+              <div class="dish-desc">源自帕米尔雪水溪流的鲜活彩虹鳟鱼，现杀上架果木炭烤，鱼皮焦脆鱼肉细嫩无小刺，配新鲜石榴籽</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">高加索传统铸铁压盘香脆童子鸡 (Tabaka)</span>
+                  <span class="dish-weight">500g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">90 TJS</span>
+              </div>
+              <div class="dish-desc">整只精选天然嫩雏鸡，重达数公斤的铸铁重盘压实炭烤，鸡皮轻薄金黄如纸，肉质鲜美多汁充满蒜香</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">秘制香料果木炭火鲜烤肥鹌鹑 (单只)</span>
+                  <span class="dish-weight">150g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">85 TJS</span>
+              </div>
+              <div class="dish-desc">鲜嫩多汁的肥美鹌鹑，刷上高原百花蜜与第戎芥末特制蜜汁，炭火慢烤至骨酥肉嫩</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">安祖尔传世名馔传统手抓饭</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">安祖尔招牌精品牛肉手抓饭 (单人份)</span>
+                  <span class="dish-weight">250g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">55 TJS</span>
+              </div>
+              <div class="dish-desc">中亚国宴级传统手抓饭：慢火慢炖精选牛肉、晶莹油润激光香米、高山甜黄胡萝卜、鹰嘴豆与蜜葡萄干</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">茶馆铜锅欢聚手抓饭整锅 (1公斤)</span>
+                  <span class="dish-weight">1000g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">475 TJS</span>
+              </div>
+              <div class="dish-desc">适合4至5位贵宾的传统铜锅整锅手抓饭，搭配慢煨整头大蒜、鹌鹑蛋与特制马肉香肠</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">抓饭绝配：薄切蜜汁番茄洋葱沙拉 (Shakarob)</span>
+                  <span class="dish-weight">180g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">18 TJS</span>
+              </div>
+              <div class="dish-desc">薄如蝉翼的熟成多汁甜番茄、甜紫洋葱丝、微辣鲜辣椒圈与紫罗勒，清爽解腻</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">泥炉现烤传统芝麻圆馕 (Kulcha)</span>
+                  <span class="dish-weight">150g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">6 TJS</span>
+              </div>
+              <div class="dish-desc">传统塔吉克泥炉高温现烤圆馕，金黄香脆外壳撒满烘香黑白芝麻</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">中亚国宴级传统铜锅炖肉与香酥羊排</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">经典中亚大铜锅干煸炖牛羊肉配金黄脆土豆 (Kazan Kabob)</span>
+                  <span class="dish-weight">380g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">95 / 100 TJS</span>
+              </div>
+              <div class="dish-desc">传统铸铁大锅慢熬：鲜嫩大块牛腱肉或羊羔肉慢炖脱骨，裹满金黄脆皮小土豆与清甜洋葱丝</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">慢火原汁传统香浓番茄土豆炖牛肉 (Kayla)</span>
+                  <span class="dish-weight">380g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">90 / 95 TJS</span>
+              </div>
+              <div class="dish-desc">中亚古法慢煨家常浓炖肉，大块鲜肉与成熟番茄、彩椒慢炖出浓稠原汁，香气扑鼻</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">酥炸香脆高山小羊排骨 (羊排籽)</span>
+                  <span class="dish-weight">280g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">79 TJS</span>
+              </div>
+              <div class="dish-desc">小羊羔鲜嫩脆骨小肋排，炭火大火快烤至油脂微焦酥脆，如瓜子般越嚼越香，配酸甜红洋葱圈</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">时令甘甜高山鲜果大盘与手工冰淇淋</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">安祖尔三层水晶塔豪华高山热带时令鲜果盘</span>
+                  <span class="dish-weight">2200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">350 TJS</span>
+              </div>
+              <div class="dish-desc">多层奢华水晶果盘：金菠萝、塔吉克特产无籽葡萄、鲜多汁柑橘、红宝石石榴粒、奇异果、香蕉与时令草莓</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">时令鲜切果盘拼盘</span>
+                  <span class="dish-weight">800g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">165 TJS</span>
+              </div>
+              <div class="dish-desc">精选切盘新鲜蜜瓜、甜葡萄、橙瓣、苹果片与鲜果，清口解腻佐茶圣品</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">意大利手工冰淇淋球 (单球)</span>
+                  <span class="dish-weight">50g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">11 TJS</span>
+              </div>
+              <div class="dish-desc">采用纯正天然鲜牛奶手工搅打：马达加斯加香草、纯黑巧克力、西西里开心果与草莓果茸</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">主厨特调手工艺术甜点</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">迪拜风情浓郁开心果生巧克力芝士蛋糕</span>
+                  <span class="dish-weight">190g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">99 TJS</span>
+              </div>
+              <div class="dish-desc">酥脆香炒卡达耶夫酥丝、100%纯天然香浓开心果酱、比利时顶级牛奶巧克力与醇滑奶油干酪</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">巴斯克焦香流心重乳酪蛋糕 (San Sebastian)</span>
+                  <span class="dish-weight">180g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">52 TJS</span>
+              </div>
+              <div class="dish-desc">风靡全球的西班牙巴斯克微焦烤芝士，内里如半熟芝士般丝滑流心，浇淋温热浓郁巧克力酱</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">法式轻盈空气蛋白霜树莓鲜果瑞士卷</span>
+                  <span class="dish-weight">160g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">58 TJS</span>
+              </div>
+              <div class="dish-desc">外脆内软的轻盈云朵蛋白霜薄壳，裹入马斯卡彭特浓香缇奶油与高山新鲜树莓果实</div>
+            </div>
+            </div>
+        </div>
+        
+    </main>
+
+    <footer class="menu-footer">
+      <p>服务费 12% · 所有价格均以索莫尼 (TJS) 结算</p>
+      <p style="margin-top:0.4rem;">© 2026 Anzur Restaurant. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>

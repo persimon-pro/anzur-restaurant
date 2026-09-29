@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anzur Restaurant · Full Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #d4af37;
+      --gold-light: #f3e5ab;
+      --bg-dark: #0a0907;
+      --card-bg: #12100d;
+      --text-white: #f5f2eb;
+      --text-muted: #9e978c;
+      --border-color: rgba(212, 175, 55, 0.2);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-white);
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.5;
+      padding: 0;
+      min-height: 100vh;
+    }
+    .top-actions {
+      background: #14120e;
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.85rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--text-white);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1.1rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(212, 175, 55, 0.08);
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: #000;
+      font-weight: 600;
+      border: 1px solid var(--gold);
+    }
+    .btn-gold:hover {
+      background: var(--gold-light);
+      color: #000;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+    .header-block {
+      text-align: center;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 3rem;
+    }
+    .brand-crest {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2.4rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    .menu-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.85rem;
+      color: var(--text-white);
+      margin-bottom: 0.5rem;
+    }
+    .menu-subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .header-meta {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.82rem;
+      color: var(--gold-light);
+      letter-spacing: 0.05em;
+    }
+    .menu-category-block {
+      margin-bottom: 3.5rem;
+      page-break-inside: avoid;
+    }
+    .cat-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.65rem;
+      color: var(--gold);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.04em;
+    }
+    .dish-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 768px) {
+      .dish-list {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.75rem 2.5rem;
+      }
+    }
+    .dish-row {
+      page-break-inside: avoid;
+    }
+    .dish-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.35rem;
+    }
+    .dish-name-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      flex-shrink: 1;
+    }
+    .dish-name {
+      font-weight: 600;
+      font-size: 0.98rem;
+      color: var(--text-white);
+    }
+    .dish-weight {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .dish-dots {
+      flex-grow: 1;
+      border-bottom: 1px dotted rgba(212, 175, 55, 0.25);
+      margin: 0 0.25rem;
+      position: relative;
+      top: -3px;
+    }
+    .dish-price {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+    .dish-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .menu-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media print {
+      .top-actions { display: none !important; }
+      body { background: #fff !important; color: #111 !important; font-size: 10pt; }
+      .container { max-width: 100% !important; padding: 0 !important; }
+      .header-block { border-bottom: 1px solid #ccc; margin-bottom: 1.5rem; padding-bottom: 1rem; }
+      .brand-crest { color: #000 !important; font-size: 20pt; }
+      .menu-title { color: #222 !important; font-size: 14pt; }
+      .cat-title { color: #7a5c10 !important; border-bottom: 1px solid #ccc; font-size: 13pt; margin-top: 1.5rem; }
+      .dish-name { color: #000 !important; font-weight: 600; }
+      .dish-price { color: #7a5c10 !important; font-weight: 700; }
+      .dish-desc { color: #555 !important; font-size: 8.5pt; }
+      .dish-dots { border-bottom: 1px dotted #bbb; }
+      .menu-footer { color: #666 !important; border-top: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-actions">
+    <a href="index.html" class="btn">← Back to Website</a>
+    <button onclick="window.print()" class="btn btn-gold">🖨️ Print / Save PDF</button>
+  </div>
+  <div class="container">
+    <header class="header-block">
+      <div class="brand-crest">ANZUR</div>
+      <h1 class="menu-title">Anzur Restaurant · Full Menu</h1>
+      <p class="menu-subtitle">National & European Cuisine · Live Fire Mangal · Josper Steaks</p>
+      <div class="header-meta">
+        <span>📍 10b Dustii Khalqho St., Dushanbe (Winery District)</span>
+        <span>📞 +992 917 917 917</span>
+      </div>
+    </header>
+
+    <main>
+      
+        <div class="menu-category-block">
+          <h2 class="cat-title">Cold Starters</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Homestyle Eggplant</span>
+                  <span class="dish-weight">180g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">55 TJS</span>
+              </div>
+              <div class="dish-desc">Fried eggplant slices served with fresh tomato salsa, finished with aged Parmesan</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Burrata with Pesto Sauce</span>
+                  <span class="dish-weight">225g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">178 TJS</span>
+              </div>
+              <div class="dish-desc">Delicate creamy Burrata served over roasted eggplant caviar with homemade basil pesto</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Bruschetta Caprese</span>
+                  <span class="dish-weight">200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">115 TJS</span>
+              </div>
+              <div class="dish-desc">Toasted Italian bread with creamy mozzarella, ripe garden tomatoes, and extra virgin olive oil</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Bruschetta with Salmon</span>
+                  <span class="dish-weight">200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">155 TJS</span>
+              </div>
+              <div class="dish-desc">Mildly cured Atlantic salmon over toasted French baguette with delicate cream cheese</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Classic Caprese Salad</span>
+                  <span class="dish-weight">250g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">195 TJS</span>
+              </div>
+              <div class="dish-desc">Tender fresh mozzarella layered with heirloom tomatoes, fragrant pesto, and pine nuts</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Cured Meats & Appetizers</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Signature Anzur Meat Platter</span>
+                  <span class="dish-weight">350g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">245 TJS</span>
+              </div>
+              <div class="dish-desc">Traditional house-made horsemeat kazy, spiced basturma, tender beef tongue, and roasted beef</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Artisan Cheese Board with Mountain Honey</span>
+                  <span class="dish-weight">300g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">225 TJS</span>
+              </div>
+              <div class="dish-desc">Parmesan, Camembert, Dorblu, Suluguni, paired with walnuts and natural Pamir mountain honey</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Pamir Anzur Mountain Onion & Pickles</span>
+                  <span class="dish-weight">280g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">75 TJS</span>
+              </div>
+              <div class="dish-desc">Endemic Pamir mountain delicacy — wild pickled Anzur onion served with crisp house pickles</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Fresh Farm Vegetables & Mountain Herbs</span>
+                  <span class="dish-weight">400g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">105 TJS</span>
+              </div>
+              <div class="dish-desc">Sweet Gissar tomatoes, crisp cucumbers, sweet bell peppers, red radish, purple basil, and coriander</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Signature Salads</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Josper Steak Salad with Medallions</span>
+                  <span class="dish-weight">260g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">125 TJS</span>
+              </div>
+              <div class="dish-desc">Tender Josper beef medallions, fresh crisp greens, cherry tomatoes, pine nuts, and wild pine cone reduction</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Crispy Eggplants with Stracciatella</span>
+                  <span class="dish-weight">240g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">118 TJS</span>
+              </div>
+              <div class="dish-desc">Crispy golden eggplant crust, velvety stracciatella cheese, vine tomatoes, and sweet chili glaze</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Classic Greek Salad with Feta</span>
+                  <span class="dish-weight">280g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">78 TJS</span>
+              </div>
+              <div class="dish-desc">Crisp garden vegetables, Kalamata olives, creamy feta block, red onion, and Aegean oregano vinaigrette</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Nobiani Red Bean & Walnut Salad</span>
+                  <span class="dish-weight">220g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">75 TJS</span>
+              </div>
+              <div class="dish-desc">Simmered red kidney beans, ground walnuts, pomegranate molasses reduction, cilantro, and fragrant spices</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Salads & Ocean Seafood</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Torched Salmon & Avocado Salad</span>
+                  <span class="dish-weight">240g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">155 TJS</span>
+              </div>
+              <div class="dish-desc">Flame-torched salmon, buttery ripe avocado, baby salad leaves, citrus yuzu dressing, and kimchi sesame</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Grilled Tiger Prawn & Baby Octopus Salad</span>
+                  <span class="dish-weight">250g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">125 TJS</span>
+              </div>
+              <div class="dish-desc">Josper-grilled ocean seafood, roasted baby potatoes, peppery wild arugula, Dijon lemon dressing, and capers</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Classic Chicken Caesar Salad</span>
+                  <span class="dish-weight">260g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">68 TJS</span>
+              </div>
+              <div class="dish-desc">Crisp romaine hearts, grilled chicken breast, 24-month Parmigiano, focaccia croutons, and artisan Caesar dressing</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Royal King Prawn Caesar Salad</span>
+                  <span class="dish-weight">280g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">145 TJS</span>
+              </div>
+              <div class="dish-desc">Charcoal-grilled king prawns, aged parmesan shavings, crispy romaine hearts, and house Caesar dressing</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Hot Starters & WOK</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Kavurga Pan-Fried Crispy Lagman</span>
+                  <span class="dish-weight">380g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">68 TJS</span>
+              </div>
+              <div class="dish-desc">Hand-pulled artisanal noodles wok-seared with tender beef slices, sweet bell peppers, Chinese chives, and garlic</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Traditional Uyghur Soupy Lagman</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">45 TJS</span>
+              </div>
+              <div class="dish-desc">Long hand-pulled noodles in rich savory broth with tender beef, green beans, tomatoes, and Silk Road spices</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Traditional Steamed Manti (1 pc)</span>
+                  <span class="dish-weight">80g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">16 TJS</span>
+              </div>
+              <div class="dish-desc">Steamed paper-thin dough filled with hand-minced beef, sweet onions, and cumin seeds, served with sour cream</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Tandoor Samsa Katra Anzur</span>
+                  <span class="dish-weight">120g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">19 TJS</span>
+              </div>
+              <div class="dish-desc">Flaky, buttery layered pastry baked on tandoor clay walls with juicy diced meat and cumin seeds</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Ocean Seafood Starters</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Almond-Crusted Crispy Jumbo Prawns</span>
+                  <span class="dish-weight">220g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">190 TJS</span>
+              </div>
+              <div class="dish-desc">Jumbo tiger prawns encased in sliced toasted almonds with signature sweet wasabi-condensed glaze</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Golden Tempura Prawns with Sweet Chili</span>
+                  <span class="dish-weight">200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">175 TJS</span>
+              </div>
+              <div class="dish-desc">Light and airy Japanese tempura batter, crispy fried prawns with sweet unagi glaze and sesame</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Warm Crispy Atlantic Salmon Roll</span>
+                  <span class="dish-weight">230g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">140 TJS</span>
+              </div>
+              <div class="dish-desc">Atlantic salmon fillet, tender baby spinach, and cream cheese baked in a delicate crispy golden crust</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Grand Beer & Party Bites Platter</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">68 TJS</span>
+              </div>
+              <div class="dish-desc">Garlic-infused dark rye croutons, melted mozzarella sticks, crispy calamari rings, and onion rings</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Traditional Heritage Soups</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Mountain Lamb Shurpa Broth</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">65 TJS</span>
+              </div>
+              <div class="dish-desc">Rich clear broth simmered with young bone-in lamb, whole garden potatoes, sweet carrots, and mountain herbs</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Slow-Simmered Beef Shurpa</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">60 TJS</span>
+              </div>
+              <div class="dish-desc">Golden clear broth simmered with premium beef brisket, whole potatoes, sweet carrots, and cumin</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Dum Shurpa Oxtail Collagen Broth</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">65 TJS</span>
+              </div>
+              <div class="dish-desc">Ancient revitalizing soup slow-braised for 6 hours, rich in natural collagen and garlic essences</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Chuchvara Dumplings / Ugro / Brinchova</span>
+                  <span class="dish-weight">400g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">45 TJS</span>
+              </div>
+              <div class="dish-desc">Petite hand-pinched meat dumplings in clarified beef broth finished with fresh herbs and dollop of kaymak</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Pan-Asian Soups & Italian Pasta</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Tom Yum Seafood Grand Soup</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">157 TJS</span>
+              </div>
+              <div class="dish-desc">Creamy coconut broth with lemongrass, kaffir lime, galangal, king tiger prawns, squid, served with jasmine rice</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Milano Velvet Soup with Pesto</span>
+                  <span class="dish-weight">350g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">75 TJS</span>
+              </div>
+              <div class="dish-desc">Smooth cream of spinach soup infused with sweet cream, toasted pine nuts, and Italian parmesan</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Handmade Tagliatelle Bolognese</span>
+                  <span class="dish-weight">320g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">79 TJS</span>
+              </div>
+              <div class="dish-desc">Fresh artisanal tagliatelle pasta with slow-simmered beef ragù, San Marzano tomatoes, and aged Parmesan</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Creamy Fettuccine with Chicken & Porcini</span>
+                  <span class="dish-weight">340g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">70 TJS</span>
+              </div>
+              <div class="dish-desc">Fettuccine ribbon pasta tossed in silky cream sauce with pan-roasted chicken breast and fragrant porcini mushrooms</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Wood-Fired Hearth Pizza</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Signature Anzur Supreme Pizza</span>
+                  <span class="dish-weight">550g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">99 TJS</span>
+              </div>
+              <div class="dish-desc">48-hour fermented dough, fior di latte mozzarella, roast beef, horsemeat kazy, smoked sausages, and bell peppers</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Four Cheese Pizza Quattro Formaggi</span>
+                  <span class="dish-weight">480g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">95 TJS</span>
+              </div>
+              <div class="dish-desc">White cream base, mozzarella, piquant gorgonzola blue cheese, sharp Parmigiano, and Swiss Emmental</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Spicy Pepperoni & Jalapeño Pizza</span>
+                  <span class="dish-weight">480g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">85 TJS</span>
+              </div>
+              <div class="dish-desc">San Marzano tomato marinara, melted mozzarella, spicy cured beef pepperoni slices, and fresh basil</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Authentic Pizza Margherita</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">79 TJS</span>
+              </div>
+              <div class="dish-desc">Neapolitan icon: Italian plum tomato sauce, fresh fior di latte mozzarella, extra virgin olive oil, and sweet basil</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Hearth Oven & Bakery</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Adjaruli Khachapuri Cheese Boat</span>
+                  <span class="dish-weight">380g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">75 TJS</span>
+              </div>
+              <div class="dish-desc">Traditional boat-shaped yeast bread packed with melting suluguni cheese, topped with raw farm egg yolk and butter</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Megruli Double-Cheese Khachapuri</span>
+                  <span class="dish-weight">420g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">70 TJS</span>
+              </div>
+              <div class="dish-desc">Round enclosed flatbread with double layer of cheese: bubbling melted cheese inside and crispy golden crust on top</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Rosemary Focaccia / Garlic Crust</span>
+                  <span class="dish-weight">220g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">25 TJS</span>
+              </div>
+              <div class="dish-desc">Airy Italian flatbread sprinkled with flaky sea salt, fragrant garden rosemary, and cold-pressed olive oil</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Artisan Bread Basket Anzur</span>
+                  <span class="dish-weight">300g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">20 TJS</span>
+              </div>
+              <div class="dish-desc">Assortment of warm freshly baked breads: tandoor kulcha, Italian focaccia, and dark rye with herb butter</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Charcoal Sides & Accompaniments</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Josper Charcoal Grilled Vegetables</span>
+                  <span class="dish-weight">250g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">55 TJS</span>
+              </div>
+              <div class="dish-desc">Zucchini ribbons, baby eggplant, sweet peppers, vine tomatoes, and brown mushrooms glazed with garlic herb oil</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Charcoal-Roasted Mushrooms with Cheese</span>
+                  <span class="dish-weight">200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">35 TJS</span>
+              </div>
+              <div class="dish-desc">Plump whole mushroom caps roasted over charcoal stuffed with melting cheese and spices</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Sweet Corn on the Cob with Paprika Butter</span>
+                  <span class="dish-weight">200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">30 TJS</span>
+              </div>
+              <div class="dish-desc">Tender sweet corn cob charred over embers brushed with smoked sweet paprika butter</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Rosemary Baby Potatoes / Mash / Fries</span>
+                  <span class="dish-weight">200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">18 / 25 / 17 TJS</span>
+              </div>
+              <div class="dish-desc">Crispy baby potatoes roasted with sea salt and rosemary, or silk-smooth creamed mashed potatoes</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Josper Charcoal Steaks</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Ribeye Steak Prime</span>
+                  <span class="dish-weight">350g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">380 TJS</span>
+              </div>
+              <div class="dish-desc">200-day grain-fed marbled beef grilled over open hardwood charcoal embers in Spanish Josper oven</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Tomahawk Bone-In Steak</span>
+                  <span class="dish-weight">1000g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">350 TJS</span>
+              </div>
+              <div class="dish-desc">Impressive long-bone ribeye steak for sharing, served with aromatic rosemary and chimichurri</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Signature Bijo Tenderloin Steak</span>
+                  <span class="dish-weight">280g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">250 TJS</span>
+              </div>
+              <div class="dish-desc">Ultra-tender center-cut tenderloin in signature cognac-peppercorn marinade with black truffle oil</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">T-Bone Steak Josper</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">175 TJS</span>
+              </div>
+              <div class="dish-desc">Classic combination of rich striploin and melting tenderloin on the authentic T-bone</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Charcoal Grilled Fish</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Josper Atlantic Salmon Steak with Red Caviar</span>
+                  <span class="dish-weight">260g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">230 TJS</span>
+              </div>
+              <div class="dish-desc">Norwegian salmon fillet grilled over embers, velvety red caviar cream sauce, green asparagus, and micro-greens</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Whole Sea Bass on Charcoal</span>
+                  <span class="dish-weight">400g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">385 TJS</span>
+              </div>
+              <div class="dish-desc">Whole Mediterranean sea bass grilled on charcoal grid with grilled lemon, rosemary sprigs, and fleur de sel</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Mediterranean Dorado on the Grill</span>
+                  <span class="dish-weight">400g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">375 TJS</span>
+              </div>
+              <div class="dish-desc">Tender ocean dorado grilled with herb garlic butter, thyme sprigs, and sweet pomegranate reduction</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Artisan Sushi & Signature Rolls</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Grand Anzur Imperial Roll Set (32 pcs)</span>
+                  <span class="dish-weight">950g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">789 TJS</span>
+              </div>
+              <div class="dish-desc">Opulent selection: Philadelphia Premium, King Crab California, Unagi Canada, Baked Truffle roll, and spicy sashimi</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Canada Roll with Smoked Unagi Eel</span>
+                  <span class="dish-weight">250g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">95 TJS</span>
+              </div>
+              <div class="dish-desc">Smoked freshwater unagi eel, silky cream cheese, buttery avocado, cucumber, sweet glaze, and toasted sesame</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Philadelphia Supreme Salmon Roll</span>
+                  <span class="dish-weight">240g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">69 TJS</span>
+              </div>
+              <div class="dish-desc">Thick layer of fresh Atlantic salmon, double Cremette cream cheese, ripe avocado, and crisp cucumber</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">California Snow Crab Roll with Tobiko</span>
+                  <span class="dish-weight">230g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">79 TJS</span>
+              </div>
+              <div class="dish-desc">Snow crab meat, Japanese Kewpie mayo, avocado, cucumber, coated all over in crunchy flying fish tobiko roe</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Traditional Mangal Kebabs</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Grand Kebab Feast for 5 Guests</span>
+                  <span class="dish-weight">1200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">449 TJS</span>
+              </div>
+              <div class="dish-desc">Napoleon skewers, tenderloin roll, bone-in lamb, ground beef lyulya, charbu wrapped kebab, tandoor bread, and dips</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Signature Napoleon Layered Kebab</span>
+                  <span class="dish-weight">180g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">48 TJS</span>
+              </div>
+              <div class="dish-desc">Legendary skewer: wafer-thin slices of prime beef tenderloin layered with spiced lamb fatback and cumin</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Beef Tenderloin Herb Roll Kebab</span>
+                  <span class="dish-weight">180g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">46 TJS</span>
+              </div>
+              <div class="dish-desc">Pounded beef tenderloin rolled with mountain herbs and paper-thin spiced fatback over glowing embers</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Tender Mountain Lamb / Lyulya Kebab</span>
+                  <span class="dish-weight">180g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">55 / 38 TJS</span>
+              </div>
+              <div class="dish-desc">Choice cuts of young mountain lamb marinated in fresh onion juice and crushed coriander seeds</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Live Fire Mangal Specialties</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Charcoal Grill Platter for 4 Guests</span>
+                  <span class="dish-weight">1100g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">435 TJS</span>
+              </div>
+              <div class="dish-desc">Flattened Tabaka spring chicken, grilled whole quails, beef and lamb kebabs, fire-roasted vegetables, and dips</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Whole Mountain Rainbow Trout (1 kg)</span>
+                  <span class="dish-weight">1000g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">185 TJS</span>
+              </div>
+              <div class="dish-desc">Freshly netted mountain stream trout grilled whole with butter, fresh rosemary sprigs, and wild pomegranate</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Charcoal-Pressed Spring Chicken Tabaka</span>
+                  <span class="dish-weight">500g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">90 TJS</span>
+              </div>
+              <div class="dish-desc">Whole young farm chicken flattened under heavy cast-iron weight over charcoal with garlic herb glaze</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Charcoal-Grilled Whole Quail (1 pc)</span>
+                  <span class="dish-weight">150g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">85 TJS</span>
+              </div>
+              <div class="dish-desc">Succulent whole farm quail glazed with mild mountain honey and Dijon mustard grilled on spit</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Signature Anzur Plov</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Anzur Beef Plov (Single Portion)</span>
+                  <span class="dish-weight">250g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">55 TJS</span>
+              </div>
+              <div class="dish-desc">Celebratory national plov: slow-braised beef, premium laser rice, sweet yellow carrots, chickpeas, and sultanas</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Tea-House Kazan Plov for Groups (1 kg)</span>
+                  <span class="dish-weight">1000g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">475 TJS</span>
+              </div>
+              <div class="dish-desc">Grand festive cauldron for 4–5 guests garnished with whole garlic heads, quail eggs, and horsemeat kazy</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Achik-Chuchuk Tomato Salad</span>
+                  <span class="dish-weight">180g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">18 TJS</span>
+              </div>
+              <div class="dish-desc">Wafer-thin heirloom tomatoes, sweet sweet red onion, mild chili pepper, and purple basil</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Hot Tandoor Kulcha Bread</span>
+                  <span class="dish-weight">150g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">6 TJS</span>
+              </div>
+              <div class="dish-desc">Authentic Tajik artisan bread baked on clay tandoor walls with golden crust and sesame seeds</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Heritage Meat Specialties</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Kazan Kabob Braised Meat & Potatoes</span>
+                  <span class="dish-weight">380g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">95 / 100 TJS</span>
+              </div>
+              <div class="dish-desc">Fork-tender braised meat cooked with golden-crusted whole potatoes, cumin, and sweet onions in heavy cast-iron cauldron</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Traditional Homestyle Kayla Meat Stew</span>
+                  <span class="dish-weight">380g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">90 / 95 TJS</span>
+              </div>
+              <div class="dish-desc">Hearty historic stew slow-cooked for hours with succulent meat, root vegetables, and aromatic Silk Road cumin bouquet</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Crispy Charcoal Lamb Riblets</span>
+                  <span class="dish-weight">280g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">79 TJS</span>
+              </div>
+              <div class="dish-desc">Crisp and crunchy baby lamb riblets charred over hardwood with thinly sliced sweet red onion and tart sumac</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Fresh Fruits & Artisan Ice Cream</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Grand Anzur 3-Tier Luxury Fruit Tower</span>
+                  <span class="dish-weight">2200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">350 TJS</span>
+              </div>
+              <div class="dish-desc">Sweet ripe pineapple, local seedless Kishmish and Tayfi grapes, citrus fruits, ruby pomegranate, kiwi, and berries</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Seasonal Fresh Fruit Platter</span>
+                  <span class="dish-weight">800g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">165 TJS</span>
+              </div>
+              <div class="dish-desc">Refreshing selection of seasonal melon, sweet grapes, citrus slices, and mountain berries for sharing</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Artisan Gelato Ice Cream (1 scoop)</span>
+                  <span class="dish-weight">50g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">11 TJS</span>
+              </div>
+              <div class="dish-desc">Natural handmade gelato made from fresh whole milk: vanilla cream, dark chocolate, pistachio, or strawberry</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Signature Desserts</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Dubai Pistachio Chocolate Cheesecake</span>
+                  <span class="dish-weight">190g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">99 TJS</span>
+              </div>
+              <div class="dish-desc">Crunchy toasted kataifi pastry, 100% pure pistachio paste, Belgian milk chocolate, and cream cheese</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">San Sebastian Basque Cheesecake</span>
+                  <span class="dish-weight">180g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">52 TJS</span>
+              </div>
+              <div class="dish-desc">Famous Basque burnt cheesecake with a melting creamy molten center and warm chocolate sauce</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Meringue Roulade with Fresh Raspberries</span>
+                  <span class="dish-weight">160g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">58 TJS</span>
+              </div>
+              <div class="dish-desc">Airy meringue with a delicate crisp shell, velvety mascarpone cream, and fresh mountain raspberries</div>
+            </div>
+            </div>
+        </div>
+        
+    </main>
+
+    <footer class="menu-footer">
+      <p>Service charge 12% · Prices in Somoni (TJS)</p>
+      <p style="margin-top:0.4rem;">© 2026 Anzur Restaurant. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1021,6 +1021,374 @@
       }
     }
 
+    /* Top bar inside photo menu lightbox */
+    .menu-modal-top-bar {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      z-index: 12010;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+    }
+    .menu-modal-top-bar > * {
+      pointer-events: auto;
+    }
+    .menu-switch-text-btn {
+      background: rgba(18, 14, 10, 0.88);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 0.55rem 1.15rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      backdrop-filter: blur(8px);
+      transition: all 0.2s ease;
+    }
+    .menu-switch-text-btn:hover {
+      background: var(--gold);
+      color: #060504;
+      transform: scale(1.05);
+    }
+
+    /* ==========================================================================
+       TEXT MENU MODAL (CLEAN TRANSLATIONS & PRICES, NO IMAGES)
+       ========================================================================== */
+    .text-menu-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 12000;
+      background: rgba(4, 3, 2, 0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      padding: 1rem;
+    }
+    .text-menu-overlay.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .text-menu-dialog {
+      max-width: 1040px;
+      width: 95vw;
+      height: 90vh;
+      background: #0b0907;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 10px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.9), 0 0 35px rgba(212, 175, 55, 0.08);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+    .text-menu-header {
+      padding: 1.25rem 1.75rem;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #110f0b;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .text-menu-crest {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .text-menu-heading {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.55rem;
+      color: #fff;
+      margin: 0.15rem 0 0.1rem;
+      font-weight: 600;
+    }
+    .text-menu-subheading {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+    .text-menu-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+    .text-menu-lang-switch {
+      display: inline-flex;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 20px;
+      padding: 2px;
+    }
+    .text-lang-tab {
+      background: transparent;
+      border: none;
+      color: #999;
+      padding: 0.3rem 0.65rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .text-lang-tab.is-active {
+      background: var(--gold);
+      color: #060504;
+    }
+    .text-menu-photo-btn {
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      border-radius: 20px;
+      padding: 0.4rem 0.85rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s;
+    }
+    .text-menu-photo-btn:hover {
+      background: var(--gold);
+      color: #060504;
+    }
+    .text-menu-print-btn {
+      color: var(--gold);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      background: rgba(0,0,0,0.4);
+      padding: 0.38rem 0.75rem;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.2s;
+    }
+    .text-menu-print-btn:hover {
+      border-color: var(--gold);
+      background: rgba(212, 175, 55, 0.15);
+    }
+    .text-menu-close {
+      background: rgba(18, 14, 10, 0.85);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.15rem;
+      line-height: 1;
+      transition: all 0.2s;
+    }
+    .text-menu-close:hover {
+      background: var(--gold);
+      color: #060504;
+      transform: scale(1.08);
+    }
+    .text-menu-toolbar {
+      padding: 0.85rem 1.75rem;
+      background: #0e0c09;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .text-menu-search {
+      position: relative;
+      max-width: 440px;
+      width: 100%;
+    }
+    .text-menu-search-svg {
+      position: absolute;
+      left: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 15px;
+      height: 15px;
+      color: var(--gold);
+      pointer-events: none;
+    }
+    .text-menu-input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 20px;
+      padding: 0.45rem 2.2rem 0.45rem 2.2rem;
+      color: #fff;
+      font-size: 0.82rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .text-menu-input:focus {
+      border-color: var(--gold);
+    }
+    .text-menu-clear {
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: #888;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .text-menu-cats {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
+      scrollbar-width: none;
+    }
+    .text-menu-cats::-webkit-scrollbar {
+      display: none;
+    }
+    .text-cat-pill {
+      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 14px;
+      padding: 0.3rem 0.85rem;
+      font-size: 0.75rem;
+      color: #b5ada3;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .text-cat-pill:hover {
+      border-color: var(--gold);
+      color: #fff;
+    }
+    .text-cat-pill.is-active {
+      background: var(--gold);
+      color: #060504;
+      border-color: var(--gold);
+      font-weight: 600;
+    }
+    .text-menu-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem 1.75rem 3.5rem;
+      scroll-behavior: smooth;
+    }
+    .text-menu-cat-section {
+      margin-bottom: 2.75rem;
+    }
+    .text-menu-cat-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding-bottom: 0.45rem;
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.03em;
+    }
+    .text-menu-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    @media (min-width: 768px) {
+      .text-menu-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem 2rem;
+      }
+    }
+    .text-dish-card {
+      background: rgba(18, 14, 11, 0.65);
+      border: 1px solid rgba(212, 175, 55, 0.14);
+      border-radius: 6px;
+      padding: 1rem 1.15rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+    }
+    .text-dish-card:hover {
+      border-color: rgba(212, 175, 55, 0.4);
+      background: rgba(25, 20, 15, 0.75);
+    }
+    .text-dish-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 0.35rem;
+    }
+    .text-dish-title-group {
+      display: flex;
+      align-items: baseline;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+    }
+    .text-dish-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #f7f4ed;
+      line-height: 1.35;
+    }
+    .text-dish-weight {
+      font-size: 0.75rem;
+      color: #9c9488;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .text-dish-price {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+    .text-dish-desc {
+      font-size: 0.8rem;
+      color: #9e978d;
+      line-height: 1.45;
+      margin-top: 0.3rem;
+    }
+    .text-menu-empty {
+      text-align: center;
+      padding: 4rem 1rem;
+      color: #888;
+      font-size: 0.95rem;
+    }
+    @media (max-width: 640px) {
+      .text-menu-header {
+        padding: 1rem;
+      }
+      .text-menu-toolbar {
+        padding: 0.75rem 1rem;
+      }
+      .text-menu-scroll {
+        padding: 1rem 1rem 3rem;
+      }
+      .text-menu-dialog {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+        border: none;
+      }
+    }
+
         @media (max-width: 1200px) {
       .filmstrip-wrap { grid-template-columns: repeat(3, 1fr); }
     }
@@ -2036,11 +2404,66 @@
        CLEAN MENU VIEWER (PAGES + ARROWS ONLY)
        ========================================================================== -->
   <div id="menu-modal" class="menu-modal-overlay" role="dialog" aria-modal="true" aria-label="Меню ресторана Анзур" onclick="handleMenuOverlayClick(event)">
-    <button type="button" class="menu-modal-close-btn" onclick="closeMenuModal()" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
+    <div class="menu-modal-top-bar" onclick="event.stopPropagation()">
+      <button type="button" class="menu-switch-text-btn" onclick="openTextMenuFromPhoto()" title="Текстовое меню с ценами">
+        <span>📄</span> <span data-i18n="menu_switch_to_text">Текст и цены</span>
+      </button>
+      <button type="button" class="menu-modal-close-btn" style="position:static;" onclick="closeMenuModal()" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
+    </div>
     <div class="menu-lightbox-stage" id="modalMenuStage" onclick="event.stopPropagation()">
       <button type="button" class="menu-stage-arrow prev" onclick="prevModalMenuPage()" title="Предыдущая страница" aria-label="Предыдущая страница">‹</button>
       <img id="modalMenuCurrentImg" src="menu_pages_web/menu_page_01.jpg" alt="Меню ресторана Анзур" class="menu-page-display" />
       <button type="button" class="menu-stage-arrow next" onclick="nextModalMenuPage()" title="Следующая страница" aria-label="Следующая страница">›</button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       TEXT MENU MODAL (CLEAN TRANSLATIONS & PRICES, NO IMAGES)
+       ========================================================================== -->
+  <div id="text-menu-modal" class="text-menu-overlay" role="dialog" aria-modal="true" aria-label="Меню ресторана Анзур" onclick="handleTextMenuOverlayClick(event)">
+    <div class="text-menu-dialog" onclick="event.stopPropagation()">
+      <!-- Header -->
+      <div class="text-menu-header">
+        <div class="text-menu-header-info">
+          <div class="text-menu-crest">АНЗУР</div>
+          <h2 class="text-menu-heading" id="textMenuTitle">Меню ресторана</h2>
+          <p class="text-menu-subheading" id="textMenuSub">Ресторан «Анзур» · г. Душанбе, ул. Дӯстии халқҳо, 10б</p>
+        </div>
+        <div class="text-menu-controls">
+          <div class="text-menu-lang-switch">
+            <button type="button" class="text-lang-tab" data-tlang="tj" onclick="changeTextMenuLanguage('tj')">TJ</button>
+            <button type="button" class="text-lang-tab" data-tlang="en" onclick="changeTextMenuLanguage('en')">EN</button>
+            <button type="button" class="text-lang-tab" data-tlang="zh" onclick="changeTextMenuLanguage('zh')">中文</button>
+            <button type="button" class="text-lang-tab" data-tlang="ru" onclick="changeTextMenuLanguage('ru')">RU</button>
+          </div>
+          <button type="button" class="text-menu-photo-btn" onclick="openPhotoMenuFromText()" title="Оригинальное фото-меню (RU)">
+            📷 <span id="textMenuPhotoToggleLabel">Фото-меню (RU)</span>
+          </button>
+          <a id="textMenuPrintLink" href="menu_en.html" target="_blank" class="text-menu-print-btn" title="Версия для печати / Print">
+            🖨️
+          </a>
+          <button type="button" class="text-menu-close" onclick="closeTextMenuModal()" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
+        </div>
+      </div>
+
+      <!-- Toolbar: Search & Category Pills -->
+      <div class="text-menu-toolbar">
+        <div class="text-menu-search">
+          <svg class="text-menu-search-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" id="textMenuSearchInput" class="text-menu-input" placeholder="Поиск блюд / Search dishes..." oninput="handleTextMenuSearch(this.value)" />
+          <button type="button" id="textMenuSearchClear" class="text-menu-clear" onclick="clearTextMenuSearch()" style="display:none;">✕</button>
+        </div>
+        <div class="text-menu-cats" id="textMenuCategoriesNav">
+          <!-- Dynamic category pills -->
+        </div>
+      </div>
+
+      <!-- Body / Dishes List -->
+      <div class="text-menu-scroll" id="textMenuScrollArea">
+        <div class="text-menu-content" id="textMenuContent">
+          <!-- Rendered dishes -->
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2056,7 +2479,7 @@
     </div>
   </div>
 
-
+  <script src="anzur_menu_data.js"></script>
 
   <!-- SCRIPT -->
   <script>
@@ -2101,6 +2524,7 @@
     menu_mono_tag: "[ ВЫБОР ШЕФ-ПОВАРА · СЕЗОН 2026 ]",
     menu_sec_title: "Карта <em>вкуса</em>",
     menu_full_btn: "ПОЛНОЕ МЕНЮ РЕСТОРАНА",
+    menu_switch_to_text: "Текст и цены",
     cat_national: "Национальная",
     cat_european: "Печь Josper",
     cat_panasian: "Суши & Роллы",
@@ -2209,6 +2633,7 @@
     menu_mono_tag: "[ ИНТИХОБИ САР-ОШПАЗ · ФАСЛИ 2026 ]",
     menu_sec_title: "Харитаи <em>лаззатҳо</em>",
     menu_full_btn: "МЕНЮИ ПУРРАИ РЕСТОРАН",
+    menu_switch_to_text: "Матн ва нархҳо",
     cat_national: "Миллӣ",
     cat_european: "Танӯри Josper",
     cat_panasian: "Суши & Роллҳо",
@@ -2309,6 +2734,7 @@
     menu_mono_tag: "[ CHEF'S SELECTION · SEASON 2026 ]",
     menu_sec_title: "Taste <em>Map</em>",
     menu_full_btn: "FULL RESTAURANT MENU",
+    menu_switch_to_text: "Text & Prices",
     cat_national: "National",
     cat_european: "Josper Grill",
     cat_panasian: "Sushi & Rolls",
@@ -2409,6 +2835,7 @@
     menu_mono_tag: "[ 主厨精选 · 2026年度 ]",
     menu_sec_title: "赏味<em>地图</em>",
     menu_full_btn: "查看完整菜单",
+    menu_switch_to_text: "文字菜单与价格",
     cat_national: "传统中亚菜",
     cat_european: "Josper炭烤",
     cat_panasian: "寿司刺身",
@@ -2959,11 +3386,23 @@ let currentSlideIdx = 0;
       }
     }
 
-    // Modal logic (Clean Menu Viewer with arrows only)
+    // Modal logic (Clean Menu Viewer with arrows only & Text Menu)
     const TOTAL_MODAL_MENU_PAGES = 22;
     let currentModalMenuPage = 1;
+    let currentTextMenuLang = 'en';
+    let activeTextCategoryFilter = 'all';
+    let textMenuSearchQuery = '';
 
     function openMenuModal(page) {
+      if (currentLang === 'ru') {
+        openPhotoMenu(page);
+      } else {
+        openTextMenuModal(currentLang);
+      }
+    }
+
+    function openPhotoMenu(page) {
+      closeTextMenuModal();
       if (typeof page === 'number' && page >= 1 && page <= TOTAL_MODAL_MENU_PAGES) {
         setModalMenuPage(page);
       }
@@ -2978,7 +3417,12 @@ let currentSlideIdx = 0;
       const modal = document.getElementById('menu-modal');
       if (modal) {
         modal.classList.remove('is-open');
-        document.body.style.overflow = '';
+        const textModal = document.getElementById('text-menu-modal');
+        const spacesModal = document.getElementById('spaces-modal');
+        if ((!textModal || !textModal.classList.contains('is-open')) &&
+            (!spacesModal || !spacesModal.classList.contains('is-open'))) {
+          document.body.style.overflow = '';
+        }
       }
     }
 
@@ -2986,6 +3430,223 @@ let currentSlideIdx = 0;
       if (e.target && e.target.id === 'menu-modal') {
         closeMenuModal();
       }
+    }
+
+    function openTextMenuFromPhoto() {
+      openTextMenuModal(currentLang === 'ru' ? 'ru' : currentLang);
+    }
+
+    function openPhotoMenuFromText() {
+      openPhotoMenu(1);
+    }
+
+    function openTextMenuModal(lang) {
+      closeMenuModal();
+      const targetLang = lang || currentLang || 'en';
+      currentTextMenuLang = targetLang;
+      renderTextMenu(targetLang);
+      const modal = document.getElementById('text-menu-modal');
+      if (modal) {
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeTextMenuModal() {
+      const modal = document.getElementById('text-menu-modal');
+      if (modal) {
+        modal.classList.remove('is-open');
+        const photoModal = document.getElementById('menu-modal');
+        const spacesModal = document.getElementById('spaces-modal');
+        if ((!photoModal || !photoModal.classList.contains('is-open')) &&
+            (!spacesModal || !spacesModal.classList.contains('is-open'))) {
+          document.body.style.overflow = '';
+        }
+      }
+    }
+
+    function handleTextMenuOverlayClick(e) {
+      if (e.target && e.target.id === 'text-menu-modal') {
+        closeTextMenuModal();
+      }
+    }
+
+    function changeTextMenuLanguage(lang) {
+      currentTextMenuLang = lang;
+      renderTextMenu(lang);
+    }
+
+    function renderTextMenu(lang) {
+      if (!lang) lang = currentTextMenuLang || 'en';
+      currentTextMenuLang = lang;
+
+      // Update lang tabs
+      document.querySelectorAll('.text-lang-tab').forEach(tab => {
+        if (tab.getAttribute('data-tlang') === lang) tab.classList.add('is-active');
+        else tab.classList.remove('is-active');
+      });
+
+      const ui = {
+        ru: {
+          title: 'Меню ресторана',
+          sub: 'Ресторан «Анзур» · г. Душанбе, ул. Дӯстии халқҳо, 10б',
+          search: 'Поиск блюд по названию или составу...',
+          all: 'Все блюда',
+          empty: 'Ничего не найдено по вашему запросу',
+          photoBtn: 'Фото-меню (RU)',
+          printUrl: 'menu_ru.html'
+        },
+        tj: {
+          title: 'Менюи тарабхона',
+          sub: 'Ресторани «Анзур» · ш. Душанбе, кӯч. Дӯстии халқҳо, 10б',
+          search: 'Ҷустуҷӯи таомҳо...',
+          all: 'Ҳамаи таомҳо',
+          empty: 'Мувофиқи дархости шумо чизе ёфт нашуд',
+          photoBtn: 'Фото-меню (RU)',
+          printUrl: 'menu_tj.html'
+        },
+        en: {
+          title: 'Restaurant Menu',
+          sub: 'Anzur Restaurant · 10b Dustii Khalqho St., Dushanbe',
+          search: 'Search dishes or ingredients...',
+          all: 'All Dishes',
+          empty: 'No dishes found matching your search',
+          photoBtn: 'Photo Menu (RU)',
+          printUrl: 'menu_en.html'
+        },
+        zh: {
+          title: '餐厅精选菜单与价格表',
+          sub: '安祖尔特色奢享餐厅 · 杜尚别市人民友谊街10b',
+          search: '搜索菜品名称或配料...',
+          all: '全部菜品',
+          empty: '未找到符合条件的菜品',
+          photoBtn: '原版图文菜单 (RU)',
+          printUrl: 'menu_zh.html'
+        }
+      };
+
+      const curUi = ui[lang] || ui.en;
+      const titleEl = document.getElementById('textMenuTitle');
+      const subEl = document.getElementById('textMenuSub');
+      const searchInput = document.getElementById('textMenuSearchInput');
+      const photoBtn = document.getElementById('textMenuPhotoToggleLabel');
+      const printLink = document.getElementById('textMenuPrintLink');
+
+      if (titleEl) titleEl.textContent = curUi.title;
+      if (subEl) subEl.textContent = curUi.sub;
+      if (searchInput) searchInput.placeholder = curUi.search;
+      if (photoBtn) photoBtn.textContent = curUi.photoBtn;
+      if (printLink) printLink.href = curUi.printUrl;
+
+      renderCategoryPills(lang, curUi.all);
+      renderDishesList(lang, curUi.empty);
+    }
+
+    function renderCategoryPills(lang, allLabel) {
+      const container = document.getElementById('textMenuCategoriesNav');
+      if (!container || typeof ANZUR_MENU_CATEGORIES === 'undefined') return;
+
+      let html = `<button type="button" class="text-cat-pill ${activeTextCategoryFilter === 'all' ? 'is-active' : ''}" onclick="selectTextCategory('all')">${allLabel}</button>`;
+
+      ANZUR_MENU_CATEGORIES.forEach(cat => {
+        const catTitle = cat.title[lang] || cat.title.ru;
+        const isActive = activeTextCategoryFilter === cat.id ? 'is-active' : '';
+        html += `<button type="button" class="text-cat-pill ${isActive}" onclick="selectTextCategory('${cat.id}')">${catTitle}</button>`;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function selectTextCategory(catId) {
+      activeTextCategoryFilter = catId;
+      const allLabels = { ru: 'Все блюда', tj: 'Ҳамаи таомҳо', en: 'All Dishes', zh: '全部菜品' };
+      renderCategoryPills(currentTextMenuLang, allLabels[currentTextMenuLang] || 'All Dishes');
+
+      if (catId === 'all') {
+        const scrollArea = document.getElementById('textMenuScrollArea');
+        if (scrollArea) scrollArea.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const target = document.getElementById('cat-sec-' + catId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+
+    function renderDishesList(lang, emptyLabel) {
+      const container = document.getElementById('textMenuContent');
+      if (!container || typeof ANZUR_MENU_CATEGORIES === 'undefined') return;
+
+      const q = textMenuSearchQuery.trim().toLowerCase();
+      let foundAny = false;
+      let html = '';
+
+      ANZUR_MENU_CATEGORIES.forEach(cat => {
+        const catTitle = cat.title[lang] || cat.title.ru;
+
+        const filteredItems = cat.items.filter(item => {
+          if (!q) return true;
+          const name = (item.name[lang] || item.name.ru || '').toLowerCase();
+          const desc = (item.desc[lang] || item.desc.ru || '').toLowerCase();
+          const pr = (item.price || '').toLowerCase();
+          const w = (item.weight || '').toLowerCase();
+          return name.includes(q) || desc.includes(q) || pr.includes(q) || w.includes(q);
+        });
+
+        if (filteredItems.length === 0) return;
+        foundAny = true;
+
+        html += `
+          <section class="text-menu-cat-section" id="cat-sec-${cat.id}">
+            <h3 class="text-menu-cat-title">${catTitle}</h3>
+            <div class="text-menu-grid">
+        `;
+
+        filteredItems.forEach(item => {
+          const name = item.name[lang] || item.name.ru;
+          const w = item.weight || '';
+          const price = item.price || '';
+          const desc = item.desc[lang] || item.desc.ru || '';
+
+          html += `
+            <article class="text-dish-card">
+              <div class="text-dish-header">
+                <div class="text-dish-title-group">
+                  <span class="text-dish-name">${name}</span>
+                  ${w ? `<span class="text-dish-weight">${w}</span>` : ''}
+                </div>
+                <span class="text-dish-price">${price}</span>
+              </div>
+              ${desc ? `<p class="text-dish-desc">${desc}</p>` : ''}
+            </article>
+          `;
+        });
+
+        html += `
+            </div>
+          </section>
+        `;
+      });
+
+      if (!foundAny) {
+        html = `<div class="text-menu-empty">${emptyLabel}</div>`;
+      }
+
+      container.innerHTML = html;
+    }
+
+    function handleTextMenuSearch(val) {
+      textMenuSearchQuery = val;
+      const clearBtn = document.getElementById('textMenuSearchClear');
+      if (clearBtn) clearBtn.style.display = val ? 'block' : 'none';
+      const emptyLabels = { ru: 'Ничего не найдено', tj: 'Чизе ёфт нашуд', en: 'No dishes found', zh: '未找到菜品' };
+      renderDishesList(currentTextMenuLang, emptyLabels[currentTextMenuLang] || 'No dishes found');
+    }
+
+    function clearTextMenuSearch() {
+      const input = document.getElementById('textMenuSearchInput');
+      if (input) input.value = '';
+      handleTextMenuSearch('');
     }
 
     function setModalMenuPage(page) {
@@ -3105,7 +3766,16 @@ let currentSlideIdx = 0;
 
     // Global Key listeners (ESC closes modal, Arrows cycle pages / slides)
     window.addEventListener('keydown', (e) => {
-      // Menu modal
+      // Text Menu modal
+      const textMenuModal = document.getElementById('text-menu-modal');
+      if (textMenuModal && textMenuModal.classList.contains('is-open')) {
+        if (e.key === 'Escape') {
+          closeTextMenuModal();
+          return;
+        }
+      }
+
+      // Menu modal (Photo viewer)
       const menuModal = document.getElementById('menu-modal');
       if (menuModal && menuModal.classList.contains('is-open')) {
         if (e.key === 'Escape') {

@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ресторани «Анзур» · Менюи комил</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #d4af37;
+      --gold-light: #f3e5ab;
+      --bg-dark: #0a0907;
+      --card-bg: #12100d;
+      --text-white: #f5f2eb;
+      --text-muted: #9e978c;
+      --border-color: rgba(212, 175, 55, 0.2);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-white);
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.5;
+      padding: 0;
+      min-height: 100vh;
+    }
+    .top-actions {
+      background: #14120e;
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.85rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--text-white);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1.1rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(212, 175, 55, 0.08);
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: #000;
+      font-weight: 600;
+      border: 1px solid var(--gold);
+    }
+    .btn-gold:hover {
+      background: var(--gold-light);
+      color: #000;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+    .header-block {
+      text-align: center;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 3rem;
+    }
+    .brand-crest {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2.4rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    .menu-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.85rem;
+      color: var(--text-white);
+      margin-bottom: 0.5rem;
+    }
+    .menu-subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .header-meta {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.82rem;
+      color: var(--gold-light);
+      letter-spacing: 0.05em;
+    }
+    .menu-category-block {
+      margin-bottom: 3.5rem;
+      page-break-inside: avoid;
+    }
+    .cat-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.65rem;
+      color: var(--gold);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.04em;
+    }
+    .dish-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 768px) {
+      .dish-list {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.75rem 2.5rem;
+      }
+    }
+    .dish-row {
+      page-break-inside: avoid;
+    }
+    .dish-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.35rem;
+    }
+    .dish-name-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      flex-shrink: 1;
+    }
+    .dish-name {
+      font-weight: 600;
+      font-size: 0.98rem;
+      color: var(--text-white);
+    }
+    .dish-weight {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .dish-dots {
+      flex-grow: 1;
+      border-bottom: 1px dotted rgba(212, 175, 55, 0.25);
+      margin: 0 0.25rem;
+      position: relative;
+      top: -3px;
+    }
+    .dish-price {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+    .dish-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .menu-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media print {
+      .top-actions { display: none !important; }
+      body { background: #fff !important; color: #111 !important; font-size: 10pt; }
+      .container { max-width: 100% !important; padding: 0 !important; }
+      .header-block { border-bottom: 1px solid #ccc; margin-bottom: 1.5rem; padding-bottom: 1rem; }
+      .brand-crest { color: #000 !important; font-size: 20pt; }
+      .menu-title { color: #222 !important; font-size: 14pt; }
+      .cat-title { color: #7a5c10 !important; border-bottom: 1px solid #ccc; font-size: 13pt; margin-top: 1.5rem; }
+      .dish-name { color: #000 !important; font-weight: 600; }
+      .dish-price { color: #7a5c10 !important; font-weight: 700; }
+      .dish-desc { color: #555 !important; font-size: 8.5pt; }
+      .dish-dots { border-bottom: 1px dotted #bbb; }
+      .menu-footer { color: #666 !important; border-top: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-actions">
+    <a href="index.html" class="btn">← Баргаштан ба сомона</a>
+    <button onclick="window.print()" class="btn btn-gold">🖨️ Чоп / Сабт ба PDF</button>
+  </div>
+  <div class="container">
+    <header class="header-block">
+      <div class="brand-crest">ANZUR</div>
+      <h1 class="menu-title">Ресторани «Анзур» · Менюи комил</h1>
+      <p class="menu-subtitle">Таомҳои миллӣ ва аврупоӣ · Мангал · Кабобҳо · Оши палави хоса</p>
+      <div class="header-meta">
+        <span>📍 ш. Душанбе, кӯч. Дӯстии халқҳо, 10б (минтақаи Винзавод)</span>
+        <span>📞 +992 917 917 917</span>
+      </div>
+    </header>
+
+    <main>
+      
+        <div class="menu-category-block">
+          <h2 class="cat-title">Хӯрокҳои сард</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Бодимҷони хонагӣ</span>
+                  <span class="dish-weight">180g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">55 TJS</span>
+              </div>
+              <div class="dish-desc">Бурдаҳои бодимҷони бирён бо соуси помидори тару тоза ва панири Пармезан</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Панири Буратта бо соуси Песто</span>
+                  <span class="dish-weight">225g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">178 TJS</span>
+              </div>
+              <div class="dish-desc">Панири мулоими Буратта рӯи икраи бодимҷон бо соуси итолиёвии Песто</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Брускетаи Капрезе</span>
+                  <span class="dish-weight">200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">115 TJS</span>
+              </div>
+              <div class="dish-desc">Нони бирён бо панири мотсарелла, помидори пухта ва равғани зайтун</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Брускета бо лосось</span>
+                  <span class="dish-weight">200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">155 TJS</span>
+              </div>
+              <div class="dish-desc">Лососи камнамак дар нони фаронсавӣ бо панири қаймоқӣ</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Хӯриши Капрезе бо песто</span>
+                  <span class="dish-weight">250g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">195 TJS</span>
+              </div>
+              <div class="dish-desc">Панири мотсарелла бо помидор, соуси Песто ва чормағзи санавбар</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Хӯрокҳои гӯштӣ & Газакҳо</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Лаълии гӯштии «Анзур»</span>
+                  <span class="dish-weight">350g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">245 TJS</span>
+              </div>
+              <div class="dish-desc">Қазии хонагии асп, бастурмаи хуштаъм, забони гов ва ростбифи хушлаззат</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Лаълии панирӣ бо асали кӯҳӣ</span>
+                  <span class="dish-weight">300g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">225 TJS</span>
+              </div>
+              <div class="dish-desc">Пармезан, камамбер, дор-блю, сулугунӣ, чормағз ва асали табиии баландкӯҳ</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Пиёзи кӯҳии Анзур бо намакинҳо</span>
+                  <span class="dish-weight">280g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">75 TJS</span>
+              </div>
+              <div class="dish-desc">Неъмати нодири кӯҳҳои Помир — пиёзи хуштаъми Анзур бо бодирингу помидори намакин</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Сабзавоти тару тоза бо кабудӣ</span>
+                  <span class="dish-weight">400g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">105 TJS</span>
+              </div>
+              <div class="dish-desc">Помидору бодиринги тозаи Ҳисор, қаланфури ширин, райҳону гашнич</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Хӯришҳои хоса</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Стейк-хӯриш бо медалйонҳои Josper</span>
+                  <span class="dish-weight">260g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">125 TJS</span>
+              </div>
+              <div class="dish-desc">Лаҳми мулоими Josper, омехтаи хӯришҳо, помидорҳои черри, чормағзи санавбар ва соуси хоса</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Бодимҷони қаҳваранг бо страчателла</span>
+                  <span class="dish-weight">240g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">118 TJS</span>
+              </div>
+              <div class="dish-desc">Бодимҷони қаҳваранги бирён бо панири страчателла, помидори пухта ва соуси чилии ширин</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Хӯриши юнонӣ бо панири фета</span>
+                  <span class="dish-weight">280g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">78 TJS</span>
+              </div>
+              <div class="dish-desc">Сабзавоти тоза, зайтуни юнонӣ, панири фета, пиёзи сурх бо равғани зайтун</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Хӯриши Нобиани бо лӯбиё ва чормағз</span>
+                  <span class="dish-weight">220g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">75 TJS</span>
+              </div>
+              <div class="dish-desc">Лӯбиёи сурх, чормағзи кӯфта, соуси анор (наршароб), гашнич ва гиёҳҳои хушбӯй</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Хӯришҳо & Маҳсулоти баҳрӣ</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Хӯриш бо лососи сӯхта ва авокадо</span>
+                  <span class="dish-weight">240g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">155 TJS</span>
+              </div>
+              <div class="dish-desc">Лососи нарм, авокадо, кабудӣ, соуси ситрусӣ ва кунҷиди хуштаъм</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Хӯриш бо майгу ва ҳаштпо</span>
+                  <span class="dish-weight">250g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">125 TJS</span>
+              </div>
+              <div class="dish-desc">Маҳсулоти баҳрии рӯи грил, картошкаи хурд, руккола ва соуси лимӯгӣ</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Сезар бо гӯшти мурғ</span>
+                  <span class="dish-weight">260g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">68 TJS</span>
+              </div>
+              <div class="dish-desc">Баргҳои романо, гӯшти мурғ дар грил, панири пармезан ва соуси хоса</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Сезар бо майгуҳои шоҳона</span>
+                  <span class="dish-weight">280g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">145 TJS</span>
+              </div>
+              <div class="dish-desc">Майгуҳои калони дар ангишт бирёншуда, панири пармезан ва баргҳои тару тоза</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Газакҳои гарм & Вок</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Лағмони бирёни Қовурма</span>
+                  <span class="dish-weight">380g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">68 TJS</span>
+              </div>
+              <div class="dish-desc">Оши кашидаи дастӣ, бирёншуда бо гӯшти гов, қаланфури ширин, ҷусай ва сирпиёз</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Лағмони классикии уйғурӣ</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">45 TJS</span>
+              </div>
+              <div class="dish-desc">Оши дастӣ дар шӯрбои ғализи хушбӯй бо гӯшт, сабзавот ва нахӯд</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Манту бо гӯшти реза (1 дона)</span>
+                  <span class="dish-weight">80g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">16 TJS</span>
+              </div>
+              <div class="dish-desc">Хамири тунук дар буғ, гӯшти резаи гов бо пиёз ва зира, бо қаймоқ</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Самбӯсаи танӯрии Катра Анзур</span>
+                  <span class="dish-weight">120g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">19 TJS</span>
+              </div>
+              <div class="dish-desc">Хамири қабат-қабати тунук аз танӯри гилин бо гӯшти солим ва зира</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Газакҳои баҳрӣ</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Майгу бо бодоми реза</span>
+                  <span class="dish-weight">220g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">190 TJS</span>
+              </div>
+              <div class="dish-desc">Майгуҳои палангӣ бо бодом дар панировка бо соуси ширини васаби</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Майгуи темпура бо чилии ширин</span>
+                  <span class="dish-weight">200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">175 TJS</span>
+              </div>
+              <div class="dish-desc">Панировкаи тиллоии темпура, хамири тунук бо соуси унаги ва кунҷид</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Рулети гарми қаҳваранг бо лосось</span>
+                  <span class="dish-weight">230g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">140 TJS</span>
+              </div>
+              <div class="dish-desc">Гӯшти моҳии лосось, испаноқ ва панири қаймоқӣ дар қабати тиллоӣ</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Сетти калони газакҳои гарм</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">68 TJS</span>
+              </div>
+              <div class="dish-desc">Нони сиёҳи сирпиёздор, чӯбчаҳои панирии мотсарелла ва ҳалқаҳои калмар</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Шӯрбоҳои миллӣ</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Шӯрбо аз гӯшти гӯсфанд</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">65 TJS</span>
+              </div>
+              <div class="dish-desc">Шӯрбои шаффофи серғизо аз гӯшти барраи наврас бо сабзавоти калон ва гиёҳҳои кӯҳӣ</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Шӯрбо аз гӯшти гов</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">60 TJS</span>
+              </div>
+              <div class="dish-desc">Шӯрбои тиллоии шаффоф аз синаи гов бо картошкаи бутун, сабзӣ ва зира</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Дум-шӯрбо аз думи барзагов</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">65 TJS</span>
+              </div>
+              <div class="dish-desc">Шӯрбои шифобахши қадимӣ бо ҷӯшонидани 6-соата, бой аз коллаген ва сирпиёз</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Чучвара / Угро / Бринҷоба</span>
+                  <span class="dish-weight">400g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">45 TJS</span>
+              </div>
+              <div class="dish-desc">Пелменҳои хурди дастӣ бо гӯшти солим дар шӯрбои шаффоф бо кабудӣ ва қаймоқ</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Шӯрбоҳои Осиё & Паста</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Том Ям бо маҳсулоти баҳрӣ</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">157 TJS</span>
+              </div>
+              <div class="dish-desc">Шири نارҷил, лимӯи махсус, галангал, майгуҳои калон ва биринҷи ёсуманӣ</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Шӯрбои Милано бо песто ва испаноқ</span>
+                  <span class="dish-weight">350g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">75 TJS</span>
+              </div>
+              <div class="dish-desc">Шӯрбо-креми мулоим аз испаноқ бо қаймоқ, чормағзи санавбар ва панир</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Пастаи Болонезеи дастии хонагӣ</span>
+                  <span class="dish-weight">320g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">79 TJS</span>
+              </div>
+              <div class="dish-desc">Талятеллеи тару тоза бо рагуи гӯшти гов, помидори итолиёвӣ ва панир</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Паста бо мурғ ва занбӯруғ</span>
+                  <span class="dish-weight">340g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">70 TJS</span>
+              </div>
+              <div class="dish-desc">Фетучини бо соуси қаймоқӣ, гӯшти мурғи бирён, занбӯруғҳои сафед ва гиёҳҳо</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Питса аз танӯри ҳезумӣ</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Питсаи омехтаи «Анзур»</span>
+                  <span class="dish-weight">550g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">99 TJS</span>
+              </div>
+              <div class="dish-desc">Хамири 48-соата, мотсарелла, ростбиф, қазӣ, ҳасибчаҳои шикорӣ ва қаланфур</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Питсаи Чор панир</span>
+                  <span class="dish-weight">480g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">95 TJS</span>
+              </div>
+              <div class="dish-desc">Соуси қаймоқӣ, мотсарелла, горгонзола, пармезан ва эмментал</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Питсаи Пепперонии тез</span>
+                  <span class="dish-weight">480g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">85 TJS</span>
+              </div>
+              <div class="dish-desc">Соуси помидории San Marzano, мотсарелла, салями пепперонии тунд ва райҳон</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Питсаи Маргарита</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">79 TJS</span>
+              </div>
+              <div class="dish-desc">Классикаи Неапол: соуси помидори итолиёвӣ, мотсарелла, равғани зайтун ва райҳон</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Таомҳои танӯрӣ & Нонпазӣ</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Хачапури ба тариқи аҷорӣ</span>
+                  <span class="dish-weight">380g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">75 TJS</span>
+              </div>
+              <div class="dish-desc">Қаиқчаи хамирӣ бо панири сулугунӣ, зардии тухми табиӣ ва равғани маска</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Хачапури ба тариқи мегрелӣ</span>
+                  <span class="dish-weight">420g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">70 TJS</span>
+              </div>
+              <div class="dish-desc">Хачапурии гирд бо ду қабати панири сулугунӣ дар дарун ва боло</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Фокачча бо розмарин / Нони сирпиёздор</span>
+                  <span class="dish-weight">220g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">25 TJS</span>
+              </div>
+              <div class="dish-desc">Нони ҳавоии итолиёвӣ бо намаки баҳрӣ, розмарин ва равғани зайтун</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Сабади нонҳои «Анзур»</span>
+                  <span class="dish-weight">300g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">20 TJS</span>
+              </div>
+              <div class="dish-desc">Маҷмӯаи нонҳои навпахта: кулчаи танӯрӣ, фокачча, нони сиёҳ бо равғани маска</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Гарнирҳои рӯи оташ & Сабзавотӣ</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Сабзавоти пухта дар Josper</span>
+                  <span class="dish-weight">250g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">55 TJS</span>
+              </div>
+              <div class="dish-desc">Кадуча, бодимҷон, қаланфур, помидор ва занбӯруғ бо равғани хушбӯй</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Занбӯруғҳои рӯи ангишт бо панир</span>
+                  <span class="dish-weight">200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">35 TJS</span>
+              </div>
+              <div class="dish-desc">Занбӯруғҳои тару тоза дар ангишт бо панири гудохташуда</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Маккаҷувори дар грил бо паприка</span>
+                  <span class="dish-weight">200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">30 TJS</span>
+              </div>
+              <div class="dish-desc">Маккаҷувории ширин бо равғани маска ва қаланфури хушбӯй</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Картошка бо розмарин / Пюре / Фри</span>
+                  <span class="dish-weight">200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">18 / 25 / 17 TJS</span>
+              </div>
+              <div class="dish-desc">Картошкаи хурди пухта бо намаки баҳрӣ ва розмарин ё пюреи мулоим бо қаймоқ</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Хоспер & Стейкҳои аълосифат</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Стейки Рибай Prime</span>
+                  <span class="dish-weight">350g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">380 TJS</span>
+              </div>
+              <div class="dish-desc">Гӯшти мармарии гов бо парвариши ғалладонагӣ, дар танӯри испании Josper дар рӯи ангишт пухта мешавад</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Стейки Томагавк бо устухон</span>
+                  <span class="dish-weight">1000g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">350 TJS</span>
+              </div>
+              <div class="dish-desc">Стейки калон дар қабурғаи дароз барои якчанд нафар, бо розмарин ва соуси чимичурри</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Стейки хосаи Bijo</span>
+                  <span class="dish-weight">280g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">250 TJS</span>
+              </div>
+              <div class="dish-desc">Гӯшти мулоими лаҳм бо маринади махсуси мурчӣ ва равғани трюфел</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Стейки Т-Бон Josper</span>
+                  <span class="dish-weight">450g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">175 TJS</span>
+              </div>
+              <div class="dish-desc">Ҳамоҳангии комили гӯшти стриплойн ва лаҳм дар устухони Т-монанд</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Моҳии рӯи грил & Маҳсулоти баҳрӣ</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Стейки моҳии Лосось бо икраи сурх</span>
+                  <span class="dish-weight">260g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">230 TJS</span>
+              </div>
+              <div class="dish-desc">Лососи норвегӣ дар ангишт, соуси қаймоқӣ бо икра ва морчӯба</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Моҳии Сибас дар ангишт</span>
+                  <span class="dish-weight">400g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">385 TJS</span>
+              </div>
+              <div class="dish-desc">Моҳии баҳри миёназамин бо лимӯ ва гиёҳҳои хушбӯй дар оташ</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Моҳии Дорадо дар грил</span>
+                  <span class="dish-weight">400g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">375 TJS</span>
+              </div>
+              <div class="dish-desc">Моҳии хуштаъми дорадо дар рӯи оташ бо сирпиёз ва соуси норанҷ</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Суши, Роллҳо & Маҷмӯаҳо</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Сетти бузурги «Анзур» (32 дона)</span>
+                  <span class="dish-weight">950g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">789 TJS</span>
+              </div>
+              <div class="dish-desc">Сетти боҳашамат: Филаделфия, Калифорния бо харчанг, Канада бо мормоҳӣ ва роллҳои гарм</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Ролли Канада бо мормоҳӣ</span>
+                  <span class="dish-weight">250g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">95 TJS</span>
+              </div>
+              <div class="dish-desc">Мормоҳии дуддодаи унаги, панири қаймоқӣ, авокадо, бодиринг ва кунҷид</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Ролли Филаделфия Премиум</span>
+                  <span class="dish-weight">240g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">69 TJS</span>
+              </div>
+              <div class="dish-desc">Қабати ғализи лососи тару тоза, панири креметте, авокадо ва бодиринг</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Ролли Калифорния бо харчанг</span>
+                  <span class="dish-weight">230g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">79 TJS</span>
+              </div>
+              <div class="dish-desc">Гӯшти харчанги барфӣ, майонези ҷопонӣ, авокадо ва икраи моҳии тобико</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Шашликҳо дар ангишт & Кабобҳо</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Ассортии калони шашликҳо барои 5 нафар</span>
+                  <span class="dish-weight">1200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">449 TJS</span>
+              </div>
+              <div class="dish-desc">Наполеон, рулети гӯштӣ, гӯшти барра, люля-кабоб, нонҳои гарм ва соусҳо</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Шашлики хосаи «Наполеон»</span>
+                  <span class="dish-weight">180g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">48 TJS</span>
+              </div>
+              <div class="dish-desc">Шашлики машҳур: қабатҳои тунуки лаҳми гов бо дунбаи хуштаъм ва зира</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Шашлики Рулет аз гӯшти гов</span>
+                  <span class="dish-weight">180g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">46 TJS</span>
+              </div>
+              <div class="dish-desc">Лаҳми кӯфташудаи гов бо гиёҳҳои хушбӯй ва дунбаи тунук дар шакли рулет</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Шашлик аз гӯшти гӯсфанд / Люля</span>
+                  <span class="dish-weight">180g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">55 / 38 TJS</span>
+              </div>
+              <div class="dish-desc">Гӯшти барраи кӯҳӣ бо оби пиёз ва кашнич дар рӯи ангишт пухташуда</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Таомҳои рӯи оташ & Мурғӣ</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Ассортии рӯи оташ барои 4 нафар</span>
+                  <span class="dish-weight">1100g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">435 TJS</span>
+              </div>
+              <div class="dish-desc">Ҷӯҷаи табака, бедона дар грил, шашлики гову гӯсфанд, сабзавоти пухта ва соусҳо</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Гулмоҳии кӯҳӣ дар оташ (1 кг)</span>
+                  <span class="dish-weight">1000g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">185 TJS</span>
+              </div>
+              <div class="dish-desc">Гулмоҳии тозаи дарёӣ дар ангишт бо равғани маска, розмарин ва донаҳои анор</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Ҷӯҷаи табака дар ангишт</span>
+                  <span class="dish-weight">500g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">90 TJS</span>
+              </div>
+              <div class="dish-desc">Ҷӯҷаи табиӣ зери фишори оҳан дар ангишт бо сирпиёз ва пӯсти қаҳваранг</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Бедонаи пухта дар оташ (1 дона)</span>
+                  <span class="dish-weight">150g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">85 TJS</span>
+              </div>
+              <div class="dish-desc">Бедонаи мулоим бо асал ва хардал дар оташи ангишт пухташуда</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Оши палави «Анзур»</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Оши палави «Анзур» аз гӯшти гов</span>
+                  <span class="dish-weight">250g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">55 TJS</span>
+              </div>
+              <div class="dish-desc">Оши суннатии ҷашнӣ: гӯшти гов, биринҷи лазер, зардии ширин, нахӯд ва мавиз</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Деги чойхонагии палав (1 кг)</span>
+                  <span class="dish-weight">1000g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">475 TJS</span>
+              </div>
+              <div class="dish-desc">Деги калони ҷашнӣ барои 4–5 нафар бо сирпиёз, тухми бедона ва қазӣ</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Хӯриши Шакароб (Ачик-чучук)</span>
+                  <span class="dish-weight">180g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">18 TJS</span>
+              </div>
+              <div class="dish-desc">Помидорҳои борик буридашуда, пиёзи ширин, қаланфури тез ва райҳон</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Кулчаи танӯрии гарм</span>
+                  <span class="dish-weight">150g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">6 TJS</span>
+              </div>
+              <div class="dish-desc">Нони суннатии тоҷикӣ аз танӯри гилин бо кунҷид</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Таомҳои миллии гӯштӣ</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Қазон-кабоб (гов / гӯсфанд)</span>
+                  <span class="dish-weight">380g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">95 / 100 TJS</span>
+              </div>
+              <div class="dish-desc">Гӯшти мулоими бирён бо картошкаи тиллоӣ, зира ва пиёз дар деги чуянӣ</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Қайлаи хонагӣ (гов / гӯсфанд)</span>
+                  <span class="dish-weight">380g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">90 / 95 TJS</span>
+              </div>
+              <div class="dish-desc">Хӯроки ғализи суннатии дерина бо гӯшт, сабзавот ва бӯи хуши зира</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Қабурғаҳои хурди гӯсфандӣ</span>
+                  <span class="dish-weight">280g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">79 TJS</span>
+              </div>
+              <div class="dish-desc">Қабурғаҳои хурди тунуки барра бо бӯи оташ, пиёзи ширин ва сумоқ</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Меваҳо & Яхмоси хонагӣ</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Вазаи меваҳои «Гранд Анзур» (3 қабат)</span>
+                  <span class="dish-weight">2200g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">350 TJS</span>
+              </div>
+              <div class="dish-desc">Ананаси пухта, ангури ширин, меваҳои ситрусӣ, анор, киви ва банан дар вазаи булӯрин</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Лаълии меваҳои мавсимӣ</span>
+                  <span class="dish-weight">800g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">165 TJS</span>
+              </div>
+              <div class="dish-desc">Омехтаи ширини меваҳо ва буттамеваҳои мавсимӣ барои чой ва нӯшокиҳо</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Яхмоси хонагӣ (1 дона)</span>
+                  <span class="dish-weight">50g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">11 TJS</span>
+              </div>
+              <div class="dish-desc">Яхмоси табиӣ аз шири тоза: қаймоқӣ, шоколадӣ, пистагӣ ва қулфинай</div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="menu-category-block">
+          <h2 class="cat-title">Шириниҳои муаллифӣ</h2>
+          <div class="dish-list">
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Чизкейки дубайии шоколадӣ</span>
+                  <span class="dish-weight">190g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">99 TJS</span>
+              </div>
+              <div class="dish-desc">Хамири қад-қади катаифӣ, хамираи пистагӣ, шоколади белгиягӣ ва панири қаймоқӣ</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Чизкейки Сан-Себастян</span>
+                  <span class="dish-weight">180g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">52 TJS</span>
+              </div>
+              <div class="dish-desc">Чизкейки машҳури баскӣ бо дили қаймоқӣ ва соуси гарми шоколад</div>
+            </div>
+            
+            <div class="dish-row">
+              <div class="dish-head">
+                <div class="dish-name-wrap">
+                  <span class="dish-name">Рулети меренгагӣ бо малина</span>
+                  <span class="dish-weight">160g</span>
+                </div>
+                <div class="dish-dots"></div>
+                <span class="dish-price">58 TJS</span>
+              </div>
+              <div class="dish-desc">Безеи ҳавоӣ, панири қаймоқии маскарпоне ва малинаи тару тозаи кӯҳӣ</div>
+            </div>
+            </div>
+        </div>
+        
+    </main>
+
+    <footer class="menu-footer">
+      <p>Хизматрасонӣ 12% · Нархҳо бо сомонӣ</p>
+      <p style="margin-top:0.4rem;">© 2026 Anzur Restaurant. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>
