@@ -945,7 +945,7 @@
       position: absolute;
       top: 1.5rem;
       right: 1.5rem;
-      z-index: 12010;
+      z-index: 12050;
       background: rgba(18, 14, 10, 0.85);
       border: 1px solid var(--gold);
       color: var(--gold);
@@ -960,6 +960,7 @@
       line-height: 1;
       transition: all 0.2s ease;
       backdrop-filter: blur(8px);
+      pointer-events: auto;
     }
     .menu-modal-close-btn:hover {
       background: var(--gold);
@@ -2472,12 +2473,7 @@
        CLEAN MENU VIEWER (PAGES + ARROWS ONLY)
        ========================================================================== -->
   <div id="menu-modal" class="menu-modal-overlay" role="dialog" aria-modal="true" aria-label="Меню ресторана Анзур" onclick="handleMenuOverlayClick(event)">
-    <div class="menu-modal-top-bar" onclick="event.stopPropagation()">
-      <button type="button" class="menu-switch-text-btn" onclick="openTextMenuFromPhoto()" title="Текстовое меню с ценами">
-        <span>📄</span> <span data-i18n="menu_switch_to_text">Текст и цены</span>
-      </button>
-      <button type="button" class="menu-modal-close-btn" style="position:static;" onclick="closeMenuModal()" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
-    </div>
+    <button type="button" class="menu-modal-close-btn" onclick="closeMenuModal(event)" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
     <div class="menu-lightbox-stage" id="modalMenuStage" onclick="event.stopPropagation()">
       <button type="button" class="menu-stage-arrow prev" onclick="prevModalMenuPage()" title="Предыдущая страница" aria-label="Предыдущая страница">‹</button>
       <img id="modalMenuCurrentImg" src="menu_pages_web/menu_page_01.jpg" alt="Меню ресторана Анзур" class="menu-page-display" />
@@ -2510,7 +2506,7 @@
           <a id="textMenuPrintLink" href="menu_en.html" target="_blank" class="text-menu-print-btn" title="Версия для печати / Print">
             🖨️
           </a>
-          <button type="button" class="text-menu-close" onclick="closeTextMenuModal()" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
+          <button type="button" class="text-menu-close" onclick="closeTextMenuModal(event)" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
         </div>
       </div>
 
@@ -2546,7 +2542,7 @@
         <button type="button" class="spaces-filter-tab" data-cat="veranda" onclick="filterSpacesGallery('veranda')">Веранда (4)</button>
         <button type="button" class="spaces-filter-tab" data-cat="karaoke" onclick="filterSpacesGallery('karaoke')">Караоке (2)</button>
       </div>
-      <button type="button" class="menu-modal-close-btn" style="position:static;" onclick="closeSpacesModal()" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
+      <button type="button" class="menu-modal-close-btn" style="position:static;" onclick="closeSpacesModal(event)" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
     </div>
     <div class="menu-lightbox-stage" id="modalSpacesStage" onclick="event.stopPropagation()">
       <button type="button" class="menu-stage-arrow prev" onclick="prevSpacesPage()" title="Предыдущее фото" aria-label="Предыдущее фото">‹</button>
@@ -3489,7 +3485,11 @@ let currentSlideIdx = 0;
       }
     }
 
-    function closeMenuModal() {
+    function closeMenuModal(e) {
+      if (e) {
+        if (typeof e.stopPropagation === 'function') e.stopPropagation();
+        if (typeof e.preventDefault === 'function') e.preventDefault();
+      }
       const modal = document.getElementById('menu-modal');
       if (modal) {
         modal.classList.remove('is-open');
@@ -3503,8 +3503,8 @@ let currentSlideIdx = 0;
     }
 
     function handleMenuOverlayClick(e) {
-      if (e.target && e.target.id === 'menu-modal') {
-        closeMenuModal();
+      if (e && e.target && (e.target.id === 'menu-modal' || e.target.classList.contains('menu-modal-overlay'))) {
+        closeMenuModal(e);
       }
     }
 
@@ -3528,7 +3528,11 @@ let currentSlideIdx = 0;
       }
     }
 
-    function closeTextMenuModal() {
+    function closeTextMenuModal(e) {
+      if (e) {
+        if (typeof e.stopPropagation === 'function') e.stopPropagation();
+        if (typeof e.preventDefault === 'function') e.preventDefault();
+      }
       const modal = document.getElementById('text-menu-modal');
       if (modal) {
         modal.classList.remove('is-open');
@@ -3542,8 +3546,8 @@ let currentSlideIdx = 0;
     }
 
     function handleTextMenuOverlayClick(e) {
-      if (e.target && e.target.id === 'text-menu-modal') {
-        closeTextMenuModal();
+      if (e && e.target && (e.target.id === 'text-menu-modal' || e.target.classList.contains('text-menu-overlay'))) {
+        closeTextMenuModal(e);
       }
     }
 
@@ -3847,7 +3851,11 @@ let currentSlideIdx = 0;
       });
     }
 
-    function closeSpacesModal() {
+    function closeSpacesModal(e) {
+      if (e) {
+        if (typeof e.stopPropagation === 'function') e.stopPropagation();
+        if (typeof e.preventDefault === 'function') e.preventDefault();
+      }
       const modal = document.getElementById('spaces-modal');
       if (modal) {
         modal.classList.remove('is-open');
@@ -3861,8 +3869,8 @@ let currentSlideIdx = 0;
     }
 
     function handleSpacesOverlayClick(e) {
-      if (e.target && e.target.id === 'spaces-modal') {
-        closeSpacesModal();
+      if (e && e.target && (e.target.id === 'spaces-modal' || e.target.classList.contains('menu-modal-overlay'))) {
+        closeSpacesModal(e);
       }
     }
 
