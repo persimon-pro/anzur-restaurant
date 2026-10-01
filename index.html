@@ -369,7 +369,8 @@
       background: #060504;
       pointer-events: none;
     }
-    .hero-backdrop-media {
+    .hero-backdrop-media,
+    .hero-backdrop-media img {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -2015,7 +2016,10 @@
        ========================================================================== -->
   <header class="hero">
     <div class="hero-backdrop">
-      <img src="zastavka.gif" alt="Заставка ресторана Анзур" class="hero-backdrop-media" />
+      <picture class="hero-backdrop-media">
+        <source srcset="zastavka.webp" type="image/webp">
+        <img src="zastavka.gif" alt="Заставка ресторана Анзур" class="hero-backdrop-media" />
+      </picture>
       <div class="hero-backdrop-overlay"></div>
     </div>
 
