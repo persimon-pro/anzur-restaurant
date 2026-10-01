@@ -989,7 +989,7 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(14, 11, 8, 0.88);
+      background: rgba(14, 11, 8, 0.92);
       border: 1px solid var(--gold);
       color: var(--gold);
       width: 52px;
@@ -1002,10 +1002,11 @@
       font-size: 2rem;
       line-height: 1;
       transition: all 0.2s ease;
-      z-index: 10;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      z-index: 12060;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
       user-select: none;
+      pointer-events: auto;
     }
     .menu-stage-arrow:hover {
       background: var(--gold);
@@ -1013,19 +1014,37 @@
       transform: translateY(-50%) scale(1.1);
     }
     .menu-stage-arrow.prev {
-      left: -28px;
+      left: 1.2rem;
     }
     .menu-stage-arrow.next {
-      right: -28px;
+      right: 1.2rem;
+    }
+    .spaces-stage-counter {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(14, 11, 8, 0.88);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      color: var(--gold);
+      padding: 0.3rem 0.85rem;
+      border-radius: 14px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      pointer-events: none;
+      user-select: none;
+      z-index: 12060;
+      backdrop-filter: blur(6px);
     }
     @media (max-width: 900px) {
-      .menu-stage-arrow.prev { left: 8px; }
-      .menu-stage-arrow.next { right: 8px; }
+      .menu-stage-arrow.prev { left: 0.5rem; }
+      .menu-stage-arrow.next { right: 0.5rem; }
       .menu-stage-arrow {
         width: 44px;
         height: 44px;
         font-size: 1.5rem;
-        background: rgba(8, 6, 4, 0.92);
+        background: rgba(8, 6, 4, 0.95);
       }
       .menu-modal-close-btn {
         top: 1rem;
@@ -2209,11 +2228,11 @@
     <!-- 1. Главный зал -->
     <div class="space-box" onclick="openSpacesCategory('main_hall')" style="cursor:pointer;" title="Смотреть фотографии Главного зала">
       <div class="space-media">
-        <img src="location_photos/main_hall_07.jpg" alt="Главный ресторанный зал Анзур" loading="lazy" />
+        <img src="location_photos/main_hall_07.jpg" alt="Главный зал Анзур" loading="lazy" />
       </div>
       <div class="space-text">
         <span class="mono-label" data-i18n="space1_badge">ДО 250 ГОСТЕЙ · ЖИВАЯ МУЗЫКА</span>
-        <h3 class="space-title" data-i18n="space1_title">Главный ресторанный зал</h3>
+        <h3 class="space-title" data-i18n="space1_title">Главный зал</h3>
         <p class="space-desc" data-i18n="space1_desc">
           Атмосферный восточный зал с резными орнаментами ручной работы, мягкими диванами, концертной сценой и танцполом для торжеств.
         </p>
@@ -2266,7 +2285,7 @@
       <!-- Card 1: Живая музыка -->
       <article class="event-card">
         <div class="event-media">
-          <img src="real_live_music.jpg" alt="Живая музыка в ресторане Анзур" loading="lazy" />
+          <img src="events_live_music.jpg" alt="Живая музыка в ресторане Анзур" loading="lazy" />
         </div>
         <div class="event-body">
           <h3 class="event-title" data-i18n="ev1_title">Живая Музыка</h3>
@@ -2279,7 +2298,7 @@
       <!-- Card 2: Шоу-балет -->
       <article class="event-card">
         <div class="event-media">
-          <img src="gen_show_ballet.jpg" alt="Шоу-балет в ресторане Анзур" loading="lazy" />
+          <img src="events_show_ballet.jpg" alt="Шоу-балет в национальных костюмах в ресторане Анзур" loading="lazy" />
         </div>
         <div class="event-body">
           <h3 class="event-title" data-i18n="ev2_title">Шоу-балет</h3>
@@ -2292,7 +2311,7 @@
       <!-- Card 3: Концерты звёзд -->
       <article class="event-card">
         <div class="event-media">
-          <img src="real_star_concert.jpg" alt="Концерты звёзд в ресторане Анзур" loading="lazy" />
+          <img src="events_star_concert.jpg" alt="Концерты звёзд в ресторане Анзур" loading="lazy" />
         </div>
         <div class="event-body">
           <h3 class="event-title" data-i18n="ev3_title">Концерты Звёзд</h3>
@@ -2408,7 +2427,7 @@
       <div class="footer-col">
         <h4 class="footer-col-title" data-i18n="footer_col_spaces">Залы & Форматы</h4>
         <ul class="footer-links">
-          <li><a href="#spaces">Главный ресторанный зал</a></li>
+          <li><a href="#spaces">Главный зал</a></li>
           <li><a href="#spaces">VIP-кабины с караоке</a></li>
           <li><a href="#spaces">Летняя терраса</a></li>
           <li><a href="#spaces">Тихая веранда</a></li>
@@ -2475,9 +2494,9 @@
   <div id="menu-modal" class="menu-modal-overlay" role="dialog" aria-modal="true" aria-label="Меню ресторана Анзур" onclick="handleMenuOverlayClick(event)">
     <button type="button" class="menu-modal-close-btn" onclick="closeMenuModal(event)" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
     <div class="menu-lightbox-stage" id="modalMenuStage" onclick="event.stopPropagation()">
-      <button type="button" class="menu-stage-arrow prev" onclick="prevModalMenuPage()" title="Предыдущая страница" aria-label="Предыдущая страница">‹</button>
+      <button type="button" class="menu-stage-arrow prev" onclick="prevModalMenuPage(event)" title="Предыдущая страница" aria-label="Предыдущая страница">‹</button>
       <img id="modalMenuCurrentImg" src="menu_pages_web/menu_page_01.jpg" alt="Меню ресторана Анзур" class="menu-page-display" />
-      <button type="button" class="menu-stage-arrow next" onclick="nextModalMenuPage()" title="Следующая страница" aria-label="Следующая страница">›</button>
+      <button type="button" class="menu-stage-arrow next" onclick="nextModalMenuPage(event)" title="Следующая страница" aria-label="Следующая страница">›</button>
     </div>
   </div>
 
@@ -2525,19 +2544,12 @@
        CLEAN LOCATIONS VIEWER (PHOTOS + ARROWS ONLY)
        ========================================================================== -->
   <div id="spaces-modal" class="menu-modal-overlay" role="dialog" aria-modal="true" aria-label="Фотографии локаций ресторана Анзур" onclick="handleSpacesOverlayClick(event)">
-    <div class="menu-modal-top-bar" onclick="event.stopPropagation()">
-      <div class="spaces-modal-filter-tabs">
-        <button type="button" class="spaces-filter-tab is-active" data-cat="all" onclick="filterSpacesGallery('all')">Все фото (18)</button>
-        <button type="button" class="spaces-filter-tab" data-cat="main_hall" onclick="filterSpacesGallery('main_hall')">Главный зал (12)</button>
-        <button type="button" class="spaces-filter-tab" data-cat="veranda" onclick="filterSpacesGallery('veranda')">Веранда (4)</button>
-        <button type="button" class="spaces-filter-tab" data-cat="karaoke" onclick="filterSpacesGallery('karaoke')">Караоке (2)</button>
-      </div>
-      <button type="button" class="menu-modal-close-btn" style="position:static;" onclick="closeSpacesModal(event)" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
-    </div>
+    <button type="button" class="menu-modal-close-btn" onclick="closeSpacesModal(event)" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
     <div class="menu-lightbox-stage" id="modalSpacesStage" onclick="event.stopPropagation()">
-      <button type="button" class="menu-stage-arrow prev" onclick="prevSpacesPage()" title="Предыдущее фото" aria-label="Предыдущее фото">‹</button>
+      <button type="button" class="menu-stage-arrow prev" onclick="prevSpacesPage(event)" title="Предыдущее фото" aria-label="Предыдущее фото">‹</button>
       <img id="modalSpacesCurrentImg" src="location_photos/main_hall_07.jpg" alt="Локация ресторана Анзур" class="menu-page-display" />
-      <button type="button" class="menu-stage-arrow next" onclick="nextSpacesPage()" title="Следующее фото" aria-label="Следующее фото">›</button>
+      <button type="button" class="menu-stage-arrow next" onclick="nextSpacesPage(event)" title="Следующее фото" aria-label="Следующее фото">›</button>
+      <div id="modalSpacesCounter" class="spaces-stage-counter">1 / 18</div>
     </div>
   </div>
 
@@ -2602,7 +2614,7 @@
     spaces_photos_btn: "ФОТОГРАФИИ ЛОКАЦИЙ",
     spaces_mono: "[ ПРИВАТНОСТЬ И ЗВУК ]",
     space1_badge: "ДО 250 ГОСТЕЙ · ЖИВАЯ МУЗЫКА",
-    space1_title: "Главный ресторанный зал",
+    space1_title: "Главный зал",
     space1_desc: "Атмосферный восточный зал с резными орнаментами ручной работы, мягкими диванами, концертной сценой и танцполом для торжеств.",
     space2_badge: "СВЕЖИЙ ВОЗДУХ & УЮТ",
     space2_title: "Летняя веранда",
@@ -2667,7 +2679,7 @@
     footer_col_spaces: "Залы & Форматы",
     footer_col_contacts: "Контакты",
     footer_banquets: "Банкеты и корпоративы",
-    footer_main_hall: "Главный ресторанный зал",
+    footer_main_hall: "Главный зал",
     footer_rights: "© 2026 Ресторан «Анзур». Все права защищены.",
     footer_dev: "Разработка сайта — ",
     wa_dock: "НАПИШИТЕ НАМ",
@@ -2711,7 +2723,7 @@
     spaces_photos_btn: "АКСҲОИ ТОЛОРҲО",
     spaces_mono: "[ МАХФИЯТ ВА САДО ]",
     space1_badge: "ТО 250 НАФАР · МУСИҚИИ ЗИНДА",
-    space1_title: "Толори асосии ресторан",
+    space1_title: "Толори асосӣ",
     space1_desc: "Толори барҳаво бо кандакории миллии дастӣ, диванҳои мулоим, саҳнаи консертӣ ва мусиқии зинда барои ҷашну шодиҳо.",
     space2_badge: "ҲАВОИ ТОЗА ВА ОРОМӢ",
     space2_title: "Верандаи тобистона",
@@ -2768,7 +2780,7 @@
     footer_col_spaces: "Толорҳо & Фазоҳо",
     footer_col_contacts: "Тамос",
     footer_banquets: "Зиёфатҳо ва чорабиниҳо",
-    footer_main_hall: "Толори асосии ресторан",
+    footer_main_hall: "Толори асосӣ",
     footer_rights: "© 2026 Ресторани «Анзур». Ҳамаи ҳуқуқҳо маҳфузанд.",
     footer_dev: "Таҳияи сомона — ",
     wa_dock: "БА МО НАВИСЕД",
@@ -2812,7 +2824,7 @@
     spaces_photos_btn: "LOCATION PHOTOS",
     spaces_mono: "[ PRIVACY & ACOUSTICS ]",
     space1_badge: "UP TO 250 GUESTS · LIVE STAGE",
-    space1_title: "Main Dining Hall",
+    space1_title: "Main Hall",
     space1_desc: "Atmospheric oriental hall featuring handcrafted carvings, plush velvet seating, live concert stage, and dance floor.",
     space2_badge: "OPEN AIR & SERENITY",
     space2_title: "Summer Veranda",
@@ -2869,7 +2881,7 @@
     footer_col_spaces: "Spaces & Formats",
     footer_col_contacts: "Contacts",
     footer_banquets: "Banquets & Corporate Events",
-    footer_main_hall: "Main Dining Hall",
+    footer_main_hall: "Main Hall",
     footer_rights: "© 2026 Anzur Restaurant. All rights reserved.",
     footer_dev: "Website by — ",
     wa_dock: "MESSAGE US",
@@ -2913,7 +2925,7 @@
     spaces_photos_btn: "空间实景相册",
     spaces_mono: "[ 私密与原声 ]",
     space1_badge: "容纳250位宾客 · 现场舞台",
-    space1_title: "主餐厅金色大厅",
+    space1_title: "主大厅",
     space1_desc: "恢弘典雅的中亚艺术殿堂：传统手工精雕石膏纹饰、舒适沙发座、现场音乐大舞台与欢聚舞池。",
     space2_badge: "露天绿洲 · 舒适惬意",
     space2_title: "夏日微风走廊",
@@ -2970,7 +2982,7 @@
     footer_col_spaces: "空间与格局",
     footer_col_contacts: "联系与信息",
     footer_banquets: "宴会与企业活动",
-    footer_main_hall: "主餐饮大厅",
+    footer_main_hall: "主大厅",
     footer_rights: "© 2026 安祖尔餐厅 (ANZUR). 版权所有.",
     footer_dev: "网站开发 — ",
     wa_dock: "在线咨询",
@@ -3723,11 +3735,19 @@ let currentSlideIdx = 0;
       }
     }
 
-    function prevModalMenuPage() {
+    function prevModalMenuPage(e) {
+      if (e) {
+        if (typeof e.stopPropagation === 'function') e.stopPropagation();
+        if (typeof e.preventDefault === 'function') e.preventDefault();
+      }
       setModalMenuPage(currentModalMenuPage > 1 ? currentModalMenuPage - 1 : TOTAL_MODAL_MENU_PAGES);
     }
 
-    function nextModalMenuPage() {
+    function nextModalMenuPage(e) {
+      if (e) {
+        if (typeof e.stopPropagation === 'function') e.stopPropagation();
+        if (typeof e.preventDefault === 'function') e.preventDefault();
+      }
       setModalMenuPage(currentModalMenuPage < TOTAL_MODAL_MENU_PAGES ? currentModalMenuPage + 1 : 1);
     }
 
@@ -3780,58 +3800,32 @@ let currentSlideIdx = 0;
       ]
     };
 
-    let currentSpacesCategory = 'all';
-    let currentSpacesList = [
+    const ALL_SPACES_PHOTOS = [
       ...SPACES_DATA.main_hall,
       ...SPACES_DATA.veranda,
       ...SPACES_DATA.karaoke
     ];
+
+    let currentSpacesList = ALL_SPACES_PHOTOS;
     let currentSpacesIndex = 0;
 
-    function getSpacesList(cat) {
-      if (cat === 'main_hall') return SPACES_DATA.main_hall;
-      if (cat === 'veranda') return SPACES_DATA.veranda;
-      if (cat === 'karaoke') return SPACES_DATA.karaoke;
-      return [
-        ...SPACES_DATA.main_hall,
-        ...SPACES_DATA.veranda,
-        ...SPACES_DATA.karaoke
-      ];
+    function openSpacesCategory(cat) {
+      let startIndex = 0;
+      if (cat === 'veranda') startIndex = 12;
+      else if (cat === 'karaoke') startIndex = 16;
+      else startIndex = 0;
+      openSpacesModal(startIndex);
     }
 
-    function openSpacesModal(cat, index) {
-      currentSpacesCategory = (cat && typeof cat === 'string') ? cat : 'all';
-      currentSpacesList = getSpacesList(currentSpacesCategory);
+    function openSpacesModal(index) {
+      currentSpacesList = ALL_SPACES_PHOTOS;
       currentSpacesIndex = (typeof index === 'number' && index >= 0 && index < currentSpacesList.length) ? index : 0;
-      updateSpacesFilterTabsUI();
       setSpacesPhoto(currentSpacesIndex);
       const modal = document.getElementById('spaces-modal');
       if (modal) {
         modal.classList.add('is-open');
         document.body.style.overflow = 'hidden';
       }
-    }
-
-    function openSpacesCategory(cat) {
-      openSpacesModal(cat, 0);
-    }
-
-    function filterSpacesGallery(cat) {
-      currentSpacesCategory = cat;
-      currentSpacesList = getSpacesList(cat);
-      currentSpacesIndex = 0;
-      updateSpacesFilterTabsUI();
-      setSpacesPhoto(currentSpacesIndex);
-    }
-
-    function updateSpacesFilterTabsUI() {
-      document.querySelectorAll('.spaces-filter-tab').forEach(tab => {
-        if (tab.getAttribute('data-cat') === currentSpacesCategory) {
-          tab.classList.add('is-active');
-        } else {
-          tab.classList.remove('is-active');
-        }
-      });
     }
 
     function closeSpacesModal(e) {
@@ -3866,13 +3860,25 @@ let currentSlideIdx = 0;
       if (img) {
         img.src = currentSpacesList[currentSpacesIndex];
       }
+      const counter = document.getElementById('modalSpacesCounter');
+      if (counter) {
+        counter.textContent = `${currentSpacesIndex + 1} / ${currentSpacesList.length}`;
+      }
     }
 
-    function prevSpacesPage() {
+    function prevSpacesPage(e) {
+      if (e) {
+        if (typeof e.stopPropagation === 'function') e.stopPropagation();
+        if (typeof e.preventDefault === 'function') e.preventDefault();
+      }
       setSpacesPhoto(currentSpacesIndex - 1);
     }
 
-    function nextSpacesPage() {
+    function nextSpacesPage(e) {
+      if (e) {
+        if (typeof e.stopPropagation === 'function') e.stopPropagation();
+        if (typeof e.preventDefault === 'function') e.preventDefault();
+      }
       setSpacesPhoto(currentSpacesIndex + 1);
     }
 
