@@ -451,28 +451,29 @@
     }
 
     /* Table shape customizations matching blueprints */
-    #t-cell-1, #t-cell-2 {
+    #t-cell-1, #t-cell-2, #t-cell-3 {
       border-radius: 12px;
-      background: radial-gradient(circle at center, rgba(197, 160, 89, 0.12) 0%, rgba(20, 16, 11, 0.95) 100%);
-      box-shadow: inset 0 0 0 1px rgba(197, 160, 89, 0.35);
+      background: radial-gradient(circle at center, rgba(197, 160, 89, 0.18) 0%, rgba(26, 20, 14, 0.96) 100%);
+      box-shadow: inset 0 0 0 1px rgba(197, 160, 89, 0.45);
+      border-color: rgba(197, 160, 89, 0.55);
     }
     #t-cell-29 {
       border-radius: 14px;
       background: radial-gradient(circle at center, rgba(197, 160, 89, 0.16) 0%, rgba(26, 20, 14, 0.95) 100%);
       box-shadow: inset 0 0 0 1px rgba(197, 160, 89, 0.45);
     }
-    #t-cell-7, #t-cell-36 {
+    #t-cell-36 {
       transform: rotate(-20deg);
       transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
-    #t-cell-7:hover, #t-cell-36:hover {
+    #t-cell-36:hover {
       transform: rotate(-20deg) scale(1.06);
     }
-    #t-cell-8, #t-cell-21 {
+    #t-cell-21 {
       transform: rotate(20deg);
       transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
-    #t-cell-8:hover, #t-cell-21:hover {
+    #t-cell-21:hover {
       transform: rotate(20deg) scale(1.06);
     }
 
@@ -1061,23 +1062,21 @@
             <!-- Left & Center Tables Section -->
             <div style="flex:1; display:flex; flex-direction:column; justify-content:space-between; padding:0.4rem 0;">
               
-              <!-- Top Row (North wall): Tables 2, 3, 4, 5, 6, 7 -->
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <div style="display:flex; gap:1.2rem; align-items:center;">
-                  <div id="t-cell-2" style="width:90px; height:74px;"></div>
-                  <div id="t-cell-3" style="width:74px; height:66px;"></div>
-                  <div id="t-cell-4" style="width:66px; height:64px;"></div>
-                  <div id="t-cell-5" style="width:66px; height:64px;"></div>
-                  <div id="t-cell-6" style="width:74px; height:64px;"></div>
-                </div>
-                <div id="t-cell-7" style="width:70px; height:64px;"></div>
+              <!-- Top Row (North wall): VIP 2, VIP 3, Tables 4, 5, 6, 7 -->
+              <div style="display:flex; align-items:center; gap:0.8rem;">
+                <div id="t-cell-2" style="width:112px; height:86px;"></div>
+                <div id="t-cell-3" style="width:108px; height:86px;"></div>
+                <div id="t-cell-4" style="width:68px; height:66px; margin-left:0.4rem;"></div>
+                <div id="t-cell-5" style="width:68px; height:66px;"></div>
+                <div id="t-cell-6" style="width:72px; height:66px;"></div>
+                <div id="t-cell-7" style="width:72px; height:66px;"></div>
               </div>
 
-              <!-- Center Zone: Central Booths (11-16) and Front Tables (17-20) -->
-              <div style="display:flex; justify-content:space-around; align-items:center; gap:2rem; margin:1.5rem 0;">
+              <!-- Center Zone: Central Booths (11-16) and Front Tables (17-20) right next to each other -->
+              <div style="display:flex; align-items:center; justify-content:flex-start; gap:0.5rem; margin:1.5rem 0;">
                 
                 <!-- Central Booths: 11-16 -->
-                <div style="background:rgba(20, 16, 12, 0.7); border:1px solid rgba(197, 160, 89, 0.3); padding:1rem 1.2rem; border-radius:6px; box-shadow:0 4px 16px rgba(0,0,0,0.5);">
+                <div style="background:rgba(20, 16, 12, 0.75); border:1px solid rgba(197, 160, 89, 0.35); padding:1rem 1.1rem; border-radius:6px; box-shadow:0 4px 16px rgba(0,0,0,0.5); margin-left:2.5rem;">
                   <div style="display:grid; grid-template-columns:repeat(3, 76px); gap:0.75rem; margin-bottom:0.75rem;">
                     <div id="t-cell-12" style="height:58px;"></div>
                     <div id="t-cell-13" style="height:58px;"></div>
@@ -1090,8 +1089,8 @@
                   </div>
                 </div>
 
-                <!-- Stage Front Tables: 17, 18, 19, 20 -->
-                <div style="background:rgba(197, 160, 89, 0.06); border:1px solid rgba(197, 160, 89, 0.45); padding:1rem 1.2rem; border-radius:6px; box-shadow:0 4px 16px rgba(0,0,0,0.5);">
+                <!-- Stage Front Tables: 17, 18, 19, 20 directly adjacent to 11-16 -->
+                <div style="background:rgba(197, 160, 89, 0.08); border:1px solid rgba(197, 160, 89, 0.45); padding:1rem 1.1rem; border-radius:6px; box-shadow:0 4px 16px rgba(0,0,0,0.5);">
                   <div style="display:grid; grid-template-columns:repeat(2, 74px); gap:0.75rem; margin-bottom:0.75rem;">
                     <div id="t-cell-17" style="height:58px;"></div>
                     <div id="t-cell-19" style="height:58px;"></div>
@@ -1104,14 +1103,12 @@
 
               </div>
 
-              <!-- Bottom Row (South wall): Tables 1, 10, 9, 8 -->
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <div style="display:flex; gap:1.2rem; align-items:center;">
-                  <div id="t-cell-1" style="width:90px; height:74px;"></div>
-                  <div id="t-cell-10" style="width:74px; height:66px;"></div>
-                  <div id="t-cell-9" style="width:74px; height:64px;"></div>
-                </div>
-                <div id="t-cell-8" style="width:70px; height:64px;"></div>
+              <!-- Bottom Row (South wall): VIP 1, Tables 10, 9, 8 -->
+              <div style="display:flex; align-items:center; gap:0.8rem;">
+                <div id="t-cell-1" style="width:112px; height:86px;"></div>
+                <div id="t-cell-10" style="width:78px; height:66px; margin-left:2.5rem;"></div>
+                <div id="t-cell-9" style="width:78px; height:66px;"></div>
+                <div id="t-cell-8" style="width:78px; height:66px;"></div>
               </div>
 
             </div>
@@ -1407,9 +1404,9 @@
     // Table specifications from blueprint
     const BLUEPRINT_TABLES = [
       // 1-й ярус (1 - 20)
-      {id:"1", zone:"tier1", name:"Лаунж-диван 1", capacity:"6–8 чел", desc:"Уютная диванная лаунж-зона"},
-      {id:"2", zone:"tier1", name:"Лаунж-диван 2", capacity:"6–8 чел", desc:"Уютная диванная лаунж-зона"},
-      {id:"3", zone:"tier1", name:"Диванный стол 3", capacity:"4–6 чел", desc:"Комфортный диван у лестницы"},
+      {id:"1", zone:"tier1", name:"VIP Лаунж 1", capacity:"6–8 чел", desc:"Премиальный VIP-лаунж с мягкими диванами"},
+      {id:"2", zone:"tier1", name:"VIP Лаунж 2", capacity:"6–8 чел", desc:"Премиальный VIP-лаунж с мягкими диванами"},
+      {id:"3", zone:"tier1", name:"VIP Диван 3", capacity:"6–8 чел", desc:"Премиальный VIP-стол с мягкими диванами"},
       {id:"4", zone:"tier1", name:"Стол 4", capacity:"2–4 чел", desc:"Стол у северной стены"},
       {id:"5", zone:"tier1", name:"Стол 5", capacity:"2–4 чел", desc:"Стол у северной стены"},
       {id:"6", zone:"tier1", name:"Стол 6", capacity:"4–6 чел", desc:"Стол с диваном у стены"},
@@ -1530,6 +1527,10 @@
       const elVip = document.getElementById('i18n-zone-vip'); if (elVip) elVip.textContent = dict.zoneVip;
       const elFormTitle = document.getElementById('i18n-form-title'); if (elFormTitle) elFormTitle.textContent = dict.formTitle;
       const elFormSub = document.getElementById('i18n-form-sub'); if (elFormSub) elFormSub.textContent = dict.formSub;
+
+      if (tablesData && tablesData.length > 0) {
+        renderAllMapCells();
+      }
     }
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -1605,11 +1606,15 @@
       cell.className = `table-cell ${isFree ? 'is-free' : 'is-busy'} ${isSelected ? 'is-selected' : ''}`;
       cell.onclick = () => onTableClicked(table);
 
-      const statusText = isFree ? "Свободен" : (isManager && table.booking_info ? (table.booking_info.guest_name || "Занят") : "Занят");
+      const statusText = isFree ? (BOOKING_I18N[currentLang]?.free || "Свободен") : (isManager && table.booking_info ? (table.booking_info.guest_name || "Занят") : (BOOKING_I18N[currentLang]?.busy || "Занят"));
+
+      const isVipTier1 = (String(table.id) === "1" || String(table.id) === "2" || String(table.id) === "3");
+      const vipHeader = isVipTier1 ? `<div style="font-family:var(--font-mono); font-size:0.62rem; color:var(--gold); letter-spacing:0.18em; font-weight:800; line-height:1; margin-bottom:2px;">ВИП</div>` : '';
 
       cell.innerHTML = `
+        ${vipHeader}
         <div class="t-num">${table.id}</div>
-        <div class="t-cap">${table.capacity || '4 чел'}</div>
+        <div class="t-cap">${table.capacity || (isVipTier1 ? '6–8 чел' : '4 чел')}</div>
         <div class="t-status">${statusText}</div>
       `;
     }
