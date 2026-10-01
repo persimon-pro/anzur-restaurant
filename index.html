@@ -384,7 +384,9 @@
     .hero-backdrop-overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at center, rgba(6, 5, 4, 0.28) 0%, rgba(6, 5, 4, 0.65) 65%, rgba(6, 5, 4, 0.94) 100%);
+      background:
+        radial-gradient(ellipse at center, rgba(6, 5, 4, 0.60) 0%, rgba(6, 5, 4, 0.82) 65%, rgba(6, 5, 4, 0.96) 100%),
+        linear-gradient(to bottom, rgba(6, 5, 4, 0.70) 0%, rgba(6, 5, 4, 0.45) 45%, rgba(6, 5, 4, 0.90) 100%);
       pointer-events: none;
       z-index: 1;
     }
@@ -1071,6 +1073,53 @@
       background: var(--gold);
       color: #060504;
       transform: scale(1.05);
+    }
+
+    /* Filter tabs in spaces/locations modal */
+    .spaces-modal-filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 80vw;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .spaces-modal-filter-tabs::-webkit-scrollbar {
+      display: none;
+    }
+    .spaces-filter-tab {
+      background: rgba(18, 14, 10, 0.88);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: #ccc;
+      padding: 0.45rem 1rem;
+      border-radius: 20px;
+      font-size: 0.76rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .spaces-filter-tab:hover {
+      border-color: var(--gold);
+      color: #fff;
+    }
+    .spaces-filter-tab.is-active {
+      background: var(--gold);
+      color: #060504;
+      border-color: var(--gold);
+      font-weight: 600;
+    }
+    @media (max-width: 640px) {
+      .spaces-modal-filter-tabs {
+        gap: 0.35rem;
+      }
+      .spaces-filter-tab {
+        padding: 0.35rem 0.7rem;
+        font-size: 0.7rem;
+      }
     }
 
     /* ==========================================================================
@@ -2155,44 +2204,44 @@
   </section>
 
   <div class="spaces-grid">
-    <!-- VIP & Karaoke (merged) -->
-    <div class="space-box" onclick="openSpacesModal(0)" style="cursor:pointer;" title="Смотреть фотографии локаций">
+    <!-- 1. Главный зал -->
+    <div class="space-box" onclick="openSpacesCategory('main_hall')" style="cursor:pointer;" title="Смотреть фотографии Главного зала">
       <div class="space-media">
-        <img src="gen_vip.jpg" alt="VIP-кабины с караоке" loading="lazy" />
+        <img src="location_photos/main_hall_07.jpg" alt="Главный ресторанный зал Анзур" loading="lazy" />
       </div>
       <div class="space-text">
-        <span class="mono-label" data-i18n="space1_badge">6 – 25 ПЕРСОН · КАРАОКЕ</span>
-        <h3 class="space-title" data-i18n="space1_title">VIP-кабины</h3>
+        <span class="mono-label" data-i18n="space1_badge">ДО 250 ГОСТЕЙ · ЖИВАЯ МУЗЫКА</span>
+        <h3 class="space-title" data-i18n="space1_title">Главный ресторанный зал</h3>
         <p class="space-desc" data-i18n="space1_desc">
-          Приватные залы с профессиональной караоке-системой (аренда караоке от 500 TJS), клубным светом и премиальным звуком для закрытых вечеров.
+          Атмосферный восточный зал с резными орнаментами ручной работы, мягкими диванами, концертной сценой и танцполом для торжеств.
         </p>
       </div>
     </div>
 
-    <!-- Летняя терраса (Реальное фото) -->
-    <div class="space-box" onclick="openSpacesModal(0)" style="cursor:pointer;" title="Смотреть фотографии локаций">
+    <!-- 2. Веранда -->
+    <div class="space-box" onclick="openSpacesCategory('veranda')" style="cursor:pointer;" title="Смотреть фотографии Веранды">
       <div class="space-media">
-        <img src="location_photos/location_01.jpg" alt="Летняя терраса ресторана Анзур" loading="lazy" />
+        <img src="location_photos/veranda_01.jpg" alt="Летняя веранда ресторана Анзур" loading="lazy" />
       </div>
       <div class="space-text">
-        <span class="mono-label" data-i18n="space2_badge">ОТКРЫТЫЙ ВОЗДУХ</span>
-        <h3 class="space-title" data-i18n="space2_title">Летняя Терраса</h3>
+        <span class="mono-label" data-i18n="space2_badge">СВЕЖИЙ ВОЗДУХ & УЮТ</span>
+        <h3 class="space-title" data-i18n="space2_title">Летняя веранда</h3>
         <p class="space-desc" data-i18n="space2_desc">
-          Просторная терраса под кронами вековых деревьев с неоновой подсветкой фасада «Анзур», гирляндами огней и вечерней прохладой.
+          Уединённая зона на свежем воздухе под мягким светом парящих сфер и гирлянд — для семейных ужинов и спокойного отдыха.
         </p>
       </div>
     </div>
 
-    <!-- Тихая веранда (Реальное фото) -->
-    <div class="space-box" onclick="openSpacesModal(1)" style="cursor:pointer;" title="Смотреть фотографии локаций">
+    <!-- 3. Караоке -->
+    <div class="space-box" onclick="openSpacesCategory('karaoke')" style="cursor:pointer;" title="Смотреть фотографии Караоке">
       <div class="space-media">
-        <img src="location_photos/location_02.jpg" alt="Тихая веранда ресторана Анзур" loading="lazy" />
+        <img src="location_photos/karaoke_01.jpg" alt="VIP-кабины с караоке Анзур" loading="lazy" />
       </div>
       <div class="space-text">
-        <span class="mono-label" data-i18n="space3_badge">БЕЗ ГРОМКОЙ МУЗЫКИ</span>
-        <h3 class="space-title" data-i18n="space3_title">Тихая веранда</h3>
+        <span class="mono-label" data-i18n="space3_badge">6 – 25 ПЕРСОН · PRO KARAOKE</span>
+        <h3 class="space-title" data-i18n="space3_title">Караоке & VIP-кабины</h3>
         <p class="space-desc" data-i18n="space3_desc">
-          Красная ковровая дорожка, парящие световые сферы и уединённая зона отдыха вдали от сцены — для деловых встреч, семейных обедов и тех, кто ценит покой.
+          Двухуровневый приватный зал с массивным столом из слэба дерева, профессиональной акустикой, караоке и лаунж-зоной.
         </p>
       </div>
     </div>
@@ -2489,10 +2538,18 @@
        CLEAN LOCATIONS VIEWER (PHOTOS + ARROWS ONLY)
        ========================================================================== -->
   <div id="spaces-modal" class="menu-modal-overlay" role="dialog" aria-modal="true" aria-label="Фотографии локаций ресторана Анзур" onclick="handleSpacesOverlayClick(event)">
-    <button type="button" class="menu-modal-close-btn" onclick="closeSpacesModal()" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
+    <div class="menu-modal-top-bar" onclick="event.stopPropagation()">
+      <div class="spaces-modal-filter-tabs">
+        <button type="button" class="spaces-filter-tab is-active" data-cat="all" onclick="filterSpacesGallery('all')">Все фото (18)</button>
+        <button type="button" class="spaces-filter-tab" data-cat="main_hall" onclick="filterSpacesGallery('main_hall')">Главный зал (12)</button>
+        <button type="button" class="spaces-filter-tab" data-cat="veranda" onclick="filterSpacesGallery('veranda')">Веранда (4)</button>
+        <button type="button" class="spaces-filter-tab" data-cat="karaoke" onclick="filterSpacesGallery('karaoke')">Караоке (2)</button>
+      </div>
+      <button type="button" class="menu-modal-close-btn" style="position:static;" onclick="closeSpacesModal()" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
+    </div>
     <div class="menu-lightbox-stage" id="modalSpacesStage" onclick="event.stopPropagation()">
       <button type="button" class="menu-stage-arrow prev" onclick="prevSpacesPage()" title="Предыдущее фото" aria-label="Предыдущее фото">‹</button>
-      <img id="modalSpacesCurrentImg" src="location_photos/location_01.jpg" alt="Локация ресторана Анзур" class="menu-page-display" />
+      <img id="modalSpacesCurrentImg" src="location_photos/main_hall_07.jpg" alt="Локация ресторана Анзур" class="menu-page-display" />
       <button type="button" class="menu-stage-arrow next" onclick="nextSpacesPage()" title="Следующее фото" aria-label="Следующее фото">›</button>
     </div>
   </div>
@@ -2557,12 +2614,12 @@
     spaces_title: "Залы & <em>Форматы</em>",
     spaces_photos_btn: "ФОТОГРАФИИ ЛОКАЦИЙ",
     spaces_mono: "[ ПРИВАТНОСТЬ И ЗВУК ]",
-    space1_badge: "6 – 25 ПЕРСОН · КАРАОКЕ",
-    space1_title: "VIP-кабины",
-    space1_desc: "Приватные залы с профессиональной караоке-системой (аренда караоке от 500 TJS), клубным светом и премиальным звуком для закрытых вечеров.",
-    space2_badge: "ОТКРЫТЫЙ ВОЗДУХ",
-    space2_title: "Летняя Терраса",
-    space2_desc: "Просторная терраса под кронами вековых деревьев с неоновой подсветкой фасада «Анзур», гирляндами огней и вечерней прохладой.",
+    space1_badge: "ДО 250 ГОСТЕЙ · ЖИВАЯ МУЗЫКА",
+    space1_title: "Главный ресторанный зал",
+    space1_desc: "Атмосферный восточный зал с резными орнаментами ручной работы, мягкими диванами, концертной сценой и танцполом для торжеств.",
+    space2_badge: "СВЕЖИЙ ВОЗДУХ & УЮТ",
+    space2_title: "Летняя веранда",
+    space2_desc: "Уединённая зона на свежем воздухе под мягким светом парящих сфер и гирлянд — для семейных ужинов и спокойного отдыха.",
     atmo_mono: "[ РЕАЛЬНЫЕ ФОТОГРАФИИ · ВЕЧЕРНИЙ ДУШАНБЕ ]",
     atmo_sec_title: "Атмосфера & <em>Архитектура</em>",
     atmo_badge_entrance: "ПАРАДНЫЙ ВХОД · RED CARPET",
@@ -2571,9 +2628,9 @@
     atmo_badge_terrace: "ГЛАВНАЯ ТЕРРАСА · OPEN AIR",
     atmo_title_terrace: "Летняя терраса под кронами вековых деревьев",
     atmo_desc_terrace: "Фирменная иллюминация фасада «Анзур», нити тёплых огней в листве и вечерняя прохлада для душевных застолий.",
-    space3_badge: "БЕЗ ГРОМКОЙ МУЗЫКИ",
-    space3_title: "Тихая веранда",
-    space3_desc: "Красная ковровая дорожка, парящие световые сферы и уединённая зона отдыха вдали от сцены — для деловых встреч, семейных обедов и тех, кто ценит покой.",
+    space3_badge: "6 – 25 ПЕРСОН · PRO KARAOKE",
+    space3_title: "Караоке & VIP-кабины",
+    space3_desc: "Двухуровневый приватный зал с массивным столом из слэба дерева, профессиональной акустикой, караоке и лаунж-зоной.",
     events_title: "Шоу & <em>Концерты</em>",
     events_mono: "[ АФИША · ЖИВОЙ ЗВУК · ВЕЧЕРНЯЯ ПРОГРАММА ]",
     ev1_badge: "ПТ — ВС · 19:30",
@@ -2666,15 +2723,15 @@
     spaces_title: "Толорҳо & <em>Фазоҳо</em>",
     spaces_photos_btn: "АКСҲОИ ТОЛОРҲО",
     spaces_mono: "[ МАХФИЯТ ВА САДО ]",
-    space1_badge: "6 – 25 НАФАР · КАРАОКЕ",
-    space1_title: "Ҳуҷраҳои VIP",
-    space1_desc: "Ҳуҷраҳои алоҳида бо системаи караокеи касбӣ, равшании клубӣ ва садои олӣ барои шомҳои хотирмон.",
-    space2_badge: "ҲАВОИ КУШОД",
-    space2_title: "Террасаи Тобистона",
-    space2_desc: "Фазои дилнишин дар зери осмони кушод бо сабзазор ва чароғони шомона барои шомҳои гуворо.",
-    space3_badge: "БЕ САДОИ БАЛАНД",
-    space3_title: "Верандаи Ором",
-    space3_desc: "Минтақаи ором дур аз саҳна — барои мулоқотҳои корӣ, хӯроки оилавӣ ва касоне, ки хомӯширо қадр мекунанд.",
+    space1_badge: "ТО 250 НАФАР · МУСИҚИИ ЗИНДА",
+    space1_title: "Толори асосии ресторан",
+    space1_desc: "Толори барҳаво бо кандакории миллии дастӣ, диванҳои мулоим, саҳнаи консертӣ ва мусиқии зинда барои ҷашну шодиҳо.",
+    space2_badge: "ҲАВОИ ТОЗА ВА ОРОМӢ",
+    space2_title: "Верандаи тобистона",
+    space2_desc: "Минтақаи дилнишин дар ҳавои кушод бо равшании мулоим ва чароғҳои зебо — барои хӯроки шоми оилавӣ ва сӯҳбатҳои самимӣ.",
+    space3_badge: "6 – 25 НАФАР · КАРАОКЕИ КАСБӢ",
+    space3_title: "Караоке & Ҳуҷраҳои VIP",
+    space3_desc: "Ҳуҷраи дуошёнаи хусусӣ бо мизи калони чӯбӣ, садои касбӣ, системаи караоке ва минтақаи фароғатии мулоим.",
     events_title: "Шоу & <em>Консертҳо</em>",
     events_mono: "[ АФИША · САДОИ ЗИНДА · БАРНОМАИ ШОМОНА ]",
     ev1_badge: "ҶУМ — ЯКШ · 19:30",
@@ -2767,15 +2824,15 @@
     spaces_title: "Spaces & <em>Ambience</em>",
     spaces_photos_btn: "LOCATION PHOTOS",
     spaces_mono: "[ PRIVACY & ACOUSTICS ]",
-    space1_badge: "6 – 25 GUESTS · KARAOKE",
-    space1_title: "VIP Lounges",
-    space1_desc: "Private suites equipped with professional karaoke, club lighting, and studio-grade acoustics for exclusive gatherings.",
-    space2_badge: "OPEN AIR",
-    space2_title: "Summer Terrace",
-    space2_desc: "A cozy open-air terrace with lush natural greenery and ambient evening illumination for unhurried dining.",
-    space3_badge: "NO LOUD MUSIC",
-    space3_title: "Quiet Veranda",
-    space3_desc: "A tranquil sanctuary distanced from the stage — crafted for business talks, family lunches, and lovers of serene calm.",
+    space1_badge: "UP TO 250 GUESTS · LIVE STAGE",
+    space1_title: "Main Dining Hall",
+    space1_desc: "Atmospheric oriental hall featuring handcrafted carvings, plush velvet seating, live concert stage, and dance floor.",
+    space2_badge: "OPEN AIR & SERENITY",
+    space2_title: "Summer Veranda",
+    space2_desc: "A secluded open-air sanctuary lit by glowing ambient spheres and garlands — crafted for family dinners and quiet talks.",
+    space3_badge: "6 – 25 GUESTS · PRO KARAOKE",
+    space3_title: "Karaoke & VIP Suites",
+    space3_desc: "Two-level private suite with a solid wood slab dining table, studio-grade acoustics, karaoke, and cozy lounge.",
     events_title: "Shows & <em>Concerts</em>",
     events_mono: "[ PLAYBILL · LIVE SOUND · EVENING PROGRAM ]",
     ev1_badge: "FRI — SUN · 19:30",
@@ -2868,15 +2925,15 @@
     spaces_title: "空间与<em>格局</em>",
     spaces_photos_btn: "空间实景相册",
     spaces_mono: "[ 私密与原声 ]",
-    space1_badge: "6 – 25位宾客 · 专属KTV",
-    space1_title: "VIP贵宾包厢",
-    space1_desc: "配备专业级KTV系统、俱乐部氛围灯光与殿堂级音响的独立私密套间，专为私人宴请打造。",
-    space2_badge: "露天雅座",
-    space2_title: "夏日露台",
-    space2_desc: "绿植环绕、灯光柔和的露天用餐区，感受清爽夜风与从容晚宴。",
-    space3_badge: "静谧无喧",
-    space3_title: "静谧回廊",
-    space3_desc: "远离舞台喧闹的幽雅区域，专为商务洽谈、温馨家宴与崇尚安静舒适的宾客而设。",
+    space1_badge: "容纳250位宾客 · 现场舞台",
+    space1_title: "主餐厅金色大厅",
+    space1_desc: "恢弘典雅的中亚艺术殿堂：传统手工精雕石膏纹饰、舒适沙发座、现场音乐大舞台与欢聚舞池。",
+    space2_badge: "露天绿洲 · 舒适惬意",
+    space2_title: "夏日微风走廊",
+    space2_desc: "绿意微风环绕的幽静露天区域，悬浮柔光暖灯球点缀，适合温馨家宴与静谧私语。",
+    space3_badge: "6 – 25位 · 专业KTV音响",
+    space3_title: "专属KTV与豪华VIP包厢",
+    space3_desc: "双层私密尊贵包厢：厚重原木长餐桌、专业录音棚级音响、卡拉OK系统与惬意软包休闲区。",
     events_title: "演艺与<em>音乐盛宴</em>",
     events_mono: "[ 精彩节目 · 现场原声 · 晚间特辑 ]",
     ev1_badge: "周五至周日 · 19:30",
@@ -3707,20 +3764,58 @@ let currentSlideIdx = 0;
       });
     })();
 
-    // Spaces / Locations Lightbox Modal (Pure photos + arrows only)
-    const LOCATION_PHOTOS = [
-      'location_photos/location_01.jpg',
-      'location_photos/location_02.jpg',
-      'location_photos/location_03.jpg',
-      'location_photos/location_04.jpg',
-      'location_photos/location_05.jpg'
+    // Spaces / Locations Lightbox Modal (Organized by categories: Главный зал, Веранда, Караоке)
+    const SPACES_DATA = {
+      main_hall: [
+        'location_photos/main_hall_07.jpg',
+        'location_photos/main_hall_01.jpg',
+        'location_photos/main_hall_02.jpg',
+        'location_photos/main_hall_03.jpg',
+        'location_photos/main_hall_04.jpg',
+        'location_photos/main_hall_05.jpg',
+        'location_photos/main_hall_06.jpg',
+        'location_photos/main_hall_08.jpg',
+        'location_photos/main_hall_09.jpg',
+        'location_photos/main_hall_10.jpg',
+        'location_photos/main_hall_11.jpg',
+        'location_photos/main_hall_12.jpg'
+      ],
+      veranda: [
+        'location_photos/veranda_01.jpg',
+        'location_photos/veranda_02.jpg',
+        'location_photos/veranda_03.jpg',
+        'location_photos/veranda_04.jpg'
+      ],
+      karaoke: [
+        'location_photos/karaoke_01.jpg',
+        'location_photos/karaoke_02.jpg'
+      ]
+    };
+
+    let currentSpacesCategory = 'all';
+    let currentSpacesList = [
+      ...SPACES_DATA.main_hall,
+      ...SPACES_DATA.veranda,
+      ...SPACES_DATA.karaoke
     ];
     let currentSpacesIndex = 0;
 
-    function openSpacesModal(index) {
-      if (typeof index === 'number' && index >= 0 && index < LOCATION_PHOTOS.length) {
-        currentSpacesIndex = index;
-      }
+    function getSpacesList(cat) {
+      if (cat === 'main_hall') return SPACES_DATA.main_hall;
+      if (cat === 'veranda') return SPACES_DATA.veranda;
+      if (cat === 'karaoke') return SPACES_DATA.karaoke;
+      return [
+        ...SPACES_DATA.main_hall,
+        ...SPACES_DATA.veranda,
+        ...SPACES_DATA.karaoke
+      ];
+    }
+
+    function openSpacesModal(cat, index) {
+      currentSpacesCategory = (cat && typeof cat === 'string') ? cat : 'all';
+      currentSpacesList = getSpacesList(currentSpacesCategory);
+      currentSpacesIndex = (typeof index === 'number' && index >= 0 && index < currentSpacesList.length) ? index : 0;
+      updateSpacesFilterTabsUI();
       setSpacesPhoto(currentSpacesIndex);
       const modal = document.getElementById('spaces-modal');
       if (modal) {
@@ -3729,11 +3824,38 @@ let currentSlideIdx = 0;
       }
     }
 
+    function openSpacesCategory(cat) {
+      openSpacesModal(cat, 0);
+    }
+
+    function filterSpacesGallery(cat) {
+      currentSpacesCategory = cat;
+      currentSpacesList = getSpacesList(cat);
+      currentSpacesIndex = 0;
+      updateSpacesFilterTabsUI();
+      setSpacesPhoto(currentSpacesIndex);
+    }
+
+    function updateSpacesFilterTabsUI() {
+      document.querySelectorAll('.spaces-filter-tab').forEach(tab => {
+        if (tab.getAttribute('data-cat') === currentSpacesCategory) {
+          tab.classList.add('is-active');
+        } else {
+          tab.classList.remove('is-active');
+        }
+      });
+    }
+
     function closeSpacesModal() {
       const modal = document.getElementById('spaces-modal');
       if (modal) {
         modal.classList.remove('is-open');
-        document.body.style.overflow = '';
+        const menuModal = document.getElementById('menu-modal');
+        const textModal = document.getElementById('text-menu-modal');
+        if ((!menuModal || !menuModal.classList.contains('is-open')) &&
+            (!textModal || !textModal.classList.contains('is-open'))) {
+          document.body.style.overflow = '';
+        }
       }
     }
 
@@ -3744,12 +3866,13 @@ let currentSlideIdx = 0;
     }
 
     function setSpacesPhoto(idx) {
-      if (idx < 0) idx = LOCATION_PHOTOS.length - 1;
-      if (idx >= LOCATION_PHOTOS.length) idx = 0;
+      if (!currentSpacesList || currentSpacesList.length === 0) return;
+      if (idx < 0) idx = currentSpacesList.length - 1;
+      if (idx >= currentSpacesList.length) idx = 0;
       currentSpacesIndex = idx;
       const img = document.getElementById('modalSpacesCurrentImg');
       if (img) {
-        img.src = LOCATION_PHOTOS[currentSpacesIndex];
+        img.src = currentSpacesList[currentSpacesIndex];
       }
     }
 
