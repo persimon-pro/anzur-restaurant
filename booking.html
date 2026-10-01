@@ -342,13 +342,10 @@
 
     /* Layout Content Grid */
     .booking-grid {
-      display: grid;
-      grid-template-columns: 1fr 390px;
-      gap: 2rem;
-      align-items: start;
-    }
-    @media (max-width: 1080px) {
-      .booking-grid { grid-template-columns: 1fr; }
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      align-items: stretch;
     }
 
     /* Floor Plan Architectural Canvas */
@@ -453,71 +450,6 @@
       margin-top: 0.2rem;
     }
 
-    /* Architectural Elements from Blueprints */
-    .arch-pillar {
-      width: 16px;
-      height: 16px;
-      background: #2a2216;
-      border: 1px solid var(--gold);
-      border-radius: 2px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 8px rgba(0,0,0,0.8);
-      flex-shrink: 0;
-      position: relative;
-    }
-    .arch-pillar::after {
-      content: '';
-      width: 4px;
-      height: 4px;
-      background: var(--gold);
-      border-radius: 1px;
-    }
-    .arch-stairs {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 6px 8px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(197, 160, 89, 0.35);
-      border-radius: 4px;
-      text-align: center;
-      box-sizing: border-box;
-      user-select: none;
-    }
-    .arch-stairs-lines {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      width: 100%;
-      margin: 4px 0;
-    }
-    .arch-stairs-line {
-      height: 2px;
-      background: rgba(197, 160, 89, 0.4);
-      width: 100%;
-      border-radius: 1px;
-    }
-    .arch-stairs-label {
-      font-family: var(--font-mono);
-      font-size: 0.52rem;
-      color: var(--gold-light);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-    .aisle-label {
-      font-family: var(--font-mono);
-      font-size: 0.52rem;
-      color: rgba(255,255,255,0.35);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      text-align: center;
-      user-select: none;
-    }
-
     /* Table shape customizations matching blueprints */
     #t-cell-1, #t-cell-2 {
       border-radius: 12px;
@@ -560,23 +492,16 @@
     }
     .stage-column-title {
       font-family: var(--font-serif);
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       color: var(--gold);
       letter-spacing: 0.18em;
       line-height: 1.2;
     }
-    .stage-column-sub {
-      font-family: var(--font-mono);
-      font-size: 0.55rem;
-      color: var(--text-muted);
-      margin-top: 0.4rem;
-      letter-spacing: 0.16em;
-    }
 
     /* Dance Floor between tables and stage */
     .dance-floor-column {
-      width: 170px;
-      min-width: 150px;
+      width: 150px;
+      min-width: 130px;
       background: 
         radial-gradient(ellipse at center, rgba(197, 160, 89, 0.14) 0%, rgba(20, 16, 10, 0.95) 75%),
         repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 2px, transparent 2px, transparent 14px);
@@ -592,18 +517,6 @@
       box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.8), 0 0 15px rgba(197, 160, 89, 0.08);
       user-select: none;
     }
-    .dance-floor-badge {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.22em;
-      color: var(--gold);
-      text-transform: uppercase;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-      margin-bottom: 0.35rem;
-    }
     .dance-floor-title {
       font-family: var(--font-serif);
       font-size: 1.35rem;
@@ -612,27 +525,6 @@
       text-shadow: 0 0 12px rgba(197, 160, 89, 0.5);
       font-weight: 400;
       line-height: 1.2;
-    }
-    .dance-floor-sub {
-      font-family: var(--font-mono);
-      font-size: 0.55rem;
-      color: var(--text-muted);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-top: 0.45rem;
-      line-height: 1.45;
-    }
-    .dance-floor-sparkle {
-      font-size: 0.75rem;
-      color: var(--gold-light);
-      margin-top: 0.6rem;
-      letter-spacing: 0.3em;
-      opacity: 0.8;
-      animation: sparkle-anim 2.5s infinite ease-in-out;
-    }
-    @keyframes sparkle-anim {
-      0%, 100% { opacity: 0.4; transform: scale(0.95); }
-      50% { opacity: 1; transform: scale(1.08); }
     }
 
     /* Menu Quick Banner */
@@ -921,13 +813,15 @@
     }
     .modal-close:hover { color: var(--gold); }
 
-    /* Right Form Sidebar */
+    /* Form Card under Scheme */
     .sidebar-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      padding: 2.2rem 2rem;
-      position: sticky;
-      top: 100px;
+      padding: 2.2rem 2.5rem;
+      position: static;
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 6px;
     }
     .sidebar-title {
       font-family: var(--font-serif);
@@ -936,9 +830,18 @@
       font-weight: 400;
     }
     .sidebar-sub {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
       margin-bottom: 1.5rem;
+    }
+    .booking-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+    @media (max-width: 768px) {
+      .sidebar-card { padding: 1.5rem 1.2rem; }
+      .booking-form-grid { grid-template-columns: 1fr; }
     }
 
     .chosen-table-badge {
@@ -1084,7 +987,6 @@
   <!-- Main Booking Interface -->
   <main class="main-wrap">
     <div class="booking-header">
-      <div class="mono-tag" id="i18n-tag">ОФИЦИАЛЬНАЯ СХЕМА ЗАЛОВ</div>
       <h1 class="booking-title" id="i18n-title">Интерактивный <em>план столов</em></h1>
     </div>
 
@@ -1132,16 +1034,16 @@
     <!-- Zone Tabs: Tier 1, Tier 2, Terrace, VIP -->
     <div class="zone-tabs">
       <button type="button" class="zone-tab active" data-zone="tier1" onclick="switchZone('tier1')">
-        🏛️ <span id="i18n-zone-tier1">1-й ярус</span>
+        <span id="i18n-zone-tier1">1-й ярус</span>
       </button>
       <button type="button" class="zone-tab" data-zone="tier2" onclick="switchZone('tier2')">
-        🎭 <span id="i18n-zone-tier2">2-й ярус</span>
+        <span id="i18n-zone-tier2">2-й ярус</span>
       </button>
       <button type="button" class="zone-tab" data-zone="terrace" onclick="switchZone('terrace')">
-        🌿 <span id="i18n-zone-terrace">Летняя терраса</span>
+        <span id="i18n-zone-terrace">Летняя терраса</span>
       </button>
       <button type="button" class="zone-tab" data-zone="vip" onclick="switchZone('vip')">
-        👑 <span id="i18n-zone-vip">VIP-кабины с караоке</span>
+        <span id="i18n-zone-vip">VIP-кабины с караоке</span>
       </button>
     </div>
 
@@ -1155,132 +1057,73 @@
         <!-- 1-Й ЯРУС (ПАРТЕР & СЦЕНА)                      -->
         <!-- ============================================== -->
         <div id="zone-tier1-content">
-          <div class="plan-top-info">
-            <span class="plan-title-badge">ПЛАН 1-ГО ЯРУСА (ОСНОВНОЙ КОНЦЕРТНЫЙ ЗАЛ)</span>
-          </div>
-
-          <div class="hall-map-frame" style="display:flex; gap:1.2rem; min-height:510px; min-width:960px;">
+          <div class="hall-map-frame" style="display:flex; gap:1.5rem; min-height:480px; min-width:920px;">
             <!-- Left & Center Tables Section -->
-            <div style="flex:1; display:flex; flex-direction:column; justify-content:space-between;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:space-between; padding:0.4rem 0;">
               
-              <!-- Top Row (North wall): Table 2, Stairs up, Table 3, Pillar, Table 4, Pillar, Table 5, Pillar, Table 6, Angle 7 -->
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem;">
-                <div style="display:flex; gap:0.9rem; align-items:center;">
-                  <div id="t-cell-2" style="width:86px; height:78px;"></div>
-                  <div class="arch-stairs" style="width:72px; height:74px;">
-                    <div class="arch-stairs-label">▲ НА 2-Й ЯРУС</div>
-                    <div class="arch-stairs-lines">
-                      <div class="arch-stairs-line"></div>
-                      <div class="arch-stairs-line"></div>
-                      <div class="arch-stairs-line"></div>
-                      <div class="arch-stairs-line"></div>
-                    </div>
-                    <div style="font-family:var(--font-mono); font-size:0.48rem; color:var(--text-muted);">ЛЕСТНИЦА</div>
-                  </div>
-                  <div id="t-cell-3" style="width:78px; height:70px;"></div>
+              <!-- Top Row (North wall): Tables 2, 3, 4, 5, 6, 7 -->
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div style="display:flex; gap:1.2rem; align-items:center;">
+                  <div id="t-cell-2" style="width:90px; height:74px;"></div>
+                  <div id="t-cell-3" style="width:74px; height:66px;"></div>
+                  <div id="t-cell-4" style="width:66px; height:64px;"></div>
+                  <div id="t-cell-5" style="width:66px; height:64px;"></div>
+                  <div id="t-cell-6" style="width:74px; height:64px;"></div>
                 </div>
-
-                <div style="display:flex; gap:0.55rem; align-items:center;">
-                  <div class="arch-pillar" title="Несущая колонна"></div>
-                  <div id="t-cell-4" style="width:60px; height:62px;"></div>
-                  <div class="arch-pillar" title="Несущая колонна"></div>
-                  <div id="t-cell-5" style="width:60px; height:62px;"></div>
-                  <div class="arch-pillar" title="Несущая колонна"></div>
-                  <div id="t-cell-6" style="width:72px; height:62px;"></div>
-                  <div id="t-cell-7" style="width:64px; height:62px; margin-left:0.4rem;"></div>
-                </div>
+                <div id="t-cell-7" style="width:70px; height:64px;"></div>
               </div>
 
-              <!-- Aisle to Dance Floor & Stage -->
-              <div style="display:flex; align-items:center; justify-content:center; margin:0.4rem 0;">
-                <div class="aisle-label">· · · ПРОХОД К ТАНЦПОЛУ И СЦЕНЕ · · ·</div>
-              </div>
-
-              <!-- Center Zone: Central Booths (11-16 back-to-back) and Front Tables (17-20) -->
-              <div style="display:flex; justify-content:space-around; align-items:center; gap:1.8rem; margin:0.6rem 0;">
+              <!-- Center Zone: Central Booths (11-16) and Front Tables (17-20) -->
+              <div style="display:flex; justify-content:space-around; align-items:center; gap:2rem; margin:1.5rem 0;">
                 
-                <!-- Central Booths: 2 rows of 3 back-to-back with divider -->
-                <div style="background:rgba(20, 16, 12, 0.7); border:1px solid rgba(197, 160, 89, 0.3); padding:0.7rem 0.9rem; border-radius:6px; box-shadow:0 4px 16px rgba(0,0,0,0.5);">
-                  <div style="font-family:var(--font-mono); font-size:0.56rem; color:var(--gold); text-align:center; margin-bottom:0.5rem; letter-spacing:0.16em; font-weight:700;">ДИВАННЫЕ КУПЕ ПАРТЕРА (СПИНА К СПИНЕ)</div>
-                  <div style="display:grid; grid-template-columns:repeat(3, 72px); gap:0.6rem;">
-                    <div id="t-cell-12" style="height:56px;"></div>
-                    <div id="t-cell-13" style="height:56px;"></div>
-                    <div id="t-cell-15" style="height:56px;"></div>
+                <!-- Central Booths: 11-16 -->
+                <div style="background:rgba(20, 16, 12, 0.7); border:1px solid rgba(197, 160, 89, 0.3); padding:1rem 1.2rem; border-radius:6px; box-shadow:0 4px 16px rgba(0,0,0,0.5);">
+                  <div style="display:grid; grid-template-columns:repeat(3, 76px); gap:0.75rem; margin-bottom:0.75rem;">
+                    <div id="t-cell-12" style="height:58px;"></div>
+                    <div id="t-cell-13" style="height:58px;"></div>
+                    <div id="t-cell-15" style="height:58px;"></div>
                   </div>
-                  <div style="height:3px; background:rgba(197, 160, 89, 0.35); margin:0.45rem 0; border-radius:1px; display:flex; align-items:center; justify-content:center;">
-                    <span style="background:var(--bg); padding:0 6px; font-family:var(--font-mono); font-size:0.45rem; color:var(--text-muted); letter-spacing:0.1em;">ПЕРЕГОРОДКА</span>
-                  </div>
-                  <div style="display:grid; grid-template-columns:repeat(3, 72px); gap:0.6rem;">
-                    <div id="t-cell-11" style="height:56px;"></div>
-                    <div id="t-cell-14" style="height:56px;"></div>
-                    <div id="t-cell-16" style="height:56px;"></div>
+                  <div style="display:grid; grid-template-columns:repeat(3, 76px); gap:0.75rem;">
+                    <div id="t-cell-11" style="height:58px;"></div>
+                    <div id="t-cell-14" style="height:58px;"></div>
+                    <div id="t-cell-16" style="height:58px;"></div>
                   </div>
                 </div>
 
-                <!-- Stage Front Tables: 17, 18 (row 2), 19, 20 (row 1 right at dance floor) -->
-                <div style="background:rgba(197, 160, 89, 0.06); border:1px solid rgba(197, 160, 89, 0.45); padding:0.7rem 0.9rem; border-radius:6px; box-shadow:0 4px 16px rgba(0,0,0,0.5);">
-                  <div style="font-family:var(--font-mono); font-size:0.56rem; color:var(--gold-light); text-align:center; margin-bottom:0.5rem; letter-spacing:0.16em; font-weight:700;">ПРЕМИУМ У ТАНЦПОЛА</div>
-                  <div style="display:grid; grid-template-columns:repeat(2, 70px); gap:0.6rem; margin-bottom:0.5rem;">
-                    <div id="t-cell-17" style="height:56px;"></div>
-                    <div id="t-cell-19" style="height:56px;"></div>
+                <!-- Stage Front Tables: 17, 18, 19, 20 -->
+                <div style="background:rgba(197, 160, 89, 0.06); border:1px solid rgba(197, 160, 89, 0.45); padding:1rem 1.2rem; border-radius:6px; box-shadow:0 4px 16px rgba(0,0,0,0.5);">
+                  <div style="display:grid; grid-template-columns:repeat(2, 74px); gap:0.75rem; margin-bottom:0.75rem;">
+                    <div id="t-cell-17" style="height:58px;"></div>
+                    <div id="t-cell-19" style="height:58px;"></div>
                   </div>
-                  <div style="display:grid; grid-template-columns:repeat(2, 70px); gap:0.6rem;">
-                    <div id="t-cell-18" style="height:56px;"></div>
-                    <div id="t-cell-20" style="height:56px;"></div>
+                  <div style="display:grid; grid-template-columns:repeat(2, 74px); gap:0.75rem;">
+                    <div id="t-cell-18" style="height:58px;"></div>
+                    <div id="t-cell-20" style="height:58px;"></div>
                   </div>
                 </div>
 
               </div>
 
-              <!-- Aisle to Dance Floor & Stage -->
-              <div style="display:flex; align-items:center; justify-content:center; margin:0.4rem 0;">
-                <div class="aisle-label">· · · ПРОХОД К ТАНЦПОЛУ И СЦЕНЕ · · ·</div>
-              </div>
-
-              <!-- Bottom Row (South wall): Table 1, Entrance/Foyer, South Stairs up, Pillar, Table 10, Pillar, Table 9, Angle 8 -->
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.8rem;">
-                <div style="display:flex; gap:0.9rem; align-items:center;">
-                  <div id="t-cell-1" style="width:86px; height:78px;"></div>
-                  <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; padding:6px 10px; border:1px dashed rgba(255,255,255,0.15); border-radius:4px; font-family:var(--font-mono); font-size:0.52rem; color:var(--text-muted); text-align:center; height:74px; box-sizing:border-box;">
-                    <span style="font-size:1.1rem; margin-bottom:2px;">🚪</span>ВХОД /<br>ГАРДЕРОБ
-                  </div>
-                  <div class="arch-stairs" style="width:72px; height:74px;">
-                    <div class="arch-stairs-label">▲ НА 2-Й ЯРУС</div>
-                    <div class="arch-stairs-lines">
-                      <div class="arch-stairs-line"></div>
-                      <div class="arch-stairs-line"></div>
-                      <div class="arch-stairs-line"></div>
-                      <div class="arch-stairs-line"></div>
-                    </div>
-                    <div style="font-family:var(--font-mono); font-size:0.48rem; color:var(--text-muted);">ЛЕСТНИЦА</div>
-                  </div>
+              <!-- Bottom Row (South wall): Tables 1, 10, 9, 8 -->
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div style="display:flex; gap:1.2rem; align-items:center;">
+                  <div id="t-cell-1" style="width:90px; height:74px;"></div>
+                  <div id="t-cell-10" style="width:74px; height:66px;"></div>
+                  <div id="t-cell-9" style="width:74px; height:64px;"></div>
                 </div>
-
-                <div style="display:flex; gap:0.55rem; align-items:center;">
-                  <div class="arch-pillar" title="Несущая колонна"></div>
-                  <div id="t-cell-10" style="width:60px; height:62px;"></div>
-                  <div class="arch-pillar" title="Несущая колонна"></div>
-                  <div id="t-cell-9" style="width:72px; height:62px;"></div>
-                  <div id="t-cell-8" style="width:64px; height:62px; margin-left:0.4rem;"></div>
-                </div>
+                <div id="t-cell-8" style="width:70px; height:64px;"></div>
               </div>
 
             </div>
 
-            <!-- Dance Floor in Front of the Stage -->
+            <!-- Dance Floor -->
             <div class="dance-floor-column">
-              <div class="dance-floor-badge">
-                <span>🪩</span> ТАНЦПОЛ
-              </div>
-              <div class="dance-floor-title">DANCE FLOOR</div>
-              <div class="dance-floor-sub">ТАНЦЕВАЛЬНАЯ ЗОНА<br>ПЕРЕД СЦЕНОЙ</div>
-              <div class="dance-floor-sparkle">✦ ✧ ✦</div>
+              <div class="dance-floor-title">ТАНЦПОЛ</div>
             </div>
 
             <!-- Stage Column on Right -->
             <div class="stage-column">
-              <div class="stage-column-title">🎭 СЦЕНА</div>
-              <div class="stage-column-sub">ЖИВОЙ ЗВУК<br>АРТИСТЫ<br>19:30 — 23:30</div>
+              <div class="stage-column-title">СЦЕНА</div>
             </div>
           </div>
         </div>
@@ -1289,24 +1132,18 @@
         <!-- 2-Й ЯРУС (БАЛКОН & БАНКЕТНЫЙ ЗАЛ)              -->
         <!-- ============================================== -->
         <div id="zone-tier2-content" style="display:none;">
-          <div class="plan-top-info">
-            <span class="plan-title-badge">ПЛАН 2-ГО ЯРУСА (БАЛКОН, ВТОРОЙ СВЕТ & БАНКЕТНАЯ ЗОНА)</span>
-          </div>
-
-          <div class="hall-map-frame" style="display:flex; gap:1.2rem; min-height:510px; min-width:960px;">
+          <div class="hall-map-frame" style="display:flex; gap:1.5rem; min-height:480px; min-width:920px;">
             
-            <!-- Left Section: Banquet Grand Table 29, Tables 30, 28, 25, 27, 26 -->
-            <div style="width:250px; border-right:1px dashed rgba(197, 160, 89, 0.35); padding-right:1.2rem; display:flex; flex-direction:column; justify-content:space-between;">
-              <div style="font-family:var(--font-mono); font-size:0.6rem; color:var(--gold); text-align:center; letter-spacing:0.18em; font-weight:700;">👑 БАНКЕТНЫЙ СЕКТОР</div>
-
+            <!-- Left Section: Banquet Tables -->
+            <div style="width:230px; border-right:1px dashed rgba(197, 160, 89, 0.35); padding-right:1.2rem; display:flex; flex-direction:column; justify-content:space-between;">
               <!-- Top Left: Large Banquet Table 29 & Table 30 -->
               <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem;">
-                <div id="t-cell-29" style="width:142px; height:80px;"></div>
+                <div id="t-cell-29" style="width:140px; height:78px;"></div>
                 <div id="t-cell-30" style="width:68px; height:68px;"></div>
               </div>
 
               <!-- Middle: Table 27 & Table 28 -->
-              <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem; margin:0.8rem 0;">
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem; margin:1rem 0;">
                 <div id="t-cell-27" style="width:84px; height:62px;"></div>
                 <div id="t-cell-28" style="width:68px; height:62px;"></div>
               </div>
@@ -1316,81 +1153,43 @@
                 <div id="t-cell-26" style="width:84px; height:62px;"></div>
                 <div id="t-cell-25" style="width:68px; height:62px;"></div>
               </div>
-
-              <div style="font-family:var(--font-mono); font-size:0.5rem; color:var(--text-muted); text-align:center; margin-top:0.4rem; letter-spacing:0.1em;">
-                ТОРЖЕСТВА & ПРИВАТНЫЕ БАНКЕТЫ
-              </div>
             </div>
 
             <!-- Center & Right Balcony Section -->
-            <div style="flex:1; display:flex; flex-direction:column; justify-content:space-between;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:space-between; padding:0.4rem 0;">
               
-              <!-- North Balcony: North stairs down + 31, 32 (wall) + Pillar + 33, 34 + Pillar + 35 + 36 (angle) -->
+              <!-- North Balcony: Tables 31-36 -->
               <div style="display:flex; justify-content:space-between; align-items:center;">
-                <div style="display:flex; gap:0.6rem; align-items:center;">
-                  <div class="arch-stairs" style="width:72px; height:64px;">
-                    <div class="arch-stairs-label">▼ 1-Й ЯРУС</div>
-                    <div class="arch-stairs-lines">
-                      <div class="arch-stairs-line"></div>
-                      <div class="arch-stairs-line"></div>
-                      <div class="arch-stairs-line"></div>
-                    </div>
-                    <div style="font-family:var(--font-mono); font-size:0.46rem; color:var(--text-muted);">СПУСК</div>
-                  </div>
-                  <div id="t-cell-31" style="width:62px; height:60px;"></div>
-                  <div id="t-cell-32" style="width:62px; height:60px;"></div>
+                <div style="display:flex; gap:0.9rem; align-items:center;">
+                  <div id="t-cell-31" style="width:68px; height:62px;"></div>
+                  <div id="t-cell-32" style="width:68px; height:62px;"></div>
+                  <div id="t-cell-33" style="width:68px; height:62px;"></div>
+                  <div id="t-cell-34" style="width:68px; height:62px;"></div>
+                  <div id="t-cell-35" style="width:68px; height:62px;"></div>
                 </div>
-
-                <div style="display:flex; gap:0.55rem; align-items:center;">
-                  <div class="arch-pillar" title="Несущая колонна"></div>
-                  <div id="t-cell-33" style="width:62px; height:60px;"></div>
-                  <div id="t-cell-34" style="width:62px; height:60px;"></div>
-                  <div class="arch-pillar" title="Несущая колонна"></div>
-                  <div id="t-cell-35" style="width:62px; height:60px;"></div>
-                  <div id="t-cell-36" style="width:64px; height:60px; margin-left:0.4rem;"></div>
-                </div>
+                <div id="t-cell-36" style="width:68px; height:62px;"></div>
               </div>
 
-              <!-- Central Void (Atrium overlooking 1st tier and stage) -->
-              <div class="atrium-void" style="border: 2px dashed rgba(197, 160, 89, 0.45); background: radial-gradient(ellipse at center, rgba(197, 160, 89, 0.05) 0%, rgba(10, 8, 6, 0.85) 100%); padding: 1.2rem; margin: 0.8rem 0; border-radius: 8px;">
-                <div style="font-family:var(--font-serif); font-size:1.15rem; color:var(--gold-light); letter-spacing:0.18em;">ВТОРОЙ СВЕТ · АТРИУМ НАД ЗАЛОМ</div>
-                <div style="font-family:var(--font-mono); font-size:0.58rem; color:var(--text-muted); margin-top:0.4rem; letter-spacing:0.14em;">ПАНОРАМНЫЙ ОБЗОР ТАНЦПОЛА, ПАРТЕРА И СЦЕНЫ С ВЫСОТЫ 2-ГО ЭТАЖА</div>
-                <div style="display:flex; justify-content:center; gap:2.5rem; margin-top:0.7rem; font-family:var(--font-mono); font-size:0.52rem; color:rgba(197, 160, 89, 0.65); letter-spacing:0.12em;">
-                  <span>═ ПЕРИЛА СЕВЕРНОГО БАЛКОНА ═</span>
-                  <span>═ ПЕРИЛА ЮЖНОГО БАЛКОНА ═</span>
-                </div>
+              <!-- Central Void (Atrium) -->
+              <div class="atrium-void" style="border:1px dashed rgba(197, 160, 89, 0.45); background:radial-gradient(ellipse at center, rgba(197, 160, 89, 0.05) 0%, rgba(10, 8, 6, 0.85) 100%); padding:2rem; margin:1.2rem 0; border-radius:8px;">
+                <div style="font-family:var(--font-serif); font-size:1.25rem; color:var(--gold-light); letter-spacing:0.18em;">АТРИУМ · ВТОРОЙ СВЕТ</div>
               </div>
 
-              <!-- South Balcony: South stairs up + 24 + Pillar + 23 + Pillar + 22 + 21 (angle) -->
+              <!-- South Balcony: Tables 24, 23, 22, 21 -->
               <div style="display:flex; justify-content:space-between; align-items:center;">
-                <div style="display:flex; gap:0.6rem; align-items:center;">
-                  <div class="arch-stairs" style="width:72px; height:64px;">
-                    <div class="arch-stairs-label">▲ С 1-ГО ЯРУСА</div>
-                    <div class="arch-stairs-lines">
-                      <div class="arch-stairs-line"></div>
-                      <div class="arch-stairs-line"></div>
-                      <div class="arch-stairs-line"></div>
-                    </div>
-                    <div style="font-family:var(--font-mono); font-size:0.46rem; color:var(--text-muted);">ВЫХОД</div>
-                  </div>
+                <div style="display:flex; gap:0.9rem; align-items:center;">
+                  <div id="t-cell-24" style="width:68px; height:62px;"></div>
+                  <div id="t-cell-23" style="width:68px; height:62px;"></div>
+                  <div id="t-cell-22" style="width:68px; height:62px;"></div>
                 </div>
-
-                <div style="display:flex; gap:0.55rem; align-items:center;">
-                  <div id="t-cell-24" style="width:62px; height:60px;"></div>
-                  <div class="arch-pillar" title="Несущая колонна"></div>
-                  <div id="t-cell-23" style="width:62px; height:60px;"></div>
-                  <div class="arch-pillar" title="Несущая колонна"></div>
-                  <div id="t-cell-22" style="width:62px; height:60px;"></div>
-                  <div id="t-cell-21" style="width:64px; height:60px; margin-left:0.4rem;"></div>
-                </div>
+                <div id="t-cell-21" style="width:68px; height:62px;"></div>
               </div>
 
             </div>
 
             <!-- View to Stage on Right -->
             <div class="stage-column" style="background:rgba(18, 14, 9, 0.85); border-color:rgba(197, 160, 89, 0.45);">
-              <div class="stage-column-title" style="font-size:1.15rem; color:var(--gold);">🎭 ВИД НА СЦЕНУ</div>
-              <div class="stage-column-sub">ВЕРХНИЙ РАКУРС<br>ОБЗОР ШОУ<br>С БАЛКОНА</div>
+              <div class="stage-column-title">СЦЕНА</div>
             </div>
 
           </div>
@@ -1400,10 +1199,6 @@
         <!-- ЛЕТНЯЯ ТЕРРАСА                                 -->
         <!-- ============================================== -->
         <div id="zone-terrace-content" style="display:none;">
-          <div class="plan-top-info">
-            <span class="plan-title-badge">ПАНОРАМНАЯ ЛЕТНЯЯ ТЕРРАСА</span>
-          </div>
-
           <div style="font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.18em; color:#34D399; margin-bottom:0.6rem; text-transform:uppercase;">
             СТОЛЫ У ПАНОРАМНЫХ ПЕРИЛ:
           </div>
@@ -1419,15 +1214,12 @@
         <!-- VIP-КАБИНЫ С КАРАОКЕ                           -->
         <!-- ============================================== -->
         <div id="zone-vip-content" style="display:none;">
-          <div class="plan-top-info">
-            <span class="plan-title-badge">ПРИВАТНЫЕ VIP-КАБИНЫ С КАРАОКЕ EVOLUTION</span>
-          </div>
           <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:1.4rem;" id="vip-grid"></div>
         </div>
 
       </div>
 
-      <!-- Right Form Sidebar -->
+      <!-- Booking Parameters Form under Scheme -->
       <aside class="sidebar-card">
         <h3 class="sidebar-title" id="i18n-form-title">Параметры брони</h3>
         <p class="sidebar-sub" id="i18n-form-sub">Выберите стол на схеме зала, введите контактные данные и нажмите кнопку подтверждения.</p>
@@ -1443,30 +1235,32 @@
 
         <!-- Guest Form -->
         <form id="bookingForm" onsubmit="submitGuestBooking(event)">
-          <div class="form-group">
-            <label class="form-label">ВАШЕ ИМЯ *</label>
-            <input type="text" class="form-input" id="guestName" placeholder="Например: Рустам" required />
-          </div>
+          <div class="booking-form-grid">
+            <div class="form-group">
+              <label class="form-label">ВАШЕ ИМЯ *</label>
+              <input type="text" class="form-input" id="guestName" placeholder="Например: Рустам" required />
+            </div>
 
-          <div class="form-group">
-            <label class="form-label">НОМЕР ТЕЛЕФОНА (WHATSAPP) *</label>
-            <input type="tel" class="form-input" id="guestPhone" placeholder="992 917 917 917" required />
-          </div>
+            <div class="form-group">
+              <label class="form-label">НОМЕР ТЕЛЕФОНА (WHATSAPP) *</label>
+              <input type="tel" class="form-input" id="guestPhone" placeholder="992 917 917 917" required />
+            </div>
 
-          <div class="form-group">
-            <label class="form-label">КОЛИЧЕСТВО ПЕРСОН</label>
-            <select class="form-input" id="guestCount">
-              <option value="1–2 персоны">1 – 2 персоны</option>
-              <option value="3–4 персоны" selected>3 – 4 персоны</option>
-              <option value="5–6 персон">5 – 6 персон</option>
-              <option value="7–10 персон">7 – 10 персон</option>
-              <option value="Банкет (от 12 персон)">Банкет (от 12 персон)</option>
-            </select>
-          </div>
+            <div class="form-group">
+              <label class="form-label">КОЛИЧЕСТВО ПЕРСОН</label>
+              <select class="form-input" id="guestCount">
+                <option value="1–2 персоны">1 – 2 персоны</option>
+                <option value="3–4 персоны" selected>3 – 4 персоны</option>
+                <option value="5–6 персон">5 – 6 персон</option>
+                <option value="7–10 персон">7 – 10 персон</option>
+                <option value="Банкет (от 12 персон)">Банкет (от 12 персон)</option>
+              </select>
+            </div>
 
-          <div class="form-group">
-            <label class="form-label">ПОЖЕЛАНИЯ / ПОВОД</label>
-            <input type="text" class="form-input" id="guestComment" placeholder="День рождения, ближе к сцене и т.д." />
+            <div class="form-group">
+              <label class="form-label">ПОЖЕЛАНИЯ / ПОВОД</label>
+              <input type="text" class="form-input" id="guestComment" placeholder="День рождения, ближе к сцене и т.д." />
+            </div>
           </div>
 
           <button type="submit" class="btn-submit" id="submitBtn" disabled>
@@ -1669,7 +1463,79 @@
       {id:"VIP4", zone:"vip", name:"VIP 4 «Анзур Гранд»", capacity:"до 25 чел", desc:"Президентский люкс для особых торжеств"}
     ];
 
+    const BOOKING_I18N = {
+      ru: {
+        title: 'Интерактивный <em>план столов</em>',
+        dateLbl: 'ДАТА ВИЗИТА',
+        timeLbl: 'ВРЕМЯ ПРИБЫТИЯ',
+        free: 'Свободен',
+        busy: 'Занят',
+        sel: 'Ваш выбор',
+        zoneTier1: '1-й ярус',
+        zoneTier2: '2-й ярус',
+        zoneTerrace: 'Летняя терраса',
+        zoneVip: 'VIP-кабины с караоке',
+        formTitle: 'Параметры брони',
+        formSub: 'Выберите стол на схеме зала, введите контактные данные и нажмите кнопку подтверждения.'
+      },
+      tj: {
+        title: 'Нақшаи интерактивии <em>мизҳо</em>',
+        dateLbl: 'САНАИ ТАШРИФ',
+        timeLbl: 'ВАҚТИ ОМАДАН',
+        free: 'Озод',
+        busy: 'Банд',
+        sel: 'Интихоби шумо',
+        zoneTier1: 'Ошёнаи 1',
+        zoneTier2: 'Ошёнаи 2',
+        zoneTerrace: 'Террасаи тобистона',
+        zoneVip: 'VIP-ҳуҷраҳо бо караоке',
+        formTitle: 'Маълумоти фармоиш',
+        formSub: 'Мизро дар нақша интихоб намоед, маълумоти худро ворид кунед ва тугмаи тасдиқро пахш намоед.'
+      },
+      en: {
+        title: 'Interactive <em>Table Floor Plan</em>',
+        dateLbl: 'VISIT DATE',
+        timeLbl: 'ARRIVAL TIME',
+        free: 'Available',
+        busy: 'Booked',
+        sel: 'Selected',
+        zoneTier1: 'Tier 1',
+        zoneTier2: 'Tier 2',
+        zoneTerrace: 'Summer Terrace',
+        zoneVip: 'VIP Suites & Karaoke',
+        formTitle: 'Booking Details',
+        formSub: 'Select a table on the floor plan, fill in your contact information and confirm your reservation.'
+      }
+    };
+
+    function setLanguage(lang) {
+      if (!BOOKING_I18N[lang]) lang = 'ru';
+      currentLang = lang;
+      try { localStorage.setItem('anzur_lang', lang); } catch(e) {}
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('is-active', btn.getAttribute('data-lang') === lang);
+      });
+
+      const dict = BOOKING_I18N[lang];
+      const elTitle = document.getElementById('i18n-title'); if (elTitle) elTitle.innerHTML = dict.title;
+      const elDate = document.getElementById('i18n-date-lbl'); if (elDate) elDate.textContent = dict.dateLbl;
+      const elTime = document.getElementById('i18n-time-lbl'); if (elTime) elTime.textContent = dict.timeLbl;
+      const elFree = document.getElementById('i18n-free'); if (elFree) elFree.textContent = dict.free;
+      const elBusy = document.getElementById('i18n-busy'); if (elBusy) elBusy.textContent = dict.busy;
+      const elSel = document.getElementById('i18n-sel'); if (elSel) elSel.textContent = dict.sel;
+      const elTier1 = document.getElementById('i18n-zone-tier1'); if (elTier1) elTier1.textContent = dict.zoneTier1;
+      const elTier2 = document.getElementById('i18n-zone-tier2'); if (elTier2) elTier2.textContent = dict.zoneTier2;
+      const elTerrace = document.getElementById('i18n-zone-terrace'); if (elTerrace) elTerrace.textContent = dict.zoneTerrace;
+      const elVip = document.getElementById('i18n-zone-vip'); if (elVip) elVip.textContent = dict.zoneVip;
+      const elFormTitle = document.getElementById('i18n-form-title'); if (elFormTitle) elFormTitle.textContent = dict.formTitle;
+      const elFormSub = document.getElementById('i18n-form-sub'); if (elFormSub) elFormSub.textContent = dict.formSub;
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('anzur_lang') || 'ru';
+      setLanguage(savedLang);
+
       const today = new Date().toISOString().split('T')[0];
       const dateInput = document.getElementById('filterDate');
       dateInput.value = today;
@@ -1839,8 +1705,9 @@
       document.getElementById('chosenTableSub').textContent = `${bp.capacity || 'Вместимость'} · ${bp.desc || 'Без депозита'}`;
       document.getElementById('submitBtn').disabled = false;
 
-      if (window.innerWidth <= 1080) {
-        document.querySelector('.sidebar-card').scrollIntoView({ behavior: 'smooth' });
+      const formCard = document.querySelector('.sidebar-card');
+      if (formCard) {
+        formCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     }
 
