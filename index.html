@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>ANZUR — Ресторан высокой гастрономии | Душанбе</title>
   <meta name="description" content="Ресторан Анзур в Душанбе: ул. Дӯстии халқҳо, 10б (р-н Винзавода). Национальная, европейская и паназиатская кухня. VIP-кабины с караоке, летняя терраса, тихая веранда. Резерв: 917 917 917." />
   <meta name="robots" content="index, follow" />
@@ -49,7 +49,6 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      border-radius: 0 !important;
     }
 
     html {
@@ -341,12 +340,264 @@
       user-select: none;
     }
 
+    .nav-burger-btn {
+      display: none;
+      background: rgba(14, 11, 8, 0.85);
+      border: 1px solid rgba(197, 160, 89, 0.4);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4.5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--gold);
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      padding: 0;
+      flex-shrink: 0;
+    }
+    .nav-burger-btn:hover {
+      border-color: var(--gold);
+      background: rgba(197, 160, 89, 0.15);
+    }
+    .burger-bar {
+      display: block;
+      width: 17px;
+      height: 1.5px;
+      background: var(--gold);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
     @media (max-width: 860px) {
       .nav-center-menu { display: none; }
+      .nav-burger-btn { display: flex; }
+      .nav-right { gap: 0.8rem; }
     }
     @media (max-width: 520px) {
+      .nav-inner { height: 60px; }
+      .nav-logo-img { height: 27px; }
       .nav-reserve-link { display: none; }
-      .lang-switcher { padding: 0.2rem 0.4rem; gap: 0.12rem; }
+      .lang-switcher { padding: 0.2rem 0.35rem; gap: 0.08rem; }
+      .lang-btn { font-size: 0.6rem; padding: 0.22rem 0.3rem; min-height: 36px; display: inline-flex; align-items: center; justify-content: center; }
+    }
+
+    /* Mobile Nav Drawer */
+    .mobile-nav-drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 11500;
+      background: rgba(4, 3, 2, 0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.28s ease, visibility 0.28s ease;
+    }
+    .mobile-nav-drawer.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .mobile-nav-content {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      max-width: 540px;
+      width: 100%;
+      margin: 0 auto;
+      padding: max(1.2rem, calc(env(safe-area-inset-top, 0px) + 0.6rem)) 1.8rem max(1.5rem, calc(env(safe-area-inset-bottom, 0px) + 0.8rem));
+      justify-content: space-between;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .mobile-nav-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-nav-logo {
+      height: 30px;
+      width: auto;
+    }
+    .mobile-nav-close {
+      background: rgba(18, 14, 10, 0.9);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    .mobile-nav-close:hover {
+      background: var(--gold);
+      color: #060504;
+    }
+    .mobile-nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      padding: 2rem 0;
+    }
+    .mobile-nav-link {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 5vw, 2.2rem);
+      font-weight: 300;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: color 0.2s ease, transform 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      padding-bottom: 0.6rem;
+    }
+    .mobile-nav-link:hover, .mobile-nav-link:active {
+      color: var(--gold);
+      transform: translateX(4px);
+    }
+    .mobile-nav-menu-btn {
+      margin-top: 0.6rem;
+      background: rgba(197, 160, 89, 0.12);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      font-weight: 700;
+      padding: 0.95rem 1.4rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-radius: 4px;
+    }
+    .mobile-nav-menu-btn:hover {
+      background: var(--gold);
+      color: #060504;
+    }
+    .mobile-nav-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .mobile-nav-phone {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+    .mobile-nav-addr {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .mobile-nav-actions {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 0.5rem;
+    }
+    .mobile-nav-wa-btn {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      background: #25D366;
+      color: #060504;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+    .mobile-nav-book-btn {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      background: var(--gold);
+      color: #060504;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Floating WhatsApp Button */
+    .floating-wa-btn {
+      position: fixed;
+      bottom: max(1.5rem, calc(env(safe-area-inset-bottom, 0px) + 1rem));
+      right: max(1.5rem, calc(env(safe-area-inset-right, 0px) + 1rem));
+      z-index: 11000;
+      background: rgba(14, 11, 8, 0.94);
+      border: 1px solid var(--gold);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.65rem 1.15rem;
+      border-radius: 30px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.75), 0 0 20px rgba(37, 211, 102, 0.25);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    .floating-wa-btn:hover {
+      transform: translateY(-3px) scale(1.04);
+      border-color: #25D366;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(37, 211, 102, 0.45);
+    }
+    .floating-wa-icon {
+      width: 20px;
+      height: 20px;
+      fill: #25D366;
+      flex-shrink: 0;
+    }
+    .floating-wa-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      white-space: nowrap;
+    }
+    @media (max-width: 640px) {
+      .floating-wa-btn {
+        padding: 0.6rem 0.9rem;
+        bottom: max(1rem, calc(env(safe-area-inset-bottom, 0px) + 0.8rem));
+        right: max(1rem, calc(env(safe-area-inset-right, 0px) + 0.8rem));
+      }
+      .floating-wa-label {
+        font-size: 0.62rem;
+      }
     }
 
     /* ==========================================================================
@@ -484,6 +735,21 @@
     @media (max-width: 768px) {
       .hero-meta-top, .hero-meta-bottom { padding: 1.5rem; }
       .hero-meta-bottom { flex-direction: column; gap: 0.8rem; align-items: center; text-align: center; }
+      .hero-subtitle {
+        letter-spacing: 0.18em;
+        line-height: 1.6;
+        font-size: 0.68rem;
+        margin-bottom: 2rem;
+      }
+      .sec-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.2rem;
+        padding: 3.5rem 0 1.5rem;
+      }
+      .sec-title {
+        font-size: clamp(2.2rem, 7.5vw, 3.4rem);
+      }
     }
 
     /* ==========================================================================
@@ -1566,7 +1832,7 @@
     }
     .res-phone {
       font-family: var(--font-serif);
-      font-size: clamp(3rem, 6vw, 5.2rem);
+      font-size: clamp(2.2rem, 7.5vw, 5.2rem);
       font-weight: 300;
       color: var(--gold);
       line-height: 1;
@@ -2042,9 +2308,60 @@
         <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B2%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="nav-reserve-link" data-i18n="nav_write_us">
           Напишите нам
         </a>
+
+        <button type="button" class="nav-burger-btn" onclick="toggleMobileNav()" aria-label="Меню" title="Меню навигации">
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+        </button>
       </div>
     </div>
   </nav>
+
+  <!-- ==========================================================================
+       MOBILE NAVIGATION DRAWER
+       ========================================================================== -->
+  <div id="mobile-nav-drawer" class="mobile-nav-drawer" onclick="closeMobileNav()" role="dialog" aria-modal="true" aria-label="Меню сайта ресторана Анзур">
+    <div class="mobile-nav-content" onclick="event.stopPropagation()">
+      <div class="mobile-nav-header">
+        <img src="anzur_logo_gold.svg" alt="ANZUR RESTAURANT" class="mobile-nav-logo" />
+        <button type="button" class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Закрыть меню">✕</button>
+      </div>
+      <div class="mobile-nav-links">
+        <a href="#cuisine" onclick="closeMobileNav()" class="mobile-nav-link">
+          <span data-i18n="nav_gastronomy">Гастрономия</span>
+          <span style="font-size:1.1rem; color:var(--gold);">›</span>
+        </a>
+        <a href="#spaces" onclick="closeMobileNav()" class="mobile-nav-link">
+          <span data-i18n="nav_spaces">Залы & VIP</span>
+          <span style="font-size:1.1rem; color:var(--gold);">›</span>
+        </a>
+        <a href="#events" onclick="closeMobileNav()" class="mobile-nav-link">
+          <span data-i18n="nav_events">Шоу & Концерты</span>
+          <span style="font-size:1.1rem; color:var(--gold);">›</span>
+        </a>
+        <a href="#reservation" onclick="closeMobileNav()" class="mobile-nav-link">
+          <span data-i18n="nav_contacts">Контакты</span>
+          <span style="font-size:1.1rem; color:var(--gold);">›</span>
+        </a>
+        <button type="button" onclick="closeMobileNav(); openMenuModal();" class="mobile-nav-menu-btn" data-i18n="menu_full_btn">
+          ПОЛНОЕ МЕНЮ РЕСТОРАНА
+        </button>
+      </div>
+      <div class="mobile-nav-footer">
+        <a href="tel:992917917917" class="mobile-nav-phone">+992 917 917 917</a>
+        <span class="mobile-nav-addr">г. Душанбе, ул. Дӯстии халқҳо, 10б (р-н Винзавода)</span>
+        <div class="mobile-nav-actions">
+          <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B2%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="mobile-nav-wa-btn">
+            WhatsApp
+          </a>
+          <a href="booking.html" class="mobile-nav-book-btn" data-i18n="hero_book_btn">
+            Забронировать
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ==========================================================================
        2. CENTRAL MONUMENTAL HERO
@@ -2567,6 +2884,17 @@
       <div id="modalSpacesCounter" class="spaces-stage-counter">1 / 18</div>
     </div>
   </div>
+
+  <!-- ==========================================================================
+       FLOATING WHATSAPP BUTTON (MOBILE & DESKTOP QUICK ACTION)
+       ========================================================================== -->
+  <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D0%B2%20%D0%A0%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD%D0%B5%20%D0%90%D0%BD%D0%B7%D1%83%D1%80."
+     target="_blank" rel="noopener" class="floating-wa-btn" id="floatingWaBtn" aria-label="Связаться в WhatsApp">
+    <svg class="floating-wa-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.79 14.07c-.24.68-1.4 1.25-1.95 1.33-.53.07-1.2.1-3.6-0.89-3.07-1.27-5.06-4.38-5.21-4.59-.16-.21-1.25-1.66-1.25-3.17 0-1.51.79-2.25 1.07-2.56.28-.31.62-.39.83-.39.21 0 .42.002.6.01.2.01.46-.07.72.55.27.64.91 2.22.99 2.38.08.16.14.35.03.56-.1.21-.16.34-.31.52-.16.18-.33.4-.47.54-.16.16-.32.33-.14.64.18.31.81 1.33 1.74 2.15 1.2 1.06 2.2 1.39 2.52 1.55.31.16.5.14.68-.08.18-.21.78-.91.99-1.22.21-.31.42-.26.7-.16.29.1.1.81 3.99 2.12.39.2.65.31.75.47.1.16.1.92-.14 1.6z"/>
+    </svg>
+    <span class="floating-wa-label" data-i18n="wa_dock">Напишите нам</span>
+  </a>
 
   <script src="anzur_menu_data.js"></script>
 
@@ -3491,13 +3819,54 @@ let currentSlideIdx = 0;
     }
 
     function checkBodyModalScroll() {
-      const anyOpen = document.querySelector('.menu-modal-overlay.is-open, .text-menu-overlay.is-open');
-      if (!anyOpen) {
+      const anyOpen = document.querySelector('.menu-modal-overlay.is-open, .text-menu-overlay.is-open, .mobile-nav-drawer.is-open');
+      const waBtn = document.getElementById('floatingWaBtn');
+      if (anyOpen) {
+        if (waBtn) {
+          waBtn.style.opacity = '0';
+          waBtn.style.pointerEvents = 'none';
+        }
+      } else {
         document.body.style.overflow = '';
+        if (waBtn) {
+          waBtn.style.opacity = '';
+          waBtn.style.pointerEvents = '';
+        }
       }
     }
 
+    function toggleMobileNav() {
+      const drawer = document.getElementById('mobile-nav-drawer');
+      if (!drawer) return;
+      if (drawer.classList.contains('is-open')) {
+        closeMobileNav();
+      } else {
+        openMobileNav();
+      }
+    }
+
+    function openMobileNav() {
+      closeMenuModal();
+      closeSpacesModal();
+      closeTextMenuModal();
+      const drawer = document.getElementById('mobile-nav-drawer');
+      if (drawer) {
+        drawer.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+      checkBodyModalScroll();
+    }
+
+    function closeMobileNav() {
+      const drawer = document.getElementById('mobile-nav-drawer');
+      if (drawer) {
+        drawer.classList.remove('is-open');
+      }
+      checkBodyModalScroll();
+    }
+
     function openPhotoMenu(page) {
+      closeMobileNav();
       closeTextMenuModal();
       closeSpacesModal();
       if (typeof page === 'number' && page >= 1 && page <= TOTAL_MODAL_MENU_PAGES) {
@@ -3537,6 +3906,7 @@ let currentSlideIdx = 0;
     }
 
     function openTextMenuModal(lang) {
+      closeMobileNav();
       closeMenuModal();
       closeSpacesModal();
       const targetLang = lang || currentLang || 'en';
@@ -3832,6 +4202,7 @@ let currentSlideIdx = 0;
     }
 
     function openSpacesModal(index) {
+      closeMobileNav();
       closeMenuModal();
       closeTextMenuModal();
       currentSpacesList = ALL_SPACES_PHOTOS;
@@ -3935,6 +4306,15 @@ let currentSlideIdx = 0;
 
     // Global Key listeners (ESC closes modal, Arrows cycle pages / slides)
     window.addEventListener('keydown', (e) => {
+      // Mobile Nav Drawer
+      const mobileNav = document.getElementById('mobile-nav-drawer');
+      if (mobileNav && mobileNav.classList.contains('is-open')) {
+        if (e.key === 'Escape') {
+          closeMobileNav();
+          return;
+        }
+      }
+
       // Text Menu modal
       const textMenuModal = document.getElementById('text-menu-modal');
       if (textMenuModal && textMenuModal.classList.contains('is-open')) {
