@@ -933,39 +933,52 @@
       align-items: center;
       justify-content: center;
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
       padding: 1rem;
     }
     .menu-modal-overlay.is-open {
       opacity: 1;
+      visibility: visible;
       pointer-events: auto;
     }
     .menu-modal-close-btn {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      z-index: 12050;
-      background: rgba(18, 14, 10, 0.85);
+      position: fixed;
+      top: max(1.5rem, calc(env(safe-area-inset-top, 0px) + 0.8rem));
+      right: max(1.5rem, calc(env(safe-area-inset-right, 0px) + 0.8rem));
+      z-index: 12100;
+      background: rgba(18, 14, 10, 0.92);
       border: 1px solid var(--gold);
       color: var(--gold);
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       line-height: 1;
       transition: all 0.2s ease;
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 0 15px rgba(212, 175, 55, 0.2);
+      pointer-events: none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    .menu-modal-overlay.is-open .menu-modal-close-btn {
       pointer-events: auto;
     }
     .menu-modal-close-btn:hover {
       background: var(--gold);
       color: #060504;
       transform: scale(1.08);
+      box-shadow: 0 6px 25px rgba(212, 175, 55, 0.4);
+    }
+    .menu-modal-close-btn:active {
+      transform: scale(0.95);
     }
     .menu-lightbox-stage {
       position: relative;
@@ -1047,11 +1060,11 @@
         background: rgba(8, 6, 4, 0.95);
       }
       .menu-modal-close-btn {
-        top: 1rem;
-        right: 1rem;
-        width: 38px;
-        height: 38px;
-        font-size: 1.1rem;
+        top: max(1rem, calc(env(safe-area-inset-top, 0px) + 0.6rem));
+        right: max(1rem, calc(env(safe-area-inset-right, 0px) + 0.6rem));
+        width: 44px;
+        height: 44px;
+        font-size: 1.25rem;
       }
       .menu-page-display {
         max-width: 96vw;
@@ -1157,12 +1170,14 @@
       align-items: center;
       justify-content: center;
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.25s ease;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
       padding: 1rem;
     }
     .text-menu-overlay.is-open {
       opacity: 1;
+      visibility: visible;
       pointer-events: auto;
     }
     .text-menu-dialog {
@@ -2492,7 +2507,7 @@
        CLEAN MENU VIEWER (PAGES + ARROWS ONLY)
        ========================================================================== -->
   <div id="menu-modal" class="menu-modal-overlay" role="dialog" aria-modal="true" aria-label="Меню ресторана Анзур" onclick="handleMenuOverlayClick(event)">
-    <button type="button" class="menu-modal-close-btn" onclick="closeMenuModal(event)" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
+    <button type="button" id="closeMenuModalBtn" class="menu-modal-close-btn" onclick="closeMenuModal(event)" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
     <div class="menu-lightbox-stage" id="modalMenuStage" onclick="event.stopPropagation()">
       <button type="button" class="menu-stage-arrow prev" onclick="prevModalMenuPage(event)" title="Предыдущая страница" aria-label="Предыдущая страница">‹</button>
       <img id="modalMenuCurrentImg" src="menu_pages_web/menu_page_01.jpg" alt="Меню ресторана Анзур" class="menu-page-display" />
@@ -2518,7 +2533,7 @@
             <button type="button" class="text-lang-tab" data-tlang="zh" onclick="changeTextMenuLanguage('zh')">中文</button>
             <button type="button" class="text-lang-tab" data-tlang="ru" onclick="changeTextMenuLanguage('ru')">RU</button>
           </div>
-          <button type="button" class="text-menu-close" onclick="closeTextMenuModal(event)" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
+          <button type="button" id="closeTextMenuModalBtn" class="text-menu-close" onclick="closeTextMenuModal(event)" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
         </div>
       </div>
 
@@ -2544,7 +2559,7 @@
        CLEAN LOCATIONS VIEWER (PHOTOS + ARROWS ONLY)
        ========================================================================== -->
   <div id="spaces-modal" class="menu-modal-overlay" role="dialog" aria-modal="true" aria-label="Фотографии локаций ресторана Анзур" onclick="handleSpacesOverlayClick(event)">
-    <button type="button" class="menu-modal-close-btn" onclick="closeSpacesModal(event)" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
+    <button type="button" id="closeSpacesModalBtn" class="menu-modal-close-btn" onclick="closeSpacesModal(event)" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
     <div class="menu-lightbox-stage" id="modalSpacesStage" onclick="event.stopPropagation()">
       <button type="button" class="menu-stage-arrow prev" onclick="prevSpacesPage(event)" title="Предыдущее фото" aria-label="Предыдущее фото">‹</button>
       <img id="modalSpacesCurrentImg" src="location_photos/main_hall_07.jpg" alt="Локация ресторана Анзур" class="menu-page-display" />
@@ -3475,8 +3490,16 @@ let currentSlideIdx = 0;
       }
     }
 
+    function checkBodyModalScroll() {
+      const anyOpen = document.querySelector('.menu-modal-overlay.is-open, .text-menu-overlay.is-open');
+      if (!anyOpen) {
+        document.body.style.overflow = '';
+      }
+    }
+
     function openPhotoMenu(page) {
       closeTextMenuModal();
+      closeSpacesModal();
       if (typeof page === 'number' && page >= 1 && page <= TOTAL_MODAL_MENU_PAGES) {
         setModalMenuPage(page);
       }
@@ -3495,13 +3518,8 @@ let currentSlideIdx = 0;
       const modal = document.getElementById('menu-modal');
       if (modal) {
         modal.classList.remove('is-open');
-        const textModal = document.getElementById('text-menu-modal');
-        const spacesModal = document.getElementById('spaces-modal');
-        if ((!textModal || !textModal.classList.contains('is-open')) &&
-            (!spacesModal || !spacesModal.classList.contains('is-open'))) {
-          document.body.style.overflow = '';
-        }
       }
+      checkBodyModalScroll();
     }
 
     function handleMenuOverlayClick(e) {
@@ -3520,6 +3538,7 @@ let currentSlideIdx = 0;
 
     function openTextMenuModal(lang) {
       closeMenuModal();
+      closeSpacesModal();
       const targetLang = lang || currentLang || 'en';
       currentTextMenuLang = targetLang;
       renderTextMenu(targetLang);
@@ -3538,13 +3557,8 @@ let currentSlideIdx = 0;
       const modal = document.getElementById('text-menu-modal');
       if (modal) {
         modal.classList.remove('is-open');
-        const photoModal = document.getElementById('menu-modal');
-        const spacesModal = document.getElementById('spaces-modal');
-        if ((!photoModal || !photoModal.classList.contains('is-open')) &&
-            (!spacesModal || !spacesModal.classList.contains('is-open'))) {
-          document.body.style.overflow = '';
-        }
       }
+      checkBodyModalScroll();
     }
 
     function handleTextMenuOverlayClick(e) {
@@ -3818,6 +3832,8 @@ let currentSlideIdx = 0;
     }
 
     function openSpacesModal(index) {
+      closeMenuModal();
+      closeTextMenuModal();
       currentSpacesList = ALL_SPACES_PHOTOS;
       currentSpacesIndex = (typeof index === 'number' && index >= 0 && index < currentSpacesList.length) ? index : 0;
       setSpacesPhoto(currentSpacesIndex);
@@ -3836,19 +3852,33 @@ let currentSlideIdx = 0;
       const modal = document.getElementById('spaces-modal');
       if (modal) {
         modal.classList.remove('is-open');
-        const menuModal = document.getElementById('menu-modal');
-        const textModal = document.getElementById('text-menu-modal');
-        if ((!menuModal || !menuModal.classList.contains('is-open')) &&
-            (!textModal || !textModal.classList.contains('is-open'))) {
-          document.body.style.overflow = '';
-        }
       }
+      checkBodyModalScroll();
     }
 
     function handleSpacesOverlayClick(e) {
       if (e && e.target && (e.target.id === 'spaces-modal' || e.target.classList.contains('menu-modal-overlay'))) {
         closeSpacesModal(e);
       }
+    }
+
+    function bindModalCloseEvents() {
+      const menuClose = document.getElementById('closeMenuModalBtn');
+      if (menuClose) {
+        menuClose.onclick = closeMenuModal;
+      }
+      const spacesClose = document.getElementById('closeSpacesModalBtn');
+      if (spacesClose) {
+        spacesClose.onclick = closeSpacesModal;
+      }
+      const textClose = document.getElementById('closeTextMenuModalBtn');
+      if (textClose) {
+        textClose.onclick = closeTextMenuModal;
+      }
+    }
+    bindModalCloseEvents();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', bindModalCloseEvents);
     }
 
     function setSpacesPhoto(idx) {
