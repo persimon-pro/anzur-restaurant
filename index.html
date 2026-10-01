@@ -366,7 +366,8 @@
       position: absolute;
       inset: 0;
       overflow: hidden;
-      background: #060504 url('zastavka.gif') center/cover no-repeat;
+      background: #060504;
+      pointer-events: none;
     }
     .hero-backdrop-media {
       position: absolute;
@@ -376,6 +377,9 @@
       object-fit: cover;
       object-position: center;
       display: block;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-select: none;
     }
     .hero-backdrop-overlay {
       position: absolute;
@@ -1962,10 +1966,7 @@
        ========================================================================== -->
   <header class="hero">
     <div class="hero-backdrop">
-      <video class="hero-backdrop-media" autoplay loop muted playsinline poster="zastavka.gif">
-        <source src="zastavka.mp4" type="video/mp4">
-        <img src="zastavka.gif" alt="Заставка ресторана Анзур" class="hero-backdrop-media" />
-      </video>
+      <img src="zastavka.gif" alt="Заставка ресторана Анзур" class="hero-backdrop-media" />
       <div class="hero-backdrop-overlay"></div>
     </div>
 
