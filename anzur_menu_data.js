@@ -1,7 +1,7 @@
 const ANZUR_MENU_CATEGORIES = [
   {
     "page": 2,
-    "id": "cold_starters_1",
+    "id": "cold_starters",
     "title": {
       "ru": "Холодные закуски",
       "tj": "Хӯрокҳои сард",
@@ -88,19 +88,7 @@ const ANZUR_MENU_CATEGORIES = [
           "en": "Tender fresh mozzarella layered with heirloom tomatoes, fragrant pesto, and pine nuts",
           "zh": "新鲜莫扎里拉奶酪切片搭配熟成蜜茄，淋上罗勒坚果青酱与香脆松子"
         }
-      }
-    ]
-  },
-  {
-    "page": 3,
-    "id": "cold_starters_2",
-    "title": {
-      "ru": "Мясные деликатесы & Закуски",
-      "tj": "Хӯрокҳои гӯштӣ & Газакҳо",
-      "en": "Cured Meats & Appetizers",
-      "zh": "特色中亚冷切肉盘与开胃佐菜"
-    },
-    "items": [
+      },
       {
         "name": {
           "ru": "Мясное плато «Анзур»",
@@ -169,12 +157,12 @@ const ANZUR_MENU_CATEGORIES = [
   },
   {
     "page": 4,
-    "id": "salads_signature",
+    "id": "salads",
     "title": {
-      "ru": "Фирменные салаты",
-      "tj": "Хӯришҳои хоса",
-      "en": "Signature Salads",
-      "zh": "主厨特调招牌沙拉"
+      "ru": "Салаты",
+      "tj": "Хӯришҳо",
+      "en": "Salads",
+      "zh": "精选沙拉"
     },
     "items": [
       {
@@ -240,19 +228,7 @@ const ANZUR_MENU_CATEGORIES = [
           "en": "Simmered red kidney beans, ground walnuts, pomegranate molasses reduction, cilantro, and fragrant spices",
           "zh": "软糯红芸豆、精选山核桃碎、阿塞拜疆纯正石榴浓汁、鲜香菜与高加索传统香草"
         }
-      }
-    ]
-  },
-  {
-    "page": 5,
-    "id": "salads_seafood",
-    "title": {
-      "ru": "Салаты & Морепродукты",
-      "tj": "Хӯришҳо & Маҳсулоти баҳрӣ",
-      "en": "Salads & Ocean Seafood",
-      "zh": "深海海鲜与地中海轻食沙拉"
-    },
-    "items": [
+      },
       {
         "name": {
           "ru": "Салат с обожжённым лососем и авокадо",
@@ -321,12 +297,12 @@ const ANZUR_MENU_CATEGORIES = [
   },
   {
     "page": 6,
-    "id": "hot_starters_wok",
+    "id": "hot_starters",
     "title": {
-      "ru": "Горячие закуски & WOK",
-      "tj": "Газакҳои гарм & Вок",
-      "en": "Hot Starters & WOK",
-      "zh": "中亚传统热点心与铁板镬气料理"
+      "ru": "Горячие закуски",
+      "tj": "Хӯрокҳои гарм",
+      "en": "Hot Starters",
+      "zh": "热前菜与镬炒"
     },
     "items": [
       {
@@ -392,19 +368,7 @@ const ANZUR_MENU_CATEGORIES = [
           "en": "Flaky, buttery layered pastry baked on tandoor clay walls with juicy diced meat and cumin seeds",
           "zh": "泥炉炭火高温炙烤，金黄起酥千层面皮，咬开爆出鲜美牛肉汁与浓郁孜然香气"
         }
-      }
-    ]
-  },
-  {
-    "page": 7,
-    "id": "seafood_starters",
-    "title": {
-      "ru": "Закуски из морепродуктов",
-      "tj": "Газакҳои баҳрӣ",
-      "en": "Ocean Seafood Starters",
-      "zh": "金黄香酥深海海鲜小食"
-    },
-    "items": [
+      },
       {
         "name": {
           "ru": "Креветки в миндальных лепестках",
@@ -473,12 +437,12 @@ const ANZUR_MENU_CATEGORIES = [
   },
   {
     "page": 8,
-    "id": "traditional_soups",
+    "id": "soups",
     "title": {
-      "ru": "Национальные супы",
-      "tj": "Шӯрбоҳои миллӣ",
-      "en": "Traditional Heritage Soups",
-      "zh": "塔吉克传统滋补养生瓦煲靓汤"
+      "ru": "Супы",
+      "tj": "Шӯрбоҳо",
+      "en": "Soups",
+      "zh": "汤类料理"
     },
     "items": [
       {
@@ -544,19 +508,7 @@ const ANZUR_MENU_CATEGORIES = [
           "en": "Petite hand-pinched meat dumplings in clarified beef broth finished with fresh herbs and dollop of kaymak",
           "zh": "一口一个的纯手工迷你牛肉小水饺，汤清味鲜，缀以翠绿香葱香菜与丝滑天然酸奶油"
         }
-      }
-    ]
-  },
-  {
-    "page": 9,
-    "id": "asian_soups_pasta",
-    "title": {
-      "ru": "Супы Азии & Итальянская паста",
-      "tj": "Шӯрбоҳои Осиё & Паста",
-      "en": "Pan-Asian Soups & Italian Pasta",
-      "zh": "泛亚风味海鲜浓汤与意式手工意面"
-    },
-    "items": [
+      },
       {
         "name": {
           "ru": "Том Ям с морепродуктами",
@@ -625,12 +577,12 @@ const ANZUR_MENU_CATEGORIES = [
   },
   {
     "page": 10,
-    "id": "wood_fired_pizza",
+    "id": "pizza",
     "title": {
-      "ru": "Пицца из дровяной печи",
-      "tj": "Питса аз танӯри ҳезумӣ",
-      "en": "Wood-Fired Hearth Pizza",
-      "zh": "传统原木柴火果木烤炉意式披萨"
+      "ru": "Пицца",
+      "tj": "Питса",
+      "en": "Pizza",
+      "zh": "手工意式披萨"
     },
     "items": [
       {
@@ -701,12 +653,12 @@ const ANZUR_MENU_CATEGORIES = [
   },
   {
     "page": 11,
-    "id": "tandoor_bakery",
+    "id": "oven_baked",
     "title": {
-      "ru": "Блюда в печи & Свежая выпечка",
-      "tj": "Таомҳои танӯрӣ & Нонпазӣ",
-      "en": "Hearth Oven & Bakery",
-      "zh": "传统陶土泥炉鲜烤面点与格鲁吉亚奶酪饼"
+      "ru": "Блюда в печи",
+      "tj": "Таомҳои танӯрӣ",
+      "en": "Oven-Baked Dishes",
+      "zh": "烤箱美馔与热烤面饼"
     },
     "items": [
       {
@@ -779,10 +731,10 @@ const ANZUR_MENU_CATEGORIES = [
     "page": 12,
     "id": "side_dishes",
     "title": {
-      "ru": "Гарниры на углях & Свежие гарниры",
-      "tj": "Гарнирҳои рӯи оташ & Сабзавотӣ",
-      "en": "Charcoal Sides & Accompaniments",
-      "zh": "果木炭烤香蔬与手工特色主厨配菜"
+      "ru": "Гарниры",
+      "tj": "Гарнирҳо",
+      "en": "Side Dishes",
+      "zh": "炭烤与特色配菜"
     },
     "items": [
       {
@@ -855,10 +807,10 @@ const ANZUR_MENU_CATEGORIES = [
     "page": 13,
     "id": "josper_steaks",
     "title": {
-      "ru": "Хоспер & Премиальные стейки",
-      "tj": "Хоспер & Стейкҳои аълосифат",
-      "en": "Josper Charcoal Steaks",
-      "zh": "乔斯珀果木炭烤顶级牛排系列"
+      "ru": "Хосперы",
+      "tj": "Хоспер ва стейкҳо",
+      "en": "Josper Dishes",
+      "zh": "乔斯珀果木烤箱牛排"
     },
     "items": [
       {
@@ -929,12 +881,12 @@ const ANZUR_MENU_CATEGORIES = [
   },
   {
     "page": 14,
-    "id": "grilled_fish",
+    "id": "fish",
     "title": {
-      "ru": "Рыба на гриле & Морепродукты",
-      "tj": "Моҳии рӯи грил & Маҳсулоти баҳрӣ",
-      "en": "Charcoal Grilled Fish",
-      "zh": "炭火原条整鱼与精选海鲜"
+      "ru": "Рыба",
+      "tj": "Моҳӣ",
+      "en": "Fish",
+      "zh": "深海海鲜与烤鱼"
     },
     "items": [
       {
@@ -991,10 +943,10 @@ const ANZUR_MENU_CATEGORIES = [
     "page": 15,
     "id": "sushi_rolls",
     "title": {
-      "ru": "Суши, Роллы & Сеты «Анзур»",
-      "tj": "Суши, Роллҳо & Маҷмӯаҳо",
-      "en": "Artisan Sushi & Signature Rolls",
-      "zh": "日式高端手作寿司与招牌拼盘"
+      "ru": "Суши и роллы",
+      "tj": "Суши ва роллҳо",
+      "en": "Sushi & Rolls",
+      "zh": "日式寿司与特色拼盘"
     },
     "items": [
       {
@@ -1067,10 +1019,10 @@ const ANZUR_MENU_CATEGORIES = [
     "page": 16,
     "id": "charcoal_kebabs",
     "title": {
-      "ru": "Шашлыки на углях & Кебабы",
-      "tj": "Шашликҳо дар ангишт & Кабобҳо",
-      "en": "Traditional Mangal Kebabs",
-      "zh": "中亚传统果木明火炭烤肉串系列"
+      "ru": "Шашлыки",
+      "tj": "Кабобҳо",
+      "en": "Kebabs",
+      "zh": "炭烤肉串与烤肉"
     },
     "items": [
       {
@@ -1141,12 +1093,12 @@ const ANZUR_MENU_CATEGORIES = [
   },
   {
     "page": 17,
-    "id": "mangal_special",
+    "id": "mangal_dishes",
     "title": {
-      "ru": "Блюда на мангале & Дичь",
-      "tj": "Таомҳои рӯи оташ & Мурғӣ",
-      "en": "Live Fire Mangal Specialties",
-      "zh": "炭火飞禽与高山冷水野生红点活鳟鱼"
+      "ru": "Блюда на мангале",
+      "tj": "Таомҳо рӯи манқал",
+      "en": "Dishes on the Grill",
+      "zh": "明火烧烤风味"
     },
     "items": [
       {
@@ -1219,10 +1171,10 @@ const ANZUR_MENU_CATEGORIES = [
     "page": 18,
     "id": "plov_anzur",
     "title": {
-      "ru": "Фирменный плов «Анзур»",
+      "ru": "Плов «Анзур»",
       "tj": "Оши палави «Анзур»",
-      "en": "Signature Anzur Plov",
-      "zh": "安祖尔传世名馔传统手抓饭"
+      "en": "Anzur Plov",
+      "zh": "安祖尔传统手抓饭"
     },
     "items": [
       {
@@ -1293,12 +1245,12 @@ const ANZUR_MENU_CATEGORIES = [
   },
   {
     "page": 19,
-    "id": "national_meats",
+    "id": "national_dishes",
     "title": {
-      "ru": "Национальные мясные блюда",
-      "tj": "Таомҳои миллии гӯштӣ",
-      "en": "Heritage Meat Specialties",
-      "zh": "中亚国宴级传统铜锅炖肉与香酥羊排"
+      "ru": "Национальные блюда",
+      "tj": "Таомҳои миллӣ",
+      "en": "National Dishes",
+      "zh": "中亚国宴传统名菜"
     },
     "items": [
       {
@@ -1353,12 +1305,12 @@ const ANZUR_MENU_CATEGORIES = [
   },
   {
     "page": 20,
-    "id": "fruits_icecream",
+    "id": "desserts",
     "title": {
-      "ru": "Фрукты & Домашнее мороженое",
-      "tj": "Меваҳо & Яхмоси хонагӣ",
-      "en": "Fresh Fruits & Artisan Ice Cream",
-      "zh": "时令甘甜高山鲜果大盘与手工冰淇淋"
+      "ru": "Десерты",
+      "tj": "Шириниҳо ва меваҳо",
+      "en": "Desserts",
+      "zh": "手工甜品与水果冰淇淋"
     },
     "items": [
       {
@@ -1408,19 +1360,7 @@ const ANZUR_MENU_CATEGORIES = [
           "en": "Natural handmade gelato made from fresh whole milk: vanilla cream, dark chocolate, pistachio, or strawberry",
           "zh": "采用纯正天然鲜牛奶手工搅打：马达加斯加香草、纯黑巧克力、西西里开心果与草莓果茸"
         }
-      }
-    ]
-  },
-  {
-    "page": 21,
-    "id": "desserts",
-    "title": {
-      "ru": "Авторские десерты",
-      "tj": "Шириниҳои муаллифӣ",
-      "en": "Signature Desserts",
-      "zh": "主厨特调手工艺术甜点"
-    },
-    "items": [
+      },
       {
         "name": {
           "ru": "Дубайский шоколадный чизкейк",
