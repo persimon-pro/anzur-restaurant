@@ -2491,7 +2491,6 @@
         <div class="text-menu-header-info">
           <div class="text-menu-crest">АНЗУР</div>
           <h2 class="text-menu-heading" id="textMenuTitle">Меню ресторана</h2>
-          <p class="text-menu-subheading" id="textMenuSub">Ресторан «Анзур» · г. Душанбе, ул. Дӯстии халқҳо, 10б</p>
         </div>
         <div class="text-menu-controls">
           <div class="text-menu-lang-switch">
@@ -2500,25 +2499,16 @@
             <button type="button" class="text-lang-tab" data-tlang="zh" onclick="changeTextMenuLanguage('zh')">中文</button>
             <button type="button" class="text-lang-tab" data-tlang="ru" onclick="changeTextMenuLanguage('ru')">RU</button>
           </div>
-          <button type="button" class="text-menu-photo-btn" onclick="openPhotoMenuFromText()" title="Оригинальное фото-меню (RU)">
-            📷 <span id="textMenuPhotoToggleLabel">Фото-меню (RU)</span>
-          </button>
-          <a id="textMenuPrintLink" href="menu_en.html" target="_blank" class="text-menu-print-btn" title="Версия для печати / Print">
-            🖨️
-          </a>
           <button type="button" class="text-menu-close" onclick="closeTextMenuModal(event)" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
         </div>
       </div>
 
-      <!-- Toolbar: Search & Category Pills -->
+      <!-- Toolbar: Search -->
       <div class="text-menu-toolbar">
         <div class="text-menu-search">
           <svg class="text-menu-search-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
           <input type="text" id="textMenuSearchInput" class="text-menu-input" placeholder="Поиск блюд / Search dishes..." oninput="handleTextMenuSearch(this.value)" />
           <button type="button" id="textMenuSearchClear" class="text-menu-clear" onclick="clearTextMenuSearch()" style="display:none;">✕</button>
-        </div>
-        <div class="text-menu-cats" id="textMenuCategoriesNav">
-          <!-- Dynamic category pills -->
         </div>
       </div>
 
@@ -3607,18 +3597,11 @@ let currentSlideIdx = 0;
 
       const curUi = ui[lang] || ui.en;
       const titleEl = document.getElementById('textMenuTitle');
-      const subEl = document.getElementById('textMenuSub');
       const searchInput = document.getElementById('textMenuSearchInput');
-      const photoBtn = document.getElementById('textMenuPhotoToggleLabel');
-      const printLink = document.getElementById('textMenuPrintLink');
 
       if (titleEl) titleEl.textContent = curUi.title;
-      if (subEl) subEl.textContent = curUi.sub;
       if (searchInput) searchInput.placeholder = curUi.search;
-      if (photoBtn) photoBtn.textContent = curUi.photoBtn;
-      if (printLink) printLink.href = curUi.printUrl;
 
-      renderCategoryPills(lang, curUi.all);
       renderDishesList(lang, curUi.empty);
     }
 
