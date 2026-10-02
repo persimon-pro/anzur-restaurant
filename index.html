@@ -2247,6 +2247,15 @@
       font-weight: 700;
       letter-spacing: 0.08em;
     }
+    .footer-dev-link {
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+    .footer-dev-link:hover strong {
+      color: var(--gold-light);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
 
     @media (max-width: 1024px) {
       .footer-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
@@ -2868,7 +2877,7 @@
       <div class="footer-bottom-left">
         <span data-i18n="footer_rights">© 2026 Ресторан «Анзур». Все права защищены.</span>
         <span class="footer-dev-credit">
-          <span data-i18n="footer_dev">Разработка сайта — </span><strong style="color:var(--gold);">Loft Creative House</strong>
+          <span data-i18n="footer_dev">Разработка сайта — </span><a href="https://loft.tj" target="_blank" rel="noopener" class="footer-dev-link" title="Агентство Loft Creative House (loft.tj)"><strong style="color:var(--gold);">Loft Creative House</strong></a>
         </span>
       </div>
       <div class="footer-bottom-right">
