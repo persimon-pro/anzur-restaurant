@@ -457,24 +457,109 @@
       box-shadow: inset 0 0 0 1px rgba(197, 160, 89, 0.45);
       border-color: rgba(197, 160, 89, 0.55);
     }
+    #t-cell-3 {
+      border-radius: 50% !important;
+    }
     #t-cell-29 {
       border-radius: 14px;
       background: radial-gradient(circle at center, rgba(197, 160, 89, 0.16) 0%, rgba(26, 20, 14, 0.95) 100%);
       box-shadow: inset 0 0 0 1px rgba(197, 160, 89, 0.45);
     }
     #t-cell-36 {
-      transform: rotate(-20deg);
+      transform: rotate(-35deg);
       transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
     #t-cell-36:hover {
-      transform: rotate(-20deg) scale(1.06);
+      transform: rotate(-35deg) scale(1.06);
     }
     #t-cell-21 {
-      transform: rotate(20deg);
+      transform: rotate(35deg);
       transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
     #t-cell-21:hover {
-      transform: rotate(20deg) scale(1.06);
+      transform: rotate(35deg) scale(1.06);
+    }
+
+    /* Furniture Graphics Elements (Chairs, Armchairs, Sofas) */
+    .table-group {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 8px 10px;
+    }
+    .arch-chair {
+      position: absolute;
+      background: #14110E;
+      border: 1px solid rgba(197, 160, 89, 0.5);
+      border-radius: 6px 6px 3px 3px;
+      pointer-events: none;
+      z-index: 1;
+      transition: all 0.2s ease;
+    }
+    .table-group:hover .arch-chair {
+      border-color: var(--gold-light);
+    }
+    .chair-top {
+      top: -11px;
+      width: 22px;
+      height: 9px;
+      border-radius: 6px 6px 2px 2px;
+    }
+    .chair-bottom {
+      bottom: -11px;
+      width: 22px;
+      height: 9px;
+      border-radius: 2px 2px 6px 6px;
+    }
+    .chair-left {
+      left: -11px;
+      width: 9px;
+      height: 22px;
+      border-radius: 6px 2px 2px 6px;
+    }
+    .chair-right {
+      right: -11px;
+      width: 9px;
+      height: 22px;
+      border-radius: 2px 6px 6px 2px;
+    }
+    /* Sofa / Couch shapes for VIP booths */
+    .arch-sofa {
+      position: absolute;
+      background: #18130E;
+      border: 1px solid rgba(197, 160, 89, 0.6);
+      box-shadow: inset 0 0 4px rgba(0,0,0,0.8);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .sofa-top {
+      top: -14px;
+      left: 4px;
+      right: 4px;
+      height: 11px;
+      border-radius: 6px 6px 2px 2px;
+    }
+    .sofa-bottom {
+      bottom: -14px;
+      left: 4px;
+      right: 4px;
+      height: 11px;
+      border-radius: 2px 2px 6px 6px;
+    }
+    .sofa-left {
+      left: -15px;
+      top: 4px;
+      bottom: 4px;
+      width: 12px;
+      border-radius: 6px 2px 2px 6px;
+    }
+    .sofa-right {
+      right: -15px;
+      top: 4px;
+      bottom: 4px;
+      width: 12px;
+      border-radius: 2px 6px 6px 2px;
     }
 
     /* Stage block on the right */
@@ -1063,52 +1148,174 @@
             <div style="flex:1; display:flex; flex-direction:column; justify-content:space-between; padding:0.4rem 0;">
               
               <!-- Top Row (North wall): VIP 2, VIP 3, Tables 4, 5, 6, 7 -->
-              <div style="display:flex; align-items:center; gap:0.8rem;">
-                <div id="t-cell-2" style="width:112px; height:86px;"></div>
-                <div id="t-cell-3" style="width:108px; height:86px;"></div>
-                <div id="t-cell-4" style="width:68px; height:66px; margin-left:0.4rem;"></div>
-                <div id="t-cell-5" style="width:68px; height:66px;"></div>
-                <div id="t-cell-6" style="width:72px; height:66px;"></div>
-                <div id="t-cell-7" style="width:72px; height:66px;"></div>
+              <div style="display:flex; align-items:center; gap:0.9rem;">
+                <!-- Table 2 (VIP Sofa Booth) -->
+                <div class="table-group">
+                  <div class="arch-sofa sofa-top"></div>
+                  <div class="arch-sofa sofa-left"></div>
+                  <div class="arch-sofa sofa-bottom"></div>
+                  <div id="t-cell-2" style="width:112px; height:86px;"></div>
+                </div>
+
+                <!-- Table 3 (VIP Round Lounge) -->
+                <div class="table-group">
+                  <div class="arch-chair chair-top" style="top:-13px;"></div>
+                  <div class="arch-chair chair-bottom" style="bottom:-13px;"></div>
+                  <div class="arch-chair chair-left" style="left:-13px;"></div>
+                  <div class="arch-chair chair-right" style="right:-13px;"></div>
+                  <div id="t-cell-3" style="width:96px; height:96px;"></div>
+                </div>
+
+                <!-- Table 4 (Booth with chairs) -->
+                <div class="table-group" style="margin-left:0.5rem;">
+                  <div class="arch-chair chair-left"></div>
+                  <div class="arch-chair chair-right"></div>
+                  <div id="t-cell-4" style="width:68px; height:66px;"></div>
+                </div>
+
+                <!-- Table 5 (Booth with chairs) -->
+                <div class="table-group">
+                  <div class="arch-chair chair-left"></div>
+                  <div class="arch-chair chair-right"></div>
+                  <div id="t-cell-5" style="width:68px; height:66px;"></div>
+                </div>
+
+                <!-- Table 6 (Rectangular table with chairs on all sides) -->
+                <div class="table-group">
+                  <div class="arch-chair chair-top"></div>
+                  <div class="arch-chair chair-bottom"></div>
+                  <div class="arch-chair chair-left"></div>
+                  <div class="arch-chair chair-right"></div>
+                  <div id="t-cell-6" style="width:72px; height:66px;"></div>
+                </div>
+
+                <!-- Table 7 (Corner Table) -->
+                <div class="table-group">
+                  <div class="arch-chair chair-left"></div>
+                  <div class="arch-chair chair-right"></div>
+                  <div id="t-cell-7" style="width:72px; height:66px;"></div>
+                </div>
               </div>
 
               <!-- Center Zone: Central Booths (11-16) and Front Tables (17-20) right next to each other -->
-              <div style="display:flex; align-items:center; justify-content:flex-start; gap:0.5rem; margin:1.5rem 0;">
+              <div style="display:flex; align-items:center; justify-content:flex-start; gap:0.6rem; margin:1.5rem 0;">
                 
                 <!-- Central Booths: 11-16 -->
                 <div style="background:rgba(20, 16, 12, 0.75); border:1px solid rgba(197, 160, 89, 0.35); padding:1rem 1.1rem; border-radius:6px; box-shadow:0 4px 16px rgba(0,0,0,0.5); margin-left:2.5rem;">
-                  <div style="display:grid; grid-template-columns:repeat(3, 76px); gap:0.75rem; margin-bottom:0.75rem;">
-                    <div id="t-cell-12" style="height:58px;"></div>
-                    <div id="t-cell-13" style="height:58px;"></div>
-                    <div id="t-cell-15" style="height:58px;"></div>
+                  <div style="display:grid; grid-template-columns:repeat(3, 88px); gap:0.9rem; margin-bottom:0.9rem;">
+                    <!-- 12 -->
+                    <div class="table-group" style="margin:0;">
+                      <div class="arch-chair chair-top" style="top:-9px;"></div>
+                      <div class="arch-sofa sofa-bottom" style="height:6px; bottom:-7px;"></div>
+                      <div id="t-cell-12" style="width:84px; height:58px;"></div>
+                    </div>
+                    <!-- 13 -->
+                    <div class="table-group" style="margin:0;">
+                      <div class="arch-chair chair-top" style="top:-9px;"></div>
+                      <div class="arch-sofa sofa-bottom" style="height:6px; bottom:-7px;"></div>
+                      <div id="t-cell-13" style="width:84px; height:58px;"></div>
+                    </div>
+                    <!-- 15 -->
+                    <div class="table-group" style="margin:0;">
+                      <div class="arch-chair chair-top" style="top:-9px;"></div>
+                      <div class="arch-sofa sofa-bottom" style="height:6px; bottom:-7px;"></div>
+                      <div id="t-cell-15" style="width:84px; height:58px;"></div>
+                    </div>
                   </div>
-                  <div style="display:grid; grid-template-columns:repeat(3, 76px); gap:0.75rem;">
-                    <div id="t-cell-11" style="height:58px;"></div>
-                    <div id="t-cell-14" style="height:58px;"></div>
-                    <div id="t-cell-16" style="height:58px;"></div>
+
+                  <div style="display:grid; grid-template-columns:repeat(3, 88px); gap:0.9rem;">
+                    <!-- 11 -->
+                    <div class="table-group" style="margin:0;">
+                      <div class="arch-sofa sofa-top" style="height:6px; top:-7px;"></div>
+                      <div class="arch-chair chair-bottom" style="bottom:-9px;"></div>
+                      <div id="t-cell-11" style="width:84px; height:58px;"></div>
+                    </div>
+                    <!-- 14 -->
+                    <div class="table-group" style="margin:0;">
+                      <div class="arch-sofa sofa-top" style="height:6px; top:-7px;"></div>
+                      <div class="arch-chair chair-bottom" style="bottom:-9px;"></div>
+                      <div id="t-cell-14" style="width:84px; height:58px;"></div>
+                    </div>
+                    <!-- 16 -->
+                    <div class="table-group" style="margin:0;">
+                      <div class="arch-sofa sofa-top" style="height:6px; top:-7px;"></div>
+                      <div class="arch-chair chair-bottom" style="bottom:-9px;"></div>
+                      <div id="t-cell-16" style="width:84px; height:58px;"></div>
+                    </div>
                   </div>
                 </div>
 
                 <!-- Stage Front Tables: 17, 18, 19, 20 directly adjacent to 11-16 -->
                 <div style="background:rgba(197, 160, 89, 0.08); border:1px solid rgba(197, 160, 89, 0.45); padding:1rem 1.1rem; border-radius:6px; box-shadow:0 4px 16px rgba(0,0,0,0.5);">
-                  <div style="display:grid; grid-template-columns:repeat(2, 74px); gap:0.75rem; margin-bottom:0.75rem;">
-                    <div id="t-cell-17" style="height:58px;"></div>
-                    <div id="t-cell-19" style="height:58px;"></div>
+                  <div style="display:grid; grid-template-columns:repeat(2, 88px); gap:0.9rem; margin-bottom:0.9rem;">
+                    <!-- 17 -->
+                    <div class="table-group" style="margin:0;">
+                      <div class="arch-chair chair-top" style="top:-9px;"></div>
+                      <div class="arch-chair chair-left" style="left:-9px;"></div>
+                      <div class="arch-chair chair-right" style="right:-9px;"></div>
+                      <div id="t-cell-17" style="width:84px; height:58px;"></div>
+                    </div>
+                    <!-- 19 -->
+                    <div class="table-group" style="margin:0;">
+                      <div class="arch-chair chair-top" style="top:-9px;"></div>
+                      <div class="arch-chair chair-left" style="left:-9px;"></div>
+                      <div class="arch-chair chair-right" style="right:-9px;"></div>
+                      <div id="t-cell-19" style="width:84px; height:58px;"></div>
+                    </div>
                   </div>
-                  <div style="display:grid; grid-template-columns:repeat(2, 74px); gap:0.75rem;">
-                    <div id="t-cell-18" style="height:58px;"></div>
-                    <div id="t-cell-20" style="height:58px;"></div>
+
+                  <div style="display:grid; grid-template-columns:repeat(2, 88px); gap:0.9rem;">
+                    <!-- 18 -->
+                    <div class="table-group" style="margin:0;">
+                      <div class="arch-chair chair-bottom" style="bottom:-9px;"></div>
+                      <div class="arch-chair chair-left" style="left:-9px;"></div>
+                      <div class="arch-chair chair-right" style="right:-9px;"></div>
+                      <div id="t-cell-18" style="width:84px; height:58px;"></div>
+                    </div>
+                    <!-- 20 -->
+                    <div class="table-group" style="margin:0;">
+                      <div class="arch-chair chair-bottom" style="bottom:-9px;"></div>
+                      <div class="arch-chair chair-left" style="left:-9px;"></div>
+                      <div class="arch-chair chair-right" style="right:-9px;"></div>
+                      <div id="t-cell-20" style="width:84px; height:58px;"></div>
+                    </div>
                   </div>
                 </div>
 
               </div>
 
               <!-- Bottom Row (South wall): VIP 1, Tables 10, 9, 8 -->
-              <div style="display:flex; align-items:center; gap:0.8rem;">
-                <div id="t-cell-1" style="width:112px; height:86px;"></div>
-                <div id="t-cell-10" style="width:78px; height:66px; margin-left:2.5rem;"></div>
-                <div id="t-cell-9" style="width:78px; height:66px;"></div>
-                <div id="t-cell-8" style="width:78px; height:66px;"></div>
+              <div style="display:flex; align-items:center; gap:0.9rem;">
+                <!-- Table 1 (VIP Sofa Booth) -->
+                <div class="table-group">
+                  <div class="arch-sofa sofa-top"></div>
+                  <div class="arch-sofa sofa-left"></div>
+                  <div class="arch-sofa sofa-bottom"></div>
+                  <div id="t-cell-1" style="width:112px; height:86px;"></div>
+                </div>
+
+                <!-- Table 10 -->
+                <div class="table-group" style="margin-left:2.5rem;">
+                  <div class="arch-chair chair-left"></div>
+                  <div class="arch-chair chair-right"></div>
+                  <div class="arch-chair chair-bottom"></div>
+                  <div id="t-cell-10" style="width:78px; height:66px;"></div>
+                </div>
+
+                <!-- Table 9 -->
+                <div class="table-group">
+                  <div class="arch-chair chair-left"></div>
+                  <div class="arch-chair chair-right"></div>
+                  <div class="arch-sofa sofa-bottom"></div>
+                  <div id="t-cell-9" style="width:78px; height:66px;"></div>
+                </div>
+
+                <!-- Table 8 -->
+                <div class="table-group">
+                  <div class="arch-chair chair-left"></div>
+                  <div class="arch-chair chair-right"></div>
+                  <div id="t-cell-8" style="width:78px; height:66px;"></div>
+                </div>
               </div>
 
             </div>
@@ -1132,23 +1339,66 @@
           <div class="hall-map-frame" style="display:flex; gap:1.5rem; min-height:480px; min-width:920px;">
             
             <!-- Left Section: Banquet Tables -->
-            <div style="width:230px; border-right:1px dashed rgba(197, 160, 89, 0.35); padding-right:1.2rem; display:flex; flex-direction:column; justify-content:space-between;">
+            <div style="width:250px; border-right:1px dashed rgba(197, 160, 89, 0.35); padding-right:1.2rem; display:flex; flex-direction:column; justify-content:space-between;">
               <!-- Top Left: Large Banquet Table 29 & Table 30 -->
               <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem;">
-                <div id="t-cell-29" style="width:140px; height:78px;"></div>
-                <div id="t-cell-30" style="width:68px; height:68px;"></div>
+                <!-- Table 29 (Banquet Table with chairs all around) -->
+                <div class="table-group">
+                  <div class="arch-chair chair-top" style="left:20px;"></div>
+                  <div class="arch-chair chair-top" style="left:55px;"></div>
+                  <div class="arch-chair chair-top" style="left:90px;"></div>
+                  <div class="arch-chair chair-bottom" style="left:20px;"></div>
+                  <div class="arch-chair chair-bottom" style="left:55px;"></div>
+                  <div class="arch-chair chair-bottom" style="left:90px;"></div>
+                  <div class="arch-chair chair-left"></div>
+                  <div class="arch-chair chair-right"></div>
+                  <div id="t-cell-29" style="width:130px; height:78px;"></div>
+                </div>
+
+                <!-- Table 30 (Booth with chairs) -->
+                <div class="table-group">
+                  <div class="arch-chair chair-top"></div>
+                  <div class="arch-chair chair-bottom"></div>
+                  <div id="t-cell-30" style="width:68px; height:68px;"></div>
+                </div>
               </div>
 
               <!-- Middle: Table 27 & Table 28 -->
               <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem; margin:1rem 0;">
-                <div id="t-cell-27" style="width:84px; height:62px;"></div>
-                <div id="t-cell-28" style="width:68px; height:62px;"></div>
+                <!-- Table 27 -->
+                <div class="table-group">
+                  <div class="arch-chair chair-top" style="left:12px;"></div>
+                  <div class="arch-chair chair-top" style="right:12px;"></div>
+                  <div class="arch-chair chair-bottom" style="left:12px;"></div>
+                  <div class="arch-chair chair-bottom" style="right:12px;"></div>
+                  <div id="t-cell-27" style="width:84px; height:62px;"></div>
+                </div>
+
+                <!-- Table 28 -->
+                <div class="table-group">
+                  <div class="arch-chair chair-top"></div>
+                  <div class="arch-chair chair-bottom"></div>
+                  <div id="t-cell-28" style="width:68px; height:62px;"></div>
+                </div>
               </div>
 
               <!-- Bottom Left: Table 26 & Table 25 -->
               <div style="display:flex; justify-content:space-between; align-items:center; gap:0.6rem;">
-                <div id="t-cell-26" style="width:84px; height:62px;"></div>
-                <div id="t-cell-25" style="width:68px; height:62px;"></div>
+                <!-- Table 26 -->
+                <div class="table-group">
+                  <div class="arch-chair chair-top" style="left:12px;"></div>
+                  <div class="arch-chair chair-top" style="right:12px;"></div>
+                  <div class="arch-chair chair-bottom" style="left:12px;"></div>
+                  <div class="arch-chair chair-bottom" style="right:12px;"></div>
+                  <div id="t-cell-26" style="width:84px; height:62px;"></div>
+                </div>
+
+                <!-- Table 25 -->
+                <div class="table-group">
+                  <div class="arch-chair chair-top"></div>
+                  <div class="arch-chair chair-bottom"></div>
+                  <div id="t-cell-25" style="width:68px; height:62px;"></div>
+                </div>
               </div>
             </div>
 
@@ -1158,13 +1408,47 @@
               <!-- North Balcony: Tables 31-36 -->
               <div style="display:flex; justify-content:space-between; align-items:center;">
                 <div style="display:flex; gap:0.9rem; align-items:center;">
-                  <div id="t-cell-31" style="width:68px; height:62px;"></div>
-                  <div id="t-cell-32" style="width:68px; height:62px;"></div>
-                  <div id="t-cell-33" style="width:68px; height:62px;"></div>
-                  <div id="t-cell-34" style="width:68px; height:62px;"></div>
-                  <div id="t-cell-35" style="width:68px; height:62px;"></div>
+                  <!-- Table 31 (Booth) -->
+                  <div class="table-group">
+                    <div class="arch-chair chair-left"></div>
+                    <div class="arch-chair chair-right"></div>
+                    <div id="t-cell-31" style="width:68px; height:62px;"></div>
+                  </div>
+                  <!-- Table 32 (Booth) -->
+                  <div class="table-group">
+                    <div class="arch-chair chair-left"></div>
+                    <div class="arch-chair chair-right"></div>
+                    <div id="t-cell-32" style="width:68px; height:62px;"></div>
+                  </div>
+                  <!-- Table 33 (Booth) -->
+                  <div class="table-group">
+                    <div class="arch-chair chair-top"></div>
+                    <div class="arch-chair chair-left"></div>
+                    <div class="arch-chair chair-right"></div>
+                    <div id="t-cell-33" style="width:68px; height:62px;"></div>
+                  </div>
+                  <!-- Table 34 (Booth) -->
+                  <div class="table-group">
+                    <div class="arch-chair chair-top"></div>
+                    <div class="arch-chair chair-left"></div>
+                    <div class="arch-chair chair-right"></div>
+                    <div id="t-cell-34" style="width:68px; height:62px;"></div>
+                  </div>
+                  <!-- Table 35 (Booth) -->
+                  <div class="table-group">
+                    <div class="arch-chair chair-top"></div>
+                    <div class="arch-chair chair-left"></div>
+                    <div class="arch-chair chair-right"></div>
+                    <div id="t-cell-35" style="width:68px; height:62px;"></div>
+                  </div>
                 </div>
-                <div id="t-cell-36" style="width:68px; height:62px;"></div>
+
+                <!-- Table 36 (Angled Corner Table) -->
+                <div class="table-group">
+                  <div class="arch-chair" style="top:-8px; right:-4px; width:20px; height:9px; transform:rotate(-35deg);"></div>
+                  <div class="arch-chair" style="bottom:-8px; left:-4px; width:20px; height:9px; transform:rotate(-35deg);"></div>
+                  <div id="t-cell-36" style="width:68px; height:62px;"></div>
+                </div>
               </div>
 
               <!-- Central Void (Atrium) -->
@@ -1175,11 +1459,35 @@
               <!-- South Balcony: Tables 24, 23, 22, 21 -->
               <div style="display:flex; justify-content:space-between; align-items:center;">
                 <div style="display:flex; gap:0.9rem; align-items:center;">
-                  <div id="t-cell-24" style="width:68px; height:62px;"></div>
-                  <div id="t-cell-23" style="width:68px; height:62px;"></div>
-                  <div id="t-cell-22" style="width:68px; height:62px;"></div>
+                  <!-- Table 24 -->
+                  <div class="table-group">
+                    <div class="arch-chair chair-bottom"></div>
+                    <div class="arch-chair chair-left"></div>
+                    <div class="arch-chair chair-right"></div>
+                    <div id="t-cell-24" style="width:68px; height:62px;"></div>
+                  </div>
+                  <!-- Table 23 -->
+                  <div class="table-group">
+                    <div class="arch-chair chair-bottom"></div>
+                    <div class="arch-chair chair-left"></div>
+                    <div class="arch-chair chair-right"></div>
+                    <div id="t-cell-23" style="width:68px; height:62px;"></div>
+                  </div>
+                  <!-- Table 22 -->
+                  <div class="table-group">
+                    <div class="arch-chair chair-bottom"></div>
+                    <div class="arch-chair chair-left"></div>
+                    <div class="arch-chair chair-right"></div>
+                    <div id="t-cell-22" style="width:68px; height:62px;"></div>
+                  </div>
                 </div>
-                <div id="t-cell-21" style="width:68px; height:62px;"></div>
+
+                <!-- Table 21 (Angled Corner Table) -->
+                <div class="table-group">
+                  <div class="arch-chair" style="top:-8px; left:-4px; width:20px; height:9px; transform:rotate(35deg);"></div>
+                  <div class="arch-chair" style="bottom:-8px; right:-4px; width:20px; height:9px; transform:rotate(35deg);"></div>
+                  <div id="t-cell-21" style="width:68px; height:62px;"></div>
+                </div>
               </div>
 
             </div>
