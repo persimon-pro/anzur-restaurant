@@ -1128,23 +1128,28 @@
       color: #060504;
     }
 
-    /* Fullscreen Overlay Guide on Portrait Phone */
+    /* Fullscreen Overlay Guide on Portrait Phone (Splash / Pre-screen) */
     .rotate-overlay-screen {
       position: fixed;
       inset: 0;
-      background: rgba(6, 5, 4, 0.96);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      z-index: 10000;
-      display: none;
+      background: #060504;
+      background-image: radial-gradient(circle at 50% 35%, rgba(197, 160, 89, 0.12) 0%, #060504 70%);
+      z-index: 99999;
+      display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 2rem;
+      padding: 2rem 1.5rem;
       text-align: center;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
     }
     .rotate-overlay-screen.is-active {
-      display: flex;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
     }
     .rotate-overlay-badge {
       font-family: var(--font-mono);
@@ -2033,7 +2038,11 @@
         formSub: 'Выберите стол на схеме зала, введите контактные данные и нажмите кнопку подтверждения.',
         orientTitle: 'Разверните телефон горизонтально',
         orientDesc: 'Для максимально удобного обзора столов и схемы зала',
-        orientBtn: 'РАЗВЕРНУТЬ ⤾'
+        orientBtn: 'РАЗВЕРНУТЬ ⤾',
+        overlayTitle: 'Разверните <em>телефон</em>',
+        overlayDesc: 'Интерактивная карта ресторана открывается в горизонтальном режиме. Поверните экран, чтобы увидеть все столики, сцену и выбрать лучшее место.',
+        overlayRotateBtn: 'ПОВЕРНУТЬ ЭКРАН ⤾',
+        overlaySkipBtn: 'Продолжить вертикально →'
       },
       tj: {
         title: 'Нақшаи интерактивии <em>мизҳо</em>',
@@ -2050,7 +2059,11 @@
         formSub: 'Мизро дар нақша интихоб намоед, маълумоти худро ворид кунед ва тугмаи тасдиқро пахш намоед.',
         orientTitle: 'Телефонро ба таври уфуқӣ гардонед',
         orientDesc: 'Барои интихоби қулайи мизҳо дар нақшаи толор',
-        orientBtn: 'ГАРДОНДАН ⤾'
+        orientBtn: 'ГАРДОНДАН ⤾',
+        overlayTitle: 'Телефонро <em>гардонед</em>',
+        overlayDesc: 'Харитаи интерактивии ресторан дар ҳолати уфуқӣ кушода мешавад. Телефонро гардонед, то ҳамаи мизҳо ва саҳнаро ба хубӣ бинед.',
+        overlayRotateBtn: 'ГАРДОНДАНИ ЭКРАН ⤾',
+        overlaySkipBtn: 'Идома дар ҳолати амудӣ →'
       },
       en: {
         title: 'Interactive <em>Table Floor Plan</em>',
@@ -2067,7 +2080,11 @@
         formSub: 'Select a table on the floor plan, fill in your contact information and confirm your reservation.',
         orientTitle: 'Rotate phone horizontally',
         orientDesc: 'For the best floor plan view and easy table selection',
-        orientBtn: 'ROTATE ⤾'
+        orientBtn: 'ROTATE ⤾',
+        overlayTitle: 'Rotate <em>your phone</em>',
+        overlayDesc: 'The restaurant floor plan is optimized for landscape view. Rotate your device to view all tables, stage, and select your seat.',
+        overlayRotateBtn: 'ROTATE SCREEN ⤾',
+        overlaySkipBtn: 'Continue in portrait →'
       }
     };
 
@@ -2096,6 +2113,10 @@
       const elOrientTitle = document.getElementById('i18n-orient-title'); if (elOrientTitle && dict.orientTitle) elOrientTitle.textContent = dict.orientTitle;
       const elOrientDesc = document.getElementById('i18n-orient-desc'); if (elOrientDesc && dict.orientDesc) elOrientDesc.textContent = dict.orientDesc;
       const elOrientBtn = document.getElementById('i18n-orient-btn'); if (elOrientBtn && dict.orientBtn) elOrientBtn.textContent = dict.orientBtn;
+      const elOverlayTitle = document.getElementById('i18n-overlay-title'); if (elOverlayTitle && dict.overlayTitle) elOverlayTitle.innerHTML = dict.overlayTitle;
+      const elOverlayDesc = document.getElementById('i18n-overlay-desc'); if (elOverlayDesc && dict.overlayDesc) elOverlayDesc.textContent = dict.overlayDesc;
+      const elOverlayRotateBtn = document.getElementById('i18n-overlay-rotate-btn'); if (elOverlayRotateBtn && dict.overlayRotateBtn) elOverlayRotateBtn.textContent = dict.overlayRotateBtn;
+      const elOverlaySkipBtn = document.getElementById('i18n-overlay-skip-btn'); if (elOverlaySkipBtn && dict.overlaySkipBtn) elOverlaySkipBtn.textContent = dict.overlaySkipBtn;
 
       if (tablesData && tablesData.length > 0) {
         renderAllMapCells();
@@ -2647,10 +2668,12 @@
       setTimeout(() => t.classList.remove('show'), 3500);
     }
 
-    /* Mobile Orientation & Landscape Mode Logic */
+    /* Mobile Orientation & Splash Screen Logic */
     function isMobilePortrait() {
       return window.innerWidth <= 900 && window.innerHeight > window.innerWidth;
     }
+
+    let hasDismissedRotateSplash = false;
 
     function checkOrientation() {
       const overlay = document.getElementById('rotateOverlayScreen');
@@ -2658,17 +2681,22 @@
       const inPortrait = isMobilePortrait();
 
       if (!inPortrait) {
+        // Device is in landscape
         if (overlay) overlay.classList.remove('is-active');
         document.body.classList.add('force-landscape-mode');
         if (hint) hint.style.display = 'none';
       } else {
+        // Device is in portrait
         document.body.classList.remove('force-landscape-mode');
-        if (hint) hint.style.display = 'flex';
+        if (!hasDismissedRotateSplash) {
+          if (overlay) overlay.classList.add('is-active');
+        } else {
+          if (hint) hint.style.display = 'flex';
+        }
       }
     }
 
     async function requestRotateExperience() {
-      // 1. Try Fullscreen API if supported
       try {
         const elem = document.documentElement;
         if (!document.fullscreenElement && elem.requestFullscreen) {
@@ -2676,22 +2704,26 @@
         }
       } catch (err) {}
 
-      // 2. Try Screen Orientation Lock API if supported (Chrome on Android, etc.)
       try {
         if (screen.orientation && screen.orientation.lock) {
           await screen.orientation.lock('landscape');
+          dismissRotateOverlay();
           return;
         }
       } catch (err) {}
 
-      // 3. If browser doesn't allow programmatic lock without hardware change, show elegant guide overlay
       const overlay = document.getElementById('rotateOverlayScreen');
       if (overlay) overlay.classList.add('is-active');
     }
 
     function dismissRotateOverlay() {
+      hasDismissedRotateSplash = true;
       const overlay = document.getElementById('rotateOverlayScreen');
       if (overlay) overlay.classList.remove('is-active');
+      const hint = document.getElementById('orientationHint');
+      if (hint && isMobilePortrait()) {
+        hint.style.display = 'flex';
+      }
     }
 
     window.addEventListener('resize', checkOrientation);
@@ -2700,20 +2732,23 @@
     });
   </script>
 
-  <!-- Fullscreen Rotate Overlay Guide for Mobile Portrait -->
+  <!-- Fullscreen Splash Pre-Screen for Mobile Portrait -->
   <div class="rotate-overlay-screen" id="rotateOverlayScreen">
-    <span class="rotate-overlay-badge">[ СХЕМА ЗАЛА ANZUR ]</span>
+    <span class="rotate-overlay-badge">[ РЕСТОРАН АНЗУР · СХЕМА ЗАЛА ]</span>
     <svg class="rotate-overlay-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
       <line x1="12" y1="18" x2="12.01" y2="18"/>
     </svg>
-    <h3 class="rotate-overlay-title">Поверните <em>телефон</em></h3>
-    <p class="rotate-overlay-desc">
-      Интерактивная карта зала спроектирована в альбомном формате. Разверните устройство горизонтально, чтобы легко выбирать столы и видеть всю панораму.
+    <h3 class="rotate-overlay-title" id="i18n-overlay-title">Разверните <em>телефон</em></h3>
+    <p class="rotate-overlay-desc" id="i18n-overlay-desc">
+      Интерактивная карта ресторана открывается в горизонтальном режиме. Поверните экран, чтобы увидеть все столики, сцену и выбрать лучшее место.
     </p>
     <div class="rotate-overlay-actions">
-      <button type="button" class="btn-rotate-fullscreen" onclick="dismissRotateOverlay()">
-        ПОНЯТНО, ПРОДОЛЖИТЬ
+      <button type="button" class="btn-rotate-fullscreen" onclick="requestRotateExperience()" id="i18n-overlay-rotate-btn">
+        ПОВЕРНУТЬ ЭКРАН ⤾
+      </button>
+      <button type="button" class="btn-rotate-dismiss" onclick="dismissRotateOverlay()" id="i18n-overlay-skip-btn">
+        Продолжить вертикально →
       </button>
     </div>
   </div>
