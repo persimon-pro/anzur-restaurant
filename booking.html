@@ -1061,6 +1061,191 @@
       transition: all 0.3s ease;
     }
     .toast-msg.show { transform: translateY(0); opacity: 1; }
+
+    /* Mobile Rotate & Orientation Experience */
+    .orientation-hint {
+      display: none;
+      background: linear-gradient(90deg, rgba(31, 24, 13, 0.95) 0%, rgba(18, 14, 10, 0.95) 100%);
+      border: 1px solid var(--gold);
+      border-radius: 6px;
+      padding: 0.9rem 1.2rem;
+      margin-bottom: 1.2rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 25px rgba(197, 160, 89, 0.15);
+      animation: pulseGlow 2.5s infinite ease-in-out;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { border-color: rgba(197, 160, 89, 0.5); }
+      50% { border-color: var(--gold-light); }
+    }
+    .orientation-hint-left {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+    .orientation-phone-icon {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      color: var(--gold);
+      animation: phoneRotateAnim 2.6s infinite ease-in-out;
+      transform-origin: center center;
+    }
+    @keyframes phoneRotateAnim {
+      0%, 20% { transform: rotate(0deg); }
+      50%, 80% { transform: rotate(90deg); }
+      100% { transform: rotate(0deg); }
+    }
+    .orientation-hint-title {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      color: var(--gold-light);
+      line-height: 1.2;
+      margin-bottom: 0.15rem;
+    }
+    .orientation-hint-desc {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+    .orientation-hint-btn {
+      background: rgba(197, 160, 89, 0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      padding: 0.45rem 0.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .orientation-hint-btn:hover {
+      background: var(--gold);
+      color: #060504;
+    }
+
+    /* Fullscreen Overlay Guide on Portrait Phone */
+    .rotate-overlay-screen {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 5, 4, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 10000;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+    .rotate-overlay-screen.is-active {
+      display: flex;
+    }
+    .rotate-overlay-badge {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+    .rotate-overlay-icon {
+      width: 72px;
+      height: 72px;
+      color: var(--gold);
+      margin-bottom: 1.6rem;
+      animation: phoneRotateLarge 2.4s infinite ease-in-out;
+      transform-origin: center center;
+      filter: drop-shadow(0 0 16px rgba(197, 160, 89, 0.4));
+    }
+    @keyframes phoneRotateLarge {
+      0%, 25% { transform: rotate(0deg); }
+      55%, 85% { transform: rotate(90deg); }
+      100% { transform: rotate(0deg); }
+    }
+    .rotate-overlay-title {
+      font-family: var(--font-serif);
+      font-size: 1.9rem;
+      font-weight: 300;
+      color: #FFFFFF;
+      margin-bottom: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .rotate-overlay-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .rotate-overlay-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      max-width: 380px;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .rotate-overlay-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      width: 100%;
+      max-width: 300px;
+    }
+    .btn-rotate-fullscreen {
+      background: var(--gold);
+      color: #060504;
+      border: 1px solid var(--gold);
+      padding: 0.85rem 1.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-rotate-fullscreen:hover {
+      background: var(--gold-light);
+    }
+    .btn-rotate-dismiss {
+      background: transparent;
+      border: 1px solid var(--border-light);
+      color: var(--text-muted);
+      padding: 0.7rem 1.2rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .btn-rotate-dismiss:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Force Horizontal/Landscape Mode Class if User locks into landscape */
+    body.force-landscape-mode .main-wrap {
+      padding-top: 1.2rem;
+      padding-bottom: 3rem;
+    }
+    body.force-landscape-mode .booking-grid {
+      grid-template-columns: 1fr 340px !important;
+    }
+    body.force-landscape-mode .sidebar-card {
+      position: sticky;
+      top: 20px;
+    }
+
+    /* Show inline banner on mobile portrait */
+    @media (max-width: 900px) and (orientation: portrait) {
+      .orientation-hint {
+        display: flex;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1159,6 +1344,23 @@
       </button>
       <button type="button" class="zone-tab" data-zone="vip" onclick="switchZone('vip')">
         <span id="i18n-zone-vip">VIP-кабины с караоке</span>
+      </button>
+    </div>
+
+    <!-- Mobile Orientation Hint Banner -->
+    <div class="orientation-hint" id="orientationHint">
+      <div class="orientation-hint-left">
+        <svg class="orientation-phone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+          <line x1="12" y1="18" x2="12.01" y2="18"/>
+        </svg>
+        <div>
+          <div class="orientation-hint-title" id="i18n-orient-title">Разверните телефон горизонтально</div>
+          <div class="orientation-hint-desc" id="i18n-orient-desc">Для максимально комфортного выбора столов на схеме зала</div>
+        </div>
+      </div>
+      <button type="button" class="orientation-hint-btn" onclick="requestRotateExperience()" id="i18n-orient-btn">
+        РАЗВЕРНУТЬ ⤾
       </button>
     </div>
 
@@ -1828,7 +2030,10 @@
         zoneTerrace: 'Летняя терраса',
         zoneVip: 'VIP-кабины с караоке',
         formTitle: 'Параметры брони',
-        formSub: 'Выберите стол на схеме зала, введите контактные данные и нажмите кнопку подтверждения.'
+        formSub: 'Выберите стол на схеме зала, введите контактные данные и нажмите кнопку подтверждения.',
+        orientTitle: 'Разверните телефон горизонтально',
+        orientDesc: 'Для максимально удобного обзора столов и схемы зала',
+        orientBtn: 'РАЗВЕРНУТЬ ⤾'
       },
       tj: {
         title: 'Нақшаи интерактивии <em>мизҳо</em>',
@@ -1842,7 +2047,10 @@
         zoneTerrace: 'Террасаи тобистона',
         zoneVip: 'VIP-ҳуҷраҳо бо караоке',
         formTitle: 'Маълумоти фармоиш',
-        formSub: 'Мизро дар нақша интихоб намоед, маълумоти худро ворид кунед ва тугмаи тасдиқро пахш намоед.'
+        formSub: 'Мизро дар нақша интихоб намоед, маълумоти худро ворид кунед ва тугмаи тасдиқро пахш намоед.',
+        orientTitle: 'Телефонро ба таври уфуқӣ гардонед',
+        orientDesc: 'Барои интихоби қулайи мизҳо дар нақшаи толор',
+        orientBtn: 'ГАРДОНДАН ⤾'
       },
       en: {
         title: 'Interactive <em>Table Floor Plan</em>',
@@ -1856,7 +2064,10 @@
         zoneTerrace: 'Summer Terrace',
         zoneVip: 'VIP Suites & Karaoke',
         formTitle: 'Booking Details',
-        formSub: 'Select a table on the floor plan, fill in your contact information and confirm your reservation.'
+        formSub: 'Select a table on the floor plan, fill in your contact information and confirm your reservation.',
+        orientTitle: 'Rotate phone horizontally',
+        orientDesc: 'For the best floor plan view and easy table selection',
+        orientBtn: 'ROTATE ⤾'
       }
     };
 
@@ -1882,6 +2093,9 @@
       const elVip = document.getElementById('i18n-zone-vip'); if (elVip) elVip.textContent = dict.zoneVip;
       const elFormTitle = document.getElementById('i18n-form-title'); if (elFormTitle) elFormTitle.textContent = dict.formTitle;
       const elFormSub = document.getElementById('i18n-form-sub'); if (elFormSub) elFormSub.textContent = dict.formSub;
+      const elOrientTitle = document.getElementById('i18n-orient-title'); if (elOrientTitle && dict.orientTitle) elOrientTitle.textContent = dict.orientTitle;
+      const elOrientDesc = document.getElementById('i18n-orient-desc'); if (elOrientDesc && dict.orientDesc) elOrientDesc.textContent = dict.orientDesc;
+      const elOrientBtn = document.getElementById('i18n-orient-btn'); if (elOrientBtn && dict.orientBtn) elOrientBtn.textContent = dict.orientBtn;
 
       if (tablesData && tablesData.length > 0) {
         renderAllMapCells();
@@ -1899,6 +2113,7 @@
 
       updateManagerUI();
       loadTablesForDate(today);
+      checkOrientation();
     });
 
     async function loadTablesForDate(dateStr) {
@@ -2431,6 +2646,77 @@
       t.classList.add('show');
       setTimeout(() => t.classList.remove('show'), 3500);
     }
+
+    /* Mobile Orientation & Landscape Mode Logic */
+    function isMobilePortrait() {
+      return window.innerWidth <= 900 && window.innerHeight > window.innerWidth;
+    }
+
+    function checkOrientation() {
+      const overlay = document.getElementById('rotateOverlayScreen');
+      const hint = document.getElementById('orientationHint');
+      const inPortrait = isMobilePortrait();
+
+      if (!inPortrait) {
+        if (overlay) overlay.classList.remove('is-active');
+        document.body.classList.add('force-landscape-mode');
+        if (hint) hint.style.display = 'none';
+      } else {
+        document.body.classList.remove('force-landscape-mode');
+        if (hint) hint.style.display = 'flex';
+      }
+    }
+
+    async function requestRotateExperience() {
+      // 1. Try Fullscreen API if supported
+      try {
+        const elem = document.documentElement;
+        if (!document.fullscreenElement && elem.requestFullscreen) {
+          await elem.requestFullscreen();
+        }
+      } catch (err) {}
+
+      // 2. Try Screen Orientation Lock API if supported (Chrome on Android, etc.)
+      try {
+        if (screen.orientation && screen.orientation.lock) {
+          await screen.orientation.lock('landscape');
+          return;
+        }
+      } catch (err) {}
+
+      // 3. If browser doesn't allow programmatic lock without hardware change, show elegant guide overlay
+      const overlay = document.getElementById('rotateOverlayScreen');
+      if (overlay) overlay.classList.add('is-active');
+    }
+
+    function dismissRotateOverlay() {
+      const overlay = document.getElementById('rotateOverlayScreen');
+      if (overlay) overlay.classList.remove('is-active');
+    }
+
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('orientationchange', () => {
+      setTimeout(checkOrientation, 300);
+    });
   </script>
+
+  <!-- Fullscreen Rotate Overlay Guide for Mobile Portrait -->
+  <div class="rotate-overlay-screen" id="rotateOverlayScreen">
+    <span class="rotate-overlay-badge">[ СХЕМА ЗАЛА ANZUR ]</span>
+    <svg class="rotate-overlay-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+      <line x1="12" y1="18" x2="12.01" y2="18"/>
+    </svg>
+    <h3 class="rotate-overlay-title">Поверните <em>телефон</em></h3>
+    <p class="rotate-overlay-desc">
+      Интерактивная карта зала спроектирована в альбомном формате. Разверните устройство горизонтально, чтобы легко выбирать столы и видеть всю панораму.
+    </p>
+    <div class="rotate-overlay-actions">
+      <button type="button" class="btn-rotate-fullscreen" onclick="dismissRotateOverlay()">
+        ПОНЯТНО, ПРОДОЛЖИТЬ
+      </button>
+    </div>
+  </div>
+
 </body>
 </html>
