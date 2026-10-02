@@ -1321,21 +1321,14 @@
                     </div>
                   </div>
 
-                  <!-- Combined Dancefloor + Stage Block in Middle Row (Flanked by 4,5,6,7 above and 10,9,8 below) -->
-                  <div style="flex:1; display:flex; align-items:stretch; margin-left:0.4rem;">
-                    <!-- Dance Floor (directly touching stage) -->
-                    <div class="dance-floor-wide" style="flex:1; min-height:146px; border-top-right-radius:0; border-bottom-right-radius:0; border-right:none;">
-                      <div class="dance-floor-title" style="letter-spacing:0.25em;">ТАНЦПОЛ</div>
-                    </div>
-                    <!-- Stage (Moved left, directly flush to dancefloor, aligned with tables 7 and 8) -->
-                    <div class="stage-column" style="width:110px; border-top-left-radius:0; border-bottom-left-radius:0;">
-                      <div class="stage-column-title">СЦЕНА</div>
-                    </div>
+                  <!-- Dance Floor (Width reduced by half ~115px, shifted left next to tables 17-20) -->
+                  <div class="dance-floor-wide" style="width:115px; min-width:105px; flex:none; min-height:146px; margin:0 0 0 0.6rem; border-top-right-radius:0; border-bottom-right-radius:0; border-right:none;">
+                    <div class="dance-floor-title" style="letter-spacing:0.18em; font-size:1.1rem;">ТАНЦПОЛ</div>
                   </div>
 
                 </div>
 
-                <!-- Bottom Row (South wall): Tables 10, 9, 8 shifted so Table 8 aligns with Table 7 right at the stage -->
+                <!-- Bottom Row (South wall): Tables 10, 9, 8 shifted left along with the reduced dancefloor -->
                 <div style="display:flex; align-items:center; justify-content:flex-end; gap:0.35rem;">
                   <!-- Table 10 -->
                   <div class="table-group" style="margin:6px 2px;">
@@ -1367,6 +1360,11 @@
 
               </div>
 
+            </div>
+
+            <!-- Full-Height Stage Column on Right (Full original height, directly flush against dancefloor and flanked by tables 7 & 8) -->
+            <div class="stage-column" style="margin-left:0;">
+              <div class="stage-column-title">СЦЕНА</div>
             </div>
 
           </div>
