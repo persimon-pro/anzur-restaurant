@@ -1236,11 +1236,11 @@
                   </div>
                 </div>
 
-                <!-- Middle Row: Central Booths (11-16) + Front Tables (17-20) shrunk by half in width + Rotated Dance Floor shifted left -->
-                <div style="display:flex; align-items:center; gap:0.6rem; margin:1rem 0;">
+                <!-- Middle Row: Central Booths (11-16) + Front Tables (17-20) + Dance Floor + Stage -->
+                <div style="display:flex; align-items:stretch; gap:0.6rem; margin:1rem 0;">
                   
                   <!-- Central Booths: 11-16 (shrunk in width to 44px each) -->
-                  <div style="background:rgba(20, 16, 12, 0.75); border:1px solid rgba(197, 160, 89, 0.35); padding:0.6rem 0.6rem; border-radius:6px; box-shadow:0 4px 16px rgba(0,0,0,0.5);">
+                  <div style="background:rgba(20, 16, 12, 0.75); border:1px solid rgba(197, 160, 89, 0.35); padding:0.6rem 0.6rem; border-radius:6px; box-shadow:0 4px 16px rgba(0,0,0,0.5); align-self:center;">
                     <div style="display:grid; grid-template-columns:repeat(3, 44px); gap:0.45rem; margin-bottom:0.6rem;">
                       <!-- 12 -->
                       <div class="table-group" style="margin:0;">
@@ -1284,8 +1284,8 @@
                     </div>
                   </div>
 
-                  <!-- Stage Front Tables: 17, 18, 19, 20 shrunk in width to 42px each -->
-                  <div style="background:rgba(197, 160, 89, 0.08); border:1px solid rgba(197, 160, 89, 0.45); padding:0.6rem 0.6rem; border-radius:6px; box-shadow:0 4px 16px rgba(0,0,0,0.5);">
+                  <!-- Stage Front Tables: 17, 18, 19, 20 -->
+                  <div style="background:rgba(197, 160, 89, 0.08); border:1px solid rgba(197, 160, 89, 0.45); padding:0.6rem 0.6rem; border-radius:6px; box-shadow:0 4px 16px rgba(0,0,0,0.5); align-self:center;">
                     <div style="display:grid; grid-template-columns:repeat(2, 42px); gap:0.45rem; margin-bottom:0.6rem;">
                       <!-- 17 -->
                       <div class="table-group" style="margin:0;">
@@ -1321,15 +1321,22 @@
                     </div>
                   </div>
 
-                  <!-- Dance Floor (Flush right against the stage) -->
-                  <div class="dance-floor-wide" style="flex:1; min-height:146px; margin:0; border-top-right-radius:0; border-bottom-right-radius:0; border-right:none;">
-                    <div class="dance-floor-title" style="letter-spacing:0.25em;">ТАНЦПОЛ</div>
+                  <!-- Combined Dancefloor + Stage Block in Middle Row (Flanked by 4,5,6,7 above and 10,9,8 below) -->
+                  <div style="flex:1; display:flex; align-items:stretch; margin-left:0.4rem;">
+                    <!-- Dance Floor (directly touching stage) -->
+                    <div class="dance-floor-wide" style="flex:1; min-height:146px; border-top-right-radius:0; border-bottom-right-radius:0; border-right:none;">
+                      <div class="dance-floor-title" style="letter-spacing:0.25em;">ТАНЦПОЛ</div>
+                    </div>
+                    <!-- Stage (Moved left, directly flush to dancefloor, aligned with tables 7 and 8) -->
+                    <div class="stage-column" style="width:110px; border-top-left-radius:0; border-bottom-left-radius:0;">
+                      <div class="stage-column-title">СЦЕНА</div>
+                    </div>
                   </div>
 
                 </div>
 
-                <!-- Bottom Row (South wall): Tables 10, 9, 8 shifted left so Table 8 aligns right under the dancefloor at the stage border -->
-                <div style="display:flex; align-items:center; justify-content:flex-end; gap:0.45rem;">
+                <!-- Bottom Row (South wall): Tables 10, 9, 8 shifted so Table 8 aligns with Table 7 right at the stage -->
+                <div style="display:flex; align-items:center; justify-content:flex-end; gap:0.35rem;">
                   <!-- Table 10 -->
                   <div class="table-group" style="margin:6px 2px;">
                     <div class="arch-chair chair-top"></div>
@@ -1348,7 +1355,7 @@
                     <div id="t-cell-9" style="width:104px; height:76px;"></div>
                   </div>
 
-                  <!-- Table 8 (Abutting the stage border right under Table 7) -->
+                  <!-- Table 8 (Abutting the stage directly under Table 7) -->
                   <div class="table-group" style="margin:6px 0 6px 2px;">
                     <div class="arch-chair chair-top"></div>
                     <div class="arch-chair chair-bottom"></div>
@@ -1360,11 +1367,6 @@
 
               </div>
 
-            </div>
-
-            <!-- Stage Column on Right (Flush against the Dance Floor, tables 7 & 8 align to it) -->
-            <div class="stage-column" style="margin-left:0;">
-              <div class="stage-column-title">СЦЕНА</div>
             </div>
 
           </div>
