@@ -1199,43 +1199,58 @@
               <!-- Main Hall Area (Separated by corridor from VIP 1 & 2, with distance to Table 3) -->
               <div style="flex:1; display:flex; flex-direction:column; justify-content:space-between; padding-left:1.1rem;">
                 
-                <!-- Top Row (North wall): Tables 3, 4, 5, 6, 7 (All sofas for 4-7) -->
+                <!-- Top Row (North wall): Tables 3, 4, 5, 6, 7 -->
                 <div style="display:flex; align-items:center; justify-content:flex-start; gap:0.35rem;">
-                  <!-- Table 3 (VIP Elongated Booth) -->
+                  <!-- Table 3 (VIP 3: Chairs only - 3 top, 3 bottom, 2 left, 2 right) -->
                   <div class="table-group" style="margin:4px 3px 4px 0;">
-                    <div class="arch-sofa sofa-top"></div>
-                    <div class="arch-sofa sofa-bottom"></div>
-                    <div class="arch-chair chair-left"></div>
-                    <div class="arch-chair chair-right"></div>
+                    <!-- 3 chairs top -->
+                    <div class="arch-chair chair-top" style="left:12px;"></div>
+                    <div class="arch-chair chair-top" style="left:41px;"></div>
+                    <div class="arch-chair chair-top" style="left:70px;"></div>
+                    <!-- 3 chairs bottom -->
+                    <div class="arch-chair chair-bottom" style="left:12px;"></div>
+                    <div class="arch-chair chair-bottom" style="left:41px;"></div>
+                    <div class="arch-chair chair-bottom" style="left:70px;"></div>
+                    <!-- 2 chairs left -->
+                    <div class="arch-chair chair-left" style="top:12px;"></div>
+                    <div class="arch-chair chair-left" style="top:46px;"></div>
+                    <!-- 2 chairs right -->
+                    <div class="arch-chair chair-right" style="top:12px;"></div>
+                    <div class="arch-chair chair-right" style="top:46px;"></div>
                     <div id="t-cell-3" style="width:104px; height:82px;"></div>
                   </div>
 
-                  <!-- Table 4 (Sofas on top and bottom) -->
+                  <!-- Table 4 (Sofas top, left, right; bottom removed) -->
                   <div class="table-group" style="margin:4px 2px;">
                     <div class="arch-sofa sofa-top"></div>
-                    <div class="arch-sofa sofa-bottom"></div>
+                    <div class="arch-sofa sofa-left"></div>
+                    <div class="arch-sofa sofa-right"></div>
                     <div id="t-cell-4" style="width:78px; height:74px;"></div>
                   </div>
 
-                  <!-- Table 5 (Sofas on top and bottom) -->
+                  <!-- Table 5 (Sofas top, left, right; bottom removed) -->
                   <div class="table-group" style="margin:4px 2px;">
                     <div class="arch-sofa sofa-top"></div>
-                    <div class="arch-sofa sofa-bottom"></div>
+                    <div class="arch-sofa sofa-left"></div>
+                    <div class="arch-sofa sofa-right"></div>
                     <div id="t-cell-5" style="width:78px; height:74px;"></div>
                   </div>
 
-                  <!-- Table 6 (Sofas on top and bottom) -->
+                  <!-- Table 6 (Sofas top, left, right; bottom removed) -->
                   <div class="table-group" style="margin:4px 2px;">
                     <div class="arch-sofa sofa-top"></div>
-                    <div class="arch-sofa sofa-bottom"></div>
+                    <div class="arch-sofa sofa-left"></div>
+                    <div class="arch-sofa sofa-right"></div>
                     <div id="t-cell-6" style="width:80px; height:74px;"></div>
                   </div>
 
-                  <!-- Table 7 (Abutting stage, exactly on the same vertical line as Table 8) -->
+                  <!-- Table 7 (Made slightly smaller, chairs only: top, bottom, left, right) -->
                   <div class="table-group" style="margin:4px 0 4px 2px;">
-                    <div class="arch-sofa sofa-top"></div>
-                    <div class="arch-sofa sofa-bottom"></div>
-                    <div id="t-cell-7" style="width:78px; height:74px;"></div>
+                    <div class="arch-chair chair-top"></div>
+                    <div class="arch-chair chair-bottom"></div>
+                    <div class="arch-chair chair-left"></div>
+                    <div class="arch-chair chair-right"></div>
+                    <div id="t-cell-7" style="width:72px; height:68px;"></div>
                   </div>
                 </div>
 
@@ -1329,18 +1344,18 @@
 
                 <!-- Bottom Row (South wall): Tables 10, 9, 8 (Tables 7 & 8 strictly on same vertical line) -->
                 <div style="display:flex; align-items:center; justify-content:flex-end; gap:0.35rem;">
-                  <!-- Table 10 (Sofas on top and bottom) -->
+                  <!-- Table 10 (Sofas left, right, bottom; top removed) -->
                   <div class="table-group" style="margin:4px 2px;">
-                    <div class="arch-sofa sofa-top"></div>
+                    <div class="arch-sofa sofa-left"></div>
+                    <div class="arch-sofa sofa-right"></div>
                     <div class="arch-sofa sofa-bottom"></div>
                     <div id="t-cell-10" style="width:78px; height:74px;"></div>
                   </div>
 
-                  <!-- Table 9 -->
+                  <!-- Table 9 (Sofas left, right, bottom; top removed) -->
                   <div class="table-group" style="margin:4px 2px;">
-                    <div class="arch-chair chair-top"></div>
-                    <div class="arch-chair chair-left"></div>
-                    <div class="arch-chair chair-right"></div>
+                    <div class="arch-sofa sofa-left"></div>
+                    <div class="arch-sofa sofa-right"></div>
                     <div class="arch-sofa sofa-bottom"></div>
                     <div id="t-cell-9" style="width:80px; height:74px;"></div>
                   </div>
@@ -1351,7 +1366,7 @@
                     <div class="arch-chair chair-bottom"></div>
                     <div class="arch-chair chair-left"></div>
                     <div class="arch-chair chair-right"></div>
-                    <div id="t-cell-8" style="width:78px; height:74px;"></div>
+                    <div id="t-cell-8" style="width:72px; height:68px;"></div>
                   </div>
                 </div>
 
