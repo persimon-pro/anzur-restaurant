@@ -1770,6 +1770,10 @@
       .filmstrip-wrap { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }
       .filmstrip-item { min-width: 220px; flex-shrink: 0; scroll-snap-align: start; }
     }
+    @media (max-width: 768px) {
+      .filmstrip-thumb { display: none !important; }
+      .filmstrip-item { min-width: 170px; padding: 0.9rem 1rem; }
+    }
 
     /* ==========================================================================
        SPACES (VIP · KARAOKE · TERRACE)
