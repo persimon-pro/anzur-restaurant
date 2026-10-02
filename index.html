@@ -1770,6 +1770,10 @@
       .filmstrip-wrap { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }
       .filmstrip-item { min-width: 220px; flex-shrink: 0; scroll-snap-align: start; }
     }
+    @media (max-width: 768px) {
+      .stage-visual { display: none !important; }
+      .stage-details { border-top: none; }
+    }
 
     /* ==========================================================================
        SPACES (VIP · KARAOKE · TERRACE)
@@ -2098,7 +2102,24 @@
     @media (max-width: 640px) {
       .events-schedule-strip { grid-template-columns: 1fr; }
       .sched-item { border-right: none; border-bottom: 1px solid var(--border); }
-      .events-cta-bar { flex-direction: column; align-items: flex-start; }
+      .events-cta-bar {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.5rem;
+      }
+      .events-cta-text {
+        text-align: center;
+      }
+      .events-cta-buttons {
+        justify-content: center;
+        width: 100%;
+      }
+      .events-cta-buttons a {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
     }
 
     /* ==========================================================================
@@ -2231,9 +2252,39 @@
       .footer-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
     }
     @media (max-width: 640px) {
-      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
-      .footer-bottom-bar { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
-      .footer-dev-credit { margin-left: 0; padding-left: 0; border-left: none; display: block; margin-top: 0.4rem; }
+      .site-footer {
+        padding: 2.2rem 0 2rem;
+      }
+      .footer-inner {
+        display: none !important;
+      }
+      .footer-bottom-bar {
+        border-top: none;
+        padding: 0;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 0.5rem;
+      }
+      .footer-bottom-left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.45rem;
+        width: 100%;
+      }
+      .footer-dev-credit {
+        margin-left: 0;
+        padding-left: 0;
+        border-left: none;
+        display: block;
+        margin-top: 0.2rem;
+      }
+      .footer-bottom-right {
+        display: none !important;
+      }
     }
 
   
