@@ -1776,7 +1776,7 @@
         <!-- VIP-КАБИНЫ С КАРАОКЕ                           -->
         <!-- ============================================== -->
         <div id="zone-vip-content" style="display:none;">
-          <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:1.4rem;" id="vip-grid"></div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1.4rem;" id="vip-grid"></div>
         </div>
 
       </div>
@@ -2016,10 +2016,9 @@
       {id:"R8", zone:"terrace", name:"Терраса R8", capacity:"2–4 чел", desc:"Уютный тихий угол"},
 
       // VIP-кабины
-      {id:"VIP1", zone:"vip", name:"VIP 1 «Худжанд»", capacity:"8–10 чел", desc:"Караоке Evolution, приватный лаунж"},
-      {id:"VIP2", zone:"vip", name:"VIP 2 «Памир»", capacity:"10–14 чел", desc:"Клубный свет, караоке, гардероб"},
-      {id:"VIP3", zone:"vip", name:"VIP 3 «Самарканд»", capacity:"12–16 чел", desc:"Премиум-звук, банкетный стол"},
-      {id:"VIP4", zone:"vip", name:"VIP 4 «Анзур Гранд»", capacity:"до 25 чел", desc:"Президентский люкс для особых торжеств"}
+      {id:"VIP1", zone:"vip", name:"VIP 1", capacity:"8–10 чел", desc:"Караоке Evolution, приватный лаунж"},
+      {id:"VIP2", zone:"vip", name:"VIP 2", capacity:"10–14 чел", desc:"Караоке Evolution, клубный свет, лаунж"},
+      {id:"VIP3", zone:"vip", name:"VIP 3", capacity:"12–16 чел", desc:"Караоке Evolution, премиум-звук, банкетный стол"}
     ];
 
     const BOOKING_I18N = {
@@ -2244,10 +2243,9 @@
 
       const vips = tablesData.filter(t => String(t.id).startsWith("VIP"));
       (vips.length ? vips : [
-        {id:"VIP1", name:"VIP 1 «Худжанд»", capacity:"8–10 чел", is_booked:false},
-        {id:"VIP2", name:"VIP 2 «Памир»", capacity:"10–14 чел", is_booked:false},
-        {id:"VIP3", name:"VIP 3 «Самарканд»", capacity:"12–16 чел", is_booked:false},
-        {id:"VIP4", name:"VIP 4 «Анзур Гранд»", capacity:"до 25 чел", is_booked:false}
+        {id:"VIP1", name:"VIP 1", capacity:"8–10 чел", is_booked:false},
+        {id:"VIP2", name:"VIP 2", capacity:"10–14 чел", is_booked:false},
+        {id:"VIP3", name:"VIP 3", capacity:"12–16 чел", is_booked:false}
       ]).forEach(v => {
         const div = document.createElement('div');
         div.style.minHeight = "110px";
