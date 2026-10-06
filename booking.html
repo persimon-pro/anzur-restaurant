@@ -395,12 +395,13 @@
 
     /* Table Node Element */
     .table-cell {
-      border: 1px solid var(--border-light);
-      background: #0F0D0B;
+      border: 1.5px solid #10B981;
+      background: rgba(16, 185, 129, 0.14);
+      box-shadow: inset 0 0 10px rgba(16, 185, 129, 0.12);
       padding: 0.6rem 0.4rem;
       text-align: center;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -408,33 +409,69 @@
       position: relative;
     }
     .table-cell:hover {
-      transform: scale(1.04);
+      transform: scale(1.05);
       z-index: 10;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.8);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.8), 0 0 16px rgba(16, 185, 129, 0.4);
     }
 
+    /* UNSELECTED FREE TABLES: 100% UNIFORM GREEN */
     .table-cell.is-free {
-      border-color: rgba(16, 185, 129, 0.4);
+      border-color: #10B981 !important;
+      background: rgba(16, 185, 129, 0.15) !important;
+      box-shadow: inset 0 0 10px rgba(16, 185, 129, 0.12) !important;
     }
     .table-cell.is-free:hover {
-      border-color: var(--status-free);
-      background: rgba(16, 185, 129, 0.08);
+      border-color: #34D399 !important;
+      background: rgba(16, 185, 129, 0.26) !important;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.45) !important;
     }
-    .table-cell.is-free .t-status { color: var(--status-free); }
+    .table-cell.is-free .t-num {
+      color: #FFFFFF !important;
+    }
+    .table-cell.is-free .t-cap {
+      color: #A7F3D0 !important;
+    }
+    .table-cell.is-free .t-status {
+      color: #10B981 !important;
+    }
+    .table-cell.is-free .vip-tag {
+      color: #10B981 !important;
+    }
 
+    /* OCCUPIED / BUSY TABLES: RED */
     .table-cell.is-busy {
-      border-color: rgba(239, 68, 68, 0.35);
-      background: rgba(239, 68, 68, 0.05);
+      border-color: rgba(239, 68, 68, 0.5) !important;
+      background: rgba(239, 68, 68, 0.08) !important;
+      box-shadow: none !important;
       cursor: not-allowed;
     }
-    .table-cell.is-busy .t-status { color: var(--status-busy); }
+    .table-cell.is-busy .t-num { color: #9CA3AF !important; }
+    .table-cell.is-busy .t-cap { color: #6B7280 !important; }
+    .table-cell.is-busy .t-status { color: var(--status-busy) !important; }
+    .table-cell.is-busy .vip-tag { color: #EF4444 !important; }
 
+    /* ACTIVELY SELECTED TABLE: ONLY SELECTED RECEIVES YELLOW / AMBER GOLD */
     .table-cell.is-selected {
-      border-color: var(--gold) !important;
-      background: rgba(197, 160, 89, 0.18) !important;
-      box-shadow: 0 0 20px rgba(197, 160, 89, 0.5) !important;
+      border: 2px solid #F59E0B !important;
+      background: rgba(245, 158, 11, 0.32) !important;
+      box-shadow: 0 0 24px rgba(245, 158, 11, 0.75), inset 0 0 14px rgba(245, 158, 11, 0.25) !important;
+      transform: scale(1.05);
+      z-index: 20 !important;
     }
-    .table-cell.is-selected .t-num { color: var(--gold-light); }
+    .table-cell.is-selected .t-num {
+      color: #FEF3C7 !important;
+      text-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+    }
+    .table-cell.is-selected .t-cap {
+      color: #FDE68A !important;
+    }
+    .table-cell.is-selected .t-status {
+      color: #F59E0B !important;
+      font-weight: 700;
+    }
+    .table-cell.is-selected .vip-tag {
+      color: #F59E0B !important;
+    }
 
     .t-num {
       font-family: var(--font-mono);
@@ -458,14 +495,9 @@
     /* Table shape customizations matching blueprints */
     #t-cell-1, #t-cell-2, #t-cell-3 {
       border-radius: 12px;
-      background: radial-gradient(circle at center, rgba(197, 160, 89, 0.18) 0%, rgba(26, 20, 14, 0.96) 100%);
-      box-shadow: inset 0 0 0 1px rgba(197, 160, 89, 0.45);
-      border-color: rgba(197, 160, 89, 0.55);
     }
     #t-cell-29 {
       border-radius: 14px;
-      background: radial-gradient(circle at center, rgba(197, 160, 89, 0.16) 0%, rgba(26, 20, 14, 0.95) 100%);
-      box-shadow: inset 0 0 0 1px rgba(197, 160, 89, 0.45);
     }
     #t-cell-36 {
       transform: rotate(-35deg);
@@ -493,14 +525,44 @@
     .arch-chair {
       position: absolute;
       background: #14110E;
-      border: 1px solid rgba(197, 160, 89, 0.5);
+      border: 1.5px solid rgba(16, 185, 129, 0.65);
+      background: rgba(16, 185, 129, 0.08);
       border-radius: 6px 6px 3px 3px;
       pointer-events: none;
       z-index: 1;
       transition: all 0.2s ease;
     }
-    .table-group:hover .arch-chair {
-      border-color: var(--gold-light);
+    .arch-sofa {
+      position: absolute;
+      background: #18130E;
+      border: 1.5px solid rgba(16, 185, 129, 0.65);
+      background: rgba(16, 185, 129, 0.08);
+      transition: all 0.2s ease;
+      box-shadow: inset 0 0 4px rgba(0,0,0,0.8);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .table-group:hover .arch-chair,
+    .table-group:hover .arch-sofa {
+      border-color: #34D399;
+      background: rgba(16, 185, 129, 0.18);
+    }
+    .table-group.is-busy .arch-chair,
+    .table-group.is-busy .arch-sofa,
+    .table-group:has(.is-busy) .arch-chair,
+    .table-group:has(.is-busy) .arch-sofa {
+      border-color: rgba(239, 68, 68, 0.45) !important;
+      background: rgba(239, 68, 68, 0.06) !important;
+    }
+
+    /* ONLY SELECTED TABLE GETS YELLOW / GOLD CHAIRS & SOFAS */
+    .table-group.is-selected .arch-chair,
+    .table-group.is-selected .arch-sofa,
+    .table-group:has(.is-selected) .arch-chair,
+    .table-group:has(.is-selected) .arch-sofa {
+      border-color: #F59E0B !important;
+      background: rgba(245, 158, 11, 0.25) !important;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.5) !important;
     }
     .chair-top {
       top: -10px;
@@ -527,14 +589,6 @@
       border-radius: 2px 4px 4px 2px;
     }
     /* Sofa / Couch shapes for VIP booths */
-    .arch-sofa {
-      position: absolute;
-      background: #18130E;
-      border: 1px solid rgba(197, 160, 89, 0.6);
-      box-shadow: inset 0 0 4px rgba(0,0,0,0.8);
-      pointer-events: none;
-      z-index: 1;
-    }
     .sofa-top {
       top: -11px;
       left: 10px;
@@ -2136,13 +2190,39 @@
       checkOrientation();
     });
 
+    function sanitizeTables(rawList) {
+      if (!Array.isArray(rawList)) return [];
+      return rawList
+        .filter(t => {
+          if (!t) return false;
+          const tid = String(t.id || '').toUpperCase();
+          if (tid === 'VIP4' || tid === 'VIP-4' || (tid === '4' && t.zone === 'vip')) return false;
+          if (t.name && /анзур\s*гранд/i.test(t.name)) return false;
+          return true;
+        })
+        .map(t => {
+          const copy = Object.assign({}, t);
+          const tid = String(copy.id).toUpperCase();
+          if (tid === 'VIP1') { copy.name = 'VIP 1'; copy.capacity = '8–10 чел'; }
+          else if (tid === 'VIP2') { copy.name = 'VIP 2'; copy.capacity = '10–14 чел'; }
+          else if (tid === 'VIP3') { copy.name = 'VIP 3'; copy.capacity = '12–16 чел'; }
+          else if (copy.name) {
+            copy.name = copy.name.replace(/«[^»]+»/g, '').replace(/Памир|Помир|Pamir|Худжанд|Самарканд/gi, '').trim();
+          }
+          if (copy.deposit) {
+            copy.deposit = copy.deposit.replace(/Памир|Помир|Pamir|Худжанд|Самарканд/gi, '').trim();
+          }
+          return copy;
+        });
+    }
+
     async function loadTablesForDate(dateStr) {
       try {
         const resp = await fetch(`${API_BASE}/api/tables?date=${dateStr}`, { cache: "no-store" });
         if (resp.ok) {
           const json = await resp.json();
           if (json.tables && json.tables.length > 0) {
-            tablesData = json.tables;
+            tablesData = sanitizeTables(json.tables);
             renderAllMapCells();
             return;
           }
@@ -2153,7 +2233,7 @@
       const localKey = `anzur_tables_${dateStr}`;
       const saved = localStorage.getItem(localKey);
       if (saved) {
-        try { tablesData = JSON.parse(saved); } catch(e) { tablesData = JSON.parse(JSON.stringify(BLUEPRINT_TABLES)); }
+        try { tablesData = sanitizeTables(JSON.parse(saved)); } catch(e) { tablesData = JSON.parse(JSON.stringify(BLUEPRINT_TABLES)); }
       } else {
         tablesData = JSON.parse(JSON.stringify(BLUEPRINT_TABLES));
       }
@@ -2196,10 +2276,17 @@
       cell.className = `table-cell ${isFree ? 'is-free' : 'is-busy'} ${isSelected ? 'is-selected' : ''}`;
       cell.onclick = () => onTableClicked(table);
 
+      if (cell.parentElement && cell.parentElement.classList.contains('table-group')) {
+        cell.parentElement.classList.toggle('is-selected', isSelected);
+        cell.parentElement.classList.toggle('is-busy', !isFree);
+        cell.parentElement.classList.toggle('is-free', isFree);
+      }
+
       const statusText = isFree ? (BOOKING_I18N[currentLang]?.free || "Свободен") : (isManager && table.booking_info ? (table.booking_info.guest_name || "Занят") : (BOOKING_I18N[currentLang]?.busy || "Занят"));
 
       const isVipTier1 = (String(table.id) === "1" || String(table.id) === "2" || String(table.id) === "3");
-      const vipHeader = isVipTier1 ? `<div style="font-family:var(--font-mono); font-size:0.62rem; color:var(--gold); letter-spacing:0.18em; font-weight:800; line-height:1; margin-bottom:2px;">ВИП</div>` : '';
+      const vipTagColor = isSelected ? '#F59E0B' : (isFree ? '#10B981' : '#EF4444');
+      const vipHeader = isVipTier1 ? `<div class="vip-tag" style="font-family:var(--font-mono); font-size:0.62rem; color:${vipTagColor}; letter-spacing:0.18em; font-weight:800; line-height:1; margin-bottom:2px;">ВИП</div>` : '';
 
       cell.innerHTML = `
         ${vipHeader}
@@ -2241,28 +2328,35 @@
       if (!grid) return;
       grid.innerHTML = "";
 
-      const vips = tablesData.filter(t => String(t.id).startsWith("VIP"));
-      (vips.length ? vips : [
-        {id:"VIP1", name:"VIP 1", capacity:"8–10 чел", is_booked:false},
-        {id:"VIP2", name:"VIP 2", capacity:"10–14 чел", is_booked:false},
-        {id:"VIP3", name:"VIP 3", capacity:"12–16 чел", is_booked:false}
-      ]).forEach(v => {
+      const CANON_VIPS = [
+        {id:"VIP1", name:"VIP 1", capacity:"8–10 чел"},
+        {id:"VIP2", name:"VIP 2", capacity:"10–14 чел"},
+        {id:"VIP3", name:"VIP 3", capacity:"12–16 чел"}
+      ];
+
+      CANON_VIPS.forEach(c => {
+        const remote = tablesData.find(t => String(t.id).toUpperCase() === c.id) || {};
+        const isBooked = !!remote.is_booked;
+        const isFree = !isBooked;
+        const isSelected = selectedTableId === c.id;
+
         const div = document.createElement('div');
-        div.style.minHeight = "110px";
-        div.style.padding = "1.2rem";
+        div.style.minHeight = "120px";
+        div.style.padding = "1.3rem";
         div.style.textAlign = "left";
         div.style.alignItems = "flex-start";
-
-        const isFree = !v.is_booked;
-        const isSelected = selectedTableId === String(v.id);
+        div.style.borderRadius = "10px";
         div.className = `table-cell ${isFree ? 'is-free' : 'is-busy'} ${isSelected ? 'is-selected' : ''}`;
-        div.onclick = () => onTableClicked(v);
+        div.onclick = () => onTableClicked({ id: c.id, name: c.name, capacity: c.capacity, is_booked: isBooked, booking_info: remote.booking_info });
+
+        const statusText = isFree ? (BOOKING_I18N[currentLang]?.free || "Свободен") : (isManager && remote.booking_info ? (remote.booking_info.guest_name || "Занят") : (BOOKING_I18N[currentLang]?.busy || "Занят"));
+        const tagColor = isSelected ? '#F59E0B' : (isFree ? '#10B981' : '#EF4444');
 
         div.innerHTML = `
-          <div style="font-family:var(--font-mono); font-size:0.58rem; color:var(--gold); letter-spacing:0.16em;">VIP SUITE · КАРАОКЕ</div>
-          <div class="t-num" style="font-size:1.15rem; font-family:var(--font-serif); margin-top:0.2rem;">${v.name || v.id}</div>
-          <div class="t-cap" style="margin-top:0.2rem;">Вместимость: <b>${v.capacity}</b></div>
-          <div class="t-status" style="margin-top:0.5rem;">● ${isFree ? 'Свободен' : 'Занят'}</div>
+          <div class="vip-tag" style="font-family:var(--font-mono); font-size:0.62rem; color:${tagColor}; letter-spacing:0.18em; font-weight:800;">VIP · КАРАОКЕ</div>
+          <div class="t-num" style="font-size:1.35rem; font-family:var(--font-serif); margin-top:0.35rem; font-weight:700;">${c.name}</div>
+          <div class="t-cap" style="margin-top:0.3rem; font-size:0.75rem;">Вместимость: <b>${c.capacity}</b></div>
+          <div class="t-status" style="margin-top:0.65rem; font-size:0.68rem; font-weight:700;">● ${statusText}</div>
         `;
         grid.appendChild(div);
       });
@@ -2295,7 +2389,8 @@
       renderAllMapCells();
 
       const bp = BLUEPRINT_TABLES.find(x => String(x.id) === selectedTableId) || table;
-      document.getElementById('chosenTableName').textContent = `Стол №${bp.id} (${bp.name || 'Зал'})`;
+      const tableNameDisplay = String(bp.id).startsWith("VIP") ? `${bp.name || bp.id} · VIP-кабина с караоке` : `Стол №${bp.id} (${bp.name || 'Зал'})`;
+      document.getElementById('chosenTableName').textContent = tableNameDisplay;
       document.getElementById('chosenTableSub').textContent = `${bp.capacity || 'Вместимость'} · ${bp.desc || 'Без депозита'}`;
       document.getElementById('submitBtn').disabled = false;
 
@@ -2355,9 +2450,10 @@
       saveLocalTables(dateStr);
 
       // WhatsApp URL
+      const tableLabel = String(selectedTableId).startsWith("VIP") ? `VIP-кабина: ${bp.name || selectedTableId} (Караоке)` : `Стол: №${selectedTableId} (${bp.name || 'Зал'})`;
       const waText = encodeURIComponent(
-        `Здравствуйте! Я хочу забронировать стол в ресторане «Анзур»:\n\n` +
-        `🏛️ Стол: №${selectedTableId} (${bp.name || 'Зал'})\n` +
+        `Здравствуйте! Я хочу забронировать в ресторане «Анзур»:\n\n` +
+        `🏛️ ${tableLabel}\n` +
         `📅 Дата: ${dateStr}\n` +
         `⏰ Время: ${timeStr}\n` +
         `👤 Имя: ${name}\n` +
@@ -2367,7 +2463,7 @@
       );
 
       document.getElementById('successModalText').innerHTML = 
-        `Стол: <b>№${selectedTableId} (${bp.name || 'Зал'})</b><br>` +
+        `<b>${tableLabel}</b><br>` +
         `Дата и время: <b>${dateStr} в ${timeStr}</b><br>` +
         `Гость: <b>${name}</b> (+${phone})<br><br>` +
         `Заявка зафиксирована в системе ресторана!`;

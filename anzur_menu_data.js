@@ -110,14 +110,14 @@ const ANZUR_MENU_CATEGORIES = [
           "ru": "Сырное плато с горным мёдом",
           "tj": "Лаълии панирӣ бо асали кӯҳӣ",
           "en": "Artisan Cheese Board with Mountain Honey",
-          "zh": "精选欧洲风味干酪拼盘佐帕米尔高山原蜜"
+          "zh": "精选欧洲风味干酪拼盘佐高山原蜜"
         },
         "weight": "300g",
         "price": "225 TJS",
         "desc": {
           "ru": "Пармезан, камамбер, дор-блю, сулугуни, грецкие орехи и натуральный горный мёд",
           "tj": "Пармезан, камамбер, дор-блю, сулугунӣ, чормағз ва асали табиии баландкӯҳ",
-          "en": "Parmesan, Camembert, Dorblu, Suluguni, paired with walnuts and natural Pamir mountain honey",
+          "en": "Parmesan, Camembert, Dorblu, Suluguni, paired with walnuts and natural mountain honey",
           "zh": "熟成帕玛森、法国卡门贝尔、蓝纹干酪与苏鲁古尼干酪，伴以香脆核桃仁与高山纯天然百花蜜"
         }
       },
@@ -125,16 +125,16 @@ const ANZUR_MENU_CATEGORIES = [
         "name": {
           "ru": "Горный лук Анзур с соленьями",
           "tj": "Пиёзи кӯҳии Анзур бо намакинҳо",
-          "en": "Pamir Anzur Mountain Onion & Pickles",
-          "zh": "帕米尔特产安祖尔高山珍珠野葱与传统腌菜"
+          "en": "Anzur Mountain Onion & Pickles",
+          "zh": "特产安祖尔高山珍珠野葱与传统腌菜"
         },
         "weight": "280g",
         "price": "75 TJS",
         "desc": {
-          "ru": "Эндемичный деликатес Памирских гор — маринованный лук Анзур с хрустящими домашними соленьями",
-          "tj": "Неъмати нодири кӯҳҳои Помир — пиёзи хуштаъми Анзур бо бодирингу помидори намакин",
-          "en": "Endemic Pamir mountain delicacy — wild pickled Anzur onion served with crisp house pickles",
-          "zh": "帕米尔高原珍稀特产：古法慢腌安祖尔珍珠野葱，佐以中亚自制香脆时令腌渍蔬果"
+          "ru": "Эндемичный горный деликатес — маринованный лук Анзур с хрустящими домашними соленьями",
+          "tj": "Неъмати нодири кӯҳӣ — пиёзи хуштаъми Анзур бо бодирингу помидори намакин",
+          "en": "Endemic mountain delicacy — wild pickled Anzur onion served with crisp house pickles",
+          "zh": "高原珍稀特产：古法慢腌安祖尔珍珠野葱，佐以中亚自制香脆时令腌渍蔬果"
         }
       },
       {
@@ -150,7 +150,7 @@ const ANZUR_MENU_CATEGORIES = [
           "ru": "Сладкие гиссарские томаты, хрустящие огурцы, болгарский перец, свежий редис, базилик и кинза",
           "tj": "Помидору бодиринги тозаи Ҳисор, қаланфури ширин, райҳону гашнич",
           "en": "Sweet Gissar tomatoes, crisp cucumbers, sweet bell peppers, red radish, purple basil, and coriander",
-          "zh": "吉萨尔高甜沙瓤番茄、爽脆水黄瓜、彩椒、水萝卜，配以帕米尔紫罗勒与鲜香菜"
+          "zh": "吉萨尔高甜沙瓤番茄、爽脆水黄瓜、彩椒、水萝卜，配以紫罗勒与鲜香菜"
         }
       }
     ]
@@ -1122,7 +1122,7 @@ const ANZUR_MENU_CATEGORIES = [
           "ru": "Форель горная радужная целиком (1 кг)",
           "tj": "Гулмоҳии кӯҳӣ дар оташ (1 кг)",
           "en": "Whole Mountain Rainbow Trout (1 kg)",
-          "zh": "帕米尔雪山泉水活捕彩虹鳟鱼 (1公斤整条炭烤)"
+          "zh": "雪山泉水活捕彩虹鳟鱼 (1公斤整条炭烤)"
         },
         "weight": "1000g",
         "price": "185 TJS",
@@ -1130,7 +1130,7 @@ const ANZUR_MENU_CATEGORIES = [
           "ru": "Свежайшая речная горная форель, запечённая на углях со сливочным маслом, розмарином и зёрнами граната",
           "tj": "Гулмоҳии тозаи дарёӣ дар ангишт бо равғани маска, розмарин ва донаҳои анор",
           "en": "Freshly netted mountain stream trout grilled whole with butter, fresh rosemary sprigs, and wild pomegranate",
-          "zh": "源自帕米尔雪水溪流的鲜活彩虹鳟鱼，现杀上架果木炭烤，鱼皮焦脆鱼肉细嫩无小刺，配新鲜石榴籽"
+          "zh": "源自雪山溪流的鲜活彩虹鳟鱼，现杀上架果木炭烤，鱼皮焦脆鱼肉细嫩无小刺，配新鲜石榴籽"
         }
       },
       {
