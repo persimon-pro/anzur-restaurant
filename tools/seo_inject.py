@@ -64,7 +64,7 @@ REMOVE_PATTERNS = [
     r'[ \t]*<meta property="og:[a-z_:]+"[^>]*>\s*\n',
     r'[ \t]*<link rel="(canonical|alternate)"[^>]*>\s*\n',
     r'[ \t]*<!-- Open Graph -->\s*\n',
-    r'[ \t]*<!-- SEO:START -->.*?<!-- SEO:END -->\s*\n',
+    r'[ \t]*<!-- SEO:START[^>]*-->.*?<!-- SEO:END -->\s*\n',
 ]
 
 
