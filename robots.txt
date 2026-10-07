@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /backups/
+Disallow: /index.backup-v1.html
+
+Sitemap: https://anzur-restaurant.vercel.app/sitemap.xml
