@@ -44,8 +44,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
-  <!-- Motion.js -->
-  <script src="https://cdn.jsdelivr.net/npm/motion@11/dist/motion.js"></script>
+  <!-- Motion.js (deferred to eliminate render blocking) -->
+  <script src="https://cdn.jsdelivr.net/npm/motion@11/dist/motion.js" defer></script>
 
   <style>
     /* ==========================================================================
@@ -643,7 +643,9 @@
       pointer-events: none;
     }
     .hero-backdrop-media,
-    .hero-backdrop-media img {
+    .hero-backdrop-media img,
+    .hero-backdrop-media video,
+    video.hero-backdrop-media {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -2455,10 +2457,14 @@
        ========================================================================== -->
   <header class="hero">
     <div class="hero-backdrop">
-      <picture class="hero-backdrop-media">
-        <source srcset="zastavka.webp" type="image/webp">
-        <img src="zastavka.gif" alt="Ресторан «Анзур» в Душанбе — атмосфера заведения" class="hero-backdrop-media" fetchpriority="high" />
-      </picture>
+      <video autoplay loop muted playsinline poster="zastavka_poster.jpg" class="hero-backdrop-media" preload="auto" aria-hidden="true">
+        <source src="zastavka.webm" type="video/webm">
+        <source src="zastavka.mp4" type="video/mp4">
+        <picture class="hero-backdrop-media">
+          <source srcset="zastavka.webp" type="image/webp">
+          <img src="zastavka_poster.jpg" alt="Ресторан «Анзур» в Душанбе — атмосфера заведения" class="hero-backdrop-media" />
+        </picture>
+      </video>
       <div class="hero-backdrop-overlay"></div>
     </div>
 
@@ -2981,6 +2987,16 @@
       splashDismissed = true;
       const splash = document.getElementById('splash');
       if (splash) splash.classList.add('done');
+    }
+
+    function replaySplash() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const splash = document.getElementById('splash');
+      if (splash) {
+        splash.classList.remove('done');
+        splashDismissed = false;
+        setTimeout(dismissSplash, 2200);
+      }
     }
 
     // Nav reveal on scroll
