@@ -183,6 +183,7 @@
       filter: blur(55px) brightness(1.6);
       transform: scale(1.22);
       pointer-events: none;
+      visibility: hidden;
     }
 
     /* 4x Larger Onion Emblem Box */
@@ -1294,38 +1295,57 @@
       transition: opacity 0.15s ease;
     }
     .menu-stage-arrow {
-      position: absolute;
+      position: fixed;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(14, 11, 8, 0.92);
-      border: 1px solid var(--gold);
+      background: rgba(14, 11, 8, 0.94);
+      border: 1.5px solid var(--gold);
       color: var(--gold);
-      width: 52px;
-      height: 52px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 2rem;
       line-height: 1;
       transition: all 0.2s ease;
-      z-index: 12060;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+      z-index: 12500;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.8), 0 0 15px rgba(197, 160, 89, 0.25);
       user-select: none;
-      pointer-events: auto;
+      -webkit-user-select: none;
+      pointer-events: auto !important;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      padding: 0;
+    }
+    .menu-stage-arrow svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--gold);
+      transition: stroke 0.15s ease, transform 0.15s ease;
+      pointer-events: none;
+      display: block;
     }
     .menu-stage-arrow:hover {
       background: var(--gold);
-      color: #060504;
+      border-color: var(--gold-light);
       transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.9), 0 0 25px rgba(197, 160, 89, 0.5);
+    }
+    .menu-stage-arrow:hover svg {
+      stroke: #060504;
+    }
+    .menu-stage-arrow:active {
+      transform: translateY(-50%) scale(0.94);
     }
     .menu-stage-arrow.prev {
-      left: 1.2rem;
+      left: max(1.5rem, calc(env(safe-area-inset-left, 0px) + 0.8rem));
     }
     .menu-stage-arrow.next {
-      right: 1.2rem;
+      right: max(1.5rem, calc(env(safe-area-inset-right, 0px) + 0.8rem));
     }
     .spaces-stage-counter {
       position: absolute;
@@ -1346,13 +1366,20 @@
       backdrop-filter: blur(6px);
     }
     @media (max-width: 900px) {
-      .menu-stage-arrow.prev { left: 0.5rem; }
-      .menu-stage-arrow.next { right: 0.5rem; }
       .menu-stage-arrow {
-        width: 44px;
-        height: 44px;
-        font-size: 1.5rem;
-        background: rgba(8, 6, 4, 0.95);
+        width: 48px;
+        height: 48px;
+        background: rgba(8, 6, 4, 0.96);
+      }
+      .menu-stage-arrow.prev {
+        left: max(0.6rem, calc(env(safe-area-inset-left, 0px) + 0.3rem));
+      }
+      .menu-stage-arrow.next {
+        right: max(0.6rem, calc(env(safe-area-inset-right, 0px) + 0.3rem));
+      }
+      .menu-stage-arrow svg {
+        width: 20px;
+        height: 20px;
       }
       .menu-modal-close-btn {
         top: max(1rem, calc(env(safe-area-inset-top, 0px) + 0.6rem));
@@ -2917,11 +2944,15 @@
        ========================================================================== -->
   <div id="menu-modal" class="menu-modal-overlay" role="dialog" aria-modal="true" aria-label="Меню ресторана Анзур" onclick="handleMenuOverlayClick(event)">
     <button type="button" id="closeMenuModalBtn" class="menu-modal-close-btn" onclick="closeMenuModal(event)" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
+    <button type="button" id="menuStagePrev" class="menu-stage-arrow prev" onclick="prevModalMenuPage(event)" title="Предыдущая страница" aria-label="Предыдущая страница">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
     <div class="menu-lightbox-stage" id="modalMenuStage" onclick="event.stopPropagation()">
-      <button type="button" class="menu-stage-arrow prev" onclick="prevModalMenuPage(event)" title="Предыдущая страница" aria-label="Предыдущая страница">‹</button>
-      <img id="modalMenuCurrentImg" src="menu_pages_web/menu_page_01.jpg" alt="Меню ресторана Анзур" class="menu-page-display" />
-      <button type="button" class="menu-stage-arrow next" onclick="nextModalMenuPage(event)" title="Следующая страница" aria-label="Следующая страница">›</button>
+      <img id="modalMenuCurrentImg" src="/menu_pages_web/menu_page_01.jpg" alt="Меню ресторана Анзур" class="menu-page-display" />
     </div>
+    <button type="button" id="menuStageNext" class="menu-stage-arrow next" onclick="nextModalMenuPage(event)" title="Следующая страница" aria-label="Следующая страница">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
   </div>
 
   <!-- ==========================================================================
@@ -2969,12 +3000,16 @@
        ========================================================================== -->
   <div id="spaces-modal" class="menu-modal-overlay" role="dialog" aria-modal="true" aria-label="Фотографии локаций ресторана Анзур" onclick="handleSpacesOverlayClick(event)">
     <button type="button" id="closeSpacesModalBtn" class="menu-modal-close-btn" onclick="closeSpacesModal(event)" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
+    <button type="button" id="spacesStagePrev" class="menu-stage-arrow prev" onclick="prevSpacesPage(event)" title="Предыдущее фото" aria-label="Предыдущее фото">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
     <div class="menu-lightbox-stage" id="modalSpacesStage" onclick="event.stopPropagation()">
-      <button type="button" class="menu-stage-arrow prev" onclick="prevSpacesPage(event)" title="Предыдущее фото" aria-label="Предыдущее фото">‹</button>
-      <img id="modalSpacesCurrentImg" src="location_photos/main_hall_07.jpg" alt="Локация ресторана Анзур" class="menu-page-display" />
-      <button type="button" class="menu-stage-arrow next" onclick="nextSpacesPage(event)" title="Следующее фото" aria-label="Следующее фото">›</button>
+      <img id="modalSpacesCurrentImg" src="/location_photos/main_hall_07.jpg" alt="Локация ресторана Анзур" class="menu-page-display" />
       <div id="modalSpacesCounter" class="spaces-stage-counter">1 / 18</div>
     </div>
+    <button type="button" id="spacesStageNext" class="menu-stage-arrow next" onclick="nextSpacesPage(event)" title="Следующее фото" aria-label="Следующее фото">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
   </div>
 
   <script src="anzur_menu_data.js"></script>
@@ -4206,7 +4241,7 @@ let currentSlideIdx = 0;
       const pad = String(page).padStart(2, '0');
       const img = document.getElementById('modalMenuCurrentImg');
       if (img) {
-        img.src = 'menu_pages_web/menu_page_' + pad + '.jpg';
+        img.src = '/menu_pages_web/menu_page_' + pad + '.jpg';
       }
     }
 
@@ -4228,9 +4263,10 @@ let currentSlideIdx = 0;
 
     // Touch swipe support on menu stage
     (function initMenuTouchSwipe() {
-      window.addEventListener('DOMContentLoaded', () => {
+      function attach() {
         const stage = document.getElementById('modalMenuStage');
-        if (!stage) return;
+        if (!stage || stage._swipeAttached) return;
+        stage._swipeAttached = true;
         let startX = 0;
         stage.addEventListener('touchstart', (e) => {
           if (e.touches && e.touches.length > 0) startX = e.touches[0].clientX;
@@ -4238,40 +4274,45 @@ let currentSlideIdx = 0;
         stage.addEventListener('touchend', (e) => {
           if (e.changedTouches && e.changedTouches.length > 0) {
             const diffX = e.changedTouches[0].clientX - startX;
-            if (Math.abs(diffX) > 40) {
+            if (Math.abs(diffX) > 25) {
               if (diffX > 0) prevModalMenuPage();
               else nextModalMenuPage();
             }
           }
         }, { passive: true });
-      });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', attach);
+      } else {
+        attach();
+      }
     })();
 
     // Spaces / Locations Lightbox Modal (Organized by categories: Главный зал, Веранда, Караоке)
     const SPACES_DATA = {
       main_hall: [
-        'location_photos/main_hall_07.jpg',
-        'location_photos/main_hall_01.jpg',
-        'location_photos/main_hall_02.jpg',
-        'location_photos/main_hall_03.jpg',
-        'location_photos/main_hall_04.jpg',
-        'location_photos/main_hall_05.jpg',
-        'location_photos/main_hall_06.jpg',
-        'location_photos/main_hall_08.jpg',
-        'location_photos/main_hall_09.jpg',
-        'location_photos/main_hall_10.jpg',
-        'location_photos/main_hall_11.jpg',
-        'location_photos/main_hall_12.jpg'
+        '/location_photos/main_hall_07.jpg',
+        '/location_photos/main_hall_01.jpg',
+        '/location_photos/main_hall_02.jpg',
+        '/location_photos/main_hall_03.jpg',
+        '/location_photos/main_hall_04.jpg',
+        '/location_photos/main_hall_05.jpg',
+        '/location_photos/main_hall_06.jpg',
+        '/location_photos/main_hall_08.jpg',
+        '/location_photos/main_hall_09.jpg',
+        '/location_photos/main_hall_10.jpg',
+        '/location_photos/main_hall_11.jpg',
+        '/location_photos/main_hall_12.jpg'
       ],
       veranda: [
-        'location_photos/veranda_01.jpg',
-        'location_photos/veranda_02.jpg',
-        'location_photos/veranda_03.jpg',
-        'location_photos/veranda_04.jpg'
+        '/location_photos/veranda_01.jpg',
+        '/location_photos/veranda_02.jpg',
+        '/location_photos/veranda_03.jpg',
+        '/location_photos/veranda_04.jpg'
       ],
       karaoke: [
-        'location_photos/karaoke_01.jpg',
-        'location_photos/karaoke_02.jpg'
+        '/location_photos/karaoke_01.jpg',
+        '/location_photos/karaoke_02.jpg'
       ]
     };
 
@@ -4324,23 +4365,88 @@ let currentSlideIdx = 0;
       }
     }
 
-    function bindModalCloseEvents() {
+    function bindModalEvents() {
+      // Close buttons
       const menuClose = document.getElementById('closeMenuModalBtn');
-      if (menuClose) {
-        menuClose.onclick = closeMenuModal;
-      }
+      if (menuClose) menuClose.onclick = closeMenuModal;
       const spacesClose = document.getElementById('closeSpacesModalBtn');
-      if (spacesClose) {
-        spacesClose.onclick = closeSpacesModal;
-      }
+      if (spacesClose) spacesClose.onclick = closeSpacesModal;
       const textClose = document.getElementById('closeTextMenuModalBtn');
-      if (textClose) {
-        textClose.onclick = closeTextMenuModal;
+      if (textClose) textClose.onclick = closeTextMenuModal;
+
+      // Menu modal arrows
+      const menuPrev = document.getElementById('menuStagePrev');
+      if (menuPrev) {
+        menuPrev.onclick = function(e) { prevModalMenuPage(e); };
+        menuPrev.addEventListener('touchend', function(e) {
+          if (typeof e.preventDefault === 'function') e.preventDefault();
+          if (typeof e.stopPropagation === 'function') e.stopPropagation();
+          prevModalMenuPage(e);
+        }, { passive: false });
+      }
+      const menuNext = document.getElementById('menuStageNext');
+      if (menuNext) {
+        menuNext.onclick = function(e) { nextModalMenuPage(e); };
+        menuNext.addEventListener('touchend', function(e) {
+          if (typeof e.preventDefault === 'function') e.preventDefault();
+          if (typeof e.stopPropagation === 'function') e.stopPropagation();
+          nextModalMenuPage(e);
+        }, { passive: false });
+      }
+
+      // Spaces modal arrows
+      const spacesPrev = document.getElementById('spacesStagePrev');
+      if (spacesPrev) {
+        spacesPrev.onclick = function(e) { prevSpacesPage(e); };
+        spacesPrev.addEventListener('touchend', function(e) {
+          if (typeof e.preventDefault === 'function') e.preventDefault();
+          if (typeof e.stopPropagation === 'function') e.stopPropagation();
+          prevSpacesPage(e);
+        }, { passive: false });
+      }
+      const spacesNext = document.getElementById('spacesStageNext');
+      if (spacesNext) {
+        spacesNext.onclick = function(e) { nextSpacesPage(e); };
+        spacesNext.addEventListener('touchend', function(e) {
+          if (typeof e.preventDefault === 'function') e.preventDefault();
+          if (typeof e.stopPropagation === 'function') e.stopPropagation();
+          nextSpacesPage(e);
+        }, { passive: false });
+      }
+
+      // Click left/right half of photo stage to flip
+      const menuStage = document.getElementById('modalMenuStage');
+      if (menuStage && !menuStage._navBound) {
+        menuStage._navBound = true;
+        menuStage.addEventListener('click', function(e) {
+          if (e.target && e.target.closest('button')) return;
+          const rect = menuStage.getBoundingClientRect();
+          const clickX = e.clientX - rect.left;
+          if (clickX < rect.width * 0.4) {
+            prevModalMenuPage(e);
+          } else if (clickX > rect.width * 0.6) {
+            nextModalMenuPage(e);
+          }
+        });
+      }
+      const spacesStage = document.getElementById('modalSpacesStage');
+      if (spacesStage && !spacesStage._navBound) {
+        spacesStage._navBound = true;
+        spacesStage.addEventListener('click', function(e) {
+          if (e.target && e.target.closest('button')) return;
+          const rect = spacesStage.getBoundingClientRect();
+          const clickX = e.clientX - rect.left;
+          if (clickX < rect.width * 0.4) {
+            prevSpacesPage(e);
+          } else if (clickX > rect.width * 0.6) {
+            nextSpacesPage(e);
+          }
+        });
       }
     }
-    bindModalCloseEvents();
+    bindModalEvents();
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', bindModalCloseEvents);
+      document.addEventListener('DOMContentLoaded', bindModalEvents);
     }
 
     function setSpacesPhoto(idx) {
@@ -4376,9 +4482,10 @@ let currentSlideIdx = 0;
 
     // Touch swipe support on spaces stage
     (function initSpacesTouchSwipe() {
-      window.addEventListener('DOMContentLoaded', () => {
+      function attach() {
         const stage = document.getElementById('modalSpacesStage');
-        if (!stage) return;
+        if (!stage || stage._swipeAttached) return;
+        stage._swipeAttached = true;
         let startX = 0;
         stage.addEventListener('touchstart', (e) => {
           if (e.touches && e.touches.length > 0) startX = e.touches[0].clientX;
@@ -4386,13 +4493,18 @@ let currentSlideIdx = 0;
         stage.addEventListener('touchend', (e) => {
           if (e.changedTouches && e.changedTouches.length > 0) {
             const diffX = e.changedTouches[0].clientX - startX;
-            if (Math.abs(diffX) > 40) {
+            if (Math.abs(diffX) > 25) {
               if (diffX > 0) prevSpacesPage();
               else nextSpacesPage();
             }
           }
         }, { passive: true });
-      });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', attach);
+      } else {
+        attach();
+      }
     })();
 
     // Global Key listeners (ESC closes modal, Arrows cycle pages / slides)
