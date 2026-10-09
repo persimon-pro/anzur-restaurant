@@ -3,8 +3,8 @@
 import json, re, subprocess, datetime, pathlib
 
 ROOT = pathlib.Path("/Users/leonid/.gemini/antigravity/scratch/anzur-restaurant")
-# >>> When a custom domain is connected, change ONLY this line and rerun. <<<
-BASE = "https://anzur-restaurant.vercel.app"
+# >>> Production custom domain <<<
+BASE = "https://anzur.tj"
 OG = f"{BASE}/og-image.jpg"
 PHONE = "+992917917917"
 INSTAGRAM = "https://www.instagram.com/anzur.rest/"
