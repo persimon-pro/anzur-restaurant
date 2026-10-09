@@ -3,8 +3,8 @@
 import json, re, subprocess, datetime, pathlib
 
 ROOT = pathlib.Path("/Users/leonid/.gemini/antigravity/scratch/anzur-restaurant")
-# >>> Production custom domain <<<
-BASE = "https://anzur.tj"
+# >>> Production custom domain (Vercel primary) <<<
+BASE = "https://www.anzur.tj"
 OG = f"{BASE}/og-image.jpg"
 PHONE = "+992917917917"
 INSTAGRAM = "https://www.instagram.com/anzur.rest/"

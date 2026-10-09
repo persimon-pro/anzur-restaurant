@@ -3,4 +3,4 @@ Allow: /
 Disallow: /backups/
 Disallow: /index.backup-v1.html
 
-Sitemap: https://anzur.tj/sitemap.xml
+Sitemap: https://www.anzur.tj/sitemap.xml
