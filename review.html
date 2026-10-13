@@ -260,6 +260,81 @@
       line-height: 1.45;
     }
 
+    /* BOLD DISCLAIMER: TURN OFF WI-FI */
+    .wifi-disclaimer {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.22), rgba(245, 158, 11, 0.16));
+      border: 2px solid #EF4444;
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      box-shadow: 0 0 25px rgba(239, 68, 68, 0.25);
+      animation: pulseAlert 2.5s infinite ease-in-out;
+    }
+
+    @keyframes pulseAlert {
+      0%, 100% {
+        box-shadow: 0 0 18px rgba(239, 68, 68, 0.25);
+        border-color: #EF4444;
+      }
+      50% {
+        box-shadow: 0 0 28px rgba(245, 158, 11, 0.45);
+        border-color: #F59E0B;
+      }
+    }
+
+    .wifi-disclaimer-icon {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(239, 68, 68, 0.25);
+      border: 1px solid rgba(239, 68, 68, 0.5);
+      color: #FCA5A5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wifi-disclaimer-icon svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .wifi-disclaimer-content h4 {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      color: #FEE2E2;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .wifi-disclaimer-content p {
+      font-size: 13px;
+      color: #F3EFEA;
+      line-height: 1.5;
+    }
+
+    .wifi-disclaimer-content strong {
+      color: #FDE047;
+      text-decoration: underline;
+      font-weight: 700;
+    }
+
+    .wifi-disclaimer-content em {
+      display: block;
+      margin-top: 4px;
+      font-size: 12px;
+      color: #FCA5A5;
+      font-style: normal;
+    }
+
     .platforms-title {
       font-family: var(--font-mono);
       font-size: 11px;
@@ -791,6 +866,28 @@
           <p>Пожалуйста, уделите 1 минуту и выберите удобную платформу ниже, чтобы опубликовать отзыв. Для нас это бесценная поддержка!</p>
         </div>
 
+        <!-- BOLD DISCLAIMER: TURN OFF WI-FI -->
+        <div class="wifi-disclaimer" role="alert">
+          <div class="wifi-disclaimer-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="1" y1="1" x2="23" y2="23"></line>
+              <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+              <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+              <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+              <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+              <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+              <line x1="12" y1="20" x2="12.01" y2="20"></line>
+            </svg>
+          </div>
+          <div class="wifi-disclaimer-content">
+            <h4>🔴 ВНИМАНИЕ: ОТКЛЮЧИТЕ WI-FI!</h4>
+            <p>
+              Обязательно <strong>отключите Wi-Fi и включите мобильный интернет (4G / LTE)</strong> перед отправкой отзыва.
+              <em>Если писать отзыв через Wi-Fi ресторана или одного офиса — алгоритмы TripAdvisor, Google и Яндекса мгновенно заблокируют и удалят ваш отзыв!</em>
+            </p>
+          </div>
+        </div>
+
         <div class="platforms-title">Выберите платформу для отзыва</div>
 
         <div class="platforms-grid">
@@ -928,7 +1025,7 @@
         <div class="staff-tips">
           <strong>💡 Памятка для сотрудников и амбассадоров ресторана:</strong>
           <ul>
-            <li><strong>Мобильный интернет (4G):</strong> Оставляйте отзывы со своего мобильного интернета, не подключаясь к ресторанному Wi-Fi.</li>
+            <li><strong style="color: #F87171;">🔴 ОБЯЗАТЕЛЬНО ОТКЛЮЧИТЕ WI-FI:</strong> Отправляйте отзывы только с мобильного интернета (4G). Ни в коем случае не подключайтесь к Wi-Fi ресторана!</li>
             <li><strong>Живое фото со смартфона:</strong> Если прикрепить 1 фото блюда или интерьера со своего телефона, TripAdvisor и Google дают отзыву наивысший вес.</li>
             <li><strong>Естественные интервалы:</strong> Не отправляйте отзывы все в одну минуту — пусть 2–3 человека пишут в день, чтобы динамика выглядела органично.</li>
           </ul>
