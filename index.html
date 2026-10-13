@@ -2681,7 +2681,7 @@
     <!-- 1. Главный зал -->
     <div class="space-box" onclick="openSpacesCategory('main_hall')" style="cursor:pointer;" title="Смотреть фотографии Главного зала">
       <div class="space-media">
-        <img src="location_photos/main_hall_07.jpg" alt="Главный зал Анзур" loading="lazy" />
+        <img src="location_photos/new_main_hall.jpg" alt="Главный зал ресторана Анзур" loading="lazy" />
       </div>
       <div class="space-text">
         <h3 class="space-title" data-i18n="space1_title">Главный зал</h3>
@@ -2694,10 +2694,10 @@
     <!-- 2. Веранда -->
     <div class="space-box" onclick="openSpacesCategory('veranda')" style="cursor:pointer;" title="Смотреть фотографии Веранды">
       <div class="space-media">
-        <img src="location_photos/veranda_01.jpg" alt="Летняя веранда ресторана Анзур" loading="lazy" />
+        <img src="location_photos/new_veranda.jpg" alt="Тихая веранда ресторана Анзур" loading="lazy" />
       </div>
       <div class="space-text">
-        <h3 class="space-title" data-i18n="space2_title">Летняя веранда</h3>
+        <h3 class="space-title" data-i18n="space2_title">Тихая веранда</h3>
         <p class="space-desc" data-i18n="space2_desc">
           Уединённая зона на свежем воздухе под мягким светом парящих сфер и гирлянд — для семейных ужинов и спокойного отдыха.
         </p>
@@ -2707,7 +2707,7 @@
     <!-- 3. Караоке -->
     <div class="space-box" onclick="openSpacesCategory('karaoke')" style="cursor:pointer;" title="Смотреть фотографии Караоке">
       <div class="space-media">
-        <img src="location_photos/karaoke_01.jpg" alt="VIP-кабины с караоке Анзур" loading="lazy" />
+        <img src="location_photos/new_karaoke_01.jpg" alt="VIP-кабины с караоке Анзур" loading="lazy" />
       </div>
       <div class="space-text">
         <h3 class="space-title" data-i18n="space3_title">Караоке & VIP-кабины</h3>
@@ -3004,7 +3004,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
     </button>
     <div class="menu-lightbox-stage" id="modalSpacesStage" onclick="event.stopPropagation()">
-      <img id="modalSpacesCurrentImg" src="/location_photos/main_hall_07.jpg" alt="Локация ресторана Анзур" class="menu-page-display" />
+      <img id="modalSpacesCurrentImg" src="/location_photos/new_main_hall.jpg" alt="Локация ресторана Анзур" class="menu-page-display" />
       <div id="modalSpacesCounter" class="spaces-stage-counter">1 / 18</div>
     </div>
     <button type="button" id="spacesStageNext" class="menu-stage-arrow next" onclick="nextSpacesPage(event)" title="Следующее фото" aria-label="Следующее фото">
@@ -3086,7 +3086,7 @@
     space1_title: "Главный зал",
     space1_desc: "Атмосферный восточный зал с резными орнаментами ручной работы, мягкими диванами, концертной сценой и танцполом для торжеств.",
     space2_badge: "СВЕЖИЙ ВОЗДУХ & УЮТ",
-    space2_title: "Летняя веранда",
+    space2_title: "Тихая веранда",
     space2_desc: "Уединённая зона на свежем воздухе под мягким светом парящих сфер и гирлянд — для семейных ужинов и спокойного отдыха.",
     atmo_mono: "[ РЕАЛЬНЫЕ ФОТОГРАФИИ · ВЕЧЕРНИЙ ДУШАНБЕ ]",
     atmo_sec_title: "Атмосфера & <em>Архитектура</em>",
@@ -3296,7 +3296,7 @@
     space1_title: "Main Hall",
     space1_desc: "Atmospheric oriental hall featuring handcrafted carvings, plush velvet seating, live concert stage, and dance floor.",
     space2_badge: "OPEN AIR & SERENITY",
-    space2_title: "Summer Veranda",
+    space2_title: "Quiet Veranda",
     space2_desc: "A secluded open-air sanctuary lit by glowing ambient spheres and garlands — crafted for family dinners and quiet talks.",
     space3_badge: "3 VIP SUITES · 8–16 GUESTS · PRO KARAOKE",
     space3_title: "Karaoke & VIP Suites",
@@ -4291,6 +4291,8 @@ let currentSlideIdx = 0;
     // Spaces / Locations Lightbox Modal (Organized by categories: Главный зал, Веранда, Караоке)
     const SPACES_DATA = {
       main_hall: [
+        '/location_photos/new_main_hall.jpg',
+        '/location_photos/new_foyer_gallery.jpg',
         '/location_photos/main_hall_07.jpg',
         '/location_photos/main_hall_01.jpg',
         '/location_photos/main_hall_02.jpg',
@@ -4305,12 +4307,15 @@ let currentSlideIdx = 0;
         '/location_photos/main_hall_12.jpg'
       ],
       veranda: [
+        '/location_photos/new_veranda.jpg',
         '/location_photos/veranda_01.jpg',
         '/location_photos/veranda_02.jpg',
         '/location_photos/veranda_03.jpg',
         '/location_photos/veranda_04.jpg'
       ],
       karaoke: [
+        '/location_photos/new_karaoke_01.jpg',
+        '/location_photos/new_karaoke_02.jpg',
         '/location_photos/karaoke_01.jpg',
         '/location_photos/karaoke_02.jpg'
       ]
@@ -4327,8 +4332,8 @@ let currentSlideIdx = 0;
 
     function openSpacesCategory(cat) {
       let startIndex = 0;
-      if (cat === 'veranda') startIndex = 12;
-      else if (cat === 'karaoke') startIndex = 16;
+      if (cat === 'veranda') startIndex = SPACES_DATA.main_hall.length;
+      else if (cat === 'karaoke') startIndex = SPACES_DATA.main_hall.length + SPACES_DATA.veranda.length;
       else startIndex = 0;
       openSpacesModal(startIndex);
     }
