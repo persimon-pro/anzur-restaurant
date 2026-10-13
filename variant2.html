@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Вариант 2: Световая синхронизация и морфинг — Ресторан «Анзур»</title>
+  <link rel="icon" href="/anzur_bulb_pure.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #060504;
+      --gold: #D4AF37;
+      --gold-light: #FCEFD8;
+      --gold-dark: #916D2A;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Space Grotesk', -apple-system, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      color: #f7f4ed;
+      font-family: var(--font-sans);
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .hero-stage {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background: #040302;
+    }
+
+    /* Video starts in dark cinematic blur, transitions to clear view */
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 1;
+      filter: blur(28px) brightness(0.22);
+      transform: scale(1.08);
+      transition: filter 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 2.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-video.is-revealed {
+      filter: blur(0px) brightness(0.85);
+      transform: scale(1);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, rgba(6, 5, 4, 0.45) 0%, rgba(6, 5, 4, 0.75) 65%, rgba(6, 5, 4, 0.95) 100%),
+        linear-gradient(to bottom, rgba(6, 5, 4, 0.65) 0%, rgba(6, 5, 4, 0.25) 45%, rgba(6, 5, 4, 0.92) 100%);
+      z-index: 2;
+      opacity: 0.6;
+      transition: opacity 1.5s ease;
+      pointer-events: none;
+    }
+    .hero-overlay.is-active {
+      opacity: 1;
+    }
+
+    /* ==========================================================================
+       LIGHT TRACE EMBLEM & MORPHING
+       ========================================================================== */
+    .morph-stage {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .emblem-box {
+      width: min(280px, 60vmin);
+      height: min(280px, 60vmin);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transform: translateY(0);
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .morph-stage.settled .emblem-box {
+      transform: translateY(-80px) scale(0.38);
+    }
+
+    .emblem-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .trace-path {
+      stroke-dasharray: 850;
+      stroke-dashoffset: 850;
+      stroke: url(#goldGrad);
+      stroke-width: 10;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8));
+    }
+    .trace-path.is-drawing {
+      animation: drawTrace 1.3s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+    }
+
+    @keyframes drawTrace {
+      0% { stroke-dashoffset: 850; }
+      100% { stroke-dashoffset: 0; }
+    }
+
+    .emblem-fill {
+      fill: url(#goldGrad);
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.5));
+    }
+    .emblem-fill.is-active {
+      opacity: 1;
+    }
+
+    /* Optical lens flare streak */
+    .flare-streak {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100vw;
+      height: 2px;
+      transform: translate(-50%, -50%) scaleX(0);
+      background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.2) 20%, #FFF5DB 50%, rgba(212, 175, 55, 0.2) 80%, transparent 100%);
+      filter: drop-shadow(0 0 14px rgba(212, 175, 55, 1));
+      pointer-events: none;
+      opacity: 0;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+    }
+    .flare-streak.flash {
+      transform: translate(-50%, -50%) scaleX(1);
+      opacity: 1;
+    }
+
+    /* ==========================================================================
+       HERO CONTENT WITH SHIMMERING GOLD TYPOGRAPHY
+       ========================================================================== */
+    .hero-content {
+      position: relative;
+      z-index: 5;
+      text-align: center;
+      padding: 0 1.5rem;
+      max-width: 900px;
+      margin-top: 50px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+      pointer-events: none;
+    }
+    .hero-content.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Shimmering gold gradient typography */
+    .shimmer-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.6rem, 6.5vw, 4.4rem);
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 0.85rem;
+      background: linear-gradient(110deg, #916D2A 0%, #D4AF37 25%, #FFF6E5 50%, #D4AF37 75%, #916D2A 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldShimmer 5s linear infinite;
+      filter: drop-shadow(0 4px 25px rgba(0, 0, 0, 0.9));
+    }
+
+    @keyframes goldShimmer {
+      0% { background-position: 200% center; }
+      100% { background-position: -200% center; }
+    }
+
+    .shimmer-subtitle {
+      font-family: var(--font-mono);
+      font-size: clamp(0.7rem, 1.4vw, 0.85rem);
+      letter-spacing: 0.28em;
+      color: rgba(255, 255, 255, 0.75);
+      text-transform: uppercase;
+      margin-bottom: 2.2rem;
+    }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.9rem 2.2rem;
+      background: linear-gradient(135deg, #E6C875 0%, #C5983A 50%, #966F22 100%);
+      color: #120e09;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4), 0 0 25px rgba(212, 175, 55, 0.25);
+      transition: all 0.3s ease;
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 35px rgba(212, 175, 55, 0.45);
+      filter: brightness(1.1);
+    }
+
+    /* ==========================================================================
+       DEMO BAR
+       ========================================================================== */
+    .demo-bar {
+      position: fixed;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      background: rgba(12, 9, 7, 0.92);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 40px;
+      padding: 0.4rem 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.15);
+      max-width: 95vw;
+      overflow-x: auto;
+    }
+    .demo-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      padding: 0 0.6rem 0 0.8rem;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .demo-pill {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      padding: 0.5rem 0.95rem;
+      border-radius: 20px;
+      background: transparent;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .demo-pill:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .demo-pill.active {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(145, 109, 42, 0.3));
+      border-color: rgba(212, 175, 55, 0.6);
+      color: #FCEFD8;
+      font-weight: 600;
+    }
+    .demo-replay {
+      background: rgba(212, 175, 55, 0.18);
+      color: var(--gold-light);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .demo-replay:hover {
+      background: var(--gold);
+      color: #120e09;
+      border-color: var(--gold);
+    }
+    .demo-site-link {
+      color: var(--gold);
+      border-left: 1px solid rgba(255, 255, 255, 0.15);
+      padding-left: 0.9rem;
+      margin-left: 0.2rem;
+    }
+
+    @media (max-width: 768px) {
+      .demo-bar {
+        bottom: 0.8rem;
+        padding: 0.3rem 0.4rem;
+        gap: 0.2rem;
+      }
+      .demo-label { display: none; }
+      .demo-pill {
+        font-size: 0.68rem;
+        padding: 0.45rem 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HERO BACKGROUND VIDEO STAGE
+       ========================================================================== -->
+  <div class="hero-stage" id="heroStage">
+    <video id="heroVideo" class="hero-video" autoplay loop muted playsinline poster="/zastavka_poster.jpg" preload="auto">
+      <source src="/zastavka.webm" type="video/webm">
+      <source src="/zastavka.mp4" type="video/mp4">
+    </video>
+    <div id="heroOverlay" class="hero-overlay"></div>
+
+    <!-- ==========================================================================
+         MORPHING LIGHT EMBLEM
+         ========================================================================== -->
+    <div id="morphStage" class="morph-stage">
+      <div id="flareStreak" class="flare-streak"></div>
+      <div class="emblem-box">
+        <svg class="emblem-svg" viewBox="0 0 200 200" fill="none">
+          <defs>
+            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FCEFD8" />
+              <stop offset="35%" stop-color="#DEBE7A" />
+              <stop offset="70%" stop-color="#C5A059" />
+              <stop offset="100%" stop-color="#916D2A" />
+            </linearGradient>
+          </defs>
+
+          <!-- Outer trace ring -->
+          <path id="traceOuter" class="trace-path"
+                d="M 100 20 C 130 20 170 50 170 100 C 170 145 138 175 100 175 C 62 175 30 145 30 100 C 30 50 70 20 100 20 Z" />
+
+          <!-- Middle trace ring -->
+          <path id="traceMid" class="trace-path" style="stroke-width: 8;"
+                d="M 100 45 C 122 45 148 68 148 100 C 148 132 125 152 100 152 C 75 152 52 132 52 100 C 52 68 78 45 100 45 Z" />
+
+          <!-- Center drop -->
+          <circle id="traceInner" cx="100" cy="100" r="14" class="trace-path" style="stroke-width: 6;" />
+
+          <!-- Golden glow fill that turns solid -->
+          <g id="emblemFill" class="emblem-fill">
+            <path d="M 100 20 C 130 20 170 50 170 100 C 170 145 138 175 100 175 C 62 175 30 145 30 100 C 30 50 70 20 100 20 Z"
+                  stroke="url(#goldGrad)" stroke-width="12" />
+            <path d="M 100 45 C 122 45 148 68 148 100 C 148 132 125 152 100 152 C 75 152 52 132 52 100 C 52 68 78 45 100 45 Z"
+                  stroke="url(#goldGrad)" stroke-width="10" />
+            <circle cx="100" cy="100" r="14" fill="url(#goldGrad)" />
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         HERO CONTENT
+         ========================================================================== -->
+    <div id="heroContent" class="hero-content">
+      <h1 class="shimmer-title">ANZUR RESTAURANT</h1>
+      <p class="shimmer-subtitle">НАЦИОНАЛЬНАЯ · ЕВРОПЕЙСКАЯ · ПАНАЗИАТСКАЯ КУХНЯ</p>
+      <div class="hero-actions">
+        <a href="/booking" class="btn-gold">Забронировать стол</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       DEMO BAR
+       ========================================================================== -->
+  <nav class="demo-bar">
+    <span class="demo-label">Концепты:</span>
+    <a href="/variant1.html" class="demo-pill">1. Портал сквозь буквы</a>
+    <a href="/variant2.html" class="demo-pill active">2. Световой морфинг</a>
+    <a href="/variant3.html" class="demo-pill">3. Раздвижные створки</a>
+    <a href="/variant4.html" class="demo-pill">4. Ambient Spotlight</a>
+    <button type="button" class="demo-pill demo-replay" onclick="replayVariant()">↺ Повторить</button>
+    <a href="/" class="demo-pill demo-site-link">Сайт ↗</a>
+  </nav>
+
+  <script>
+    function runMorphSequence() {
+      const video = document.getElementById('heroVideo');
+      const overlay = document.getElementById('heroOverlay');
+      const morphStage = document.getElementById('morphStage');
+      const flare = document.getElementById('flareStreak');
+      const emblemFill = document.getElementById('emblemFill');
+      const content = document.getElementById('heroContent');
+      const traces = [
+        document.getElementById('traceOuter'),
+        document.getElementById('traceMid'),
+        document.getElementById('traceInner')
+      ];
+
+      // Reset
+      video.classList.remove('is-revealed');
+      overlay.classList.remove('is-active');
+      morphStage.classList.remove('settled');
+      flare.classList.remove('flash');
+      emblemFill.classList.remove('is-active');
+      content.classList.remove('is-revealed');
+      traces.forEach(t => t.classList.remove('is-drawing'));
+
+      if (video.paused) {
+        video.play().catch(() => {});
+      }
+
+      // Step 1: Draw light trace (0.1s)
+      setTimeout(() => {
+        traces.forEach(t => t.classList.add('is-drawing'));
+      }, 100);
+
+      // Step 2: The emblem completes, flare flash and fill glow (1.2s)
+      setTimeout(() => {
+        emblemFill.classList.add('is-active');
+        flare.classList.add('flash');
+      }, 1250);
+
+      // Step 3: Flash fades, emblem morphs to top, video comes to sharp focus (1.5s)
+      setTimeout(() => {
+        flare.classList.remove('flash');
+        morphStage.classList.add('settled');
+        video.classList.add('is-revealed');
+        overlay.classList.add('is-active');
+      }, 1500);
+
+      // Step 4: Hero typography reveals with shimmering gold (1.9s)
+      setTimeout(() => {
+        content.classList.add('is-revealed');
+      }, 1900);
+    }
+
+    function replayVariant() {
+      runMorphSequence();
+    }
+
+    window.addEventListener('DOMContentLoaded', runMorphSequence);
+  </script>
+</body>
+</html>

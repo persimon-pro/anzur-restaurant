@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Лаборатория заставок и старта — Ресторан «Анзур»</title>
+  <link rel="icon" href="/anzur_bulb_pure.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #060504;
+      --card-bg: rgba(18, 14, 11, 0.75);
+      --border: rgba(212, 175, 55, 0.22);
+      --border-hover: rgba(212, 175, 55, 0.55);
+      --gold: #D4AF37;
+      --gold-light: #FCEFD8;
+      --gold-dark: #916D2A;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Space Grotesk', -apple-system, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      background-image:
+        radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(145, 109, 42, 0.08) 0%, transparent 50%);
+      color: #f7f4ed;
+      font-family: var(--font-sans);
+      padding: 3rem 1.5rem 5rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .hub-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .hub-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.24em;
+      color: var(--gold);
+      border: 1px solid var(--border);
+      padding: 0.35rem 1rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+      background: rgba(212, 175, 55, 0.06);
+      text-transform: uppercase;
+    }
+    .hub-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .hub-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hub-desc {
+      font-size: 1rem;
+      color: #a89f91;
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Grid of 4 concepts */
+    .concepts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.75rem;
+      margin-bottom: 3.5rem;
+    }
+    @media (max-width: 840px) {
+      .concepts-grid { grid-template-columns: 1fr; }
+    }
+
+    .concept-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(10px);
+      text-decoration: none;
+      color: inherit;
+      overflow: hidden;
+    }
+    .concept-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.12) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+    .concept-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 30px rgba(212, 175, 55, 0.15);
+    }
+    .concept-card:hover::before {
+      opacity: 1;
+    }
+
+    .card-num {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 1.85rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: #fff;
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+    .card-vibe {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      color: var(--gold-light);
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 1.1rem;
+      text-transform: uppercase;
+    }
+    .card-desc {
+      font-size: 0.9rem;
+      color: #a89f91;
+      line-height: 1.6;
+      margin-bottom: 1.8rem;
+    }
+
+    .card-features {
+      list-style: none;
+      margin-bottom: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1.2rem;
+    }
+    .card-features li {
+      font-size: 0.82rem;
+      color: #c9c1b3;
+      padding: 0.35rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .card-features li::before {
+      content: '✦';
+      color: var(--gold);
+      font-size: 0.7rem;
+    }
+
+    .card-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.6rem;
+      background: rgba(212, 175, 55, 0.14);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      color: var(--gold-light);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    .concept-card:hover .card-btn {
+      background: var(--gold);
+      color: #120e09;
+      border-color: var(--gold);
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.35);
+    }
+
+    /* Footer */
+    .hub-footer {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(212, 175, 55, 0.15);
+    }
+    .hub-footer a {
+      color: var(--gold);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .hub-footer a:hover {
+      color: var(--gold-light);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header class="hub-header">
+      <span class="hub-badge">ЛАБОРАТОРИЯ ДИЗАЙНА · ANZUR RESTAURANT</span>
+      <h1 class="hub-title">Концепты старта & <em>Коллаборации заставки</em></h1>
+      <p class="hub-desc">
+        Четыре кинематографичных сценария появления сайта и синергии нового таймлапса с фирменным знаком и надписью «ANZUR RESTAURANT». Нажмите на любой вариант для полноэкранного теста:
+      </p>
+    </header>
+
+    <div class="concepts-grid">
+
+      <!-- 1. Кинематографичный портал -->
+      <a href="/variant1.html" class="concept-card">
+        <div>
+          <div class="card-num">[ ВАРИАНТ 01 ]</div>
+          <h2 class="card-title">Кинематографичный портал сквозь буквы</h2>
+          <span class="card-vibe">Эффект Apple TV / HBO / Киноэкран</span>
+          <p class="card-desc">
+            С первой миллисекунды таймлапс играет <strong>внутри силуэта букв ANZUR</strong> как через стеклянный трафарет. Затем камера совершает стремительный пролёт сквозь буквы прямо в открывшееся пространство ресторана.
+          </p>
+          <ul class="card-features">
+            <li>Видео сразу видно внутри букв с золотой каёмкой</li>
+            <li>Эффектный пролёт камеры (Zoom Through)</li>
+            <li>Бесшовное раскрытие полного экрана</li>
+          </ul>
+        </div>
+        <div class="card-btn">Открыть тест Варианта 1 →</div>
+      </a>
+
+      <!-- 2. Световой морфинг -->
+      <a href="/variant2.html" class="concept-card">
+        <div>
+          <div class="card-num">[ ВАРИАНТ 02 ]</div>
+          <h2 class="card-title">Световой морфинг и огни фасада</h2>
+          <span class="card-vibe">Эффект ювелирного золота & Анаморфотный блик</span>
+          <p class="card-desc">
+            Лазерная золотая нить чертит фирменный бутон Анзур. В момент смыкания вспыхивает горизонтальный луч света, знак плавно приземляется на место, а надпись зажигается жидким золотым шиммером, синхронно с вечерними огнями фасада.
+          </p>
+          <ul class="card-features">
+            <li>Черчение эмблемы световой золотой нитью</li>
+            <li>Анаморфотный световой блик (Lens Flare)</li>
+            <li>Жидкий золотой шиммер на типографике</li>
+          </ul>
+        </div>
+        <div class="card-btn">Открыть тест Варианта 2 →</div>
+      </a>
+
+      <!-- 3. Театральные створки -->
+      <a href="/variant3.html" class="concept-card">
+        <div>
+          <div class="card-num">[ ВАРИАНТ 03 ]</div>
+          <h2 class="card-title">Архитектурные створки (Вход в ресторан)</h2>
+          <span class="card-vibe">Ритуал открытия дверей / Private Club</span>
+          <p class="card-desc">
+            Экран закрыт двумя массивными темными створками с золотой печатью по центру. По клику (или через 1 сек) створки плавно и бесшумно разъезжаются в стороны, а видео на фоне делает плавный кинематографичный наплыв.
+          </p>
+          <ul class="card-features">
+            <li>Эффект распахивающихся тяжелых дверей</li>
+            <li>Пульсирующая золотая печать с логотипом</li>
+            <li>Интерактивный жест входа гостя в заведение</li>
+          </ul>
+        </div>
+        <div class="card-btn">Открыть тест Варианта 3 →</div>
+      </a>
+
+      <!-- 4. Ambient Spotlight -->
+      <a href="/variant4.html" class="concept-card">
+        <div>
+          <div class="card-num">[ ВАРИАНТ 04 ]</div>
+          <h2 class="card-title">Бесшовный Ambient & 3D Spotlight</h2>
+          <span class="card-vibe">Michelin Luxury / Европейский минимализм</span>
+          <p class="card-desc">
+            Без блокирующих прелоадеров. Первые секунды играют в кинематографичном формате Letterbox. Поверх видео действует интерактивный золотой прожектор (Spotlight), следующий за курсором и подсвечивающий детали здания с мягким 3D-наклоном букв.
+          </p>
+          <ul class="card-features">
+            <li>Мгновенный старт без ожидания прелоадера</li>
+            <li>Кинематографичный Letterbox с мягким расширением</li>
+            <li>Интерактивный луч света (Spotlight) и 3D-наклон</li>
+          </ul>
+        </div>
+        <div class="card-btn">Открыть тест Варианта 4 →</div>
+      </a>
+
+    </div>
+
+    <footer class="hub-footer">
+      <a href="/">← Вернуться на основной сайт anzur.tj</a>
+    </footer>
+  </div>
+
+</body>
+</html>
