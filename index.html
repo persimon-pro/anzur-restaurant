@@ -2734,7 +2734,7 @@
     <!-- 3. Тихая веранда -->
     <div class="space-box" onclick="openSpacesCategory('veranda')" style="cursor:pointer;" title="Смотреть фотографии Тихой веранды">
       <div class="space-media">
-        <img src="/location_photos/veranda_01.jpg" alt="Тихая веранда ресторана Анзур" loading="lazy" />
+        <img src="/location_photos/veranda_02.jpg" alt="Тихая веранда ресторана Анзур" loading="lazy" />
       </div>
       <div class="space-text">
         <h3 class="space-title" data-i18n="space2_title">Тихая веранда</h3>
@@ -4363,8 +4363,8 @@ let currentSlideIdx = 0;
       veranda: {
         cat: 'Тихая веранда',
         photos: [
-          '/location_photos/veranda_01.jpg',
-          '/location_photos/veranda_02.jpg'
+          '/location_photos/veranda_02.jpg',
+          '/location_photos/veranda_01.jpg'
         ]
       },
       karaoke: {
@@ -4388,24 +4388,25 @@ let currentSlideIdx = 0;
     let currentSpacesIndex = 0;
 
     function openSpacesCategory(cat) {
-      let startIndex = 0;
-      if (cat === 'terrace') {
-        startIndex = SPACES_DATA.main_hall.photos.length;
-      } else if (cat === 'veranda') {
-        startIndex = SPACES_DATA.main_hall.photos.length + SPACES_DATA.terrace.photos.length;
-      } else if (cat === 'karaoke') {
-        startIndex = SPACES_DATA.main_hall.photos.length + SPACES_DATA.terrace.photos.length + SPACES_DATA.veranda.photos.length;
+      if (cat && SPACES_DATA[cat] && SPACES_DATA[cat].photos) {
+        const catData = SPACES_DATA[cat];
+        currentSpacesList = catData.photos.map(src => ({ src, cat: catData.cat }));
+        currentSpacesIndex = 0;
+        openSpacesModal(0, false);
       } else {
-        startIndex = 0;
+        currentSpacesList = ALL_SPACES_ITEMS;
+        currentSpacesIndex = 0;
+        openSpacesModal(0, false);
       }
-      openSpacesModal(startIndex);
     }
 
-    function openSpacesModal(index) {
+    function openSpacesModal(index, resetList = true) {
       closeMobileNav();
       closeMenuModal();
       closeTextMenuModal();
-      currentSpacesList = ALL_SPACES_ITEMS;
+      if (resetList || !currentSpacesList || currentSpacesList.length === 0) {
+        currentSpacesList = ALL_SPACES_ITEMS;
+      }
       currentSpacesIndex = (typeof index === 'number' && index >= 0 && index < currentSpacesList.length) ? index : 0;
       setSpacesPhoto(currentSpacesIndex);
       const modal = document.getElementById('spaces-modal');
