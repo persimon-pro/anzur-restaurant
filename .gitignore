@@ -1,6 +1,7 @@
 *.png
 !anzur_bulb_pure.png
 !anzur_emblem_clean.png
+!review_qr.png
 backups/
 .DS_Store
 menu_pages/
