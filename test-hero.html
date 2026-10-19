@@ -2107,9 +2107,13 @@
       overflow: hidden;
       border-bottom: 1px solid var(--border);
     }
-    .event-media img {
+    .event-media img,
+    .event-media picture {
       width: 100%;
       height: 100%;
+      display: block;
+    }
+    .event-media img {
       object-fit: cover;
       filter: brightness(0.85) contrast(1.05);
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
@@ -2117,6 +2121,42 @@
     .event-card:hover .event-media img {
       transform: scale(1.04);
       filter: brightness(0.95) contrast(1.1);
+    }
+    .event-photo-toggle {
+      position: absolute;
+      bottom: 0.8rem;
+      right: 0.8rem;
+      z-index: 3;
+      display: flex;
+      gap: 0.3rem;
+      background: rgba(6, 5, 4, 0.88);
+      border: 1px solid rgba(197, 160, 89, 0.45);
+      border-radius: 20px;
+      padding: 0.2rem 0.45rem;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .event-photo-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 0.18rem 0.45rem;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      line-height: 1.2;
+    }
+    .event-photo-btn:hover {
+      color: var(--gold);
+    }
+    .event-photo-btn.is-active {
+      color: #060504;
+      background: var(--gold);
+      font-weight: 700;
     }
     .event-tag-badge {
       position: absolute;
@@ -2901,9 +2941,16 @@
       </article>
 
       <!-- Card 3: Концерты звёзд -->
-      <article class="event-card">
+      <article class="event-card" id="cardStarConcert">
         <div class="event-media">
-          <img src="events_star_concert.jpg" alt="Концерты звёзд эстрады в ресторане Анзур — сцена и живой звук" loading="lazy" />
+          <picture id="starConcertPic">
+            <source id="starConcertSrcWebp" srcset="events_star_concert_yulduz.webp?v=2" type="image/webp">
+            <img id="starConcertImg" src="events_star_concert_yulduz.jpg?v=2" alt="Концерты звёзд эстрады в ресторане Анзур — сцена и живой звук" loading="lazy" />
+          </picture>
+          <div class="event-photo-toggle" role="tablist" aria-label="Ракурс фото">
+            <button type="button" class="event-photo-btn is-active" id="btnPhotoStage" onclick="setStarConcertPhoto('stage', event)">Сцена</button>
+            <button type="button" class="event-photo-btn" id="btnPhotoCloseup" onclick="setStarConcertPhoto('closeup', event)">Крупно</button>
+          </div>
         </div>
         <div class="event-body">
           <h3 class="event-title" data-i18n="ev3_title">Концерты Звёзд</h3>
@@ -4810,6 +4857,29 @@ let currentSlideIdx = 0;
       renderSlide(0);
       resetAutoplay();
     });
+
+    // Star Concert Photo Switcher (Wide Stage vs Close-up)
+    function setStarConcertPhoto(type, e) {
+      if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
+      const img = document.getElementById('starConcertImg');
+      const srcWebp = document.getElementById('starConcertSrcWebp');
+      const btnStage = document.getElementById('btnPhotoStage');
+      const btnClose = document.getElementById('btnPhotoCloseup');
+
+      if (!img) return;
+
+      if (type === 'closeup') {
+        img.src = 'events_star_concert_closeup.jpg?v=2';
+        if (srcWebp) srcWebp.srcset = 'events_star_concert_closeup.webp?v=2';
+        if (btnClose) btnClose.classList.add('is-active');
+        if (btnStage) btnStage.classList.remove('is-active');
+      } else {
+        img.src = 'events_star_concert_yulduz.jpg?v=2';
+        if (srcWebp) srcWebp.srcset = 'events_star_concert_yulduz.webp?v=2';
+        if (btnStage) btnStage.classList.add('is-active');
+        if (btnClose) btnClose.classList.remove('is-active');
+      }
+    }
 
     // ==========================================================================
     // AMBIENT SPOTLIGHT & 3D TILT FOR HERO
