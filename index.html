@@ -1288,6 +1288,72 @@
       justify-content: center;
       user-select: none;
     }
+    .menu-scroll-stage {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      touch-action: pan-y pinch-zoom;
+      scroll-behavior: smooth;
+      z-index: 12010;
+      padding: max(4rem, calc(env(safe-area-inset-top, 0px) + 3.2rem)) 1rem max(4.5rem, calc(env(safe-area-inset-bottom, 0px) + 3.5rem));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .menu-pages-feed {
+      width: 100%;
+      max-width: min(92vw, 820px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      margin: 0 auto;
+    }
+    .menu-page-card {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      scroll-margin-top: max(1.5rem, calc(env(safe-area-inset-top, 0px) + 1rem));
+    }
+    .menu-page-card .menu-page-display {
+      width: 100%;
+      max-width: 820px;
+      max-height: none;
+      height: auto;
+      aspect-ratio: 983 / 1200;
+      background: #0e0b08;
+      object-fit: contain;
+      display: block;
+      border-radius: 6px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.12);
+    }
+    .menu-stage-counter {
+      position: fixed;
+      bottom: max(1.2rem, calc(env(safe-area-inset-bottom, 0px) + 0.6rem));
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(14, 11, 8, 0.92);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      color: var(--gold);
+      padding: 0.38rem 1rem;
+      border-radius: 18px;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.14em;
+      pointer-events: none;
+      user-select: none;
+      z-index: 12500;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    }
     .menu-page-display {
       max-width: min(88vw, 840px);
       max-height: 92vh;
@@ -1728,8 +1794,12 @@
       font-weight: 600;
     }
     .text-menu-scroll {
-      flex: 1;
+      flex: 1 1 auto;
+      min-height: 0;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      touch-action: pan-y;
       padding: 1.5rem 1.75rem 3.5rem;
       scroll-behavior: smooth;
     }
@@ -3027,16 +3097,21 @@
   </footer>
 
   <!-- ==========================================================================
-       CLEAN MENU VIEWER (PAGES + ARROWS ONLY)
+       CLEAN MENU VIEWER (SCROLLABLE 22 PAGES + ARROWS + SWIPE)
        ========================================================================== -->
   <div id="menu-modal" class="menu-modal-overlay" role="dialog" aria-modal="true" aria-label="Меню ресторана Анзур" onclick="handleMenuOverlayClick(event)">
     <button type="button" id="closeMenuModalBtn" class="menu-modal-close-btn" onclick="closeMenuModal(event)" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
     <button type="button" id="menuStagePrev" class="menu-stage-arrow prev" onclick="prevModalMenuPage(event)" title="Предыдущая страница" aria-label="Предыдущая страница">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
     </button>
-    <div class="menu-lightbox-stage" id="modalMenuStage" onclick="event.stopPropagation()">
-      <img id="modalMenuCurrentImg" src="/menu_pages_web/menu_page_01.jpg" alt="Меню ресторана Анзур" class="menu-page-display" />
+    <div class="menu-scroll-stage" id="modalMenuStage" onclick="handleMenuStageBackdropClick(event)">
+      <div class="menu-pages-feed" id="modalMenuPagesFeed">
+        <div class="menu-page-card" id="modalMenuPage-1" data-page="1">
+          <img id="modalMenuCurrentImg" src="/menu_pages_web/menu_page_01.jpg" alt="Меню ресторана Анзур — страница 1" class="menu-page-display" />
+        </div>
+      </div>
     </div>
+    <div id="modalMenuCounter" class="menu-stage-counter">1 / 22</div>
     <button type="button" id="menuStageNext" class="menu-stage-arrow next" onclick="nextModalMenuPage(event)" title="Следующая страница" aria-label="Следующая страница">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
     </button>
@@ -3064,13 +3139,14 @@
         </div>
       </div>
 
-      <!-- Toolbar: Search -->
+      <!-- Toolbar: Search & Categories -->
       <div class="text-menu-toolbar">
         <div class="text-menu-search">
           <svg class="text-menu-search-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
           <input type="text" id="textMenuSearchInput" class="text-menu-input" placeholder="Поиск блюд / Search dishes..." oninput="handleTextMenuSearch(this.value)" />
           <button type="button" id="textMenuSearchClear" class="text-menu-clear" onclick="clearTextMenuSearch()" style="display:none;">✕</button>
         </div>
+        <div class="text-menu-cats" id="textMenuCategoriesNav"></div>
       </div>
 
       <!-- Body / Dishes List -->
@@ -3912,6 +3988,14 @@ let currentSlideIdx = 0;
         }
       });
 
+      // Keep active filmstrip item scrolled into view horizontally on mobile/tablet
+      const stripTrackEl = document.getElementById('filmstrip-track');
+      const activeStripItem = items[currentSlideIdx];
+      if (stripTrackEl && activeStripItem && stripTrackEl.scrollWidth > stripTrackEl.clientWidth) {
+        const targetLeft = activeStripItem.offsetLeft - (stripTrackEl.clientWidth - activeStripItem.offsetWidth) / 2;
+        stripTrackEl.scrollTo({ left: Math.max(0, targetLeft), behavior: 'smooth' });
+      }
+
       // Animate with Motion.js
       if (window.Motion && typeof Motion.animate === 'function') {
         try {
@@ -4091,18 +4175,95 @@ let currentSlideIdx = 0;
       checkBodyModalScroll();
     }
 
+    function ensureMenuPagesFeed() {
+      const feed = document.getElementById('modalMenuPagesFeed');
+      if (!feed || feed._allPagesRendered) return;
+      feed._allPagesRendered = true;
+      let html = '';
+      for (let p = 1; p <= TOTAL_MODAL_MENU_PAGES; p++) {
+        const pad = String(p).padStart(2, '0');
+        const loadAttr = p <= 4 ? 'eager' : 'lazy';
+        const idAttr = p === 1 ? 'id="modalMenuCurrentImg" ' : '';
+        html += `<div class="menu-page-card" id="modalMenuPage-${p}" data-page="${p}">
+          <img ${idAttr}src="/menu_pages_web/menu_page_${pad}.jpg" alt="Меню ресторана Анзур — страница ${p}" class="menu-page-display" loading="${loadAttr}" decoding="async" />
+        </div>`;
+      }
+      feed.innerHTML = html;
+
+      const stage = document.getElementById('modalMenuStage');
+      if (stage && !stage._scrollTracked) {
+        stage._scrollTracked = true;
+        let ticking = false;
+        stage.addEventListener('scroll', () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(() => {
+            ticking = false;
+            if (stage._programmaticScrollUntil && Date.now() < stage._programmaticScrollUntil) return;
+            const cards = feed.querySelectorAll('.menu-page-card');
+            const stageRect = stage.getBoundingClientRect();
+            const centerLine = stageRect.top + stageRect.height * 0.42;
+            let bestPage = currentModalMenuPage;
+            let bestDist = Infinity;
+            cards.forEach((card) => {
+              const r = card.getBoundingClientRect();
+              const cardCenter = (r.top + r.bottom) * 0.5;
+              const dist = Math.abs(cardCenter - centerLine);
+              if (dist < bestDist) {
+                bestDist = dist;
+                bestPage = parseInt(card.getAttribute('data-page'), 10) || 1;
+              }
+            });
+            if (bestPage !== currentModalMenuPage) {
+              currentModalMenuPage = bestPage;
+              updateModalMenuCounter(bestPage);
+              preloadAdjacentMenuPages(bestPage);
+            }
+          });
+        }, { passive: true });
+      }
+    }
+
+    function updateModalMenuCounter(page) {
+      const counter = document.getElementById('modalMenuCounter');
+      if (counter) {
+        counter.textContent = `${page} / ${TOTAL_MODAL_MENU_PAGES}`;
+      }
+    }
+
+    function preloadAdjacentMenuPages(page) {
+      for (let p = Math.max(1, page - 1); p <= Math.min(TOTAL_MODAL_MENU_PAGES, page + 2); p++) {
+        const card = document.getElementById('modalMenuPage-' + p);
+        if (card) {
+          const img = card.querySelector('img');
+          if (img && img.getAttribute('loading') === 'lazy') {
+            img.setAttribute('loading', 'eager');
+          }
+        }
+      }
+    }
+
+    function handleMenuStageBackdropClick(e) {
+      if (!e || !e.target) return;
+      if (e.target.id === 'modalMenuStage' || e.target.id === 'modalMenuPagesFeed') {
+        closeMenuModal(e);
+      }
+    }
+
     function openPhotoMenu(page) {
       closeMobileNav();
       closeTextMenuModal();
       closeSpacesModal();
-      if (typeof page === 'number' && page >= 1 && page <= TOTAL_MODAL_MENU_PAGES) {
-        setModalMenuPage(page);
-      }
+      ensureMenuPagesFeed();
       const modal = document.getElementById('menu-modal');
       if (modal) {
         modal.classList.add('is-open');
         document.body.style.overflow = 'hidden';
       }
+      const targetPage = (typeof page === 'number' && page >= 1 && page <= TOTAL_MODAL_MENU_PAGES) ? page : (currentModalMenuPage || 1);
+      requestAnimationFrame(() => {
+        setModalMenuPage(targetPage, false);
+      });
     }
 
     function closeMenuModal(e) {
@@ -4224,6 +4385,7 @@ let currentSlideIdx = 0;
       if (titleEl) titleEl.textContent = curUi.title;
       if (searchInput) searchInput.placeholder = curUi.search;
 
+      renderCategoryPills(lang, curUi.all);
       renderDishesList(lang, curUi.empty);
     }
 
@@ -4334,14 +4496,32 @@ let currentSlideIdx = 0;
       handleTextMenuSearch('');
     }
 
-    function setModalMenuPage(page) {
+    let lastMenuSwipeTimestamp = 0;
+    let lastSpacesSwipeTimestamp = 0;
+
+    function setModalMenuPage(page, smooth = true) {
+      ensureMenuPagesFeed();
       if (page < 1) page = 1;
       if (page > TOTAL_MODAL_MENU_PAGES) page = TOTAL_MODAL_MENU_PAGES;
       currentModalMenuPage = page;
-      const pad = String(page).padStart(2, '0');
-      const img = document.getElementById('modalMenuCurrentImg');
-      if (img) {
-        img.src = '/menu_pages_web/menu_page_' + pad + '.jpg';
+      updateModalMenuCounter(page);
+      preloadAdjacentMenuPages(page);
+
+      const stage = document.getElementById('modalMenuStage');
+      const card = document.getElementById('modalMenuPage-' + page);
+      if (stage && card) {
+        stage._programmaticScrollUntil = Date.now() + (smooth ? 550 : 120);
+        const topOffset = Math.max(0, card.offsetTop - 24);
+        stage.scrollTo({
+          top: topOffset,
+          behavior: smooth ? 'smooth' : 'auto'
+        });
+      } else {
+        const pad = String(page).padStart(2, '0');
+        const img = document.getElementById('modalMenuCurrentImg');
+        if (img) {
+          img.src = '/menu_pages_web/menu_page_' + pad + '.jpg';
+        }
       }
     }
 
@@ -4350,7 +4530,7 @@ let currentSlideIdx = 0;
         if (typeof e.stopPropagation === 'function') e.stopPropagation();
         if (typeof e.preventDefault === 'function') e.preventDefault();
       }
-      setModalMenuPage(currentModalMenuPage > 1 ? currentModalMenuPage - 1 : TOTAL_MODAL_MENU_PAGES);
+      setModalMenuPage(currentModalMenuPage > 1 ? currentModalMenuPage - 1 : TOTAL_MODAL_MENU_PAGES, true);
     }
 
     function nextModalMenuPage(e) {
@@ -4358,23 +4538,29 @@ let currentSlideIdx = 0;
         if (typeof e.stopPropagation === 'function') e.stopPropagation();
         if (typeof e.preventDefault === 'function') e.preventDefault();
       }
-      setModalMenuPage(currentModalMenuPage < TOTAL_MODAL_MENU_PAGES ? currentModalMenuPage + 1 : 1);
+      setModalMenuPage(currentModalMenuPage < TOTAL_MODAL_MENU_PAGES ? currentModalMenuPage + 1 : 1, true);
     }
 
-    // Touch swipe support on menu stage
+    // Touch swipe support on menu stage (horizontal swipe jumps pages; vertical swipe scrolls naturally)
     (function initMenuTouchSwipe() {
       function attach() {
         const stage = document.getElementById('modalMenuStage');
         if (!stage || stage._swipeAttached) return;
         stage._swipeAttached = true;
         let startX = 0;
+        let startY = 0;
         stage.addEventListener('touchstart', (e) => {
-          if (e.touches && e.touches.length > 0) startX = e.touches[0].clientX;
+          if (e.touches && e.touches.length === 1) {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+          }
         }, { passive: true });
         stage.addEventListener('touchend', (e) => {
-          if (e.changedTouches && e.changedTouches.length > 0) {
+          if (e.changedTouches && e.changedTouches.length === 1) {
             const diffX = e.changedTouches[0].clientX - startX;
-            if (Math.abs(diffX) > 25) {
+            const diffY = e.changedTouches[0].clientY - startY;
+            if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY) * 1.35) {
+              lastMenuSwipeTimestamp = Date.now();
               if (diffX > 0) prevModalMenuPage();
               else nextModalMenuPage();
             }
@@ -4482,6 +4668,8 @@ let currentSlideIdx = 0;
     }
 
     function bindModalEvents() {
+      ensureMenuPagesFeed();
+
       // Close buttons
       const menuClose = document.getElementById('closeMenuModalBtn');
       if (menuClose) menuClose.onclick = closeMenuModal;
@@ -4490,57 +4678,40 @@ let currentSlideIdx = 0;
       const textClose = document.getElementById('closeTextMenuModalBtn');
       if (textClose) textClose.onclick = closeTextMenuModal;
 
-      // Menu modal arrows
+      // Menu modal arrows (single clean onclick handler to prevent touch+click double firing)
       const menuPrev = document.getElementById('menuStagePrev');
       if (menuPrev) {
         menuPrev.onclick = function(e) { prevModalMenuPage(e); };
-        menuPrev.addEventListener('touchend', function(e) {
-          if (typeof e.preventDefault === 'function') e.preventDefault();
-          if (typeof e.stopPropagation === 'function') e.stopPropagation();
-          prevModalMenuPage(e);
-        }, { passive: false });
       }
       const menuNext = document.getElementById('menuStageNext');
       if (menuNext) {
         menuNext.onclick = function(e) { nextModalMenuPage(e); };
-        menuNext.addEventListener('touchend', function(e) {
-          if (typeof e.preventDefault === 'function') e.preventDefault();
-          if (typeof e.stopPropagation === 'function') e.stopPropagation();
-          nextModalMenuPage(e);
-        }, { passive: false });
       }
 
       // Spaces modal arrows
       const spacesPrev = document.getElementById('spacesStagePrev');
       if (spacesPrev) {
         spacesPrev.onclick = function(e) { prevSpacesPage(e); };
-        spacesPrev.addEventListener('touchend', function(e) {
-          if (typeof e.preventDefault === 'function') e.preventDefault();
-          if (typeof e.stopPropagation === 'function') e.stopPropagation();
-          prevSpacesPage(e);
-        }, { passive: false });
       }
       const spacesNext = document.getElementById('spacesStageNext');
       if (spacesNext) {
         spacesNext.onclick = function(e) { nextSpacesPage(e); };
-        spacesNext.addEventListener('touchend', function(e) {
-          if (typeof e.preventDefault === 'function') e.preventDefault();
-          if (typeof e.stopPropagation === 'function') e.stopPropagation();
-          nextSpacesPage(e);
-        }, { passive: false });
       }
 
-      // Click left/right half of photo stage to flip
+      // Click left/right edge of photo card to flip (guarded against touch swipe synthetic click)
       const menuStage = document.getElementById('modalMenuStage');
       if (menuStage && !menuStage._navBound) {
         menuStage._navBound = true;
         menuStage.addEventListener('click', function(e) {
+          if (Date.now() - lastMenuSwipeTimestamp < 450) return;
           if (e.target && e.target.closest('button')) return;
-          const rect = menuStage.getBoundingClientRect();
+          const img = e.target && e.target.closest('.menu-page-display');
+          if (!img) return;
+          const rect = img.getBoundingClientRect();
           const clickX = e.clientX - rect.left;
-          if (clickX < rect.width * 0.4) {
+          if (clickX < rect.width * 0.35) {
             prevModalMenuPage(e);
-          } else if (clickX > rect.width * 0.6) {
+          } else if (clickX > rect.width * 0.65) {
             nextModalMenuPage(e);
           }
         });
@@ -4549,6 +4720,7 @@ let currentSlideIdx = 0;
       if (spacesStage && !spacesStage._navBound) {
         spacesStage._navBound = true;
         spacesStage.addEventListener('click', function(e) {
+          if (Date.now() - lastSpacesSwipeTimestamp < 450) return;
           if (e.target && e.target.closest('button')) return;
           const rect = spacesStage.getBoundingClientRect();
           const clickX = e.clientX - rect.left;
@@ -4615,6 +4787,7 @@ let currentSlideIdx = 0;
           if (e.changedTouches && e.changedTouches.length > 0) {
             const diffX = e.changedTouches[0].clientX - startX;
             if (Math.abs(diffX) > 25) {
+              lastSpacesSwipeTimestamp = Date.now();
               if (diffX > 0) prevSpacesPage();
               else nextSpacesPage();
             }
