@@ -1521,42 +1521,75 @@
       right: max(1.5rem, calc(env(safe-area-inset-right, 0px) + 0.8rem));
     }
     .spaces-stage-category {
-      position: absolute;
-      top: 1rem;
+      position: fixed;
+      top: max(1.3rem, calc(env(safe-area-inset-top, 0px) + 0.7rem));
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(14, 11, 8, 0.88);
-      border: 1px solid rgba(212, 175, 55, 0.35);
+      background: rgba(14, 11, 8, 0.92);
+      border: 1px solid rgba(212, 175, 55, 0.45);
       color: var(--gold-light);
-      padding: 0.3rem 0.9rem;
-      border-radius: 14px;
+      padding: 0.36rem 1.05rem;
+      border-radius: 18px;
       font-family: var(--font-mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
+      font-size: 0.74rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       pointer-events: none;
       user-select: none;
-      z-index: 12060;
-      backdrop-filter: blur(6px);
+      z-index: 12500;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       white-space: nowrap;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
     }
     .spaces-stage-counter {
-      position: absolute;
-      bottom: 1rem;
+      position: fixed;
+      bottom: max(1.2rem, calc(env(safe-area-inset-bottom, 0px) + 0.6rem));
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(14, 11, 8, 0.88);
-      border: 1px solid rgba(212, 175, 55, 0.35);
+      background: rgba(14, 11, 8, 0.92);
+      border: 1px solid rgba(212, 175, 55, 0.45);
       color: var(--gold);
-      padding: 0.3rem 0.85rem;
-      border-radius: 14px;
+      padding: 0.38rem 1rem;
+      border-radius: 18px;
       font-family: var(--font-mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
+      font-size: 0.76rem;
+      letter-spacing: 0.14em;
       pointer-events: none;
       user-select: none;
-      z-index: 12060;
-      backdrop-filter: blur(6px);
+      z-index: 12500;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    }
+    .spaces-photo-card {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      scroll-margin-top: max(4rem, calc(env(safe-area-inset-top, 0px) + 3rem));
+    }
+    .spaces-photo-card picture {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    .spaces-photo-card .menu-page-display {
+      width: auto;
+      max-width: min(90vw, 1080px);
+      max-height: 82vh;
+      height: auto;
+      background: #0e0b08;
+      object-fit: contain;
+      display: block;
+      border-radius: 6px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.12);
+    }
+    .menu-page-card picture {
+      display: flex;
+      justify-content: center;
+      width: 100%;
     }
     @media (max-width: 900px) {
       .menu-stage-arrow {
@@ -2043,6 +2076,11 @@
       aspect-ratio: 4/3;
       overflow: hidden;
       border-bottom: 1px solid var(--border);
+    }
+    .space-media picture {
+      width: 100%;
+      height: 100%;
+      display: block;
     }
     .space-media img {
       width: 100%;
@@ -2918,9 +2956,12 @@
 
   <div class="spaces-grid">
     <!-- 1. Главный зал -->
-    <div class="space-box" onclick="openSpacesCategory('main_hall')" style="cursor:pointer;" title="Смотреть фотографии Главного зала">
+    <div class="space-box" onclick="openSpacesCategory('main_hall')" onmouseenter="preloadSpacesCategory('main_hall')" style="cursor:pointer;" title="Смотреть фотографии Главного зала">
       <div class="space-media">
-        <img src="/location_photos/main_hall_01.jpg" alt="Главный зал ресторана Анзур" loading="lazy" />
+        <picture>
+          <source srcset="/location_photos/main_hall_01_thumb.webp" type="image/webp" />
+          <img src="/location_photos/main_hall_01.jpg" alt="Главный зал ресторана Анзур" loading="lazy" decoding="async" />
+        </picture>
       </div>
       <div class="space-text">
         <h3 class="space-title" data-i18n="space1_title">Главный зал</h3>
@@ -2931,9 +2972,12 @@
     </div>
 
     <!-- 2. Летняя терраса -->
-    <div class="space-box" onclick="openSpacesCategory('terrace')" style="cursor:pointer;" title="Смотреть фотографии Летней террасы">
+    <div class="space-box" onclick="openSpacesCategory('terrace')" onmouseenter="preloadSpacesCategory('terrace')" style="cursor:pointer;" title="Смотреть фотографии Летней террасы">
       <div class="space-media">
-        <img src="/location_photos/terrace_01.jpg" alt="Летняя терраса ресторана Анзур" loading="lazy" />
+        <picture>
+          <source srcset="/location_photos/terrace_01_thumb.webp" type="image/webp" />
+          <img src="/location_photos/terrace_01.jpg" alt="Летняя терраса ресторана Анзур" loading="lazy" decoding="async" />
+        </picture>
       </div>
       <div class="space-text">
         <h3 class="space-title" data-i18n="space_terrace_title">Летняя терраса</h3>
@@ -2944,9 +2988,12 @@
     </div>
 
     <!-- 3. Тихая веранда -->
-    <div class="space-box" onclick="openSpacesCategory('veranda')" style="cursor:pointer;" title="Смотреть фотографии Тихой веранды">
+    <div class="space-box" onclick="openSpacesCategory('veranda')" onmouseenter="preloadSpacesCategory('veranda')" style="cursor:pointer;" title="Смотреть фотографии Тихой веранды">
       <div class="space-media">
-        <img src="/location_photos/veranda_02.jpg" alt="Тихая веранда ресторана Анзур" loading="lazy" />
+        <picture>
+          <source srcset="/location_photos/veranda_02_thumb.webp" type="image/webp" />
+          <img src="/location_photos/veranda_02.jpg" alt="Тихая веранда ресторана Анзур" loading="lazy" decoding="async" />
+        </picture>
       </div>
       <div class="space-text">
         <h3 class="space-title" data-i18n="space2_title">Тихая веранда</h3>
@@ -2957,9 +3004,12 @@
     </div>
 
     <!-- 4. Караоке -->
-    <div class="space-box" onclick="openSpacesCategory('karaoke')" style="cursor:pointer;" title="Смотреть фотографии Караоке">
+    <div class="space-box" onclick="openSpacesCategory('karaoke')" onmouseenter="preloadSpacesCategory('karaoke')" style="cursor:pointer;" title="Смотреть фотографии Караоке">
       <div class="space-media">
-        <img src="/location_photos/karaoke_01.jpg" alt="VIP-кабины с караоке Анзур" loading="lazy" />
+        <picture>
+          <source srcset="/location_photos/karaoke_01_thumb.webp" type="image/webp" />
+          <img src="/location_photos/karaoke_01.jpg" alt="VIP-кабины с караоке Анзур" loading="lazy" decoding="async" />
+        </picture>
       </div>
       <div class="space-text">
         <h3 class="space-title" data-i18n="space3_title">Караоке & VIP-кабины</h3>
@@ -3261,18 +3311,25 @@
   </div>
 
   <!-- ==========================================================================
-       CLEAN LOCATIONS VIEWER (PHOTOS + ARROWS ONLY)
+       CLEAN LOCATIONS VIEWER (SCROLLABLE WEBP PHOTOS + ARROWS + SWIPE)
        ========================================================================== -->
   <div id="spaces-modal" class="menu-modal-overlay" role="dialog" aria-modal="true" aria-label="Фотографии локаций ресторана Анзур" onclick="handleSpacesOverlayClick(event)">
     <button type="button" id="closeSpacesModalBtn" class="menu-modal-close-btn" onclick="closeSpacesModal(event)" title="Закрыть [ESC]" aria-label="Закрыть">✕</button>
+    <div id="modalSpacesCategoryTag" class="spaces-stage-category">ГЛАВНЫЙ ЗАЛ</div>
     <button type="button" id="spacesStagePrev" class="menu-stage-arrow prev" onclick="prevSpacesPage(event)" title="Предыдущее фото" aria-label="Предыдущее фото">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
     </button>
-    <div class="menu-lightbox-stage" id="modalSpacesStage" onclick="event.stopPropagation()">
-      <div id="modalSpacesCategoryTag" class="spaces-stage-category">ГЛАВНЫЙ ЗАЛ</div>
-      <img id="modalSpacesCurrentImg" src="/location_photos/main_hall_01.jpg" alt="Локация ресторана Анзур" class="menu-page-display" />
-      <div id="modalSpacesCounter" class="spaces-stage-counter">1 / 11</div>
+    <div class="menu-scroll-stage" id="modalSpacesStage" onclick="handleSpacesStageBackdropClick(event)">
+      <div class="menu-pages-feed" id="modalSpacesPagesFeed">
+        <div class="spaces-photo-card" id="modalSpacesCard-0" data-index="0">
+          <picture>
+            <source srcset="/location_photos/main_hall_01.webp" type="image/webp" />
+            <img id="modalSpacesCurrentImg" src="/location_photos/main_hall_01.jpg" alt="Локация ресторана Анзур" class="menu-page-display" decoding="async" />
+          </picture>
+        </div>
+      </div>
     </div>
+    <div id="modalSpacesCounter" class="spaces-stage-counter">1 / 11</div>
     <button type="button" id="spacesStageNext" class="menu-stage-arrow next" onclick="nextSpacesPage(event)" title="Следующее фото" aria-label="Следующее фото">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
     </button>
@@ -4288,7 +4345,10 @@ let currentSlideIdx = 0;
         const loadAttr = p <= 4 ? 'eager' : 'lazy';
         const idAttr = p === 1 ? 'id="modalMenuCurrentImg" ' : '';
         html += `<div class="menu-page-card" id="modalMenuPage-${p}" data-page="${p}">
-          <img ${idAttr}src="/menu_pages_web/menu_page_${pad}.jpg" alt="Меню ресторана Анзур — страница ${p}" class="menu-page-display" loading="${loadAttr}" decoding="async" />
+          <picture>
+            <source srcset="/menu_pages_web/menu_page_${pad}.webp" type="image/webp" />
+            <img ${idAttr}src="/menu_pages_web/menu_page_${pad}.jpg" alt="Меню ресторана Анзур — страница ${p}" class="menu-page-display" loading="${loadAttr}" decoding="async" />
+          </picture>
         </div>`;
       }
       feed.innerHTML = html;
@@ -4721,6 +4781,98 @@ let currentSlideIdx = 0;
 
     let currentSpacesList = ALL_SPACES_ITEMS;
     let currentSpacesIndex = 0;
+    const _preloadedSpaceUrls = new Set();
+
+    function toWebpUrl(src) {
+      return String(src).replace(/\.jpe?g(\?.*)?$/i, '.webp$1');
+    }
+
+    function preloadSpaceImage(src) {
+      const webp = toWebpUrl(src);
+      if (_preloadedSpaceUrls.has(webp)) return;
+      _preloadedSpaceUrls.add(webp);
+      const img = new Image();
+      img.decoding = 'async';
+      img.src = webp;
+    }
+
+    function preloadSpacesCategory(cat) {
+      if (cat && SPACES_DATA[cat] && SPACES_DATA[cat].photos) {
+        SPACES_DATA[cat].photos.forEach(preloadSpaceImage);
+      } else {
+        ALL_SPACES_ITEMS.forEach(item => preloadSpaceImage(item.src));
+      }
+    }
+
+    function renderSpacesFeed() {
+      const feed = document.getElementById('modalSpacesPagesFeed');
+      if (!feed) return;
+      let html = '';
+      currentSpacesList.forEach((item, idx) => {
+        const src = typeof item === 'string' ? item : item.src;
+        const webp = toWebpUrl(src);
+        const cat = (item && item.cat) ? item.cat : 'Интерьер';
+        const idAttr = idx === 0 ? 'id="modalSpacesCurrentImg" ' : '';
+        html += `<div class="spaces-photo-card" id="modalSpacesCard-${idx}" data-index="${idx}" data-cat="${cat}">
+          <picture>
+            <source srcset="${webp}" type="image/webp" />
+            <img ${idAttr}src="${src}" alt="${cat} — фото ${idx + 1}" class="menu-page-display" loading="eager" decoding="async" />
+          </picture>
+        </div>`;
+      });
+      feed.innerHTML = html;
+
+      const stage = document.getElementById('modalSpacesStage');
+      if (stage && !stage._scrollTracked) {
+        stage._scrollTracked = true;
+        let ticking = false;
+        stage.addEventListener('scroll', () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(() => {
+            ticking = false;
+            if (stage._programmaticScrollUntil && Date.now() < stage._programmaticScrollUntil) return;
+            const cards = feed.querySelectorAll('.spaces-photo-card');
+            const stageRect = stage.getBoundingClientRect();
+            const centerLine = stageRect.top + stageRect.height * 0.45;
+            let bestIdx = currentSpacesIndex;
+            let bestDist = Infinity;
+            cards.forEach((card) => {
+              const r = card.getBoundingClientRect();
+              const cardCenter = (r.top + r.bottom) * 0.5;
+              const dist = Math.abs(cardCenter - centerLine);
+              if (dist < bestDist) {
+                bestDist = dist;
+                bestIdx = parseInt(card.getAttribute('data-index'), 10) || 0;
+              }
+            });
+            if (bestIdx !== currentSpacesIndex) {
+              currentSpacesIndex = bestIdx;
+              updateSpacesMeta(bestIdx);
+            }
+          });
+        }, { passive: true });
+      }
+    }
+
+    function updateSpacesMeta(idx) {
+      const item = currentSpacesList[idx];
+      const tag = document.getElementById('modalSpacesCategoryTag');
+      if (tag && item && item.cat) {
+        tag.textContent = item.cat;
+      }
+      const counter = document.getElementById('modalSpacesCounter');
+      if (counter) {
+        counter.textContent = `${idx + 1} / ${currentSpacesList.length}`;
+      }
+    }
+
+    function handleSpacesStageBackdropClick(e) {
+      if (!e || !e.target) return;
+      if (e.target.id === 'modalSpacesStage' || e.target.id === 'modalSpacesPagesFeed') {
+        closeSpacesModal(e);
+      }
+    }
 
     function openSpacesCategory(cat) {
       if (cat && SPACES_DATA[cat] && SPACES_DATA[cat].photos) {
@@ -4743,12 +4895,15 @@ let currentSlideIdx = 0;
         currentSpacesList = ALL_SPACES_ITEMS;
       }
       currentSpacesIndex = (typeof index === 'number' && index >= 0 && index < currentSpacesList.length) ? index : 0;
-      setSpacesPhoto(currentSpacesIndex);
+      renderSpacesFeed();
       const modal = document.getElementById('spaces-modal');
       if (modal) {
         modal.classList.add('is-open');
         document.body.style.overflow = 'hidden';
       }
+      requestAnimationFrame(() => {
+        setSpacesPhoto(currentSpacesIndex, false);
+      });
     }
 
     function closeSpacesModal(e) {
@@ -4824,11 +4979,13 @@ let currentSlideIdx = 0;
         spacesStage.addEventListener('click', function(e) {
           if (Date.now() - lastSpacesSwipeTimestamp < 450) return;
           if (e.target && e.target.closest('button')) return;
-          const rect = spacesStage.getBoundingClientRect();
+          const img = e.target && e.target.closest('.menu-page-display');
+          if (!img) return;
+          const rect = img.getBoundingClientRect();
           const clickX = e.clientX - rect.left;
-          if (clickX < rect.width * 0.4) {
+          if (clickX < rect.width * 0.35) {
             prevSpacesPage(e);
-          } else if (clickX > rect.width * 0.6) {
+          } else if (clickX > rect.width * 0.65) {
             nextSpacesPage(e);
           }
         });
@@ -4839,23 +4996,50 @@ let currentSlideIdx = 0;
       document.addEventListener('DOMContentLoaded', bindModalEvents);
     }
 
-    function setSpacesPhoto(idx) {
+    // Background preloading of interior WebP photos when user scrolls near #spaces
+    (function initSpacesPreloader() {
+      function attach() {
+        const spacesSec = document.querySelector('.spaces-grid') || document.getElementById('spaces');
+        if (!spacesSec || !('IntersectionObserver' in window)) return;
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              preloadSpacesCategory();
+              obs.disconnect();
+            }
+          });
+        }, { rootMargin: '600px' });
+        obs.observe(spacesSec);
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', attach);
+      } else {
+        attach();
+      }
+    })();
+
+    function setSpacesPhoto(idx, smooth = true) {
       if (!currentSpacesList || currentSpacesList.length === 0) return;
       if (idx < 0) idx = currentSpacesList.length - 1;
       if (idx >= currentSpacesList.length) idx = 0;
       currentSpacesIndex = idx;
-      const item = currentSpacesList[currentSpacesIndex];
-      const img = document.getElementById('modalSpacesCurrentImg');
-      if (img) {
-        img.src = typeof item === 'string' ? item : item.src;
-      }
-      const tag = document.getElementById('modalSpacesCategoryTag');
-      if (tag && item && item.cat) {
-        tag.textContent = item.cat;
-      }
-      const counter = document.getElementById('modalSpacesCounter');
-      if (counter) {
-        counter.textContent = `${currentSpacesIndex + 1} / ${currentSpacesList.length}`;
+      updateSpacesMeta(idx);
+
+      const stage = document.getElementById('modalSpacesStage');
+      const card = document.getElementById('modalSpacesCard-' + idx);
+      if (stage && card) {
+        stage._programmaticScrollUntil = Date.now() + (smooth ? 500 : 120);
+        const topOffset = Math.max(0, card.offsetTop - 24);
+        stage.scrollTo({
+          top: topOffset,
+          behavior: smooth ? 'smooth' : 'auto'
+        });
+      } else {
+        const item = currentSpacesList[currentSpacesIndex];
+        const img = document.getElementById('modalSpacesCurrentImg');
+        if (img) {
+          img.src = typeof item === 'string' ? item : item.src;
+        }
       }
     }
 
@@ -4864,7 +5048,7 @@ let currentSlideIdx = 0;
         if (typeof e.stopPropagation === 'function') e.stopPropagation();
         if (typeof e.preventDefault === 'function') e.preventDefault();
       }
-      setSpacesPhoto(currentSpacesIndex - 1);
+      setSpacesPhoto(currentSpacesIndex - 1, true);
     }
 
     function nextSpacesPage(e) {
@@ -4872,7 +5056,7 @@ let currentSlideIdx = 0;
         if (typeof e.stopPropagation === 'function') e.stopPropagation();
         if (typeof e.preventDefault === 'function') e.preventDefault();
       }
-      setSpacesPhoto(currentSpacesIndex + 1);
+      setSpacesPhoto(currentSpacesIndex + 1, true);
     }
 
     // Touch swipe support on spaces stage
@@ -4882,13 +5066,19 @@ let currentSlideIdx = 0;
         if (!stage || stage._swipeAttached) return;
         stage._swipeAttached = true;
         let startX = 0;
+        let startY = 0;
         stage.addEventListener('touchstart', (e) => {
-          if (e.touches && e.touches.length > 0) startX = e.touches[0].clientX;
+          if (e.touches && e.touches.length === 1) {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+          }
         }, { passive: true });
         stage.addEventListener('touchend', (e) => {
-          if (e.changedTouches && e.changedTouches.length > 0) {
+          if (e.changedTouches && e.changedTouches.length === 1) {
             const diffX = e.changedTouches[0].clientX - startX;
-            if (Math.abs(diffX) > 25) {
+            const diffY = e.changedTouches[0].clientY - startY;
+            if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY) * 1.35) {
+              lastSpacesSwipeTimestamp = Date.now();
               if (diffX > 0) prevSpacesPage();
               else nextSpacesPage();
             }
