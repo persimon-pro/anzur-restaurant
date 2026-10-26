@@ -2343,19 +2343,19 @@
       margin: 0 auto 2.2rem;
       display: grid;
       grid-template-columns: 1fr 340px;
-      border: 1px solid rgba(197, 160, 89, 0.32);
-      border-radius: 12px;
-      background: rgba(14, 11, 9, 0.92);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+      align-items: center;
+      border: none;
+      background: transparent;
+      box-shadow: none;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
     }
     .star-concerts-info {
-      padding: 2.2rem 2.4rem;
-      border-right: 1px solid var(--border);
+      padding: 1.5rem 2rem 1.5rem 0;
+      border: none;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
       gap: 1.35rem;
     }
     .star-concerts-headline {
@@ -2371,11 +2371,10 @@
       color: var(--gold);
     }
     .star-active-card-meta {
-      background: rgba(255, 255, 255, 0.025);
-      border: 1px solid var(--border);
+      background: transparent;
+      border: none;
       border-left: 2px solid var(--gold);
-      padding: 1rem 1.2rem;
-      border-radius: 4px;
+      padding: 0.2rem 0 0.2rem 1.1rem;
       transition: opacity 0.25s ease;
     }
     .star-active-artist {
@@ -2555,12 +2554,11 @@
         max-width: 480px;
       }
       .star-concerts-info {
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        padding: 1.8rem 1.5rem;
+        border: none;
+        padding: 1rem 0.5rem;
       }
       .star-posters-stage {
-        padding: 2rem 1.2rem 2.4rem;
+        padding: 1.5rem 1.2rem 2.2rem;
         min-height: 390px;
       }
     }
