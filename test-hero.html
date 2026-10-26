@@ -44,11 +44,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
-  <!-- Motion.js (deferred to eliminate render blocking) -->
+  <!-- Motion.js, GSAP + ScrollTrigger, Lenis & Three.js (all deferred to eliminate render blocking) -->
   <script src="https://cdn.jsdelivr.net/npm/motion@11/dist/motion.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
 
   <!-- Preload Hero Poster Image for instant LCP -->
-  <link rel="preload" as="image" href="/taimlars_poster.jpg" fetchpriority="high" />
+  <link rel="preload" as="image" href="/zastavka_poster.jpg" fetchpriority="high" />
 
   <style>
     /* ==========================================================================
@@ -626,114 +630,24 @@
       }
     }
 
-    
-    /* Ambient Spotlight & 3D Tilt */
-    .hero {
-      perspective: 1200px;
-    }
-    .ambient-spotlight {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-      background: radial-gradient(circle 520px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 175, 55, 0.22) 0%, rgba(212, 175, 55, 0.06) 50%, transparent 80%);
-      mix-blend-mode: screen;
-      transition: opacity 0.4s ease;
-    }
-    .hero-content {
-      transform-style: preserve-3d;
-      transition: transform 0.18s cubic-bezier(0.1, 0.9, 0.2, 1);
-    }
-    .hero-subtitle-clean {
-      font-family: var(--font-serif);
-      font-size: clamp(1.25rem, 2.8vw, 2.1rem);
-      font-weight: 300;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #fff;
-      margin-bottom: 2.2rem;
-      line-height: 1.35;
-      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.95), 0 0 40px rgba(212, 175, 55, 0.35);
-    }
-    .hero-subtitle-clean em {
-      font-style: italic;
-      color: var(--gold);
-      font-weight: 400;
-    }
-
-    /* Floating Test Banner */
-    .test-floating-badge {
-      position: fixed;
-      bottom: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 12000;
-      background: rgba(14, 11, 8, 0.94);
-      border: 1px solid var(--gold);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(197, 160, 89, 0.3);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 999px;
-      padding: 0.4rem 0.6rem 0.4rem 1.1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      color: #fff;
-      max-width: 92vw;
-    }
-    .test-badge-tag {
-      color: var(--gold);
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      white-space: nowrap;
-    }
-    .test-badge-btn {
-      background: rgba(197, 160, 89, 0.18);
-      border: 1px solid var(--gold);
-      color: #fff;
-      padding: 0.3rem 0.75rem;
-      border-radius: 999px;
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      white-space: nowrap;
-    }
-    .test-badge-btn:hover {
-      background: var(--gold);
-      color: #060504;
-    }
-    .test-badge-close {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      cursor: pointer;
-      font-size: 0.9rem;
-      padding: 0 0.25rem;
-      line-height: 1;
-    }
-    .test-badge-close:hover {
-      color: #fff;
-    }
-    @media (max-width: 680px) {
-      .test-floating-badge {
-        bottom: 5rem;
-        font-size: 0.6rem;
-        gap: 0.45rem;
-        padding: 0.35rem 0.5rem 0.35rem 0.75rem;
-      }
-      .test-badge-tag {
-        display: none;
-      }
-    }
-
     /* ==========================================================================
        2. CENTRAL MONUMENTAL HERO
        Calm, centered, architectural, poetic restraint.
        ========================================================================== */
+    .scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+      transform-origin: left center;
+      transform: scaleX(0);
+      z-index: 11900;
+      pointer-events: none;
+      box-shadow: 0 0 12px rgba(197, 160, 89, 0.55);
+      will-change: transform;
+    }
     .hero {
       position: relative;
       min-height: calc(100vh - 74px);
@@ -742,6 +656,60 @@
       justify-content: space-between;
       border-bottom: 1px solid var(--border);
       overflow: hidden;
+      perspective: 1200px;
+    }
+    #hero-webgl-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.85;
+    }
+    .hero-spotlight {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: radial-gradient(
+        560px circle at var(--spot-x, 50%) var(--spot-y, 45%),
+        rgba(212, 175, 55, 0.22) 0%,
+        rgba(197, 160, 89, 0.08) 38%,
+        transparent 72%
+      );
+      mix-blend-mode: screen;
+      will-change: background;
+    }
+    .spaces-grid,
+    .events-section,
+    .reservation-sec {
+      content-visibility: auto;
+      contain-intrinsic-size: auto none auto 680px;
+    }
+    .space-box,
+    .event-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .space-box::after,
+    .event-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(
+        420px circle at var(--card-x, 50%) var(--card-y, 50%),
+        rgba(212, 175, 55, 0.14) 0%,
+        transparent 70%
+      );
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      z-index: 3;
+    }
+    .space-box:hover::after,
+    .event-card:hover::after {
+      opacity: 1;
     }
     .hero-backdrop {
       position: absolute;
@@ -2238,75 +2206,15 @@
       pointer-events: none;
       z-index: 1;
     }
-    .event-reel-top-bar {
-      position: absolute;
-      top: 0.85rem;
-      left: 0.85rem;
-      right: 0.85rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .event-reel-live-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.38rem;
-      background: rgba(6, 5, 4, 0.82);
-      border: 1px solid rgba(197, 160, 89, 0.45);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      padding: 0.24rem 0.6rem;
-      border-radius: 20px;
-      font-family: var(--font-mono);
-      font-size: 0.54rem;
-      letter-spacing: 0.16em;
-      color: var(--gold);
-      text-transform: uppercase;
-    }
-    .event-reel-live-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--gold);
-      box-shadow: 0 0 8px var(--gold);
-      animation: reelPulse 1.8s infinite ease-in-out;
-    }
-    @keyframes reelPulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.82); }
-    }
-    .event-reel-counter {
-      background: rgba(6, 5, 4, 0.78);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 0.2rem 0.5rem;
-      border-radius: 12px;
-      font-family: var(--font-mono);
-      font-size: 0.54rem;
-      letter-spacing: 0.12em;
-      color: var(--text);
-    }
     .event-reel-bottom-bar {
       position: absolute;
       bottom: 0.85rem;
-      left: 0.85rem;
       right: 0.85rem;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
       z-index: 3;
       gap: 0.5rem;
-    }
-    .event-reel-caption {
-      font-family: var(--font-mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.12em;
-      color: var(--text);
-      text-transform: uppercase;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
     .event-reel-nav {
       display: flex;
@@ -2342,24 +2250,6 @@
       justify-content: space-between;
       gap: 1.25rem;
     }
-    .event-meta-time {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.22em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 0.55rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .event-meta-time::before {
-      content: '';
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      background: var(--gold);
-    }
     .event-title {
       font-family: var(--font-serif);
       font-size: 1.75rem;
@@ -2384,16 +2274,6 @@
       gap: 0.55rem;
       border-top: 1px solid var(--border);
       padding-top: 1.1rem;
-    }
-    .reel-clips-label {
-      font-family: var(--font-mono);
-      font-size: 0.55rem;
-      letter-spacing: 0.2em;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
     }
     .reel-clips-grid {
       display: grid;
@@ -2452,10 +2332,10 @@
       text-overflow: ellipsis;
     }
 
-    /* Separate Star Concerts Block (Концерты Звёзд · Афиша @anzur.rest) */
+    /* Separate Star Concerts Block (Концерты Звёзд · 12 Официальных Афиш @anzur.rest) */
     .star-concerts-showcase {
       display: grid;
-      grid-template-columns: 1.05fr 1.25fr;
+      grid-template-columns: 0.95fr 1.35fr;
       border-bottom: 1px solid var(--border);
       background: radial-gradient(circle at 75% 50%, rgba(197, 160, 89, 0.07) 0%, rgba(10, 8, 7, 0.98) 70%);
       position: relative;
@@ -2469,34 +2349,13 @@
       justify-content: space-between;
       gap: 1.8rem;
     }
-    .star-ig-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.35rem 0.85rem;
-      border: 1px solid rgba(197, 160, 89, 0.45);
-      border-radius: 999px;
-      background: rgba(197, 160, 89, 0.08);
-      color: var(--gold);
-      font-family: var(--font-mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      text-decoration: none;
-      width: fit-content;
-      transition: all 0.25s ease;
-    }
-    .star-ig-pill:hover {
-      background: var(--gold);
-      color: #060504;
-    }
     .star-concerts-headline {
       font-family: var(--font-serif);
       font-size: clamp(2rem, 3.2vw, 2.75rem);
       font-weight: 300;
       line-height: 1.12;
       color: var(--text);
-      margin: 0.7rem 0 0.9rem;
+      margin: 0 0 0.9rem;
     }
     .star-concerts-headline em {
       font-style: italic;
@@ -2506,28 +2365,20 @@
       background: rgba(255, 255, 255, 0.025);
       border: 1px solid var(--border);
       border-left: 2px solid var(--gold);
-      padding: 1.15rem 1.35rem;
+      padding: 1.25rem 1.45rem;
       border-radius: 4px;
       transition: opacity 0.25s ease;
     }
-    .star-active-tag {
-      font-family: var(--font-mono);
-      font-size: 0.56rem;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 0.35rem;
-    }
     .star-active-artist {
       font-family: var(--font-serif);
-      font-size: 1.35rem;
+      font-size: 1.45rem;
       color: var(--text);
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.4rem;
     }
     .star-active-caption {
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       color: var(--text-muted);
-      line-height: 1.55;
+      line-height: 1.58;
       margin: 0;
     }
     .star-concerts-actions {
@@ -2537,20 +2388,19 @@
       flex-wrap: wrap;
     }
 
-    /* Right Column: Interactive Mini-Slideshow of Concert Posters */
+    /* Right Column: Interactive Mini-Slideshow of 12 Official Concert Posters */
     .star-posters-stage {
-      padding: 2.4rem 2.8rem;
+      padding: 2.2rem 2.6rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 1.2rem;
       position: relative;
       user-select: none;
     }
     .star-posters-viewer {
       display: grid;
-      grid-template-columns: 250px 1fr;
-      gap: 1.4rem;
+      grid-template-columns: 245px 1fr;
+      gap: 1.35rem;
       align-items: center;
     }
     .star-poster-main-frame {
@@ -2563,91 +2413,42 @@
       background: #060504;
       box-shadow: 0 22px 50px rgba(0, 0, 0, 0.65), 0 0 28px rgba(197, 160, 89, 0.12);
     }
+    .star-poster-main-link {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
     .star-poster-main-frame img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
-    .star-poster-badge-overlay {
-      position: absolute;
-      top: 0.75rem;
-      left: 0.75rem;
-      background: rgba(6, 5, 4, 0.84);
-      border: 1px solid rgba(197, 160, 89, 0.45);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      padding: 0.22rem 0.55rem;
-      border-radius: 4px;
-      font-family: var(--font-mono);
-      font-size: 0.52rem;
-      letter-spacing: 0.16em;
-      color: var(--gold);
-      text-transform: uppercase;
-      z-index: 2;
-    }
-    .star-posters-side-panel {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 1rem;
-      height: 100%;
-    }
-    .star-secondary-frame {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      border-radius: 6px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: #060504;
-    }
-    .star-secondary-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: brightness(0.9) contrast(1.05);
-    }
-    .star-secondary-caption {
-      position: absolute;
-      bottom: 0.6rem;
-      left: 0.6rem;
-      background: rgba(6, 5, 4, 0.82);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 0.2rem 0.55rem;
-      border-radius: 4px;
-      font-family: var(--font-mono);
-      font-size: 0.52rem;
-      letter-spacing: 0.14em;
-      color: var(--text);
-      text-transform: uppercase;
-    }
     .star-thumbs-strip {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 0.5rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.55rem;
     }
     .star-thumb-btn {
       position: relative;
-      aspect-ratio: 3 / 4;
-      border-radius: 5px;
+      aspect-ratio: 9 / 16;
+      border-radius: 6px;
       overflow: hidden;
       border: 1px solid var(--border);
       background: #080706;
       padding: 0;
       cursor: pointer;
       transition: all 0.22s ease;
-      opacity: 0.55;
+      opacity: 0.52;
     }
     .star-thumb-btn:hover {
-      opacity: 0.88;
-      border-color: rgba(197, 160, 89, 0.5);
+      opacity: 0.9;
+      border-color: rgba(197, 160, 89, 0.55);
     }
     .star-thumb-btn.is-active {
       opacity: 1;
       border-color: var(--gold);
-      box-shadow: 0 0 0 1px var(--gold);
+      box-shadow: 0 0 0 1px var(--gold), 0 8px 20px rgba(0, 0, 0, 0.45);
       transform: translateY(-2px);
     }
     .star-thumb-btn img {
@@ -2655,41 +2456,6 @@
       height: 100%;
       object-fit: cover;
       display: block;
-    }
-    .star-slideshow-controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 0.4rem;
-      border-top: 1px solid var(--border);
-    }
-    .star-slide-counter {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      text-transform: uppercase;
-    }
-    .star-slide-nav-btns {
-      display: flex;
-      gap: 0.45rem;
-    }
-    .star-slide-btn {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      border: 1px solid rgba(197, 160, 89, 0.45);
-      background: rgba(12, 10, 9, 0.9);
-      color: var(--gold);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .star-slide-btn:hover {
-      background: var(--gold);
-      color: #060504;
     }
 
     /* Events Bottom CTA */
@@ -2759,10 +2525,26 @@
       }
       .star-posters-viewer {
         grid-template-columns: 1fr;
+        gap: 1.1rem;
       }
       .star-poster-main-frame {
         max-width: 270px;
         margin: 0 auto;
+      }
+      .star-thumbs-strip {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+        gap: 0.55rem;
+        padding-bottom: 0.35rem;
+        scrollbar-width: none;
+      }
+      .star-thumbs-strip::-webkit-scrollbar {
+        display: none;
+      }
+      .star-thumb-btn {
+        flex: 0 0 68px;
+        scroll-snap-align: center;
       }
       .events-cta-bar {
         flex-direction: column;
@@ -3008,6 +2790,7 @@
   <!-- ==========================================================================
        MINIMAL STICKY NAVBAR
        ========================================================================== -->
+  <div id="scroll-progress-bar" class="scroll-progress-bar" aria-hidden="true"></div>
   <nav class="nav">
     <div class="container nav-inner">
       <div class="nav-brand" onclick="replaySplash()" title="ANZUR RESTAURANT">
@@ -3093,25 +2876,29 @@
   <!-- ==========================================================================
        2. CENTRAL MONUMENTAL HERO
        ========================================================================== -->
-  <header class="hero">
+  <header class="hero" id="hero-section">
     <div class="hero-backdrop">
-      <video autoplay loop muted playsinline poster="/taimlars_poster.jpg" class="hero-backdrop-media" id="heroVideo" preload="auto" aria-hidden="true">
-        <source src="/taimlars.webm" type="video/webm">
-        <source src="/taimlars.mp4" type="video/mp4">
+      <video autoplay loop muted playsinline poster="/zastavka_poster.jpg" class="hero-backdrop-media" preload="auto" aria-hidden="true">
+        <source src="/zastavka.webm" type="video/webm">
+        <source src="/zastavka.mp4" type="video/mp4">
         <picture class="hero-backdrop-media">
-          <source srcset="/taimlars.webp" type="image/webp">
-          <img src="/taimlars_poster.jpg" alt="Ресторан «Анзур» в Душанбе — атмосфера заведения" class="hero-backdrop-media" />
+          <source srcset="/zastavka.webp" type="image/webp">
+          <img src="/zastavka_poster.jpg" alt="Ресторан «Анзур» в Душанбе — атмосфера заведения" class="hero-backdrop-media" />
         </picture>
       </video>
       <div class="hero-backdrop-overlay"></div>
-      <div id="ambientSpotlight" class="ambient-spotlight"></div>
+      <canvas id="hero-webgl-canvas" aria-hidden="true"></canvas>
+      <div class="hero-spotlight" id="heroSpotlight" aria-hidden="true"></div>
     </div>
 
-    <div class="hero-content" id="heroCenter">
+    <div class="hero-content">
+      <div class="hero-logo-wrap">
+        <img src="anzur_logo_gold.png" alt="ANZUR RESTAURANT" class="hero-logo-img" />
+      </div>
       <h1 class="visually-hidden">ANZUR RESTAURANT — Ресторан высокой гастрономии в Душанбе</h1>
-      <p class="hero-subtitle-clean" data-i18n-html="hero_subtitle_clean">
-        <span>ПАНАЗИАТСКАЯ · ЕВРОПЕЙСКАЯ · НАЦИОНАЛЬНАЯ</span>
-        <em>КУХНЯ</em>
+      <p class="hero-subtitle" data-i18n-html="hero_subtitle">
+        <span>НАЦИОНАЛЬНАЯ · ЕВРОПЕЙСКАЯ · ПАНАЗИАТСКАЯ</span>
+        <span>КУХНЯ</span>
       </p>
 
       <div class="hero-actions">
@@ -3380,15 +3167,7 @@
             data-src="events_media/music_1.mp4"
           ></video>
           <div class="event-reel-StageGlow"></div>
-          <div class="event-reel-top-bar">
-            <span class="event-reel-live-pill">
-              <span class="event-reel-live-dot"></span>
-              LIVE REEL
-            </span>
-            <span class="event-reel-counter" id="musicReelCounter">01 / 04</span>
-          </div>
           <div class="event-reel-bottom-bar">
-            <span class="event-reel-caption" id="musicReelCaption">01 · Живой вокал</span>
             <div class="event-reel-nav">
               <button type="button" class="event-reel-arrow" onclick="stepEventReel('music', -1, event)" aria-label="Предыдущее видео">‹</button>
               <button type="button" class="event-reel-arrow" onclick="stepEventReel('music', 1, event)" aria-label="Следующее видео">›</button>
@@ -3398,7 +3177,6 @@
 
         <div class="event-body">
           <div>
-            <div class="event-meta-time" data-i18n="ev1_meta">ГЛАВНЫЙ ЗАЛ & ТЕРРАСА</div>
             <h3 class="event-title" data-i18n="ev1_title">Живая Музыка</h3>
             <p class="event-desc" data-i18n="ev1_desc">
               Саксофон, скрипка, живой вокал и восточные инструменты — рубаб, тар. Джазовые импровизации, мировые хиты и восточная классика каждый вечер.
@@ -3406,10 +3184,6 @@
           </div>
 
           <div class="reel-clips-selector">
-            <div class="reel-clips-label">
-              <span>ВЫБЕРИТЕ ФРАГМЕНТ (9:16 VIDEO)</span>
-              <span style="color:var(--gold);">HD · БЕЗ ПЕРЕГРУЗКИ</span>
-            </div>
             <div class="reel-clips-grid" id="musicClipsGrid">
               <button type="button" class="reel-clip-btn is-active" onclick="switchEventReel('music', 0, event)">
                 <img src="events_media/music_1_poster.webp" alt="Живой вокал" class="reel-clip-thumb" loading="lazy" decoding="async" />
@@ -3458,15 +3232,7 @@
             data-src="events_media/dance_1.mp4"
           ></video>
           <div class="event-reel-StageGlow"></div>
-          <div class="event-reel-top-bar">
-            <span class="event-reel-live-pill">
-              <span class="event-reel-live-dot"></span>
-              SHOW REEL
-            </span>
-            <span class="event-reel-counter" id="danceReelCounter">01 / 04</span>
-          </div>
           <div class="event-reel-bottom-bar">
-            <span class="event-reel-caption" id="danceReelCaption">01 · Восточная классика</span>
             <div class="event-reel-nav">
               <button type="button" class="event-reel-arrow" onclick="stepEventReel('dance', -1, event)" aria-label="Предыдущее видео">‹</button>
               <button type="button" class="event-reel-arrow" onclick="stepEventReel('dance', 1, event)" aria-label="Следующее видео">›</button>
@@ -3476,7 +3242,6 @@
 
         <div class="event-body">
           <div>
-            <div class="event-meta-time" data-i18n="ev2_meta">ГЛАВНАЯ СЦЕНА</div>
             <h3 class="event-title" data-i18n="ev2_title">Шоу-балет</h3>
             <p class="event-desc" data-i18n="ev2_desc">
               Зрелищные танцевальные постановки с профессиональными артистами, костюмированные шоу-программы, сценический свет и спецэффекты.
@@ -3484,10 +3249,6 @@
           </div>
 
           <div class="reel-clips-selector">
-            <div class="reel-clips-label">
-              <span>ВЫБЕРИТЕ ПОСТАНОВКУ (9:16 VIDEO)</span>
-              <span style="color:var(--gold);">ТАНЦЫ · ШОУ</span>
-            </div>
             <div class="reel-clips-grid" id="danceClipsGrid">
               <button type="button" class="reel-clip-btn is-active" onclick="switchEventReel('dance', 0, event)">
                 <img src="events_media/dance_1_poster.webp" alt="Восточная классика" class="reel-clip-thumb" loading="lazy" decoding="async" />
@@ -3523,14 +3284,10 @@
       </article>
     </div>
 
-    <!-- Separate Dedicated Block: Концерты Звёзд · Афиша из Instagram @anzur.rest -->
+    <!-- Separate Dedicated Block: Концерты Звёзд · 12 Официальных Афиш @anzur.rest -->
     <div class="star-concerts-showcase" id="cardStarConcert">
       <div class="star-concerts-info">
         <div>
-          <a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" class="star-ig-pill">
-            <span class="event-reel-live-dot"></span>
-            АФИША INSTAGRAM · @ANZUR.REST ↗
-          </a>
           <h3 class="star-concerts-headline" data-i18n="ev3_title">Концерты <em>Звёзд</em></h3>
           <p class="event-desc" data-i18n="ev3_desc">
             Выступления популярных артистов эстрады — специальные концертные вечера с полной программой, живым звуком и VIP-местами у сцены.
@@ -3538,16 +3295,15 @@
         </div>
 
         <div class="star-active-card-meta" id="starActiveMeta">
-          <div class="star-active-tag" id="starActiveTag">ОФИЦИАЛЬНАЯ АФИША · @ANZUR.REST</div>
-          <div class="star-active-artist" id="starActiveArtist">Легендарная группа «Авесто»</div>
+          <div class="star-active-artist" id="starActiveArtist">Dato Sofiya</div>
           <p class="star-active-caption" id="starActiveCaption">
-            Специальный вечер живой музыки на главной сцене ресторана «Анзур» — виртуозный сплав этно-джаза и любимые хиты.
+            5 июня | 20:00 — Большой музыкальный вечер яркого исполнителя из Грузии («Janaya», «Chemo Gogo», «Верила», «Я любил») при участии DJ Emre Jan, Nikruz, Farid и Shirin.
           </p>
         </div>
 
         <div class="star-concerts-actions">
-          <a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" class="btn-gold">
-            Актуальная афиша в Instagram ↗
+          <a id="starActivePostLink" href="https://www.instagram.com/anzur.rest/reel/DY2XFL8ID9m/" target="_blank" rel="noopener" class="btn-gold">
+            Смотреть пост в Instagram ↗
           </a>
           <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%B1%D0%BB%D0%B8%D0%B6%D0%B0%D0%B9%D1%88%D0%B8%D0%B5%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D1%80%D1%82%D1%8B%20%D0%B7%D0%B2%D1%91%D0%B7%D0%B4%20%D0%B8%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D1%83%20%D1%81%D1%86%D0%B5%D0%BD%D1%8B%20%D0%B2%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="btn-outline">
             Бронь стола на концерт
@@ -3555,58 +3311,63 @@
         </div>
       </div>
 
-      <!-- Mini-Slideshow of Concert Posters & Stage Frames -->
+      <!-- Mini-Slideshow of 12 Official Concert Posters from @anzur.rest -->
       <div class="star-posters-stage" id="starPostersStage">
         <div class="star-posters-viewer">
           <!-- Primary 9:16 Vertical Poster -->
           <div class="star-poster-main-frame">
-            <span class="star-poster-badge-overlay" id="starPosterOverlayBadge">АФИША · @ANZUR.REST</span>
-            <picture id="starMainPosterPic">
-              <source id="starMainPosterWebp" srcset="events_media/poster_avesto.webp" type="image/webp" />
-              <img id="starMainPosterImg" src="events_media/poster_avesto.jpg" alt="Афиша концерта в ресторане Анзур" loading="lazy" decoding="async" />
-            </picture>
+            <a id="starMainPosterLink" href="https://www.instagram.com/anzur.rest/reel/DY2XFL8ID9m/" target="_blank" rel="noopener" class="star-poster-main-link" title="Открыть афишу в Instagram">
+              <picture id="starMainPosterPic">
+                <source id="starMainPosterWebp" srcset="events_media/afisha_01.webp" type="image/webp" />
+                <img id="starMainPosterImg" src="events_media/afisha_01.jpg" alt="Афиша концерта Dato Sofiya в ресторане Анзур" loading="lazy" decoding="async" />
+              </picture>
+            </a>
+            <div class="event-reel-bottom-bar">
+              <div class="event-reel-nav">
+                <button type="button" class="event-reel-arrow" onclick="stepStarPosterSlide(-1, event)" aria-label="Предыдущая афиша">‹</button>
+                <button type="button" class="event-reel-arrow" onclick="stepStarPosterSlide(1, event)" aria-label="Следующая афиша">›</button>
+              </div>
+            </div>
           </div>
 
-          <!-- Secondary Stage Preview + 5-Poster Thumbnails Strip -->
-          <div class="star-posters-side-panel">
-            <div class="star-secondary-frame">
-              <picture>
-                <source id="starSecondaryWebp" srcset="events_media/poster_avesto_wide.webp" type="image/webp" />
-                <img id="starSecondaryImg" src="events_media/poster_avesto.jpg" alt="Сцена ресторана Анзур" loading="lazy" decoding="async" />
-              </picture>
-              <span class="star-secondary-caption" id="starSecondaryCaption">ГЛАВНАЯ СЦЕНА · ANZUR</span>
-            </div>
-
-            <div>
-              <div class="reel-clips-label" style="margin-bottom:0.45rem;">
-                <span>МИНИ-СЛАЙДШОУ АФИШ И КОНЦЕРТОВ</span>
-                <span id="starSlideCounter" class="star-slide-counter">01 / 04</span>
-              </div>
-              <div class="star-thumbs-strip" id="starThumbsStrip" style="grid-template-columns: repeat(4, 1fr);">
-                <button type="button" class="star-thumb-btn is-active" onclick="setStarPosterSlide(0, event)" aria-label="Афиша группы Авесто">
-                  <img src="events_media/poster_avesto.webp" alt="Группа Авесто" loading="lazy" decoding="async" />
-                </button>
-                <button type="button" class="star-thumb-btn" onclick="setStarPosterSlide(1, event)" aria-label="Концерт Юлдуз Усмоновой">
-                  <img src="events_media/poster_yulduz_vert.webp" alt="Юлдуз Усмонова" loading="lazy" decoding="async" />
-                </button>
-                <button type="button" class="star-thumb-btn" onclick="setStarPosterSlide(2, event)" aria-label="Концерт Шабнами Тоҷиддин и Хайриддини Шариф">
-                  <img src="events_media/poster_shabnam.webp" alt="Шабнами Тоҷиддин" loading="lazy" decoding="async" />
-                </button>
-                <button type="button" class="star-thumb-btn" onclick="setStarPosterSlide(3, event)" aria-label="Вечерний концерт Dima & Julietta">
-                  <img src="events_media/poster_dima_julietta.webp" alt="Dima & Julietta" loading="lazy" decoding="async" />
-                </button>
-              </div>
-            </div>
-
-            <div class="star-slideshow-controls">
-              <span style="font-family:var(--font-mono); font-size:0.54rem; letter-spacing:0.14em; color:var(--text-muted); text-transform:uppercase;">
-                ЛИСТАЙТЕ АФИШИ ‹ ›
-              </span>
-              <div class="star-slide-nav-btns">
-                <button type="button" class="star-slide-btn" onclick="stepStarPosterSlide(-1, event)" aria-label="Предыдущая афиша">‹</button>
-                <button type="button" class="star-slide-btn" onclick="stepStarPosterSlide(1, event)" aria-label="Следующая афиша">›</button>
-              </div>
-            </div>
+          <!-- 12 Concert Posters Selector Strip (4x3 Mosaic on Desktop, Scroll-Snap Strip on Mobile) -->
+          <div class="star-thumbs-strip" id="starThumbsStrip" role="region" aria-label="Афиши концертов в ресторане Анзур">
+            <button type="button" class="star-thumb-btn is-active" data-poster-idx="0" aria-current="true" onclick="setStarPosterSlide(0, event)" aria-label="Dato Sofiya — 5 июня">
+              <img src="events_media/afisha_01.webp" alt="Dato Sofiya" loading="lazy" decoding="async" />
+            </button>
+            <button type="button" class="star-thumb-btn" data-poster-idx="1" onclick="setStarPosterSlide(1, event)" aria-label="Shabnam Surayo — 23 апреля">
+              <img src="events_media/afisha_02.webp" alt="Shabnam Surayo" loading="lazy" decoding="async" />
+            </button>
+            <button type="button" class="star-thumb-btn" data-poster-idx="2" onclick="setStarPosterSlide(2, event)" aria-label="KARE — 5 апреля">
+              <img src="events_media/afisha_03.webp" alt="KARE" loading="lazy" decoding="async" />
+            </button>
+            <button type="button" class="star-thumb-btn" data-poster-idx="3" onclick="setStarPosterSlide(3, event)" aria-label="Zakiya — 5 февраля">
+              <img src="events_media/afisha_04.webp" alt="Zakiya" loading="lazy" decoding="async" />
+            </button>
+            <button type="button" class="star-thumb-btn" data-poster-idx="4" onclick="setStarPosterSlide(4, event)" aria-label="Noziya Karomatullo — 17 января">
+              <img src="events_media/afisha_05.webp" alt="Noziya Karomatullo" loading="lazy" decoding="async" />
+            </button>
+            <button type="button" class="star-thumb-btn" data-poster-idx="5" onclick="setStarPosterSlide(5, event)" aria-label="Zulaykho Mahmadshoeva — 31 декабря">
+              <img src="events_media/afisha_06.webp" alt="Zulaykho Mahmadshoeva" loading="lazy" decoding="async" />
+            </button>
+            <button type="button" class="star-thumb-btn" data-poster-idx="6" onclick="setStarPosterSlide(6, event)" aria-label="Surush Kholov, Dilshodi Fayzullo, Umedjoni Burhon — 30 декабря">
+              <img src="events_media/afisha_07.webp" alt="Surush Kholov, Dilshodi Fayzullo, Umedjoni Burhon" loading="lazy" decoding="async" />
+            </button>
+            <button type="button" class="star-thumb-btn" data-poster-idx="7" onclick="setStarPosterSlide(7, event)" aria-label="Ваграм Вазян — 6 декабря">
+              <img src="events_media/afisha_08.webp" alt="Ваграм Вазян" loading="lazy" decoding="async" />
+            </button>
+            <button type="button" class="star-thumb-btn" data-poster-idx="8" onclick="setStarPosterSlide(8, event)" aria-label="Yosamin Davlatova — 13 декабря">
+              <img src="events_media/afisha_09.webp" alt="Yosamin Davlatova" loading="lazy" decoding="async" />
+            </button>
+            <button type="button" class="star-thumb-btn" data-poster-idx="9" onclick="setStarPosterSlide(9, event)" aria-label="Jonibek Murodov — 6 ноября">
+              <img src="events_media/afisha_10.webp" alt="Jonibek Murodov" loading="lazy" decoding="async" />
+            </button>
+            <button type="button" class="star-thumb-btn" data-poster-idx="10" onclick="setStarPosterSlide(10, event)" aria-label="Farzonai Khurshed — 23 октября">
+              <img src="events_media/afisha_11.webp" alt="Farzonai Khurshed" loading="lazy" decoding="async" />
+            </button>
+            <button type="button" class="star-thumb-btn" data-poster-idx="11" onclick="setStarPosterSlide(11, event)" aria-label="Yulduz Usmonova — 4 июля">
+              <img src="events_media/afisha_12.webp" alt="Yulduz Usmonova" loading="lazy" decoding="async" />
+            </button>
           </div>
         </div>
       </div>
@@ -3884,11 +3645,6 @@
       if (splash) {
         splash.classList.remove('done');
         splashDismissed = false;
-        const box = splash.querySelector('.splash-box');
-        if (box) {
-          const clone = box.cloneNode(true);
-          box.parentNode.replaceChild(clone, box);
-        }
         setTimeout(dismissSplash, 2200);
       }
     }
@@ -3921,7 +3677,6 @@
     nav_events: "Шоу & Концерты",
     nav_contacts: "Контакты",
     nav_write_us: "Напишите нам",
-    hero_subtitle_clean: "<span>ПАНАЗИАТСКАЯ · ЕВРОПЕЙСКАЯ · НАЦИОНАЛЬНАЯ</span> <em>КУХНЯ</em>",
     hero_subtitle: "<span>НАЦИОНАЛЬНАЯ · ЕВРОПЕЙСКАЯ · ПАНАЗИАТСКАЯ</span><span>КУХНЯ</span>",
     hero_book_btn: "Забронировать стол",
     menu_mono_tag: "[ ВЫБОР ШЕФ-ПОВАРА · СЕЗОН 2026 ]",
@@ -4034,7 +3789,6 @@
     nav_events: "Шоу & Консертҳо",
     nav_contacts: "Тамос",
     nav_write_us: "Ба мо нависед",
-    hero_subtitle_clean: "<span>ТАОМҲОИ ПАН-ОСИЁӢ · АВРУПОӢ · МИЛЛӢ</span>",
     hero_subtitle: "<span>ТАОМҲОИ МИЛЛӢ · АВРУПОӢ · ПАН-ОСИЁӢ</span><span>ТАОМҲО</span>",
     hero_book_btn: "Фармоиши миз",
     menu_mono_tag: "[ ИНТИХОБИ САР-ОШПАЗ · ФАСЛИ 2026 ]",
@@ -4139,7 +3893,6 @@
     nav_events: "Shows & Concerts",
     nav_contacts: "Contacts",
     nav_write_us: "Message Us",
-    hero_subtitle_clean: "<span>PAN-ASIAN · EUROPEAN · NATIONAL</span> <em>CUISINE</em>",
     hero_subtitle: "<span>NATIONAL · EUROPEAN · PAN-ASIAN</span><span>CUISINE</span>",
     hero_book_btn: "Reserve a Table",
     menu_mono_tag: "[ CHEF'S SELECTION · SEASON 2026 ]",
@@ -4244,7 +3997,6 @@
     nav_events: "演艺盛事",
     nav_contacts: "联系我们",
     nav_write_us: "在线咨询",
-    hero_subtitle_clean: "<span>泛亚美馔 · 欧式佳肴 · 传统中亚风味</span>",
     hero_subtitle: "<span>传统中亚风味 · 欧式佳肴 · 泛亚美馔</span><span>高端品鉴</span>",
     hero_book_btn: "预订餐桌",
     menu_mono_tag: "[ 主厨精选 · 2026年度 ]",
@@ -4687,6 +4439,14 @@ let currentSlideIdx = 0;
         }
       });
 
+      // Keep active filmstrip item scrolled into view horizontally on mobile/tablet
+      const stripTrackEl = document.getElementById('filmstrip-track');
+      const activeStripItem = items[currentSlideIdx];
+      if (stripTrackEl && activeStripItem && stripTrackEl.scrollWidth > stripTrackEl.clientWidth) {
+        const targetLeft = activeStripItem.offsetLeft - (stripTrackEl.clientWidth - activeStripItem.offsetWidth) / 2;
+        stripTrackEl.scrollTo({ left: Math.max(0, targetLeft), behavior: 'smooth' });
+      }
+
       // Animate with Motion.js
       if (window.Motion && typeof Motion.animate === 'function') {
         try {
@@ -5079,6 +4839,7 @@ let currentSlideIdx = 0;
       if (titleEl) titleEl.textContent = curUi.title;
       if (searchInput) searchInput.placeholder = curUi.search;
 
+      renderCategoryPills(lang, curUi.all);
       renderDishesList(lang, curUi.empty);
     }
 
@@ -5466,7 +5227,7 @@ let currentSlideIdx = 0;
       const textClose = document.getElementById('closeTextMenuModalBtn');
       if (textClose) textClose.onclick = closeTextMenuModal;
 
-      // Menu modal arrows
+      // Menu modal arrows (single clean onclick handler to prevent touch+click double firing)
       const menuPrev = document.getElementById('menuStagePrev');
       if (menuPrev) {
         menuPrev.onclick = function(e) { prevModalMenuPage(e); };
@@ -5486,7 +5247,7 @@ let currentSlideIdx = 0;
         spacesNext.onclick = function(e) { nextSpacesPage(e); };
       }
 
-      // Click left/right edge of photo card to flip
+      // Click left/right edge of photo card to flip (guarded against touch swipe synthetic click)
       const menuStage = document.getElementById('modalMenuStage');
       if (menuStage && !menuStage._navBound) {
         menuStage._navBound = true;
@@ -5531,16 +5292,27 @@ let currentSlideIdx = 0;
     (function initSpacesPreloader() {
       function attach() {
         const spacesSec = document.querySelector('.spaces-grid') || document.getElementById('spaces');
-        if (!spacesSec || !('IntersectionObserver' in window)) return;
-        const obs = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
+        if (!spacesSec) return;
+        const isContentVisSupported = 'contentVisibility' in document.documentElement.style;
+        if (isContentVisSupported) {
+          spacesSec.addEventListener('contentvisibilityautostatechange', (event) => {
+            if (!event.skipped) {
               preloadSpacesCategory();
-              obs.disconnect();
+              if (window.ScrollTrigger) ScrollTrigger.refresh();
             }
           });
-        }, { rootMargin: '600px' });
-        obs.observe(spacesSec);
+        }
+        if ('IntersectionObserver' in window) {
+          const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                preloadSpacesCategory();
+                obs.disconnect();
+              }
+            });
+          }, { rootMargin: '600px' });
+          obs.observe(spacesSec);
+        }
       }
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', attach);
@@ -5590,7 +5362,7 @@ let currentSlideIdx = 0;
       setSpacesPhoto(currentSpacesIndex + 1, true);
     }
 
-    // Touch swipe support on spaces stage
+    // Touch swipe support on spaces stage (horizontal swipe jumps photos; vertical swipe scrolls naturally)
     (function initSpacesTouchSwipe() {
       function attach() {
         const stage = document.getElementById('modalSpacesStage');
@@ -5749,28 +5521,24 @@ let currentSlideIdx = 0;
     const EVENT_REELS_DATA = {
       music: {
         videoId: 'liveMusicVideo',
-        counterId: 'musicReelCounter',
-        captionId: 'musicReelCaption',
         gridId: 'musicClipsGrid',
         currentIndex: 0,
         clips: [
-          { src: 'events_media/music_1.mp4', poster: 'events_media/music_1_poster.webp', caption: '01 · Живой вокал' },
-          { src: 'events_media/music_2.mp4', poster: 'events_media/music_2_poster.webp', caption: '02 · Саксофон Live' },
-          { src: 'events_media/music_3.mp4', poster: 'events_media/music_3_poster.webp', caption: '03 · Акустика & Хит' },
-          { src: 'events_media/music_4.mp4', poster: 'events_media/music_4_poster.webp', caption: '04 · Вечерний дуэт' }
+          { src: 'events_media/music_1.mp4', poster: 'events_media/music_1_poster.webp' },
+          { src: 'events_media/music_2.mp4', poster: 'events_media/music_2_poster.webp' },
+          { src: 'events_media/music_3.mp4', poster: 'events_media/music_3_poster.webp' },
+          { src: 'events_media/music_4.mp4', poster: 'events_media/music_4_poster.webp' }
         ]
       },
       dance: {
         videoId: 'showBalletVideo',
-        counterId: 'danceReelCounter',
-        captionId: 'danceReelCaption',
         gridId: 'danceClipsGrid',
         currentIndex: 0,
         clips: [
-          { src: 'events_media/dance_1.mp4', poster: 'events_media/dance_1_poster.webp', caption: '01 · Восточная классика' },
-          { src: 'events_media/dance_2.mp4', poster: 'events_media/dance_2_poster.webp', caption: '02 · Атлас & Адрас' },
-          { src: 'events_media/dance_3.mp4', poster: 'events_media/dance_3_poster.webp', caption: '03 · Вечерний балет' },
-          { src: 'events_media/dance_4.mp4', poster: 'events_media/dance_4_poster.webp', caption: '04 · Золотой шёлк' }
+          { src: 'events_media/dance_1.mp4', poster: 'events_media/dance_1_poster.webp' },
+          { src: 'events_media/dance_2.mp4', poster: 'events_media/dance_2_poster.webp' },
+          { src: 'events_media/dance_3.mp4', poster: 'events_media/dance_3_poster.webp' },
+          { src: 'events_media/dance_4.mp4', poster: 'events_media/dance_4_poster.webp' }
         ]
       }
     };
@@ -5785,12 +5553,7 @@ let currentSlideIdx = 0;
       const clip = group.clips[nextIdx];
 
       const videoEl = document.getElementById(group.videoId);
-      const counterEl = document.getElementById(group.counterId);
-      const captionEl = document.getElementById(group.captionId);
       const gridEl = document.getElementById(group.gridId);
-
-      if (counterEl) counterEl.textContent = `0${nextIdx + 1} / 0${total}`;
-      if (captionEl) captionEl.textContent = clip.caption;
 
       if (gridEl) {
         const btns = gridEl.querySelectorAll('.reel-clip-btn');
@@ -5820,51 +5583,91 @@ let currentSlideIdx = 0;
       switchEventReel(type, group.currentIndex + delta, e);
     }
 
-    // Star Concerts Mini-Slideshow Data (@anzur.rest Posters & Live Nights)
+    // Star Concerts Mini-Slideshow Data (12 Official Concert Posters from @anzur.rest)
     const STAR_POSTERS_SLIDES = [
       {
-        tag: 'ОФИЦИАЛЬНАЯ АФИША · @ANZUR.REST',
-        artist: 'Легендарная группа «Авесто»',
-        caption: 'Специальный вечер живой музыки на главной сцене ресторана «Анзур» — виртуозный сплав этно-джаза, восточной мелодики и любимых хитов.',
-        overlayBadge: 'АФИША · 22 ОКТЯБРЯ',
-        mainWebp: 'events_media/poster_avesto.webp',
-        mainJpg: 'events_media/poster_avesto.jpg',
-        secWebp: 'events_media/poster_avesto_wide.webp',
-        secJpg: 'events_media/poster_avesto.jpg',
-        secCaption: 'АФИША КОНЦЕРТА · @ANZUR.REST'
+        artist: 'Dato Sofiya',
+        caption: '5 июня | 20:00 — Большой музыкальный вечер яркого исполнителя из Грузии («Janaya», «Chemo Gogo», «Верила», «Я любил») при участии DJ Emre Jan, Nikruz, Farid и Shirin.',
+        url: 'https://www.instagram.com/anzur.rest/reel/DY2XFL8ID9m/',
+        mainWebp: 'events_media/afisha_01.webp',
+        mainJpg: 'events_media/afisha_01.jpg'
       },
       {
-        tag: 'ГАЛА-КОНЦЕРТ · ЗВЁЗДЫ ВОСТОКА',
-        artist: 'Юлдуз Усмонова (Yulduz Usmonova)',
-        caption: 'Эксклюзивный сольный вечер примадонны восточной эстрады в «Анзур» — полное живое сопровождение оркестра и незабываемая энергетика.',
-        overlayBadge: 'LIVE · ANZUR STAGE',
-        mainWebp: 'events_media/poster_yulduz_vert.webp',
-        mainJpg: 'events_media/poster_yulduz_vert.jpg',
-        secWebp: 'events_media/poster_yulduz_stage.webp',
-        secJpg: 'events_media/poster_yulduz_stage.jpg',
-        secCaption: 'ЮЛДУЗ УСМОНОВА · ГЛАВНАЯ СЦЕНА'
+        artist: 'Shabnam Surayo',
+        caption: '23 апреля | 20:00 — Сольный вечер яркой звезды таджикской эстрады, покорившей сердца миллионов. Живая музыка, мощная энергия и незабываемая атмосфера.',
+        url: 'https://www.instagram.com/anzur.rest/reel/DXJjX8uiOBO/',
+        mainWebp: 'events_media/afisha_02.webp',
+        mainJpg: 'events_media/afisha_02.jpg'
       },
       {
-        tag: 'СПЕЦИАЛЬНЫЙ ВЕЧЕР · @ANZUR.REST',
-        artist: 'Шабнами Тоҷиддин & Хайриддини Шариф',
-        caption: 'Звёздный дуэтный вечер в ресторане «Анзур» — аншлаг в главном зале, световое шоу, любимые песни и танцы до полуночи.',
-        overlayBadge: 'КОНЦЕРТ · ДУШАНБЕ',
-        mainWebp: 'events_media/poster_shabnam.webp',
-        mainJpg: 'events_media/poster_shabnam.jpg',
-        secWebp: 'events_media/poster_yulduz_live.webp',
-        secJpg: 'events_media/poster_yulduz_live.jpg',
-        secCaption: 'SHABNAMI TOJIDDIN & KHAYRIDDINI SHARIF'
+        artist: 'KARE',
+        caption: '5 апреля | 21:00 — Праздничный весенний концерт исполнителя хитов, которые звучат в сердце каждого. Атмосфера восточного вечера и живой звук.',
+        url: 'https://www.instagram.com/anzur.rest/reel/DWTR_J7CB0G/',
+        mainWebp: 'events_media/afisha_03.webp',
+        mainJpg: 'events_media/afisha_03.jpg'
       },
       {
-        tag: 'ВЕЧЕРНЯЯ ПРОГРАММА · LIVE SOUND',
-        artist: 'Dima & Julietta — Вечерний концерт',
-        caption: 'Элегантная концертная программа с роялем и живым вокалом — мировые хиты и авторские аранжировки для идеального ужина.',
-        overlayBadge: 'LIVE DUO · ANZUR',
-        mainWebp: 'events_media/poster_dima_julietta.webp',
-        mainJpg: 'events_media/poster_dima_julietta.jpg',
-        secWebp: 'events_media/poster_yulduz_stage.webp',
-        secJpg: 'events_media/poster_yulduz_stage.jpg',
-        secCaption: 'DIMA & JULIETTA · КОНЦЕРТНЫЙ ЗАЛ'
+        artist: 'Zakiya (Закия)',
+        caption: '5 февраля | 21:00 — Живое исполнение и красивый, чувственный голос. Тёплая и стильная атмосфера вечернего концерта в ресторане «Анзур».',
+        url: 'https://www.instagram.com/anzur.rest/reel/DULfZr3COKc/',
+        mainWebp: 'events_media/afisha_04.webp',
+        mainJpg: 'events_media/afisha_04.jpg'
+      },
+      {
+        artist: 'Noziya Karomatullo',
+        caption: '17 января | 21:00 — Вечер живой музыки и настоящих эмоций. Красивый голос, тонкое чувство сцены и искренняя связь со зрителем.',
+        url: 'https://www.instagram.com/anzur.rest/reel/DTaS6wVCI6a/',
+        mainWebp: 'events_media/afisha_05.webp',
+        mainJpg: 'events_media/afisha_05.jpg'
+      },
+      {
+        artist: 'Zulaykho Mahmadshoeva',
+        caption: '31 декабря | 21:00 — Праздничный гала-вечер в самую долгожданную ночь года. Магия живого голоса и торжественная атмосфера.',
+        url: 'https://www.instagram.com/anzur.rest/reel/DSaWM66CMQV/',
+        mainWebp: 'events_media/afisha_06.webp',
+        mainJpg: 'events_media/afisha_06.jpg'
+      },
+      {
+        artist: 'Surush Kholov · Dilshodi Fayzullo · Umedjoni Burhon',
+        caption: '30 декабря | 21:00 — Предновогодний звёздный концерт трёх популярных исполнителей на главной сцене ресторана «Анзур».',
+        url: 'https://www.instagram.com/anzur.rest/reel/DSaLEZViGAE/',
+        mainWebp: 'events_media/afisha_07.webp',
+        mainJpg: 'events_media/afisha_07.jpg'
+      },
+      {
+        artist: 'Ваграм Вазян',
+        caption: '6 декабря | 21:00 — Большой сольный концерт в Душанбе. Голос, покоривший миллионы слушателей, и проникновенные хиты в живом исполнении.',
+        url: 'https://www.instagram.com/anzur.rest/reel/DRuFiZtiAAe/',
+        mainWebp: 'events_media/afisha_08.webp',
+        mainJpg: 'events_media/afisha_08.jpg'
+      },
+      {
+        artist: 'Yosamin Davlatova',
+        caption: '13 декабря | 21:00 — Живая энергия и настоящие эмоции. Выступление талантливой певицы, превращающее вечер в настоящий праздник души.',
+        url: 'https://www.instagram.com/anzur.rest/reel/DSC_7XFCBJY/',
+        mainWebp: 'events_media/afisha_09.webp',
+        mainJpg: 'events_media/afisha_09.jpg'
+      },
+      {
+        artist: 'Jonibek Murodov',
+        caption: '6 ноября | 21:00 — Яркий музыкальный вечер с участием неповторимого Джонибека Муродова. Любимые песни, живой звук и праздничная атмосфера.',
+        url: 'https://www.instagram.com/anzur.rest/reel/DQcEIzCCFEo/',
+        mainWebp: 'events_media/afisha_10.webp',
+        mainJpg: 'events_media/afisha_10.jpg'
+      },
+      {
+        artist: 'Farzonai Khurshed',
+        caption: '23 октября | 21:00 — Особенный концерт неповторимой Фарзонаи Хуршед. Яркая харизма, живая музыка и незабываемый вечер.',
+        url: 'https://www.instagram.com/anzur.rest/reel/DP1PInACD5W/',
+        mainWebp: 'events_media/afisha_11.webp',
+        mainJpg: 'events_media/afisha_11.jpg'
+      },
+      {
+        artist: 'Yulduz Usmonova',
+        caption: '4 июля | 20:00 — Эксклюзивный концерт примадонны узбекской эстрады Юлдуз Усмоновой. Легендарные хиты и грандиозная сценическая энергия.',
+        url: 'https://www.instagram.com/anzur.rest/reel/DZP6Sr1oIgH/',
+        mainWebp: 'events_media/afisha_12.webp',
+        mainJpg: 'events_media/afisha_12.jpg'
       }
     ];
 
@@ -5879,43 +5682,43 @@ let currentSlideIdx = 0;
 
       const mainWebp = document.getElementById('starMainPosterWebp');
       const mainImg = document.getElementById('starMainPosterImg');
-      const secWebp = document.getElementById('starSecondaryWebp');
-      const secImg = document.getElementById('starSecondaryImg');
-      const overlayBadge = document.getElementById('starPosterOverlayBadge');
-      const secCaption = document.getElementById('starSecondaryCaption');
-      const counter = document.getElementById('starSlideCounter');
-      const tagEl = document.getElementById('starActiveTag');
+      const mainLink = document.getElementById('starMainPosterLink');
+      const postLink = document.getElementById('starActivePostLink');
       const artistEl = document.getElementById('starActiveArtist');
       const captionEl = document.getElementById('starActiveCaption');
       const metaCard = document.getElementById('starActiveMeta');
       const strip = document.getElementById('starThumbsStrip');
 
       if (mainWebp) mainWebp.srcset = slide.mainWebp;
-      if (mainImg) mainImg.src = slide.mainJpg;
-      if (secWebp) secWebp.srcset = slide.secWebp;
-      if (secImg) secImg.src = slide.secJpg;
-      if (overlayBadge) overlayBadge.textContent = slide.overlayBadge;
-      if (secCaption) secCaption.textContent = slide.secCaption;
-      if (counter) counter.textContent = `0${currentStarSlideIdx + 1} / 0${total}`;
-      if (tagEl) tagEl.textContent = slide.tag;
+      if (mainImg) {
+        mainImg.src = slide.mainJpg;
+        mainImg.alt = `Афиша концерта ${slide.artist} в ресторане Анзур`;
+      }
+      if (mainLink) mainLink.href = slide.url;
+      if (postLink) postLink.href = slide.url;
       if (artistEl) artistEl.textContent = slide.artist;
       if (captionEl) captionEl.textContent = slide.caption;
 
       if (strip) {
         const thumbs = strip.querySelectorAll('.star-thumb-btn');
-        thumbs.forEach((btn, idx) => btn.classList.toggle('is-active', idx === currentStarSlideIdx));
+        thumbs.forEach((btn, idx) => {
+          const active = idx === currentStarSlideIdx;
+          btn.classList.toggle('is-active', active);
+          if (active) {
+            btn.setAttribute('aria-current', 'true');
+          } else {
+            btn.removeAttribute('aria-current');
+          }
+        });
       }
 
       if (window.Motion && typeof Motion.animate === 'function') {
         try {
           if (mainImg) {
-            Motion.animate(mainImg, { opacity: [0.3, 1], transform: ['scale(1.05)', 'scale(1)'] }, { duration: 0.48, easing: [0.16, 1, 0.3, 1] });
-          }
-          if (secImg) {
-            Motion.animate(secImg, { opacity: [0.35, 1], transform: ['scale(1.04)', 'scale(1)'] }, { duration: 0.48, easing: [0.16, 1, 0.3, 1] });
+            Motion.animate(mainImg, { opacity: [0.3, 1], transform: ['scale(1.04)', 'scale(1)'] }, { duration: 0.45, easing: [0.16, 1, 0.3, 1] });
           }
           if (metaCard) {
-            Motion.animate(metaCard, { opacity: [0.4, 1], transform: ['translateY(6px)', 'translateY(0px)'] }, { duration: 0.38, easing: [0.16, 1, 0.3, 1] });
+            Motion.animate(metaCard, { opacity: [0.4, 1], transform: ['translateY(5px)', 'translateY(0px)'] }, { duration: 0.36, easing: [0.16, 1, 0.3, 1] });
           }
         } catch (err) {}
       }
@@ -5930,7 +5733,7 @@ let currentSlideIdx = 0;
       if (starSlideTimer) clearInterval(starSlideTimer);
       starSlideTimer = setInterval(() => {
         setStarPosterSlide(currentStarSlideIdx + 1);
-      }, 5500);
+      }, 5000);
     }
 
     // Initialize Lazy Vertical Videos & Poster Slideshow via IntersectionObserver
@@ -5968,6 +5771,34 @@ let currentSlideIdx = 0;
         reelObserver.observe(eventsSec);
       }
 
+      // Sync horizontal scroll-snap strip on mobile (scrollsnapchange with IntersectionObserver fallback)
+      const stripEl = document.getElementById('starThumbsStrip');
+      if (stripEl) {
+        if ('onscrollsnapchange' in HTMLElement.prototype) {
+          stripEl.addEventListener('scrollsnapchange', (ev) => {
+            const snapped = ev.snapTargetInline;
+            if (snapped && snapped.dataset && snapped.dataset.posterIdx !== undefined) {
+              const idx = parseInt(snapped.dataset.posterIdx, 10);
+              if (!isNaN(idx) && idx !== currentStarSlideIdx) {
+                setStarPosterSlide(idx);
+              }
+            }
+          });
+        } else if ('IntersectionObserver' in window && window.matchMedia('(max-width: 680px)').matches) {
+          const thumbObs = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting && entry.intersectionRatio >= 0.9) {
+                const idx = parseInt(entry.target.dataset.posterIdx, 10);
+                if (!isNaN(idx) && idx !== currentStarSlideIdx) {
+                  setStarPosterSlide(idx);
+                }
+              }
+            });
+          }, { root: stripEl, threshold: 0.9 });
+          stripEl.querySelectorAll('.star-thumb-btn').forEach((btn) => thumbObs.observe(btn));
+        }
+      }
+
       // Touch swipe support on Star Posters Stage
       const posterStage = document.getElementById('starPostersStage');
       if (posterStage) {
@@ -5989,74 +5820,472 @@ let currentSlideIdx = 0;
       }
     });
 
-    // ==========================================================================
-    // AMBIENT SPOTLIGHT & 3D TILT FOR HERO
-    // ==========================================================================
-    (function initHeroSpotlightAndTilt() {
-      const hero = document.getElementById('hero');
-      const heroCenter = document.getElementById('heroCenter');
-      if (!hero || !heroCenter) return;
+    /* ==========================================================================
+       TOP-TIER LUXURY ANIMATION ENGINE (GSAP + ScrollTrigger + Lenis + Motion + Three.js)
+       Ultra-lightweight, non-blocking, adaptive 60fps for Desktop & Mobile
+       ========================================================================== */
+    (function initLuxuryExperienceEngine() {
+      const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) return;
 
-      function onPointerMove(clientX, clientY) {
-        const rect = hero.getBoundingClientRect();
-        if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+      const isMobileOrTouch = window.matchMedia && window.matchMedia('(max-width: 900px), (hover: none)').matches;
+      let lenisInstance = null;
 
-        const xPercent = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
-        const yPercent = Math.max(0, Math.min(100, ((clientY - rect.top) / rect.height) * 100));
+      function bootCoreAnimations() {
+        // 1. LENIS SMOOTH SCROLL (Desktop inertial scroll synced with GSAP ticker; native fast touch on Mobile)
+        if (window.Lenis && !isMobileOrTouch) {
+          try {
+            lenisInstance = new Lenis({
+              duration: 1.12,
+              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+              smoothWheel: true,
+              wheelMultiplier: 0.95
+            });
+            window.__anzurLenis = lenisInstance;
 
-        hero.style.setProperty('--mouse-x', `${xPercent.toFixed(2)}%`);
-        hero.style.setProperty('--mouse-y', `${yPercent.toFixed(2)}%`);
+            if (window.gsap && window.ScrollTrigger) {
+              lenisInstance.on('scroll', ScrollTrigger.update);
+              gsap.ticker.add((time) => {
+                if (document.body.style.overflow === 'hidden') return;
+                lenisInstance.raf(time * 1000);
+              });
+              gsap.ticker.lagSmoothing(0);
+            } else {
+              function rafLoop(time) {
+                if (document.body.style.overflow !== 'hidden') {
+                  lenisInstance.raf(time);
+                }
+                requestAnimationFrame(rafLoop);
+              }
+              requestAnimationFrame(rafLoop);
+            }
 
-        // Subtle 3D tilt
-        const xOffset = ((clientX - rect.left) - rect.width / 2) / (rect.width / 2);
-        const yOffset = ((clientY - rect.top) - rect.height / 2) / (rect.height / 2);
-
-        const rotateY = (xOffset * 8.5).toFixed(2);
-        const rotateX = (-yOffset * 8.5).toFixed(2);
-
-        heroCenter.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(12px)`;
-      }
-
-      window.addEventListener('mousemove', (e) => {
-        onPointerMove(e.clientX, e.clientY);
-      }, { passive: true });
-
-      window.addEventListener('touchmove', (e) => {
-        if (e.touches && e.touches.length > 0) {
-          onPointerMove(e.touches[0].clientX, e.touches[0].clientY);
+            // Smooth anchor navigation with Lenis
+            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+              anchor.addEventListener('click', (e) => {
+                const targetId = anchor.getAttribute('href');
+                if (!targetId || targetId === '#') return;
+                const targetEl = document.querySelector(targetId);
+                if (targetEl) {
+                  e.preventDefault();
+                  lenisInstance.scrollTo(targetEl, { offset: -64, duration: 1.2 });
+                }
+              });
+            });
+          } catch (e) {}
         }
-      }, { passive: true });
 
-      hero.addEventListener('mouseleave', () => {
-        heroCenter.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
-        hero.style.setProperty('--mouse-x', '50%');
-        hero.style.setProperty('--mouse-y', '50%');
-      });
-    })();
+        // 2. GSAP + SCROLLTRIGGER CHOREOGRAPHY
+        if (window.gsap && window.ScrollTrigger) {
+          gsap.registerPlugin(ScrollTrigger);
 
-    // Video play guarantee
-    (function ensureHeroVideo() {
-      const video = document.getElementById('heroVideo');
-      if (video) {
-        video.muted = true;
-        const p = video.play();
-        if (p !== undefined) {
-          p.catch(() => {
-            const unlock = () => { video.play().catch(()=>{}); };
-            document.addEventListener('click', unlock, { once: true });
-            document.addEventListener('touchstart', unlock, { once: true });
+          // Top 24K Gold Scroll Progress Bar
+          const progressBar = document.getElementById('scroll-progress-bar');
+          if (progressBar) {
+            gsap.to(progressBar, {
+              scaleX: 1,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: document.documentElement,
+                start: 'top top',
+                end: 'bottom bottom',
+                scrub: 0.15
+              }
+            });
+          }
+
+          // Hero Cinematic Depth Parallax on Scroll
+          const heroSec = document.querySelector('.hero');
+          const heroMedia = document.querySelector('.hero-backdrop-media');
+          const heroContent = document.querySelector('.hero-content');
+          if (heroSec && heroMedia) {
+            gsap.to(heroMedia, {
+              scale: 1.1,
+              yPercent: isMobileOrTouch ? 6 : 12,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: heroSec,
+                start: 'top top',
+                end: 'bottom top',
+                scrub: true
+              }
+            });
+          }
+          if (heroSec && heroContent && !isMobileOrTouch) {
+            gsap.to(heroContent, {
+              y: -48,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: heroSec,
+                start: 'top top',
+                end: 'bottom top',
+                scrub: true
+              }
+            });
+          }
+
+          // Section Headers Editorial Reveal
+          gsap.utils.toArray('.sec-header').forEach((header) => {
+            gsap.from(header, {
+              y: 28,
+              opacity: 0,
+              duration: 0.85,
+              ease: 'power3.out',
+              clearProps: 'transform,opacity',
+              scrollTrigger: {
+                trigger: header,
+                start: 'top 88%',
+                once: true
+              }
+            });
+          });
+
+          // Cuisine Stage & Filmstrip Staggered Entrance
+          const stageGrid = document.getElementById('menu-stage-container');
+          if (stageGrid) {
+            gsap.from(stageGrid, {
+              y: 34,
+              opacity: 0,
+              duration: 0.9,
+              ease: 'power3.out',
+              clearProps: 'transform,opacity',
+              scrollTrigger: {
+                trigger: stageGrid,
+                start: 'top 86%',
+                once: true
+              }
+            });
+          }
+
+          const filmstripItems = gsap.utils.toArray('.filmstrip-item');
+          if (filmstripItems.length) {
+            gsap.from(filmstripItems, {
+              y: 24,
+              opacity: 0,
+              duration: 0.65,
+              stagger: 0.055,
+              ease: 'power2.out',
+              clearProps: 'transform,opacity',
+              scrollTrigger: {
+                trigger: '#filmstrip-track',
+                start: 'top 90%',
+                once: true
+              }
+            });
+          }
+
+          // Interior Spaces Cards Staggered Cascade
+          const spaceBoxes = gsap.utils.toArray('.space-box');
+          if (spaceBoxes.length) {
+            gsap.from(spaceBoxes, {
+              y: 38,
+              opacity: 0,
+              duration: 0.8,
+              stagger: 0.09,
+              ease: 'power3.out',
+              clearProps: 'transform,opacity',
+              scrollTrigger: {
+                trigger: '.spaces-grid',
+                start: 'top 86%',
+                once: true
+              }
+            });
+          }
+
+          // Events & Shows Cards Staggered Cascade + CTA Bar
+          const eventCards = gsap.utils.toArray('.event-card');
+          if (eventCards.length) {
+            gsap.from(eventCards, {
+              y: 38,
+              opacity: 0,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: 'power3.out',
+              clearProps: 'transform,opacity',
+              scrollTrigger: {
+                trigger: '.events-grid',
+                start: 'top 86%',
+                once: true
+              }
+            });
+          }
+
+          const ctaBar = document.querySelector('.events-cta-bar');
+          if (ctaBar) {
+            gsap.from(ctaBar, {
+              y: 26,
+              opacity: 0,
+              duration: 0.75,
+              ease: 'power3.out',
+              clearProps: 'transform,opacity',
+              scrollTrigger: {
+                trigger: ctaBar,
+                start: 'top 90%',
+                once: true
+              }
+            });
+          }
+
+          // Reservation & Contact Editorial Reveal
+          const resLeftItems = gsap.utils.toArray('.res-left > *');
+          if (resLeftItems.length) {
+            gsap.from(resLeftItems, {
+              y: 24,
+              opacity: 0,
+              duration: 0.7,
+              stagger: 0.07,
+              ease: 'power3.out',
+              clearProps: 'transform,opacity',
+              scrollTrigger: {
+                trigger: '#reservation',
+                start: 'top 84%',
+                once: true
+              }
+            });
+          }
+        }
+
+        // 3. HERO AMBIENT SPOTLIGHT & 3D PERSPECTIVE TILT + CARD RADIAL GLARE + MAGNETIC BUTTONS
+        const heroEl = document.querySelector('.hero');
+        const spotlightEl = document.getElementById('heroSpotlight');
+        const heroContentEl = document.querySelector('.hero-content');
+        let heroVisible = true;
+
+        if (heroEl && spotlightEl) {
+          if (!isMobileOrTouch) {
+            let targetX = 50, targetY = 45, curX = 50, curY = 45;
+            let tiltX = 0, tiltY = 0, curTiltX = 0, curTiltY = 0;
+            let spotRaf = null;
+
+            function updateSpotlightDesktop() {
+              curX += (targetX - curX) * 0.1;
+              curY += (targetY - curY) * 0.1;
+              curTiltX += (tiltX - curTiltX) * 0.1;
+              curTiltY += (tiltY - curTiltY) * 0.1;
+
+              spotlightEl.style.setProperty('--spot-x', curX.toFixed(2) + '%');
+              spotlightEl.style.setProperty('--spot-y', curY.toFixed(2) + '%');
+              if (heroContentEl) {
+                heroContentEl.style.transform = `rotateX(${curTiltY.toFixed(2)}deg) rotateY(${curTiltX.toFixed(2)}deg)`;
+              }
+
+              if (Math.abs(targetX - curX) > 0.05 || Math.abs(targetY - curY) > 0.05) {
+                spotRaf = requestAnimationFrame(updateSpotlightDesktop);
+              } else {
+                spotRaf = null;
+              }
+            }
+
+            heroEl.addEventListener('pointermove', (e) => {
+              if (!heroVisible) return;
+              const r = heroEl.getBoundingClientRect();
+              targetX = ((e.clientX - r.left) / r.width) * 100;
+              targetY = ((e.clientY - r.top) / r.height) * 100;
+              tiltX = ((targetX - 50) / 50) * 3.8;
+              tiltY = -((targetY - 50) / 50) * 3.2;
+              if (!spotRaf) spotRaf = requestAnimationFrame(updateSpotlightDesktop);
+            }, { passive: true });
+
+            heroEl.addEventListener('pointerleave', () => {
+              targetX = 50;
+              targetY = 45;
+              tiltX = 0;
+              tiltY = 0;
+              if (!spotRaf) spotRaf = requestAnimationFrame(updateSpotlightDesktop);
+            }, { passive: true });
+          } else {
+            // Mobile: gentle autonomous figure-8 golden spotlight drift while Hero is visible
+            let t0 = performance.now();
+            function mobileSpotlightLoop(now) {
+              if (heroVisible && !document.hidden) {
+                const elapsed = (now - t0) * 0.0008;
+                const sx = 50 + Math.sin(elapsed) * 24;
+                const sy = 45 + Math.cos(elapsed * 0.75) * 16;
+                spotlightEl.style.setProperty('--spot-x', sx.toFixed(1) + '%');
+                spotlightEl.style.setProperty('--spot-y', sy.toFixed(1) + '%');
+              }
+              requestAnimationFrame(mobileSpotlightLoop);
+            }
+            requestAnimationFrame(mobileSpotlightLoop);
+          }
+        }
+
+        // Card radial gold glare on hover (Desktop)
+        if (!isMobileOrTouch) {
+          document.querySelectorAll('.space-box, .event-card').forEach((card) => {
+            card.addEventListener('pointermove', (e) => {
+              const r = card.getBoundingClientRect();
+              card.style.setProperty('--card-x', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+              card.style.setProperty('--card-y', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+            }, { passive: true });
+          });
+
+          // Magnetic pull on primary luxury buttons (.btn-gold, .btn-outline) using Motion.js
+          document.querySelectorAll('.btn-gold, .btn-outline').forEach((btn) => {
+            btn.addEventListener('pointermove', (e) => {
+              const r = btn.getBoundingClientRect();
+              const dx = (e.clientX - (r.left + r.width * 0.5)) * 0.18;
+              const dy = (e.clientY - (r.top + r.height * 0.5)) * 0.22;
+              btn.style.transform = `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0)`;
+            }, { passive: true });
+
+            btn.addEventListener('pointerleave', () => {
+              if (window.Motion && typeof Motion.animate === 'function') {
+                try {
+                  Motion.animate(btn, { transform: 'translate3d(0px, 0px, 0px)' }, { duration: 0.45, easing: [0.16, 1, 0.3, 1] });
+                } catch (err) {
+                  btn.style.transform = '';
+                }
+              } else {
+                btn.style.transform = '';
+              }
+            }, { passive: true });
           });
         }
+
+        // 4. THREE.JS 3D GOLDEN DUST & SHIMMER IN HERO (Deferred to idle time, pauses automatically when offscreen)
+        const scheduleIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 350));
+        scheduleIdle(() => {
+          initHeroThreeParticles((visible) => {
+            heroVisible = visible;
+          });
+        });
+      }
+
+      function initHeroThreeParticles(onVisibilityChange) {
+        if (!window.THREE) return;
+        const canvas = document.getElementById('hero-webgl-canvas');
+        const heroEl = document.querySelector('.hero');
+        if (!canvas || !heroEl) return;
+
+        let renderer, scene, camera, points, geometry, material;
+        let isRendering = true;
+        let mouseNormX = 0, mouseNormY = 0;
+
+        try {
+          renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            alpha: true,
+            antialias: false,
+            powerPreference: 'low-power'
+          });
+        } catch (err) {
+          return;
+        }
+
+        const maxDpr = isMobileOrTouch ? 1.25 : 1.65;
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, maxDpr));
+
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+        camera.position.z = 14;
+
+        function resizeRenderer() {
+          const w = heroEl.clientWidth || window.innerWidth;
+          const h = heroEl.clientHeight || window.innerHeight;
+          renderer.setSize(w, h, false);
+          camera.aspect = w / Math.max(1, h);
+          camera.updateProjectionMatrix();
+        }
+        resizeRenderer();
+        window.addEventListener('resize', resizeRenderer, { passive: true });
+
+        // Create procedural soft golden bokeh radial texture (64x64)
+        const texCanvas = document.createElement('canvas');
+        texCanvas.width = 64;
+        texCanvas.height = 64;
+        const ctx = texCanvas.getContext('2d');
+        const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+        grad.addColorStop(0, 'rgba(255, 244, 210, 1)');
+        grad.addColorStop(0.35, 'rgba(212, 175, 55, 0.75)');
+        grad.addColorStop(0.7, 'rgba(197, 160, 89, 0.2)');
+        grad.addColorStop(1, 'rgba(197, 160, 89, 0)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, 64, 64);
+        const particleTex = new THREE.CanvasTexture(texCanvas);
+
+        const count = isMobileOrTouch ? 40 : 95;
+        const positions = new Float32Array(count * 3);
+        const speeds = new Float32Array(count);
+        const phases = new Float32Array(count);
+
+        for (let i = 0; i < count; i++) {
+          positions[i * 3] = (Math.random() - 0.5) * 24;
+          positions[i * 3 + 1] = (Math.random() - 0.5) * 14;
+          positions[i * 3 + 2] = (Math.random() - 0.5) * 8;
+          speeds[i] = 0.006 + Math.random() * 0.012;
+          phases[i] = Math.random() * Math.PI * 2;
+        }
+
+        geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+        material = new THREE.PointsMaterial({
+          size: isMobileOrTouch ? 0.34 : 0.28,
+          map: particleTex,
+          transparent: true,
+          opacity: 0.68,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending
+        });
+
+        points = new THREE.Points(geometry, material);
+        scene.add(points);
+
+        if (!isMobileOrTouch) {
+          heroEl.addEventListener('pointermove', (e) => {
+            const r = heroEl.getBoundingClientRect();
+            mouseNormX = ((e.clientX - r.left) / r.width - 0.5) * 2;
+            mouseNormY = -((e.clientY - r.top) / r.height - 0.5) * 2;
+          }, { passive: true });
+        }
+
+        // Pause/resume WebGL loop when Hero leaves/enters viewport
+        if ('IntersectionObserver' in window) {
+          const heroObs = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              isRendering = entry.isIntersecting;
+              if (typeof onVisibilityChange === 'function') onVisibilityChange(isRendering);
+            });
+          }, { rootMargin: '150px' });
+          heroObs.observe(heroEl);
+        }
+
+        let frameCount = 0;
+        function animateThree() {
+          requestAnimationFrame(animateThree);
+          if (!isRendering || document.hidden || document.body.style.overflow === 'hidden') return;
+
+          frameCount++;
+          const posAttr = geometry.attributes.position;
+          const arr = posAttr.array;
+          const time = frameCount * 0.015;
+
+          for (let i = 0; i < count; i++) {
+            const idx = i * 3;
+            arr[idx + 1] += speeds[i];
+            arr[idx] += Math.sin(time + phases[i]) * 0.004;
+            if (arr[idx + 1] > 7.5) {
+              arr[idx + 1] = -7.5;
+              arr[idx] = (Math.random() - 0.5) * 24;
+            }
+          }
+          posAttr.needsUpdate = true;
+
+          points.rotation.y += (mouseNormX * 0.12 - points.rotation.y) * 0.04;
+          points.rotation.x += (mouseNormY * 0.08 - points.rotation.x) * 0.04;
+
+          renderer.render(scene, camera);
+        }
+        requestAnimationFrame(animateThree);
+      }
+
+      if (document.readyState === 'complete') {
+        bootCoreAnimations();
+      } else {
+        window.addEventListener('load', bootCoreAnimations, { once: true });
       }
     })();
   </script>
-
-  <!-- Floating Test Badge -->
-  <div class="test-floating-badge" id="testBadge">
-    <span class="test-badge-tag">ТЕСТ: ТАЙМЛАРС + 3D Spotlight</span>
-    <button type="button" class="test-badge-btn" onclick="replaySplash()">↺ Заставка</button>
-    <a href="/" class="test-badge-btn">Текущий anzur.tj ↗</a>
-    <button type="button" class="test-badge-close" onclick="document.getElementById('testBadge').remove()" title="Скрыть плашку">✕</button>
-  </div>
 </body>
 </html>
