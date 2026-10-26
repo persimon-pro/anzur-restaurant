@@ -2332,30 +2332,39 @@
       text-overflow: ellipsis;
     }
 
-    /* Separate Star Concerts Block (Концерты Звёзд · 12 Официальных Афиш @anzur.rest) */
-    .star-concerts-showcase {
-      display: grid;
-      grid-template-columns: 0.95fr 1.35fr;
+    /* Separate Compact Star Concerts Block (Концерты Звёзд · 3D Колода Афиш) */
+    .star-concerts-wrap {
+      padding: 2.8rem 1.5rem 0.5rem;
       border-bottom: 1px solid var(--border);
-      background: radial-gradient(circle at 75% 50%, rgba(197, 160, 89, 0.07) 0%, rgba(10, 8, 7, 0.98) 70%);
+      background: radial-gradient(circle at 50% 50%, rgba(197, 160, 89, 0.06) 0%, rgba(8, 7, 6, 0.98) 72%);
+    }
+    .star-concerts-showcase {
+      max-width: 780px;
+      margin: 0 auto 2.2rem;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      border: 1px solid rgba(197, 160, 89, 0.32);
+      border-radius: 12px;
+      background: rgba(14, 11, 9, 0.92);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
       position: relative;
       overflow: hidden;
     }
     .star-concerts-info {
-      padding: 3rem 3.2rem;
+      padding: 2.2rem 2.4rem;
       border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 1.8rem;
+      gap: 1.35rem;
     }
     .star-concerts-headline {
       font-family: var(--font-serif);
-      font-size: clamp(2rem, 3.2vw, 2.75rem);
+      font-size: clamp(1.75rem, 2.6vw, 2.25rem);
       font-weight: 300;
-      line-height: 1.12;
+      line-height: 1.14;
       color: var(--text);
-      margin: 0 0 0.9rem;
+      margin: 0 0 0.65rem;
     }
     .star-concerts-headline em {
       font-style: italic;
@@ -2365,97 +2374,138 @@
       background: rgba(255, 255, 255, 0.025);
       border: 1px solid var(--border);
       border-left: 2px solid var(--gold);
-      padding: 1.25rem 1.45rem;
+      padding: 1rem 1.2rem;
       border-radius: 4px;
       transition: opacity 0.25s ease;
     }
     .star-active-artist {
       font-family: var(--font-serif);
-      font-size: 1.45rem;
+      font-size: 1.3rem;
       color: var(--text);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.35rem;
     }
     .star-active-caption {
-      font-size: 0.84rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
-      line-height: 1.58;
+      line-height: 1.54;
       margin: 0;
     }
     .star-concerts-actions {
       display: flex;
       align-items: center;
-      gap: 0.9rem;
+      gap: 0.75rem;
       flex-wrap: wrap;
     }
+    .star-concerts-actions .btn-gold,
+    .star-concerts-actions .btn-outline {
+      padding: 0.68rem 1.15rem;
+      font-size: 0.6rem;
+    }
 
-    /* Right Column: Interactive Mini-Slideshow of 12 Official Concert Posters */
+    /* Right Column: 3D Fanned Deck of Cards (Колода из 12 Афиш) */
     .star-posters-stage {
-      padding: 2.2rem 2.6rem;
+      padding: 1.8rem 1.4rem;
       display: flex;
       flex-direction: column;
+      align-items: center;
       justify-content: center;
       position: relative;
       user-select: none;
+      min-height: 410px;
     }
-    .star-posters-viewer {
-      display: grid;
-      grid-template-columns: 245px 1fr;
-      gap: 1.35rem;
-      align-items: center;
-    }
-    .star-poster-main-frame {
+    .poster-deck {
       position: relative;
-      width: 100%;
+      width: 205px;
       aspect-ratio: 9 / 16;
-      border-radius: 8px;
+      perspective: 1100px;
+      margin: 0 auto;
+    }
+    .poster-deck-card {
+      --index: var(--sibling-index, 1);
+      --count: var(--sibling-count, 12);
+      position: absolute;
+      inset: 0;
+      border-radius: 9px;
       overflow: hidden;
-      border: 1px solid rgba(197, 160, 89, 0.5);
+      border: 1px solid rgba(197, 160, 89, 0.42);
       background: #060504;
-      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.65), 0 0 28px rgba(197, 160, 89, 0.12);
-    }
-    .star-poster-main-link {
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-    .star-poster-main-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .star-thumbs-strip {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.55rem;
-    }
-    .star-thumb-btn {
-      position: relative;
-      aspect-ratio: 9 / 16;
-      border-radius: 6px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: #080706;
       padding: 0;
       cursor: pointer;
-      transition: all 0.22s ease;
-      opacity: 0.52;
+      transform-origin: 50% 92%;
+      transition: transform 0.52s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.42s ease, box-shadow 0.42s ease, filter 0.42s ease, border-color 0.3s ease;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.65);
+      opacity: 0;
+      pointer-events: none;
+      transform: translate3d(0, 24px, -120px) scale(0.72);
+      z-index: 1;
     }
-    .star-thumb-btn:hover {
-      opacity: 0.9;
-      border-color: rgba(197, 160, 89, 0.55);
+    @supports (top: calc(sibling-index() * 1px)) {
+      .poster-deck-card {
+        --index: sibling-index();
+        --count: sibling-count();
+      }
     }
-    .star-thumb-btn.is-active {
-      opacity: 1;
-      border-color: var(--gold);
-      box-shadow: 0 0 0 1px var(--gold), 0 8px 20px rgba(0, 0, 0, 0.45);
-      transform: translateY(-2px);
-    }
-    .star-thumb-btn img {
+    .poster-deck-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      pointer-events: none;
+    }
+    /* Active Top Card of the Deck */
+    .poster-deck-card[data-deck-pos="0"] {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 12;
+      border-color: var(--gold);
+      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.8), 0 0 26px rgba(197, 160, 89, 0.22);
+      transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+      filter: brightness(1);
+    }
+    /* Fanned Right Cards (+1, +2, +3) */
+    .poster-deck-card[data-deck-pos="1"] {
+      opacity: 0.92;
+      pointer-events: auto;
+      z-index: 10;
+      transform: translate3d(34px, 8px, -25px) rotate(6.5deg) scale(0.92);
+      filter: brightness(0.76);
+    }
+    .poster-deck-card[data-deck-pos="2"] {
+      opacity: 0.75;
+      pointer-events: auto;
+      z-index: 8;
+      transform: translate3d(62px, 18px, -50px) rotate(12.5deg) scale(0.84);
+      filter: brightness(0.58);
+    }
+    .poster-deck-card[data-deck-pos="3"] {
+      opacity: 0.48;
+      pointer-events: auto;
+      z-index: 6;
+      transform: translate3d(84px, 28px, -75px) rotate(18deg) scale(0.76);
+      filter: brightness(0.42);
+    }
+    /* Fanned Left Cards (-1, -2) */
+    .poster-deck-card[data-deck-pos="-1"] {
+      opacity: 0.88;
+      pointer-events: auto;
+      z-index: 9;
+      transform: translate3d(-34px, 8px, -25px) rotate(-6.5deg) scale(0.92);
+      filter: brightness(0.74);
+    }
+    .poster-deck-card[data-deck-pos="-2"] {
+      opacity: 0.62;
+      pointer-events: auto;
+      z-index: 7;
+      transform: translate3d(-62px, 18px, -50px) rotate(-12.5deg) scale(0.84);
+      filter: brightness(0.54);
+    }
+    .poster-deck-nav {
+      position: absolute;
+      bottom: 1rem;
+      right: 1.2rem;
+      display: flex;
+      gap: 0.35rem;
+      z-index: 20;
     }
 
     /* Events Bottom CTA */
@@ -2498,16 +2548,20 @@
         border-bottom: 1px solid var(--border);
         grid-template-columns: 260px 1fr;
       }
+    }
+    @media (max-width: 820px) {
       .star-concerts-showcase {
         grid-template-columns: 1fr;
+        max-width: 480px;
       }
       .star-concerts-info {
         border-right: none;
         border-bottom: 1px solid var(--border);
-        padding: 2.2rem 1.8rem;
+        padding: 1.8rem 1.5rem;
       }
       .star-posters-stage {
-        padding: 2rem 1.8rem;
+        padding: 2rem 1.2rem 2.4rem;
+        min-height: 390px;
       }
     }
     @media (max-width: 680px) {
@@ -2523,28 +2577,8 @@
       .event-body {
         padding: 1.5rem 1.25rem 1.8rem;
       }
-      .star-posters-viewer {
-        grid-template-columns: 1fr;
-        gap: 1.1rem;
-      }
-      .star-poster-main-frame {
-        max-width: 270px;
-        margin: 0 auto;
-      }
-      .star-thumbs-strip {
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x proximity;
-        gap: 0.55rem;
-        padding-bottom: 0.35rem;
-        scrollbar-width: none;
-      }
-      .star-thumbs-strip::-webkit-scrollbar {
-        display: none;
-      }
-      .star-thumb-btn {
-        flex: 0 0 68px;
-        scroll-snap-align: center;
+      .poster-deck {
+        width: 185px;
       }
       .events-cta-bar {
         flex-direction: column;
@@ -3186,31 +3220,27 @@
           <div class="reel-clips-selector">
             <div class="reel-clips-grid" id="musicClipsGrid">
               <button type="button" class="reel-clip-btn is-active" onclick="switchEventReel('music', 0, event)">
-                <img src="events_media/music_1_poster.webp" alt="Живой вокал" class="reel-clip-thumb" loading="lazy" decoding="async" />
+                <img src="events_media/music_1_poster.webp" alt="Ширин" class="reel-clip-thumb" loading="lazy" decoding="async" />
                 <span class="reel-clip-info">
-                  <span class="reel-clip-num">REEL 01</span>
-                  <span class="reel-clip-name">Сольный вокал</span>
+                  <span class="reel-clip-name">Ширин</span>
                 </span>
               </button>
               <button type="button" class="reel-clip-btn" onclick="switchEventReel('music', 1, event)">
-                <img src="events_media/music_2_poster.webp" alt="Вечерний саксофон" class="reel-clip-thumb" loading="lazy" decoding="async" />
+                <img src="events_media/music_2_poster.webp" alt="Сайдо Амонов" class="reel-clip-thumb" loading="lazy" decoding="async" />
                 <span class="reel-clip-info">
-                  <span class="reel-clip-num">REEL 02</span>
-                  <span class="reel-clip-name">Саксофон Live</span>
+                  <span class="reel-clip-name">Сайдо Амонов</span>
                 </span>
               </button>
               <button type="button" class="reel-clip-btn" onclick="switchEventReel('music', 2, event)">
-                <img src="events_media/music_3_poster.webp" alt="Акустическая гитара" class="reel-clip-thumb" loading="lazy" decoding="async" />
+                <img src="events_media/music_3_poster.webp" alt="Фаридун Алиев" class="reel-clip-thumb" loading="lazy" decoding="async" />
                 <span class="reel-clip-info">
-                  <span class="reel-clip-num">REEL 03</span>
-                  <span class="reel-clip-name">Акустика & Хит</span>
+                  <span class="reel-clip-name">Фаридун Алиев</span>
                 </span>
               </button>
               <button type="button" class="reel-clip-btn" onclick="switchEventReel('music', 3, event)">
-                <img src="events_media/music_4_poster.webp" alt="Дуэт на главной сцене" class="reel-clip-thumb" loading="lazy" decoding="async" />
+                <img src="events_media/music_4_poster.webp" alt="Дима и Джульетта" class="reel-clip-thumb" loading="lazy" decoding="async" />
                 <span class="reel-clip-info">
-                  <span class="reel-clip-num">REEL 04</span>
-                  <span class="reel-clip-name">Вечерний дуэт</span>
+                  <span class="reel-clip-name">Дима и Джульетта</span>
                 </span>
               </button>
             </div>
@@ -3251,31 +3281,21 @@
           <div class="reel-clips-selector">
             <div class="reel-clips-grid" id="danceClipsGrid">
               <button type="button" class="reel-clip-btn is-active" onclick="switchEventReel('dance', 0, event)">
-                <img src="events_media/dance_1_poster.webp" alt="Восточная классика" class="reel-clip-thumb" loading="lazy" decoding="async" />
+                <img src="events_media/dance_1_poster.webp" alt="Национальный танец" class="reel-clip-thumb" loading="lazy" decoding="async" />
                 <span class="reel-clip-info">
-                  <span class="reel-clip-num">SHOW 01</span>
-                  <span class="reel-clip-name">Восточная грация</span>
+                  <span class="reel-clip-name">Национальный танец</span>
                 </span>
               </button>
               <button type="button" class="reel-clip-btn" onclick="switchEventReel('dance', 1, event)">
-                <img src="events_media/dance_2_poster.webp" alt="Национальный танец Атлас" class="reel-clip-thumb" loading="lazy" decoding="async" />
+                <img src="events_media/dance_2_poster.webp" alt="Национальный танец 2" class="reel-clip-thumb" loading="lazy" decoding="async" />
                 <span class="reel-clip-info">
-                  <span class="reel-clip-num">SHOW 02</span>
-                  <span class="reel-clip-name">Атлас & Адрас</span>
+                  <span class="reel-clip-name">Национальный танец 2</span>
                 </span>
               </button>
               <button type="button" class="reel-clip-btn" onclick="switchEventReel('dance', 2, event)">
-                <img src="events_media/dance_3_poster.webp" alt="Вечернее гранд-шоу" class="reel-clip-thumb" loading="lazy" decoding="async" />
+                <img src="events_media/dance_3_poster.webp" alt="Мужской шоу-балет" class="reel-clip-thumb" loading="lazy" decoding="async" />
                 <span class="reel-clip-info">
-                  <span class="reel-clip-num">SHOW 03</span>
-                  <span class="reel-clip-name">Вечерний балет</span>
-                </span>
-              </button>
-              <button type="button" class="reel-clip-btn" onclick="switchEventReel('dance', 3, event)">
-                <img src="events_media/dance_4_poster.webp" alt="Танец золотой шёлк" class="reel-clip-thumb" loading="lazy" decoding="async" />
-                <span class="reel-clip-info">
-                  <span class="reel-clip-num">SHOW 04</span>
-                  <span class="reel-clip-name">Золотой шёлк</span>
+                  <span class="reel-clip-name">Мужской шоу-балет</span>
                 </span>
               </button>
             </div>
@@ -3284,90 +3304,77 @@
       </article>
     </div>
 
-    <!-- Separate Dedicated Block: Концерты Звёзд · 12 Официальных Афиш @anzur.rest -->
-    <div class="star-concerts-showcase" id="cardStarConcert">
-      <div class="star-concerts-info">
-        <div>
-          <h3 class="star-concerts-headline" data-i18n="ev3_title">Концерты <em>Звёзд</em></h3>
-          <p class="event-desc" data-i18n="ev3_desc">
-            Выступления популярных артистов эстрады — специальные концертные вечера с полной программой, живым звуком и VIP-местами у сцены.
-          </p>
-        </div>
-
-        <div class="star-active-card-meta" id="starActiveMeta">
-          <div class="star-active-artist" id="starActiveArtist">Dato Sofiya</div>
-          <p class="star-active-caption" id="starActiveCaption">
-            5 июня | 20:00 — Большой музыкальный вечер яркого исполнителя из Грузии («Janaya», «Chemo Gogo», «Верила», «Я любил») при участии DJ Emre Jan, Nikruz, Farid и Shirin.
-          </p>
-        </div>
-
-        <div class="star-concerts-actions">
-          <a id="starActivePostLink" href="https://www.instagram.com/anzur.rest/reel/DY2XFL8ID9m/" target="_blank" rel="noopener" class="btn-gold">
-            Смотреть пост в Instagram ↗
-          </a>
-          <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%B1%D0%BB%D0%B8%D0%B6%D0%B0%D0%B9%D1%88%D0%B8%D0%B5%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D1%80%D1%82%D1%8B%20%D0%B7%D0%B2%D1%91%D0%B7%D0%B4%20%D0%B8%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D1%83%20%D1%81%D1%86%D0%B5%D0%BD%D1%8B%20%D0%B2%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="btn-outline">
-            Бронь стола на концерт
-          </a>
-        </div>
-      </div>
-
-      <!-- Mini-Slideshow of 12 Official Concert Posters from @anzur.rest -->
-      <div class="star-posters-stage" id="starPostersStage">
-        <div class="star-posters-viewer">
-          <!-- Primary 9:16 Vertical Poster -->
-          <div class="star-poster-main-frame">
-            <a id="starMainPosterLink" href="https://www.instagram.com/anzur.rest/reel/DY2XFL8ID9m/" target="_blank" rel="noopener" class="star-poster-main-link" title="Открыть афишу в Instagram">
-              <picture id="starMainPosterPic">
-                <source id="starMainPosterWebp" srcset="events_media/afisha_01.webp" type="image/webp" />
-                <img id="starMainPosterImg" src="events_media/afisha_01.jpg" alt="Афиша концерта Dato Sofiya в ресторане Анзур" loading="lazy" decoding="async" />
-              </picture>
-            </a>
-            <div class="event-reel-bottom-bar">
-              <div class="event-reel-nav">
-                <button type="button" class="event-reel-arrow" onclick="stepStarPosterSlide(-1, event)" aria-label="Предыдущая афиша">‹</button>
-                <button type="button" class="event-reel-arrow" onclick="stepStarPosterSlide(1, event)" aria-label="Следующая афиша">›</button>
-              </div>
-            </div>
+    <!-- Compact Dedicated Block: Концерты Звёзд · 3D Колода из 12 Афиш @anzur.rest -->
+    <div class="star-concerts-wrap">
+      <div class="star-concerts-showcase" id="cardStarConcert">
+        <div class="star-concerts-info">
+          <div>
+            <h3 class="star-concerts-headline" data-i18n="ev3_title">Концерты <em>Звёзд</em></h3>
+            <p class="event-desc" data-i18n="ev3_desc">
+              Выступления популярных артистов эстрады — специальные концертные вечера с полной программой, живым звуком и VIP-местами у сцены.
+            </p>
           </div>
 
-          <!-- 12 Concert Posters Selector Strip (4x3 Mosaic on Desktop, Scroll-Snap Strip on Mobile) -->
-          <div class="star-thumbs-strip" id="starThumbsStrip" role="region" aria-label="Афиши концертов в ресторане Анзур">
-            <button type="button" class="star-thumb-btn is-active" data-poster-idx="0" aria-current="true" onclick="setStarPosterSlide(0, event)" aria-label="Dato Sofiya — 5 июня">
+          <div class="star-active-card-meta" id="starActiveMeta">
+            <div class="star-active-artist" id="starActiveArtist">Dato Sofiya</div>
+            <p class="star-active-caption" id="starActiveCaption">
+              5 июня | 20:00 — Большой музыкальный вечер яркого исполнителя из Грузии («Janaya», «Chemo Gogo», «Верила», «Я любил») при участии DJ Emre Jan, Nikruz, Farid и Shirin.
+            </p>
+          </div>
+
+          <div class="star-concerts-actions">
+            <a id="starActivePostLink" href="https://www.instagram.com/anzur.rest/reel/DY2XFL8ID9m/" target="_blank" rel="noopener" class="btn-gold">
+              Смотреть пост в Instagram ↗
+            </a>
+            <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%B1%D0%BB%D0%B8%D0%B6%D0%B0%D0%B9%D1%88%D0%B8%D0%B5%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D1%80%D1%82%D1%8B%20%D0%B7%D0%B2%D1%91%D0%B7%D0%B4%20%D0%B8%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D1%83%20%D1%81%D1%86%D0%B5%D0%BD%D1%8B%20%D0%B2%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="btn-outline">
+              Бронь стола на концерт
+            </a>
+          </div>
+        </div>
+
+        <!-- 3D Fanned Deck of Cards (Колода из 12 Афиш @anzur.rest) -->
+        <div class="star-posters-stage" id="starPostersStage">
+          <div class="poster-deck" id="posterDeck" role="region" aria-label="Колода афиш концертов в ресторане Анзур">
+            <button type="button" class="poster-deck-card" data-poster-idx="0" data-deck-pos="0" aria-current="true" onclick="handlePosterDeckCardClick(0, event)" aria-label="Dato Sofiya — 5 июня">
               <img src="events_media/afisha_01.webp" alt="Dato Sofiya" loading="lazy" decoding="async" />
             </button>
-            <button type="button" class="star-thumb-btn" data-poster-idx="1" onclick="setStarPosterSlide(1, event)" aria-label="Shabnam Surayo — 23 апреля">
+            <button type="button" class="poster-deck-card" data-poster-idx="1" data-deck-pos="1" onclick="handlePosterDeckCardClick(1, event)" aria-label="Shabnam Surayo — 23 апреля">
               <img src="events_media/afisha_02.webp" alt="Shabnam Surayo" loading="lazy" decoding="async" />
             </button>
-            <button type="button" class="star-thumb-btn" data-poster-idx="2" onclick="setStarPosterSlide(2, event)" aria-label="KARE — 5 апреля">
+            <button type="button" class="poster-deck-card" data-poster-idx="2" data-deck-pos="2" onclick="handlePosterDeckCardClick(2, event)" aria-label="KARE — 5 апреля">
               <img src="events_media/afisha_03.webp" alt="KARE" loading="lazy" decoding="async" />
             </button>
-            <button type="button" class="star-thumb-btn" data-poster-idx="3" onclick="setStarPosterSlide(3, event)" aria-label="Zakiya — 5 февраля">
+            <button type="button" class="poster-deck-card" data-poster-idx="3" data-deck-pos="3" onclick="handlePosterDeckCardClick(3, event)" aria-label="Zakiya — 5 февраля">
               <img src="events_media/afisha_04.webp" alt="Zakiya" loading="lazy" decoding="async" />
             </button>
-            <button type="button" class="star-thumb-btn" data-poster-idx="4" onclick="setStarPosterSlide(4, event)" aria-label="Noziya Karomatullo — 17 января">
+            <button type="button" class="poster-deck-card" data-poster-idx="4" data-deck-pos="hidden" onclick="handlePosterDeckCardClick(4, event)" aria-label="Noziya Karomatullo — 17 января">
               <img src="events_media/afisha_05.webp" alt="Noziya Karomatullo" loading="lazy" decoding="async" />
             </button>
-            <button type="button" class="star-thumb-btn" data-poster-idx="5" onclick="setStarPosterSlide(5, event)" aria-label="Zulaykho Mahmadshoeva — 31 декабря">
+            <button type="button" class="poster-deck-card" data-poster-idx="5" data-deck-pos="hidden" onclick="handlePosterDeckCardClick(5, event)" aria-label="Zulaykho Mahmadshoeva — 31 декабря">
               <img src="events_media/afisha_06.webp" alt="Zulaykho Mahmadshoeva" loading="lazy" decoding="async" />
             </button>
-            <button type="button" class="star-thumb-btn" data-poster-idx="6" onclick="setStarPosterSlide(6, event)" aria-label="Surush Kholov, Dilshodi Fayzullo, Umedjoni Burhon — 30 декабря">
+            <button type="button" class="poster-deck-card" data-poster-idx="6" data-deck-pos="hidden" onclick="handlePosterDeckCardClick(6, event)" aria-label="Surush Kholov, Dilshodi Fayzullo, Umedjoni Burhon — 30 декабря">
               <img src="events_media/afisha_07.webp" alt="Surush Kholov, Dilshodi Fayzullo, Umedjoni Burhon" loading="lazy" decoding="async" />
             </button>
-            <button type="button" class="star-thumb-btn" data-poster-idx="7" onclick="setStarPosterSlide(7, event)" aria-label="Ваграм Вазян — 6 декабря">
+            <button type="button" class="poster-deck-card" data-poster-idx="7" data-deck-pos="hidden" onclick="handlePosterDeckCardClick(7, event)" aria-label="Ваграм Вазян — 6 декабря">
               <img src="events_media/afisha_08.webp" alt="Ваграм Вазян" loading="lazy" decoding="async" />
             </button>
-            <button type="button" class="star-thumb-btn" data-poster-idx="8" onclick="setStarPosterSlide(8, event)" aria-label="Yosamin Davlatova — 13 декабря">
+            <button type="button" class="poster-deck-card" data-poster-idx="8" data-deck-pos="hidden" onclick="handlePosterDeckCardClick(8, event)" aria-label="Yosamin Davlatova — 13 декабря">
               <img src="events_media/afisha_09.webp" alt="Yosamin Davlatova" loading="lazy" decoding="async" />
             </button>
-            <button type="button" class="star-thumb-btn" data-poster-idx="9" onclick="setStarPosterSlide(9, event)" aria-label="Jonibek Murodov — 6 ноября">
+            <button type="button" class="poster-deck-card" data-poster-idx="9" data-deck-pos="hidden" onclick="handlePosterDeckCardClick(9, event)" aria-label="Jonibek Murodov — 6 ноября">
               <img src="events_media/afisha_10.webp" alt="Jonibek Murodov" loading="lazy" decoding="async" />
             </button>
-            <button type="button" class="star-thumb-btn" data-poster-idx="10" onclick="setStarPosterSlide(10, event)" aria-label="Farzonai Khurshed — 23 октября">
+            <button type="button" class="poster-deck-card" data-poster-idx="10" data-deck-pos="-2" onclick="handlePosterDeckCardClick(10, event)" aria-label="Farzonai Khurshed — 23 октября">
               <img src="events_media/afisha_11.webp" alt="Farzonai Khurshed" loading="lazy" decoding="async" />
             </button>
-            <button type="button" class="star-thumb-btn" data-poster-idx="11" onclick="setStarPosterSlide(11, event)" aria-label="Yulduz Usmonova — 4 июля">
+            <button type="button" class="poster-deck-card" data-poster-idx="11" data-deck-pos="-1" onclick="handlePosterDeckCardClick(11, event)" aria-label="Yulduz Usmonova — 4 июля">
               <img src="events_media/afisha_12.webp" alt="Yulduz Usmonova" loading="lazy" decoding="async" />
             </button>
+          </div>
+          <div class="poster-deck-nav">
+            <button type="button" class="event-reel-arrow" onclick="stepStarPosterSlide(-1, event)" aria-label="Предыдущая афиша">‹</button>
+            <button type="button" class="event-reel-arrow" onclick="stepStarPosterSlide(1, event)" aria-label="Следующая афиша">›</button>
           </div>
         </div>
       </div>
@@ -5537,8 +5544,7 @@ let currentSlideIdx = 0;
         clips: [
           { src: 'events_media/dance_1.mp4', poster: 'events_media/dance_1_poster.webp' },
           { src: 'events_media/dance_2.mp4', poster: 'events_media/dance_2_poster.webp' },
-          { src: 'events_media/dance_3.mp4', poster: 'events_media/dance_3_poster.webp' },
-          { src: 'events_media/dance_4.mp4', poster: 'events_media/dance_4_poster.webp' }
+          { src: 'events_media/dance_3.mp4', poster: 'events_media/dance_3_poster.webp' }
         ]
       }
     };
@@ -5583,7 +5589,7 @@ let currentSlideIdx = 0;
       switchEventReel(type, group.currentIndex + delta, e);
     }
 
-    // Star Concerts Mini-Slideshow Data (12 Official Concert Posters from @anzur.rest)
+    // Star Concerts 3D Deck of Cards Data (12 Official Concert Posters from @anzur.rest)
     const STAR_POSTERS_SLIDES = [
       {
         artist: 'Dato Sofiya',
@@ -5680,47 +5686,54 @@ let currentSlideIdx = 0;
       currentStarSlideIdx = ((index % total) + total) % total;
       const slide = STAR_POSTERS_SLIDES[currentStarSlideIdx];
 
-      const mainWebp = document.getElementById('starMainPosterWebp');
-      const mainImg = document.getElementById('starMainPosterImg');
-      const mainLink = document.getElementById('starMainPosterLink');
       const postLink = document.getElementById('starActivePostLink');
       const artistEl = document.getElementById('starActiveArtist');
       const captionEl = document.getElementById('starActiveCaption');
       const metaCard = document.getElementById('starActiveMeta');
-      const strip = document.getElementById('starThumbsStrip');
+      const deckEl = document.getElementById('posterDeck');
 
-      if (mainWebp) mainWebp.srcset = slide.mainWebp;
-      if (mainImg) {
-        mainImg.src = slide.mainJpg;
-        mainImg.alt = `Афиша концерта ${slide.artist} в ресторане Анзур`;
-      }
-      if (mainLink) mainLink.href = slide.url;
       if (postLink) postLink.href = slide.url;
       if (artistEl) artistEl.textContent = slide.artist;
       if (captionEl) captionEl.textContent = slide.caption;
 
-      if (strip) {
-        const thumbs = strip.querySelectorAll('.star-thumb-btn');
-        thumbs.forEach((btn, idx) => {
-          const active = idx === currentStarSlideIdx;
-          btn.classList.toggle('is-active', active);
-          if (active) {
-            btn.setAttribute('aria-current', 'true');
+      if (deckEl) {
+        const cards = deckEl.querySelectorAll('.poster-deck-card');
+        cards.forEach((card, idx) => {
+          let rel = (idx - currentStarSlideIdx) % total;
+          if (rel < 0) rel += total;
+          if (rel > total / 2) rel -= total;
+
+          if (rel >= -2 && rel <= 3) {
+            card.setAttribute('data-deck-pos', String(rel));
           } else {
-            btn.removeAttribute('aria-current');
+            card.setAttribute('data-deck-pos', 'hidden');
+          }
+
+          if (rel === 0) {
+            card.setAttribute('aria-current', 'true');
+          } else {
+            card.removeAttribute('aria-current');
           }
         });
       }
 
-      if (window.Motion && typeof Motion.animate === 'function') {
+      if (window.Motion && typeof Motion.animate === 'function' && metaCard) {
         try {
-          if (mainImg) {
-            Motion.animate(mainImg, { opacity: [0.3, 1], transform: ['scale(1.04)', 'scale(1)'] }, { duration: 0.45, easing: [0.16, 1, 0.3, 1] });
-          }
-          if (metaCard) {
-            Motion.animate(metaCard, { opacity: [0.4, 1], transform: ['translateY(5px)', 'translateY(0px)'] }, { duration: 0.36, easing: [0.16, 1, 0.3, 1] });
-          }
+          Motion.animate(metaCard, { opacity: [0.4, 1], transform: ['translateY(5px)', 'translateY(0px)'] }, { duration: 0.36, easing: [0.16, 1, 0.3, 1] });
         } catch (err) {}
+      }
+    }
+
+    function handlePosterDeckCardClick(index, e) {
+      if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
+      if (index === currentStarSlideIdx) {
+        const slide = STAR_POSTERS_SLIDES[currentStarSlideIdx];
+        if (slide && slide.url) {
+          window.open(slide.url, '_blank', 'noopener');
+        }
+      } else {
+        setStarPosterSlide(index, e);
+        resetStarPosterAutoplay();
       }
     }
 
@@ -5736,8 +5749,17 @@ let currentSlideIdx = 0;
       }, 5000);
     }
 
-    // Initialize Lazy Vertical Videos & Poster Slideshow via IntersectionObserver
+    // Initialize Lazy Vertical Videos & Poster Deck via IntersectionObserver
     document.addEventListener('DOMContentLoaded', () => {
+      // Fallback for CSS sibling-index() and sibling-count() on Poster Deck cards
+      if (typeof CSS !== 'undefined' && typeof CSS.supports === 'function' && !CSS.supports('top: calc(sibling-index() * 1px)')) {
+        const deckCards = document.querySelectorAll('.poster-deck-card');
+        deckCards.forEach((item, index) => {
+          item.style.setProperty('--sibling-index', index + 1);
+          item.style.setProperty('--sibling-count', deckCards.length);
+        });
+      }
+
       const eventsSec = document.getElementById('events');
       const videoIds = ['liveMusicVideo', 'showBalletVideo'];
 
@@ -5771,35 +5793,7 @@ let currentSlideIdx = 0;
         reelObserver.observe(eventsSec);
       }
 
-      // Sync horizontal scroll-snap strip on mobile (scrollsnapchange with IntersectionObserver fallback)
-      const stripEl = document.getElementById('starThumbsStrip');
-      if (stripEl) {
-        if ('onscrollsnapchange' in HTMLElement.prototype) {
-          stripEl.addEventListener('scrollsnapchange', (ev) => {
-            const snapped = ev.snapTargetInline;
-            if (snapped && snapped.dataset && snapped.dataset.posterIdx !== undefined) {
-              const idx = parseInt(snapped.dataset.posterIdx, 10);
-              if (!isNaN(idx) && idx !== currentStarSlideIdx) {
-                setStarPosterSlide(idx);
-              }
-            }
-          });
-        } else if ('IntersectionObserver' in window && window.matchMedia('(max-width: 680px)').matches) {
-          const thumbObs = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting && entry.intersectionRatio >= 0.9) {
-                const idx = parseInt(entry.target.dataset.posterIdx, 10);
-                if (!isNaN(idx) && idx !== currentStarSlideIdx) {
-                  setStarPosterSlide(idx);
-                }
-              }
-            });
-          }, { root: stripEl, threshold: 0.9 });
-          stripEl.querySelectorAll('.star-thumb-btn').forEach((btn) => thumbObs.observe(btn));
-        }
-      }
-
-      // Touch swipe support on Star Posters Stage
+      // Touch swipe support on Star Posters Deck Stage
       const posterStage = document.getElementById('starPostersStage');
       if (posterStage) {
         let touchStartX = 0;
@@ -5813,7 +5807,7 @@ let currentSlideIdx = 0;
           if (!e.changedTouches || !e.changedTouches.length) return;
           const dx = e.changedTouches[0].clientX - touchStartX;
           const dy = e.changedTouches[0].clientY - touchStartY;
-          if (Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy) * 1.3) {
+          if (Math.abs(dx) > 36 && Math.abs(dx) > Math.abs(dy) * 1.25) {
             stepStarPosterSlide(dx < 0 ? 1 : -1);
           }
         }, { passive: true });
