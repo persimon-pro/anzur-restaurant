@@ -2149,7 +2149,7 @@
     }
 
     /* ==========================================================================
-       EVENTS & SHOWS (ШОУ И КОНЦЕРТЫ · АФИША И ЖИВАЯ МУЗЫКА)
+       EVENTS & SHOWS (ШОУ И КОНЦЕРТЫ · ВЕРТИКАЛЬНЫЕ REELS И АФИША ЗВЁЗД)
        ========================================================================== */
     .events-section {
       position: relative;
@@ -2158,111 +2158,165 @@
     }
     .events-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
     .event-card {
       border-right: 1px solid var(--border);
       background: var(--bg-card);
-      display: flex;
-      flex-direction: column;
-      transition: background 0.3s ease;
+      display: grid;
+      grid-template-columns: 268px 1fr;
+      transition: background 0.35s ease;
       position: relative;
+      overflow: hidden;
     }
     .event-card:last-child {
       border-right: none;
     }
     .event-card:hover {
-      background: #110e0c;
+      background: #100d0b;
     }
-    .event-media {
+
+    /* 9:16 Vertical Video Stage */
+    .event-reel-stage {
       position: relative;
       width: 100%;
-      aspect-ratio: 16/10;
+      aspect-ratio: 9 / 16;
+      background: #050403;
+      border-right: 1px solid var(--border);
       overflow: hidden;
-      border-bottom: 1px solid var(--border);
+      user-select: none;
     }
-    .event-media img,
-    .event-media picture {
+    .event-reel-video {
       width: 100%;
       height: 100%;
-      display: block;
-    }
-    .event-media img {
       object-fit: cover;
-      filter: brightness(0.85) contrast(1.05);
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+      display: block;
+      filter: brightness(0.92) contrast(1.05);
+      transition: opacity 0.35s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .event-card:hover .event-media img {
-      transform: scale(1.04);
-      filter: brightness(0.95) contrast(1.1);
+    .event-card:hover .event-reel-video {
+      transform: scale(1.025);
     }
-    .event-photo-toggle {
+    .event-reel-StageGlow {
       position: absolute;
-      bottom: 0.8rem;
-      right: 0.8rem;
-      z-index: 3;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(6,5,4,0.45) 0%, transparent 24%, transparent 68%, rgba(6,5,4,0.88) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .event-reel-top-bar {
+      position: absolute;
+      top: 0.85rem;
+      left: 0.85rem;
+      right: 0.85rem;
       display: flex;
-      gap: 0.3rem;
-      background: rgba(6, 5, 4, 0.88);
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .event-reel-live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.38rem;
+      background: rgba(6, 5, 4, 0.82);
       border: 1px solid rgba(197, 160, 89, 0.45);
-      border-radius: 20px;
-      padding: 0.2rem 0.45rem;
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-    }
-    .event-photo-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
+      padding: 0.24rem 0.6rem;
+      border-radius: 20px;
       font-family: var(--font-mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      cursor: pointer;
-      padding: 0.18rem 0.45rem;
-      border-radius: 12px;
-      transition: all 0.2s ease;
-      line-height: 1.2;
-    }
-    .event-photo-btn:hover {
+      font-size: 0.54rem;
+      letter-spacing: 0.16em;
       color: var(--gold);
+      text-transform: uppercase;
     }
-    .event-photo-btn.is-active {
-      color: #060504;
+    .event-reel-live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
       background: var(--gold);
-      font-weight: 700;
+      box-shadow: 0 0 8px var(--gold);
+      animation: reelPulse 1.8s infinite ease-in-out;
     }
-    .event-tag-badge {
+    @keyframes reelPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.82); }
+    }
+    .event-reel-counter {
+      background: rgba(6, 5, 4, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0.2rem 0.5rem;
+      border-radius: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.54rem;
+      letter-spacing: 0.12em;
+      color: var(--text);
+    }
+    .event-reel-bottom-bar {
       position: absolute;
-      top: 1.2rem;
-      left: 1.2rem;
-      background: rgba(6, 5, 4, 0.88);
-      backdrop-filter: blur(8px);
-      border: 1px solid var(--gold);
-      padding: 0.35rem 0.8rem;
+      bottom: 0.85rem;
+      left: 0.85rem;
+      right: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 3;
+      gap: 0.5rem;
+    }
+    .event-reel-caption {
       font-family: var(--font-mono);
       font-size: 0.58rem;
-      letter-spacing: 0.2em;
-      color: var(--gold);
+      letter-spacing: 0.12em;
+      color: var(--text);
       text-transform: uppercase;
-      z-index: 2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
+    .event-reel-nav {
+      display: flex;
+      gap: 0.3rem;
+      flex-shrink: 0;
+    }
+    .event-reel-arrow {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(6, 5, 4, 0.85);
+      border: 1px solid rgba(197, 160, 89, 0.45);
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.75rem;
+      padding: 0;
+    }
+    .event-reel-arrow:hover {
+      background: var(--gold);
+      color: #060504;
+      transform: scale(1.06);
+    }
+
+    /* Right Editorial Column inside Vertical Reel Card */
     .event-body {
-      padding: 2.2rem 2.4rem;
+      padding: 2rem 2.2rem;
       display: flex;
       flex-direction: column;
-      flex-grow: 1;
       justify-content: space-between;
+      gap: 1.25rem;
     }
     .event-meta-time {
       font-family: var(--font-mono);
-      font-size: 0.62rem;
+      font-size: 0.6rem;
       letter-spacing: 0.22em;
       color: var(--gold);
       text-transform: uppercase;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.55rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -2276,87 +2330,334 @@
     }
     .event-title {
       font-family: var(--font-serif);
-      font-size: 1.65rem;
+      font-size: 1.75rem;
       font-weight: 400;
-      line-height: 1.2;
+      line-height: 1.18;
       color: var(--text);
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
       letter-spacing: 0.02em;
     }
     .event-desc {
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       color: var(--text-muted);
-      line-height: 1.65;
-      margin-bottom: 1.8rem;
+      line-height: 1.62;
+      margin-bottom: 0;
       font-weight: 300;
     }
-    .event-desc:last-child {
-      margin-bottom: 0;
-    }
-    .event-footer {
+
+    /* 4-Clip Interactive Selector Strip */
+    .reel-clips-selector {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
       border-top: 1px solid var(--border);
-      padding-top: 1.2rem;
+      padding-top: 1.1rem;
+    }
+    .reel-clips-label {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      text-transform: uppercase;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .event-specs {
-      font-family: var(--font-mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.16em;
-      color: var(--text-muted);
-      text-transform: uppercase;
+    .reel-clips-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.45rem;
     }
-    .event-link {
+    .reel-clip-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.42rem 0.55rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.22s ease;
+      color: var(--text-muted);
+    }
+    .reel-clip-btn:hover {
+      border-color: rgba(197, 160, 89, 0.5);
+      color: var(--text);
+      background: rgba(197, 160, 89, 0.05);
+    }
+    .reel-clip-btn.is-active {
+      border-color: var(--gold);
+      background: rgba(197, 160, 89, 0.12);
+      color: var(--text);
+    }
+    .reel-clip-thumb {
+      width: 28px;
+      height: 42px;
+      border-radius: 3px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid rgba(197, 160, 89, 0.3);
+    }
+    .reel-clip-info {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .reel-clip-num {
       font-family: var(--font-mono);
-      font-size: 0.64rem;
-      letter-spacing: 0.18em;
+      font-size: 0.52rem;
+      letter-spacing: 0.14em;
       color: var(--gold);
       text-transform: uppercase;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: gap 0.2s ease, color 0.2s ease;
     }
-    .event-link:hover {
-      color: var(--gold-light);
-      gap: 0.65rem;
+    .reel-clip-name {
+      font-size: 0.74rem;
+      font-weight: 400;
+      color: inherit;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    /* Events Program Schedule Strip */
-    .events-schedule-strip {
+    /* Separate Star Concerts Block (Концерты Звёзд · Афиша @anzur.rest) */
+    .star-concerts-showcase {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1.05fr 1.25fr;
       border-bottom: 1px solid var(--border);
-      background: #090807;
+      background: radial-gradient(circle at 75% 50%, rgba(197, 160, 89, 0.07) 0%, rgba(10, 8, 7, 0.98) 70%);
+      position: relative;
+      overflow: hidden;
     }
-    .sched-item {
-      padding: 1.6rem 2rem;
+    .star-concerts-info {
+      padding: 3rem 3.2rem;
       border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.8rem;
     }
-    .sched-item:last-child {
-      border-right: none;
-    }
-    .sched-day {
+    .star-ig-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      border: 1px solid rgba(197, 160, 89, 0.45);
+      border-radius: 999px;
+      background: rgba(197, 160, 89, 0.08);
+      color: var(--gold);
       font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.24em;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      width: fit-content;
+      transition: all 0.25s ease;
+    }
+    .star-ig-pill:hover {
+      background: var(--gold);
+      color: #060504;
+    }
+    .star-concerts-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.2vw, 2.75rem);
+      font-weight: 300;
+      line-height: 1.12;
+      color: var(--text);
+      margin: 0.7rem 0 0.9rem;
+    }
+    .star-concerts-headline em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .star-active-card-meta {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--gold);
+      padding: 1.15rem 1.35rem;
+      border-radius: 4px;
+      transition: opacity 0.25s ease;
+    }
+    .star-active-tag {
+      font-family: var(--font-mono);
+      font-size: 0.56rem;
+      letter-spacing: 0.2em;
       color: var(--gold);
       text-transform: uppercase;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.35rem;
     }
-    .sched-name {
-      font-size: 0.92rem;
-      font-weight: 500;
+    .star-active-artist {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
       color: var(--text);
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.35rem;
     }
-    .sched-detail {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
+    .star-active-caption {
+      font-size: 0.82rem;
       color: var(--text-muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+    .star-concerts-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    /* Right Column: Interactive Mini-Slideshow of Concert Posters */
+    .star-posters-stage {
+      padding: 2.4rem 2.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.2rem;
+      position: relative;
+      user-select: none;
+    }
+    .star-posters-viewer {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 1.4rem;
+      align-items: center;
+    }
+    .star-poster-main-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(197, 160, 89, 0.5);
+      background: #060504;
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.65), 0 0 28px rgba(197, 160, 89, 0.12);
+    }
+    .star-poster-main-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .star-poster-badge-overlay {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      background: rgba(6, 5, 4, 0.84);
+      border: 1px solid rgba(197, 160, 89, 0.45);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0.22rem 0.55rem;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      text-transform: uppercase;
+      z-index: 2;
+    }
+    .star-posters-side-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+      height: 100%;
+    }
+    .star-secondary-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #060504;
+    }
+    .star-secondary-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.9) contrast(1.05);
+    }
+    .star-secondary-caption {
+      position: absolute;
+      bottom: 0.6rem;
+      left: 0.6rem;
+      background: rgba(6, 5, 4, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.14em;
+      color: var(--text);
+      text-transform: uppercase;
+    }
+    .star-thumbs-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+    }
+    .star-thumb-btn {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      border-radius: 5px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #080706;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      opacity: 0.55;
+    }
+    .star-thumb-btn:hover {
+      opacity: 0.88;
+      border-color: rgba(197, 160, 89, 0.5);
+    }
+    .star-thumb-btn.is-active {
+      opacity: 1;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 1px var(--gold);
+      transform: translateY(-2px);
+    }
+    .star-thumb-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .star-slideshow-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.4rem;
+      border-top: 1px solid var(--border);
+    }
+    .star-slide-counter {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .star-slide-nav-btns {
+      display: flex;
+      gap: 0.45rem;
+    }
+    .star-slide-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(197, 160, 89, 0.45);
+      background: rgba(12, 10, 9, 0.9);
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .star-slide-btn:hover {
+      background: var(--gold);
+      color: #060504;
     }
 
     /* Events Bottom CTA */
@@ -2390,16 +2691,47 @@
       flex-wrap: wrap;
     }
 
-    @media (max-width: 1024px) {
-      .events-grid { grid-template-columns: 1fr; }
-      .event-card { border-right: none; border-bottom: 1px solid var(--border); }
-      .events-schedule-strip { grid-template-columns: 1fr 1fr; }
-      .sched-item:nth-child(2) { border-right: none; }
-      .sched-item:nth-child(1), .sched-item:nth-child(2) { border-bottom: 1px solid var(--border); }
+    @media (max-width: 1180px) {
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+      .event-card {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        grid-template-columns: 260px 1fr;
+      }
+      .star-concerts-showcase {
+        grid-template-columns: 1fr;
+      }
+      .star-concerts-info {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 2.2rem 1.8rem;
+      }
+      .star-posters-stage {
+        padding: 2rem 1.8rem;
+      }
     }
-    @media (max-width: 640px) {
-      .events-schedule-strip { grid-template-columns: 1fr; }
-      .sched-item { border-right: none; border-bottom: 1px solid var(--border); }
+    @media (max-width: 680px) {
+      .event-card {
+        grid-template-columns: 1fr;
+      }
+      .event-reel-stage {
+        max-width: 280px;
+        margin: 1.2rem auto 0;
+        border: 1px solid rgba(197, 160, 89, 0.35);
+        border-radius: 10px;
+      }
+      .event-body {
+        padding: 1.5rem 1.25rem 1.8rem;
+      }
+      .star-posters-viewer {
+        grid-template-columns: 1fr;
+      }
+      .star-poster-main-frame {
+        max-width: 270px;
+        margin: 0 auto;
+      }
       .events-cta-bar {
         flex-direction: column;
         align-items: center;
@@ -3005,53 +3337,252 @@
       </div>
     </div>
 
-    <!-- Editorial 3-Cards Grid -->
+    <!-- Upper 2-Column Showcase: Vertical Video Reels (Живая Музыка & Шоу-балет) -->
     <div class="events-grid">
-      <!-- Card 1: Живая музыка -->
-      <article class="event-card">
-        <div class="event-media">
-          <img src="events_live_music.jpg" alt="Живая музыка в ресторане Анзур" loading="lazy" />
-        </div>
-        <div class="event-body">
-          <h3 class="event-title" data-i18n="ev1_title">Живая Музыка</h3>
-          <p class="event-desc" data-i18n="ev1_desc">
-            Саксофон, скрипка, живой вокал и восточные инструменты — рубаб, тар. Джазовые импровизации, мировые хиты и восточная классика каждый вечер.
-          </p>
-        </div>
-      </article>
-
-      <!-- Card 2: Шоу-балет -->
-      <article class="event-card">
-        <div class="event-media">
-          <img src="events_show_ballet.jpg" alt="Шоу-балет в национальных костюмах в ресторане Анзур" loading="lazy" />
-        </div>
-        <div class="event-body">
-          <h3 class="event-title" data-i18n="ev2_title">Шоу-балет</h3>
-          <p class="event-desc" data-i18n="ev2_desc">
-            Зрелищные танцевальные постановки с профессиональными артистами, костюмированные шоу-программы, сценический свет и спецэффекты.
-          </p>
-        </div>
-      </article>
-
-      <!-- Card 3: Концерты звёзд -->
-      <article class="event-card" id="cardStarConcert">
-        <div class="event-media">
-          <picture id="starConcertPic">
-            <source id="starConcertSrcWebp" srcset="events_star_concert_yulduz.webp?v=2" type="image/webp">
-            <img id="starConcertImg" src="events_star_concert_yulduz.jpg?v=2" alt="Концерты звёзд эстрады в ресторане Анзур — сцена и живой звук" loading="lazy" />
-          </picture>
-          <div class="event-photo-toggle" role="tablist" aria-label="Ракурс фото">
-            <button type="button" class="event-photo-btn is-active" id="btnPhotoStage" onclick="setStarConcertPhoto('stage', event)">Сцена</button>
-            <button type="button" class="event-photo-btn" id="btnPhotoCloseup" onclick="setStarConcertPhoto('closeup', event)">Крупно</button>
+      <!-- Card 1: Живая музыка (Vertical 9:16 Video Reels) -->
+      <article class="event-card" id="cardLiveMusic">
+        <div class="event-reel-stage" id="liveMusicStage">
+          <video
+            id="liveMusicVideo"
+            class="event-reel-video"
+            muted
+            loop
+            playsinline
+            preload="none"
+            poster="events_media/music_1_poster.webp"
+            data-src="events_media/music_1.mp4"
+          ></video>
+          <div class="event-reel-StageGlow"></div>
+          <div class="event-reel-top-bar">
+            <span class="event-reel-live-pill">
+              <span class="event-reel-live-dot"></span>
+              LIVE REEL
+            </span>
+            <span class="event-reel-counter" id="musicReelCounter">01 / 04</span>
+          </div>
+          <div class="event-reel-bottom-bar">
+            <span class="event-reel-caption" id="musicReelCaption">01 · Живой вокал</span>
+            <div class="event-reel-nav">
+              <button type="button" class="event-reel-arrow" onclick="stepEventReel('music', -1, event)" aria-label="Предыдущее видео">‹</button>
+              <button type="button" class="event-reel-arrow" onclick="stepEventReel('music', 1, event)" aria-label="Следующее видео">›</button>
+            </div>
           </div>
         </div>
+
         <div class="event-body">
-          <h3 class="event-title" data-i18n="ev3_title">Концерты Звёзд</h3>
+          <div>
+            <div class="event-meta-time" data-i18n="ev1_meta">ГЛАВНЫЙ ЗАЛ & ТЕРРАСА</div>
+            <h3 class="event-title" data-i18n="ev1_title">Живая Музыка</h3>
+            <p class="event-desc" data-i18n="ev1_desc">
+              Саксофон, скрипка, живой вокал и восточные инструменты — рубаб, тар. Джазовые импровизации, мировые хиты и восточная классика каждый вечер.
+            </p>
+          </div>
+
+          <div class="reel-clips-selector">
+            <div class="reel-clips-label">
+              <span>ВЫБЕРИТЕ ФРАГМЕНТ (9:16 VIDEO)</span>
+              <span style="color:var(--gold);">HD · БЕЗ ПЕРЕГРУЗКИ</span>
+            </div>
+            <div class="reel-clips-grid" id="musicClipsGrid">
+              <button type="button" class="reel-clip-btn is-active" onclick="switchEventReel('music', 0, event)">
+                <img src="events_media/music_1_poster.webp" alt="Живой вокал" class="reel-clip-thumb" loading="lazy" decoding="async" />
+                <span class="reel-clip-info">
+                  <span class="reel-clip-num">REEL 01</span>
+                  <span class="reel-clip-name">Сольный вокал</span>
+                </span>
+              </button>
+              <button type="button" class="reel-clip-btn" onclick="switchEventReel('music', 1, event)">
+                <img src="events_media/music_2_poster.webp" alt="Вечерний саксофон" class="reel-clip-thumb" loading="lazy" decoding="async" />
+                <span class="reel-clip-info">
+                  <span class="reel-clip-num">REEL 02</span>
+                  <span class="reel-clip-name">Саксофон Live</span>
+                </span>
+              </button>
+              <button type="button" class="reel-clip-btn" onclick="switchEventReel('music', 2, event)">
+                <img src="events_media/music_3_poster.webp" alt="Акустическая гитара" class="reel-clip-thumb" loading="lazy" decoding="async" />
+                <span class="reel-clip-info">
+                  <span class="reel-clip-num">REEL 03</span>
+                  <span class="reel-clip-name">Акустика & Хит</span>
+                </span>
+              </button>
+              <button type="button" class="reel-clip-btn" onclick="switchEventReel('music', 3, event)">
+                <img src="events_media/music_4_poster.webp" alt="Дуэт на главной сцене" class="reel-clip-thumb" loading="lazy" decoding="async" />
+                <span class="reel-clip-info">
+                  <span class="reel-clip-num">REEL 04</span>
+                  <span class="reel-clip-name">Вечерний дуэт</span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: Шоу-балет (Vertical 9:16 Video Reels) -->
+      <article class="event-card" id="cardShowBallet">
+        <div class="event-reel-stage" id="showBalletStage">
+          <video
+            id="showBalletVideo"
+            class="event-reel-video"
+            muted
+            loop
+            playsinline
+            preload="none"
+            poster="events_media/dance_1_poster.webp"
+            data-src="events_media/dance_1.mp4"
+          ></video>
+          <div class="event-reel-StageGlow"></div>
+          <div class="event-reel-top-bar">
+            <span class="event-reel-live-pill">
+              <span class="event-reel-live-dot"></span>
+              SHOW REEL
+            </span>
+            <span class="event-reel-counter" id="danceReelCounter">01 / 04</span>
+          </div>
+          <div class="event-reel-bottom-bar">
+            <span class="event-reel-caption" id="danceReelCaption">01 · Восточная классика</span>
+            <div class="event-reel-nav">
+              <button type="button" class="event-reel-arrow" onclick="stepEventReel('dance', -1, event)" aria-label="Предыдущее видео">‹</button>
+              <button type="button" class="event-reel-arrow" onclick="stepEventReel('dance', 1, event)" aria-label="Следующее видео">›</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="event-body">
+          <div>
+            <div class="event-meta-time" data-i18n="ev2_meta">ГЛАВНАЯ СЦЕНА</div>
+            <h3 class="event-title" data-i18n="ev2_title">Шоу-балет</h3>
+            <p class="event-desc" data-i18n="ev2_desc">
+              Зрелищные танцевальные постановки с профессиональными артистами, костюмированные шоу-программы, сценический свет и спецэффекты.
+            </p>
+          </div>
+
+          <div class="reel-clips-selector">
+            <div class="reel-clips-label">
+              <span>ВЫБЕРИТЕ ПОСТАНОВКУ (9:16 VIDEO)</span>
+              <span style="color:var(--gold);">ТАНЦЫ · ШОУ</span>
+            </div>
+            <div class="reel-clips-grid" id="danceClipsGrid">
+              <button type="button" class="reel-clip-btn is-active" onclick="switchEventReel('dance', 0, event)">
+                <img src="events_media/dance_1_poster.webp" alt="Восточная классика" class="reel-clip-thumb" loading="lazy" decoding="async" />
+                <span class="reel-clip-info">
+                  <span class="reel-clip-num">SHOW 01</span>
+                  <span class="reel-clip-name">Восточная грация</span>
+                </span>
+              </button>
+              <button type="button" class="reel-clip-btn" onclick="switchEventReel('dance', 1, event)">
+                <img src="events_media/dance_2_poster.webp" alt="Национальный танец Атлас" class="reel-clip-thumb" loading="lazy" decoding="async" />
+                <span class="reel-clip-info">
+                  <span class="reel-clip-num">SHOW 02</span>
+                  <span class="reel-clip-name">Атлас & Адрас</span>
+                </span>
+              </button>
+              <button type="button" class="reel-clip-btn" onclick="switchEventReel('dance', 2, event)">
+                <img src="events_media/dance_3_poster.webp" alt="Вечернее гранд-шоу" class="reel-clip-thumb" loading="lazy" decoding="async" />
+                <span class="reel-clip-info">
+                  <span class="reel-clip-num">SHOW 03</span>
+                  <span class="reel-clip-name">Вечерний балет</span>
+                </span>
+              </button>
+              <button type="button" class="reel-clip-btn" onclick="switchEventReel('dance', 3, event)">
+                <img src="events_media/dance_4_poster.webp" alt="Танец золотой шёлк" class="reel-clip-thumb" loading="lazy" decoding="async" />
+                <span class="reel-clip-info">
+                  <span class="reel-clip-num">SHOW 04</span>
+                  <span class="reel-clip-name">Золотой шёлк</span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Separate Dedicated Block: Концерты Звёзд · Афиша из Instagram @anzur.rest -->
+    <div class="star-concerts-showcase" id="cardStarConcert">
+      <div class="star-concerts-info">
+        <div>
+          <a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" class="star-ig-pill">
+            <span class="event-reel-live-dot"></span>
+            АФИША INSTAGRAM · @ANZUR.REST ↗
+          </a>
+          <h3 class="star-concerts-headline" data-i18n="ev3_title">Концерты <em>Звёзд</em></h3>
           <p class="event-desc" data-i18n="ev3_desc">
             Выступления популярных артистов эстрады — специальные концертные вечера с полной программой, живым звуком и VIP-местами у сцены.
           </p>
         </div>
-      </article>
+
+        <div class="star-active-card-meta" id="starActiveMeta">
+          <div class="star-active-tag" id="starActiveTag">ОФИЦИАЛЬНАЯ АФИША · @ANZUR.REST</div>
+          <div class="star-active-artist" id="starActiveArtist">Легендарная группа «Авесто»</div>
+          <p class="star-active-caption" id="starActiveCaption">
+            Специальный вечер живой музыки на главной сцене ресторана «Анзур» — виртуозный сплав этно-джаза и любимые хиты.
+          </p>
+        </div>
+
+        <div class="star-concerts-actions">
+          <a href="https://www.instagram.com/anzur.rest/" target="_blank" rel="noopener" class="btn-gold">
+            Актуальная афиша в Instagram ↗
+          </a>
+          <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%B1%D0%BB%D0%B8%D0%B6%D0%B0%D0%B9%D1%88%D0%B8%D0%B5%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D1%80%D1%82%D1%8B%20%D0%B7%D0%B2%D1%91%D0%B7%D0%B4%20%D0%B8%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%20%D1%83%20%D1%81%D1%86%D0%B5%D0%BD%D1%8B%20%D0%B2%20%D0%90%D0%BD%D0%B7%D1%83%D1%80." target="_blank" rel="noopener" class="btn-outline">
+            Бронь стола на концерт
+          </a>
+        </div>
+      </div>
+
+      <!-- Mini-Slideshow of Concert Posters & Stage Frames -->
+      <div class="star-posters-stage" id="starPostersStage">
+        <div class="star-posters-viewer">
+          <!-- Primary 9:16 Vertical Poster -->
+          <div class="star-poster-main-frame">
+            <span class="star-poster-badge-overlay" id="starPosterOverlayBadge">АФИША · @ANZUR.REST</span>
+            <picture id="starMainPosterPic">
+              <source id="starMainPosterWebp" srcset="events_media/poster_avesto.webp" type="image/webp" />
+              <img id="starMainPosterImg" src="events_media/poster_avesto.jpg" alt="Афиша концерта в ресторане Анзур" loading="lazy" decoding="async" />
+            </picture>
+          </div>
+
+          <!-- Secondary Stage Preview + 5-Poster Thumbnails Strip -->
+          <div class="star-posters-side-panel">
+            <div class="star-secondary-frame">
+              <picture>
+                <source id="starSecondaryWebp" srcset="events_media/poster_avesto_wide.webp" type="image/webp" />
+                <img id="starSecondaryImg" src="events_media/poster_avesto.jpg" alt="Сцена ресторана Анзур" loading="lazy" decoding="async" />
+              </picture>
+              <span class="star-secondary-caption" id="starSecondaryCaption">ГЛАВНАЯ СЦЕНА · ANZUR</span>
+            </div>
+
+            <div>
+              <div class="reel-clips-label" style="margin-bottom:0.45rem;">
+                <span>МИНИ-СЛАЙДШОУ АФИШ И КОНЦЕРТОВ</span>
+                <span id="starSlideCounter" class="star-slide-counter">01 / 04</span>
+              </div>
+              <div class="star-thumbs-strip" id="starThumbsStrip" style="grid-template-columns: repeat(4, 1fr);">
+                <button type="button" class="star-thumb-btn is-active" onclick="setStarPosterSlide(0, event)" aria-label="Афиша группы Авесто">
+                  <img src="events_media/poster_avesto.webp" alt="Группа Авесто" loading="lazy" decoding="async" />
+                </button>
+                <button type="button" class="star-thumb-btn" onclick="setStarPosterSlide(1, event)" aria-label="Концерт Юлдуз Усмоновой">
+                  <img src="events_media/poster_yulduz_vert.webp" alt="Юлдуз Усмонова" loading="lazy" decoding="async" />
+                </button>
+                <button type="button" class="star-thumb-btn" onclick="setStarPosterSlide(2, event)" aria-label="Концерт Шабнами Тоҷиддин и Хайриддини Шариф">
+                  <img src="events_media/poster_shabnam.webp" alt="Шабнами Тоҷиддин" loading="lazy" decoding="async" />
+                </button>
+                <button type="button" class="star-thumb-btn" onclick="setStarPosterSlide(3, event)" aria-label="Вечерний концерт Dima & Julietta">
+                  <img src="events_media/poster_dima_julietta.webp" alt="Dima & Julietta" loading="lazy" decoding="async" />
+                </button>
+              </div>
+            </div>
+
+            <div class="star-slideshow-controls">
+              <span style="font-family:var(--font-mono); font-size:0.54rem; letter-spacing:0.14em; color:var(--text-muted); text-transform:uppercase;">
+                ЛИСТАЙТЕ АФИШИ ‹ ›
+              </span>
+              <div class="star-slide-nav-btns">
+                <button type="button" class="star-slide-btn" onclick="stepStarPosterSlide(-1, event)" aria-label="Предыдущая афиша">‹</button>
+                <button type="button" class="star-slide-btn" onclick="stepStarPosterSlide(1, event)" aria-label="Следующая афиша">›</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- CTA Bar -->
@@ -5195,40 +5726,252 @@ let currentSlideIdx = 0;
       resetAutoplay();
     });
 
-    // Star Concert Photo Switcher (Wide Stage vs Close-up)
-    function setStarConcertPhoto(type, e) {
+    // =========================================================================
+    // VERTICAL REELS CONTROLLER (Живая Музыка & Шоу-балет) + STAR POSTERS SLIDESHOW
+    // Zero initial weight: videos load on demand via IntersectionObserver
+    // =========================================================================
+    const EVENT_REELS_DATA = {
+      music: {
+        videoId: 'liveMusicVideo',
+        counterId: 'musicReelCounter',
+        captionId: 'musicReelCaption',
+        gridId: 'musicClipsGrid',
+        currentIndex: 0,
+        clips: [
+          { src: 'events_media/music_1.mp4', poster: 'events_media/music_1_poster.webp', caption: '01 · Живой вокал' },
+          { src: 'events_media/music_2.mp4', poster: 'events_media/music_2_poster.webp', caption: '02 · Саксофон Live' },
+          { src: 'events_media/music_3.mp4', poster: 'events_media/music_3_poster.webp', caption: '03 · Акустика & Хит' },
+          { src: 'events_media/music_4.mp4', poster: 'events_media/music_4_poster.webp', caption: '04 · Вечерний дуэт' }
+        ]
+      },
+      dance: {
+        videoId: 'showBalletVideo',
+        counterId: 'danceReelCounter',
+        captionId: 'danceReelCaption',
+        gridId: 'danceClipsGrid',
+        currentIndex: 0,
+        clips: [
+          { src: 'events_media/dance_1.mp4', poster: 'events_media/dance_1_poster.webp', caption: '01 · Восточная классика' },
+          { src: 'events_media/dance_2.mp4', poster: 'events_media/dance_2_poster.webp', caption: '02 · Атлас & Адрас' },
+          { src: 'events_media/dance_3.mp4', poster: 'events_media/dance_3_poster.webp', caption: '03 · Вечерний балет' },
+          { src: 'events_media/dance_4.mp4', poster: 'events_media/dance_4_poster.webp', caption: '04 · Золотой шёлк' }
+        ]
+      }
+    };
+
+    function switchEventReel(type, index, e) {
       if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
-      const img = document.getElementById('starConcertImg');
-      const srcWebp = document.getElementById('starConcertSrcWebp');
-      const btnStage = document.getElementById('btnPhotoStage');
-      const btnClose = document.getElementById('btnPhotoCloseup');
+      const group = EVENT_REELS_DATA[type];
+      if (!group) return;
+      const total = group.clips.length;
+      const nextIdx = ((index % total) + total) % total;
+      group.currentIndex = nextIdx;
+      const clip = group.clips[nextIdx];
 
-      if (!img) return;
+      const videoEl = document.getElementById(group.videoId);
+      const counterEl = document.getElementById(group.counterId);
+      const captionEl = document.getElementById(group.captionId);
+      const gridEl = document.getElementById(group.gridId);
 
-      if (type === 'closeup') {
-        img.src = 'events_star_concert_closeup.jpg?v=2';
-        if (srcWebp) srcWebp.srcset = 'events_star_concert_closeup.webp?v=2';
-        if (btnClose) btnClose.classList.add('is-active');
-        if (btnStage) btnStage.classList.remove('is-active');
-      } else {
-        img.src = 'events_star_concert_yulduz.jpg?v=2';
-        if (srcWebp) srcWebp.srcset = 'events_star_concert_yulduz.webp?v=2';
-        if (btnStage) btnStage.classList.add('is-active');
-        if (btnClose) btnClose.classList.remove('is-active');
+      if (counterEl) counterEl.textContent = `0${nextIdx + 1} / 0${total}`;
+      if (captionEl) captionEl.textContent = clip.caption;
+
+      if (gridEl) {
+        const btns = gridEl.querySelectorAll('.reel-clip-btn');
+        btns.forEach((btn, idx) => btn.classList.toggle('is-active', idx === nextIdx));
+      }
+
+      if (videoEl) {
+        videoEl.poster = clip.poster;
+        videoEl.dataset.src = clip.src;
+        videoEl.src = clip.src;
+        videoEl.load();
+        const playPromise = videoEl.play();
+        if (playPromise && typeof playPromise.catch === 'function') {
+          playPromise.catch(() => {});
+        }
+        if (window.Motion && typeof Motion.animate === 'function') {
+          try {
+            Motion.animate(videoEl, { opacity: [0.35, 1], transform: ['scale(1.04)', 'scale(1)'] }, { duration: 0.42, easing: [0.16, 1, 0.3, 1] });
+          } catch (err) {}
+        }
+      }
+    }
+
+    function stepEventReel(type, delta, e) {
+      const group = EVENT_REELS_DATA[type];
+      if (!group) return;
+      switchEventReel(type, group.currentIndex + delta, e);
+    }
+
+    // Star Concerts Mini-Slideshow Data (@anzur.rest Posters & Live Nights)
+    const STAR_POSTERS_SLIDES = [
+      {
+        tag: 'ОФИЦИАЛЬНАЯ АФИША · @ANZUR.REST',
+        artist: 'Легендарная группа «Авесто»',
+        caption: 'Специальный вечер живой музыки на главной сцене ресторана «Анзур» — виртуозный сплав этно-джаза, восточной мелодики и любимых хитов.',
+        overlayBadge: 'АФИША · 22 ОКТЯБРЯ',
+        mainWebp: 'events_media/poster_avesto.webp',
+        mainJpg: 'events_media/poster_avesto.jpg',
+        secWebp: 'events_media/poster_avesto_wide.webp',
+        secJpg: 'events_media/poster_avesto.jpg',
+        secCaption: 'АФИША КОНЦЕРТА · @ANZUR.REST'
+      },
+      {
+        tag: 'ГАЛА-КОНЦЕРТ · ЗВЁЗДЫ ВОСТОКА',
+        artist: 'Юлдуз Усмонова (Yulduz Usmonova)',
+        caption: 'Эксклюзивный сольный вечер примадонны восточной эстрады в «Анзур» — полное живое сопровождение оркестра и незабываемая энергетика.',
+        overlayBadge: 'LIVE · ANZUR STAGE',
+        mainWebp: 'events_media/poster_yulduz_vert.webp',
+        mainJpg: 'events_media/poster_yulduz_vert.jpg',
+        secWebp: 'events_media/poster_yulduz_stage.webp',
+        secJpg: 'events_media/poster_yulduz_stage.jpg',
+        secCaption: 'ЮЛДУЗ УСМОНОВА · ГЛАВНАЯ СЦЕНА'
+      },
+      {
+        tag: 'СПЕЦИАЛЬНЫЙ ВЕЧЕР · @ANZUR.REST',
+        artist: 'Шабнами Тоҷиддин & Хайриддини Шариф',
+        caption: 'Звёздный дуэтный вечер в ресторане «Анзур» — аншлаг в главном зале, световое шоу, любимые песни и танцы до полуночи.',
+        overlayBadge: 'КОНЦЕРТ · ДУШАНБЕ',
+        mainWebp: 'events_media/poster_shabnam.webp',
+        mainJpg: 'events_media/poster_shabnam.jpg',
+        secWebp: 'events_media/poster_yulduz_live.webp',
+        secJpg: 'events_media/poster_yulduz_live.jpg',
+        secCaption: 'SHABNAMI TOJIDDIN & KHAYRIDDINI SHARIF'
+      },
+      {
+        tag: 'ВЕЧЕРНЯЯ ПРОГРАММА · LIVE SOUND',
+        artist: 'Dima & Julietta — Вечерний концерт',
+        caption: 'Элегантная концертная программа с роялем и живым вокалом — мировые хиты и авторские аранжировки для идеального ужина.',
+        overlayBadge: 'LIVE DUO · ANZUR',
+        mainWebp: 'events_media/poster_dima_julietta.webp',
+        mainJpg: 'events_media/poster_dima_julietta.jpg',
+        secWebp: 'events_media/poster_yulduz_stage.webp',
+        secJpg: 'events_media/poster_yulduz_stage.jpg',
+        secCaption: 'DIMA & JULIETTA · КОНЦЕРТНЫЙ ЗАЛ'
+      }
+    ];
+
+    let currentStarSlideIdx = 0;
+    let starSlideTimer = null;
+
+    function setStarPosterSlide(index, e) {
+      if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
+      const total = STAR_POSTERS_SLIDES.length;
+      currentStarSlideIdx = ((index % total) + total) % total;
+      const slide = STAR_POSTERS_SLIDES[currentStarSlideIdx];
+
+      const mainWebp = document.getElementById('starMainPosterWebp');
+      const mainImg = document.getElementById('starMainPosterImg');
+      const secWebp = document.getElementById('starSecondaryWebp');
+      const secImg = document.getElementById('starSecondaryImg');
+      const overlayBadge = document.getElementById('starPosterOverlayBadge');
+      const secCaption = document.getElementById('starSecondaryCaption');
+      const counter = document.getElementById('starSlideCounter');
+      const tagEl = document.getElementById('starActiveTag');
+      const artistEl = document.getElementById('starActiveArtist');
+      const captionEl = document.getElementById('starActiveCaption');
+      const metaCard = document.getElementById('starActiveMeta');
+      const strip = document.getElementById('starThumbsStrip');
+
+      if (mainWebp) mainWebp.srcset = slide.mainWebp;
+      if (mainImg) mainImg.src = slide.mainJpg;
+      if (secWebp) secWebp.srcset = slide.secWebp;
+      if (secImg) secImg.src = slide.secJpg;
+      if (overlayBadge) overlayBadge.textContent = slide.overlayBadge;
+      if (secCaption) secCaption.textContent = slide.secCaption;
+      if (counter) counter.textContent = `0${currentStarSlideIdx + 1} / 0${total}`;
+      if (tagEl) tagEl.textContent = slide.tag;
+      if (artistEl) artistEl.textContent = slide.artist;
+      if (captionEl) captionEl.textContent = slide.caption;
+
+      if (strip) {
+        const thumbs = strip.querySelectorAll('.star-thumb-btn');
+        thumbs.forEach((btn, idx) => btn.classList.toggle('is-active', idx === currentStarSlideIdx));
       }
 
       if (window.Motion && typeof Motion.animate === 'function') {
         try {
-          Motion.animate(img, {
-            opacity: [0.35, 1],
-            transform: ['scale(1.06)', 'scale(1)']
-          }, {
-            duration: 0.55,
-            easing: [0.16, 1, 0.3, 1]
-          });
+          if (mainImg) {
+            Motion.animate(mainImg, { opacity: [0.3, 1], transform: ['scale(1.05)', 'scale(1)'] }, { duration: 0.48, easing: [0.16, 1, 0.3, 1] });
+          }
+          if (secImg) {
+            Motion.animate(secImg, { opacity: [0.35, 1], transform: ['scale(1.04)', 'scale(1)'] }, { duration: 0.48, easing: [0.16, 1, 0.3, 1] });
+          }
+          if (metaCard) {
+            Motion.animate(metaCard, { opacity: [0.4, 1], transform: ['translateY(6px)', 'translateY(0px)'] }, { duration: 0.38, easing: [0.16, 1, 0.3, 1] });
+          }
         } catch (err) {}
       }
     }
+
+    function stepStarPosterSlide(delta, e) {
+      setStarPosterSlide(currentStarSlideIdx + delta, e);
+      resetStarPosterAutoplay();
+    }
+
+    function resetStarPosterAutoplay() {
+      if (starSlideTimer) clearInterval(starSlideTimer);
+      starSlideTimer = setInterval(() => {
+        setStarPosterSlide(currentStarSlideIdx + 1);
+      }, 5500);
+    }
+
+    // Initialize Lazy Vertical Videos & Poster Slideshow via IntersectionObserver
+    document.addEventListener('DOMContentLoaded', () => {
+      const eventsSec = document.getElementById('events');
+      const videoIds = ['liveMusicVideo', 'showBalletVideo'];
+
+      if ('IntersectionObserver' in window && eventsSec) {
+        const reelObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            videoIds.forEach((id) => {
+              const v = document.getElementById(id);
+              if (!v) return;
+              if (entry.isIntersecting) {
+                if (!v.getAttribute('src') && v.dataset.src) {
+                  v.src = v.dataset.src;
+                  v.load();
+                }
+                const p = v.play();
+                if (p && typeof p.catch === 'function') p.catch(() => {});
+              } else {
+                v.pause();
+              }
+            });
+
+            if (entry.isIntersecting) {
+              resetStarPosterAutoplay();
+            } else if (starSlideTimer) {
+              clearInterval(starSlideTimer);
+              starSlideTimer = null;
+            }
+          });
+        }, { rootMargin: '260px 0px', threshold: 0.05 });
+
+        reelObserver.observe(eventsSec);
+      }
+
+      // Touch swipe support on Star Posters Stage
+      const posterStage = document.getElementById('starPostersStage');
+      if (posterStage) {
+        let touchStartX = 0;
+        let touchStartY = 0;
+        posterStage.addEventListener('touchstart', (e) => {
+          if (!e.touches || !e.touches.length) return;
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+        posterStage.addEventListener('touchend', (e) => {
+          if (!e.changedTouches || !e.changedTouches.length) return;
+          const dx = e.changedTouches[0].clientX - touchStartX;
+          const dy = e.changedTouches[0].clientY - touchStartY;
+          if (Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy) * 1.3) {
+            stepStarPosterSlide(dx < 0 ? 1 : -1);
+          }
+        }, { passive: true });
+      }
+    });
 
     /* ==========================================================================
        TOP-TIER LUXURY ANIMATION ENGINE (GSAP + ScrollTrigger + Lenis + Motion + Three.js)
