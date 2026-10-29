@@ -711,6 +711,41 @@
     .event-card:hover::after {
       opacity: 1;
     }
+
+    /* Ambient Luxury Cursor Spotlight (Desktop) */
+    #ambient-cursor-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 480px;
+      height: 480px;
+      margin-left: -240px;
+      margin-top: -240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, rgba(197, 160, 89, 0.02) 42%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+      mix-blend-mode: screen;
+      will-change: transform;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    @media (hover: none), (max-width: 900px) {
+      #ambient-cursor-glow { display: none !important; }
+    }
+
+    /* 3D Poster Deck Hover Fan-out */
+    @media (hover: hover) and (min-width: 901px) {
+      .trio-poster-deck:hover .poster-deck-card[data-deck-pos="1"] {
+        transform: translate3d(32px, 8px, -15px) rotate(8deg) scale(0.93) !important;
+      }
+      .trio-poster-deck:hover .poster-deck-card[data-deck-pos="2"] {
+        transform: translate3d(58px, 18px, -32px) rotate(14deg) scale(0.86) !important;
+      }
+      .trio-poster-deck:hover .poster-deck-card[data-deck-pos="-1"] {
+        transform: translate3d(-30px, 8px, -15px) rotate(-8deg) scale(0.93) !important;
+      }
+    }
     .hero-backdrop {
       position: absolute;
       inset: 0;
@@ -2660,6 +2695,8 @@
 </style>
 </head>
 <body>
+  <!-- Ambient Luxury Cursor Spotlight (Desktop) -->
+  <div id="ambient-cursor-glow" aria-hidden="true"></div>
 
   <!-- ==========================================================================
        1. ALCHEMIST INTRO SPLASH PRELOADER
@@ -3495,6 +3532,9 @@
       splashDismissed = true;
       const splash = document.getElementById('splash');
       if (splash) splash.classList.add('done');
+      if (typeof window.triggerHeroIntro === 'function') {
+        window.triggerHeroIntro();
+      }
     }
 
     function replaySplash() {
@@ -5775,7 +5815,7 @@ let currentSlideIdx = 0;
 
     /* ==========================================================================
        TOP-TIER LUXURY ANIMATION ENGINE (GSAP + ScrollTrigger + Lenis + Motion + Three.js)
-       Ultra-lightweight, non-blocking, adaptive 60fps for Desktop & Mobile
+       Ultra-smooth 60fps, Copenhagen/Dubai Michelin luxury tier
        ========================================================================== */
     (function initLuxuryExperienceEngine() {
       const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -5783,16 +5823,61 @@ let currentSlideIdx = 0;
 
       const isMobileOrTouch = window.matchMedia && window.matchMedia('(max-width: 900px), (hover: none)').matches;
       let lenisInstance = null;
+      let heroVisible = true;
 
+      // ------------------------------------------------------------------------
+      // 1. HERO GRAND OPENING TIMELINE (Exquisite Orchestration)
+      // ------------------------------------------------------------------------
+      let heroIntroPlayed = false;
+      function playHeroIntroTimeline() {
+        if (heroIntroPlayed) return;
+        heroIntroPlayed = true;
+        if (!window.gsap) return;
+
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+        tl.fromTo('.hero-logo-wrap', 
+            { scale: 0.90, opacity: 0, filter: 'blur(10px)' },
+            { scale: 1, opacity: 1, filter: 'blur(0px)', duration: 1.25, ease: 'power2.out' },
+            0.15
+          )
+          .fromTo('.hero-subtitle span',
+            { y: 24, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.12, duration: 0.85 },
+            0.45
+          )
+          .fromTo('.hero-actions .btn-gold',
+            { y: 22, scale: 0.94, opacity: 0 },
+            { y: 0, scale: 1, opacity: 1, duration: 0.85, ease: 'back.out(1.4)' },
+            0.75
+          )
+          .fromTo('.scroll-indicator',
+            { opacity: 0, y: -12 },
+            { opacity: 1, y: 0, duration: 0.8 },
+            1.05
+          );
+      }
+      window.triggerHeroIntro = playHeroIntroTimeline;
+
+      // ------------------------------------------------------------------------
+      // 2. BOOT CORE ANIMATIONS & LIBRARIES
+      // ------------------------------------------------------------------------
       function bootCoreAnimations() {
-        // 1. LENIS SMOOTH SCROLL (Desktop inertial scroll synced with GSAP ticker; native fast touch on Mobile)
+        // If splash is already gone or missing, trigger intro
+        const splashEl = document.getElementById('splash');
+        if (!splashEl || splashEl.classList.contains('done')) {
+          playHeroIntroTimeline();
+        }
+
+        // --- A. LENIS VELVETY INERTIAL SCROLL ---
         if (window.Lenis && !isMobileOrTouch) {
           try {
             lenisInstance = new Lenis({
-              duration: 1.12,
+              duration: 1.25,
               easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
               smoothWheel: true,
-              wheelMultiplier: 0.95
+              wheelMultiplier: 0.92,
+              touchMultiplier: 1.2,
+              infinite: false
             });
             window.__anzurLenis = lenisInstance;
 
@@ -5805,30 +5890,31 @@ let currentSlideIdx = 0;
               gsap.ticker.lagSmoothing(0);
             } else {
               function rafLoop(time) {
-                if (document.body.style.overflow !== 'hidden') {
-                  lenisInstance.raf(time);
-                }
+                if (document.body.style.overflow !== 'hidden') lenisInstance.raf(time);
                 requestAnimationFrame(rafLoop);
               }
               requestAnimationFrame(rafLoop);
             }
 
             // Smooth anchor navigation with Lenis
-            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+            document.querySelectorAll('a[href^="#"], .scroll-indicator').forEach((anchor) => {
               anchor.addEventListener('click', (e) => {
-                const targetId = anchor.getAttribute('href');
+                let targetId = anchor.getAttribute('href');
+                if (!targetId && anchor.classList.contains('scroll-indicator')) targetId = '#cuisine';
                 if (!targetId || targetId === '#') return;
                 const targetEl = document.querySelector(targetId);
                 if (targetEl) {
                   e.preventDefault();
-                  lenisInstance.scrollTo(targetEl, { offset: -64, duration: 1.2 });
+                  lenisInstance.scrollTo(targetEl, { offset: -68, duration: 1.3 });
                 }
               });
             });
-          } catch (e) {}
+          } catch (e) {
+            console.warn('Lenis init:', e);
+          }
         }
 
-        // 2. GSAP + SCROLLTRIGGER CHOREOGRAPHY
+        // --- B. GSAP + SCROLLTRIGGER CINEMATIC CHOREOGRAPHY ---
         if (window.gsap && window.ScrollTrigger) {
           gsap.registerPlugin(ScrollTrigger);
 
@@ -5853,34 +5939,36 @@ let currentSlideIdx = 0;
           const heroContent = document.querySelector('.hero-content');
           if (heroSec && heroMedia) {
             gsap.to(heroMedia, {
-              scale: 1.1,
-              yPercent: isMobileOrTouch ? 6 : 12,
+              scale: 1.08,
+              yPercent: isMobileOrTouch ? 6 : 10,
               ease: 'none',
               scrollTrigger: {
                 trigger: heroSec,
                 start: 'top top',
                 end: 'bottom top',
-                scrub: true
+                scrub: 0.2
               }
             });
           }
           if (heroSec && heroContent && !isMobileOrTouch) {
             gsap.to(heroContent, {
-              y: -48,
+              yPercent: -18,
+              opacity: 0.72,
               ease: 'none',
               scrollTrigger: {
                 trigger: heroSec,
                 start: 'top top',
                 end: 'bottom top',
-                scrub: true
+                scrub: 0.2
               }
             });
           }
 
-          // Section Headers Editorial Reveal
+          // Section Headers Reveal
           gsap.utils.toArray('.sec-header').forEach((header) => {
-            gsap.from(header, {
-              y: 28,
+            const title = header.querySelector('.sec-title');
+            gsap.from(title || header, {
+              y: 32,
               opacity: 0,
               duration: 0.85,
               ease: 'power3.out',
@@ -5893,11 +5981,11 @@ let currentSlideIdx = 0;
             });
           });
 
-          // Cuisine Stage & Filmstrip Staggered Entrance
+          // Cuisine Stage Grid & Showcase Entrance
           const stageGrid = document.getElementById('menu-stage-container');
           if (stageGrid) {
             gsap.from(stageGrid, {
-              y: 34,
+              y: 36,
               opacity: 0,
               duration: 0.9,
               ease: 'power3.out',
@@ -5910,13 +5998,14 @@ let currentSlideIdx = 0;
             });
           }
 
+          // Filmstrip Staggered Cascade
           const filmstripItems = gsap.utils.toArray('.filmstrip-item');
           if (filmstripItems.length) {
             gsap.from(filmstripItems, {
-              y: 24,
+              y: 26,
               opacity: 0,
-              duration: 0.65,
-              stagger: 0.055,
+              duration: 0.7,
+              stagger: 0.06,
               ease: 'power2.out',
               clearProps: 'transform,opacity',
               scrollTrigger: {
@@ -5927,37 +6016,56 @@ let currentSlideIdx = 0;
             });
           }
 
-          // Interior Spaces Cards Staggered Cascade
+          // Spaces Section (Залы) - Staggered Cascade + Image Depth Parallax
           const spaceBoxes = gsap.utils.toArray('.space-box');
           if (spaceBoxes.length) {
             gsap.from(spaceBoxes, {
-              y: 38,
+              y: 44,
               opacity: 0,
-              duration: 0.8,
-              stagger: 0.09,
+              duration: 0.85,
+              stagger: 0.1,
               ease: 'power3.out',
-              clearProps: 'transform,opacity',
+              clearProps: 'opacity',
               scrollTrigger: {
                 trigger: '.spaces-grid',
                 start: 'top 86%',
                 once: true
               }
             });
+
+            if (!isMobileOrTouch) {
+              spaceBoxes.forEach((box) => {
+                const img = box.querySelector('.space-media img');
+                if (img) {
+                  gsap.to(img, {
+                    yPercent: 8,
+                    ease: 'none',
+                    scrollTrigger: {
+                      trigger: box,
+                      start: 'top bottom',
+                      end: 'bottom top',
+                      scrub: 0.4
+                    }
+                  });
+                }
+              });
+            }
           }
 
-          // Events & Shows Cards Staggered Cascade + CTA Bar
-          const eventCards = gsap.utils.toArray('.event-card');
-          if (eventCards.length) {
-            gsap.from(eventCards, {
-              y: 38,
+          // Events & Shows Trio Row 3D Staggered Cascade
+          const eventTrio = document.querySelector('.events-trio-row');
+          const trioCols = gsap.utils.toArray('.event-trio-col');
+          if (eventTrio && trioCols.length) {
+            gsap.from(trioCols, {
+              y: 48,
               opacity: 0,
-              duration: 0.8,
-              stagger: 0.1,
+              duration: 0.9,
+              stagger: 0.12,
               ease: 'power3.out',
-              clearProps: 'transform,opacity',
+              clearProps: 'opacity',
               scrollTrigger: {
-                trigger: '.events-grid',
-                start: 'top 86%',
+                trigger: eventTrio,
+                start: 'top 85%',
                 once: true
               }
             });
@@ -5966,7 +6074,7 @@ let currentSlideIdx = 0;
           const ctaBar = document.querySelector('.events-cta-bar');
           if (ctaBar) {
             gsap.from(ctaBar, {
-              y: 26,
+              y: 28,
               opacity: 0,
               duration: 0.75,
               ease: 'power3.out',
@@ -5983,10 +6091,10 @@ let currentSlideIdx = 0;
           const resLeftItems = gsap.utils.toArray('.res-left > *');
           if (resLeftItems.length) {
             gsap.from(resLeftItems, {
-              y: 24,
+              y: 26,
               opacity: 0,
-              duration: 0.7,
-              stagger: 0.07,
+              duration: 0.75,
+              stagger: 0.08,
               ease: 'power3.out',
               clearProps: 'transform,opacity',
               scrollTrigger: {
@@ -5998,11 +6106,107 @@ let currentSlideIdx = 0;
           }
         }
 
-        // 3. HERO AMBIENT SPOTLIGHT & 3D PERSPECTIVE TILT + CARD RADIAL GLARE + MAGNETIC BUTTONS
+        // --- C. MOTION.JS SPRING PHYSICS & MAGNETIC BUTTONS ---
+        if (!isMobileOrTouch) {
+          // Magnetic Pull on Primary Luxury Buttons
+          const magneticButtons = document.querySelectorAll('.btn-gold, .btn-outline, .nav-cta, .event-reel-arrow');
+          magneticButtons.forEach((btn) => {
+            btn.addEventListener('pointermove', (e) => {
+              const r = btn.getBoundingClientRect();
+              const dx = (e.clientX - (r.left + r.width * 0.5)) * 0.22;
+              const dy = (e.clientY - (r.top + r.height * 0.5)) * 0.25;
+              btn.style.transform = `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0)`;
+            }, { passive: true });
+
+            btn.addEventListener('pointerleave', () => {
+              if (window.Motion && typeof Motion.animate === 'function') {
+                try {
+                  Motion.animate(btn, 
+                    { transform: 'translate3d(0px, 0px, 0px)' }, 
+                    { type: 'spring', stiffness: 350, damping: 22 }
+                  );
+                } catch (err) {
+                  btn.style.transform = '';
+                }
+              } else {
+                btn.style.transform = '';
+              }
+            }, { passive: true });
+          });
+
+          // 3D Interactive Card Tilt with Specular Gold Glare
+          const tiltCards = document.querySelectorAll('.space-box, .event-card, .stage-card');
+          tiltCards.forEach((card) => {
+            card.addEventListener('pointermove', (e) => {
+              const r = card.getBoundingClientRect();
+              const xRatio = (e.clientX - r.left) / r.width;
+              const yRatio = (e.clientY - r.top) / r.height;
+
+              card.style.setProperty('--card-x', (xRatio * 100).toFixed(1) + '%');
+              card.style.setProperty('--card-y', (yRatio * 100).toFixed(1) + '%');
+
+              const tiltX = (yRatio - 0.5) * -5.2;
+              const tiltY = (xRatio - 0.5) * 6.0;
+              card.style.transform = `perspective(1000px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) scale3d(1.015, 1.015, 1.015)`;
+            }, { passive: true });
+
+            card.addEventListener('pointerleave', () => {
+              if (window.Motion && typeof Motion.animate === 'function') {
+                try {
+                  Motion.animate(card, 
+                    { transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)' }, 
+                    { type: 'spring', stiffness: 280, damping: 24 }
+                  );
+                } catch (err) {
+                  card.style.transform = '';
+                }
+              } else {
+                card.style.transform = '';
+              }
+            }, { passive: true });
+          });
+
+          // Ambient Golden Cursor Spotlight (Follower)
+          const cursorGlow = document.getElementById('ambient-cursor-glow');
+          if (cursorGlow) {
+            let curGlowX = window.innerWidth * 0.5, curGlowY = window.innerHeight * 0.5;
+            let targetGlowX = curGlowX, targetGlowY = curGlowY;
+            let glowActive = false;
+            let glowRaf = null;
+
+            function renderGlow() {
+              curGlowX += (targetGlowX - curGlowX) * 0.12;
+              curGlowY += (targetGlowY - curGlowY) * 0.12;
+              cursorGlow.style.transform = `translate3d(${curGlowX.toFixed(1)}px, ${curGlowY.toFixed(1)}px, 0)`;
+
+              if (Math.abs(targetGlowX - curGlowX) > 0.1 || Math.abs(targetGlowY - curGlowY) > 0.1) {
+                glowRaf = requestAnimationFrame(renderGlow);
+              } else {
+                glowRaf = null;
+              }
+            }
+
+            window.addEventListener('pointermove', (e) => {
+              targetGlowX = e.clientX;
+              targetGlowY = e.clientY;
+              if (!glowActive) {
+                glowActive = true;
+                cursorGlow.style.opacity = '1';
+              }
+              if (!glowRaf) glowRaf = requestAnimationFrame(renderGlow);
+            }, { passive: true });
+
+            document.addEventListener('mouseleave', () => {
+              cursorGlow.style.opacity = '0';
+              glowActive = false;
+            });
+          }
+        }
+
+        // --- D. HERO SPOTLIGHT & 3D PERSPECTIVE TILT ---
         const heroEl = document.querySelector('.hero');
         const spotlightEl = document.getElementById('heroSpotlight');
         const heroContentEl = document.querySelector('.hero-content');
-        let heroVisible = true;
 
         if (heroEl && spotlightEl) {
           if (!isMobileOrTouch) {
@@ -6040,14 +6244,10 @@ let currentSlideIdx = 0;
             }, { passive: true });
 
             heroEl.addEventListener('pointerleave', () => {
-              targetX = 50;
-              targetY = 45;
-              tiltX = 0;
-              tiltY = 0;
+              targetX = 50; targetY = 45; tiltX = 0; tiltY = 0;
               if (!spotRaf) spotRaf = requestAnimationFrame(updateSpotlightDesktop);
             }, { passive: true });
           } else {
-            // Mobile: gentle autonomous figure-8 golden spotlight drift while Hero is visible
             let t0 = performance.now();
             function mobileSpotlightLoop(now) {
               if (heroVisible && !document.hidden) {
@@ -6063,41 +6263,8 @@ let currentSlideIdx = 0;
           }
         }
 
-        // Card radial gold glare on hover (Desktop)
-        if (!isMobileOrTouch) {
-          document.querySelectorAll('.space-box, .event-card').forEach((card) => {
-            card.addEventListener('pointermove', (e) => {
-              const r = card.getBoundingClientRect();
-              card.style.setProperty('--card-x', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
-              card.style.setProperty('--card-y', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
-            }, { passive: true });
-          });
-
-          // Magnetic pull on primary luxury buttons (.btn-gold, .btn-outline) using Motion.js
-          document.querySelectorAll('.btn-gold, .btn-outline').forEach((btn) => {
-            btn.addEventListener('pointermove', (e) => {
-              const r = btn.getBoundingClientRect();
-              const dx = (e.clientX - (r.left + r.width * 0.5)) * 0.18;
-              const dy = (e.clientY - (r.top + r.height * 0.5)) * 0.22;
-              btn.style.transform = `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0)`;
-            }, { passive: true });
-
-            btn.addEventListener('pointerleave', () => {
-              if (window.Motion && typeof Motion.animate === 'function') {
-                try {
-                  Motion.animate(btn, { transform: 'translate3d(0px, 0px, 0px)' }, { duration: 0.45, easing: [0.16, 1, 0.3, 1] });
-                } catch (err) {
-                  btn.style.transform = '';
-                }
-              } else {
-                btn.style.transform = '';
-              }
-            }, { passive: true });
-          });
-        }
-
-        // 4. THREE.JS 3D GOLDEN DUST & SHIMMER IN HERO (Deferred to idle time, pauses automatically when offscreen)
-        const scheduleIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 350));
+        // --- E. THREE.JS 3D GOLDEN DUST & CELESTIAL CONSTELLATION IN HERO ---
+        const scheduleIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 250));
         scheduleIdle(() => {
           initHeroThreeParticles((visible) => {
             heroVisible = visible;
@@ -6105,6 +6272,9 @@ let currentSlideIdx = 0;
         });
       }
 
+      // ------------------------------------------------------------------------
+      // 3. THREE.JS 3D GOLDEN PARTICLES & CONSTELLATION ENGINE
+      // ------------------------------------------------------------------------
       function initHeroThreeParticles(onVisibilityChange) {
         if (!window.THREE) return;
         const canvas = document.getElementById('hero-webgl-canvas');
@@ -6112,6 +6282,7 @@ let currentSlideIdx = 0;
         if (!canvas || !heroEl) return;
 
         let renderer, scene, camera, points, geometry, material;
+        let lineSegments = null, lineGeometry = null, linePositions = null, lineColors = null;
         let isRendering = true;
         let mouseNormX = 0, mouseNormY = 0;
 
@@ -6143,47 +6314,73 @@ let currentSlideIdx = 0;
         resizeRenderer();
         window.addEventListener('resize', resizeRenderer, { passive: true });
 
-        // Create procedural soft golden bokeh radial texture (64x64)
+        // High-definition procedural golden champagne bokeh texture (128x128)
         const texCanvas = document.createElement('canvas');
-        texCanvas.width = 64;
-        texCanvas.height = 64;
+        texCanvas.width = 128;
+        texCanvas.height = 128;
         const ctx = texCanvas.getContext('2d');
-        const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-        grad.addColorStop(0, 'rgba(255, 244, 210, 1)');
-        grad.addColorStop(0.35, 'rgba(212, 175, 55, 0.75)');
-        grad.addColorStop(0.7, 'rgba(197, 160, 89, 0.2)');
+        const grad = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+        grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+        grad.addColorStop(0.2, 'rgba(255, 238, 190, 0.95)');
+        grad.addColorStop(0.45, 'rgba(212, 175, 55, 0.65)');
+        grad.addColorStop(0.75, 'rgba(197, 160, 89, 0.20)');
         grad.addColorStop(1, 'rgba(197, 160, 89, 0)');
         ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, 64, 64);
+        ctx.fillRect(0, 0, 128, 128);
         const particleTex = new THREE.CanvasTexture(texCanvas);
 
-        const count = isMobileOrTouch ? 40 : 95;
+        const count = isMobileOrTouch ? 45 : 110;
         const positions = new Float32Array(count * 3);
         const speeds = new Float32Array(count);
         const phases = new Float32Array(count);
+        const waveX = new Float32Array(count);
+        const waveZ = new Float32Array(count);
 
         for (let i = 0; i < count; i++) {
-          positions[i * 3] = (Math.random() - 0.5) * 24;
-          positions[i * 3 + 1] = (Math.random() - 0.5) * 14;
-          positions[i * 3 + 2] = (Math.random() - 0.5) * 8;
-          speeds[i] = 0.006 + Math.random() * 0.012;
+          positions[i * 3] = (Math.random() - 0.5) * 26;
+          positions[i * 3 + 1] = (Math.random() - 0.5) * 16;
+          positions[i * 3 + 2] = (Math.random() - 0.5) * 9;
+          speeds[i] = 0.005 + Math.random() * 0.012;
           phases[i] = Math.random() * Math.PI * 2;
+          waveX[i] = 0.4 + Math.random() * 0.8;
+          waveZ[i] = 0.3 + Math.random() * 0.6;
         }
 
         geometry = new THREE.BufferGeometry();
         geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
         material = new THREE.PointsMaterial({
-          size: isMobileOrTouch ? 0.34 : 0.28,
+          size: isMobileOrTouch ? 0.36 : 0.30,
           map: particleTex,
           transparent: true,
-          opacity: 0.68,
+          opacity: 0.75,
           depthWrite: false,
           blending: THREE.AdditiveBlending
         });
 
         points = new THREE.Points(geometry, material);
         scene.add(points);
+
+        // Delicate Golden Constellation Filaments (Desktop only)
+        if (!isMobileOrTouch) {
+          const maxLines = 80;
+          linePositions = new Float32Array(maxLines * 6);
+          lineColors = new Float32Array(maxLines * 6);
+          lineGeometry = new THREE.BufferGeometry();
+          lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+          lineGeometry.setAttribute('color', new THREE.BufferAttribute(lineColors, 3));
+
+          const lineMaterial = new THREE.LineBasicMaterial({
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.28,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+          });
+
+          lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
+          scene.add(lineSegments);
+        }
 
         if (!isMobileOrTouch) {
           heroEl.addEventListener('pointermove', (e) => {
@@ -6193,7 +6390,6 @@ let currentSlideIdx = 0;
           }, { passive: true });
         }
 
-        // Pause/resume WebGL loop when Hero leaves/enters viewport
         if ('IntersectionObserver' in window) {
           const heroObs = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
@@ -6212,31 +6408,103 @@ let currentSlideIdx = 0;
           frameCount++;
           const posAttr = geometry.attributes.position;
           const arr = posAttr.array;
-          const time = frameCount * 0.015;
+          const time = frameCount * 0.016;
 
           for (let i = 0; i < count; i++) {
             const idx = i * 3;
             arr[idx + 1] += speeds[i];
-            arr[idx] += Math.sin(time + phases[i]) * 0.004;
-            if (arr[idx + 1] > 7.5) {
-              arr[idx + 1] = -7.5;
-              arr[idx] = (Math.random() - 0.5) * 24;
+            arr[idx] += Math.sin(time * waveX[i] + phases[i]) * 0.005;
+            arr[idx + 2] += Math.cos(time * waveZ[i] + phases[i]) * 0.003;
+
+            if (arr[idx + 1] > 8.0) {
+              arr[idx + 1] = -8.0;
+              arr[idx] = (Math.random() - 0.5) * 26;
+              arr[idx + 2] = (Math.random() - 0.5) * 9;
             }
           }
           posAttr.needsUpdate = true;
 
-          points.rotation.y += (mouseNormX * 0.12 - points.rotation.y) * 0.04;
-          points.rotation.x += (mouseNormY * 0.08 - points.rotation.x) * 0.04;
+          // Update Constellation Filaments (Desktop)
+          if (lineSegments && linePositions && lineColors) {
+            let lineIdx = 0;
+            const maxDistance = 2.9;
+            const maxLines = 80;
+
+            for (let i = 0; i < count && lineIdx < maxLines; i += 2) {
+              const i3 = i * 3;
+              const x1 = arr[i3], y1 = arr[i3 + 1], z1 = arr[i3 + 2];
+
+              for (let j = i + 1; j < count && lineIdx < maxLines; j += 2) {
+                const j3 = j * 3;
+                const dx = x1 - arr[j3];
+                const dy = y1 - arr[j3 + 1];
+                const dz = z1 - arr[j3 + 2];
+                const distSq = dx * dx + dy * dy + dz * dz;
+
+                if (distSq < maxDistance * maxDistance) {
+                  const dist = Math.sqrt(distSq);
+                  const alpha = (1 - dist / maxDistance) * 0.35;
+                  const ptr = lineIdx * 6;
+
+                  linePositions[ptr] = x1;
+                  linePositions[ptr + 1] = y1;
+                  linePositions[ptr + 2] = z1;
+                  linePositions[ptr + 3] = arr[j3];
+                  linePositions[ptr + 4] = arr[j3 + 1];
+                  linePositions[ptr + 5] = arr[j3 + 2];
+
+                  // Gold color gradient: rgb(0.83, 0.68, 0.35)
+                  const r = 0.83 * alpha;
+                  const g = 0.68 * alpha;
+                  const b = 0.35 * alpha;
+
+                  lineColors[ptr] = r; lineColors[ptr + 1] = g; lineColors[ptr + 2] = b;
+                  lineColors[ptr + 3] = r; lineColors[ptr + 4] = g; lineColors[ptr + 5] = b;
+
+                  lineIdx++;
+                }
+              }
+            }
+
+            lineGeometry.attributes.position.needsUpdate = true;
+            lineGeometry.attributes.color.needsUpdate = true;
+            lineGeometry.setDrawRange(0, lineIdx * 2);
+          }
+
+          // Camera perspective parallax reaction
+          camera.position.x += (mouseNormX * 0.75 - camera.position.x) * 0.045;
+          camera.position.y += (mouseNormY * 0.45 - camera.position.y) * 0.045;
+          camera.lookAt(0, 0, 0);
+
+          points.rotation.y += (mouseNormX * 0.12 - points.rotation.y) * 0.035;
 
           renderer.render(scene, camera);
         }
         requestAnimationFrame(animateThree);
       }
 
-      if (document.readyState === 'complete') {
-        bootCoreAnimations();
+      // ------------------------------------------------------------------------
+      // 4. FAST ADAPTIVE BOOTSTRAPPER (Zero delay)
+      // ------------------------------------------------------------------------
+      function bootWhenReady() {
+        if (window.gsap && window.Lenis) {
+          bootCoreAnimations();
+        } else {
+          let attempts = 0;
+          const poll = setInterval(() => {
+            attempts++;
+            if ((window.gsap && window.Lenis) || attempts > 25) {
+              clearInterval(poll);
+              bootCoreAnimations();
+            }
+          }, 40);
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bootWhenReady);
       } else {
-        window.addEventListener('load', bootCoreAnimations, { once: true });
+        bootWhenReady();
       }
     })();
   </script>
