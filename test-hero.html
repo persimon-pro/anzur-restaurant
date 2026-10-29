@@ -2149,198 +2149,30 @@
     }
 
     /* ==========================================================================
-       EVENTS & SHOWS (ШОУ И КОНЦЕРТЫ · ВЕРТИКАЛЬНЫЕ REELS И АФИША ЗВЁЗД)
+       EVENTS & SHOWS (ШОУ И КОНЦЕРТЫ · 3D КОЛОДЫ ВИДЕО И АФИШ ЗВЁЗД)
        ========================================================================== */
     .events-section {
       position: relative;
       border-bottom: 1px solid var(--border);
       background: var(--bg);
     }
-    .events-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      border-top: 1px solid var(--border);
+    .event-deck-wrap {
+      padding: 2.8rem 1.5rem 1.5rem;
       border-bottom: 1px solid var(--border);
-    }
-    .event-card {
-      border-right: 1px solid var(--border);
-      background: var(--bg-card);
-      display: grid;
-      grid-template-columns: 268px 1fr;
-      transition: background 0.35s ease;
       position: relative;
-      overflow: hidden;
     }
-    .event-card:last-child {
-      border-right: none;
-    }
-    .event-card:hover {
-      background: #100d0b;
-    }
-
-    /* 9:16 Vertical Video Stage */
-    .event-reel-stage {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 9 / 16;
-      background: #050403;
-      border-right: 1px solid var(--border);
-      overflow: hidden;
-      user-select: none;
-    }
-    .event-reel-video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: brightness(0.92) contrast(1.05);
-      transition: opacity 0.35s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .event-card:hover .event-reel-video {
-      transform: scale(1.025);
-    }
-    .event-reel-StageGlow {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(6,5,4,0.45) 0%, transparent 24%, transparent 68%, rgba(6,5,4,0.88) 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-    .event-reel-bottom-bar {
-      position: absolute;
-      bottom: 0.85rem;
-      right: 0.85rem;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      z-index: 3;
-      gap: 0.5rem;
-    }
-    .event-reel-nav {
-      display: flex;
-      gap: 0.3rem;
-      flex-shrink: 0;
-    }
-    .event-reel-arrow {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: rgba(6, 5, 4, 0.85);
-      border: 1px solid rgba(197, 160, 89, 0.45);
-      color: var(--gold);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-size: 0.75rem;
-      padding: 0;
-    }
-    .event-reel-arrow:hover {
-      background: var(--gold);
-      color: #060504;
-      transform: scale(1.06);
-    }
-
-    /* Right Editorial Column inside Vertical Reel Card */
-    .event-body {
-      padding: 2rem 2.2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 1.25rem;
-    }
-    .event-title {
-      font-family: var(--font-serif);
-      font-size: 1.75rem;
-      font-weight: 400;
-      line-height: 1.18;
-      color: var(--text);
-      margin-bottom: 0.75rem;
-      letter-spacing: 0.02em;
-    }
-    .event-desc {
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      line-height: 1.62;
-      margin-bottom: 0;
-      font-weight: 300;
-    }
-
-    /* 4-Clip Interactive Selector Strip */
-    .reel-clips-selector {
-      display: flex;
-      flex-direction: column;
-      gap: 0.55rem;
+    .event-deck-wrap:first-of-type {
       border-top: 1px solid var(--border);
-      padding-top: 1.1rem;
     }
-    .reel-clips-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.45rem;
+    .event-deck-wrap:nth-child(even) {
+      background: radial-gradient(circle at 50% 50%, rgba(197, 160, 89, 0.04) 0%, rgba(8, 7, 6, 0.98) 72%);
     }
-    .reel-clip-btn {
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
-      padding: 0.42rem 0.55rem;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      cursor: pointer;
-      text-align: left;
-      transition: all 0.22s ease;
-      color: var(--text-muted);
-    }
-    .reel-clip-btn:hover {
-      border-color: rgba(197, 160, 89, 0.5);
-      color: var(--text);
-      background: rgba(197, 160, 89, 0.05);
-    }
-    .reel-clip-btn.is-active {
-      border-color: var(--gold);
-      background: rgba(197, 160, 89, 0.12);
-      color: var(--text);
-    }
-    .reel-clip-thumb {
-      width: 28px;
-      height: 42px;
-      border-radius: 3px;
-      object-fit: cover;
-      flex-shrink: 0;
-      border: 1px solid rgba(197, 160, 89, 0.3);
-    }
-    .reel-clip-info {
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-    }
-    .reel-clip-num {
-      font-family: var(--font-mono);
-      font-size: 0.52rem;
-      letter-spacing: 0.14em;
-      color: var(--gold);
-      text-transform: uppercase;
-    }
-    .reel-clip-name {
-      font-size: 0.74rem;
-      font-weight: 400;
-      color: inherit;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    /* Separate Compact Star Concerts Block (Концерты Звёзд · 3D Колода Афиш) */
     .star-concerts-wrap {
-      padding: 2.8rem 1.5rem 0.5rem;
-      border-bottom: 1px solid var(--border);
       background: radial-gradient(circle at 50% 50%, rgba(197, 160, 89, 0.06) 0%, rgba(8, 7, 6, 0.98) 72%);
     }
     .star-concerts-showcase {
       max-width: 780px;
-      margin: 0 auto 2.2rem;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 340px;
       align-items: center;
@@ -2370,6 +2202,13 @@
       font-style: italic;
       color: var(--gold);
     }
+    .event-desc {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.62;
+      margin-bottom: 0;
+      font-weight: 300;
+    }
     .star-active-card-meta {
       background: transparent;
       border: none;
@@ -2389,19 +2228,8 @@
       line-height: 1.54;
       margin: 0;
     }
-    .star-concerts-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-    .star-concerts-actions .btn-gold,
-    .star-concerts-actions .btn-outline {
-      padding: 0.68rem 1.15rem;
-      font-size: 0.6rem;
-    }
 
-    /* Right Column: 3D Fanned Deck of Cards (Колода из 12 Афиш) */
+    /* 3D Fanned Deck of Cards Stage */
     .star-posters-stage {
       padding: 1.8rem 1.4rem;
       display: flex;
@@ -2450,6 +2278,58 @@
       object-fit: cover;
       display: block;
       pointer-events: none;
+    }
+    .poster-deck-card video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .poster-deck-card[data-deck-pos="0"] video {
+      opacity: 1;
+    }
+    .deck-card-sound-pill {
+      position: absolute;
+      top: 0.65rem;
+      right: 0.65rem;
+      z-index: 5;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(6, 5, 4, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(197, 160, 89, 0.5);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.2s ease, background 0.2s ease;
+    }
+    .poster-deck-card[data-deck-pos="0"] .deck-card-sound-pill {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .deck-card-sound-pill:hover {
+      transform: scale(1.1);
+      background: rgba(197, 160, 89, 0.25);
+    }
+    .deck-card-sound-pill .sound-icon-loud {
+      display: none;
+    }
+    .deck-card-sound-pill.is-unmuted .sound-icon-muted {
+      display: none;
+    }
+    .deck-card-sound-pill.is-unmuted .sound-icon-loud {
+      display: block;
     }
     /* Active Top Card of the Deck */
     .poster-deck-card[data-deck-pos="0"] {
@@ -2506,6 +2386,26 @@
       gap: 0.35rem;
       z-index: 20;
     }
+    .event-reel-arrow {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(6, 5, 4, 0.85);
+      border: 1px solid rgba(197, 160, 89, 0.45);
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.75rem;
+      padding: 0;
+    }
+    .event-reel-arrow:hover {
+      background: var(--gold);
+      color: #060504;
+      transform: scale(1.06);
+    }
 
     /* Events Bottom CTA */
     .events-cta-bar {
@@ -2538,16 +2438,6 @@
       flex-wrap: wrap;
     }
 
-    @media (max-width: 1180px) {
-      .events-grid {
-        grid-template-columns: 1fr;
-      }
-      .event-card {
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        grid-template-columns: 260px 1fr;
-      }
-    }
     @media (max-width: 820px) {
       .star-concerts-showcase {
         grid-template-columns: 1fr;
@@ -2563,18 +2453,6 @@
       }
     }
     @media (max-width: 680px) {
-      .event-card {
-        grid-template-columns: 1fr;
-      }
-      .event-reel-stage {
-        max-width: 280px;
-        margin: 1.2rem auto 0;
-        border: 1px solid rgba(197, 160, 89, 0.35);
-        border-radius: 10px;
-      }
-      .event-body {
-        padding: 1.5rem 1.25rem 1.8rem;
-      }
       .poster-deck {
         width: 185px;
       }
@@ -3183,133 +3061,134 @@
       </div>
     </div>
 
-    <!-- Upper 2-Column Showcase: Vertical Video Reels (Живая Музыка & Шоу-балет) -->
-    <div class="events-grid">
-      <!-- Card 1: Живая музыка (Vertical 9:16 Video Reels) -->
-      <article class="event-card" id="cardLiveMusic">
-        <div class="event-reel-stage" id="liveMusicStage">
-          <video
-            id="liveMusicVideo"
-            class="event-reel-video"
-            muted
-            loop
-            playsinline
-            preload="none"
-            poster="events_media/music_1_poster.webp"
-            data-src="events_media/music_1.mp4"
-          ></video>
-          <div class="event-reel-StageGlow"></div>
-          <div class="event-reel-bottom-bar">
-            <div class="event-reel-nav">
-              <button type="button" class="event-reel-arrow" onclick="stepEventReel('music', -1, event)" aria-label="Предыдущее видео">‹</button>
-              <button type="button" class="event-reel-arrow" onclick="stepEventReel('music', 1, event)" aria-label="Следующее видео">›</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="event-body">
+    <!-- 1. Showcase: Живая Музыка (3D Колода Видео) -->
+    <div class="event-deck-wrap" id="wrapLiveMusic">
+      <div class="star-concerts-showcase" id="cardLiveMusic">
+        <div class="star-concerts-info">
           <div>
-            <h3 class="event-title" data-i18n="ev1_title">Живая Музыка</h3>
+            <h3 class="star-concerts-headline" data-i18n="ev1_title">Живая <em>Музыка</em></h3>
             <p class="event-desc" data-i18n="ev1_desc">
               Саксофон, скрипка, живой вокал и восточные инструменты — рубаб, тар. Джазовые импровизации, мировые хиты и восточная классика каждый вечер.
             </p>
           </div>
 
-          <div class="reel-clips-selector">
-            <div class="reel-clips-grid" id="musicClipsGrid">
-              <button type="button" class="reel-clip-btn is-active" onclick="switchEventReel('music', 0, event)">
-                <img src="events_media/music_1_poster.webp" alt="Ширин" class="reel-clip-thumb" loading="lazy" decoding="async" />
-                <span class="reel-clip-info">
-                  <span class="reel-clip-name">Ширин</span>
-                </span>
-              </button>
-              <button type="button" class="reel-clip-btn" onclick="switchEventReel('music', 1, event)">
-                <img src="events_media/music_2_poster.webp" alt="Сайдо Амонов" class="reel-clip-thumb" loading="lazy" decoding="async" />
-                <span class="reel-clip-info">
-                  <span class="reel-clip-name">Сайдо Амонов</span>
-                </span>
-              </button>
-              <button type="button" class="reel-clip-btn" onclick="switchEventReel('music', 2, event)">
-                <img src="events_media/music_3_poster.webp" alt="Фаридун Алиев" class="reel-clip-thumb" loading="lazy" decoding="async" />
-                <span class="reel-clip-info">
-                  <span class="reel-clip-name">Фаридун Алиев</span>
-                </span>
-              </button>
-              <button type="button" class="reel-clip-btn" onclick="switchEventReel('music', 3, event)">
-                <img src="events_media/music_4_poster.webp" alt="Дима и Джульетта" class="reel-clip-thumb" loading="lazy" decoding="async" />
-                <span class="reel-clip-info">
-                  <span class="reel-clip-name">Дима и Джульетта</span>
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 2: Шоу-балет (Vertical 9:16 Video Reels) -->
-      <article class="event-card" id="cardShowBallet">
-        <div class="event-reel-stage" id="showBalletStage">
-          <video
-            id="showBalletVideo"
-            class="event-reel-video"
-            muted
-            loop
-            playsinline
-            preload="none"
-            poster="events_media/dance_1_poster.webp"
-            data-src="events_media/dance_1.mp4"
-          ></video>
-          <div class="event-reel-StageGlow"></div>
-          <div class="event-reel-bottom-bar">
-            <div class="event-reel-nav">
-              <button type="button" class="event-reel-arrow" onclick="stepEventReel('dance', -1, event)" aria-label="Предыдущее видео">‹</button>
-              <button type="button" class="event-reel-arrow" onclick="stepEventReel('dance', 1, event)" aria-label="Следующее видео">›</button>
-            </div>
+          <div class="star-active-card-meta" id="musicActiveMeta">
+            <div class="star-active-artist" id="musicActiveTitle">Ширин</div>
+            <p class="star-active-caption" id="musicActiveCaption">
+              Живой вокал · Золотые мировые хиты и лирические композиции в сольном исполнении каждый вечер.
+            </p>
           </div>
         </div>
 
-        <div class="event-body">
+        <!-- 3D Fanned Deck of Cards (Колода из 4 видео) -->
+        <div class="star-posters-stage" id="musicDeckStage">
+          <div class="poster-deck" id="musicDeck" role="region" aria-label="Колода видео: Живая музыка">
+            <button type="button" class="poster-deck-card" data-card-idx="0" data-deck-pos="0" aria-current="true" onclick="handleVideoDeckCardClick('music', 0, event)" aria-label="Ширин">
+              <img src="events_media/music_1_poster.webp" alt="Ширин" loading="lazy" decoding="async" />
+              <video class="deck-card-video" muted loop playsinline preload="none" poster="events_media/music_1_poster.webp" data-src="events_media/music_1.mp4"></video>
+              <span class="deck-card-sound-pill" onclick="toggleDeckAudio('music', event)" title="Включить звук" aria-label="Звук">
+                <svg class="sound-icon-muted" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                <svg class="sound-icon-loud" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              </span>
+            </button>
+            <button type="button" class="poster-deck-card" data-card-idx="1" data-deck-pos="1" onclick="handleVideoDeckCardClick('music', 1, event)" aria-label="Сайдо Амонов">
+              <img src="events_media/music_2_poster.webp" alt="Сайдо Амонов" loading="lazy" decoding="async" />
+              <video class="deck-card-video" muted loop playsinline preload="none" poster="events_media/music_2_poster.webp" data-src="events_media/music_2.mp4"></video>
+              <span class="deck-card-sound-pill" onclick="toggleDeckAudio('music', event)" title="Включить звук" aria-label="Звук">
+                <svg class="sound-icon-muted" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                <svg class="sound-icon-loud" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              </span>
+            </button>
+            <button type="button" class="poster-deck-card" data-card-idx="2" data-deck-pos="2" onclick="handleVideoDeckCardClick('music', 2, event)" aria-label="Фаридун Алиев">
+              <img src="events_media/music_3_poster.webp" alt="Фаридун Алиев" loading="lazy" decoding="async" />
+              <video class="deck-card-video" muted loop playsinline preload="none" poster="events_media/music_3_poster.webp" data-src="events_media/music_3.mp4"></video>
+              <span class="deck-card-sound-pill" onclick="toggleDeckAudio('music', event)" title="Включить звук" aria-label="Звук">
+                <svg class="sound-icon-muted" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                <svg class="sound-icon-loud" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              </span>
+            </button>
+            <button type="button" class="poster-deck-card" data-card-idx="3" data-deck-pos="-1" onclick="handleVideoDeckCardClick('music', 3, event)" aria-label="Дима и Джульетта">
+              <img src="events_media/music_4_poster.webp" alt="Дима и Джульетта" loading="lazy" decoding="async" />
+              <video class="deck-card-video" muted loop playsinline preload="none" poster="events_media/music_4_poster.webp" data-src="events_media/music_4.mp4"></video>
+              <span class="deck-card-sound-pill" onclick="toggleDeckAudio('music', event)" title="Включить звук" aria-label="Звук">
+                <svg class="sound-icon-muted" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                <svg class="sound-icon-loud" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              </span>
+            </button>
+          </div>
+          <div class="poster-deck-nav">
+            <button type="button" class="event-reel-arrow" onclick="stepVideoDeck('music', -1, event)" aria-label="Предыдущее видео">‹</button>
+            <button type="button" class="event-reel-arrow" onclick="stepVideoDeck('music', 1, event)" aria-label="Следующее видео">›</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Showcase: Шоу-балет (3D Колода Видео) -->
+    <div class="event-deck-wrap" id="wrapShowBallet">
+      <div class="star-concerts-showcase" id="cardShowBallet">
+        <div class="star-concerts-info">
           <div>
-            <h3 class="event-title" data-i18n="ev2_title">Шоу-балет</h3>
+            <h3 class="star-concerts-headline" data-i18n="ev2_title">Шоу-<em>балет</em></h3>
             <p class="event-desc" data-i18n="ev2_desc">
               Зрелищные танцевальные постановки с профессиональными артистами, костюмированные шоу-программы, сценический свет и спецэффекты.
             </p>
           </div>
 
-          <div class="reel-clips-selector">
-            <div class="reel-clips-grid" id="danceClipsGrid">
-              <button type="button" class="reel-clip-btn is-active" onclick="switchEventReel('dance', 0, event)">
-                <img src="events_media/dance_1_poster.webp" alt="Шоу-группа №1" class="reel-clip-thumb" loading="lazy" decoding="async" />
-                <span class="reel-clip-info">
-                  <span class="reel-clip-name">Шоу-группа №1</span>
-                </span>
-              </button>
-              <button type="button" class="reel-clip-btn" onclick="switchEventReel('dance', 1, event)">
-                <img src="events_media/dance_2_poster.webp" alt="Шоу-группа №2" class="reel-clip-thumb" loading="lazy" decoding="async" />
-                <span class="reel-clip-info">
-                  <span class="reel-clip-name">Шоу-группа №2</span>
-                </span>
-              </button>
-              <button type="button" class="reel-clip-btn" onclick="switchEventReel('dance', 2, event)">
-                <img src="events_media/dance_3_poster.webp" alt="Шоу-группа №3" class="reel-clip-thumb" loading="lazy" decoding="async" />
-                <span class="reel-clip-info">
-                  <span class="reel-clip-name">Шоу-группа №3</span>
-                </span>
-              </button>
-              <button type="button" class="reel-clip-btn" onclick="switchEventReel('dance', 3, event)">
-                <img src="events_media/dance_4_poster.webp" alt="Мужской шоу-балет" class="reel-clip-thumb" loading="lazy" decoding="async" />
-                <span class="reel-clip-info">
-                  <span class="reel-clip-name">Мужской шоу-балет</span>
-                </span>
-              </button>
-            </div>
+          <div class="star-active-card-meta" id="danceActiveMeta">
+            <div class="star-active-artist" id="danceActiveTitle">Шоу-группа №1</div>
+            <p class="star-active-caption" id="danceActiveCaption">
+              Костюмированное восточное шоу · Завораживающая хореография, пластика и восточные танцевальные традиции.
+            </p>
           </div>
         </div>
-      </article>
+
+        <!-- 3D Fanned Deck of Cards (Колода из 4 видео) -->
+        <div class="star-posters-stage" id="danceDeckStage">
+          <div class="poster-deck" id="danceDeck" role="region" aria-label="Колода видео: Шоу-балет">
+            <button type="button" class="poster-deck-card" data-card-idx="0" data-deck-pos="0" aria-current="true" onclick="handleVideoDeckCardClick('dance', 0, event)" aria-label="Шоу-группа №1">
+              <img src="events_media/dance_1_poster.webp" alt="Шоу-группа №1" loading="lazy" decoding="async" />
+              <video class="deck-card-video" muted loop playsinline preload="none" poster="events_media/dance_1_poster.webp" data-src="events_media/dance_1.mp4"></video>
+              <span class="deck-card-sound-pill" onclick="toggleDeckAudio('dance', event)" title="Включить звук" aria-label="Звук">
+                <svg class="sound-icon-muted" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                <svg class="sound-icon-loud" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              </span>
+            </button>
+            <button type="button" class="poster-deck-card" data-card-idx="1" data-deck-pos="1" onclick="handleVideoDeckCardClick('dance', 1, event)" aria-label="Шоу-группа №2">
+              <img src="events_media/dance_2_poster.webp" alt="Шоу-группа №2" loading="lazy" decoding="async" />
+              <video class="deck-card-video" muted loop playsinline preload="none" poster="events_media/dance_2_poster.webp" data-src="events_media/dance_2.mp4"></video>
+              <span class="deck-card-sound-pill" onclick="toggleDeckAudio('dance', event)" title="Включить звук" aria-label="Звук">
+                <svg class="sound-icon-muted" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                <svg class="sound-icon-loud" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              </span>
+            </button>
+            <button type="button" class="poster-deck-card" data-card-idx="2" data-deck-pos="2" onclick="handleVideoDeckCardClick('dance', 2, event)" aria-label="Шоу-группа №3">
+              <img src="events_media/dance_3_poster.webp" alt="Шоу-группа №3" loading="lazy" decoding="async" />
+              <video class="deck-card-video" muted loop playsinline preload="none" poster="events_media/dance_3_poster.webp" data-src="events_media/dance_3.mp4"></video>
+              <span class="deck-card-sound-pill" onclick="toggleDeckAudio('dance', event)" title="Включить звук" aria-label="Звук">
+                <svg class="sound-icon-muted" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                <svg class="sound-icon-loud" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              </span>
+            </button>
+            <button type="button" class="poster-deck-card" data-card-idx="3" data-deck-pos="-1" onclick="handleVideoDeckCardClick('dance', 3, event)" aria-label="Мужской шоу-балет">
+              <img src="events_media/dance_4_poster.webp" alt="Мужской шоу-балет" loading="lazy" decoding="async" />
+              <video class="deck-card-video" muted loop playsinline preload="none" poster="events_media/dance_4_poster.webp" data-src="events_media/dance_4.mp4"></video>
+              <span class="deck-card-sound-pill" onclick="toggleDeckAudio('dance', event)" title="Включить звук" aria-label="Звук">
+                <svg class="sound-icon-muted" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                <svg class="sound-icon-loud" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              </span>
+            </button>
+          </div>
+          <div class="poster-deck-nav">
+            <button type="button" class="event-reel-arrow" onclick="stepVideoDeck('dance', -1, event)" aria-label="Предыдущее видео">‹</button>
+            <button type="button" class="event-reel-arrow" onclick="stepVideoDeck('dance', 1, event)" aria-label="Следующее видео">›</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Compact Dedicated Block: Концерты Звёзд · 3D Колода из 12 Афиш @anzur.rest -->
-    <div class="star-concerts-wrap">
+    <!-- 3. Showcase: Концерты Звёзд · 3D Колода из 12 Афиш @anzur.rest -->
+    <div class="event-deck-wrap star-concerts-wrap" id="wrapStarConcerts">
       <div class="star-concerts-showcase" id="cardStarConcert">
         <div class="star-concerts-info">
           <div>
@@ -5517,72 +5396,170 @@ let currentSlideIdx = 0;
     });
 
     // =========================================================================
-    // VERTICAL REELS CONTROLLER (Живая Музыка & Шоу-балет) + STAR POSTERS SLIDESHOW
-    // Zero initial weight: videos load on demand via IntersectionObserver
+    // 3D VIDEO DECKS CONTROLLER (Живая Музыка & Шоу-балет) + STAR POSTERS SLIDESHOW
+    // Zero initial weight: lightweight posters load first, active video plays on demand
     // =========================================================================
-    const EVENT_REELS_DATA = {
+    const EVENT_VIDEO_DECKS = {
       music: {
-        videoId: 'liveMusicVideo',
-        gridId: 'musicClipsGrid',
+        stageId: 'musicDeckStage',
+        deckId: 'musicDeck',
+        titleId: 'musicActiveTitle',
+        captionId: 'musicActiveCaption',
+        metaId: 'musicActiveMeta',
         currentIndex: 0,
-        clips: [
-          { src: 'events_media/music_1.mp4', poster: 'events_media/music_1_poster.webp' },
-          { src: 'events_media/music_2.mp4', poster: 'events_media/music_2_poster.webp' },
-          { src: 'events_media/music_3.mp4', poster: 'events_media/music_3_poster.webp' },
-          { src: 'events_media/music_4.mp4', poster: 'events_media/music_4_poster.webp' }
+        isUnmuted: false,
+        items: [
+          {
+            title: 'Ширин',
+            caption: 'Живой вокал · Золотые мировые хиты и лирические композиции в сольном исполнении каждый вечер.',
+            videoSrc: 'events_media/music_1.mp4',
+            poster: 'events_media/music_1_poster.webp'
+          },
+          {
+            title: 'Сайдо Амонов',
+            caption: 'Виртуозный инструментальный вечер · Саксофон, авторские аранжировки и живая музыкальная импровизация.',
+            videoSrc: 'events_media/music_2.mp4',
+            poster: 'events_media/music_2_poster.webp'
+          },
+          {
+            title: 'Фаридун Алиев',
+            caption: 'Эстрадный и национальный вокал · Романтические баллады, праздничные песни и живой сценический звук.',
+            videoSrc: 'events_media/music_3.mp4',
+            poster: 'events_media/music_3_poster.webp'
+          },
+          {
+            title: 'Дима и Джульетта',
+            caption: 'Вокальный дуэт · Мировые романтические хиты, гармония двух голосов и особенная атмосфера вечера.',
+            videoSrc: 'events_media/music_4.mp4',
+            poster: 'events_media/music_4_poster.webp'
+          }
         ]
       },
       dance: {
-        videoId: 'showBalletVideo',
-        gridId: 'danceClipsGrid',
+        stageId: 'danceDeckStage',
+        deckId: 'danceDeck',
+        titleId: 'danceActiveTitle',
+        captionId: 'danceActiveCaption',
+        metaId: 'danceActiveMeta',
         currentIndex: 0,
-        clips: [
-          { src: 'events_media/dance_1.mp4', poster: 'events_media/dance_1_poster.webp' },
-          { src: 'events_media/dance_2.mp4', poster: 'events_media/dance_2_poster.webp' },
-          { src: 'events_media/dance_3.mp4', poster: 'events_media/dance_3_poster.webp' },
-          { src: 'events_media/dance_4.mp4', poster: 'events_media/dance_4_poster.webp' }
+        isUnmuted: false,
+        items: [
+          {
+            title: 'Шоу-группа №1',
+            caption: 'Костюмированное восточное шоу · Завораживающая хореография, пластика и восточные танцевальные традиции.',
+            videoSrc: 'events_media/dance_1.mp4',
+            poster: 'events_media/dance_1_poster.webp'
+          },
+          {
+            title: 'Шоу-группа №2',
+            caption: 'Эстрадно-танцевальная программа · Современная хореография, сценический драйв и яркие образы.',
+            videoSrc: 'events_media/dance_2.mp4',
+            poster: 'events_media/dance_2_poster.webp'
+          },
+          {
+            title: 'Шоу-группа №3',
+            caption: 'Праздничная шоу-постановка · Грациозные танцевальные номера в сопровождении сценического света и спецэффектов.',
+            videoSrc: 'events_media/dance_3.mp4',
+            poster: 'events_media/dance_3_poster.webp'
+          },
+          {
+            title: 'Мужской шоу-балет',
+            caption: 'Экспрессия, сила и национальный колорит · Динамичный мужской танцевальный номер с мощной сценической подачей.',
+            videoSrc: 'events_media/dance_4.mp4',
+            poster: 'events_media/dance_4_poster.webp'
+          }
         ]
       }
     };
 
-    function switchEventReel(type, index, e) {
+    function setVideoDeckSlide(type, index, e) {
       if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
-      const group = EVENT_REELS_DATA[type];
-      if (!group) return;
-      const total = group.clips.length;
-      const nextIdx = ((index % total) + total) % total;
-      group.currentIndex = nextIdx;
-      const clip = group.clips[nextIdx];
+      const deckConfig = EVENT_VIDEO_DECKS[type];
+      if (!deckConfig) return;
+      const total = deckConfig.items.length;
+      deckConfig.currentIndex = ((index % total) + total) % total;
+      const curIdx = deckConfig.currentIndex;
+      const curItem = deckConfig.items[curIdx];
 
-      const videoEl = document.getElementById(group.videoId);
-      const gridEl = document.getElementById(group.gridId);
+      const titleEl = document.getElementById(deckConfig.titleId);
+      const captionEl = document.getElementById(deckConfig.captionId);
+      const metaEl = document.getElementById(deckConfig.metaId);
+      const deckEl = document.getElementById(deckConfig.deckId);
 
-      if (gridEl) {
-        const btns = gridEl.querySelectorAll('.reel-clip-btn');
-        btns.forEach((btn, idx) => btn.classList.toggle('is-active', idx === nextIdx));
+      if (titleEl) titleEl.textContent = curItem.title;
+      if (captionEl) captionEl.textContent = curItem.caption;
+
+      if (deckEl) {
+        const cards = deckEl.querySelectorAll('.poster-deck-card');
+        cards.forEach((card, idx) => {
+          let rel = (idx - curIdx) % total;
+          if (rel < 0) rel += total;
+          if (rel > total / 2) rel -= total;
+
+          card.setAttribute('data-deck-pos', String(rel));
+
+          const video = card.querySelector('video');
+          if (rel === 0) {
+            card.setAttribute('aria-current', 'true');
+            if (video) {
+              if (!video.getAttribute('src') && video.dataset.src) {
+                video.src = video.dataset.src;
+                video.load();
+              }
+              video.muted = !deckConfig.isUnmuted;
+              const p = video.play();
+              if (p && typeof p.catch === 'function') p.catch(() => {});
+            }
+          } else {
+            card.removeAttribute('aria-current');
+            if (video) {
+              video.pause();
+            }
+          }
+        });
       }
 
-      if (videoEl) {
-        videoEl.poster = clip.poster;
-        videoEl.dataset.src = clip.src;
-        videoEl.src = clip.src;
-        videoEl.load();
-        const playPromise = videoEl.play();
-        if (playPromise && typeof playPromise.catch === 'function') {
-          playPromise.catch(() => {});
-        }
-        if (window.Motion && typeof Motion.animate === 'function') {
-          try {
-            Motion.animate(videoEl, { opacity: [0.35, 1], transform: ['scale(1.04)', 'scale(1)'] }, { duration: 0.42, easing: [0.16, 1, 0.3, 1] });
-          } catch (err) {}
-        }
+      if (window.Motion && typeof Motion.animate === 'function' && metaEl) {
+        try {
+          Motion.animate(metaEl, { opacity: [0.4, 1], transform: ['translateY(5px)', 'translateY(0px)'] }, { duration: 0.36, easing: [0.16, 1, 0.3, 1] });
+        } catch (err) {}
       }
     }
 
-    function stepEventReel(type, delta, e) {
-      const group = EVENT_REELS_DATA[type];
-      if (!group) return;
-      switchEventReel(type, group.currentIndex + delta, e);
+    function handleVideoDeckCardClick(type, index, e) {
+      if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
+      const deckConfig = EVENT_VIDEO_DECKS[type];
+      if (!deckConfig) return;
+      if (index === deckConfig.currentIndex) {
+        toggleDeckAudio(type, e);
+      } else {
+        setVideoDeckSlide(type, index, e);
+      }
+    }
+
+    function stepVideoDeck(type, delta, e) {
+      const deckConfig = EVENT_VIDEO_DECKS[type];
+      if (!deckConfig) return;
+      setVideoDeckSlide(type, deckConfig.currentIndex + delta, e);
+    }
+
+    function toggleDeckAudio(type, e) {
+      if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
+      const deckConfig = EVENT_VIDEO_DECKS[type];
+      if (!deckConfig) return;
+      deckConfig.isUnmuted = !deckConfig.isUnmuted;
+
+      const deckEl = document.getElementById(deckConfig.deckId);
+      if (!deckEl) return;
+      const activeCard = deckEl.querySelector('.poster-deck-card[data-deck-pos="0"]');
+      if (activeCard) {
+        const video = activeCard.querySelector('video');
+        if (video) video.muted = !deckConfig.isUnmuted;
+        const pill = activeCard.querySelector('.deck-card-sound-pill');
+        if (pill) {
+          pill.classList.toggle('is-unmuted', deckConfig.isUnmuted);
+        }
+      }
     }
 
     // Star Concerts 3D Deck of Cards Data (12 Official Concert Posters from @anzur.rest)
@@ -5749,21 +5726,25 @@ let currentSlideIdx = 0;
     document.addEventListener('DOMContentLoaded', () => {
       // Fallback for CSS sibling-index() and sibling-count() on Poster Deck cards
       if (typeof CSS !== 'undefined' && typeof CSS.supports === 'function' && !CSS.supports('top: calc(sibling-index() * 1px)')) {
-        const deckCards = document.querySelectorAll('.poster-deck-card');
-        deckCards.forEach((item, index) => {
-          item.style.setProperty('--sibling-index', index + 1);
-          item.style.setProperty('--sibling-count', deckCards.length);
+        document.querySelectorAll('.poster-deck').forEach((deck) => {
+          const deckCards = deck.querySelectorAll('.poster-deck-card');
+          deckCards.forEach((item, index) => {
+            item.style.setProperty('--sibling-index', index + 1);
+            item.style.setProperty('--sibling-count', deckCards.length);
+          });
         });
       }
 
       const eventsSec = document.getElementById('events');
-      const videoIds = ['liveMusicVideo', 'showBalletVideo'];
-
       if ('IntersectionObserver' in window && eventsSec) {
         const reelObserver = new IntersectionObserver((entries) => {
           entries.forEach((entry) => {
-            videoIds.forEach((id) => {
-              const v = document.getElementById(id);
+            ['music', 'dance'].forEach((t) => {
+              const deckEl = document.getElementById(EVENT_VIDEO_DECKS[t].deckId);
+              if (!deckEl) return;
+              const activeCard = deckEl.querySelector('.poster-deck-card[data-deck-pos="0"]');
+              if (!activeCard) return;
+              const v = activeCard.querySelector('video');
               if (!v) return;
               if (entry.isIntersecting) {
                 if (!v.getAttribute('src') && v.dataset.src) {
@@ -5789,25 +5770,30 @@ let currentSlideIdx = 0;
         reelObserver.observe(eventsSec);
       }
 
-      // Touch swipe support on Star Posters Deck Stage
-      const posterStage = document.getElementById('starPostersStage');
-      if (posterStage) {
-        let touchStartX = 0;
-        let touchStartY = 0;
-        posterStage.addEventListener('touchstart', (e) => {
-          if (!e.touches || !e.touches.length) return;
-          touchStartX = e.touches[0].clientX;
-          touchStartY = e.touches[0].clientY;
-        }, { passive: true });
-        posterStage.addEventListener('touchend', (e) => {
-          if (!e.changedTouches || !e.changedTouches.length) return;
-          const dx = e.changedTouches[0].clientX - touchStartX;
-          const dy = e.changedTouches[0].clientY - touchStartY;
-          if (Math.abs(dx) > 36 && Math.abs(dx) > Math.abs(dy) * 1.25) {
-            stepStarPosterSlide(dx < 0 ? 1 : -1);
-          }
-        }, { passive: true });
-      }
+      // Touch swipe support on all Deck Stages
+      ['musicDeckStage', 'danceDeckStage', 'starPostersStage'].forEach((stageId) => {
+        const stage = document.getElementById(stageId);
+        if (stage) {
+          let touchStartX = 0;
+          let touchStartY = 0;
+          stage.addEventListener('touchstart', (e) => {
+            if (!e.touches || !e.touches.length) return;
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+          }, { passive: true });
+          stage.addEventListener('touchend', (e) => {
+            if (!e.changedTouches || !e.changedTouches.length) return;
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            const dy = e.changedTouches[0].clientY - touchStartY;
+            if (Math.abs(dx) > 36 && Math.abs(dx) > Math.abs(dy) * 1.25) {
+              const dir = dx < 0 ? 1 : -1;
+              if (stageId === 'musicDeckStage') stepVideoDeck('music', dir);
+              else if (stageId === 'danceDeckStage') stepVideoDeck('dance', dir);
+              else if (stageId === 'starPostersStage') stepStarPosterSlide(dir);
+            }
+          }, { passive: true });
+        }
+      });
     });
 
     /* ==========================================================================
