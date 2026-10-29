@@ -2149,100 +2149,103 @@
     }
 
     /* ==========================================================================
-       EVENTS & SHOWS (ШОУ И КОНЦЕРТЫ · 3D КОЛОДЫ ВИДЕО И АФИШ ЗВЁЗД)
+       EVENTS & SHOWS (ШОУ И КОНЦЕРТЫ · ТРИО 3D КОЛОД В 1 СТРОКУ НА ДЕСКТОПЕ)
        ========================================================================== */
     .events-section {
       position: relative;
       border-bottom: 1px solid var(--border);
       background: var(--bg);
     }
-    .event-deck-wrap {
-      padding: 2.8rem 1.5rem 1.5rem;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
-    .event-deck-wrap:first-of-type {
-      border-top: 1px solid var(--border);
-    }
-    .event-deck-wrap:nth-child(even) {
-      background: radial-gradient(circle at 50% 50%, rgba(197, 160, 89, 0.04) 0%, rgba(8, 7, 6, 0.98) 72%);
-    }
-    .star-concerts-wrap {
-      background: radial-gradient(circle at 50% 50%, rgba(197, 160, 89, 0.06) 0%, rgba(8, 7, 6, 0.98) 72%);
-    }
-    .star-concerts-showcase {
-      max-width: 780px;
-      margin: 0 auto;
+    .events-trio-row {
       display: grid;
-      grid-template-columns: 1fr 340px;
-      align-items: center;
-      border: none;
-      background: transparent;
-      box-shadow: none;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
       position: relative;
-      overflow: visible;
     }
-    .star-concerts-info {
-      padding: 1.5rem 2rem 1.5rem 0;
-      border: none;
+    .event-trio-col {
+      padding: 2.2rem 1.25rem 2rem;
+      border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      gap: 1.35rem;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+      background: var(--bg-card);
+      position: relative;
+      overflow: visible;
+      transition: background 0.35s ease;
     }
-    .star-concerts-headline {
+    .event-trio-col:last-child {
+      border-right: none;
+    }
+    .event-trio-col:nth-child(2) {
+      background: radial-gradient(circle at 50% 50%, rgba(197, 160, 89, 0.05) 0%, rgba(10, 8, 7, 0.98) 72%);
+    }
+    .event-trio-col:hover {
+      background: #110e0c;
+    }
+    .event-trio-header {
+      margin-bottom: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      min-height: 64px;
+    }
+    .event-trio-title {
       font-family: var(--font-serif);
-      font-size: clamp(1.75rem, 2.6vw, 2.25rem);
+      font-size: clamp(1.35rem, 1.7vw, 1.65rem);
       font-weight: 300;
-      line-height: 1.14;
+      line-height: 1.18;
       color: var(--text);
-      margin: 0 0 0.65rem;
+      margin: 0;
+      letter-spacing: 0.02em;
     }
-    .star-concerts-headline em {
+    .event-trio-title em {
       font-style: italic;
       color: var(--gold);
     }
-    .event-desc {
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      line-height: 1.62;
-      margin-bottom: 0;
-      font-weight: 300;
-    }
-    .star-active-card-meta {
-      background: transparent;
-      border: none;
-      border-left: 2px solid var(--gold);
-      padding: 0.2rem 0 0.2rem 1.1rem;
+    .event-trio-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.18rem;
       transition: opacity 0.25s ease;
     }
-    .star-active-artist {
+    .event-trio-artist {
       font-family: var(--font-serif);
-      font-size: 1.3rem;
-      color: var(--text);
-      margin-bottom: 0.35rem;
+      font-size: 1.05rem;
+      color: var(--gold);
+      font-weight: 400;
+      letter-spacing: 0.02em;
     }
-    .star-active-caption {
-      font-size: 0.8rem;
+    .event-trio-caption {
+      font-size: 0.74rem;
       color: var(--text-muted);
-      line-height: 1.54;
-      margin: 0;
+      line-height: 1.35;
+      max-width: 290px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     /* 3D Fanned Deck of Cards Stage */
-    .star-posters-stage {
-      padding: 1.8rem 1.4rem;
+    .trio-deck-stage {
+      padding: 0.8rem 0 1.2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       position: relative;
       user-select: none;
-      min-height: 410px;
+      min-height: 330px;
+      width: 100%;
     }
-    .poster-deck {
+    .trio-poster-deck {
       position: relative;
-      width: 205px;
+      width: 165px;
       aspect-ratio: 9 / 16;
       perspective: 1100px;
       margin: 0 auto;
@@ -2260,10 +2263,10 @@
       cursor: pointer;
       transform-origin: 50% 92%;
       transition: transform 0.52s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.42s ease, box-shadow 0.42s ease, filter 0.42s ease, border-color 0.3s ease;
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.65);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65);
       opacity: 0;
       pointer-events: none;
-      transform: translate3d(0, 24px, -120px) scale(0.72);
+      transform: translate3d(0, 20px, -100px) scale(0.72);
       z-index: 1;
     }
     @supports (top: calc(sibling-index() * 1px)) {
@@ -2295,11 +2298,11 @@
     }
     .deck-card-sound-pill {
       position: absolute;
-      top: 0.65rem;
-      right: 0.65rem;
+      top: 0.55rem;
+      right: 0.55rem;
       z-index: 5;
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       background: rgba(6, 5, 4, 0.75);
       backdrop-filter: blur(8px);
@@ -2337,7 +2340,7 @@
       pointer-events: auto;
       z-index: 12;
       border-color: var(--gold);
-      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.8), 0 0 26px rgba(197, 160, 89, 0.22);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.8), 0 0 22px rgba(197, 160, 89, 0.22);
       transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
       filter: brightness(1);
     }
@@ -2346,21 +2349,21 @@
       opacity: 0.92;
       pointer-events: auto;
       z-index: 10;
-      transform: translate3d(34px, 8px, -25px) rotate(6.5deg) scale(0.92);
+      transform: translate3d(26px, 6px, -20px) rotate(6deg) scale(0.92);
       filter: brightness(0.76);
     }
     .poster-deck-card[data-deck-pos="2"] {
       opacity: 0.75;
       pointer-events: auto;
       z-index: 8;
-      transform: translate3d(62px, 18px, -50px) rotate(12.5deg) scale(0.84);
+      transform: translate3d(48px, 14px, -40px) rotate(11deg) scale(0.84);
       filter: brightness(0.58);
     }
     .poster-deck-card[data-deck-pos="3"] {
       opacity: 0.48;
       pointer-events: auto;
       z-index: 6;
-      transform: translate3d(84px, 28px, -75px) rotate(18deg) scale(0.76);
+      transform: translate3d(66px, 22px, -60px) rotate(16deg) scale(0.76);
       filter: brightness(0.42);
     }
     /* Fanned Left Cards (-1, -2) */
@@ -2368,22 +2371,22 @@
       opacity: 0.88;
       pointer-events: auto;
       z-index: 9;
-      transform: translate3d(-34px, 8px, -25px) rotate(-6.5deg) scale(0.92);
+      transform: translate3d(-26px, 6px, -20px) rotate(-6deg) scale(0.92);
       filter: brightness(0.74);
     }
     .poster-deck-card[data-deck-pos="-2"] {
       opacity: 0.62;
       pointer-events: auto;
       z-index: 7;
-      transform: translate3d(-62px, 18px, -50px) rotate(-12.5deg) scale(0.84);
+      transform: translate3d(-48px, 14px, -40px) rotate(-11deg) scale(0.84);
       filter: brightness(0.54);
     }
-    .poster-deck-nav {
-      position: absolute;
-      bottom: 1rem;
-      right: 1.2rem;
+    .trio-deck-nav {
+      position: relative;
+      margin-top: 0.95rem;
       display: flex;
-      gap: 0.35rem;
+      justify-content: center;
+      gap: 0.45rem;
       z-index: 20;
     }
     .event-reel-arrow {
@@ -2438,23 +2441,22 @@
       flex-wrap: wrap;
     }
 
-    @media (max-width: 820px) {
-      .star-concerts-showcase {
+    @media (max-width: 980px) {
+      .events-trio-row {
         grid-template-columns: 1fr;
-        max-width: 480px;
       }
-      .star-concerts-info {
-        border: none;
-        padding: 1rem 0.5rem;
+      .event-trio-col {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 2.2rem 1.25rem 2rem;
       }
-      .star-posters-stage {
-        padding: 1.5rem 1.2rem 2.2rem;
-        min-height: 390px;
+      .event-trio-col:last-child {
+        border-bottom: none;
       }
     }
     @media (max-width: 680px) {
-      .poster-deck {
-        width: 185px;
+      .trio-poster-deck {
+        width: 155px;
       }
       .events-cta-bar {
         flex-direction: column;
@@ -3061,28 +3063,20 @@
       </div>
     </div>
 
-    <!-- 1. Showcase: Живая Музыка (3D Колода Видео) -->
-    <div class="event-deck-wrap" id="wrapLiveMusic">
-      <div class="star-concerts-showcase" id="cardLiveMusic">
-        <div class="star-concerts-info">
-          <div>
-            <h3 class="star-concerts-headline" data-i18n="ev1_title">Живая <em>Музыка</em></h3>
-            <p class="event-desc" data-i18n="ev1_desc">
-              Саксофон, скрипка, живой вокал и восточные инструменты — рубаб, тар. Джазовые импровизации, мировые хиты и восточная классика каждый вечер.
-            </p>
-          </div>
-
-          <div class="star-active-card-meta" id="musicActiveMeta">
-            <div class="star-active-artist" id="musicActiveTitle">Ширин</div>
-            <p class="star-active-caption" id="musicActiveCaption">
-              Живой вокал · Золотые мировые хиты и лирические композиции в сольном исполнении каждый вечер.
-            </p>
+    <!-- 3D Event Decks in 1 Desktop Row (Живая Музыка · Шоу-балет · Концерты Звёзд) -->
+    <div class="events-trio-row">
+      <!-- 1. Живая Музыка -->
+      <article class="event-card event-trio-col" id="cardLiveMusic">
+        <div class="event-trio-header">
+          <h3 class="event-trio-title" data-i18n="ev1_title">Живая <em>Музыка</em></h3>
+          <div class="event-trio-meta" id="musicActiveMeta">
+            <span class="event-trio-artist" id="musicActiveTitle">Ширин</span>
+            <span class="event-trio-caption" id="musicActiveCaption">Живой вокал · Золотые хиты</span>
           </div>
         </div>
 
-        <!-- 3D Fanned Deck of Cards (Колода из 4 видео) -->
-        <div class="star-posters-stage" id="musicDeckStage">
-          <div class="poster-deck" id="musicDeck" role="region" aria-label="Колода видео: Живая музыка">
+        <div class="star-posters-stage trio-deck-stage" id="musicDeckStage">
+          <div class="poster-deck trio-poster-deck" id="musicDeck" role="region" aria-label="Колода видео: Живая музыка">
             <button type="button" class="poster-deck-card" data-card-idx="0" data-deck-pos="0" aria-current="true" onclick="handleVideoDeckCardClick('music', 0, event)" aria-label="Ширин">
               <img src="events_media/music_1_poster.webp" alt="Ширин" loading="lazy" decoding="async" />
               <video class="deck-card-video" muted loop playsinline preload="none" poster="events_media/music_1_poster.webp" data-src="events_media/music_1.mp4"></video>
@@ -3116,36 +3110,25 @@
               </span>
             </button>
           </div>
-          <div class="poster-deck-nav">
+          <div class="poster-deck-nav trio-deck-nav">
             <button type="button" class="event-reel-arrow" onclick="stepVideoDeck('music', -1, event)" aria-label="Предыдущее видео">‹</button>
             <button type="button" class="event-reel-arrow" onclick="stepVideoDeck('music', 1, event)" aria-label="Следующее видео">›</button>
           </div>
         </div>
-      </div>
-    </div>
+      </article>
 
-    <!-- 2. Showcase: Шоу-балет (3D Колода Видео) -->
-    <div class="event-deck-wrap" id="wrapShowBallet">
-      <div class="star-concerts-showcase" id="cardShowBallet">
-        <div class="star-concerts-info">
-          <div>
-            <h3 class="star-concerts-headline" data-i18n="ev2_title">Шоу-<em>балет</em></h3>
-            <p class="event-desc" data-i18n="ev2_desc">
-              Зрелищные танцевальные постановки с профессиональными артистами, костюмированные шоу-программы, сценический свет и спецэффекты.
-            </p>
-          </div>
-
-          <div class="star-active-card-meta" id="danceActiveMeta">
-            <div class="star-active-artist" id="danceActiveTitle">Шоу-группа №1</div>
-            <p class="star-active-caption" id="danceActiveCaption">
-              Костюмированное восточное шоу · Завораживающая хореография, пластика и восточные танцевальные традиции.
-            </p>
+      <!-- 2. Шоу-балет -->
+      <article class="event-card event-trio-col" id="cardShowBallet">
+        <div class="event-trio-header">
+          <h3 class="event-trio-title" data-i18n="ev2_title">Шоу-<em>балет</em></h3>
+          <div class="event-trio-meta" id="danceActiveMeta">
+            <span class="event-trio-artist" id="danceActiveTitle">Шоу-группа №1</span>
+            <span class="event-trio-caption" id="danceActiveCaption">Костюмированное восточное шоу</span>
           </div>
         </div>
 
-        <!-- 3D Fanned Deck of Cards (Колода из 4 видео) -->
-        <div class="star-posters-stage" id="danceDeckStage">
-          <div class="poster-deck" id="danceDeck" role="region" aria-label="Колода видео: Шоу-балет">
+        <div class="star-posters-stage trio-deck-stage" id="danceDeckStage">
+          <div class="poster-deck trio-poster-deck" id="danceDeck" role="region" aria-label="Колода видео: Шоу-балет">
             <button type="button" class="poster-deck-card" data-card-idx="0" data-deck-pos="0" aria-current="true" onclick="handleVideoDeckCardClick('dance', 0, event)" aria-label="Шоу-группа №1">
               <img src="events_media/dance_1_poster.webp" alt="Шоу-группа №1" loading="lazy" decoding="async" />
               <video class="deck-card-video" muted loop playsinline preload="none" poster="events_media/dance_1_poster.webp" data-src="events_media/dance_1.mp4"></video>
@@ -3179,36 +3162,25 @@
               </span>
             </button>
           </div>
-          <div class="poster-deck-nav">
+          <div class="poster-deck-nav trio-deck-nav">
             <button type="button" class="event-reel-arrow" onclick="stepVideoDeck('dance', -1, event)" aria-label="Предыдущее видео">‹</button>
             <button type="button" class="event-reel-arrow" onclick="stepVideoDeck('dance', 1, event)" aria-label="Следующее видео">›</button>
           </div>
         </div>
-      </div>
-    </div>
+      </article>
 
-    <!-- 3. Showcase: Концерты Звёзд · 3D Колода из 12 Афиш @anzur.rest -->
-    <div class="event-deck-wrap star-concerts-wrap" id="wrapStarConcerts">
-      <div class="star-concerts-showcase" id="cardStarConcert">
-        <div class="star-concerts-info">
-          <div>
-            <h3 class="star-concerts-headline" data-i18n="ev3_title">Концерты <em>Звёзд</em></h3>
-            <p class="event-desc" data-i18n="ev3_desc">
-              Выступления популярных артистов эстрады — специальные концертные вечера с полной программой, живым звуком и VIP-местами у сцены.
-            </p>
-          </div>
-
-          <div class="star-active-card-meta" id="starActiveMeta">
-            <div class="star-active-artist" id="starActiveArtist">Dato Sofiya</div>
-            <p class="star-active-caption" id="starActiveCaption">
-              5 июня | 20:00 — Большой музыкальный вечер яркого исполнителя из Грузии («Janaya», «Chemo Gogo», «Верила», «Я любил») при участии DJ Emre Jan, Nikruz, Farid и Shirin.
-            </p>
+      <!-- 3. Концерты Звёзд -->
+      <article class="event-card event-trio-col" id="cardStarConcert">
+        <div class="event-trio-header">
+          <h3 class="event-trio-title" data-i18n="ev3_title">Концерты <em>Звёзд</em></h3>
+          <div class="event-trio-meta" id="starActiveMeta">
+            <span class="event-trio-artist" id="starActiveArtist">Dato Sofiya</span>
+            <span class="event-trio-caption" id="starActiveCaption">5 июня · «Janaya» · Большой вечер</span>
           </div>
         </div>
 
-        <!-- 3D Fanned Deck of Cards (Колода из 12 Афиш @anzur.rest) -->
-        <div class="star-posters-stage" id="starPostersStage">
-          <div class="poster-deck" id="posterDeck" role="region" aria-label="Колода афиш концертов в ресторане Анзур">
+        <div class="star-posters-stage trio-deck-stage" id="starPostersStage">
+          <div class="poster-deck trio-poster-deck" id="posterDeck" role="region" aria-label="Колода афиш концертов в ресторане Анзур">
             <button type="button" class="poster-deck-card" data-poster-idx="0" data-deck-pos="0" aria-current="true" onclick="handlePosterDeckCardClick(0, event)" aria-label="Dato Sofiya — 5 июня">
               <img src="events_media/afisha_01.webp" alt="Dato Sofiya" loading="lazy" decoding="async" />
             </button>
@@ -3246,12 +3218,12 @@
               <img src="events_media/afisha_12.webp" alt="Yulduz Usmonova" loading="lazy" decoding="async" />
             </button>
           </div>
-          <div class="poster-deck-nav">
+          <div class="poster-deck-nav trio-deck-nav">
             <button type="button" class="event-reel-arrow" onclick="stepStarPosterSlide(-1, event)" aria-label="Предыдущая афиша">‹</button>
             <button type="button" class="event-reel-arrow" onclick="stepStarPosterSlide(1, event)" aria-label="Следующая афиша">›</button>
           </div>
         </div>
-      </div>
+      </article>
     </div>
 
     <!-- CTA Bar -->
@@ -5411,25 +5383,25 @@ let currentSlideIdx = 0;
         items: [
           {
             title: 'Ширин',
-            caption: 'Живой вокал · Золотые мировые хиты и лирические композиции в сольном исполнении каждый вечер.',
+            caption: 'Живой вокал · Золотые хиты',
             videoSrc: 'events_media/music_1.mp4',
             poster: 'events_media/music_1_poster.webp'
           },
           {
             title: 'Сайдо Амонов',
-            caption: 'Виртуозный инструментальный вечер · Саксофон, авторские аранжировки и живая музыкальная импровизация.',
+            caption: 'Саксофон · Авторские аранжировки',
             videoSrc: 'events_media/music_2.mp4',
             poster: 'events_media/music_2_poster.webp'
           },
           {
             title: 'Фаридун Алиев',
-            caption: 'Эстрадный и национальный вокал · Романтические баллады, праздничные песни и живой сценический звук.',
+            caption: 'Эстрадный & национальный вокал',
             videoSrc: 'events_media/music_3.mp4',
             poster: 'events_media/music_3_poster.webp'
           },
           {
             title: 'Дима и Джульетта',
-            caption: 'Вокальный дуэт · Мировые романтические хиты, гармония двух голосов и особенная атмосфера вечера.',
+            caption: 'Вокальный дуэт · Романтические хиты',
             videoSrc: 'events_media/music_4.mp4',
             poster: 'events_media/music_4_poster.webp'
           }
@@ -5446,25 +5418,25 @@ let currentSlideIdx = 0;
         items: [
           {
             title: 'Шоу-группа №1',
-            caption: 'Костюмированное восточное шоу · Завораживающая хореография, пластика и восточные танцевальные традиции.',
+            caption: 'Костюмированное восточное шоу',
             videoSrc: 'events_media/dance_1.mp4',
             poster: 'events_media/dance_1_poster.webp'
           },
           {
             title: 'Шоу-группа №2',
-            caption: 'Эстрадно-танцевальная программа · Современная хореография, сценический драйв и яркие образы.',
+            caption: 'Эстрадная хореография & драйв',
             videoSrc: 'events_media/dance_2.mp4',
             poster: 'events_media/dance_2_poster.webp'
           },
           {
             title: 'Шоу-группа №3',
-            caption: 'Праздничная шоу-постановка · Грациозные танцевальные номера в сопровождении сценического света и спецэффектов.',
+            caption: 'Праздничная феерия & спецэффекты',
             videoSrc: 'events_media/dance_3.mp4',
             poster: 'events_media/dance_3_poster.webp'
           },
           {
             title: 'Мужской шоу-балет',
-            caption: 'Экспрессия, сила и национальный колорит · Динамичный мужской танцевальный номер с мощной сценической подачей.',
+            caption: 'Экспрессия, сила & колорит',
             videoSrc: 'events_media/dance_4.mp4',
             poster: 'events_media/dance_4_poster.webp'
           }
@@ -5566,84 +5538,84 @@ let currentSlideIdx = 0;
     const STAR_POSTERS_SLIDES = [
       {
         artist: 'Dato Sofiya',
-        caption: '5 июня | 20:00 — Большой музыкальный вечер яркого исполнителя из Грузии («Janaya», «Chemo Gogo», «Верила», «Я любил») при участии DJ Emre Jan, Nikruz, Farid и Shirin.',
+        caption: '5 июня · «Janaya» · Большой вечер',
         url: 'https://www.instagram.com/anzur.rest/reel/DY2XFL8ID9m/',
         mainWebp: 'events_media/afisha_01.webp',
         mainJpg: 'events_media/afisha_01.jpg'
       },
       {
         artist: 'Shabnam Surayo',
-        caption: '23 апреля | 20:00 — Сольный вечер яркой звезды таджикской эстрады, покорившей сердца миллионов. Живая музыка, мощная энергия и незабываемая атмосфера.',
+        caption: '23 апреля · Сольный концерт',
         url: 'https://www.instagram.com/anzur.rest/reel/DXJjX8uiOBO/',
         mainWebp: 'events_media/afisha_02.webp',
         mainJpg: 'events_media/afisha_02.jpg'
       },
       {
         artist: 'KARE',
-        caption: '5 апреля | 21:00 — Праздничный весенний концерт исполнителя хитов, которые звучат в сердце каждого. Атмосфера восточного вечера и живой звук.',
+        caption: '5 апреля · Весенний концерт',
         url: 'https://www.instagram.com/anzur.rest/reel/DWTR_J7CB0G/',
         mainWebp: 'events_media/afisha_03.webp',
         mainJpg: 'events_media/afisha_03.jpg'
       },
       {
         artist: 'Zakiya (Закия)',
-        caption: '5 февраля | 21:00 — Живое исполнение и красивый, чувственный голос. Тёплая и стильная атмосфера вечернего концерта в ресторане «Анзур».',
+        caption: '5 февраля · Живой звук & вокал',
         url: 'https://www.instagram.com/anzur.rest/reel/DULfZr3COKc/',
         mainWebp: 'events_media/afisha_04.webp',
         mainJpg: 'events_media/afisha_04.jpg'
       },
       {
         artist: 'Noziya Karomatullo',
-        caption: '17 января | 21:00 — Вечер живой музыки и настоящих эмоций. Красивый голос, тонкое чувство сцены и искренняя связь со зрителем.',
+        caption: '17 января · Сольный вечер',
         url: 'https://www.instagram.com/anzur.rest/reel/DTaS6wVCI6a/',
         mainWebp: 'events_media/afisha_05.webp',
         mainJpg: 'events_media/afisha_05.jpg'
       },
       {
         artist: 'Zulaykho Mahmadshoeva',
-        caption: '31 декабря | 21:00 — Праздничный гала-вечер в самую долгожданную ночь года. Магия живого голоса и торжественная атмосфера.',
+        caption: '31 декабря · Новогодний гала-вечер',
         url: 'https://www.instagram.com/anzur.rest/reel/DSaWM66CMQV/',
         mainWebp: 'events_media/afisha_06.webp',
         mainJpg: 'events_media/afisha_06.jpg'
       },
       {
-        artist: 'Surush Kholov · Dilshodi Fayzullo · Umedjoni Burhon',
-        caption: '30 декабря | 21:00 — Предновогодний звёздный концерт трёх популярных исполнителей на главной сцене ресторана «Анзур».',
+        artist: 'Surush Kholov · Dilshod · Umedjon',
+        caption: '30 декабря · Звёздный предновогодний вечер',
         url: 'https://www.instagram.com/anzur.rest/reel/DSaLEZViGAE/',
         mainWebp: 'events_media/afisha_07.webp',
         mainJpg: 'events_media/afisha_07.jpg'
       },
       {
         artist: 'Ваграм Вазян',
-        caption: '6 декабря | 21:00 — Большой сольный концерт в Душанбе. Голос, покоривший миллионы слушателей, и проникновенные хиты в живом исполнении.',
+        caption: '6 декабря · Большой сольный концерт',
         url: 'https://www.instagram.com/anzur.rest/reel/DRuFiZtiAAe/',
         mainWebp: 'events_media/afisha_08.webp',
         mainJpg: 'events_media/afisha_08.jpg'
       },
       {
         artist: 'Yosamin Davlatova',
-        caption: '13 декабря | 21:00 — Живая энергия и настоящие эмоции. Выступление талантливой певицы, превращающее вечер в настоящий праздник души.',
+        caption: '13 декабря · Праздничный концерт',
         url: 'https://www.instagram.com/anzur.rest/reel/DSC_7XFCBJY/',
         mainWebp: 'events_media/afisha_09.webp',
         mainJpg: 'events_media/afisha_09.jpg'
       },
       {
         artist: 'Jonibek Murodov',
-        caption: '6 ноября | 21:00 — Яркий музыкальный вечер с участием неповторимого Джонибека Муродова. Любимые песни, живой звук и праздничная атмосфера.',
+        caption: '6 ноября · Любимые золотые хиты',
         url: 'https://www.instagram.com/anzur.rest/reel/DQcEIzCCFEo/',
         mainWebp: 'events_media/afisha_10.webp',
         mainJpg: 'events_media/afisha_10.jpg'
       },
       {
         artist: 'Farzonai Khurshed',
-        caption: '23 октября | 21:00 — Особенный концерт неповторимой Фарзонаи Хуршед. Яркая харизма, живая музыка и незабываемый вечер.',
+        caption: '23 октября · Эксклюзивный вечер',
         url: 'https://www.instagram.com/anzur.rest/reel/DP1PInACD5W/',
         mainWebp: 'events_media/afisha_11.webp',
         mainJpg: 'events_media/afisha_11.jpg'
       },
       {
         artist: 'Yulduz Usmonova',
-        caption: '4 июля | 20:00 — Эксклюзивный концерт примадонны узбекской эстрады Юлдуз Усмоновой. Легендарные хиты и грандиозная сценическая энергия.',
+        caption: '4 июля · Примадонна узбекской эстрады',
         url: 'https://www.instagram.com/anzur.rest/reel/DZP6Sr1oIgH/',
         mainWebp: 'events_media/afisha_12.webp',
         mainJpg: 'events_media/afisha_12.jpg'
