@@ -975,6 +975,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: grab;
+      touch-action: pan-y;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .stage-visual:active,
+    .stage-visual.is-dragging {
+      cursor: grabbing;
     }
     .stage-visual-img {
       width: 100%;
@@ -1238,6 +1246,20 @@
       border-top: 1px solid var(--border);
       background: var(--border);
       gap: 1px;
+      user-select: none;
+      -webkit-user-select: none;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      cursor: grab;
+      touch-action: pan-x;
+    }
+    .filmstrip-wrap::-webkit-scrollbar {
+      display: none;
+    }
+    .filmstrip-wrap:active,
+    .filmstrip-wrap.is-dragging {
+      cursor: grabbing;
     }
     .filmstrip-item {
       background: var(--bg);
@@ -1410,6 +1432,7 @@
       overscroll-behavior: contain;
       touch-action: pan-y pinch-zoom;
       scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
       z-index: 12010;
       padding: max(4rem, calc(env(safe-area-inset-top, 0px) + 3.2rem)) 1rem max(4.5rem, calc(env(safe-area-inset-bottom, 0px) + 3.5rem));
       display: flex;
@@ -1425,13 +1448,16 @@
       gap: 1.5rem;
       margin: 0 auto;
     }
-    .menu-page-card {
+    .menu-page-card,
+    .spaces-photo-card {
       width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
       scroll-margin-top: max(1.5rem, calc(env(safe-area-inset-top, 0px) + 1rem));
+      scroll-snap-align: center;
+      scroll-snap-stop: normal;
     }
     .menu-page-card .menu-page-display {
       width: 100%;
@@ -2077,12 +2103,22 @@
       background: var(--bg);
       display: flex;
       flex-direction: column;
+      position: relative;
     }
     .space-media {
       width: 100%;
       aspect-ratio: 4/3;
       overflow: hidden;
       border-bottom: 1px solid var(--border);
+      position: relative;
+      cursor: grab;
+      touch-action: pan-y;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .space-media:active,
+    .space-media.is-dragging {
+      cursor: grabbing;
     }
     .space-media picture {
       width: 100%;
@@ -2093,9 +2129,68 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.8s ease;
+      transition: transform 0.8s ease, opacity 0.35s ease;
     }
     .space-box:hover .space-media img { transform: scale(1.05); }
+    .space-media-pill {
+      position: absolute;
+      bottom: 0.65rem;
+      right: 0.65rem;
+      z-index: 3;
+      background: rgba(6, 5, 4, 0.78);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(197, 160, 89, 0.38);
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.5rem;
+      border-radius: 12px;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .space-media-arrows {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+      padding: 0 0.5rem;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      z-index: 4;
+    }
+    .space-media:hover .space-media-arrows {
+      opacity: 1;
+    }
+    .space-media-arrow {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(6, 5, 4, 0.72);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(197, 160, 89, 0.45);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      line-height: 1;
+      padding: 0;
+      cursor: pointer;
+      pointer-events: auto;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+    .space-media-arrow:hover {
+      transform: scale(1.15);
+      background: rgba(197, 160, 89, 0.28);
+      border-color: var(--gold);
+    }
     .space-text {
       padding: 2.2rem 1.6rem;
     }
@@ -2116,9 +2211,26 @@
     @media (max-width: 1200px) {
       .spaces-grid { grid-template-columns: repeat(2, 1fr); }
     }
-    @media (max-width: 680px) {
-      .spaces-grid { grid-template-columns: 1fr; }
-      .space-text { padding: 1.8rem 1.4rem; }
+    @media (max-width: 768px) {
+      .spaces-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 12px;
+        padding: 0 1rem 1.4rem;
+        background: transparent;
+      }
+      .spaces-grid::-webkit-scrollbar { display: none; }
+      .space-box {
+        min-width: 82vw;
+        flex-shrink: 0;
+        scroll-snap-align: center;
+        border: 1px solid var(--border);
+      }
+      .space-text { padding: 1.6rem 1.2rem; }
+      .space-media-arrows { opacity: 1; }
     }
 
     /* ==========================================================================
@@ -2279,8 +2391,10 @@
       justify-content: center;
       position: relative;
       user-select: none;
+      -webkit-user-select: none;
       min-height: 330px;
       width: 100%;
+      touch-action: pan-y;
     }
     .trio-poster-deck {
       position: relative;
@@ -2288,6 +2402,14 @@
       aspect-ratio: 9 / 16;
       perspective: 1100px;
       margin: 0 auto;
+      cursor: grab;
+      touch-action: pan-y;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .trio-poster-deck:active,
+    .trio-poster-deck.is-dragging {
+      cursor: grabbing;
     }
     .poster-deck-card {
       --index: var(--sibling-index, 1);
@@ -2888,9 +3010,9 @@
     </div>
 
     <!-- MAIN EDITORIAL STAGE -->
-    <div class="stage-grid" id="menu-stage-container">
+    <div class="stage-grid" id="menu-stage-container" data-lenis-prevent="true">
       <!-- Left Visual Stage -->
-      <div class="stage-visual">
+      <div class="stage-visual" id="stageVisual" data-lenis-prevent="true">
         <img id="stage-img" class="stage-visual-img" src="dish_real_plov.jpg" alt="Праздничный Плов Анзур" />
         <div class="stage-visual-vignette"></div>
 
@@ -2922,7 +3044,7 @@
     </div>
 
     <!-- FILMSTRIP TRACK -->
-    <div class="filmstrip-wrap" id="filmstrip-track">
+    <div class="filmstrip-wrap" id="filmstrip-track" data-lenis-prevent="true">
       <!-- Item 0: Plov -->
       <div class="filmstrip-item is-active" data-idx="0" onclick="goToSlide(0)">
         <div class="filmstrip-thumb">
@@ -3027,14 +3149,19 @@
     </div>
   </section>
 
-  <div class="spaces-grid">
+  <div class="spaces-grid" id="spacesGrid" data-lenis-prevent="true">
     <!-- 1. Главный зал -->
-    <div class="space-box" onclick="openSpacesCategory('main_hall')" onmouseenter="preloadSpacesCategory('main_hall')" style="cursor:pointer;" title="Смотреть фотографии Главного зала">
-      <div class="space-media">
-        <picture>
+    <div class="space-box" data-cat="main_hall" onclick="handleSpaceBoxClick('main_hall', event)" onmouseenter="preloadSpacesCategory('main_hall')" style="cursor:pointer;" title="Смотреть фотографии Главного зала">
+      <div class="space-media" data-cat="main_hall" id="spaceMedia-main_hall">
+        <picture id="spacePic-main_hall">
           <source srcset="/location_photos/main_hall_01_thumb.webp" type="image/webp" />
           <img src="/location_photos/main_hall_01.jpg" alt="Главный зал ресторана Анзур" loading="lazy" decoding="async" />
         </picture>
+        <span class="space-media-pill" id="spacePill-main_hall">1 / 4</span>
+        <div class="space-media-arrows">
+          <button type="button" class="space-media-arrow prev" onclick="stepSpacePhoto('main_hall', -1, event)" aria-label="Предыдущее фото">‹</button>
+          <button type="button" class="space-media-arrow next" onclick="stepSpacePhoto('main_hall', 1, event)" aria-label="Следующее фото">›</button>
+        </div>
       </div>
       <div class="space-text">
         <h3 class="space-title" data-i18n="space1_title">Главный зал</h3>
@@ -3045,12 +3172,17 @@
     </div>
 
     <!-- 2. Летняя терраса -->
-    <div class="space-box" onclick="openSpacesCategory('terrace')" onmouseenter="preloadSpacesCategory('terrace')" style="cursor:pointer;" title="Смотреть фотографии Летней террасы">
-      <div class="space-media">
-        <picture>
+    <div class="space-box" data-cat="terrace" onclick="handleSpaceBoxClick('terrace', event)" onmouseenter="preloadSpacesCategory('terrace')" style="cursor:pointer;" title="Смотреть фотографии Летней террасы">
+      <div class="space-media" data-cat="terrace" id="spaceMedia-terrace">
+        <picture id="spacePic-terrace">
           <source srcset="/location_photos/terrace_01_thumb.webp" type="image/webp" />
           <img src="/location_photos/terrace_01.jpg" alt="Летняя терраса ресторана Анзур" loading="lazy" decoding="async" />
         </picture>
+        <span class="space-media-pill" id="spacePill-terrace">1 / 3</span>
+        <div class="space-media-arrows">
+          <button type="button" class="space-media-arrow prev" onclick="stepSpacePhoto('terrace', -1, event)" aria-label="Предыдущее фото">‹</button>
+          <button type="button" class="space-media-arrow next" onclick="stepSpacePhoto('terrace', 1, event)" aria-label="Следующее фото">›</button>
+        </div>
       </div>
       <div class="space-text">
         <h3 class="space-title" data-i18n="space_terrace_title">Летняя терраса</h3>
@@ -3061,12 +3193,17 @@
     </div>
 
     <!-- 3. Тихая веранда -->
-    <div class="space-box" onclick="openSpacesCategory('veranda')" onmouseenter="preloadSpacesCategory('veranda')" style="cursor:pointer;" title="Смотреть фотографии Тихой веранды">
-      <div class="space-media">
-        <picture>
+    <div class="space-box" data-cat="veranda" onclick="handleSpaceBoxClick('veranda', event)" onmouseenter="preloadSpacesCategory('veranda')" style="cursor:pointer;" title="Смотреть фотографии Тихой веранды">
+      <div class="space-media" data-cat="veranda" id="spaceMedia-veranda">
+        <picture id="spacePic-veranda">
           <source srcset="/location_photos/veranda_02_thumb.webp" type="image/webp" />
           <img src="/location_photos/veranda_02.jpg" alt="Тихая веранда ресторана Анзур" loading="lazy" decoding="async" />
         </picture>
+        <span class="space-media-pill" id="spacePill-veranda">1 / 2</span>
+        <div class="space-media-arrows">
+          <button type="button" class="space-media-arrow prev" onclick="stepSpacePhoto('veranda', -1, event)" aria-label="Предыдущее фото">‹</button>
+          <button type="button" class="space-media-arrow next" onclick="stepSpacePhoto('veranda', 1, event)" aria-label="Следующее фото">›</button>
+        </div>
       </div>
       <div class="space-text">
         <h3 class="space-title" data-i18n="space2_title">Тихая веранда</h3>
@@ -3077,12 +3214,17 @@
     </div>
 
     <!-- 4. Караоке -->
-    <div class="space-box" onclick="openSpacesCategory('karaoke')" onmouseenter="preloadSpacesCategory('karaoke')" style="cursor:pointer;" title="Смотреть фотографии Караоке">
-      <div class="space-media">
-        <picture>
+    <div class="space-box" data-cat="karaoke" onclick="handleSpaceBoxClick('karaoke', event)" onmouseenter="preloadSpacesCategory('karaoke')" style="cursor:pointer;" title="Смотреть фотографии Караоке">
+      <div class="space-media" data-cat="karaoke" id="spaceMedia-karaoke">
+        <picture id="spacePic-karaoke">
           <source srcset="/location_photos/karaoke_01_thumb.webp" type="image/webp" />
           <img src="/location_photos/karaoke_01.jpg" alt="VIP-кабины с караоке Анзур" loading="lazy" decoding="async" />
         </picture>
+        <span class="space-media-pill" id="spacePill-karaoke">1 / 2</span>
+        <div class="space-media-arrows">
+          <button type="button" class="space-media-arrow prev" onclick="stepSpacePhoto('karaoke', -1, event)" aria-label="Предыдущее фото">‹</button>
+          <button type="button" class="space-media-arrow next" onclick="stepSpacePhoto('karaoke', 1, event)" aria-label="Следующее фото">›</button>
+        </div>
       </div>
       <div class="space-text">
         <h3 class="space-title" data-i18n="space3_title">Караоке & VIP-кабины</h3>
@@ -3117,7 +3259,7 @@
           </div>
         </div>
 
-        <div class="star-posters-stage trio-deck-stage" id="musicDeckStage">
+        <div class="star-posters-stage trio-deck-stage" id="musicDeckStage" data-lenis-prevent="true">
           <div class="poster-deck trio-poster-deck" id="musicDeck" role="region" aria-label="Колода видео: Живая музыка">
             <button type="button" class="poster-deck-card" data-card-idx="0" data-deck-pos="0" aria-current="true" onclick="handleVideoDeckCardClick('music', 0, event)" aria-label="Ширин">
               <img src="events_media/music_1_poster.webp" alt="Ширин" loading="lazy" decoding="async" />
@@ -3169,7 +3311,7 @@
           </div>
         </div>
 
-        <div class="star-posters-stage trio-deck-stage" id="danceDeckStage">
+        <div class="star-posters-stage trio-deck-stage" id="danceDeckStage" data-lenis-prevent="true">
           <div class="poster-deck trio-poster-deck" id="danceDeck" role="region" aria-label="Колода видео: Шоу-балет">
             <button type="button" class="poster-deck-card" data-card-idx="0" data-deck-pos="0" aria-current="true" onclick="handleVideoDeckCardClick('dance', 0, event)" aria-label="Шоу-группа №1">
               <img src="events_media/dance_1_poster.webp" alt="Шоу-группа №1" loading="lazy" decoding="async" />
@@ -3221,7 +3363,7 @@
           </div>
         </div>
 
-        <div class="star-posters-stage trio-deck-stage" id="starPostersStage">
+        <div class="star-posters-stage trio-deck-stage" id="starPostersStage" data-lenis-prevent="true">
           <div class="poster-deck trio-poster-deck" id="posterDeck" role="region" aria-label="Колода афиш концертов в ресторане Анзур">
             <button type="button" class="poster-deck-card" data-poster-idx="0" data-deck-pos="0" aria-current="true" onclick="handlePosterDeckCardClick(0, event)" aria-label="Dato Sofiya — 5 июня">
               <img src="events_media/afisha_01.webp" alt="Dato Sofiya" loading="lazy" decoding="async" />
@@ -5064,12 +5206,68 @@ let currentSlideIdx = 0;
       }
     }
 
-    function openSpacesCategory(cat) {
+    const SPACES_PREVIEWS = {
+      main_hall: { idx: 0, photos: SPACES_DATA.main_hall.photos },
+      terrace: { idx: 0, photos: SPACES_DATA.terrace.photos },
+      veranda: { idx: 0, photos: SPACES_DATA.veranda.photos },
+      karaoke: { idx: 0, photos: SPACES_DATA.karaoke.photos }
+    };
+
+    let wasSpaceDragged = false;
+
+    function stepSpacePhoto(cat, delta, e) {
+      if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
+      const cfg = SPACES_PREVIEWS[cat];
+      if (!cfg) return;
+      const total = cfg.photos.length;
+      cfg.idx = ((cfg.idx + delta) % total + total) % total;
+      updateSpaceBoxPhoto(cat);
+    }
+
+    function updateSpaceBoxPhoto(cat) {
+      const cfg = SPACES_PREVIEWS[cat];
+      if (!cfg) return;
+      const mediaEl = document.getElementById('spaceMedia-' + cat);
+      const pillEl = document.getElementById('spacePill-' + cat);
+      if (!mediaEl) return;
+
+      const imgSrc = cfg.photos[cfg.idx];
+      const webpSrc = toWebpUrl(imgSrc);
+      const img = mediaEl.querySelector('img');
+      const source = mediaEl.querySelector('source');
+
+      if (img) {
+        if (window.Motion && typeof Motion.animate === 'function') {
+          try {
+            Motion.animate(img, { opacity: [0.35, 1], scale: [1.04, 1] }, { duration: 0.35, easing: [0.16, 1, 0.3, 1] });
+          } catch (err) {}
+        }
+        img.src = imgSrc;
+      }
+      if (source) {
+        source.srcset = webpSrc;
+      }
+      if (pillEl) {
+        pillEl.textContent = `${cfg.idx + 1} / ${cfg.photos.length}`;
+      }
+    }
+
+    function handleSpaceBoxClick(cat, e) {
+      if (wasSpaceDragged) {
+        wasSpaceDragged = false;
+        return;
+      }
+      const cfg = SPACES_PREVIEWS[cat];
+      const initialIdx = cfg ? cfg.idx : 0;
+      openSpacesCategory(cat, initialIdx);
+    }
+
+    function openSpacesCategory(cat, initialIndex = 0) {
       if (cat && SPACES_DATA[cat] && SPACES_DATA[cat].photos) {
         const catData = SPACES_DATA[cat];
         currentSpacesList = catData.photos.map(src => ({ src, cat: catData.cat }));
-        currentSpacesIndex = 0;
-        openSpacesModal(0, false);
+        currentSpacesIndex = (typeof initialIndex === 'number' && initialIndex >= 0 && initialIndex < currentSpacesList.length) ? initialIndex : 0;
+        openSpacesModal(currentSpacesIndex, false);
       } else {
         currentSpacesList = ALL_SPACES_ITEMS;
         currentSpacesIndex = 0;
@@ -5544,6 +5742,7 @@ let currentSlideIdx = 0;
     }
 
     function handleVideoDeckCardClick(type, index, e) {
+      if (window._eventDeckDragged) return;
       if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
       const deckConfig = EVENT_VIDEO_DECKS[type];
       if (!deckConfig) return;
@@ -5715,6 +5914,7 @@ let currentSlideIdx = 0;
     }
 
     function handlePosterDeckCardClick(index, e) {
+      if (window._eventDeckDragged) return;
       if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
       if (index === currentStarSlideIdx) {
         const slide = STAR_POSTERS_SLIDES[currentStarSlideIdx];
@@ -5787,30 +5987,278 @@ let currentSlideIdx = 0;
         reelObserver.observe(eventsSec);
       }
 
-      // Touch swipe support on all Deck Stages
-      ['musicDeckStage', 'danceDeckStage', 'starPostersStage'].forEach((stageId) => {
-        const stage = document.getElementById(stageId);
-        if (stage) {
-          let touchStartX = 0;
-          let touchStartY = 0;
-          stage.addEventListener('touchstart', (e) => {
-            if (!e.touches || !e.touches.length) return;
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
-          }, { passive: true });
-          stage.addEventListener('touchend', (e) => {
-            if (!e.changedTouches || !e.changedTouches.length) return;
-            const dx = e.changedTouches[0].clientX - touchStartX;
-            const dy = e.changedTouches[0].clientY - touchStartY;
-            if (Math.abs(dx) > 36 && Math.abs(dx) > Math.abs(dy) * 1.25) {
-              const dir = dx < 0 ? 1 : -1;
-              if (stageId === 'musicDeckStage') stepVideoDeck('music', dir);
-              else if (stageId === 'danceDeckStage') stepVideoDeck('dance', dir);
-              else if (stageId === 'starPostersStage') stepStarPosterSlide(dir);
+      // =========================================================================
+      // UNIFIED LUXURY SCROLL & SWIPE GESTURE CONTROLLER
+      // Seamless wheel, drag, trackpad & touch navigation for:
+      // 1. Kinetic Menu showcase & filmstrip
+      // 2. Spaces location photos (cards & modal gallery)
+      // 3. 3D Event video & concert poster decks
+      // =========================================================================
+      function attachWheelStep(element, onStep, options = {}) {
+        if (!element) return;
+        const threshold = options.threshold || 26;
+        const cooldown = options.cooldown || 280;
+        let accumulatedDelta = 0;
+        let lastStepTime = 0;
+        let resetTimer = null;
+
+        element.addEventListener('wheel', (e) => {
+          const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+          if (Math.abs(delta) < 2) return;
+
+          if (e.cancelable) e.preventDefault();
+          e.stopPropagation();
+
+          accumulatedDelta += delta;
+          const now = Date.now();
+
+          if (resetTimer) clearTimeout(resetTimer);
+          resetTimer = setTimeout(() => { accumulatedDelta = 0; }, 180);
+
+          if (Math.abs(accumulatedDelta) >= threshold && (now - lastStepTime) >= cooldown) {
+            const dir = accumulatedDelta > 0 ? 1 : -1;
+            onStep(dir, e);
+            lastStepTime = now;
+            accumulatedDelta = 0;
+          }
+        }, { passive: false });
+      }
+
+      function attachDragStep(element, onStep, options = {}) {
+        if (!element) return;
+        const threshold = options.threshold || 30;
+        let startX = 0;
+        let startY = 0;
+        let isDown = false;
+        let hasDragged = false;
+
+        element.addEventListener('pointerdown', (e) => {
+          if (e.button !== 0 && e.pointerType === 'mouse') return;
+          if (e.target && e.target.closest('button.deck-card-sound-pill, button.event-reel-arrow, button.space-media-arrow, button.stage-img-arrow')) return;
+          isDown = true;
+          hasDragged = false;
+          startX = e.clientX;
+          startY = e.clientY;
+          element.classList.add('is-dragging');
+        });
+
+        window.addEventListener('pointermove', (e) => {
+          if (!isDown) return;
+          const dx = e.clientX - startX;
+          const dy = e.clientY - startY;
+          if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
+            hasDragged = true;
+          }
+        });
+
+        window.addEventListener('pointerup', (e) => {
+          if (!isDown) return;
+          isDown = false;
+          element.classList.remove('is-dragging');
+          const dx = e.clientX - startX;
+          const dy = e.clientY - startY;
+          if (hasDragged && Math.abs(dx) >= threshold && Math.abs(dx) > Math.abs(dy) * 0.75) {
+            const dir = dx < 0 ? 1 : -1;
+            onStep(dir, e);
+            if (options.onDragEnd) options.onDragEnd(true);
+          } else if (hasDragged && options.onDragEnd) {
+            options.onDragEnd(true);
+          }
+        });
+
+        window.addEventListener('pointercancel', () => {
+          if (isDown) {
+            isDown = false;
+            element.classList.remove('is-dragging');
+          }
+        });
+      }
+
+      function initInteractiveScrollGestures() {
+        // --- 1. SHOW CARD DECKS (Живая Музыка · Шоу-балет · Концерты Звёзд) ---
+        const musicStage = document.getElementById('musicDeckStage') || document.getElementById('musicDeck');
+        if (musicStage) {
+          attachWheelStep(musicStage, (dir, e) => {
+            stepVideoDeck('music', dir, e);
+          }, { threshold: 24, cooldown: 280 });
+
+          attachDragStep(musicStage, (dir, e) => {
+            stepVideoDeck('music', dir, e);
+          }, {
+            threshold: 28,
+            onDragEnd: (dragged) => {
+              if (dragged) {
+                window._eventDeckDragged = true;
+                setTimeout(() => { window._eventDeckDragged = false; }, 250);
+              }
             }
-          }, { passive: true });
+          });
         }
-      });
+
+        const danceStage = document.getElementById('danceDeckStage') || document.getElementById('danceDeck');
+        if (danceStage) {
+          attachWheelStep(danceStage, (dir, e) => {
+            stepVideoDeck('dance', dir, e);
+          }, { threshold: 24, cooldown: 280 });
+
+          attachDragStep(danceStage, (dir, e) => {
+            stepVideoDeck('dance', dir, e);
+          }, {
+            threshold: 28,
+            onDragEnd: (dragged) => {
+              if (dragged) {
+                window._eventDeckDragged = true;
+                setTimeout(() => { window._eventDeckDragged = false; }, 250);
+              }
+            }
+          });
+        }
+
+        const starStage = document.getElementById('starPostersStage') || document.getElementById('posterDeck');
+        if (starStage) {
+          attachWheelStep(starStage, (dir, e) => {
+            stepStarPosterSlide(dir, e);
+          }, { threshold: 24, cooldown: 280 });
+
+          attachDragStep(starStage, (dir, e) => {
+            stepStarPosterSlide(dir, e);
+          }, {
+            threshold: 28,
+            onDragEnd: (dragged) => {
+              if (dragged) {
+                window._eventDeckDragged = true;
+                setTimeout(() => { window._eventDeckDragged = false; }, 250);
+              }
+            }
+          });
+        }
+
+        // Touch swipe support for mobile thumbs on all 3 Deck Stages
+        ['musicDeckStage', 'danceDeckStage', 'starPostersStage'].forEach((stageId) => {
+          const stage = document.getElementById(stageId);
+          if (stage) {
+            let touchStartX = 0;
+            let touchStartY = 0;
+            stage.addEventListener('touchstart', (e) => {
+              if (!e.touches || !e.touches.length) return;
+              touchStartX = e.touches[0].clientX;
+              touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+            stage.addEventListener('touchend', (e) => {
+              if (!e.changedTouches || !e.changedTouches.length) return;
+              const dx = e.changedTouches[0].clientX - touchStartX;
+              const dy = e.changedTouches[0].clientY - touchStartY;
+              if (Math.abs(dx) > 28 && Math.abs(dx) > Math.abs(dy) * 1.1) {
+                const dir = dx < 0 ? 1 : -1;
+                if (stageId === 'musicDeckStage') stepVideoDeck('music', dir);
+                else if (stageId === 'danceDeckStage') stepVideoDeck('dance', dir);
+                else if (stageId === 'starPostersStage') stepStarPosterSlide(dir);
+              }
+            }, { passive: true });
+          }
+        });
+
+        // --- 2. KINETIC MENU SHOWCASE & FILMSTRIP ---
+        const menuVisual = document.querySelector('.stage-visual') || document.getElementById('menu-stage-container');
+        if (menuVisual) {
+          attachWheelStep(menuVisual, (dir) => {
+            if (dir > 0) nextSlide();
+            else prevSlide();
+          }, { threshold: 24, cooldown: 320 });
+
+          attachDragStep(menuVisual, (dir) => {
+            if (dir > 0) nextSlide();
+            else prevSlide();
+          }, { threshold: 30 });
+        }
+
+        const filmstrip = document.getElementById('filmstrip-track');
+        if (filmstrip) {
+          filmstrip.addEventListener('wheel', (e) => {
+            const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+            const atStart = filmstrip.scrollLeft <= 0 && delta < 0;
+            const atEnd = filmstrip.scrollLeft >= (filmstrip.scrollWidth - filmstrip.clientWidth - 2) && delta > 0;
+            if (!atStart && !atEnd) {
+              if (e.cancelable) e.preventDefault();
+              e.stopPropagation();
+              filmstrip.scrollLeft += delta * 1.15;
+            }
+          }, { passive: false });
+
+          let isFilmDown = false;
+          let filmStartX = 0;
+          let filmScrollLeft = 0;
+          let filmMoved = false;
+
+          filmstrip.addEventListener('pointerdown', (e) => {
+            if (e.button !== 0 && e.pointerType === 'mouse') return;
+            isFilmDown = true;
+            filmMoved = false;
+            filmStartX = e.clientX;
+            filmScrollLeft = filmstrip.scrollLeft;
+            filmstrip.classList.add('is-dragging');
+          });
+
+          window.addEventListener('pointermove', (e) => {
+            if (!isFilmDown) return;
+            const walk = (e.clientX - filmStartX) * 1.25;
+            if (Math.abs(walk) > 6) filmMoved = true;
+            filmstrip.scrollLeft = filmScrollLeft - walk;
+          });
+
+          window.addEventListener('pointerup', () => {
+            if (isFilmDown) {
+              isFilmDown = false;
+              filmstrip.classList.remove('is-dragging');
+            }
+          });
+        }
+
+        // --- 3. SPACES LOCATION PHOTOS (Cards & Modal Gallery) ---
+        ['main_hall', 'terrace', 'veranda', 'karaoke'].forEach((cat) => {
+          const mediaEl = document.getElementById('spaceMedia-' + cat);
+          if (mediaEl) {
+            attachWheelStep(mediaEl, (dir, e) => {
+              stepSpacePhoto(cat, dir, e);
+            }, { threshold: 24, cooldown: 280 });
+
+            attachDragStep(mediaEl, (dir, e) => {
+              stepSpacePhoto(cat, dir, e);
+            }, {
+              threshold: 28,
+              onDragEnd: (dragged) => {
+                if (dragged) {
+                  wasSpaceDragged = true;
+                  setTimeout(() => { wasSpaceDragged = false; }, 250);
+                }
+              }
+            });
+          }
+        });
+
+        const modalSpacesStage = document.getElementById('modalSpacesStage');
+        if (modalSpacesStage) {
+          attachWheelStep(modalSpacesStage, (dir, e) => {
+            if (dir > 0) nextSpacesPage(e);
+            else prevSpacesPage(e);
+          }, { threshold: 26, cooldown: 300 });
+
+          attachDragStep(modalSpacesStage, (dir, e) => {
+            if (dir > 0) nextSpacesPage(e);
+            else prevSpacesPage(e);
+          }, { threshold: 32 });
+        }
+
+        const modalMenuStage = document.getElementById('modalMenuStage');
+        if (modalMenuStage) {
+          attachWheelStep(modalMenuStage, (dir, e) => {
+            if (dir > 0) nextModalMenuPage(e);
+            else prevModalMenuPage(e);
+          }, { threshold: 28, cooldown: 320 });
+        }
+      }
+
+      initInteractiveScrollGestures();
     });
 
     /* ==========================================================================
