@@ -6242,21 +6242,7 @@ let currentSlideIdx = 0;
         // --- 2. KINETIC MENU SHOWCASE & FILMSTRIP ---
         const menuVisual = document.getElementById('stageVisual') || document.querySelector('.stage-visual');
         if (menuVisual) {
-          attachWheelStep(menuVisual, (dir) => {
-            if (dir > 0) nextSlide();
-            else prevSlide();
-          }, {
-            threshold: 24,
-            cooldown: 320,
-            shouldPreventDefault: (dir, isHorizontal) => {
-              if (isHorizontal) return true; // Horizontal swipe always flips dishes
-              // When scrolling vertically: step dishes 0 to 6, but allow natural page scroll at edges
-              if (dir > 0 && currentSlideIdx >= DISHES.length - 1) return false;
-              if (dir < 0 && currentSlideIdx <= 0) return false;
-              return true;
-            }
-          });
-
+          // Wheel scroll removed: scrolling with mouse wheel over food photo scrolls webpage naturally
           attachDragStep(menuVisual, (dir) => {
             if (dir > 0) nextSlide();
             else prevSlide();
@@ -6309,10 +6295,7 @@ let currentSlideIdx = 0;
         ['main_hall', 'terrace', 'veranda', 'karaoke'].forEach((cat) => {
           const mediaEl = document.getElementById('spaceMedia-' + cat);
           if (mediaEl) {
-            attachWheelStep(mediaEl, (dir, e) => {
-              stepSpacePhoto(cat, dir, e);
-            }, { threshold: 24, cooldown: 280 });
-
+            // Wheel scroll removed: wheel over small preview cards scrolls webpage naturally
             attachDragStep(mediaEl, (dir, e) => {
               stepSpacePhoto(cat, dir, e);
             }, {
