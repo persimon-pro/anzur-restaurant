@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ANZUR RESTAURANT — 3D Scrollytelling</title>
+  <link rel="icon" href="anzur_bulb_pure.png" type="image/png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Verified CDNs: GSAP, ScrollTrigger, Three.js, Lenis, Motion -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
+
+  <style>
+    :root {
+      --bg:          #060504;
+      --bg-card:     #0C0A09;
+      --border:      rgba(197, 160, 89, 0.22);
+      --gold:        #C5A059;
+      --gold-bright: #E6C786;
+      --gold-deep:   #8E6B28;
+      --text:        #F5F2EB;
+      --font-serif:  'Cormorant Garamond', Georgia, serif;
+      --font-sans:   'Space Grotesk', -apple-system, sans-serif;
+      --font-mono:   'Space Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::-webkit-scrollbar { width: 2px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+    /* ==========================================================================
+       PHASE 0: ARCHITECTURAL BLUEPRINT SPLASH CURTAIN
+       Draws the Anzur Emblem as a golden geometric CAD blueprint before
+       morphing into the 3D sculpted gold model
+       ========================================================================== */
+    #blueprint-splash {
+      position: fixed;
+      inset: 0;
+      z-index: 4;
+      background: radial-gradient(circle at 50% 50%, #0d0a07 0%, #040302 75%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .blueprint-svg {
+      width: min(460px, 78vmin);
+      height: min(460px, 78vmin);
+      overflow: visible;
+    }
+
+    /* Architectural CAD construction lines */
+    .bp-guide {
+      stroke: rgba(197, 160, 89, 0.28);
+      stroke-width: 0.75;
+      fill: none;
+      stroke-dasharray: 600;
+      stroke-dashoffset: 600;
+    }
+    .bp-guide-dashed {
+      stroke: rgba(230, 199, 134, 0.32);
+      stroke-width: 0.75;
+      stroke-dasharray: 4 6;
+      fill: none;
+      opacity: 0;
+    }
+
+    /* Primary Blueprint Contours of the Anzur Bulb */
+    .bp-contour {
+      stroke: #E6C786;
+      stroke-width: 1.6;
+      fill: none;
+      filter: drop-shadow(0 0 10px rgba(230, 199, 134, 0.45));
+      stroke-dasharray: 900;
+      stroke-dashoffset: 900;
+    }
+    .bp-contour-thick {
+      stroke: url(#bpGoldGrad);
+      stroke-width: 22;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      opacity: 0;
+    }
+
+    /* ==========================================================================
+       LAYER 1: FIXED FULLSCREEN WEBGL CANVAS (ORYZO ARCHITECTURE)
+       Holds the 3D Sculpted Anzur Emblem that morphs from blueprint & travels
+       ========================================================================== */
+    #webgl-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    /* Interactive 3D Ambient Spotlight */
+    .ambient-spotlight {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: radial-gradient(
+        circle 520px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(230, 199, 134, 0.16) 0%,
+        rgba(197, 160, 89, 0.04) 48%,
+        transparent 78%
+      );
+      mix-blend-mode: screen;
+    }
+
+    /* ==========================================================================
+       LAYER 2: SCROLLABLE DOM CONTENT (#ui) SYNCED WITH THE 3D MODEL
+       ========================================================================== */
+    #ui {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* ==========================================================================
+       STAGE 1: HERO (STRICTLY MATCHING USER SCREENSHOT — ZERO VISUAL CLUTTER)
+       ========================================================================== */
+    .hero {
+      position: relative;
+      width: 100vw;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-backdrop {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      background: #060504;
+    }
+    .hero-backdrop-video {
+      position: absolute;
+      inset: -3%;
+      width: 106%;
+      height: 106%;
+      object-fit: cover;
+      object-position: center;
+      filter: contrast(1.06) brightness(0.75);
+      will-change: transform;
+    }
+    .hero-backdrop-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, rgba(6, 5, 4, 0.42) 0%, rgba(6, 5, 4, 0.78) 65%, rgba(6, 5, 4, 0.96) 100%),
+        linear-gradient(to bottom, rgba(6, 5, 4, 0.62) 0%, rgba(6, 5, 4, 0.35) 45%, rgba(6, 5, 4, 0.96) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 12;
+      text-align: center;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      /* Space at the top for the 3D WebGL Anzur Bulb sitting right above ANZUR */
+      padding-top: clamp(150px, 21vh, 210px);
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    /* Wordmark matching screenshot: ANZUR + RESTAURANT */
+    .hero-wordmark {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2.2rem;
+      user-select: none;
+    }
+    .hero-wordmark-svg {
+      width: clamp(220px, 28vw, 330px);
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.85));
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-mono);
+      font-size: clamp(0.72rem, 1.1vw, 0.86rem);
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2.8rem;
+      line-height: 2.0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+    }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.1rem 3.1rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid var(--gold);
+      background: var(--gold);
+      color: #060504;
+      text-decoration: none;
+      transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .btn-gold:hover {
+      background: var(--gold-bright);
+      border-color: var(--gold-bright);
+      box-shadow: 0 12px 36px rgba(197, 160, 89, 0.32);
+    }
+
+    /* ==========================================================================
+       SCROLLYTELLING STORY SECTIONS (3D LOGO MOVES LEFT / RIGHT / MACRO)
+       ========================================================================== */
+    .story-section {
+      position: relative;
+      width: 100vw;
+      min-height: 105vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 6vw;
+    }
+
+    .story-grid {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .story-col-left {
+      grid-column: 1 / span 6;
+    }
+    .story-col-right {
+      grid-column: 7 / span 6;
+    }
+
+    @media (max-width: 960px) {
+      .story-col-left,
+      .story-col-right {
+        grid-column: 1 / -1;
+      }
+      .story-section {
+        padding: 4rem 1.5rem;
+      }
+    }
+
+    .showcase-card {
+      position: relative;
+      background: rgba(12, 10, 9, 0.76);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      overflow: hidden;
+      box-shadow: 0 35px 90px rgba(0, 0, 0, 0.85);
+    }
+
+    .showcase-media {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: #060504;
+    }
+    .showcase-media img,
+    .showcase-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: contrast(1.06) brightness(0.9);
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .showcase-card:hover .showcase-media img {
+      transform: scale(1.04);
+    }
+
+    .showcase-body {
+      padding: 2.4rem 2.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--border);
+    }
+
+    .showcase-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.2vw, 3rem);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .showcase-title em {
+      font-style: italic;
+      color: var(--gold-bright);
+    }
+
+    .thumb-strip {
+      display: flex;
+      gap: 0.55rem;
+    }
+    .thumb-item {
+      width: 60px;
+      height: 42px;
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      overflow: hidden;
+      cursor: pointer;
+      opacity: 0.55;
+      transition: all 0.25s ease;
+    }
+    .thumb-item.is-active,
+    .thumb-item:hover {
+      opacity: 1;
+      border-color: var(--gold-bright);
+      transform: translateY(-2px);
+    }
+    .thumb-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ==========================================================================
+       STAGE 6: FINALE — 3D LOGO REASSEMBLES AT CENTER ABOVE WORDMARK
+       ========================================================================== */
+    .finale-section {
+      position: relative;
+      width: 100vw;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 1.5rem;
+      padding-top: clamp(160px, 22vh, 220px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       PHASE 0: ARCHITECTURAL BLUEPRINT SPLASH
+       Draws the geometric construction lines & contours of the Anzur Bulb
+       before morphing into the 3D Gold Model
+       ======================================================================== -->
+  <div id="blueprint-splash" aria-hidden="true">
+    <svg class="blueprint-svg" id="blueprintSvg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bpGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FCEFD8" />
+          <stop offset="50%" stop-color="#C5A059" />
+          <stop offset="100%" stop-color="#8E6B28" />
+        </linearGradient>
+      </defs>
+
+      <!-- Architectural CAD Construction Axes & Compass Rings -->
+      <line class="bp-guide" x1="200" y1="20" x2="200" y2="380" />
+      <line class="bp-guide" x1="20" y1="210" x2="380" y2="210" />
+      <line class="bp-guide" x1="75" y1="85" x2="325" y2="335" />
+      <line class="bp-guide" x1="325" y1="85" x2="75" y2="335" />
+
+      <circle class="bp-guide-dashed" cx="200" cy="210" r="142" />
+      <circle class="bp-guide-dashed" cx="200" cy="210" r="96" />
+      <circle class="bp-guide-dashed" cx="200" cy="210" r="42" />
+
+      <!-- Corner ArchitecturalTicks -->
+      <path class="bp-guide" d="M 55 85 L 55 65 L 75 65" />
+      <path class="bp-guide" d="M 345 85 L 345 65 L 325 65" />
+      <path class="bp-guide" d="M 55 335 L 55 355 L 75 355" />
+      <path class="bp-guide" d="M 345 335 L 345 355 L 325 355" />
+
+      <!-- Blueprint Precision Wireframe Contours of the 3 Anzur Onion Rings -->
+      <!-- Outer Ring Blueprint -->
+      <path class="bp-contour" id="bpOuter1"
+            d="M 205.5 73.2 L 220.3 77.8 L 252.0 100.1 L 273.4 117.1 L 297.2 140.5 L 311.1 158.5 L 320.1 175.6 L 327.0 198.9 L 328.2 216.9 L 324.6 239.3 L 316.6 260.7 L 301.5 283.6 L 287.0 298.4 L 264.6 314.2 L 245.9 322.6 L 221.6 329.3 L 194.2 331.4 L 167.1 327.4 L 145.3 320.0 L 121.0 306.7 L 101.6 290.1 L 88.2 274.0 L 77.5 253.3 L 71.7 233.2 L 70.0 208.0 L 72.2 190.0 L 78.1 173.1 L 89.4 154.2 L 101.8 139.9 L 119.3 123.5 L 147.4 103.0 L 190.4 77.3 Z" />
+
+      <!-- Middle Ring Blueprint -->
+      <path class="bp-contour" id="bpMid1"
+            d="M 216.5 136.2 L 221.8 138.2 L 228.0 143.6 L 243.3 164.3 L 256.2 186.6 L 263.2 208.4 L 263.9 219.0 L 262.6 229.9 L 259.1 240.7 L 252.0 252.9 L 245.0 260.9 L 234.5 269.2 L 223.7 275.1 L 210.4 279.1 L 200.6 280.3 L 186.7 279.2 L 172.0 274.9 L 161.0 269.0 L 149.4 259.3 L 141.6 249.9 L 136.3 240.6 L 131.6 227.0 L 129.9 210.5 L 131.1 199.4 L 138.4 181.8 L 146.9 171.2 L 168.5 155.9 L 187.1 146.2 L 208.4 137.0 Z" />
+
+      <!-- Center Drop Blueprint -->
+      <path class="bp-contour" id="bpInner1"
+            d="M 201.80 186.82 L 194.61 192.81 L 181.43 201.20 L 176.63 208.39 L 176.63 217.98 L 182.62 227.56 L 194.61 233.55 L 204.19 233.55 L 205.39 232.36 L 207.79 232.36 L 212.58 229.96 L 218.57 221.57 L 218.57 209.59 L 216.18 205.99 L 216.18 203.60 L 213.78 201.20 L 210.19 194.01 Z" />
+    </svg>
+  </div>
+
+  <!-- LAYER 1: FIXED FULLSCREEN WEBGL CANVAS (3D ANZUR EMBLEM + SHADERS) -->
+  <canvas id="webgl-canvas" aria-hidden="true"></canvas>
+  <div class="ambient-spotlight" id="ambientSpotlight" aria-hidden="true"></div>
+
+  <!-- LAYER 2: SCROLLABLE DOM CONTENT -->
+  <main id="ui">
+
+    <!-- ======================================================================
+         STAGE 1: FIRST WELCOMING SCREEN (EXACTLY AS IN SCREENSHOT)
+         The 3D Sculpted Anzur Bulb glides to sit directly above ANZUR RESTAURANT
+         ====================================================================== -->
+    <section class="hero" id="stageHero">
+      <div class="hero-backdrop">
+        <video class="hero-backdrop-video" id="heroVideo" autoplay loop muted playsinline preload="auto" poster="taimlars_poster.jpg">
+          <source src="taimlars.webm" type="video/webm" />
+          <source src="taimlars.mp4" type="video/mp4" />
+        </video>
+        <div class="hero-backdrop-overlay"></div>
+      </div>
+
+      <div class="hero-content" id="heroContent">
+        <!-- Exact ANZUR + RESTAURANT gold typography matching screenshot -->
+        <div class="hero-wordmark">
+          <svg class="hero-wordmark-svg" viewBox="0 0 500 135" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="ANZUR RESTAURANT">
+            <defs>
+              <linearGradient id="wordmarkGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#E5C786" />
+                <stop offset="50%" stop-color="#C5A059" />
+                <stop offset="100%" stop-color="#9A7632" />
+              </linearGradient>
+            </defs>
+            <text x="250" y="72" text-anchor="middle" fill="url(#wordmarkGold)" font-family="'Space Grotesk', sans-serif" font-weight="500" font-size="76" letter-spacing="12">ANZUR</text>
+            <text x="250" y="122" text-anchor="middle" fill="#C5A059" font-family="'Space Grotesk', sans-serif" font-weight="400" font-size="22" letter-spacing="14">RESTAURANT</text>
+          </svg>
+        </div>
+
+        <p class="hero-subtitle">
+          <span>НАЦИОНАЛЬНАЯ · ЕВРОПЕЙСКАЯ · ПАНАЗИАТСКАЯ</span>
+          <span>КУХНЯ</span>
+        </p>
+
+        <a href="booking.html" class="btn-gold magnetic-btn">
+          ЗАБРОНИРОВАТЬ СТОЛ
+        </a>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         STAGE 2: ГЛАВНЫЙ ЗАЛ (Card on Left, 3D Anzur Logo Explodes on Right)
+         ====================================================================== -->
+    <section class="story-section" id="stageMainHall">
+      <div class="story-grid">
+        <div class="story-col-left">
+          <article class="showcase-card">
+            <div class="showcase-media">
+              <img class="js-showcase-img" src="location_photos/main_hall_01.jpg" alt="Главный Зал" />
+            </div>
+            <div class="showcase-body">
+              <h2 class="showcase-title">Главный <em>Зал</em></h2>
+              <div class="thumb-strip">
+                <div class="thumb-item is-active" data-src="location_photos/main_hall_01.jpg"><img src="location_photos/main_hall_01.jpg" alt="" /></div>
+                <div class="thumb-item" data-src="location_photos/main_hall_02.jpg"><img src="location_photos/main_hall_02.jpg" alt="" /></div>
+                <div class="thumb-item" data-src="location_photos/main_hall_03.jpg"><img src="location_photos/main_hall_03.jpg" alt="" /></div>
+                <div class="thumb-item" data-src="location_photos/main_hall_04.jpg"><img src="location_photos/main_hall_04.jpg" alt="" /></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         STAGE 3: ЛЕТНЯЯ ТЕРРАСА (3D Anzur Logo Glides Left, Card on Right)
+         ====================================================================== -->
+    <section class="story-section" id="stageTerrace">
+      <div class="story-grid">
+        <div class="story-col-right">
+          <article class="showcase-card">
+            <div class="showcase-media">
+              <img class="js-showcase-img" src="location_photos/terrace_01.jpg" alt="Летняя Терраса" />
+            </div>
+            <div class="showcase-body">
+              <h2 class="showcase-title">Летняя <em>Терраса</em></h2>
+              <div class="thumb-strip">
+                <div class="thumb-item is-active" data-src="location_photos/terrace_01.jpg"><img src="location_photos/terrace_01.jpg" alt="" /></div>
+                <div class="thumb-item" data-src="location_photos/terrace_02.jpg"><img src="location_photos/terrace_02.jpg" alt="" /></div>
+                <div class="thumb-item" data-src="location_photos/terrace_03.jpg"><img src="location_photos/terrace_03.jpg" alt="" /></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         STAGE 4: ТИХАЯ ВЕРАНДА & VIP КАРАОКЕ (Card on Left, 3D Logo on Right)
+         ====================================================================== -->
+    <section class="story-section" id="stageVeranda">
+      <div class="story-grid">
+        <div class="story-col-left">
+          <article class="showcase-card">
+            <div class="showcase-media">
+              <img class="js-showcase-img" src="location_photos/veranda_01.jpg" alt="Тихая Веранда и VIP" />
+            </div>
+            <div class="showcase-body">
+              <h2 class="showcase-title">Веранда <em>&amp; VIP</em></h2>
+              <div class="thumb-strip">
+                <div class="thumb-item is-active" data-src="location_photos/veranda_01.jpg"><img src="location_photos/veranda_01.jpg" alt="" /></div>
+                <div class="thumb-item" data-src="location_photos/veranda_02.jpg"><img src="location_photos/veranda_02.jpg" alt="" /></div>
+                <div class="thumb-item" data-src="location_photos/karaoke_01.jpg"><img src="location_photos/karaoke_01.jpg" alt="" /></div>
+                <div class="thumb-item" data-src="location_photos/karaoke_02.jpg"><img src="location_photos/karaoke_02.jpg" alt="" /></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         STAGE 5: КОНЦЕРТЫ ЗВЁЗД (3D Logo Macro Left, Card on Right)
+         ====================================================================== -->
+    <section class="story-section" id="stageConcerts">
+      <div class="story-grid">
+        <div class="story-col-right">
+          <article class="showcase-card">
+            <div class="showcase-media">
+              <img class="js-showcase-img" src="events_star_concert_yulduz.jpg" alt="Концерты Звёзд" />
+            </div>
+            <div class="showcase-body">
+              <h2 class="showcase-title">Концерты <em>Звёзд</em></h2>
+              <div class="thumb-strip">
+                <div class="thumb-item is-active" data-src="events_star_concert_yulduz.jpg"><img src="events_star_concert_yulduz.jpg" alt="" /></div>
+                <div class="thumb-item" data-src="events_star_concert_closeup.jpg"><img src="events_star_concert_closeup.jpg" alt="" /></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         STAGE 6: FINALE (3D Logo Reassembles at Center Above Wordmark)
+         ====================================================================== -->
+    <section class="finale-section" id="stageFinale">
+      <div class="hero-wordmark">
+        <svg class="hero-wordmark-svg" viewBox="0 0 500 135" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="250" y="72" text-anchor="middle" fill="url(#wordmarkGold)" font-family="'Space Grotesk', sans-serif" font-weight="500" font-size="76" letter-spacing="12">ANZUR</text>
+          <text x="250" y="122" text-anchor="middle" fill="#C5A059" font-family="'Space Grotesk', sans-serif" font-weight="400" font-size="22" letter-spacing="14">RESTAURANT</text>
+        </svg>
+      </div>
+
+      <p class="hero-subtitle">
+        <span>НАЦИОНАЛЬНАЯ · ЕВРОПЕЙСКАЯ · ПАНАЗИАТСКАЯ</span>
+        <span>КУХНЯ</span>
+      </p>
+
+      <a href="booking.html" class="btn-gold magnetic-btn">
+        ЗАБРОНИРОВАТЬ СТОЛ
+      </a>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       ORYZO-STYLE HYBRID WEBGL + BLUEPRINT-TO-3D INTRO + SCROLLTRIGGER ENGINE
+       ======================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // ----------------------------------------------------------------------
+      // 1. PROCEDURAL 24K BRUSHED GOLD & MICRO-RELIEF TEXTURES (ORYZO TECHNIQUE)
+      // ----------------------------------------------------------------------
+      function createBrushedGoldTextures() {
+        const size = 512;
+        const diffCanvas = document.createElement('canvas');
+        const bumpCanvas = document.createElement('canvas');
+        diffCanvas.width = bumpCanvas.width = size;
+        diffCanvas.height = bumpCanvas.height = size;
+
+        const dCtx = diffCanvas.getContext('2d');
+        const bCtx = bumpCanvas.getContext('2d');
+
+        const grad = dCtx.createLinearGradient(0, 0, size, size);
+        grad.addColorStop(0, '#E8C985');
+        grad.addColorStop(0.5, '#C5A059');
+        grad.addColorStop(1, '#9E7932');
+        dCtx.fillStyle = grad;
+        dCtx.fillRect(0, 0, size, size);
+
+        bCtx.fillStyle = '#808080';
+        bCtx.fillRect(0, 0, size, size);
+
+        for (let i = 0; i < 6500; i++) {
+          const x = Math.random() * size;
+          const y = Math.random() * size;
+          const len = 10 + Math.random() * 45;
+          const alpha = 0.03 + Math.random() * 0.06;
+          dCtx.strokeStyle = Math.random() > 0.5 ? `rgba(255,244,214,${alpha})` : `rgba(90,64,20,${alpha})`;
+          dCtx.lineWidth = 1;
+          dCtx.beginPath();
+          dCtx.moveTo(x, y);
+          dCtx.lineTo(x + len, y + (Math.random() - 0.5) * 3);
+          dCtx.stroke();
+
+          const shade = Math.random() > 0.5 ? 165 : 95;
+          bCtx.strokeStyle = `rgb(${shade},${shade},${shade})`;
+          bCtx.beginPath();
+          bCtx.moveTo(x, y);
+          bCtx.lineTo(x + len, y);
+          bCtx.stroke();
+        }
+
+        const diffTex = new THREE.CanvasTexture(diffCanvas);
+        const bumpTex = new THREE.CanvasTexture(bumpCanvas);
+        diffTex.wrapS = diffTex.wrapT = THREE.RepeatWrapping;
+        bumpTex.wrapS = bumpTex.wrapT = THREE.RepeatWrapping;
+        diffTex.repeat.set(0.5, 0.5);
+        bumpTex.repeat.set(0.5, 0.5);
+
+        return { diffTex, bumpTex };
+      }
+
+      // ----------------------------------------------------------------------
+      // 2. BUILD EXACT 3-LAYER 3D ANZUR BULB EMBLEM (SOLID GOLD + WIREFRAME CAD)
+      // ----------------------------------------------------------------------
+      function createTeardropPath(scaleX, scaleY, offsetX, offsetY, tipSkewX, isHole) {
+        const p = isHole ? new THREE.Path() : new THREE.Shape();
+        const tx = offsetX + tipSkewX;
+        const ty = offsetY + scaleY * 1.12;
+        const bx = offsetX;
+        const by = offsetY - scaleY * 0.92;
+
+        p.moveTo(tx, ty);
+        p.bezierCurveTo(
+          offsetX + scaleX * 0.58, offsetY + scaleY * 0.65,
+          offsetX + scaleX * 1.12, offsetY + scaleY * 0.02,
+          offsetX + scaleX * 1.02, offsetY - scaleY * 0.42
+        );
+        p.bezierCurveTo(
+          offsetX + scaleX * 0.92, offsetY - scaleY * 0.78,
+          offsetX + scaleX * 0.48, by,
+          bx, by
+        );
+        p.bezierCurveTo(
+          offsetX - scaleX * 0.48, by,
+          offsetX - scaleX * 0.92, offsetY - scaleY * 0.78,
+          offsetX - scaleX * 1.02, offsetY - scaleY * 0.42
+        );
+        p.bezierCurveTo(
+          offsetX - scaleX * 1.12, offsetY + scaleY * 0.02,
+          offsetX - scaleX * 0.58, offsetY + scaleY * 0.65,
+          tx, ty
+        );
+        return p;
+      }
+
+      const canvas = document.getElementById('webgl-canvas');
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(
+        36,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 0, 6.2);
+
+      const renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: true,
+        alpha: true,
+        powerPreference: 'high-performance'
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.25;
+
+      // Studio Lighting
+      const ambientLight = new THREE.AmbientLight('#fff6e5', 0.85);
+      scene.add(ambientLight);
+
+      const keyLight = new THREE.DirectionalLight('#fff2d6', 2.8);
+      keyLight.position.set(4, 6, 5);
+      scene.add(keyLight);
+
+      const rimLight = new THREE.PointLight('#e5c786', 10, 15);
+      rimLight.position.set(-4, -2, -2.5);
+      scene.add(rimLight);
+
+      const cursorLight = new THREE.PointLight('#ffd984', 7, 10);
+      cursorLight.position.set(0, 1, 3.5);
+      scene.add(cursorLight);
+
+      // Hierarchy:
+      // logoRoot (ScrollTrigger moves this across sections)
+      //  └── introGroup (Intro animation glides this from center of screen up to hero crown)
+      //       └── logoPivot (Rotations & 3 concentric layers)
+      const logoRoot = new THREE.Group();
+      const introGroup = new THREE.Group();
+      const logoPivot = new THREE.Group();
+      logoRoot.add(introGroup);
+      introGroup.add(logoPivot);
+      scene.add(logoRoot);
+
+      const { diffTex, bumpTex } = createBrushedGoldTextures();
+
+      // Solid 24K Gold Material (starts transparent during blueprint phase, then materializes)
+      const goldMaterial = new THREE.MeshStandardMaterial({
+        color: '#D6B168',
+        map: diffTex,
+        bumpMap: bumpTex,
+        bumpScale: 0.015,
+        metalness: 0.82,
+        roughness: 0.24,
+        emissive: '#3a2808',
+        emissiveIntensity: 0.22,
+        transparent: true,
+        opacity: 0
+      });
+
+      // Architectural CAD Wireframe Material (glows as 3D blueprint, then fades out into solid gold)
+      const wireframeMaterial = new THREE.MeshBasicMaterial({
+        color: '#E6C786',
+        wireframe: true,
+        transparent: true,
+        opacity: 0
+      });
+
+      const extrudeSettings = {
+        depth: 0.14,
+        bevelEnabled: true,
+        bevelSegments: 6,
+        steps: 1,
+        bevelSize: 0.035,
+        bevelThickness: 0.045,
+        curveSegments: 36
+      };
+
+      function createDualLayerPart(geo, yOffset) {
+        const partGroup = new THREE.Group();
+        const solidMesh = new THREE.Mesh(geo, goldMaterial);
+        const wireMesh = new THREE.Mesh(geo, wireframeMaterial);
+        wireMesh.scale.setScalar(1.003);
+        partGroup.add(solidMesh);
+        partGroup.add(wireMesh);
+        partGroup.position.y = yOffset;
+        return partGroup;
+      }
+
+      // LAYER 1: Outer Sacred Ring
+      const outerShape = createTeardropPath(0.95, 1.0, 0, 0, -0.02, false);
+      const outerHole = createTeardropPath(0.73, 0.78, 0, -0.02, -0.01, true);
+      outerShape.holes.push(outerHole);
+      const outerGeo = new THREE.ExtrudeGeometry(outerShape, extrudeSettings);
+      outerGeo.center();
+      const outerRingGroup = createDualLayerPart(outerGeo, 0);
+      logoPivot.add(outerRingGroup);
+
+      // LAYER 2: Middle Sacred Ring
+      const midShape = createTeardropPath(0.55, 0.59, 0.01, -0.04, 0.05, false);
+      const midHole = createTeardropPath(0.35, 0.38, 0.01, -0.06, 0.03, true);
+      midShape.holes.push(midHole);
+      const midGeo = new THREE.ExtrudeGeometry(midShape, extrudeSettings);
+      midGeo.center();
+      const middleRingGroup = createDualLayerPart(midGeo, -0.05);
+      logoPivot.add(middleRingGroup);
+
+      // LAYER 3: Inner Solid Golden Teardrop Jewel
+      const innerShape = createTeardropPath(0.16, 0.18, 0, -0.08, -0.03, false);
+      const innerGeo = new THREE.ExtrudeGeometry(innerShape, {
+        ...extrudeSettings,
+        depth: 0.18,
+        bevelThickness: 0.055
+      });
+      innerGeo.center();
+      const innerDropGroup = createDualLayerPart(innerGeo, -0.08);
+      logoPivot.add(innerDropGroup);
+
+      // LAYER 4: Custom GLSL Harmonic Aura Field
+      const auraUniforms = {
+        uTime: { value: 0 },
+        uIntensity: { value: 0.0 }
+      };
+      const auraGeo = new THREE.PlaneGeometry(3.2, 3.2, 48, 48);
+      const auraMat = new THREE.ShaderMaterial({
+        transparent: true,
+        depthWrite: false,
+        side: THREE.DoubleSide,
+        blending: THREE.AdditiveBlending,
+        uniforms: auraUniforms,
+        vertexShader: `
+          uniform float uTime;
+          varying vec2 vUv;
+          void main() {
+            vUv = uv;
+            vec3 pos = position;
+            pos.z += sin(length(pos.xy) * 8.0 - uTime * 3.0) * 0.05;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+          }
+        `,
+        fragmentShader: `
+          uniform float uTime;
+          uniform float uIntensity;
+          varying vec2 vUv;
+          void main() {
+            float d = length(vUv - vec2(0.5)) * 2.0;
+            float ring = sin(d * 34.0 - uTime * 3.2);
+            float mask = smoothstep(0.95, 0.45, d) * smoothstep(0.1, 0.35, d);
+            vec3 col = mix(vec3(0.77, 0.62, 0.35), vec3(0.98, 0.88, 0.62), smoothstep(-0.2, 0.8, ring));
+            gl_FragColor = vec4(col, mask * uIntensity * (0.35 + 0.35 * ring));
+          }
+        `
+      });
+      const auraMesh = new THREE.Mesh(auraGeo, auraMat);
+      auraMesh.position.z = -0.08;
+      logoPivot.add(auraMesh);
+
+      // Ambient Floating Golden Dust Particles
+      const pCount = 150;
+      const pGeo = new THREE.BufferGeometry();
+      const pPos = new Float32Array(pCount * 3);
+      for (let i = 0; i < pCount; i++) {
+        pPos[i * 3] = (Math.random() - 0.5) * 12;
+        pPos[i * 3 + 1] = (Math.random() - 0.5) * 8;
+        pPos[i * 3 + 2] = (Math.random() - 0.5) * 6;
+      }
+      pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+      const pMat = new THREE.PointsMaterial({
+        color: '#e5c786',
+        size: 0.035,
+        transparent: true,
+        opacity: 0.45,
+        blending: THREE.AdditiveBlending
+      });
+      const particles = new THREE.Points(pGeo, pMat);
+      scene.add(particles);
+
+      // ----------------------------------------------------------------------
+      // 3. BLUEPRINT -> 3D WIREFRAME -> SOLID GOLD -> GLIDE TO HERO CROWN
+      // ----------------------------------------------------------------------
+      const sceneState = { explode: 0 };
+
+      function applyExplode(val) {
+        sceneState.explode = val;
+        outerRingGroup.position.z = -val * 0.42;
+        middleRingGroup.position.z = val * 0.12;
+        innerDropGroup.position.z = val * 0.58;
+        auraUniforms.uIntensity.value = 0.18 + val * 0.55;
+      }
+
+      // Base ScrollTrigger anchor is at (0, 0.92, 0) with scale 0.72.
+      // During the Blueprint Splash, introGroup offsets the 3D logo to the exact center
+      // of the viewport (y: -0.92, z: 0.95) so it matches the 2D SVG blueprint!
+      logoRoot.position.set(0, 0.92, 0);
+      logoRoot.scale.setScalar(0.72);
+
+      introGroup.position.set(0, -0.92, 1.05);
+      introGroup.scale.setScalar(1.32);
+
+      if (window.gsap) {
+        const introTl = gsap.timeline();
+
+        // Step A (0.0s - 1.3s): Draw Architectural CAD Axes, Compass Circles & Blueprint Contours
+        introTl
+          .to('.bp-guide', {
+            strokeDashoffset: 0,
+            duration: 0.85,
+            stagger: 0.05,
+            ease: 'power2.out'
+          }, 0)
+          .to('.bp-guide-dashed', {
+            opacity: 1,
+            duration: 0.7,
+            stagger: 0.1,
+            ease: 'power2.out'
+          }, 0.15)
+          .to('#bpOuter1', {
+            strokeDashoffset: 0,
+            duration: 1.05,
+            ease: 'power2.inOut'
+          }, 0.2)
+          .to('#bpMid1', {
+            strokeDashoffset: 0,
+            duration: 0.9,
+            ease: 'power2.inOut'
+          }, 0.45)
+          .to('#bpInner1', {
+            strokeDashoffset: 0,
+            duration: 0.65,
+            ease: 'power2.out'
+          }, 0.75)
+
+          // Step B (1.1s - 1.9s): Ignite 3D Wireframe Mesh & Rotate slightly to reveal 3D depth
+          .to(wireframeMaterial, {
+            opacity: 0.78,
+            duration: 0.55,
+            ease: 'power2.inOut'
+          }, 1.05)
+          .fromTo(
+            introGroup.rotation,
+            { x: 0, y: -0.55, z: 0 },
+            { x: 0.18, y: 0.35, z: -0.05, duration: 0.95, ease: 'power2.inOut' },
+            1.1
+          )
+          // Fade out 2D SVG blueprint lines as 3D Solid Gold materializes
+          .to('#blueprintSvg', {
+            opacity: 0,
+            scale: 1.04,
+            duration: 0.65,
+            ease: 'power2.inOut'
+          }, 1.45)
+          .to(goldMaterial, {
+            opacity: 1,
+            duration: 0.75,
+            ease: 'power2.out'
+          }, 1.35)
+          .to(wireframeMaterial, {
+            opacity: 0,
+            duration: 0.75,
+            ease: 'power2.inOut'
+          }, 1.65)
+
+          // Step C (1.95s - 3.0s): Dissolve Splash Curtain & Glide 3D Gold Model up above "ANZUR RESTAURANT"
+          .to('#blueprint-splash', {
+            opacity: 0,
+            duration: 0.95,
+            ease: 'power3.inOut'
+          }, 1.95)
+          .to(introGroup.position, {
+            x: 0,
+            y: 0,
+            z: 0,
+            duration: 1.25,
+            ease: 'expo.inOut'
+          }, 1.9)
+          .to(introGroup.scale, {
+            x: 1,
+            y: 1,
+            z: 1,
+            duration: 1.25,
+            ease: 'expo.inOut'
+          }, 1.9)
+          .to(introGroup.rotation, {
+            x: 0,
+            y: 0,
+            z: 0,
+            duration: 1.25,
+            ease: 'expo.inOut'
+          }, 1.9)
+          .to('#heroContent', {
+            opacity: 1,
+            y: 0,
+            duration: 1.1,
+            ease: 'power3.out'
+          }, 2.25)
+          .to(auraUniforms.uIntensity, {
+            value: 0.18,
+            duration: 0.8
+          }, 2.2);
+      }
+
+      // ----------------------------------------------------------------------
+      // 4. LENIS SMOOTH SCROLL + GSAP SCROLLTRIGGER CHOREOGRAPHY (ORYZO STYLE)
+      // ----------------------------------------------------------------------
+      if (window.gsap && window.ScrollTrigger && window.Lenis) {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const lenis = new Lenis({
+          duration: 1.2,
+          smoothWheel: true
+        });
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+
+        const masterTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '#ui',
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1.2
+          }
+        });
+
+        // Stage 1 -> Stage 2 (Главный Зал on Left -> 3D Logo glides Right, rotates & explodes layers)
+        masterTl.to(logoRoot.position, { x: 1.55, y: 0.0, z: 0.65, duration: 1, ease: 'power2.inOut' }, 0);
+        masterTl.to(logoRoot.scale, { x: 0.95, y: 0.95, z: 0.95, duration: 1, ease: 'power2.inOut' }, 0);
+        masterTl.to(logoPivot.rotation, { x: 0.28, y: Math.PI * 0.72, z: -0.12, duration: 1, ease: 'power2.inOut' }, 0);
+        masterTl.to(sceneState, {
+          explode: 1,
+          duration: 1,
+          ease: 'power2.inOut',
+          onUpdate: () => applyExplode(sceneState.explode)
+        }, 0);
+
+        // Stage 2 -> Stage 3 (Летняя Терраса on Right -> 3D Logo glides Left & flips 180°)
+        masterTl.to(logoRoot.position, { x: -1.55, y: -0.05, z: 0.85, duration: 1, ease: 'power2.inOut' }, 1);
+        masterTl.to(logoPivot.rotation, { x: -0.22, y: Math.PI * 1.38, z: 0.14, duration: 1, ease: 'power2.inOut' }, 1);
+        masterTl.to(sceneState, {
+          explode: 0.35,
+          duration: 1,
+          ease: 'power2.inOut',
+          onUpdate: () => applyExplode(sceneState.explode)
+        }, 1);
+
+        // Stage 3 -> Stage 4 (Веранда & VIP on Left -> 3D Logo orbits Right & expands again)
+        masterTl.to(logoRoot.position, { x: 1.5, y: 0.05, z: 1.05, duration: 1, ease: 'power2.inOut' }, 2);
+        masterTl.to(logoPivot.rotation, { x: 0.42, y: Math.PI * 2.25, z: -0.18, duration: 1, ease: 'power2.inOut' }, 2);
+        masterTl.to(sceneState, {
+          explode: 1.15,
+          duration: 1,
+          ease: 'power2.inOut',
+          onUpdate: () => applyExplode(sceneState.explode)
+        }, 2);
+
+        // Stage 4 -> Stage 5 (Концерты Звёзд on Right -> 3D Logo Macro Close-up on Left)
+        masterTl.to(logoRoot.position, { x: -1.45, y: 0.0, z: 1.45, duration: 1, ease: 'power2.inOut' }, 3);
+        masterTl.to(logoPivot.rotation, { x: -0.18, y: Math.PI * 3.25, z: 0.08, duration: 1, ease: 'power2.inOut' }, 3);
+        masterTl.to(sceneState, {
+          explode: 0.5,
+          duration: 1,
+          ease: 'power2.inOut',
+          onUpdate: () => applyExplode(sceneState.explode)
+        }, 3);
+
+        // Stage 5 -> Stage 6 (Finale -> 3D Logo returns to top-center & reassembles above ANZUR)
+        masterTl.to(logoRoot.position, { x: 0, y: 0.92, z: 0, duration: 1, ease: 'power2.inOut' }, 4);
+        masterTl.to(logoRoot.scale, { x: 0.72, y: 0.72, z: 0.72, duration: 1, ease: 'power2.inOut' }, 4);
+        masterTl.to(logoPivot.rotation, { x: 0, y: Math.PI * 4, z: 0, duration: 1, ease: 'power2.inOut' }, 4);
+        masterTl.to(sceneState, {
+          explode: 0,
+          duration: 1,
+          ease: 'power2.inOut',
+          onUpdate: () => applyExplode(sceneState.explode)
+        }, 4);
+      }
+
+      // ----------------------------------------------------------------------
+      // 5. POINTER PHYSICS & 60-120 FPS RENDER LOOP
+      // ----------------------------------------------------------------------
+      const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
+      const spotlight = document.getElementById('ambientSpotlight');
+
+      window.addEventListener('pointermove', (e) => {
+        pointer.targetX = (e.clientX / window.innerWidth) * 2 - 1;
+        pointer.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
+
+        if (spotlight) {
+          spotlight.style.setProperty('--mouse-x', `${(e.clientX / window.innerWidth) * 100}%`);
+          spotlight.style.setProperty('--mouse-y', `${(e.clientY / window.innerHeight) * 100}%`);
+        }
+      });
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      const clock = new THREE.Clock();
+
+      function animate() {
+        requestAnimationFrame(animate);
+        const elapsed = clock.getElapsedTime();
+
+        pointer.x += (pointer.targetX - pointer.x) * 0.06;
+        pointer.y += (pointer.targetY - pointer.y) * 0.06;
+
+        auraUniforms.uTime.value = elapsed;
+
+        outerRingGroup.rotation.z = Math.sin(elapsed * 1.1) * 0.025 + pointer.x * 0.08;
+        middleRingGroup.rotation.z = -Math.sin(elapsed * 1.3) * 0.035 - pointer.x * 0.06;
+        innerDropGroup.position.y = -0.08 + Math.sin(elapsed * 2.0) * 0.02;
+
+        cursorLight.position.x = pointer.x * 3.2;
+        cursorLight.position.y = pointer.y * 2.4 + 0.8;
+
+        camera.position.x = pointer.x * 0.22;
+        camera.position.y = pointer.y * 0.16;
+        camera.lookAt(0, 0, 0);
+
+        particles.rotation.y = elapsed * 0.03;
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      // ----------------------------------------------------------------------
+      // 6. PHOTO THUMBNAIL SWITCHER & MAGNETIC BUTTONS
+      // ----------------------------------------------------------------------
+      const motionAnimate = window.Motion && window.Motion.animate ? window.Motion.animate : null;
+
+      document.querySelectorAll('.showcase-card').forEach((card) => {
+        const mainImg = card.querySelector('.js-showcase-img');
+        const thumbs = card.querySelectorAll('.thumb-item');
+        thumbs.forEach((thumb) => {
+          thumb.addEventListener('click', () => {
+            const src = thumb.getAttribute('data-src');
+            thumbs.forEach((t) => t.classList.remove('is-active'));
+            thumb.classList.add('is-active');
+            if (mainImg && src) {
+              if (motionAnimate) {
+                motionAnimate(mainImg, { opacity: [0.35, 1] }, { duration: 0.4 });
+              }
+              mainImg.src = src;
+            }
+          });
+        });
+      });
+
+      document.querySelectorAll('.magnetic-btn').forEach((btn) => {
+        btn.addEventListener('pointermove', (e) => {
+          const r = btn.getBoundingClientRect();
+          const dx = e.clientX - (r.left + r.width / 2);
+          const dy = e.clientY - (r.top + r.height / 2);
+          if (motionAnimate) {
+            motionAnimate(
+              btn,
+              { transform: `translate(${dx * 0.2}px, ${dy * 0.25}px)` },
+              { duration: 0.25 }
+            );
+          }
+        });
+        btn.addEventListener('pointerleave', () => {
+          if (motionAnimate) {
+            motionAnimate(
+              btn,
+              { transform: 'translate(0px, 0px)' },
+              { duration: 0.45, easing: [0.16, 1, 0.3, 1] }
+            );
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

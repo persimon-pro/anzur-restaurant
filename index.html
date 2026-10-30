@@ -44,15 +44,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
-  <!-- Motion.js, GSAP + ScrollTrigger, Lenis & Three.js (all deferred to eliminate render blocking) -->
+  <!-- Motion.js, GSAP + ScrollTrigger, Lenis (deferred to eliminate render blocking) -->
   <script src="https://cdn.jsdelivr.net/npm/motion@11/dist/motion.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
   <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
 
-  <!-- Preload Hero Poster Image for instant LCP -->
-  <link rel="preload" as="image" href="zastavka_poster.jpg" fetchpriority="high" />
+  <!-- Preload Ultra-Light Hero Posters for instant LCP (12KB WebP mobile, 45KB WebP desktop) -->
+  <link rel="preload" as="image" href="zastavka_poster_mobile.webp" media="(max-width: 768px)" type="image/webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="zastavka_poster.webp" media="(min-width: 769px)" type="image/webp" fetchpriority="high" />
 
   <style>
     /* ==========================================================================
@@ -666,6 +666,9 @@
       pointer-events: none;
       z-index: 2;
       opacity: 0.85;
+    }
+    @media (max-width: 900px), (hover: none) {
+      #hero-webgl-canvas { display: none !important; }
     }
     .hero-spotlight {
       position: absolute;
@@ -2208,29 +2211,72 @@
       line-height: 1.6;
     }
 
-    @media (max-width: 1200px) {
-      .spaces-grid { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 1100px) {
+      .spaces-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .space-text {
+        padding: 1.5rem 1.2rem;
+      }
+      .space-title {
+        font-size: 1.25rem;
+      }
     }
     @media (max-width: 768px) {
       .spaces-grid {
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        gap: 12px;
-        padding: 0 1rem 1.4rem;
-        background: transparent;
+        grid-template-columns: repeat(2, 1fr);
+        background: var(--border);
+        gap: 1px;
+        border-bottom: 1px solid var(--border);
       }
-      .spaces-grid::-webkit-scrollbar { display: none; }
       .space-box {
-        min-width: 82vw;
-        flex-shrink: 0;
-        scroll-snap-align: center;
-        border: 1px solid var(--border);
+        background: var(--bg);
+        border: none;
       }
-      .space-text { padding: 1.6rem 1.2rem; }
-      .space-media-arrows { opacity: 1; }
+      .space-media {
+        aspect-ratio: 16 / 10;
+        cursor: pointer;
+      }
+      .space-media-arrows {
+        display: none !important;
+      }
+      .space-media-pill {
+        font-size: 0.54rem;
+        padding: 0.15rem 0.4rem;
+        bottom: 0.4rem;
+        right: 0.4rem;
+      }
+      .space-text {
+        padding: 0.95rem 0.8rem 1.15rem;
+      }
+      .space-title {
+        font-size: 1.02rem;
+        margin: 0.1rem 0 0.35rem;
+        letter-spacing: 0.3px;
+      }
+      .space-desc {
+        font-size: 0.72rem;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
+    @media (max-width: 480px) {
+      .space-media {
+        aspect-ratio: 16 / 10;
+      }
+      .space-text {
+        padding: 0.85rem 0.65rem 1rem;
+      }
+      .space-title {
+        font-size: 0.92rem;
+      }
+      .space-desc {
+        font-size: 0.68rem;
+        line-height: 1.35;
+      }
     }
 
     /* ==========================================================================
@@ -2953,13 +2999,14 @@
        ========================================================================== -->
   <header class="hero" id="hero-section">
     <div class="hero-backdrop">
-      <video autoplay loop muted playsinline poster="zastavka_poster.jpg" class="hero-backdrop-media" preload="auto" aria-hidden="true">
+      <video autoplay loop muted playsinline poster="zastavka_poster_mobile.webp" class="hero-backdrop-media" preload="metadata" aria-hidden="true">
         <source src="zastavka_mobile.mp4" type="video/mp4" media="(max-width: 768px)">
         <source src="zastavka.mp4" type="video/mp4">
         <source src="zastavka.webm" type="video/webm">
         <picture class="hero-backdrop-media">
-          <source srcset="zastavka.webp" type="image/webp">
-          <img src="zastavka_poster.jpg" alt="Ресторан «Анзур» в Душанбе — атмосфера заведения" class="hero-backdrop-media" />
+          <source srcset="zastavka_poster_mobile.webp" media="(max-width: 768px)" type="image/webp">
+          <source srcset="zastavka_poster.webp" type="image/webp">
+          <img src="zastavka_poster.jpg" alt="Ресторан «Анзур» в Душанбе — атмосфера заведения" class="hero-backdrop-media" fetchpriority="high" />
         </picture>
       </video>
       <div class="hero-backdrop-overlay"></div>
@@ -2969,7 +3016,7 @@
 
     <div class="hero-content">
       <div class="hero-logo-wrap">
-        <img src="anzur_logo_gold.png" alt="ANZUR RESTAURANT" class="hero-logo-img" />
+        <img src="anzur_logo_gold.svg" alt="ANZUR RESTAURANT" class="hero-logo-img" />
       </div>
       <h1 class="visually-hidden">ANZUR RESTAURANT — Ресторан высокой гастрономии в Душанбе</h1>
       <p class="hero-subtitle" data-i18n-html="hero_subtitle">
@@ -3013,7 +3060,10 @@
     <div class="stage-grid" id="menu-stage-container" data-lenis-prevent="true">
       <!-- Left Visual Stage -->
       <div class="stage-visual" id="stageVisual" data-lenis-prevent="true">
-        <img id="stage-img" class="stage-visual-img" src="dish_real_plov.jpg" alt="Праздничный Плов Анзур" />
+        <picture>
+          <source srcset="dish_real_plov.webp" type="image/webp" />
+          <img id="stage-img" class="stage-visual-img" src="dish_real_plov.webp" alt="Праздничный Плов Анзур" />
+        </picture>
         <div class="stage-visual-vignette"></div>
 
         <!-- Overlay navigation arrows -->
@@ -3048,7 +3098,7 @@
       <!-- Item 0: Plov -->
       <div class="filmstrip-item is-active" data-idx="0" onclick="goToSlide(0)">
         <div class="filmstrip-thumb">
-          <img src="dish_real_plov.jpg" alt="Плов Анзур" loading="lazy" />
+          <img src="dish_real_plov.webp" alt="Плов Анзур" loading="lazy" />
         </div>
         <div class="filmstrip-meta-top">
           <span class="filmstrip-num">01</span>
@@ -3061,7 +3111,7 @@
       <!-- Item 1: Kazan Kabob -->
       <div class="filmstrip-item" data-idx="1" onclick="goToSlide(1)">
         <div class="filmstrip-thumb">
-          <img src="dish_real_kazan_kabob.jpg" alt="Казан Кабоб" loading="lazy" />
+          <img src="dish_real_kazan_kabob.webp" alt="Казан Кабоб" loading="lazy" />
         </div>
         <div class="filmstrip-meta-top">
           <span class="filmstrip-num">02</span>
@@ -3074,7 +3124,7 @@
       <!-- Item 2: Josper Steaks -->
       <div class="filmstrip-item" data-idx="2" onclick="goToSlide(2)">
         <div class="filmstrip-thumb">
-          <img src="dish_real_josper.jpg" alt="Стейки в Josper" loading="lazy" />
+          <img src="dish_real_josper.webp" alt="Стейки в Josper" loading="lazy" />
         </div>
         <div class="filmstrip-meta-top">
           <span class="filmstrip-num">03</span>
@@ -3087,7 +3137,7 @@
       <!-- Item 3: Sushi Set Anzur -->
       <div class="filmstrip-item" data-idx="3" onclick="goToSlide(3)">
         <div class="filmstrip-thumb">
-          <img src="dish_real_sushiset.jpg" alt="Суши сет Анзур" loading="lazy" />
+          <img src="dish_real_sushiset.webp" alt="Суши сет Анзур" loading="lazy" />
         </div>
         <div class="filmstrip-meta-top">
           <span class="filmstrip-num">04</span>
@@ -3100,7 +3150,7 @@
       <!-- Item 4: Kebabs Assorti -->
       <div class="filmstrip-item" data-idx="4" onclick="goToSlide(4)">
         <div class="filmstrip-thumb">
-          <img src="dish_real_kebabs.jpg" alt="Ассорти шашлыков" loading="lazy" />
+          <img src="dish_real_kebabs.webp" alt="Ассорти шашлыков" loading="lazy" />
         </div>
         <div class="filmstrip-meta-top">
           <span class="filmstrip-num">05</span>
@@ -3113,7 +3163,7 @@
       <!-- Item 5: Josper Salmon -->
       <div class="filmstrip-item" data-idx="5" onclick="goToSlide(5)">
         <div class="filmstrip-thumb">
-          <img src="dish_real_salmon.jpg" alt="Стейк Лосось Josper" loading="lazy" />
+          <img src="dish_real_salmon.webp" alt="Стейк Лосось Josper" loading="lazy" />
         </div>
         <div class="filmstrip-meta-top">
           <span class="filmstrip-num">06</span>
@@ -3126,7 +3176,7 @@
       <!-- Item 6: Dubai Cheesecake -->
       <div class="filmstrip-item" data-idx="6" onclick="goToSlide(6)">
         <div class="filmstrip-thumb">
-          <img src="dish_real_dubai_cheesecake.jpg" alt="Дубайский чизкейк" loading="lazy" />
+          <img src="dish_real_dubai_cheesecake.webp" alt="Дубайский чизкейк" loading="lazy" />
         </div>
         <div class="filmstrip-meta-top">
           <span class="filmstrip-num">07</span>
@@ -3149,13 +3199,13 @@
     </div>
   </section>
 
-  <div class="spaces-grid" id="spacesGrid" data-lenis-prevent="true">
+  <div class="spaces-grid" id="spacesGrid">
     <!-- 1. Главный зал -->
     <div class="space-box" data-cat="main_hall" onclick="handleSpaceBoxClick('main_hall', event)" onmouseenter="preloadSpacesCategory('main_hall')" style="cursor:pointer;" title="Смотреть фотографии Главного зала">
       <div class="space-media" data-cat="main_hall" id="spaceMedia-main_hall">
         <picture id="spacePic-main_hall">
-          <source srcset="/location_photos/main_hall_01_thumb.webp" type="image/webp" />
-          <img src="/location_photos/main_hall_01.jpg" alt="Главный зал ресторана Анзур" loading="lazy" decoding="async" />
+          <source srcset="location_photos/main_hall_01_thumb.webp" type="image/webp" />
+          <img src="location_photos/main_hall_01.jpg" alt="Главный зал ресторана Анзур" loading="lazy" decoding="async" />
         </picture>
         <span class="space-media-pill" id="spacePill-main_hall">1 / 4</span>
         <div class="space-media-arrows">
@@ -3175,8 +3225,8 @@
     <div class="space-box" data-cat="terrace" onclick="handleSpaceBoxClick('terrace', event)" onmouseenter="preloadSpacesCategory('terrace')" style="cursor:pointer;" title="Смотреть фотографии Летней террасы">
       <div class="space-media" data-cat="terrace" id="spaceMedia-terrace">
         <picture id="spacePic-terrace">
-          <source srcset="/location_photos/terrace_01_thumb.webp" type="image/webp" />
-          <img src="/location_photos/terrace_01.jpg" alt="Летняя терраса ресторана Анзур" loading="lazy" decoding="async" />
+          <source srcset="location_photos/terrace_01_thumb.webp" type="image/webp" />
+          <img src="location_photos/terrace_01.jpg" alt="Летняя терраса ресторана Анзур" loading="lazy" decoding="async" />
         </picture>
         <span class="space-media-pill" id="spacePill-terrace">1 / 3</span>
         <div class="space-media-arrows">
@@ -3196,8 +3246,8 @@
     <div class="space-box" data-cat="veranda" onclick="handleSpaceBoxClick('veranda', event)" onmouseenter="preloadSpacesCategory('veranda')" style="cursor:pointer;" title="Смотреть фотографии Тихой веранды">
       <div class="space-media" data-cat="veranda" id="spaceMedia-veranda">
         <picture id="spacePic-veranda">
-          <source srcset="/location_photos/veranda_02_thumb.webp" type="image/webp" />
-          <img src="/location_photos/veranda_02.jpg" alt="Тихая веранда ресторана Анзур" loading="lazy" decoding="async" />
+          <source srcset="location_photos/veranda_02_thumb.webp" type="image/webp" />
+          <img src="location_photos/veranda_02.jpg" alt="Тихая веранда ресторана Анзур" loading="lazy" decoding="async" />
         </picture>
         <span class="space-media-pill" id="spacePill-veranda">1 / 2</span>
         <div class="space-media-arrows">
@@ -3217,8 +3267,8 @@
     <div class="space-box" data-cat="karaoke" onclick="handleSpaceBoxClick('karaoke', event)" onmouseenter="preloadSpacesCategory('karaoke')" style="cursor:pointer;" title="Смотреть фотографии Караоке">
       <div class="space-media" data-cat="karaoke" id="spaceMedia-karaoke">
         <picture id="spacePic-karaoke">
-          <source srcset="/location_photos/karaoke_01_thumb.webp" type="image/webp" />
-          <img src="/location_photos/karaoke_01.jpg" alt="VIP-кабины с караоке Анзур" loading="lazy" decoding="async" />
+          <source srcset="location_photos/karaoke_01_thumb.webp" type="image/webp" />
+          <img src="location_photos/karaoke_01.jpg" alt="VIP-кабины с караоке Анзур" loading="lazy" decoding="async" />
         </picture>
         <span class="space-media-pill" id="spacePill-karaoke">1 / 2</span>
         <div class="space-media-arrows">
@@ -3664,7 +3714,7 @@
     </button>
   </div>
 
-  <script src="anzur_menu_data.js"></script>
+  <script src="anzur_menu_data.js" defer></script>
 
   <!-- SCRIPT -->
   <script>
@@ -4147,7 +4197,7 @@ for (let l of ['ru', 'tj', 'en', 'zh']) {
         id: 0,
         category: 'national',
         price: '55',
-        img: 'dish_real_plov.jpg',
+        img: 'dish_real_plov.webp',
         catShort: { ru: 'Плов Анзур', tj: 'Оши Анзур', en: 'Anzur Plov', zh: '安祖尔抓饭' },
         catName: { ru: 'ФИРМЕННЫЙ ПЛОВ', tj: 'ОШИ СУННАТӢ', en: 'SIGNATURE PLOV', zh: '招牌手抓饭' },
         tag: { ru: 'ФИРМЕННОЕ БЛЮДО', tj: 'ТАОМИ МАХСУС', en: 'SIGNATURE DISH', zh: '主厨招牌' },
@@ -4179,7 +4229,7 @@ for (let l of ['ru', 'tj', 'en', 'zh']) {
         id: 1,
         category: 'national',
         price: '95',
-        img: 'dish_real_kazan_kabob.jpg',
+        img: 'dish_real_kazan_kabob.webp',
         catShort: { ru: 'Казан Кабоб', tj: 'Қазон Кабоб', en: 'Kazan Kabob', zh: '铁锅烤肉' },
         catName: { ru: 'НАЦИОНАЛЬНЫЕ БЛЮДА', tj: 'ТАОМҲОИ МИЛЛӢ', en: 'NATIONAL DISHES', zh: '传统中亚菜' },
         tag: { ru: 'ХИТ РЕСТОРАНА', tj: 'МАҲБУБТАРИН', en: 'TOP HIT', zh: '人气名菜' },
@@ -4211,7 +4261,7 @@ for (let l of ['ru', 'tj', 'en', 'zh']) {
         id: 2,
         category: 'european',
         price: '178',
-        img: 'dish_real_josper.jpg',
+        img: 'dish_real_josper.webp',
         catShort: { ru: 'Печь Josper', tj: 'Танӯри Josper', en: 'Josper Grill', zh: 'Josper炭烤' },
         catName: { ru: 'СТЕЙКХАУС JOSPER', tj: 'СТЕЙКҲО ДАР JOSPER', en: 'JOSPER STEAKHOUSE', zh: 'Josper炭火烤炉牛排' },
         tag: { ru: 'ЧИСТЫЙ ДРЕВЕСНЫЙ УГОЛЬ', tj: 'АНГИШТИ ТОЗАИ ЧӮБ', en: 'CHARCOAL EMBERS', zh: '天然木炭高温炙烤' },
@@ -4243,7 +4293,7 @@ for (let l of ['ru', 'tj', 'en', 'zh']) {
         id: 3,
         category: 'panasian',
         price: '789',
-        img: 'dish_real_sushiset.jpg',
+        img: 'dish_real_sushiset.webp',
         catShort: { ru: 'Суши & Роллы', tj: 'Суши & Роллҳо', en: 'Sushi & Rolls', zh: '寿司刺身' },
         catName: { ru: 'ПАНАЗИАТСКАЯ ЛИНИЯ', tj: 'ХАТТИ ПАН-ОСИЁӢ', en: 'PAN-ASIAN LINE', zh: '泛亚经典与刺身吧' },
         tag: { ru: 'ФЛАГМАН СУШИ-БАРА', tj: 'МАҶМӮИ ШОҲОНА', en: 'GRAND SUSHI BOAT', zh: '招牌木舟大拼盘' },
@@ -4275,7 +4325,7 @@ for (let l of ['ru', 'tj', 'en', 'zh']) {
         id: 4,
         category: 'mangal',
         price: '449',
-        img: 'dish_real_kebabs.jpg',
+        img: 'dish_real_kebabs.webp',
         catShort: { ru: 'Шашлыки', tj: 'Шашликҳо', en: 'Kebabs', zh: '炭烤肉串' },
         catName: { ru: 'МАНГАЛ & УГЛИ', tj: 'МАНҚАЛ ВА ОТАШ', en: 'MANGAL & CHARCOAL', zh: '明火炭烤系列' },
         tag: { ru: 'НА 5 ПЕРСОН', tj: 'БАРОИ 5 НАФАР', en: 'SERVES 5 GUESTS', zh: '5人豪华盛宴' },
@@ -4307,7 +4357,7 @@ for (let l of ['ru', 'tj', 'en', 'zh']) {
         id: 5,
         category: 'fish',
         price: '230',
-        img: 'dish_real_salmon.jpg',
+        img: 'dish_real_salmon.webp',
         catShort: { ru: 'Рыба Josper', tj: 'Моҳии Josper', en: 'Josper Fish', zh: '炭烤鱼鲜' },
         catName: { ru: 'РЫБНЫЕ БЛЮДА JOSPER', tj: 'ТАОМҲОИ МОҲӢ', en: 'JOSPER FISH SPECIALTIES', zh: 'Josper炭烤特色鱼排' },
         tag: { ru: 'ДЕЛИКАТЕС', tj: 'ТАОМИ НОЗУК', en: 'SEAFOOD DELICACY', zh: '主厨海味珍馐' },
@@ -4339,7 +4389,7 @@ for (let l of ['ru', 'tj', 'en', 'zh']) {
         id: 6,
         category: 'bar',
         price: '99',
-        img: 'dish_real_dubai_cheesecake.jpg',
+        img: 'dish_real_dubai_cheesecake.webp',
         catShort: { ru: 'Десерты', tj: 'Шириниҳо', en: 'Desserts', zh: '甜品' },
         catName: { ru: 'АВТОРСКИЕ ДЕСЕРТЫ', tj: 'ШИРИНИҲОИ ХОС', en: 'ARTISANAL DESSERTS', zh: '安祖尔主厨甜品' },
         tag: { ru: 'ТРЕНДОВЫЙ ХИТ', tj: 'ХИТИ ИМРӮЗА', en: 'VIRAL HIT', zh: '风靡全球招牌' },
@@ -5384,9 +5434,11 @@ let currentSlideIdx = 0;
       document.addEventListener('DOMContentLoaded', bindModalEvents);
     }
 
-    // Background preloading of interior WebP photos when user scrolls near #spaces
+    // Background preloading of interior WebP photos when user scrolls near #spaces (desktop only)
     (function initSpacesPreloader() {
       function attach() {
+        const isMobile = window.matchMedia && window.matchMedia('(max-width: 900px), (hover: none)').matches;
+        if (isMobile) return; // Avoid preloading 11 large photos over mobile data
         const spacesSec = document.querySelector('.spaces-grid') || document.getElementById('spaces');
         if (!spacesSec) return;
         const isContentVisSupported = 'contentVisibility' in document.documentElement.style;
@@ -6712,12 +6764,27 @@ let currentSlideIdx = 0;
         }
 
         // --- E. THREE.JS 3D GOLDEN DUST & CELESTIAL CONSTELLATION IN HERO ---
-        const scheduleIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 250));
-        scheduleIdle(() => {
-          initHeroThreeParticles((visible) => {
-            heroVisible = visible;
+        // Dynamically loaded exclusively on desktop devices to avoid 600KB overhead on mobile
+        if (!isMobileOrTouch) {
+          const scheduleIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 250));
+          scheduleIdle(() => {
+            if (window.THREE) {
+              initHeroThreeParticles((visible) => {
+                heroVisible = visible;
+              });
+            } else {
+              const script = document.createElement('script');
+              script.src = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js';
+              script.async = true;
+              script.onload = () => {
+                initHeroThreeParticles((visible) => {
+                  heroVisible = visible;
+                });
+              };
+              document.head.appendChild(script);
+            }
           });
-        });
+        }
       }
 
       // ------------------------------------------------------------------------
