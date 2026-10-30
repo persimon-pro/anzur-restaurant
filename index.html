@@ -654,6 +654,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      align-items: center;
       border-bottom: 1px solid var(--border);
       overflow: hidden;
       perspective: 1200px;
@@ -806,11 +807,24 @@
       padding: 0 1.5rem;
       max-width: 900px;
       margin: auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     .hero-logo-wrap {
       margin: 0 auto 1.6rem;
       max-width: 280px;
       width: 55%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform-origin: center center;
+    }
+    .hero-logo-wrap picture {
+      display: block;
+      width: 100%;
     }
     .hero-logo-img {
       width: 100%;
@@ -3016,7 +3030,10 @@
 
     <div class="hero-content">
       <div class="hero-logo-wrap">
-        <img src="anzur_logo_gold.svg" alt="ANZUR RESTAURANT" class="hero-logo-img" />
+        <picture>
+          <source srcset="anzur_logo_gold.webp" type="image/webp" />
+          <img src="anzur_logo_gold.png" alt="ANZUR RESTAURANT" class="hero-logo-img" width="280" height="275" fetchpriority="high" />
+        </picture>
       </div>
       <h1 class="visually-hidden">ANZUR RESTAURANT — Ресторан высокой гастрономии в Душанбе</h1>
       <p class="hero-subtitle" data-i18n-html="hero_subtitle">
@@ -6706,7 +6723,7 @@ let currentSlideIdx = 0;
         // --- D. HERO SPOTLIGHT & 3D PERSPECTIVE TILT ---
         const heroEl = document.querySelector('.hero');
         const spotlightEl = document.getElementById('heroSpotlight');
-        const heroContentEl = document.querySelector('.hero-content');
+        const heroLogoEl = document.querySelector('.hero-logo-wrap');
 
         if (heroEl && spotlightEl) {
           if (!isMobileOrTouch) {
@@ -6722,8 +6739,8 @@ let currentSlideIdx = 0;
 
               spotlightEl.style.setProperty('--spot-x', curX.toFixed(2) + '%');
               spotlightEl.style.setProperty('--spot-y', curY.toFixed(2) + '%');
-              if (heroContentEl) {
-                heroContentEl.style.transform = `rotateX(${curTiltY.toFixed(2)}deg) rotateY(${curTiltX.toFixed(2)}deg)`;
+              if (heroLogoEl) {
+                heroLogoEl.style.transform = `rotateX(${curTiltY.toFixed(2)}deg) rotateY(${curTiltX.toFixed(2)}deg)`;
               }
 
               if (Math.abs(targetX - curX) > 0.05 || Math.abs(targetY - curY) > 0.05) {
