@@ -3074,13 +3074,10 @@
     </div>
 
     <!-- MAIN EDITORIAL STAGE -->
-    <div class="stage-grid" id="menu-stage-container" data-lenis-prevent="true">
+    <div class="stage-grid" id="menu-stage-container">
       <!-- Left Visual Stage -->
-      <div class="stage-visual" id="stageVisual" data-lenis-prevent="true">
-        <picture>
-          <source srcset="dish_real_plov.webp" type="image/webp" />
-          <img id="stage-img" class="stage-visual-img" src="dish_real_plov.webp" alt="Праздничный Плов Анзур" />
-        </picture>
+      <div class="stage-visual" id="stageVisual">
+        <img id="stage-img" class="stage-visual-img" src="dish_real_plov.webp" alt="Праздничный Плов Анзур" />
         <div class="stage-visual-vignette"></div>
 
         <!-- Overlay navigation arrows -->
@@ -4516,6 +4513,10 @@ let currentSlideIdx = 0;
       const waLink = document.getElementById('stage-wa-link');
 
       if (imgEl) {
+        if (imgEl.parentElement && imgEl.parentElement.tagName === 'PICTURE') {
+          const s = imgEl.parentElement.querySelector('source');
+          if (s) s.srcset = dish.img;
+        }
         imgEl.src = dish.img;
         imgEl.alt = dish.title[lang] || dish.title.ru;
       }
@@ -6072,8 +6073,19 @@ let currentSlideIdx = 0;
         let resetTimer = null;
 
         element.addEventListener('wheel', (e) => {
-          const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+          const isHorizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+          const delta = isHorizontal ? e.deltaX : e.deltaY;
           if (Math.abs(delta) < 2) return;
+
+          const dir = delta > 0 ? 1 : -1;
+          const shouldPrevent = typeof options.shouldPreventDefault === 'function'
+            ? options.shouldPreventDefault(dir, isHorizontal, e)
+            : true;
+
+          if (!shouldPrevent) {
+            accumulatedDelta = 0;
+            return;
+          }
 
           if (e.cancelable) e.preventDefault();
           e.stopPropagation();
@@ -6085,8 +6097,8 @@ let currentSlideIdx = 0;
           resetTimer = setTimeout(() => { accumulatedDelta = 0; }, 180);
 
           if (Math.abs(accumulatedDelta) >= threshold && (now - lastStepTime) >= cooldown) {
-            const dir = accumulatedDelta > 0 ? 1 : -1;
-            onStep(dir, e);
+            const stepDir = accumulatedDelta > 0 ? 1 : -1;
+            onStep(stepDir, e);
             lastStepTime = now;
             accumulatedDelta = 0;
           }
@@ -6228,12 +6240,22 @@ let currentSlideIdx = 0;
         });
 
         // --- 2. KINETIC MENU SHOWCASE & FILMSTRIP ---
-        const menuVisual = document.querySelector('.stage-visual') || document.getElementById('menu-stage-container');
+        const menuVisual = document.getElementById('stageVisual') || document.querySelector('.stage-visual');
         if (menuVisual) {
           attachWheelStep(menuVisual, (dir) => {
             if (dir > 0) nextSlide();
             else prevSlide();
-          }, { threshold: 24, cooldown: 320 });
+          }, {
+            threshold: 24,
+            cooldown: 320,
+            shouldPreventDefault: (dir, isHorizontal) => {
+              if (isHorizontal) return true; // Horizontal swipe always flips dishes
+              // When scrolling vertically: step dishes 0 to 6, but allow natural page scroll at edges
+              if (dir > 0 && currentSlideIdx >= DISHES.length - 1) return false;
+              if (dir < 0 && currentSlideIdx <= 0) return false;
+              return true;
+            }
+          });
 
           attachDragStep(menuVisual, (dir) => {
             if (dir > 0) nextSlide();
