@@ -2,20 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.anzur.tj/</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <image:image><image:loc>https://www.anzur.tj/og-image.jpg</image:loc></image:image>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.anzur.tj/menu_ru"/>
+    <xhtml:link rel="alternate" hreflang="tg" href="https://www.anzur.tj/menu_tj"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.anzur.tj/menu_en"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.anzur.tj/menu_zh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.anzur.tj/"/>
+    <image:image>
+      <image:loc>https://www.anzur.tj/og-image.jpg</image:loc>
+      <image:title>Ресторан «Анзур» в Душанбе — интерьер и атмосфера</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.anzur.tj/dish_real_plov_hd.webp</image:loc>
+      <image:title>Праздничный Плов «Анзур»</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.anzur.tj/real_anzur_entrance.jpg</image:loc>
+      <image:title>Входная группа ресторана «Анзур»</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.anzur.tj/real_anzur_terrace.jpg</image:loc>
+      <image:title>Летняя терраса ресторана «Анзур»</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://www.anzur.tj/booking</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.anzur.tj/menu_ru</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ru" href="https://www.anzur.tj/menu_ru"/>
@@ -26,9 +46,9 @@
   </url>
   <url>
     <loc>https://www.anzur.tj/menu_tj</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="ru" href="https://www.anzur.tj/menu_ru"/>
     <xhtml:link rel="alternate" hreflang="tg" href="https://www.anzur.tj/menu_tj"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.anzur.tj/menu_en"/>
@@ -37,9 +57,9 @@
   </url>
   <url>
     <loc>https://www.anzur.tj/menu_en</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="ru" href="https://www.anzur.tj/menu_ru"/>
     <xhtml:link rel="alternate" hreflang="tg" href="https://www.anzur.tj/menu_tj"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.anzur.tj/menu_en"/>
@@ -48,9 +68,9 @@
   </url>
   <url>
     <loc>https://www.anzur.tj/menu_zh</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="ru" href="https://www.anzur.tj/menu_ru"/>
     <xhtml:link rel="alternate" hreflang="tg" href="https://www.anzur.tj/menu_tj"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.anzur.tj/menu_en"/>

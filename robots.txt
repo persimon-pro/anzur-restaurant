@@ -2,5 +2,8 @@ User-agent: *
 Allow: /
 Disallow: /backups/
 Disallow: /index.backup-v1.html
+Disallow: /review
+Disallow: /otzyv
 
 Sitemap: https://www.anzur.tj/sitemap.xml
+Host: https://www.anzur.tj
