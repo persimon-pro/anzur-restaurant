@@ -5,5 +5,24 @@ Disallow: /index.backup-v1.html
 Disallow: /review
 Disallow: /otzyv
 
+# AI & LLM Search Agents
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
 Sitemap: https://www.anzur.tj/sitemap.xml
 Host: https://www.anzur.tj
