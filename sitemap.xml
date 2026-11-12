@@ -2,8 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.anzur.tj/</loc>
-    <lastmod>2026-11-10</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="ru" href="https://www.anzur.tj/menu_ru"/>
     <xhtml:link rel="alternate" hreflang="tg" href="https://www.anzur.tj/menu_tj"/>
@@ -12,30 +12,42 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.anzur.tj/"/>
     <image:image>
       <image:loc>https://www.anzur.tj/og-image.jpg</image:loc>
-      <image:title>Ресторан «Анзур» в Душанбе — интерьер и атмосфера</image:title>
+      <image:title>Ресторан «Анзур» в Душанбе — интерьер, сцена и атмосфера</image:title>
     </image:image>
     <image:image>
       <image:loc>https://www.anzur.tj/dish_real_plov_hd.webp</image:loc>
-      <image:title>Праздничный Плов «Анзур»</image:title>
+      <image:title>Праздничный Плов «Анзур» с казы и салатом ачик-чучук</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.anzur.tj/dish_real_josper_hd.webp</image:loc>
+      <image:title>Мраморные стейки в испанской печи Josper на углях</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.anzur.tj/dish_real_kebabs_hd.webp</image:loc>
+      <image:title>Шашлычное ассорти на мангале ресторана «Анзур»</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.anzur.tj/dish_real_dubai_cheesecake_hd.webp</image:loc>
+      <image:title>Дубайский шоколадный чизкейк с катаифи и фисташкой</image:title>
     </image:image>
     <image:image>
       <image:loc>https://www.anzur.tj/real_anzur_entrance.jpg</image:loc>
-      <image:title>Входная группа ресторана «Анзур»</image:title>
+      <image:title>Парадный вход ресторана «Анзур» в Душанбе</image:title>
     </image:image>
     <image:image>
       <image:loc>https://www.anzur.tj/real_anzur_terrace.jpg</image:loc>
-      <image:title>Летняя терраса ресторана «Анзур»</image:title>
+      <image:title>Летняя терраса с фонтаном ресторана «Анзур»</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://www.anzur.tj/booking</loc>
-    <lastmod>2026-11-10</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.anzur.tj/menu_ru</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ru" href="https://www.anzur.tj/menu_ru"/>
@@ -46,7 +58,7 @@
   </url>
   <url>
     <loc>https://www.anzur.tj/menu_tj</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="ru" href="https://www.anzur.tj/menu_ru"/>
@@ -57,7 +69,7 @@
   </url>
   <url>
     <loc>https://www.anzur.tj/menu_en</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="ru" href="https://www.anzur.tj/menu_ru"/>
@@ -68,7 +80,7 @@
   </url>
   <url>
     <loc>https://www.anzur.tj/menu_zh</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="ru" href="https://www.anzur.tj/menu_ru"/>

@@ -5,8 +5,13 @@ Disallow: /index.backup-v1.html
 Disallow: /review
 Disallow: /otzyv
 
-# AI & LLM Search Agents
+# -------------------------------------------------------------
+# AI Search, LLM Retrieval & Generative Engines
+# -------------------------------------------------------------
 User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: ChatGPT-User
@@ -18,10 +23,43 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
 User-agent: Google-Extended
 Allow: /
 
+User-agent: GoogleOther
+Allow: /
+
 User-agent: Applebot-Extended
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: YandexDirect
+Allow: /
+
+User-agent: Bingbot
 Allow: /
 
 Sitemap: https://www.anzur.tj/sitemap.xml
