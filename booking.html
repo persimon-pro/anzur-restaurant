@@ -2046,19 +2046,28 @@
     let currentZone = 'tier1';
     let tablesData = [];
 
+    // Постоянно забронированные столы для VIP-гостей ресторана (1-й ярус: 4, 8, 10)
+    const PERMANENT_VIP_IDS = new Set(['4', '8', '10']);
+    const VIP_RESERVE_INFO = {
+      guest_name: "VIP Резерв",
+      guest_phone: "917917917",
+      time: "Весь день",
+      comment: "Постоянный резерв для VIP гостей ресторана"
+    };
+
     // Table specifications from blueprint
     const BLUEPRINT_TABLES = [
       // 1-й ярус (1 - 20)
       {id:"1", zone:"tier1", name:"VIP Лаунж 1", capacity:"6–8 чел", desc:"Премиальный VIP-лаунж с мягкими диванами"},
       {id:"2", zone:"tier1", name:"VIP Лаунж 2", capacity:"6–8 чел", desc:"Премиальный VIP-лаунж с мягкими диванами"},
       {id:"3", zone:"tier1", name:"VIP Диван 3", capacity:"6–8 чел", desc:"Премиальный VIP-стол с мягкими диванами"},
-      {id:"4", zone:"tier1", name:"Стол 4", capacity:"2–4 чел", desc:"Стол у северной стены"},
+      {id:"4", zone:"tier1", name:"Стол 4", capacity:"2–4 чел", desc:"Стол у северной стены · VIP Резерв", is_booked: true, booking_info: Object.assign({}, VIP_RESERVE_INFO)},
       {id:"5", zone:"tier1", name:"Стол 5", capacity:"2–4 чел", desc:"Стол у северной стены"},
       {id:"6", zone:"tier1", name:"Стол 6", capacity:"4–6 чел", desc:"Стол с диваном у стены"},
       {id:"7", zone:"tier1", name:"Стол 7", capacity:"2–4 чел", desc:"Угловой стол перед сценой"},
-      {id:"8", zone:"tier1", name:"Стол 8", capacity:"2–4 чел", desc:"Угловой стол перед сценой"},
+      {id:"8", zone:"tier1", name:"Стол 8", capacity:"2–4 чел", desc:"Угловой стол перед сценой · VIP Резерв", is_booked: true, booking_info: Object.assign({}, VIP_RESERVE_INFO)},
       {id:"9", zone:"tier1", name:"Стол 9", capacity:"4–6 чел", desc:"Стол с диваном у южной стены"},
-      {id:"10", zone:"tier1", name:"Стол 10", capacity:"2–4 чел", desc:"Стол у южной стены"},
+      {id:"10", zone:"tier1", name:"Стол 10", capacity:"2–4 чел", desc:"Стол у южной стены · VIP Резерв", is_booked: true, booking_info: Object.assign({}, VIP_RESERVE_INFO)},
       {id:"11", zone:"tier1", name:"Купе 11", capacity:"4–6 чел", desc:"Центральное мягкое купе"},
       {id:"12", zone:"tier1", name:"Купе 12", capacity:"4–6 чел", desc:"Центральное мягкое купе"},
       {id:"13", zone:"tier1", name:"Купе 13", capacity:"4–6 чел", desc:"Центральное мягкое купе"},
@@ -2124,7 +2133,8 @@
         overlayTitle: 'Разверните <em>телефон</em>',
         overlayDesc: 'Интерактивная карта ресторана открывается в горизонтальном режиме. Поверните экран, чтобы увидеть все столики, сцену и выбрать лучшее место.',
         overlayRotateBtn: 'ПОВЕРНУТЬ ЭКРАН ⤾',
-        overlaySkipBtn: 'Продолжить вертикально →'
+        overlaySkipBtn: 'Продолжить вертикально →',
+        vipReserveToast: '👑 Стол №{id} находится в постоянном резерве для VIP-гостей ресторана. Пожалуйста, выберите другой свободный стол.'
       },
       tj: {
         title: 'Нақшаи интерактивии <em>мизҳо</em>',
@@ -2145,7 +2155,8 @@
         overlayTitle: 'Телефонро <em>гардонед</em>',
         overlayDesc: 'Харитаи интерактивии ресторан дар ҳолати уфуқӣ кушода мешавад. Телефонро гардонед, то ҳамаи мизҳо ва саҳнаро ба хубӣ бинед.',
         overlayRotateBtn: 'ГАРДОНДАНИ ЭКРАН ⤾',
-        overlaySkipBtn: 'Идома дар ҳолати амудӣ →'
+        overlaySkipBtn: 'Идома дар ҳолати амудӣ →',
+        vipReserveToast: '👑 Мизи №{id} дар захираи доимӣ барои меҳмонони VIP-и тарабхона мебошад. Лутфан мизи дигари озодро интихоб намоед.'
       },
       en: {
         title: 'Interactive <em>Table Floor Plan</em>',
@@ -2166,7 +2177,8 @@
         overlayTitle: 'Rotate <em>your phone</em>',
         overlayDesc: 'The restaurant floor plan is optimized for landscape view. Rotate your device to view all tables, stage, and select your seat.',
         overlayRotateBtn: 'ROTATE SCREEN ⤾',
-        overlaySkipBtn: 'Continue in portrait →'
+        overlaySkipBtn: 'Continue in portrait →',
+        vipReserveToast: '👑 Table #{id} is permanently reserved for restaurant VIP guests. Please select another available table.'
       }
     };
 
@@ -2219,6 +2231,21 @@
       checkOrientation();
     });
 
+    function applyPermanentVipReservations() {
+      PERMANENT_VIP_IDS.forEach(vipId => {
+        let t = tablesData.find(x => String(x.id) === vipId && (!x.zone || x.zone === 'tier1'));
+        if (!t) {
+          const bp = BLUEPRINT_TABLES.find(b => String(b.id) === vipId);
+          if (bp) tablesData.push(JSON.parse(JSON.stringify(bp)));
+        } else {
+          t.is_booked = true;
+          if (!t.booking_info) {
+            t.booking_info = Object.assign({}, VIP_RESERVE_INFO);
+          }
+        }
+      });
+    }
+
     function sanitizeTables(rawList) {
       if (!Array.isArray(rawList)) return [];
       return rawList
@@ -2241,6 +2268,13 @@
           if (copy.deposit) {
             copy.deposit = copy.deposit.replace(/Памир|Помир|Pamir|Худжанд|Самарканд/gi, '').trim();
           }
+          // Постоянный VIP-резерв для столов 4, 8, 10 на первом этаже
+          if (PERMANENT_VIP_IDS.has(String(copy.id)) && (!copy.zone || copy.zone === 'tier1')) {
+            copy.is_booked = true;
+            if (!copy.booking_info || !copy.booking_info.guest_name) {
+              copy.booking_info = Object.assign({}, VIP_RESERVE_INFO);
+            }
+          }
           return copy;
         });
     }
@@ -2252,6 +2286,7 @@
           const json = await resp.json();
           if (json.tables && json.tables.length > 0) {
             tablesData = sanitizeTables(json.tables);
+            applyPermanentVipReservations();
             renderAllMapCells();
             return;
           }
@@ -2266,6 +2301,7 @@
       } else {
         tablesData = JSON.parse(JSON.stringify(BLUEPRINT_TABLES));
       }
+      applyPermanentVipReservations();
       renderAllMapCells();
     }
 
@@ -2279,7 +2315,14 @@
       for (let i = 1; i <= 20; i++) {
         const cell = document.getElementById(`t-cell-${i}`);
         if (!cell) continue;
-        const table = tablesData.find(t => String(t.id) === String(i)) || {id: String(i), capacity:"4 чел", is_booked:false};
+        const isVipLocked = PERMANENT_VIP_IDS.has(String(i));
+        const table = tablesData.find(t => String(t.id) === String(i)) || {
+          id: String(i),
+          zone: "tier1",
+          capacity: (i === 1 || i === 2 || i === 3) ? "6–8 чел" : "2–4 чел",
+          is_booked: isVipLocked,
+          booking_info: isVipLocked ? Object.assign({}, VIP_RESERVE_INFO) : null
+        };
         populateCell(cell, table);
       }
 
@@ -2299,7 +2342,8 @@
     }
 
     function populateCell(cell, table) {
-      const isFree = !table.is_booked;
+      const isPermanentVip = PERMANENT_VIP_IDS.has(String(table.id)) && (!table.zone || table.zone === 'tier1');
+      const isFree = isPermanentVip ? false : !table.is_booked;
       const isSelected = selectedTableId === String(table.id);
 
       cell.className = `table-cell ${isFree ? 'is-free' : 'is-busy'} ${isSelected ? 'is-selected' : ''}`;
@@ -2409,6 +2453,13 @@
         return;
       }
 
+      const isPermanentVip = PERMANENT_VIP_IDS.has(String(table.id)) && (!table.zone || table.zone === 'tier1');
+      if (isPermanentVip) {
+        const msg = (BOOKING_I18N[currentLang]?.vipReserveToast || "👑 Стол №{id} находится в постоянном резерве для VIP-гостей ресторана. Пожалуйста, выберите другой свободный стол.").replace('{id}', table.id);
+        showToast(msg);
+        return;
+      }
+
       if (table.is_booked) {
         showToast("⚠️ Стол уже забронирован на эту дату. Пожалуйста, выберите другой свободный стол.");
         return;
@@ -2441,6 +2492,11 @@
     async function submitGuestBooking(event) {
       event.preventDefault();
       if (!selectedTableId) return;
+
+      if (PERMANENT_VIP_IDS.has(String(selectedTableId)) && !isManager) {
+        showToast("👑 Этот стол зарезервирован для VIP-гостей ресторана.");
+        return;
+      }
 
       const dateStr = document.getElementById('filterDate').value;
       const timeStr = document.getElementById('filterTime').value;
@@ -2562,20 +2618,22 @@
     function openManagerTableControl(table) {
       const dateStr = document.getElementById('filterDate').value;
       const bp = BLUEPRINT_TABLES.find(x => String(x.id) === String(table.id)) || table;
+      const isPermanentVip = PERMANENT_VIP_IDS.has(String(table.id)) && (!table.zone || table.zone === 'tier1');
 
       document.getElementById('mgrModalTableTitle').textContent = `Стол №${table.id} (${bp.name || 'Зал'})`;
 
       const detailsDiv = document.getElementById('mgrTableDetails');
       const actionsDiv = document.getElementById('mgrTableActions');
 
-      if (table.is_booked) {
-        const b = table.booking_info || {};
-        document.getElementById('mgrModalTableSub').textContent = "🔴 СТОЛ СЕЙЧАС ЗАБРОНИРОВАН";
+      if (table.is_booked || isPermanentVip) {
+        const b = table.booking_info || (isPermanentVip ? Object.assign({}, VIP_RESERVE_INFO) : {});
+        document.getElementById('mgrModalTableSub').textContent = isPermanentVip ? "👑 ПОСТОЯННЫЙ VIP-РЕЗЕРВ РЕСТОРАНА" : "🔴 СТОЛ СЕЙЧАС ЗАБРОНИРОВАН";
         detailsDiv.innerHTML = `
+          ${isPermanentVip ? '<div style="color:var(--gold); font-weight:700; margin-bottom:0.4rem;">★ Резерв для приходящих VIP-гостей ресторана</div>' : ''}
           <div><b>Гость:</b> ${b.guest_name || 'Не указано'}</div>
           <div><b>Телефон:</b> +${b.guest_phone || '—'}</div>
-          <div><b>Время визита:</b> ${b.time || '19:00'}</div>
-          <div><b>Количество персон:</b> ${b.guests_count || table.capacity}</div>
+          <div><b>Время визита:</b> ${b.time || 'Весь день'}</div>
+          <div><b>Количество персон:</b> ${b.guests_count || table.capacity || bp.capacity}</div>
           <div><b>Пометки:</b> ${b.comment || '—'}</div>
         `;
 
@@ -2606,6 +2664,11 @@
     }
 
     async function managerFreeTable(tableId, dateStr) {
+      if (PERMANENT_VIP_IDS.has(String(tableId))) {
+        if (!confirm(`Внимание: Стол №${tableId} закреплен как постоянный VIP-резерв ресторана (на случай визита VIP-гостей).\nВы действительно хотите снять этот резерв на ${dateStr}?`)) {
+          return;
+        }
+      }
       try {
         await fetch(`${API_BASE}/api/admin/tables/toggle`, {
           method: "POST",
