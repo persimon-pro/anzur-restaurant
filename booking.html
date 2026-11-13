@@ -334,6 +334,81 @@
     .dot-busy { background: var(--status-busy); box-shadow: 0 0 8px rgba(239,68,68,0.4); }
     .dot-selected { background: var(--gold); box-shadow: 0 0 8px rgba(197,160,89,0.6); }
 
+    /* Weekend Closed Alert Banner */
+    .weekend-closed-banner {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.14), rgba(184, 134, 11, 0.06));
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      border-radius: 8px;
+      padding: 1.2rem 1.6rem;
+      margin-bottom: 1.8rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+      animation: fadeInBanner 0.3s ease;
+    }
+    @keyframes fadeInBanner {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .weekend-closed-icon {
+      font-size: 2.2rem;
+      flex-shrink: 0;
+      line-height: 1;
+      margin-top: 0.1rem;
+    }
+    .weekend-closed-content {
+      flex: 1;
+    }
+    .weekend-closed-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #f7df94;
+      margin-bottom: 0.35rem;
+      letter-spacing: 0.02em;
+    }
+    .weekend-closed-desc {
+      font-size: 0.92rem;
+      color: #e5e7eb;
+      line-height: 1.5;
+      margin-bottom: 0.9rem;
+    }
+    .weekend-closed-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .weekend-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.6rem 1.15rem;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .weekend-btn-wa {
+      background: #25d366;
+      color: #000;
+      font-weight: 600;
+    }
+    .weekend-btn-wa:hover {
+      background: #1eb956;
+      transform: translateY(-1px);
+    }
+    .weekend-btn-call {
+      background: rgba(212, 175, 55, 0.18);
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      color: #f7df94;
+    }
+    .weekend-btn-call:hover {
+      background: rgba(212, 175, 55, 0.32);
+      transform: translateY(-1px);
+    }
+
     /* Zone Tabs */
     .zone-tabs {
       display: flex;
@@ -1422,6 +1497,25 @@
       </div>
     </div>
 
+    <!-- Weekend Closed Alert Banner (Fridays & Saturdays) -->
+    <div id="weekendClosedAlert" class="weekend-closed-banner" style="display: none;">
+      <div class="weekend-closed-icon">🔒</div>
+      <div class="weekend-closed-content">
+        <div class="weekend-closed-title" id="i18n-weekend-title">Пятница и суббота — дни шоу-программы</div>
+        <div class="weekend-closed-desc" id="i18n-weekend-desc">
+          На этот день все столы закрыты для онлайн-бронирования. Резервирование столиков и VIP-кабин принимается только через администратора ресторана:
+        </div>
+        <div class="weekend-closed-actions">
+          <a href="https://wa.me/992917917917?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D1%82%D1%8C%20%D0%B1%D1%80%D0%BE%D0%BD%D1%8C%20%D1%81%D1%82%D0%BE%D0%BB%D0%B0%20%D0%BD%D0%B0%20%D1%88%D0%BE%D1%83-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D1%83" target="_blank" rel="noopener" class="weekend-btn weekend-btn-wa">
+            💬 <span id="i18n-weekend-wa">Написать в WhatsApp (+992 91 791 79 17)</span>
+          </a>
+          <a href="tel:+992917917917" class="weekend-btn weekend-btn-call">
+            📞 <span id="i18n-weekend-call">Позвонить администратору</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
     <!-- Zone Tabs: Tier 1, Tier 2, Terrace, VIP -->
     <div class="zone-tabs">
       <button type="button" class="zone-tab active" data-zone="tier1" onclick="switchZone('tier1')">
@@ -1908,6 +2002,11 @@
             </div>
           </div>
 
+          <div id="sidebarWeekendNotice" style="display:none; margin-bottom:1rem; padding:0.9rem; background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.3); border-radius:6px; font-size:0.82rem; color:#f7df94; text-align:center; line-height:1.4;">
+            🔒 <strong>В пятницу и субботу онлайн-бронь закрыта.</strong><br/>
+            Резерв столиков и VIP-кабин принимается только администратором по телефону или WhatsApp.
+          </div>
+
           <button type="submit" class="btn-submit" id="submitBtn" disabled>
             <span>ПОДТВЕРДИТЬ БРОНИРОВАНИЕ</span>
             <span>→</span>
@@ -2137,7 +2236,13 @@
         overlayDesc: 'Интерактивная карта ресторана открывается в горизонтальном режиме. Поверните экран, чтобы увидеть все столики, сцену и выбрать лучшее место.',
         overlayRotateBtn: 'ПОВЕРНУТЬ ЭКРАН ⤾',
         overlaySkipBtn: 'Продолжить вертикально →',
-        vipReserveToast: '👑 Стол №{id} находится в постоянном резерве для VIP-гостей ресторана. Пожалуйста, выберите другой свободный стол.'
+        vipReserveToast: '👑 Стол №{id} находится в постоянном резерве для VIP-гостей ресторана. Пожалуйста, выберите другой свободный стол.',
+        weekendTitle: 'Пятница и суббота — дни шоу-программы',
+        weekendDesc: 'На этот день все столы закрыты для онлайн-бронирования. Резервирование столиков и VIP-кабин принимается только через администратора ресторана:',
+        weekendWa: 'Написать в WhatsApp (+992 91 791 79 17)',
+        weekendCall: 'Позвонить администратору',
+        weekendToast: '🎭 В пятницу и субботу действует шоу-программа. Онлайн-бронь закрыта. Звоните: +992 91 791 79 17',
+        weekendBtnDisabled: '🔒 Бронь закрыта (только по звонку)'
       },
       tj: {
         title: 'Нақшаи интерактивии <em>мизҳо</em>',
@@ -2159,7 +2264,13 @@
         overlayDesc: 'Харитаи интерактивии ресторан дар ҳолати уфуқӣ кушода мешавад. Телефонро гардонед, то ҳамаи мизҳо ва саҳнаро ба хубӣ бинед.',
         overlayRotateBtn: 'ГАРДОНДАНИ ЭКРАН ⤾',
         overlaySkipBtn: 'Идома дар ҳолати амудӣ →',
-        vipReserveToast: '👑 Мизи №{id} дар захираи доимӣ барои меҳмонони VIP-и тарабхона мебошад. Лутфан мизи дигари озодро интихоб намоед.'
+        vipReserveToast: '👑 Мизи №{id} дар захираи доимӣ барои меҳмонони VIP-и тарабхона мебошад. Лутфан мизи дигари озодро интихоб намоед.',
+        weekendTitle: 'Ҷумъа ва шанбе — рӯзҳои барномаи шоу',
+        weekendDesc: 'Барои ин рӯз ҳамаи мизҳо бастаанд. Фармоиши мизҳо ва утоқҳои VIP танҳо тавассути маъмурият қабул карда мешавад:',
+        weekendWa: 'Навиштан ба WhatsApp (+992 91 791 79 17)',
+        weekendCall: 'Тамос бо маъмурият',
+        weekendToast: '🎭 Рӯзҳои ҷумъа ва шанбе фармоиши онлайн баста аст. Тамос: +992 91 791 79 17',
+        weekendBtnDisabled: '🔒 Брон бастааст (бо занг)'
       },
       en: {
         title: 'Interactive <em>Table Floor Plan</em>',
@@ -2181,7 +2292,13 @@
         overlayDesc: 'The restaurant floor plan is optimized for landscape view. Rotate your device to view all tables, stage, and select your seat.',
         overlayRotateBtn: 'ROTATE SCREEN ⤾',
         overlaySkipBtn: 'Continue in portrait →',
-        vipReserveToast: '👑 Table #{id} is permanently reserved for restaurant VIP guests. Please select another available table.'
+        vipReserveToast: '👑 Table #{id} is permanently reserved for restaurant VIP guests. Please select another available table.',
+        weekendTitle: 'Friday & Saturday — Live Show Program Days',
+        weekendDesc: 'All tables are closed for online reservations on these days. Table & VIP booth bookings are handled exclusively by phone or WhatsApp:',
+        weekendWa: 'Message WhatsApp (+992 91 791 79 17)',
+        weekendCall: 'Call the Manager',
+        weekendToast: '🎭 Online booking is closed on Friday & Saturday. Call: +992 91 791 79 17',
+        weekendBtnDisabled: '🔒 Booking Closed (Call Only)'
       }
     };
 
@@ -2214,6 +2331,11 @@
       const elOverlayDesc = document.getElementById('i18n-overlay-desc'); if (elOverlayDesc && dict.overlayDesc) elOverlayDesc.textContent = dict.overlayDesc;
       const elOverlayRotateBtn = document.getElementById('i18n-overlay-rotate-btn'); if (elOverlayRotateBtn && dict.overlayRotateBtn) elOverlayRotateBtn.textContent = dict.overlayRotateBtn;
       const elOverlaySkipBtn = document.getElementById('i18n-overlay-skip-btn'); if (elOverlaySkipBtn && dict.overlaySkipBtn) elOverlaySkipBtn.textContent = dict.overlaySkipBtn;
+
+      const elWTitle = document.getElementById('i18n-weekend-title'); if (elWTitle && dict.weekendTitle) elWTitle.textContent = dict.weekendTitle;
+      const elWDesc = document.getElementById('i18n-weekend-desc'); if (elWDesc && dict.weekendDesc) elWDesc.textContent = dict.weekendDesc;
+      const elWWa = document.getElementById('i18n-weekend-wa'); if (elWWa && dict.weekendWa) elWWa.textContent = dict.weekendWa;
+      const elWCall = document.getElementById('i18n-weekend-call'); if (elWCall && dict.weekendCall) elWCall.textContent = dict.weekendCall;
 
       if (tablesData && tablesData.length > 0) {
         renderAllMapCells();
@@ -2282,13 +2404,46 @@
         });
     }
 
+    function isFridayOrSaturday(dateStr) {
+      if (!dateStr) return false;
+      const parts = dateStr.split('-');
+      if (parts.length !== 3) return false;
+      const d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+      const day = d.getDay(); // 0 = Sun, 5 = Fri, 6 = Sat
+      return day === 5 || day === 6;
+    }
+
     async function loadTablesForDate(dateStr) {
+      const isWeekend = isFridayOrSaturday(dateStr);
+      const alertEl = document.getElementById('weekendClosedAlert');
+      const sidebarNotice = document.getElementById('sidebarWeekendNotice');
+      const submitBtn = document.getElementById('submitBtn');
+
+      if (alertEl) {
+        alertEl.style.display = isWeekend && !isManager ? 'flex' : 'none';
+      }
+      if (sidebarNotice) {
+        sidebarNotice.style.display = isWeekend && !isManager ? 'block' : 'none';
+      }
+      if (isWeekend && !isManager && submitBtn) {
+        submitBtn.disabled = true;
+        const disabledText = BOOKING_I18N[currentLang]?.weekendBtnDisabled || "🔒 Бронь закрыта (только по звонку)";
+        const labelSpan = submitBtn.querySelector('span:first-child');
+        if (labelSpan) labelSpan.textContent = disabledText;
+      } else if (!isWeekend && submitBtn) {
+        const labelSpan = submitBtn.querySelector('span:first-child');
+        if (labelSpan) labelSpan.textContent = "ПОДТВЕРДИТЬ БРОНИРОВАНИЕ";
+      }
+
       try {
         const resp = await fetch(`${API_BASE}/api/tables?date=${dateStr}`, { cache: "no-store" });
         if (resp.ok) {
           const json = await resp.json();
           if (json.tables && json.tables.length > 0) {
             tablesData = sanitizeTables(json.tables);
+            if (isWeekend) {
+              tablesData.forEach(t => { t.is_booked = true; });
+            }
             applyPermanentVipReservations();
             renderAllMapCells();
             return;
@@ -2303,6 +2458,12 @@
         try { tablesData = sanitizeTables(JSON.parse(saved)); } catch(e) { tablesData = JSON.parse(JSON.stringify(BLUEPRINT_TABLES)); }
       } else {
         tablesData = JSON.parse(JSON.stringify(BLUEPRINT_TABLES));
+      }
+      if (isWeekend) {
+        tablesData.forEach(t => {
+          t.is_booked = true;
+          t.booking_info = { guest_name: "Шоу-программа (Резерв заведения)", status: "closed" };
+        });
       }
       applyPermanentVipReservations();
       renderAllMapCells();
@@ -2456,6 +2617,13 @@
         return;
       }
 
+      const dateStr = document.getElementById('filterDate').value;
+      if (isFridayOrSaturday(dateStr)) {
+        const msg = BOOKING_I18N[currentLang]?.weekendToast || "🎭 В пятницу и субботу онлайн-бронирование закрыто. Звоните: +992 91 791 79 17";
+        showToast(msg);
+        return;
+      }
+
       const isPermanentVip = PERMANENT_VIP_IDS.has(String(table.id)) && (!table.zone || table.zone === 'tier1');
       if (isPermanentVip) {
         const msg = (BOOKING_I18N[currentLang]?.vipReserveToast || "👑 Стол №{id} находится в постоянном резерве для VIP-гостей ресторана. Пожалуйста, выберите другой свободный стол.").replace('{id}', table.id);
@@ -2495,6 +2663,13 @@
     async function submitGuestBooking(event) {
       event.preventDefault();
       if (!selectedTableId) return;
+
+      const dateStr = document.getElementById('filterDate').value;
+      if (isFridayOrSaturday(dateStr) && !isManager) {
+        const msg = BOOKING_I18N[currentLang]?.weekendToast || "🎭 В пятницу и субботу онлайн-бронирование закрыто. Звоните: +992 91 791 79 17";
+        showToast(msg);
+        return;
+      }
 
       if (PERMANENT_VIP_IDS.has(String(selectedTableId)) && !isManager) {
         showToast("👑 Этот стол зарезервирован для VIP-гостей ресторана.");
