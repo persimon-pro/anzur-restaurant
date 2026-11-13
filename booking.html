@@ -1524,7 +1524,7 @@
       <button type="button" class="zone-tab" data-zone="tier2" onclick="switchZone('tier2')">
         <span id="i18n-zone-tier2">2-й ярус</span>
       </button>
-      <button type="button" class="zone-tab" data-zone="terrace" onclick="switchZone('terrace')">
+      <button type="button" class="zone-tab" data-zone="terrace" id="tab-zone-terrace" style="display:none;" onclick="switchZone('terrace')">
         <span id="i18n-zone-terrace">Летняя терраса</span>
       </button>
       <button type="button" class="zone-tab" data-zone="vip" onclick="switchZone('vip')">
@@ -2242,7 +2242,8 @@
         weekendWa: 'Написать в WhatsApp (+992 91 791 79 17)',
         weekendCall: 'Позвонить администратору',
         weekendToast: '🎭 В пятницу и субботу действует шоу-программа. Онлайн-бронь закрыта. Звоните: +992 91 791 79 17',
-        weekendBtnDisabled: '🔒 Бронь закрыта (только по звонку)'
+        weekendBtnDisabled: '🔒 Бронь закрыта (только по звонку)',
+        terraceSeasonToast: '🌿 Летняя терраса закрыта на зимний период до 1 мая. Пожалуйста, выберите стол в главном зале (1-й или 2-й ярус) или VIP-кабину.'
       },
       tj: {
         title: 'Нақшаи интерактивии <em>мизҳо</em>',
@@ -2270,7 +2271,8 @@
         weekendWa: 'Навиштан ба WhatsApp (+992 91 791 79 17)',
         weekendCall: 'Тамос бо маъмурият',
         weekendToast: '🎭 Рӯзҳои ҷумъа ва шанбе фармоиши онлайн баста аст. Тамос: +992 91 791 79 17',
-        weekendBtnDisabled: '🔒 Брон бастааст (бо занг)'
+        weekendBtnDisabled: '🔒 Брон бастааст (бо занг)',
+        terraceSeasonToast: '🌿 Террасаи тобистона то 1 май баста аст. Лутфан мизро дар толор ё ҳуҷраи VIP интихоб намоед.'
       },
       en: {
         title: 'Interactive <em>Table Floor Plan</em>',
@@ -2298,7 +2300,8 @@
         weekendWa: 'Message WhatsApp (+992 91 791 79 17)',
         weekendCall: 'Call the Manager',
         weekendToast: '🎭 Online booking is closed on Friday & Saturday. Call: +992 91 791 79 17',
-        weekendBtnDisabled: '🔒 Booking Closed (Call Only)'
+        weekendBtnDisabled: '🔒 Booking Closed (Call Only)',
+        terraceSeasonToast: '🌿 The summer terrace is closed for the winter season until May 1. Please choose an indoor table or a VIP suite.'
       }
     };
 
@@ -2417,11 +2420,33 @@
       return day === 5 || day === 6;
     }
 
+    function isTerraceClosedForSeason(dateStr) {
+      if (!dateStr) return true;
+      const parts = dateStr.split('-');
+      if (parts.length !== 3) return true;
+      const y = parseInt(parts[0], 10);
+      const m = parseInt(parts[1], 10); // 1 = Jan, 12 = Dec
+      // Closed until May 1, 2027 (and in general before May 1 of any year, or outside May-Oct)
+      if (y < 2027) return true;
+      if (y === 2027 && m < 5) return true;
+      if (m < 5 || m > 10) return true;
+      return false;
+    }
+
     async function loadTablesForDate(dateStr) {
       const isWeekend = isFridayOrSaturday(dateStr);
+      const isTerraceClosed = isTerraceClosedForSeason(dateStr) && !isManager;
       const alertEl = document.getElementById('weekendClosedAlert');
       const sidebarNotice = document.getElementById('sidebarWeekendNotice');
       const submitBtn = document.getElementById('submitBtn');
+
+      const terraceTab = document.getElementById('tab-zone-terrace') || document.querySelector('.zone-tab[data-zone="terrace"]');
+      if (terraceTab) {
+        terraceTab.style.display = isTerraceClosed ? 'none' : '';
+      }
+      if (isTerraceClosed && currentZone === 'terrace') {
+        switchZone('tier1');
+      }
 
       if (alertEl) {
         alertEl.style.display = isWeekend && !isManager ? 'flex' : 'none';
@@ -2628,6 +2653,12 @@
     }
 
     function switchZone(zone) {
+      const dateStr = document.getElementById('filterDate')?.value;
+      if (zone === 'terrace' && isTerraceClosedForSeason(dateStr) && !isManager) {
+        const msg = BOOKING_I18N[currentLang]?.terraceSeasonToast || "🌿 Летняя терраса закрыта на зимний период до 1 мая. Пожалуйста, выберите стол в главном зале (1-й или 2-й ярус) или VIP-кабину.";
+        showToast(msg);
+        zone = 'tier1';
+      }
       currentZone = zone;
       document.querySelectorAll('.zone-tab').forEach(b => {
         b.classList.toggle('active', b.getAttribute('data-zone') === zone);
@@ -2646,6 +2677,12 @@
       }
 
       const dateStr = document.getElementById('filterDate').value;
+      if ((table.zone === 'terrace' || String(table.id).startsWith('R')) && isTerraceClosedForSeason(dateStr) && !isManager) {
+        const msg = BOOKING_I18N[currentLang]?.terraceSeasonToast || "🌿 Летняя терраса закрыта на зимний период до 1 мая. Пожалуйста, выберите стол в главном зале (1-й или 2-й ярус) или VIP-кабину.";
+        showToast(msg);
+        return;
+      }
+
       if (isFridayOrSaturday(dateStr)) {
         const msg = BOOKING_I18N[currentLang]?.weekendToast || "🎭 В пятницу и субботу онлайн-бронирование закрыто. Звоните: +992 91 791 79 17";
         showToast(msg);
@@ -2698,6 +2735,12 @@
       }
 
       if (!selectedTableId) return;
+
+      if ((String(selectedTableId).startsWith('R')) && isTerraceClosedForSeason(dateStr) && !isManager) {
+        const msg = BOOKING_I18N[currentLang]?.terraceSeasonToast || "🌿 Летняя терраса закрыта на зимний период до 1 мая.";
+        showToast(msg);
+        return;
+      }
 
       if (PERMANENT_VIP_IDS.has(String(selectedTableId)) && !isManager) {
         showToast("👑 Этот стол зарезервирован для VIP-гостей ресторана.");
@@ -2773,6 +2816,15 @@
       const banner = document.getElementById('adminBanner');
       const btn = document.getElementById('managerBtn');
       const btnText = document.getElementById('mgrBtnText');
+      const dateStr = document.getElementById('filterDate')?.value;
+      const isTerraceClosed = isTerraceClosedForSeason(dateStr) && !isManager;
+      const terraceTab = document.getElementById('tab-zone-terrace') || document.querySelector('.zone-tab[data-zone="terrace"]');
+      if (terraceTab) {
+        terraceTab.style.display = isTerraceClosed ? 'none' : '';
+      }
+      if (isTerraceClosed && currentZone === 'terrace') {
+        switchZone('tier1');
+      }
 
       if (isManager) {
         banner.classList.add('visible');
