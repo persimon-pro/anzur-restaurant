@@ -2346,7 +2346,11 @@
       const savedLang = localStorage.getItem('anzur_lang') || 'ru';
       setLanguage(savedLang);
 
-      const today = new Date().toISOString().split('T')[0];
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const today = `${year}-${month}-${day}`;
       const dateInput = document.getElementById('filterDate');
       dateInput.value = today;
       dateInput.min = today;
@@ -2425,6 +2429,13 @@
       if (sidebarNotice) {
         sidebarNotice.style.display = isWeekend && !isManager ? 'block' : 'none';
       }
+      if (isWeekend && !isManager) {
+        selectedTableId = null;
+        const chosenEl = document.getElementById('chosenTableName');
+        if (chosenEl) chosenEl.textContent = "Онлайн-бронь закрыта";
+        const chosenSub = document.getElementById('chosenTableSub');
+        if (chosenSub) chosenSub.textContent = "Пт и Сб — шоу-программа. Бронь только по телефону";
+      }
       if (isWeekend && !isManager && submitBtn) {
         submitBtn.disabled = true;
         const disabledText = BOOKING_I18N[currentLang]?.weekendBtnDisabled || "🔒 Бронь закрыта (только по звонку)";
@@ -2441,7 +2452,7 @@
           const json = await resp.json();
           if (json.tables && json.tables.length > 0) {
             tablesData = sanitizeTables(json.tables);
-            if (isWeekend) {
+            if (isWeekend && !isManager) {
               tablesData.forEach(t => { t.is_booked = true; });
             }
             applyPermanentVipReservations();
@@ -2459,7 +2470,7 @@
       } else {
         tablesData = JSON.parse(JSON.stringify(BLUEPRINT_TABLES));
       }
-      if (isWeekend) {
+      if (isWeekend && !isManager) {
         tablesData.forEach(t => {
           t.is_booked = true;
           t.booking_info = { guest_name: "Шоу-программа (Резерв заведения)", status: "closed" };
@@ -2475,6 +2486,9 @@
     }
 
     function renderAllMapCells() {
+      const dateStr = document.getElementById('filterDate')?.value;
+      const isWeekend = isFridayOrSaturday(dateStr);
+
       // Render 1st tier (1 - 20)
       for (let i = 1; i <= 20; i++) {
         const cell = document.getElementById(`t-cell-${i}`);
@@ -2484,8 +2498,8 @@
           id: String(i),
           zone: "tier1",
           capacity: (i === 1 || i === 2 || i === 3) ? "6–8 чел" : "2–4 чел",
-          is_booked: isVipLocked,
-          booking_info: isVipLocked ? Object.assign({}, VIP_RESERVE_INFO) : null
+          is_booked: (isWeekend && !isManager) || isVipLocked,
+          booking_info: isVipLocked ? Object.assign({}, VIP_RESERVE_INFO) : ((isWeekend && !isManager) ? { guest_name: "Шоу-программа", status: "closed" } : null)
         };
         populateCell(cell, table);
       }
@@ -2494,7 +2508,13 @@
       for (let i = 21; i <= 36; i++) {
         const cell = document.getElementById(`t-cell-${i}`);
         if (!cell) continue;
-        const table = tablesData.find(t => String(t.id) === String(i)) || {id: String(i), capacity:"4 чел", is_booked:false};
+        const table = tablesData.find(t => String(t.id) === String(i)) || {
+          id: String(i),
+          zone: "tier2",
+          capacity:"4 чел",
+          is_booked: (isWeekend && !isManager),
+          booking_info: (isWeekend && !isManager) ? { guest_name: "Шоу-программа", status: "closed" } : null
+        };
         populateCell(cell, table);
       }
 
@@ -2506,8 +2526,10 @@
     }
 
     function populateCell(cell, table) {
+      const dateStr = document.getElementById('filterDate')?.value;
+      const isWeekend = isFridayOrSaturday(dateStr);
       const isPermanentVip = PERMANENT_VIP_IDS.has(String(table.id)) && (!table.zone || table.zone === 'tier1');
-      const isFree = isPermanentVip ? false : !table.is_booked;
+      const isFree = (isWeekend && !isManager) ? false : (isPermanentVip ? false : !table.is_booked);
       const isSelected = selectedTableId === String(table.id);
 
       cell.className = `table-cell ${isFree ? 'is-free' : 'is-busy'} ${isSelected ? 'is-selected' : ''}`;
@@ -2538,12 +2560,15 @@
       const gardenGrid = document.getElementById('terrace-garden-grid');
       if (!railGrid || !gardenGrid) return;
 
+      const dateStr = document.getElementById('filterDate')?.value;
+      const isWeekend = isFridayOrSaturday(dateStr);
+
       railGrid.innerHTML = "";
       gardenGrid.innerHTML = "";
 
       for (let i = 1; i <= 4; i++) {
         const id = `R${i}`;
-        const t = tablesData.find(x => x.id === id) || {id, capacity:"4 чел", is_booked:false};
+        const t = tablesData.find(x => x.id === id) || {id, zone:"terrace", capacity:"4 чел", is_booked: (isWeekend && !isManager)};
         const div = document.createElement('div');
         div.style.minHeight = "70px";
         populateCell(div, t);
@@ -2552,7 +2577,7 @@
 
       for (let i = 5; i <= 8; i++) {
         const id = `R${i}`;
-        const t = tablesData.find(x => x.id === id) || {id, capacity:"4–6 чел", is_booked:false};
+        const t = tablesData.find(x => x.id === id) || {id, zone:"terrace", capacity:"4–6 чел", is_booked: (isWeekend && !isManager)};
         const div = document.createElement('div');
         div.style.minHeight = "70px";
         populateCell(div, t);
@@ -2565,6 +2590,9 @@
       if (!grid) return;
       grid.innerHTML = "";
 
+      const dateStr = document.getElementById('filterDate')?.value;
+      const isWeekend = isFridayOrSaturday(dateStr);
+
       const CANON_VIPS = [
         {id:"VIP1", name:"VIP 1", capacity:"8–10 чел"},
         {id:"VIP2", name:"VIP 2", capacity:"10–14 чел"},
@@ -2573,8 +2601,8 @@
 
       CANON_VIPS.forEach(c => {
         const remote = tablesData.find(t => String(t.id).toUpperCase() === c.id) || {};
-        const isBooked = !!remote.is_booked;
-        const isFree = !isBooked;
+        const isBooked = (isWeekend && !isManager) ? true : !!remote.is_booked;
+        const isFree = (isWeekend && !isManager) ? false : !isBooked;
         const isSelected = selectedTableId === c.id;
 
         const div = document.createElement('div');
@@ -2662,8 +2690,6 @@
 
     async function submitGuestBooking(event) {
       event.preventDefault();
-      if (!selectedTableId) return;
-
       const dateStr = document.getElementById('filterDate').value;
       if (isFridayOrSaturday(dateStr) && !isManager) {
         const msg = BOOKING_I18N[currentLang]?.weekendToast || "🎭 В пятницу и субботу онлайн-бронирование закрыто. Звоните: +992 91 791 79 17";
@@ -2671,12 +2697,13 @@
         return;
       }
 
+      if (!selectedTableId) return;
+
       if (PERMANENT_VIP_IDS.has(String(selectedTableId)) && !isManager) {
         showToast("👑 Этот стол зарезервирован для VIP-гостей ресторана.");
         return;
       }
 
-      const dateStr = document.getElementById('filterDate').value;
       const timeStr = document.getElementById('filterTime').value;
       const name = document.getElementById('guestName').value.trim();
       const phone = document.getElementById('guestPhone').value.trim();
