@@ -2687,7 +2687,7 @@
 
       // API Call
       try {
-        await fetch(`${API_BASE}/api/bookings`, {
+        const resp = await fetch(`${API_BASE}/api/bookings`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -2700,17 +2700,14 @@
             comment: comment
           })
         });
-      } catch(e) {}
-
-      // Update Local State
-      let t = tablesData.find(x => String(x.id) === selectedTableId);
-      if (!t) {
-        t = { id: selectedTableId, capacity: count };
-        tablesData.push(t);
+        const resJson = await resp.json().catch(() => ({}));
+        if (!resp.ok || resJson.ok === false) {
+          alert(resJson.error || "Не удалось отправить заявку. Попробуйте еще раз или свяжитесь с нами по телефону: +992 91 791 79 17");
+          return;
+        }
+      } catch(e) {
+        console.warn("API booking request network error:", e);
       }
-      t.is_booked = true;
-      t.booking_info = { guest_name: name, guest_phone: phone, time: timeStr, guests_count: count, comment: comment };
-      saveLocalTables(dateStr);
 
       // WhatsApp URL
       const tableLabel = String(selectedTableId).startsWith("VIP") ? `VIP-кабина: ${bp.name || selectedTableId} (Караоке)` : `Стол: №${selectedTableId} (${bp.name || 'Зал'})`;
@@ -2729,7 +2726,8 @@
         `<b>${tableLabel}</b><br>` +
         `Дата и время: <b>${dateStr} в ${timeStr}</b><br>` +
         `Гость: <b>${name}</b> (+${phone})<br><br>` +
-        `Заявка зафиксирована в системе ресторана!`;
+        `<span style="color:#d4af37; font-weight:600;">🛎️ Ваша заявка успешно передана менеджеру!</span><br>` +
+        `<span style="font-size:0.85rem; color:#aaa; line-height:1.5; display:inline-block; margin-top:6px;">Стол закрепляется на сайте после подтверждения администратором. Мы свяжемся с вами по телефону или в WhatsApp в течение нескольких минут.</span>`;
 
       document.getElementById('successWaBtn').href = `https://wa.me/992917917917?text=${waText}`;
       openModal('successModal');
